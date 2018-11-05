@@ -1,4 +1,5 @@
 # vk-blocks
+Gutenberg用のカスタムブロックプラグインです。
 
 ## How to Build
 
