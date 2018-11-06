@@ -1,7 +1,6 @@
 /**
  * Alert block type
  *
- * @package capital-block
  */
 
 const { registerBlockType } = wp.blocks;
@@ -9,7 +8,7 @@ const { RichText }          = wp.editor;
 
 registerBlockType( 'vk-block/alert', {
 
-  title: 'VK-alert',
+  title: 'Alert',
 
   icon: 'info',
 
