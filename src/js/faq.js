@@ -5,7 +5,7 @@
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
 const {RichText} = wp.editor;
-const BlockIcon = 'info';
+const BlockIcon = 'editor-help';
 
 /**
  * Register: aa Gutenberg Block.
