@@ -2,7 +2,6 @@
  * Alert block type
  *
  */
-
 const { registerBlockType } = wp.blocks;
 const { RichText }          = wp.editor;
 
