@@ -22,3 +22,4 @@ define( 'VK_BLOCKS_ASSET_URL', plugin_dir_url( __FILE__ ) );
 require __DIR__ . '/includes/alert.php';
 require __DIR__ . '/includes/baloon.php';
 require __DIR__ . '/includes/flow.php';
+require __DIR__ . '/includes/faq.php';
