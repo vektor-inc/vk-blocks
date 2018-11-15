@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Vk-Blocks
+ * Plugin Name: VK Blocks
  * Plugin URI: https://github.com/vektor-inc/vk-blocks
  * Description:
  * Version: 1.0.0
