@@ -41,7 +41,11 @@ registerBlockType('vk-block/flow', {
         arrowFlag: {
             type: 'string',
             default: 'vk_flow-arrow-on',
-        }
+        },
+				insertImage: {
+					type: 'string',
+					default: null, // no image by default!
+				}
     },
 
     /**
