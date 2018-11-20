@@ -1,75 +1,22 @@
 var gulp          = require('gulp'),
     $             = require('gulp-load-plugins')(),
-    webpack       = require('webpack-stream'),
-    webpackBundle = require('webpack'),
-    named         = require('vinyl-named');
+    webpackStream = require('webpack-stream'),
+    webpack = require('webpack'),
+    webpackConfig = require('./webpack.config');
 
-// Sass tasks
-gulp.task('sass', function () {
-  return gulp.src(['./src/scss/**/*.scss'])
-    .pipe($.plumber({
-      errorHandler: $.notify.onError('<%= error.message %>')
-    }))
-    .pipe($.sourcemaps.init({loadMaps: true}))
-    .pipe($.sass({
-      errLogToConsole: true,
-      outputStyle    : 'compressed',
-      includePaths   : [
-        './src/scss'
-      ]
-    }))
-    .pipe($.autoprefixer({browsers: ['last 2 version', '> 5%']}))
-    .pipe($.sourcemaps.write('./map'))
-    .pipe(gulp.dest('./assets/css'));
-});
-
-// Transpile JS
-gulp.task('js', function () {
-  return gulp.src(['./src/js/**/*.js'])
-    .pipe($.plumber({
-      errorHandler: $.notify.onError('<%= error.message %>')
-    }))
-    .pipe(named())
-    .pipe(webpack({
-      mode: 'production',
-      devtool: 'source-map',
-      module: {
-        rules: [
-          {
-            test: /\.js$/,
-            exclude: /(node_modules|bower_components)/,
-            use: {
-              loader: 'babel-loader',
-              options: {
-                presets: ['@babel/preset-env'],
-                plugins: [
-                    '@babel/plugin-transform-react-jsx',
-                    [
-                        '@wordpress/babel-plugin-makepot',
-                        {
-                            'output': `./assets/languages/vk-blocks.pot`
-                        }
-                    ]
-                ]
-              }
-            }
-          }
-        ]
-      }
-    }, webpackBundle))
-    .pipe(gulp.dest('./assets/js'));
+// Transpile and Compile Sass and Bundle it.
+gulp.task('webpack', function () {
+    return webpackStream(webpackConfig, webpack)
+        .pipe(gulp.dest('./'));
 });
 
 // watch
 gulp.task('watch', function () {
-  // Make SASS
-  gulp.watch('src/scss/**/*.scss', ['sass']);
-  // JS
-  gulp.watch(['src/js/**/*.js'], ['js']);
+  gulp.watch('src/**/*', ['webpack']);
 });
 
 // Build
-gulp.task('build', ['js', 'sass']);
+gulp.task('build', ['webpack']);
 
 // Default Tasks
 gulp.task('default', ['watch']);
