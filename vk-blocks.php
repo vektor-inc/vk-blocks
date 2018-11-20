@@ -6,7 +6,7 @@
  * Version: 1.0.0
  * Author: Vektor,Inc.
  * Author URI:
- *
+ * Text Domain: vk-blocks
  */
 
 // Do not load directly.
@@ -23,3 +23,9 @@ require __DIR__ . '/includes/alert.php';
 require __DIR__ . '/includes/baloon.php';
 require __DIR__ . '/includes/flow.php';
 require __DIR__ . '/includes/faq.php';
+
+add_action( 'plugins_loaded', function () {
+
+	//Load language files.
+	load_plugin_textdomain( 'vk-blocks', false, basename( dirname( __FILE__ ) ) . '/assets/languages' );
+} );

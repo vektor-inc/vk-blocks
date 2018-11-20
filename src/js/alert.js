@@ -2,12 +2,13 @@
  * Alert block type
  *
  */
+const {__} = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks;
 const { RichText }          = wp.editor;
 
 registerBlockType( 'vk-block/alert', {
 
-  title: 'Alert',
+  title: __('Alert', 'vk-blocks'),
 
   icon: 'info',
 

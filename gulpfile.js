@@ -42,7 +42,15 @@ gulp.task('js', function () {
               loader: 'babel-loader',
               options: {
                 presets: ['@babel/preset-env'],
-                plugins: ['@babel/plugin-transform-react-jsx']
+                plugins: [
+                    '@babel/plugin-transform-react-jsx',
+                    [
+                        '@wordpress/babel-plugin-makepot',
+                        {
+                            'output': `./assets/languages/vk-blocks.pot`
+                        }
+                    ]
+                ]
               }
             }
           }

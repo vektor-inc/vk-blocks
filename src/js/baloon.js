@@ -3,7 +3,7 @@
  *
  */
 
-const { __ } = wp.i18n; // Import __() from wp.i18n
+const { __, _n, sprintf } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
 const {RangeControl, RadioControl, PanelBody, Button} = wp.components;
 const { Fragment } = wp.element;
@@ -29,7 +29,7 @@ const BlockIcon = (
  */
 registerBlockType( 'vk-block/balloon', {
 	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-	title: __( 'フキダシ' ), // Block title.
+	title: __( 'Ballon' ), // Block title.
 	icon: BlockIcon, // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
 	category: 'formatting', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
 	attributes: {
