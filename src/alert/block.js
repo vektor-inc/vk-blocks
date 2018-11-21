@@ -21,13 +21,17 @@ registerBlockType( 'vk-blocks/alert', {
       default: 'info',
     },
     content: {
-      type: 'array',
-      source: 'children',
-      selector: 'p',
+        type: 'string',
+        source: 'html',
+        selector: 'p',
     }
   },
 
   edit({attributes, setAttributes}) {
+      const {
+          style,
+          content
+      } = attributes;
 
     function onStyleChange(event){
       setAttributes({style: event.target.value});
@@ -38,28 +42,32 @@ registerBlockType( 'vk-blocks/alert', {
     }
 
     return (
-      <div className={`alert alert-${attributes.style}`}>
+        <div className={`alert alert-${style}`}>
         <select onChange={onStyleChange}>
-          <option value={'success'} selected={attributes.style == 'success'}>Success</option>
-          <option value={'info'} selected={attributes.style == 'info'}>Info</option>
-          <option value={'warning'} selected={attributes.style == 'warning'}>Warning</option>
-          <option value={'danger'} selected={attributes.style == 'danger'}>Danger</option>
+            <option value={'success'} selected={style === 'success'}>Success</option>
+            <option value={'info'} selected={style === 'info'}>Info</option>
+            <option value={'warning'} selected={style === 'warning'}>Warning</option>
+            <option value={'danger'} selected={style === 'danger'}>Danger</option>
         </select>
         <RichText
-          tagName="p"
-          onChange={ onChangeContent }
-          value={ attributes.content }
+            tagName="p"
+            onChange={onChangeContent}
+            value={content}
         />
       </div>
     );
   },
 
   save({attributes}) {
+      const {
+          style,
+          content
+      } = attributes;
     return (
-      <div className={`alert alert-${attributes.style}`}>
+        <div className={`alert alert-${style}`}>
         <RichText.Content
-          tagName={'p'}
-          value={attributes.content}/>
+            tagName={'p'}
+            value={content}/>
       </div>
     );
   },
