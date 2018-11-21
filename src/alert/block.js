@@ -13,7 +13,7 @@ registerBlockType( 'vk-blocks/alert', {
 
   icon: 'info',
 
-  category: 'formatting',
+  category: 'vk-blocks-cat',
 
   attributes: {
     style: {
