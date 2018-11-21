@@ -3,14 +3,11 @@
  *
  */
 
-//  Import CSS.
-// import './style.scss';
-
 const {__} = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks;
 const { RichText }          = wp.editor;
 
-registerBlockType( 'vk-block/alert', {
+registerBlockType( 'vk-blocks/alert', {
 
   title: __('Alert', 'vk-blocks'),
 
