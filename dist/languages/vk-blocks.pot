@@ -1,0 +1,20 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/alert/block.js:12
+msgid "Alert"
+msgstr ""
+
+#: src/baloon/block.js:32
+msgid "Ballon"
+msgstr ""
+
+#: src/faq/block.js:25
+msgid "FAQ"
+msgstr ""
+
+#: src/flow/block.js:27
+msgid "Flow"
+msgstr ""

@@ -22,11 +22,11 @@ const BlockIcon = 'arrow-down';
  * @return {?WPBlock}          The block, if it has been successfully
  *                             registered; otherwise `undefined`.
  */
-registerBlockType('vk-block/flow', {
+registerBlockType('vk-blocks/flow', {
     // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-    title: __('フロー'), // Block title.
+    title: __('Flow', 'vk-blocks'), // Block title.
     icon: BlockIcon, // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
-    category: 'formatting', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
+    category: 'vk-blocks-cat', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
     attributes: {
         heading: {
             type: 'string',
@@ -40,7 +40,7 @@ registerBlockType('vk-block/flow', {
         },
         arrowFlag: {
             type: 'string',
-            default: 'arrowFlag-on',
+            default: 'vk_flow-arrow-on',
         }
     },
 
@@ -67,47 +67,50 @@ registerBlockType('vk-block/flow', {
                         <RadioControl
                             selected={arrowFlag}
                             options={[
-                                {label: '表示', value: 'arrowFlag-on'},
-                                {label: '非表示', value: 'arrowFlag-off'},
+                                {label: '表示', value: 'vk_flow-arrow-on'},
+                                {label: '非表示', value: 'vk_flow-arrow-off'},
                             ]}
                             onChange={(value) => setAttributes({arrowFlag: value})}
                         />
                     </PanelBody>
                 </InspectorControls>
 
-                <div className={`${ arrowFlag } veu_flowBox`}>
-                    <dl>
-                        <dt className={'image'}>
-                            <MediaUpload
-                                onSelect={(value) => setAttributes({insertImage: value.url})}
-                                type="image"
-                                className={'icon-image'}
-                                value={insertImage}
-                                render={({open}) => (
-                                    <Button
-                                        onClick={open}
-                                        className={insertImage ? 'image-button' : 'button button-large'}
-                                    >
-                                        {!insertImage ? '画像選択' :
-                                            <img className={'icon-image'} src={insertImage} alt={'画像アップロード'}/>}
-                                    </Button>
-                                )}
-                            />
-                        </dt>
+                <div className={`${ arrowFlag } vk_flow`}>
+									<div className={ 'vk_flow_frame' } >
+                    <dl className={ 'vk_flow_frame_text' }>
                         <RichText
                             tagName="dt"
-                            className={ 'title' }
+                            className={ 'vk_flow_frame_text_title' }
                             onChange={(value) => setAttributes({heading: value})}
                             value={heading}
                             placeholder="タイトルを入れて下さい"
                         />
                         <RichText
                             tagName="dd"
+														className={ 'vk_flow_frame_text_content' }
                             onChange={(value) => setAttributes({content: value})}
                             value={content}
-                            placeholder="文字を入れてください"
+                            placeholder="本文を入力してください"
                         />
                     </dl>
+										<div className={'vk_flow_frame_image'}>
+												<MediaUpload
+														onSelect={(value) => setAttributes({insertImage: value.url})}
+														type="image"
+														className={ 'vk_flow_frame_image' }
+														value={insertImage}
+														render={({open}) => (
+																<Button
+																		onClick={open}
+																		className={insertImage ? 'image-button' : 'button button-large'}
+																>
+																		{!insertImage ? '画像選択' :
+																				<img className={'icon-image'} src={insertImage} alt={'画像アップロード'}/>}
+																</Button>
+														)}
+												/>
+										</div>
+									</div>
                 </div>
             </Fragment>
         ];
@@ -131,25 +134,27 @@ registerBlockType('vk-block/flow', {
         } = attributes;
 
         return (
-            <div className={`${ arrowFlag } veu_flowBox`}>
-                <dl>
-                    <dt className={ 'image' }>
-                        { insertImage ?
-                            <img
-                                src={ insertImage }
-                                alt=''
-                            /> : '' }
-                    </dt>
+            <div className={`${ arrowFlag } vk_flow`}>
+							<div className={ 'vk_flow_frame' }>
+                <dl className={ 'vk_flow_frame_text' }>
                     <RichText.Content
                         tagName="dt"
-                        className={ 'title' }
+                        className={ 'vk_flow_frame_text_title' }
                         value={heading}
                     />
                     <RichText.Content
                         tagName="dd"
+												className={ 'vk_flow_frame_text_content' }
                         value={content}
                     />
                 </dl>
+								{ insertImage ?
+									<div className={ 'vk_flow_frame_image' }>
+										<img
+												src={ insertImage }
+												alt=''
+										/></div> : '' }
+							</div>
             </div>
         );
     },

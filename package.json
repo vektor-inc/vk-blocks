@@ -15,16 +15,28 @@
     "@babel/core": "^7.1.0",
     "@babel/plugin-transform-react-jsx": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
+    "@wordpress/babel-plugin-makepot": "^2.1.2",
+    "autoprefixer": "^9.3.1",
     "babel-loader": "^8.0.2",
+    "css-loader": "^1.0.1",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.1.0",
+    "gulp-concat": "^2.6.1",
     "gulp-load-plugins": "^1.2",
     "gulp-notify": "^2.2.0",
     "gulp-plumber": "^1.0.0",
     "gulp-sass": "^2.2",
     "gulp-sourcemaps": "^1.5",
+    "node-sass": "^4.10.0",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
     "vinyl-named": "^1.1.0",
-    "webpack": "^4.19.1",
+    "webpack": "^4.26.0",
+    "webpack-cli": "^3.1.2",
     "webpack-stream": "^5.1.1"
+  },
+  "dependencies": {
+    "@wordpress/i18n": "^3.1.0"
   }
 }

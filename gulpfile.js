@@ -1,63 +1,43 @@
-var gulp          = require('gulp'),
-    $             = require('gulp-load-plugins')(),
-    webpack       = require('webpack-stream'),
-    webpackBundle = require('webpack'),
-    named         = require('vinyl-named');
+var gulp = require('gulp'),
+    concat = require("gulp-concat"),
+    $ = require('gulp-load-plugins')(),
+    webpackStream = require('webpack-stream'),
+    webpack = require('webpack'),
+    webpackConfig = require('./webpack.config');
 
-// Sass tasks
 gulp.task('sass', function () {
-  return gulp.src(['./src/scss/**/*.scss'])
-    .pipe($.plumber({
-      errorHandler: $.notify.onError('<%= error.message %>')
-    }))
-    .pipe($.sourcemaps.init({loadMaps: true}))
-    .pipe($.sass({
-      errLogToConsole: true,
-      outputStyle    : 'compressed',
-      includePaths   : [
-        './src/scss'
-      ]
-    }))
-    .pipe($.autoprefixer({browsers: ['last 2 version', '> 5%']}))
-    .pipe($.sourcemaps.write('./map'))
-    .pipe(gulp.dest('./assets/css'));
+    return gulp.src(['./src/**/*.scss'])
+        .pipe($.plumber({
+            errorHandler: $.notify.onError('<%= error.message %>')
+        }))
+        .pipe($.sourcemaps.init({loadMaps: true}))
+        .pipe($.sass({
+            errLogToConsole: true,
+            outputStyle: 'compressed',
+            includePaths: [
+                './src/scss'
+            ]
+        }))
+        .pipe($.autoprefixer({browsers: ['last 2 version', '> 5%']}))
+        .pipe($.sourcemaps.write('./map'))
+
+        //bundle css files by gulp-concat
+        .pipe(concat('block-build.css'))
+        .pipe(gulp.dest('./dist'));
 });
 
-// Transpile JS
+
+// Transpile and Compile Sass and Bundle it.
 gulp.task('js', function () {
-  return gulp.src(['./src/js/**/*.js'])
-    .pipe($.plumber({
-      errorHandler: $.notify.onError('<%= error.message %>')
-    }))
-    .pipe(named())
-    .pipe(webpack({
-      mode: 'production',
-      devtool: 'source-map',
-      module: {
-        rules: [
-          {
-            test: /\.js$/,
-            exclude: /(node_modules|bower_components)/,
-            use: {
-              loader: 'babel-loader',
-              options: {
-                presets: ['@babel/preset-env'],
-                plugins: ['@babel/plugin-transform-react-jsx']
-              }
-            }
-          }
-        ]
-      }
-    }, webpackBundle))
-    .pipe(gulp.dest('./assets/js'));
+    return webpackStream(webpackConfig, webpack)
+        .pipe(gulp.dest('./'));
 });
+
 
 // watch
 gulp.task('watch', function () {
-  // Make SASS
-  gulp.watch('src/scss/**/*.scss', ['sass']);
-  // JS
-  gulp.watch(['src/js/**/*.js'], ['js']);
+    gulp.watch('src/**/*.js', ['js']);
+    gulp.watch('src/**/*.scss', ['sass']);
 });
 
 // Build

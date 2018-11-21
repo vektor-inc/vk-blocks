@@ -1,0 +1,29 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"X-Generator: Poedit 2.2\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: ja_JP\n"
+
+#: src/js/alert.js:11
+msgid "Alert"
+msgstr "アラート"
+
+#: src/js/baloon.js:32
+msgid "Ballon"
+msgstr "フキダシ"
+
+#: src/js/faq.js:25
+msgid "FAQ"
+msgstr "質問と解答"
+
+#: src/js/flow.js:27
+msgid "Flow"
+msgstr "フロー"
