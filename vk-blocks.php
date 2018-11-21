@@ -25,8 +25,9 @@ add_action( 'plugins_loaded', function () {
 
 function vkblocks_blocks_assets() {
 
+	wp_register_style( 'vk-blocks-buid-css', plugins_url( 'dist/block-build.css', __FILE__ ), [], VK_BLOCKS_VERSION );
 	wp_register_script(
-		'vk-blocks-buid', plugins_url( 'dist/block-build.js', __FILE__ ), array(
+		'vk-blocks-buid-js', plugins_url( 'dist/block-build.js', __FILE__ ), array(
 		'wp-blocks',
 		'wp-i18n',
 		'wp-element',
@@ -42,7 +43,7 @@ function vkblocks_blocks_assets() {
 		$content = 'wp.i18n.setLocaleData( ' . json_encode( $locale ) . ', "vk-blocks" );';
 
 		//Pass the data to javascript from php.
-		wp_script_add_data( 'vk-blocks-buid', 'data', $content );
+		wp_script_add_data( 'vk-blocks-buid-js', 'data', $content );
 	}
 
 	if ( defined( 'GUTENBERG_VERSION' ) ) {
@@ -50,30 +51,33 @@ function vkblocks_blocks_assets() {
 		// Alert Block.
 		register_block_type(
 			'vk-blocks/alert', [
-				'editor_script' => 'vk-blocks-buid',
+				'style'  => 'vk-blocks-buid-css',
+				'editor_script' => 'vk-blocks-buid-js',
 			]
 		);
 		// Baloon Block.
 		register_block_type(
 			'vk-blocks/balloon', [
-				'editor_script' => 'vk-blocks-buid',
+				'style'  => 'vk-blocks-buid-css',
+				'editor_script' => 'vk-blocks-buid-js',
 			]
 		);
 		// Faq Block.
 		register_block_type(
 			'vk-blocks/faq', [
-				'editor_script' => 'vk-blocks-buid',
+				'style'  => 'vk-blocks-buid-css',
+				'editor_script' => 'vk-blocks-buid-js',
 			]
 		);
 		// Flow Block.
 		register_block_type(
 			'vk-blocks/flow', [
-				'editor_script' => 'vk-blocks-buid',
+				'style'  => 'vk-blocks-buid-css',
+				'editor_script' => 'vk-blocks-buid-js',
 			]
 		);
 	}
 }
-
 add_action( 'init', 'vkblocks_blocks_assets' );
 
 
