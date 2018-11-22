@@ -28,6 +28,7 @@ add_action(
 function vkblocks_blocks_assets() {
 
 	wp_register_style( 'vk-blocks-buid-css', plugins_url( 'dist/block-build.css', __FILE__ ), [], VK_BLOCKS_VERSION );
+	wp_register_style( 'vk-blocks-buid-editor-css', plugins_url( 'dist/block-build-editor.css', __FILE__ ), [], VK_BLOCKS_VERSION );
 	wp_register_script(
 		'vk-blocks-buid-js', plugins_url( 'dist/block-build.js', __FILE__ ), array(
 			'wp-blocks',
