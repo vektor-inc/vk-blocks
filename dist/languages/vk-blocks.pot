@@ -8,10 +8,12 @@ msgid "Alert"
 msgstr ""
 
 #: src/balloon/block.js:117
+#: src/flow/block.js:111
 msgid "Select image"
 msgstr ""
 
 #: src/balloon/block.js:117
+#: src/flow/block.js:112
 msgid "Upload image"
 msgstr ""
 
@@ -73,4 +75,24 @@ msgstr ""
 
 #: src/flow/block.js:27
 msgid "Flow"
+msgstr ""
+
+#: src/flow/block.js:70
+msgid "Display of arrow"
+msgstr ""
+
+#: src/flow/block.js:74
+msgid "Arrow display"
+msgstr ""
+
+#: src/flow/block.js:75
+msgid "Arrow hidden"
+msgstr ""
+
+#: src/flow/block.js:90
+msgid "Input title"
+msgstr ""
+
+#: src/flow/block.js:97
+msgid "Input content"
 msgstr ""

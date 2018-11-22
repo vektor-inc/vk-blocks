@@ -19,11 +19,11 @@ msgstr ""
 msgid "Alert"
 msgstr "アラート"
 
-#: src/balloon/block.js:117
+#: src/balloon/block.js:117 src/flow/block.js:111
 msgid "Select image"
 msgstr "画像を選択"
 
-#: src/balloon/block.js:117
+#: src/balloon/block.js:117 src/flow/block.js:112
 msgid "Upload image"
 msgstr "画像をアップロード"
 
@@ -86,3 +86,23 @@ msgstr "回答を入力してください。"
 #: src/flow/block.js:27
 msgid "Flow"
 msgstr "フロー"
+
+#: src/flow/block.js:70
+msgid "Display of arrow"
+msgstr "矢印の表示"
+
+#: src/flow/block.js:74
+msgid "Arrow display"
+msgstr "矢印を表示する"
+
+#: src/flow/block.js:75
+msgid "Arrow hidden"
+msgstr "矢印を表示しない"
+
+#: src/flow/block.js:90
+msgid "Input title"
+msgstr "タイトルを入力"
+
+#: src/flow/block.js:97
+msgid "Input content"
+msgstr "説明を入力"

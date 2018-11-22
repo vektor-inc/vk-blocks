@@ -67,12 +67,12 @@ registerBlockType('vk-blocks/flow', {
         return [
             <Fragment>
                 <InspectorControls>
-                    <PanelBody title="矢印設定">
+                    <PanelBody title={__('Display of arrow', 'vk-blocks') }>
                         <RadioControl
                             selected={arrowFlag}
                             options={[
-                                {label: '表示', value: 'vk_flow-arrow-on'},
-                                {label: '非表示', value: 'vk_flow-arrow-off'},
+                                {label: __('Arrow display', 'vk-blocks'), value: 'vk_flow-arrow-on'},
+                                {label: __('Arrow hidden', 'vk-blocks'), value: 'vk_flow-arrow-off'},
                             ]}
                             onChange={(value) => setAttributes({arrowFlag: value})}
                         />
@@ -87,14 +87,14 @@ registerBlockType('vk-blocks/flow', {
                             className={ 'vk_flow_frame_text_title' }
                             onChange={(value) => setAttributes({heading: value})}
                             value={heading}
-                            placeholder="タイトルを入れて下さい"
+                            placeholder={__('Input title', 'vk-blocks') }
                         />
                         <RichText
                             tagName="dd"
 														className={ 'vk_flow_frame_text_content' }
                             onChange={(value) => setAttributes({content: value})}
                             value={content}
-                            placeholder="本文を入力してください"
+                            placeholder={__('Input content', 'vk-blocks') }
                         />
                     </dl>
 										<div className={'vk_flow_frame_image'}>
@@ -108,8 +108,8 @@ registerBlockType('vk-blocks/flow', {
 																		onClick={open}
 																		className={insertImage ? 'image-button' : 'button button-large'}
 																>
-																		{!insertImage ? '画像選択' :
-																				<img className={'icon-image'} src={insertImage} alt={'画像アップロード'}/>}
+																		{!insertImage ? __('Select image', 'vk-blocks') :
+																				<img className={'icon-image'} src={insertImage} alt={__('Upload image', 'vk-blocks')}/>}
 																</Button>
 														)}
 												/>
