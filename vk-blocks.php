@@ -87,7 +87,6 @@ function vkblocks_blocks_assets() {
 }
 add_action( 'init', 'vkblocks_blocks_assets' );
 
-
 // Add Block Category,
 function vkblocks_blocks_categories( $categories, $post ) {
 	return array_merge(

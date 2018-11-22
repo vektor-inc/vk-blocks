@@ -48,7 +48,7 @@ registerBlockType('vk-blocks/balloon', {
 			type: 'string',
 			default: 'balloon-left',
 		},
-		backgroundImage: {
+		IconImage: {
 			type: 'string',
 			default: null, // no image by default!
 		}
@@ -68,7 +68,7 @@ registerBlockType('vk-blocks/balloon', {
             balloonType,
             balloonBgColor,
 			balloonAlign,
-			backgroundImage,
+			IconImage,
 		} = attributes;
 
         return (
@@ -105,16 +105,16 @@ registerBlockType('vk-blocks/balloon', {
 				<div className={ `${ className } ${ balloonAlign } ${ balloonType }` }>
 					<div className={ 'image' }>
 						<MediaUpload
-							onSelect={ (value) => setAttributes( { backgroundImage: value.sizes.full.url } ) }
+							onSelect={ (value) => setAttributes( { IconImage: value.sizes.full.url } ) }
 							type="image"
 							className={ 'icon-image' }
-							value={ backgroundImage }
+							value={ IconImage }
 							render={ ( { open } ) => (
 								<Button
 									onClick={ open }
-									className={ backgroundImage ? 'image-button' : 'button button-large' }
+									className={ IconImage ? 'image-button' : 'button button-large' }
 								>
-									{ ! backgroundImage ? __('Select image', 'vk-blocks') : <img className={ 'icon-image' } src={ backgroundImage } alt={__('Upload image', 'vk-blocks') } /> }
+									{ ! IconImage ? __('Select image', 'vk-blocks') : <img className={ 'icon-image' } src={ IconImage } alt={__('Upload image', 'vk-blocks') } /> }
 								</Button>
 							)}
 						/>
@@ -146,17 +146,17 @@ registerBlockType('vk-blocks/balloon', {
             balloonType,
             balloonBgColor,
 			balloonAlign,
-			backgroundImage,
+			IconImage,
 		} = attributes;
 
 		return (
 			<div className={ `${ balloonAlign } ${ balloonType }` }>
 				<div className={ 'image' }>
-					{ backgroundImage ?
+					{ IconImage ?
 						<figure>
 							<img
 								className={ 'icon-image' }
-								src={ backgroundImage }
+								src={ IconImage }
 								alt=''
 							/>
 						</figure> : '' }
