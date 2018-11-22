@@ -85,20 +85,20 @@ registerBlockType('vk-blocks/balloon', {
 							] }
 							onChange={ ( value ) => setAttributes( { balloonAlign: value } ) }
 						/>
-                        <RadioControl
-                            label={__('Type', 'vk-blocks')}
-                            help={__('Please select the type of balloon.', 'vk-blocks')}
-                            selected={ balloonType }
-                            options={ [
-                                { label: __('Serif', 'vk-blocks'), value: 'type-serif' },
-                                { label: __('Thinking', 'vk-blocks'), value: 'type-think' }
-                            ] }
-                            onChange={ ( value ) => setAttributes( { balloonType: value } ) }
-                        />
-                        <ColorPalette
-                            value={balloonBgColor}
-                            onChange={(value) => setAttributes({balloonBgColor: value})}
-                        />
+		        <RadioControl
+		            label={__('Type', 'vk-blocks')}
+		            help={__('Please select the type of balloon.', 'vk-blocks')}
+		            selected={ balloonType }
+		            options={ [
+		                { label: __('Serif', 'vk-blocks'), value: 'type-serif' },
+		                { label: __('Thinking', 'vk-blocks'), value: 'type-think' }
+		            ] }
+		            onChange={ ( value ) => setAttributes( { balloonType: value } ) }
+		        />
+		        <ColorPalette
+		            value={balloonBgColor}
+		            onChange={(value) => setAttributes({balloonBgColor: value})}
+		        />
 					</PanelBody>
 				</InspectorControls>
 

@@ -19,57 +19,61 @@ msgstr ""
 msgid "Alert"
 msgstr "アラート"
 
-#: src/baloon/block.js:117
+#: src/balloon/block.js:118
 msgid "Select image"
 msgstr "画像を選択"
 
-#: src/baloon/block.js:117
+#: src/balloon/block.js:118
 msgid "Upload image"
 msgstr "画像をアップロード"
 
-#: src/baloon/block.js:127
+#: src/balloon/block.js:128
 msgid "Input text"
 msgstr "文字を入力"
 
-#: src/baloon/block.js:32
+#: src/balloon/block.js:32
 msgid "Ballon"
 msgstr "フキダシ"
 
-#: src/baloon/block.js:77
-msgid "Baloon setting"
+#: src/balloon/block.js:77
+msgid "Balloon setting"
 msgstr "フキダシ設定"
 
-#: src/baloon/block.js:79
+#: src/balloon/block.js:79
 msgid "Position"
 msgstr "位置"
 
-#: src/baloon/block.js:80
+#: src/balloon/block.js:80
 msgid "Please specify the layout of the balloon."
 msgstr "吹き出しの配置を指定してください。"
 
-#: src/baloon/block.js:83
+#: src/balloon/block.js:83
 msgid "Left"
 msgstr "左"
 
-#: src/baloon/block.js:84
+#: src/balloon/block.js:84
 msgid "Right"
 msgstr "右"
 
-#: src/baloon/block.js:89
+#: src/balloon/block.js:89
 msgid "Type"
 msgstr "タイプ"
 
-#: src/baloon/block.js:90
+#: src/balloon/block.js:90
 msgid "Please select the type of balloon."
 msgstr "吹き出しのタイプを指定してください。"
 
-#: src/baloon/block.js:93
+#: src/balloon/block.js:93
 msgid "Serif"
 msgstr "セリフ"
 
-#: src/baloon/block.js:94
+#: src/balloon/block.js:94
 msgid "Thinking"
 msgstr "吹き出し"
+
+#: src/balloon/block.js:99
+msgid "Balloon bg color"
+msgstr ""
 
 #: src/faq/block.js:25
 msgid "FAQ"
