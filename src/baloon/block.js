@@ -74,24 +74,24 @@ registerBlockType('vk-blocks/balloon', {
         return (
 			<Fragment>
 				<InspectorControls>
-					<PanelBody title="吹き出し設定">
+					<PanelBody title={__('Baloon setting', 'vk-blocks')}>
 						<RadioControl
-							label="配置"
-							help="吹き出しの配置を指定してください。"
+							label={__('Position', 'vk-blocks')}
+							help={__('Please specify the layout of the balloon.', 'vk-blocks')}
 							selected={ balloonAlign }
 							options={ [
-								{ label: '左', value: 'balloon-left' },
-								{ label: '右', value: 'balloon-right' },
+								{ label: __('Left', 'vk-blocks'), value: 'balloon-left' },
+								{ label: __('Right', 'vk-blocks'), value: 'balloon-right' },
 							] }
 							onChange={ ( value ) => setAttributes( { balloonAlign: value } ) }
 						/>
                         <RadioControl
-                            label="タイプ"
-                            help="吹き出しのタイプを指定してください。"
+                            label={__('Type', 'vk-blocks')}
+                            help={__('Please select the type of balloon.', 'vk-blocks')}
                             selected={ balloonType }
                             options={ [
-                                { label: 'セリフ', value: 'type-serif' },
-                                { label: '考え中', value: 'type-think' }
+                                { label: __('Serif', 'vk-blocks'), value: 'type-serif' },
+                                { label: __('Thinking', 'vk-blocks'), value: 'type-think' }
                             ] }
                             onChange={ ( value ) => setAttributes( { balloonType: value } ) }
                         />
@@ -114,7 +114,7 @@ registerBlockType('vk-blocks/balloon', {
 									onClick={ open }
 									className={ backgroundImage ? 'image-button' : 'button button-large' }
 								>
-									{ ! backgroundImage ? 'アイコン選択' : <img className={ 'icon-image' } src={ backgroundImage } alt={'画像アップロード' } /> }
+									{ ! backgroundImage ? __('Select image', 'vk-blocks') : <img className={ 'icon-image' } src={ backgroundImage } alt={__('Upload image', 'vk-blocks') } /> }
 								</Button>
 							)}
 						/>
@@ -124,7 +124,7 @@ registerBlockType('vk-blocks/balloon', {
 						tagName="p"
 						onChange={ ( value ) => setAttributes( { content: value } ) }
 						value={ content }
-						placeholder="文字を入れてください"
+						placeholder={__('Input text', 'vk-blocks') }
 					/>
 				</div>
 			</Fragment>
