@@ -74,7 +74,7 @@ registerBlockType('vk-blocks/balloon', {
         return (
 			<Fragment>
 				<InspectorControls>
-					<PanelBody title={__('Baloon setting', 'vk-blocks')}>
+					<PanelBody title={__('Balloon setting', 'vk-blocks')}>
 						<RadioControl
 							label={__('Position', 'vk-blocks')}
 							help={__('Please specify the layout of the balloon.', 'vk-blocks')}
