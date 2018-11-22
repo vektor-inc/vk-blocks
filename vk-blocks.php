@@ -55,6 +55,7 @@ function vkblocks_blocks_assets() {
 		register_block_type(
 			'vk-blocks/alert', [
 				'style'         => 'vk-blocks-buid-css',
+				'editor_style'  => 'vk-blocks-buid-editor-css',
 				'editor_script' => 'vk-blocks-buid-js',
 			]
 		);
@@ -62,6 +63,7 @@ function vkblocks_blocks_assets() {
 		register_block_type(
 			'vk-blocks/balloon', [
 				'style'         => 'vk-blocks-buid-css',
+				'editor_style'  => 'vk-blocks-buid-editor-css',
 				'editor_script' => 'vk-blocks-buid-js',
 			]
 		);
@@ -69,6 +71,7 @@ function vkblocks_blocks_assets() {
 		register_block_type(
 			'vk-blocks/faq', [
 				'style'         => 'vk-blocks-buid-css',
+				'editor_style'  => 'vk-blocks-buid-editor-css',
 				'editor_script' => 'vk-blocks-buid-js',
 			]
 		);
@@ -76,6 +79,7 @@ function vkblocks_blocks_assets() {
 		register_block_type(
 			'vk-blocks/flow', [
 				'style'         => 'vk-blocks-buid-css',
+				'editor_style'  => 'vk-blocks-buid-editor-css',
 				'editor_script' => 'vk-blocks-buid-js',
 			]
 		);
