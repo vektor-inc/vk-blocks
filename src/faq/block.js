@@ -58,18 +58,17 @@ registerBlockType('vk-blocks/faq', {
                     tagName="dt"
                     onChange={(value) => setAttributes({heading: value})}
                     value={heading}
-                    placeholder="質問文を入れて下さい"
+                    placeholder={__('Please enter a question.', 'vk-blocks') }
                 />
                 <RichText
                     tagName="dd"
                     onChange={(value) => setAttributes({content: value})}
                     value={content}
-                    placeholder="回答文を入れてください"
+                    placeholder={__('Please enter a answer.', 'vk-blocks') }
                 />
             </dl>
         );
     },
-
 
     /**
      * The save function defin className }> which the different attributes should be combined
