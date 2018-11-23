@@ -7,6 +7,8 @@ var gulp = require('gulp'),
 var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var cleanCss = require('gulp-clean-css');
+// 同期的に処理してくれる（ distで使用している ）
+var runSequence = require('run-sequence');
 
 gulp.task('sass', function () {
     return gulp.src(['./src/**/*.scss'])
@@ -35,6 +37,7 @@ gulp.task('sass_editor', function () {
 				.pipe(concat('editor-block-build.scss'))
 				.pipe(gulp.dest('./editor-css/'))
 				.pipe(sass())
+				.pipe(cleanCss())
 				.pipe(concat('block-build-editor.css'))
 				.pipe(gulp.dest('./inc/vk-blocks/build/'));
 });
@@ -59,3 +62,46 @@ gulp.task('build', ['js', 'sass']);
 
 // Default Tasks
 gulp.task('default', ['watch']);
+
+
+// copy dist ////////////////////////////////////////////////
+
+gulp.task('copy_dist', function() {
+    return gulp.src(
+            [
+							'./**/*.php',
+							'./**/*.txt',
+							'./**/*.css',
+							'./**/*.scss',
+							'./**/*.bat',
+							'./**/*.rb',
+							'./**/*.eot',
+							'./**/*.svg',
+							'./**/*.ttf',
+							'./**/*.woff',
+							'./**/*.woff2',
+							'./**/*.otf',
+							'./**/*.less',
+							'./**/*.png',
+							'./inc/**',
+							"!./compile.bat",
+							"!./config.rb",
+							"!./tests/**",
+							"!./dist/**",
+							"!./src/**",
+							"!./editor-css/**",
+							"!./node_modules/**"
+            ],
+            { base: './' }
+        )
+        .pipe( gulp.dest( 'dist/vk-blocks' ) ); // distディレクトリに出力
+} );
+// gulp.task('build:dist',function(){
+//     /* ここで、CSS とか JS をコンパイルする */
+// });
+
+gulp.task('dist', function(cb){
+    // return runSequence( 'build:dist', 'copy', cb );
+    // return runSequence( 'build:dist', 'copy_dist', cb );
+    return runSequence( 'copy_dist', cb );
+});

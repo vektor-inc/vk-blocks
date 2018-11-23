@@ -1,15 +1,5 @@
 <?php
 
-add_action(
-	'plugins_loaded', function () {
-		//Load language files.
-		load_plugin_textdomain( 'vk-blocks', false, VK_BLOCKS_URL . '/build/languages' );
-	}
-);
-
-
-
-
 function vkblocks_blocks_assets() {
 
 	wp_register_style( 'vk-blocks-buid-css', VK_BLOCKS_URL . 'build/block-build.css', [], VK_BLOCKS_VERSION );

@@ -30,6 +30,7 @@
     "gulp-sourcemaps": "^1.5",
     "node-sass": "^4.10.0",
     "postcss-loader": "^3.0.0",
+    "run-sequence": "^2.2.1",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "vinyl-named": "^1.1.0",
