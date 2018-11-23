@@ -1,5 +1,5 @@
 === VK Blocks ===
-Contributors: (this should be a list of wordpress.org userid's)
+Contributors: vektor-inc,kurudrive
 Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 4.6
