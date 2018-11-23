@@ -10,3 +10,5 @@
 	define( 'VK_BLOCKS_VERSION', '1.0.0' );
 
 // }
+	global $vk_blocks_prefix;
+	$vk_blocks_prefix = apply_filters( 'vk_blocks_prefix', 'VK ' );
