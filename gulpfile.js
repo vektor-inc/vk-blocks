@@ -66,7 +66,7 @@ gulp.task('default', ['watch']);
 
 // copy dist ////////////////////////////////////////////////
 
-gulp.task('copy_dist', function() {
+gulp.task('dist', function() {
     return gulp.src(
             [
 							'./**/*.php',
@@ -96,12 +96,13 @@ gulp.task('copy_dist', function() {
         )
         .pipe( gulp.dest( 'dist/vk-blocks' ) ); // distディレクトリに出力
 } );
-// gulp.task('build:dist',function(){
-//     /* ここで、CSS とか JS をコンパイルする */
-// });
 
-gulp.task('dist', function(cb){
-    // return runSequence( 'build:dist', 'copy', cb );
-    // return runSequence( 'build:dist', 'copy_dist', cb );
-    return runSequence( 'copy_dist', cb );
-});
+gulp.task('dist_ex', function() {
+    return gulp.src(
+            [
+							'./inc/vk-blocks/**',
+            ],
+            { base: './inc/vk-blocks/' }
+        )
+        .pipe( gulp.dest( '../vk-all-in-one-expansion-unit/plugins/vk-blocks' ) ); // distディレクトリに出力
+} );
