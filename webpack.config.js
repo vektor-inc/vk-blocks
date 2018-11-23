@@ -3,7 +3,7 @@ module.exports = {
     devtool: 'source-map',
     entry: "./src/bundle.js",
     output: {
-        filename: "./dist/block-build.js"
+        filename: "./inc/vk-blocks/build/block-build.js"
     },
     module: {
         rules: [
@@ -20,7 +20,7 @@ module.exports = {
                                 // JSをスキャンして、potを作成/アップデート
                                 '@wordpress/babel-plugin-makepot',
                                 {
-                                    'output': `./dist/languages/vk-blocks.pot`
+                                    'output': `./inc/vk-blocks/build/languages/vk-blocks.pot`
                                 }
                             ]
                         ]

@@ -26,7 +26,7 @@ gulp.task('sass', function () {
 
         //bundle css files by gulp-concat
         .pipe(concat('block-build.css'))
-        .pipe(gulp.dest('./dist'));
+        .pipe(gulp.dest('./inc/vk-blocks/build/'));
 });
 
 
@@ -36,7 +36,7 @@ gulp.task('sass_editor', function () {
 				.pipe(gulp.dest('./editor-css/'))
 				.pipe(sass())
 				.pipe(concat('block-build-editor.css'))
-				.pipe(gulp.dest('./dist/'));
+				.pipe(gulp.dest('./inc/vk-blocks/build/'));
 });
 
 

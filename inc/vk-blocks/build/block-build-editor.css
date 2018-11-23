@@ -232,7 +232,7 @@
         font-family: ""; }
   .edit-post-visual-editor .vk_flow-arrow-on:after {
     content: "";
-    background: url("./images/arrow_bottom.svg") center 50% no-repeat;
+    background: url("../images/arrow_bottom.svg") center 50% no-repeat;
     background-size: 50px 50px;
     display: block;
     overflow: hidden;

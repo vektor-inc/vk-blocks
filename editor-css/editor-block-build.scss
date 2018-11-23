@@ -319,6 +319,7 @@
 
   }
 }
+
 /*      .qaItem
 /*-------------------------------------------*/
 dl.veu_qaItem  { display:block; overflow:hidden;border-bottom:1px dotted #ccc; padding:0px 0px 20px; margin:0px 0px 20px; width:100%; position: relative;
@@ -340,7 +341,7 @@ dl.veu_qaItem  { display:block; overflow:hidden;border-bottom:1px dotted #ccc; p
 }
 .vk_flow-arrow-on:after {
   content:"";
-  background: url('./images/arrow_bottom.svg') center 50% no-repeat;
+  background: url('../images/arrow_bottom.svg') center 50% no-repeat;
   background-size: 50px 50px;
   display:block; overflow:hidden;
   height:50px;
