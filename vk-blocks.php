@@ -3,7 +3,7 @@
  * Plugin Name: VK Blocks
  * Plugin URI: https://github.com/vektor-inc/vk-blocks
  * Description:
- * Version: 1.0.0
+ * Version: 0.1.0
  * Author: Vektor,Inc.
  * Author URI:
  * Text Domain: vk-blocks
