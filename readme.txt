@@ -35,6 +35,7 @@ e.g.
 
 == Screenshots ==
 
+1. VK Blocks can be selected from the VK Blocks Panel.
 1. VK Blocks examples.
 
 == Changelog ==
