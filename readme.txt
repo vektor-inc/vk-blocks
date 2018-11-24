@@ -15,10 +15,17 @@ This is a plugin that extends Gutenberg's blocks.
 
 This is a plugin that extends Gutenberg's blocks.
 
+[ Blocks ]
+
 * Alert
 * FAQ
 * Balloon
 * Flow
+
+[ Editing and correction ]
+
+The source code of this plug-in is below.
+https://github.com/vektor-inc/vk-blocks
 
 == Installation ==
 
