@@ -53,15 +53,17 @@ registerBlockType('vk-blocks/faq', {
         } = attributes;
 
         return (
-            <dl className={'veu_qaItem'}>
+            <dl className={'vk_faq'}>
                 <RichText
                     tagName="dt"
+										className={ 'vk_faq_title' }
                     onChange={(value) => setAttributes({heading: value})}
                     value={heading}
                     placeholder={__('Please enter a question.', 'vk-blocks') }
                 />
                 <RichText
                     tagName="dd"
+										className={ 'vk_faq_content' }
                     onChange={(value) => setAttributes({content: value})}
                     value={content}
                     placeholder={__('Please enter a answer.', 'vk-blocks') }
@@ -85,13 +87,15 @@ registerBlockType('vk-blocks/faq', {
         } = attributes;
 
         return (
-            <dl className={'veu_qaItem'}>
+            <dl className={ 'vk_faq' }>
                 <RichText.Content
                     tagName="dt"
+										className={ 'vk_faq_title' }
                     value={heading}
                 />
                 <RichText.Content
                     tagName="dd"
+										className={ 'vk_faq_content' }
                     value={content}
                 />
             </dl>
