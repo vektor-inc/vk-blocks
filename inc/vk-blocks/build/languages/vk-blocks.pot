@@ -17,11 +17,11 @@ msgstr ""
 msgid "Upload image"
 msgstr ""
 
-#: src/balloon/block.js:130
+#: src/balloon/block.js:131
 msgid "Icon Name"
 msgstr ""
 
-#: src/balloon/block.js:138
+#: src/balloon/block.js:139
 msgid "Input text"
 msgstr ""
 

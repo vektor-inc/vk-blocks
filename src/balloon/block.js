@@ -125,6 +125,7 @@ registerBlockType('vk-blocks/balloon', {
 						/>
                         <RichText
                             tagName="figcaption"
+														className={ 'vk-balloon-icon-name' }
                             onChange={ ( value ) => setAttributes( { balloonName: value } ) }
                             value={ balloonName }
                             placeholder={__('Icon Name', 'vk-blocks') }
@@ -173,6 +174,7 @@ registerBlockType('vk-blocks/balloon', {
 							/>
                             <RichText.Content
                                 tagName="figcaption"
+																className={ 'vk-balloon-icon-name' }
                                 value={ balloonName }
                             />
 						</figure> : '' }
