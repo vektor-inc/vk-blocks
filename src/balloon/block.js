@@ -50,7 +50,7 @@ registerBlockType('vk-blocks/balloon', {
 		},
 		balloonAlign: {
 			type: 'string',
-			default: 'balloon-left',
+			default: 'left',
 		},
 		IconImage: {
 			type: 'string',
@@ -85,8 +85,8 @@ registerBlockType('vk-blocks/balloon', {
 							help={__('Please specify the layout of the balloon.', 'vk-blocks')}
 							selected={ balloonAlign }
 							options={ [
-								{ label: __('Left', 'vk-blocks'), value: 'balloon-left' },
-								{ label: __('Right', 'vk-blocks'), value: 'balloon-right' },
+								{ label: __('Left', 'vk-blocks'), value: 'left' },
+								{ label: __('Right', 'vk-blocks'), value: 'right' },
 							] }
 							onChange={ ( value ) => setAttributes( { balloonAlign: value } ) }
 						/>
@@ -107,7 +107,7 @@ registerBlockType('vk-blocks/balloon', {
 					</PanelBody>
 				</InspectorControls>
 
-				<div className={ `${ className } vk_balloon ${ balloonAlign } ${ balloonType }` }>
+				<div className={ `${ className } vk_balloon vk_balloon-${ balloonAlign } vk_balloon-${ balloonType }` }>
 					<div className={ 'vk_balloon_icon' }>
 						<MediaUpload
 							onSelect={ (value) => setAttributes( { IconImage: value.sizes.full.url } ) }
@@ -163,7 +163,7 @@ registerBlockType('vk-blocks/balloon', {
 		} = attributes;
 
 		return (
-			<div className={ `vk_balloon ${ balloonAlign } ${ balloonType }` }>
+			<div className={ `vk_balloon vk_balloon-${ balloonAlign } vk_balloon-${ balloonType }` }>
 				<div className={ 'vk_balloon_icon' }>
 					{ IconImage ?
 						<figure>
