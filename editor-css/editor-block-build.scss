@@ -72,12 +72,17 @@
 .vk_balloon_content{
 	position: relative;
 	text-align: left;
+	&.editor-rich-text__tinymce[data-is-placeholder-visible=true] {
+		// これがないと未入力時に吹き出しが２重になる
+		position: absolute;
+	}
 }
+
 
 /*	type
 /*-------------------------------------------*/
 .vk_balloon-type-serif{
-	p{
+	.vk_balloon_content{
 		border-color: #f5f5f5;
 		border-radius: .4em;
 		&::after{
@@ -90,7 +95,7 @@
 	}
 }
 .vk_balloon-type-think{
-	p{
+	.vk_balloon_content{
 		border-radius: 2rem;
 		&::before,
 		&::after{
@@ -118,7 +123,7 @@
 			margin-right: 2rem;
 		}
 
-		p{
+		.vk_balloon_content{
 			&::after{
 				left: 0;
 				top: 50%;
@@ -135,7 +140,7 @@
 			margin-right: 2.5rem;
 		}
 
-		p{
+		.vk_balloon_content{
 			&::before{
 				left: -22px;
 				top: 7px;
@@ -155,7 +160,7 @@
 			margin-left: 2rem;
 		}
 
-		p{
+		.vk_balloon_content{
 			&::after{
 				right: 0;
 				top: 50%;
@@ -172,7 +177,7 @@
 			margin-left: 2.5rem;
 		}
 
-		p{
+		.vk_balloon_content{
 			&::before{
 				right: -22px;
 				top: 7px;
@@ -189,7 +194,7 @@
 
 .vk_balloon {
   &.animation-vibration{
-    p{
+    .vk_balloon_content{
       display: inline-block;
       animation: vibration .1s  infinite;
     }
@@ -216,7 +221,7 @@
     display: block;
     &.vk_balloon-position-left{
       &.vk_balloon-type-serif{
-        p{
+        .vk_balloon_content{
           display: inline-block;
           &::after{
             top: 0;
@@ -233,7 +238,7 @@
       }
 
       &.vk_balloon-type-think{
-        p{
+        .vk_balloon_content{
           display: inline-block;
 
           &::before{
@@ -258,7 +263,7 @@
           margin-right: 0;
         }
 
-        p{
+        .vk_balloon_content{
           display: inline-block;
           &::after{
             top: 0;
@@ -280,7 +285,7 @@
           margin-right: 0;
         }
 
-        p{
+        .vk_balloon_content{
           display: inline-block;
 
           &::before{
@@ -320,9 +325,6 @@
 
 //*      .flowBox
 /*-------------------------------------------*/
-.vk-flow {
-
-}
 .vk_flow-arrow-on:after {
   content:"";
   background: url('../images/arrow_bottom.svg') center 50% no-repeat;

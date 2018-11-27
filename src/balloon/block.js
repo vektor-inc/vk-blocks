@@ -134,6 +134,7 @@ registerBlockType('vk-blocks/balloon', {
 					<RichText
 						style={ { background: balloonBgColor, border: balloonBgColor } }
 						tagName="p"
+						className={ 'vk_balloon_content' }
 						onChange={ ( value ) => setAttributes( { content: value } ) }
 						value={ content }
 						placeholder={__('Input text', 'vk-blocks') }

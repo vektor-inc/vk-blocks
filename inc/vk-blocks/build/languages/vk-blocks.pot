@@ -21,7 +21,7 @@ msgstr ""
 msgid "Icon Name"
 msgstr ""
 
-#: src/balloon/block.js:139
+#: src/balloon/block.js:140
 msgid "Input text"
 msgstr ""
 
