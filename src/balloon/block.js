@@ -37,6 +37,10 @@ registerBlockType('vk-blocks/balloon', {
 			source: 'html',
             selector: 'p',
 		},
+        balloonName: {
+            source: 'html',
+            selector: 'figcaption',
+        },
         balloonType: {
             type: 'string',
             default: 'type-serif',
@@ -65,6 +69,7 @@ registerBlockType('vk-blocks/balloon', {
 	edit( { attributes, className, setAttributes } ) {
 		const {
 			content,
+            balloonName,
             balloonType,
             balloonBgColor,
 			balloonAlign,
@@ -118,6 +123,12 @@ registerBlockType('vk-blocks/balloon', {
 								</Button>
 							)}
 						/>
+                        <RichText
+                            tagName="figcaption"
+                            onChange={ ( value ) => setAttributes( { balloonName: value } ) }
+                            value={ balloonName }
+                            placeholder={__('Icon Name', 'vk-blocks') }
+                        />
 					</div>
 					<RichText
 						style={ { background: balloonBgColor, border: balloonBgColor } }
@@ -143,6 +154,7 @@ registerBlockType('vk-blocks/balloon', {
 	save( { attributes, className } ) {
 		const {
 			content,
+            balloonName,
             balloonType,
             balloonBgColor,
 			balloonAlign,
@@ -159,6 +171,10 @@ registerBlockType('vk-blocks/balloon', {
 								src={ IconImage }
 								alt=''
 							/>
+                            <RichText.Content
+                                tagName="figcaption"
+                                value={ balloonName }
+                            />
 						</figure> : '' }
 				</div>
 				<RichText.Content
