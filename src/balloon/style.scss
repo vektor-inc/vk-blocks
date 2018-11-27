@@ -1,4 +1,4 @@
-.wp-block-vk-blocks-balloon {
+.vk-balloon {
   display: flex;
   align-items: center;
 
@@ -23,7 +23,7 @@
     }
   }
 
-  .image{
+  .vk-balloon-icon{
     flex-basis: 96px;
     flex-shrink: 0;
     text-align: center;
@@ -87,7 +87,7 @@
 
   &.balloon-left{
     &.type-serif{
-      .image{
+      .vk-balloon-icon{
         margin-right: 2rem;
       }
 
@@ -104,7 +104,7 @@
     }
 
     &.type-think{
-      .image{
+      .vk-balloon-icon{
         margin-right: 2.5rem;
       }
 
@@ -127,7 +127,7 @@
     flex-direction: row-reverse;
 
     &.type-serif{
-      .image{
+      .vk-balloon-icon{
         margin-left: 2rem;
       }
 
@@ -144,7 +144,7 @@
     }
 
     &.type-think{
-      .image{
+      .vk-balloon-icon{
         margin-left: 2.5rem;
       }
 
@@ -180,10 +180,10 @@
 0px - 480px
 ***********************/
 @media only screen and (max-width: 480px) {
-  .wp-block-nishiki-balloon{
+  .vk-balloon{
     display: block;
 
-    .image{
+    .vk-balloon-icon{
       max-width:96px;
     }
 
@@ -228,7 +228,7 @@
       text-align: right;
 
       &.type-serif{
-        .image{
+        .vk-balloon-icon{
           margin-left: auto;
           margin-right: 0;
         }
@@ -251,7 +251,7 @@
       }
 
       &.type-think{
-        .image{
+        .vk-balloon-icon{
           margin-left: auto;
           margin-right: 0;
         }

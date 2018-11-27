@@ -107,8 +107,8 @@ registerBlockType('vk-blocks/balloon', {
 					</PanelBody>
 				</InspectorControls>
 
-				<div className={ `${ className } ${ balloonAlign } ${ balloonType }` }>
-					<div className={ 'image' }>
+				<div className={ `${ className } vk-balloon ${ balloonAlign } ${ balloonType }` }>
+					<div className={ 'vk-balloon-icon' }>
 						<MediaUpload
 							onSelect={ (value) => setAttributes( { IconImage: value.sizes.full.url } ) }
 							type="image"
@@ -162,8 +162,8 @@ registerBlockType('vk-blocks/balloon', {
 		} = attributes;
 
 		return (
-			<div className={ `${ balloonAlign } ${ balloonType }` }>
-				<div className={ 'image' }>
+			<div className={ `vk-balloon ${ balloonAlign } ${ balloonType }` }>
+				<div className={ 'vk-balloon-icon' }>
 					{ IconImage ?
 						<figure>
 							<img
