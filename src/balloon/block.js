@@ -133,7 +133,6 @@ registerBlockType('vk-blocks/balloon', {
 					<RichText
 						style={ { background: balloonBgColor, border: balloonBgColor } }
 						tagName="p"
-						className={ 'vk-balloon-text' }
 						onChange={ ( value ) => setAttributes( { content: value } ) }
 						value={ content }
 						placeholder={__('Input text', 'vk-blocks') }
@@ -179,7 +178,7 @@ registerBlockType('vk-blocks/balloon', {
 						</figure> : '' }
 				</div>
 				<RichText.Content
-					className={ 'vk-balloon-text' }
+					className={ 'text' }
 					style={ { background: balloonBgColor, border: balloonBgColor } }
 					tagName="p"
 					value={ content }
