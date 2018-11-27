@@ -112,14 +112,14 @@ registerBlockType('vk-blocks/balloon', {
 						<MediaUpload
 							onSelect={ (value) => setAttributes( { IconImage: value.sizes.full.url } ) }
 							type="image"
-							className={ 'icon-image' }
+							className={ 'vk-balloon-icon-image' }
 							value={ IconImage }
 							render={ ( { open } ) => (
 								<Button
 									onClick={ open }
 									className={ IconImage ? 'image-button' : 'button button-large' }
 								>
-									{ ! IconImage ? __('Select image', 'vk-blocks') : <img className={ 'icon-image' } src={ IconImage } alt={__('Upload image', 'vk-blocks') } /> }
+									{ ! IconImage ? __('Select image', 'vk-blocks') : <img className={ 'vk-balloon-icon-image' } src={ IconImage } alt={__('Upload image', 'vk-blocks') } /> }
 								</Button>
 							)}
 						/>
@@ -168,7 +168,7 @@ registerBlockType('vk-blocks/balloon', {
 					{ IconImage ?
 						<figure>
 							<img
-								className={ 'icon-image' }
+								className={ 'vk-balloon-icon-image' }
 								src={ IconImage }
 								alt=''
 							/>

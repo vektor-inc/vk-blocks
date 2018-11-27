@@ -46,6 +46,15 @@
   display: flex;
   align-items: center;
 }
+.vk-balloon-icon {
+	flex-basis: 96px;
+	flex-shrink: 0;
+	text-align: center;
+}
+.vk-balloon-icon-image {
+	vertical-align: bottom;
+	max-width: 64px;
+}
 .vk-balloon-icon-name {
 	display: block;
 	text-align: center;
@@ -60,21 +69,9 @@
 
   p{
     word-break: break-all;
-
     &.text{
       position: relative;
       text-align: left;
-    }
-  }
-
-  .vk-balloon-icon{
-    flex-basis: 96px;
-    flex-shrink: 0;
-    text-align: center;
-
-    img.icon-image{
-      vertical-align: bottom;
-      max-width: 64px;
     }
   }
 
