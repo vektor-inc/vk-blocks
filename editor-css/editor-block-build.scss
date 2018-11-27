@@ -64,14 +64,14 @@
 	font-size: 0.7rem;
 	margin-top:0.2rem;
 }
+.vk_balloon_content{
+	position: relative;
+	text-align: left;
+}
 
 .vk_balloon {
   p{
     word-break: break-all;
-    &.text{
-      position: relative;
-      text-align: left;
-    }
   }
 
   &.animation-vibration{

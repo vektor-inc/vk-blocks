@@ -180,7 +180,7 @@ registerBlockType('vk-blocks/balloon', {
 						</figure> : '' }
 				</div>
 				<RichText.Content
-					className={ 'text' }
+					className={ 'vk_balloon_content' }
 					style={ { background: balloonBgColor, border: balloonBgColor } }
 					tagName="p"
 					value={ content }
