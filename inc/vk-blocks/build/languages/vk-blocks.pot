@@ -65,11 +65,11 @@ msgstr ""
 msgid "FAQ"
 msgstr ""
 
-#: src/faq/block.js:61
+#: src/faq/block.js:62
 msgid "Please enter a question."
 msgstr ""
 
-#: src/faq/block.js:67
+#: src/faq/block.js:69
 msgid "Please enter a answer."
 msgstr ""
 
