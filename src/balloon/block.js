@@ -107,25 +107,25 @@ registerBlockType('vk-blocks/balloon', {
 					</PanelBody>
 				</InspectorControls>
 
-				<div className={ `${ className } vk-balloon ${ balloonAlign } ${ balloonType }` }>
-					<div className={ 'vk-balloon-icon' }>
+				<div className={ `${ className } vk_balloon ${ balloonAlign } ${ balloonType }` }>
+					<div className={ 'vk_balloon_icon' }>
 						<MediaUpload
 							onSelect={ (value) => setAttributes( { IconImage: value.sizes.full.url } ) }
 							type="image"
-							className={ 'vk-balloon-icon-image' }
+							className={ 'vk_balloon_icon_image' }
 							value={ IconImage }
 							render={ ( { open } ) => (
 								<Button
 									onClick={ open }
 									className={ IconImage ? 'image-button' : 'button button-large' }
 								>
-									{ ! IconImage ? __('Select image', 'vk-blocks') : <img className={ 'vk-balloon-icon-image' } src={ IconImage } alt={__('Upload image', 'vk-blocks') } /> }
+									{ ! IconImage ? __('Select image', 'vk-blocks') : <img className={ 'vk_balloon_icon_image' } src={ IconImage } alt={__('Upload image', 'vk-blocks') } /> }
 								</Button>
 							)}
 						/>
                         <RichText
                             tagName="figcaption"
-														className={ 'vk-balloon-icon-name' }
+														className={ 'vk_balloon_icon_name' }
                             onChange={ ( value ) => setAttributes( { balloonName: value } ) }
                             value={ balloonName }
                             placeholder={__('Icon Name', 'vk-blocks') }
@@ -163,18 +163,18 @@ registerBlockType('vk-blocks/balloon', {
 		} = attributes;
 
 		return (
-			<div className={ `vk-balloon ${ balloonAlign } ${ balloonType }` }>
-				<div className={ 'vk-balloon-icon' }>
+			<div className={ `vk_balloon ${ balloonAlign } ${ balloonType }` }>
+				<div className={ 'vk_balloon_icon' }>
 					{ IconImage ?
 						<figure>
 							<img
-								className={ 'vk-balloon-icon-image' }
+								className={ 'vk_balloon_icon_image' }
 								src={ IconImage }
 								alt=''
 							/>
                             <RichText.Content
                                 tagName="figcaption"
-																className={ 'vk-balloon-icon-name' }
+																className={ 'vk_balloon_icon_name' }
                                 value={ balloonName }
                             />
 						</figure> : '' }
