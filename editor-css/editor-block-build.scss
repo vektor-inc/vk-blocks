@@ -112,7 +112,7 @@
 
 /*	position
 /*-------------------------------------------*/
-.vk_balloon-left{
+.vk_balloon-position-left{
 	&.vk_balloon-type-serif{
 		.vk_balloon_icon{
 			margin-right: 2rem;
@@ -148,7 +148,7 @@
 		}
 	}
 }
-.vk_balloon-right{
+.vk_balloon-position-right{
 	flex-direction: row-reverse;
 	&.vk_balloon-type-serif{
 		.vk_balloon_icon{
@@ -214,7 +214,7 @@
 @media only screen and (max-width: 480px) {
   .vk_balloon{
     display: block;
-    &.vk_balloon-left{
+    &.vk_balloon-position-left{
       &.vk_balloon-type-serif{
         p{
           display: inline-block;
@@ -249,7 +249,7 @@
       }
     }
 
-    &.vk_balloon-right{
+    &.vk_balloon-position-right{
       text-align: right;
 
       &.vk_balloon-type-serif{

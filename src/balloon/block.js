@@ -50,7 +50,7 @@ registerBlockType('vk-blocks/balloon', {
 		},
 		balloonAlign: {
 			type: 'string',
-			default: 'left',
+			default: 'position-left',
 		},
 		IconImage: {
 			type: 'string',
@@ -85,8 +85,8 @@ registerBlockType('vk-blocks/balloon', {
 							help={__('Please specify the layout of the balloon.', 'vk-blocks')}
 							selected={ balloonAlign }
 							options={ [
-								{ label: __('Left', 'vk-blocks'), value: 'left' },
-								{ label: __('Right', 'vk-blocks'), value: 'right' },
+								{ label: __('Left', 'vk-blocks'), value: 'position-left' },
+								{ label: __('Right', 'vk-blocks'), value: 'position-right' },
 							] }
 							onChange={ ( value ) => setAttributes( { balloonAlign: value } ) }
 						/>
