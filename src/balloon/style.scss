@@ -1,17 +1,17 @@
 .vk-balloon {
   display: flex;
   align-items: center;
+}
+.vk-balloon-icon-name {
+	display: block;
+	text-align: center;
+	font-size: 0.7rem;
+	margin-top:0.2rem;
+}
 
+.vk-balloon {
   figure{
     margin:0;
-  }
-
-  figcaption{
-    display: block;
-    text-align: center;
-    font-size: 0.7rem;
-    margin-top:0.2rem;
-    padding: 0!important;
   }
 
   p{
