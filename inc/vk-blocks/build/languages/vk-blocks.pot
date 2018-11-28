@@ -101,7 +101,7 @@ msgid "Input title"
 msgstr ""
 
 #: src/flow/block.js:97
-#: src/pr/block.js:96
+#: src/pr/block.js:95
 msgid "Input content"
 msgstr ""
 

@@ -83,14 +83,13 @@ registerBlockType('vk-blocks/pr', {
                         )}
                     />
                     <RichText
-                        tagName="dt"
+                        tagName="h1"
                         onChange={(value) => setAttributes({heading: value})}
                         value={heading}
                         placeholder={__('Input title', 'vk-blocks')}
                     />
                     <RichText
-                        tagName="dd"
-                        className={'vk_pr_frame_text_content'}
+                        tagName="p"
                         onChange={(value) => setAttributes({content: value})}
                         value={content}
                         placeholder={__('Input content', 'vk-blocks')}
@@ -126,11 +125,11 @@ registerBlockType('vk-blocks/pr', {
                             alt=''
                         /></div> : ''}
                 <RichText.Content
-                    tagName="dt"
+                    tagName="h1"
                     value={heading}
                 />
                 <RichText.Content
-                    tagName="dd"
+                    tagName="p"
                     value={content}
                 />
             </div>
