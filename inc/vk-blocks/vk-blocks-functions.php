@@ -60,6 +60,14 @@ function vkblocks_blocks_assets() {
 				'editor_script' => 'vk-blocks-buid-js',
 			]
 		);
+		// PR Block.
+		register_block_type(
+			'vk-blocks/pr', [
+				'style'         => 'vk-blocks-buid-css',
+				'editor_style'  => 'vk-blocks-buid-editor-css',
+				'editor_script' => 'vk-blocks-buid-js',
+			]
+		);
 	}
 }
 add_action( 'init', 'vkblocks_blocks_assets' );
