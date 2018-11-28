@@ -9,11 +9,13 @@ msgstr ""
 
 #: src/balloon/block.js:122
 #: src/flow/block.js:111
+#: src/pr/block.js:79
 msgid "Select image"
 msgstr ""
 
 #: src/balloon/block.js:122
 #: src/flow/block.js:112
+#: src/pr/block.js:81
 msgid "Upload image"
 msgstr ""
 
@@ -94,9 +96,15 @@ msgid "Arrow hidden"
 msgstr ""
 
 #: src/flow/block.js:90
+#: src/pr/block.js:89
 msgid "Input title"
 msgstr ""
 
 #: src/flow/block.js:97
+#: src/pr/block.js:96
 msgid "Input content"
+msgstr ""
+
+#: src/pr/block.js:27
+msgid "PR Block"
 msgstr ""
