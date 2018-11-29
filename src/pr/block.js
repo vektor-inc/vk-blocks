@@ -189,7 +189,7 @@ registerBlockType('vk-blocks/pr', {
                 <div className="prBlock col-sm-4">
                     <a
                         href={url}
-                        target={urlOpenType}
+                        target={urlOpenType? '_blank':'_self'}
                     >
                         {(() => {
 
