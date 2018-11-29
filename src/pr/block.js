@@ -4,7 +4,7 @@
  */
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
-const {RangeControl, RadioControl, PanelBody, Button, PanelColor} = wp.components;
+const {RangeControl, RadioControl, PanelBody, Button, BaseControl, CheckboxControl, TextControl} = wp.components;
 const {Fragment} = wp.element;
 const {RichText, InspectorControls, MediaUpload, ColorPalette} = wp.editor;
 const BlockIcon = 'arrow-down';
@@ -40,11 +40,27 @@ registerBlockType('vk-blocks/pr', {
         },
         url: {
             type: 'string',
-            default: null, // no image by default!
+            default: null,
+        },
+        urlOpenType: {
+            type: 'Boolean',
+            default: false,
+        },
+        icon: {
+            type: 'string',
+            default: 'fa-file-text-o',
+        },
+        color: {
+            type: 'string',
+            default: null,
+        },
+        bgType: {
+            type: 'string',
+            default: '0',
         },
         insertImage: {
             type: 'string',
-            default: null, // no image by default!
+            default: null,
         }
     },
 
@@ -61,27 +77,75 @@ registerBlockType('vk-blocks/pr', {
             heading,
             content,
             url,
-            insertImage,
+            urlOpenType,
+            icon,
+            color,
+            bgType,
+            insertImage
         } = attributes;
 
         return [
             <Fragment>
+                <InspectorControls>
+                    <PanelBody title={__('PR Block1 Setting', 'vk-blocks')}>
+                        <BaseControl
+                            label={__('Link URL:', 'vk-blocks')}
+                        >
+                            <TextControl
+                                value={url}
+                                onChange={(value) => setAttributes({url: value})}
+                            />
+                            <CheckboxControl
+                                label={__('Open link new tab.', 'vk-blocks')}
+                                checked={urlOpenType}
+                                onChange={(checked) => setAttributes({urlOpenType: checked})}
+                            />
+                        </BaseControl>
+                        <BaseControl
+                            label={__('Icon 1', 'vk-blocks')}
+                        >
+                            <TextControl
+                                label={__('Class name of the icon font you want to use:', 'vk-blocks')}
+                                value={icon}
+                                onChange={(value) => setAttributes({icon: value})}
+                            />
+                            <ColorPalette
+                                value={color}
+                                onChange={(value) => setAttributes({color: value})}
+                            />
+                            <RadioControl
+                                label={__('Icon Background:', 'vk-blocks')}
+                                selected={bgType}
+                                options={[
+                                    {label: __('Solid color', 'vk-blocks'), value: '0'},
+                                    {label: __('No background', 'vk-blocks'), value: '1'},
+                                ]}
+                                onChange={(value) => setAttributes({bgType: value})}
+                            />
+                        </BaseControl>
+                        <BaseControl
+                            label={__('PR Image 1', 'vk-blocks')}
+                            help={__('When you have an image. Image is displayed with priority', 'vk-blocks')}
+                        >
+                            <MediaUpload
+                                onSelect={(value) => setAttributes({insertImage: value.url})}
+                                type="image"
+                                value={insertImage}
+                                render={({open}) => (
+                                    <Button
+                                        onClick={open}
+                                        className={insertImage ? 'image-button' : 'button button-large'}
+                                    >
+                                        {!insertImage ? __('Select image', 'vk-blocks') :
+                                            <img className={'icon-image'} src={insertImage}
+                                                 alt={__('Upload image', 'vk-blocks')}/>}
+                                    </Button>
+                                )}
+                            />
+                        </BaseControl>
+                    </PanelBody>
+                </InspectorControls>
                 <div>
-                    <MediaUpload
-                        onSelect={(value) => setAttributes({insertImage: value.url})}
-                        type="image"
-                        value={insertImage}
-                        render={({open}) => (
-                            <Button
-                                onClick={open}
-                                className={insertImage ? 'image-button' : 'button button-large'}
-                            >
-                                {!insertImage ? __('Select image', 'vk-blocks') :
-                                    <img className={'icon-image'} src={insertImage}
-                                         alt={__('Upload image', 'vk-blocks')}/>}
-                            </Button>
-                        )}
-                    />
                     <RichText
                         tagName="h1"
                         onChange={(value) => setAttributes({heading: value})}
@@ -113,26 +177,45 @@ registerBlockType('vk-blocks/pr', {
             heading,
             content,
             url,
+            urlOpenType,
+            icon,
+            color,
+            bgType,
             insertImage
         } = attributes;
 
         return (
-            <div>
-                {insertImage ?
-                    <div>
-                        <img
-                            src={insertImage}
-                            alt=''
-                        /></div> : ''}
-                <RichText.Content
-                    tagName="h1"
-                    value={heading}
-                />
-                <RichText.Content
-                    tagName="p"
-                    value={content}
-                />
-            </div>
+            <article className="veu_prBlocks prBlocks row">
+                <div className="prBlock col-sm-4">
+                    <a
+                        href={url}
+                        target={urlOpenType}
+                    >
+                        {(() => {
+                            if (bgType === '0') {
+                                return <div
+                                    className="prBlock_icon_outer"
+                                    style={{
+                                        backgroundColor: color,
+                                        border: `1px solid ${color}`
+                                    }}
+                                ><i className={`1px solid ${color} font_icon prBlock_icon`} style={`color:${color}`}>
+                                </i>
+                                </div>
+                            } else {
+                                return <div
+                                    className="prBlock_icon_outer"
+                                    style={{backgroundColor: 'none', border: `1px solid ${color}`}}
+                                ><i className={`1px solid ${color} font_icon prBlock_icon`} style={`color:${color}`}>
+                                </i>
+                                </div>
+                            }
+                        })()}
+                        <h1 className="prBlock_title">Service</h1>
+                        <p className="prBlock_summary">fdsafasdgasdf</p>
+                    </a>
+                </div>
+            </article>
         );
     },
 });
