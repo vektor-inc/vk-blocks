@@ -192,27 +192,48 @@ registerBlockType('vk-blocks/pr', {
                         target={urlOpenType}
                     >
                         {(() => {
-                            if (bgType === '0') {
-                                return <div
-                                    className="prBlock_icon_outer"
-                                    style={{
-                                        backgroundColor: color,
-                                        border: `1px solid ${color}`
-                                    }}
-                                ><i className={`1px solid ${color} font_icon prBlock_icon`} style={`color:${color}`}>
-                                </i>
+
+                            if (insertImage) {
+
+                                return <div className="prBlock_image"
+                                            style={`background:url(${insertImage}) no-repeat 50% center;background-size: cover`}
+                                >
+                                    <img
+                                        src={insertImage}
+                                        alt=''
+                                    />
                                 </div>
+
                             } else {
-                                return <div
-                                    className="prBlock_icon_outer"
-                                    style={{backgroundColor: 'none', border: `1px solid ${color}`}}
-                                ><i className={`1px solid ${color} font_icon prBlock_icon`} style={`color:${color}`}>
-                                </i>
-                                </div>
+
+                                if (bgType === '0') {
+                                    return <div
+                                        className="prBlock_icon_outer"
+                                        style={{
+                                            backgroundColor: color,
+                                            border: `1px solid ${color}`
+                                        }}
+                                    ><i className={`${icon} font_icon prBlock_icon`} style={`color:${color}`}>
+                                    </i>
+                                    </div>
+                                } else {
+                                    return <div
+                                        className="prBlock_icon_outer"
+                                        style={{backgroundColor: 'none', border: `1px solid ${color}`}}
+                                    ><i className={`${icon} font_icon prBlock_icon`} style={`color:${color}`}>
+                                    </i>
+                                    </div>
+                                }
                             }
                         })()}
-                        <h1 className="prBlock_title">Service</h1>
-                        <p className="prBlock_summary">fdsafasdgasdf</p>
+                        <RichText.Content
+                            className="prBlock_title"
+                            tagName={'h1'}
+                            value={heading}/>
+                        <RichText.Content
+                            className="prBlock_summary"
+                            tagName={'p'}
+                            value={content}/>
                     </a>
                 </div>
             </article>
