@@ -2,6 +2,7 @@
 function vkblocks_active() {
 	return true;
 }
+
 function vkblocks_blocks_assets() {
 
 	wp_register_style( 'vk-blocks-buid-css', VK_BLOCKS_URL . 'build/block-build.css', [], VK_BLOCKS_VERSION );
