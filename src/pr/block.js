@@ -213,14 +213,14 @@ registerBlockType('vk-blocks/pr', {
                                             backgroundColor: color,
                                             border: `1px solid ${color}`
                                         }}
-                                    ><i className={`${icon} font_icon prBlock_icon`} style={`color:${color}`}>
+                                    ><i className={`fa ${icon} font_icon prBlock_icon`} style={`color:${color}`}>
                                     </i>
                                     </div>
                                 } else {
                                     return <div
                                         className="prBlock_icon_outer"
                                         style={{backgroundColor: 'none', border: `1px solid ${color}`}}
-                                    ><i className={`${icon} font_icon prBlock_icon`} style={`color:${color}`}>
+                                    ><i className={`fa ${icon} font_icon prBlock_icon`} style={`color:${color}`}>
                                     </i>
                                     </div>
                                 }
