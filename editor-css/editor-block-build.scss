@@ -319,23 +319,6 @@
   }
 }
 
-/*      .qaItem
-/*-------------------------------------------*/
-.vk_faq { display:block; overflow:hidden;border-bottom:1px dotted #ccc; padding:0px 0px 25px; margin:25px 0px; width:100%; position: relative; }
-.vk_faq_title,
-.vk_faq_content {
-	border:none;padding-left: 35px;
-	&:before {
-		position: absolute;left:0;font-size:24px;line-height: 105%;
-	}
-}
-.vk_faq_title { margin-bottom:15px;font-size:18px;font-weight:700;
-  &:before { font-family:"areal";content:"Q ";color:#e50000; }
-}
-.vk_faq_content { margin:0px;
-  &:before { content:"A ";color:#337ab7;font-family: "" }
-}
-
 //*      .flowBox
 /*-------------------------------------------*/
 .vk-flow {
@@ -370,4 +353,49 @@
 	box-sizing: border-box;
 }
 
+/*      .qaItem
+/*-------------------------------------------*/
+.vk_faq { display:block; overflow:hidden;border-bottom:1px dotted #ccc; padding:0px 0px 25px; margin:25px 0px; width:100%; position: relative; }
+.vk_faq_title,
+.vk_faq_content {
+	border:none;padding-left: 35px;
+	&:before {
+		position: absolute;left:0;font-size:24px;line-height: 105%;
+	}
+}
+.vk_faq_title { margin-bottom:15px;font-size:18px;font-weight:700;
+  &:before { font-family:"areal";content:"Q ";color:#e50000; }
+}
+.vk_faq_content { margin:0px;
+  &:before { content:"A ";color:#337ab7;font-family: "" }
+}
+
+/*-------------------------------------------*/
+/* Widget .veu_prBlocks
+/*-------------------------------------------*/
+// .veu_prBlocks{
+.prBlock {
+  a{ color: #333;
+    &:hover{ color: #333; text-decoration: none; }
+    .prBlock_summary:hover{ text-decoration: underline; }
+  }
+  .prBlock_icon_outer { display: block;position:relative; margin: 0 auto ; width: 80px; height: 80px; border-radius: 50%; }
+  .prBlock_icon { position:absolute; top:50%;left:50%; transform: translateY(-50%) translateX(-50%);font-size: 36px; }
+  .prBlock_title{ margin-top:0.9em;margin-bottom: 0.7em; text-align: center; font-size: 18px; line-height: 1.4em; }
+  .prBlock_image{ position: relative; display: block; width: 120px; height:120px; margin: 0 auto;overflow: hidden;border-radius: 50%;
+    text-indent:-9999px;
+  }
+  .prBlock_summary{ margin-bottom: 0.5em; text-align: center; font-size: 14px; line-height: 1.6em; }
+}
+/*
+入れ子にするとLightning テーマ埋め込みの３ＰＲブロックのアイコンカラーが負けるので、各スキンの方で継承を強くするまで旦軽くする為に個別記載とする
+*/
+.prBlock_icon { color: #fff; }
+// }
+
+@media screen and (max-width:992px){
+  // .veu_prBlocks{
+  .prBlock{ margin-bottom: 1.5em; }
+  // }
+}
 }
