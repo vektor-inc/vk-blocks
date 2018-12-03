@@ -9,6 +9,58 @@ const {Fragment} = wp.element;
 const {RichText, InspectorControls, MediaUpload, ColorPalette} = wp.editor;
 const BlockIcon = 'arrow-down';
 
+
+class RepeatBlocks {
+
+    countUp(number) { // :voidってつける
+        cnt++;
+        var attribute = {};
+        for(var i = 0; i<number;i++){
+
+        }
+
+        attribute = {
+            heading: {
+                type: 'string',
+                source: 'html',
+                selector: 'h1',
+            },
+            content: {
+                type: 'string',
+                source: 'html',
+                selector: 'p',
+            },
+            url: {
+                type: 'string',
+                default: null,
+            },
+            urlOpenType: {
+                type: 'Boolean',
+                default: false,
+            },
+            icon: {
+                type: 'string',
+                default: 'fa-file',
+            },
+            color: {
+                type: 'string',
+                default: '#0693e3',
+            },
+            bgType: {
+                type: 'string',
+                default: '0',
+            },
+            insertImage: {
+                type: 'string',
+                default: null,
+            }
+        }
+    }
+}
+
+
+
+
 /**
  * Register: aa Gutenberg Block.
  *
