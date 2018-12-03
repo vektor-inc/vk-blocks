@@ -4,8 +4,7 @@
 /*-------------------------------------------*/
 if ( ! function_exists( 'vkblocks_active' ) ) {
 
-	require_once('./font-awesome/font-awesome-config.php');
-
+	require_once('vk-blocks/plugins/font-awesome/font-awesome-config.php');
 	require_once( 'vk-blocks/vk-blocks-functions.php' );
 	// Set asset URL.
 	define( 'VK_BLOCKS_URL', plugin_dir_url( __FILE__ ) . 'vk-blocks/' );
