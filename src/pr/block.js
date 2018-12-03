@@ -48,11 +48,11 @@ registerBlockType('vk-blocks/pr', {
         },
         icon: {
             type: 'string',
-            default: 'fa-file-text-o',
+            default: 'fa-file',
         },
         color: {
             type: 'string',
-            default: null,
+            default: '#0693e3',
         },
         bgType: {
             type: 'string',
@@ -108,6 +108,7 @@ registerBlockType('vk-blocks/pr', {
                                 label={__('Class name of the icon font you want to use:', 'vk-blocks')}
                                 value={icon}
                                 onChange={(value) => setAttributes({icon: value})}
+                                placeholder={__('fa-file', 'vk-blocks')}
                             />
                             <ColorPalette
                                 value={color}
@@ -145,24 +146,69 @@ registerBlockType('vk-blocks/pr', {
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
-                <div>
-                    <RichText
-                        tagName="h1"
-                        onChange={(value) => setAttributes({heading: value})}
-                        value={heading}
-                        placeholder={__('Input title', 'vk-blocks')}
-                    />
-                    <RichText
-                        tagName="p"
-                        onChange={(value) => setAttributes({content: value})}
-                        value={content}
-                        placeholder={__('Input content', 'vk-blocks')}
-                    />
-                </div>
+                <article className="veu_prBlocks prBlocks row">
+                    <div className="prBlock col-sm-4">
+                        {(() => {
+
+                            if (insertImage) {
+
+                                return <div className="prBlock_image"
+                                            style={{
+                                                backgroundImage: 'url(' + insertImage + ')',
+                                                backgroundRepeat: 'no-repeat 50% center',
+                                                backgroundSize: 'cover'
+                                            }}
+                                >
+                                    <img
+                                        src={insertImage}
+                                        alt=''
+                                    />
+                                </div>
+
+                            } else {
+
+                                if (bgType === '0') {
+                                    return <div
+                                        className="prBlock_icon_outer"
+                                        style={{
+                                            backgroundColor: color,
+                                            border: `1px solid ${color}`
+                                        }}
+                                    ><i className={`fa fas fab far ${icon} font_icon prBlock_icon`}
+                                        style={{color: '#fff'}}>
+                                    </i>
+                                    </div>
+                                } else {
+                                    return <div
+                                        className="prBlock_icon_outer"
+                                        style={{backgroundColor: 'transparent', border: '1px solid' + color}}
+                                    ><i className={`fa fas fab far ${icon} font_icon prBlock_icon`}
+                                        style={{color: color}}>
+                                    </i>
+                                    </div>
+                                }
+                            }
+                        })()}
+                        <RichText
+                            className="prBlock_title"
+                            tagName="h1"
+                            onChange={(value) => setAttributes({heading: value})}
+                            value={heading}
+                            placeholder={__('Input title', 'vk-blocks')}
+                        />
+                        <RichText
+                            className="prBlock_summary"
+                            tagName="p"
+                            onChange={(value) => setAttributes({content: value})}
+                            value={content}
+                            placeholder={__('Input content', 'vk-blocks')}
+                        />
+                        {/*</a>*/}
+                    </div>
+                </article>
             </Fragment>
         ];
     },
-
 
     /**
      * The save function defin className }> which the different attributes should be combined
@@ -196,7 +242,11 @@ registerBlockType('vk-blocks/pr', {
                             if (insertImage) {
 
                                 return <div className="prBlock_image"
-                                            style={`background:url(${insertImage}) no-repeat 50% center;background-size: cover`}
+                                            style={{
+                                                backgroundImage: 'url(' + insertImage + ')',
+                                                backgroundRepeat: 'no-repeat 50% center',
+                                                backgroundSize: 'cover'
+                                            }}
                                 >
                                     <img
                                         src={insertImage}
@@ -213,14 +263,16 @@ registerBlockType('vk-blocks/pr', {
                                             backgroundColor: color,
                                             border: `1px solid ${color}`
                                         }}
-                                    ><i className={`fa fas fab ${icon} font_icon prBlock_icon`} style={`color:${color}`}>
+                                    ><i className={`fa fas fab far ${icon} font_icon prBlock_icon`}
+                                        style={{color: '#fff'}}>
                                     </i>
                                     </div>
                                 } else {
                                     return <div
                                         className="prBlock_icon_outer"
-                                        style={{backgroundColor: 'none', border: `1px solid ${color}`}}
-                                    ><i className={`fa fas fab ${icon} font_icon prBlock_icon`} style={`color:${color}`}>
+                                        style={{backgroundColor: 'transparent', border: '1px solid' + color}}
+                                    ><i className={`fa fas fab far ${icon} font_icon prBlock_icon`}
+                                        style={{color: color}}>
                                     </i>
                                     </div>
                                 }

@@ -9,13 +9,13 @@ msgstr ""
 
 #: src/balloon/block.js:122
 #: src/flow/block.js:111
-#: src/pr/block.js:139
+#: src/pr/block.js:140
 msgid "Select image"
 msgstr ""
 
 #: src/balloon/block.js:122
 #: src/flow/block.js:112
-#: src/pr/block.js:141
+#: src/pr/block.js:142
 msgid "Upload image"
 msgstr ""
 
@@ -96,12 +96,12 @@ msgid "Arrow hidden"
 msgstr ""
 
 #: src/flow/block.js:90
-#: src/pr/block.js:153
+#: src/pr/block.js:197
 msgid "Input title"
 msgstr ""
 
 #: src/flow/block.js:97
-#: src/pr/block.js:159
+#: src/pr/block.js:204
 msgid "Input content"
 msgstr ""
 
@@ -113,23 +113,27 @@ msgstr ""
 msgid "Class name of the icon font you want to use:"
 msgstr ""
 
-#: src/pr/block.js:117
+#: src/pr/block.js:111
+msgid "fa-file"
+msgstr ""
+
+#: src/pr/block.js:118
 msgid "Icon Background:"
 msgstr ""
 
-#: src/pr/block.js:120
+#: src/pr/block.js:121
 msgid "Solid color"
 msgstr ""
 
-#: src/pr/block.js:121
+#: src/pr/block.js:122
 msgid "No background"
 msgstr ""
 
-#: src/pr/block.js:127
+#: src/pr/block.js:128
 msgid "PR Image 1"
 msgstr ""
 
-#: src/pr/block.js:128
+#: src/pr/block.js:129
 msgid "When you have an image. Image is displayed with priority"
 msgstr ""
 
