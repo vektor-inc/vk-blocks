@@ -50,7 +50,7 @@ registerBlockType('vk-blocks/balloon', {
 		},
 		balloonAlign: {
 			type: 'string',
-			default: 'balloon-left',
+			default: 'position-left',
 		},
 		IconImage: {
 			type: 'string',
@@ -85,8 +85,8 @@ registerBlockType('vk-blocks/balloon', {
 							help={__('Please specify the layout of the balloon.', 'vk-blocks')}
 							selected={ balloonAlign }
 							options={ [
-								{ label: __('Left', 'vk-blocks'), value: 'balloon-left' },
-								{ label: __('Right', 'vk-blocks'), value: 'balloon-right' },
+								{ label: __('Left', 'vk-blocks'), value: 'position-left' },
+								{ label: __('Right', 'vk-blocks'), value: 'position-right' },
 							] }
 							onChange={ ( value ) => setAttributes( { balloonAlign: value } ) }
 						/>
@@ -107,24 +107,25 @@ registerBlockType('vk-blocks/balloon', {
 					</PanelBody>
 				</InspectorControls>
 
-				<div className={ `${ className } ${ balloonAlign } ${ balloonType }` }>
-					<div className={ 'image' }>
+				<div className={ `${ className } vk_balloon vk_balloon-${ balloonAlign } vk_balloon-${ balloonType }` }>
+					<div className={ 'vk_balloon_icon' }>
 						<MediaUpload
 							onSelect={ (value) => setAttributes( { IconImage: value.sizes.full.url } ) }
 							type="image"
-							className={ 'icon-image' }
+							className={ 'vk_balloon_icon_image' }
 							value={ IconImage }
 							render={ ( { open } ) => (
 								<Button
 									onClick={ open }
 									className={ IconImage ? 'image-button' : 'button button-large' }
 								>
-									{ ! IconImage ? __('Select image', 'vk-blocks') : <img className={ 'icon-image' } src={ IconImage } alt={__('Upload image', 'vk-blocks') } /> }
+									{ ! IconImage ? __('Select image', 'vk-blocks') : <img className={ 'vk_balloon_icon_image' } src={ IconImage } alt={__('Upload image', 'vk-blocks') } /> }
 								</Button>
 							)}
 						/>
                         <RichText
                             tagName="figcaption"
+														className={ 'vk_balloon_icon_name' }
                             onChange={ ( value ) => setAttributes( { balloonName: value } ) }
                             value={ balloonName }
                             placeholder={__('Icon Name', 'vk-blocks') }
@@ -133,6 +134,7 @@ registerBlockType('vk-blocks/balloon', {
 					<RichText
 						style={ { background: balloonBgColor, border: balloonBgColor } }
 						tagName="p"
+						className={ 'vk_balloon_content' }
 						onChange={ ( value ) => setAttributes( { content: value } ) }
 						value={ content }
 						placeholder={__('Input text', 'vk-blocks') }
@@ -162,23 +164,24 @@ registerBlockType('vk-blocks/balloon', {
 		} = attributes;
 
 		return (
-			<div className={ `${ balloonAlign } ${ balloonType }` }>
-				<div className={ 'image' }>
+			<div className={ `vk_balloon vk_balloon-${ balloonAlign } vk_balloon-${ balloonType }` }>
+				<div className={ 'vk_balloon_icon' }>
 					{ IconImage ?
 						<figure>
 							<img
-								className={ 'icon-image' }
+								className={ 'vk_balloon_icon_image' }
 								src={ IconImage }
 								alt=''
 							/>
                             <RichText.Content
                                 tagName="figcaption"
+																className={ 'vk_balloon_icon_name' }
                                 value={ balloonName }
                             />
 						</figure> : '' }
 				</div>
 				<RichText.Content
-					className={ 'text' }
+					className={ 'vk_balloon_content' }
 					style={ { background: balloonBgColor, border: balloonBgColor } }
 					tagName="p"
 					value={ content }

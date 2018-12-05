@@ -9,3 +9,11 @@ npm install
 npm run build
 npm run watch
 ```
+
+## CSS name rule
+
+```
+[ prefix ]_[ block name ]_[section name]
+[ prefix ]_[ block name ]_[section name]_[sub section name]
+[ prefix ]_[ block name ]-[Attribute name]-[Attribute property]
+```

@@ -11,12 +11,10 @@
   a{
     transition: color .3s linear, opacity .3s linear;
     &:link, &:visited{
-      color: #fff;
       opacity: .8;
       text-decoration: underline;
     }
     &:hover, &:visited{
-      color: #fff;
       opacity: 1;
       text-decoration: none;
     }
