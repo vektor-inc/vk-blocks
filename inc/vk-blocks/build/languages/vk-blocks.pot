@@ -9,13 +9,13 @@ msgstr ""
 
 #: src/balloon/block.js:122
 #: src/flow/block.js:111
-#: src/pr/block.js:140
+#: src/pr/block.js:286
 msgid "Select image"
 msgstr ""
 
 #: src/balloon/block.js:122
 #: src/flow/block.js:112
-#: src/pr/block.js:142
+#: src/pr/block.js:288
 msgid "Upload image"
 msgstr ""
 
@@ -96,59 +96,83 @@ msgid "Arrow hidden"
 msgstr ""
 
 #: src/flow/block.js:90
-#: src/pr/block.js:197
+#: src/pr/block.js:457
 msgid "Input title"
 msgstr ""
 
 #: src/flow/block.js:97
-#: src/pr/block.js:204
+#: src/pr/block.js:464
 msgid "Input content"
 msgstr ""
 
-#: src/pr/block.js:105
-msgid "Icon 1"
-msgstr ""
-
-#: src/pr/block.js:108
-msgid "Class name of the icon font you want to use:"
-msgstr ""
-
-#: src/pr/block.js:111
-msgid "fa-file"
-msgstr ""
-
-#: src/pr/block.js:118
-msgid "Icon Background:"
-msgstr ""
-
-#: src/pr/block.js:121
-msgid "Solid color"
-msgstr ""
-
-#: src/pr/block.js:122
-msgid "No background"
-msgstr ""
-
-#: src/pr/block.js:128
-msgid "PR Image 1"
-msgstr ""
-
-#: src/pr/block.js:129
-msgid "When you have an image. Image is displayed with priority"
-msgstr ""
-
-#: src/pr/block.js:27
-msgid "PR Block"
-msgstr ""
-
-#: src/pr/block.js:90
+#: src/pr/block.js:120
 msgid "PR Block1 Setting"
 msgstr ""
 
-#: src/pr/block.js:92
+#: src/pr/block.js:135
+msgid "Icon 1"
+msgstr ""
+
+#: src/pr/block.js:158
+msgid "PR Image 1"
+msgstr ""
+
+#: src/pr/block.js:178
+msgid "PR Block2 Setting"
+msgstr ""
+
+#: src/pr/block.js:193
+msgid "Icon 2"
+msgstr ""
+
+#: src/pr/block.js:216
+msgid "PR Image 2"
+msgstr ""
+
+#: src/pr/block.js:236
+msgid "PR Block3 Setting"
+msgstr ""
+
+#: src/pr/block.js:238
 msgid "Link URL:"
 msgstr ""
 
-#: src/pr/block.js:99
+#: src/pr/block.js:245
 msgid "Open link new tab."
+msgstr ""
+
+#: src/pr/block.js:251
+msgid "Icon 3"
+msgstr ""
+
+#: src/pr/block.js:254
+msgid "Class name of the icon font you want to use:"
+msgstr ""
+
+#: src/pr/block.js:257
+msgid "fa-file"
+msgstr ""
+
+#: src/pr/block.js:264
+msgid "Icon Background:"
+msgstr ""
+
+#: src/pr/block.js:267
+msgid "Solid color"
+msgstr ""
+
+#: src/pr/block.js:268
+msgid "No background"
+msgstr ""
+
+#: src/pr/block.js:274
+msgid "PR Image 3"
+msgstr ""
+
+#: src/pr/block.js:275
+msgid "When you have an image. Image is displayed with priority"
+msgstr ""
+
+#: src/pr/block.js:75
+msgid "PR Block"
 msgstr ""
