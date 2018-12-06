@@ -22,6 +22,7 @@ msgid "Icon Name"
 msgstr ""
 
 #: src/balloon/block.js:140
+#: src/button/block.js:174
 msgid "Input text"
 msgstr ""
 
@@ -63,6 +64,34 @@ msgstr ""
 
 #: src/balloon/block.js:99
 msgid "Thinking"
+msgstr ""
+
+#: src/button/block.js:106
+msgid "Button Color:"
+msgstr ""
+
+#: src/button/block.js:113
+msgid "Button Style:"
+msgstr ""
+
+#: src/button/block.js:116
+msgid "Solid color"
+msgstr ""
+
+#: src/button/block.js:117
+msgid "No background"
+msgstr ""
+
+#: src/button/block.js:33
+msgid "Button"
+msgstr ""
+
+#: src/button/block.js:96
+msgid "Button setting"
+msgstr ""
+
+#: src/button/block.js:98
+msgid "Link URL:"
 msgstr ""
 
 #: src/faq/block.js:25
