@@ -18,6 +18,7 @@ if ( ! function_exists( 'vkblocks_active' ) ) {
 		wp_enqueue_style( 'vkblocks-bootstrap' );
 	}
 	add_action( 'admin_enqueue_scripts', 'vkblocks_load_bootstrap_admin' );
+	add_action( 'wp_enqueue_scripts', 'vkblocks_load_bootstrap_admin' );
 
 
 }

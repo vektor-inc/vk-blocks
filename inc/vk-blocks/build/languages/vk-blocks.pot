@@ -22,7 +22,7 @@ msgid "Icon Name"
 msgstr ""
 
 #: src/balloon/block.js:140
-#: src/button/block.js:174
+#: src/button/block.js:205
 msgid "Input text"
 msgstr ""
 
@@ -66,32 +66,72 @@ msgstr ""
 msgid "Thinking"
 msgstr ""
 
-#: src/button/block.js:106
-msgid "Button Color:"
-msgstr ""
-
-#: src/button/block.js:113
-msgid "Button Style:"
-msgstr ""
-
-#: src/button/block.js:116
-msgid "Solid color"
-msgstr ""
-
-#: src/button/block.js:117
-msgid "No background"
-msgstr ""
-
-#: src/button/block.js:33
-msgid "Button"
-msgstr ""
-
-#: src/button/block.js:96
+#: src/button/block.js:121
 msgid "Button setting"
 msgstr ""
 
-#: src/button/block.js:98
+#: src/button/block.js:123
 msgid "Link URL:"
+msgstr ""
+
+#: src/button/block.js:131
+msgid "Button Color:"
+msgstr ""
+
+#: src/button/block.js:138
+msgid "Button Style:"
+msgstr ""
+
+#: src/button/block.js:141
+msgid "Solid color"
+msgstr ""
+
+#: src/button/block.js:142
+msgid "No background"
+msgstr ""
+
+#: src/button/block.js:179
+msgid "Primary"
+msgstr ""
+
+#: src/button/block.js:181
+msgid "Secondary"
+msgstr ""
+
+#: src/button/block.js:183
+msgid "Success"
+msgstr ""
+
+#: src/button/block.js:185
+msgid "Info"
+msgstr ""
+
+#: src/button/block.js:187
+msgid "Warning"
+msgstr ""
+
+#: src/button/block.js:189
+msgid "Danger"
+msgstr ""
+
+#: src/button/block.js:191
+msgid "Light"
+msgstr ""
+
+#: src/button/block.js:193
+msgid "Dark"
+msgstr ""
+
+#: src/button/block.js:196
+msgid "Large"
+msgstr ""
+
+#: src/button/block.js:197
+msgid "Small"
+msgstr ""
+
+#: src/button/block.js:34
+msgid "Button"
 msgstr ""
 
 #: src/faq/block.js:25

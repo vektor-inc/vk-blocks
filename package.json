@@ -39,6 +39,7 @@
     "webpack-stream": "^5.1.1"
   },
   "dependencies": {
-    "@wordpress/i18n": "^3.1.0"
+    "@wordpress/i18n": "^3.1.0",
+    "aphrodite": "^2.2.3"
   }
 }
