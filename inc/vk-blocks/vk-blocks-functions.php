@@ -14,19 +14,12 @@ function vkblocks_blocks_assets() {
 		), VK_BLOCKS_VERSION, true
 	);
 
-	if ( function_exists( 'gutenberg_get_jed_locale_data' ) ) {
-
-		//Get translation data from indicated text-domain.
-		$locale = gutenberg_get_jed_locale_data( 'vk-blocks' );
-
-		//Add translation data to javasript object.
-		$content = 'wp.i18n.setLocaleData( ' . json_encode( $locale ) . ', "vk-blocks" );';
-
-		//Pass the data to javascript from php.
-		wp_script_add_data( 'vk-blocks-buid-js', 'data', $content );
+	if(function_exists('wp_set_script_translations' )){
+		wp_set_script_translations( 'vk-blocks-buid-js', 'vk-blocks', plugin_dir_path( __FILE__ ) . 'build/languages' );
 	}
 
-	if ( defined( 'GUTENBERG_VERSION' ) ) {
+	global $wp_version;
+	if ( defined( 'GUTENBERG_VERSION' ) || version_compare( $wp_version, '5.0', '>=' ) ) {
 
 		// Alert Block.
 		register_block_type(
@@ -39,6 +32,14 @@ function vkblocks_blocks_assets() {
 		// Baloon Block.
 		register_block_type(
 			'vk-blocks/balloon', [
+				'style'         => 'vk-blocks-buid-css',
+				'editor_style'  => 'vk-blocks-buid-editor-css',
+				'editor_script' => 'vk-blocks-buid-js',
+			]
+		);
+		// Button Block.
+		register_block_type(
+			'vk-blocks/button', [
 				'style'         => 'vk-blocks-buid-css',
 				'editor_style'  => 'vk-blocks-buid-editor-css',
 				'editor_script' => 'vk-blocks-buid-js',
