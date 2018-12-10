@@ -115,6 +115,10 @@ registerBlockType('vk-blocks/button', {
             setAttributes({buttonSize: event.target.value});
         }
 
+        function onPositionChange(event) {
+            setAttributes({buttonAlign: event.target.value});
+        }
+
         return (
             <Fragment>
                 <InspectorControls>
@@ -150,30 +154,67 @@ registerBlockType('vk-blocks/button', {
                     if (buttonColorCustom) {
 
                         if (buttonType === '0') {
-                            return <button type="button"
-                                           className={`btn btn-primary btn-${buttonSize} ${css(styles.focus, styles.hover, styles.solid)}`}>
-                                <RichText
-                                    tagName="p"
-                                    className={'vk_button_content'}
-                                    onChange={(value) => setAttributes({content: value})}
-                                    value={content}
-                                    placeholder={__('Input text', 'vk-blocks')}
-                                />
-                            </button>;
+                            return <div className={'vk-block'}>
+                                <select onChange={onSizeChange}>
+                                    <option value={'lg'} selected={buttonColor === 'lg'}>{__('Large', 'vk-blocks')}</option>
+                                    <option value={'sm'} selected={buttonColor === 'sm'}>{__('Small', 'vk-blocks')}</option>
+                                </select>
+                                <select onChange={onPositionChange}>
+                                    <option value={'left'}
+                                            selected={buttonAlign === 'left'}>{__('Left', 'vk-blocks')}</option>
+                                    <option value={'center'}
+                                            selected={buttonAlign === 'center'}>{__('Center', 'vk-blocks')}</option>
+                                    <option value={'right'}
+                                            selected={buttonAlign === 'right'}>{__('Right', 'vk-blocks')}</option>
+                                    <option value={'block'}
+                                            selected={buttonAlign === 'block'}>{__('Block', 'vk-blocks')}</option>
+                                </select>
+                                <div className={'btn-container'}>
+                                <button type="button"
+                                        className={`btn btn-primary btn-${buttonSize} btn-${buttonAlign} ${css(styles.focus, styles.hover, styles.solid)}`}>
+                                    <RichText
+                                        tagName="p"
+                                        className={'vk_button_content'}
+                                        onChange={(value) => setAttributes({content: value})}
+                                        value={content}
+                                        placeholder={__('Input text', 'vk-blocks')}
+                                    />
+                                </button>
+                                </div>
+                            </div>;
                         } else {
-                            return <button type="button" className={`btn btn-${buttonSize} ${css(styles.outLine, styles.focus)}`}>
-                                <RichText
-                                    tagName="p"
-                                    className={'vk_button_content'}
-                                    onChange={(value) => setAttributes({content: value})}
-                                    value={content}
-                                    placeholder={__('Input text', 'vk-blocks')}
-                                />
-                            </button>;
+                            return <div className={'vk-block'}>
+                                <select onChange={onSizeChange}>
+                                    <option value={'lg'} selected={buttonColor === 'lg'}>{__('Large', 'vk-blocks')}</option>
+                                    <option value={'sm'} selected={buttonColor === 'sm'}>{__('Small', 'vk-blocks')}</option>
+                                </select>
+                                <select onChange={onPositionChange}>
+                                    <option value={'left'}
+                                            selected={buttonAlign === 'left'}>{__('Left', 'vk-blocks')}</option>
+                                    <option value={'center'}
+                                            selected={buttonAlign === 'center'}>{__('Center', 'vk-blocks')}</option>
+                                    <option value={'right'}
+                                            selected={buttonAlign === 'right'}>{__('Right', 'vk-blocks')}</option>
+                                    <option value={'block'}
+                                            selected={buttonAlign === 'block'}>{__('Block', 'vk-blocks')}</option>
+                                </select>
+                                <div className={'btn-container'}>
+                                <button type="button"
+                                        className={`btn btn-${buttonSize} btn-${buttonAlign} ${css(styles.outLine, styles.focus)}`}>
+                                    <RichText
+                                        tagName="p"
+                                        className={'vk_button_content'}
+                                        onChange={(value) => setAttributes({content: value})}
+                                        value={content}
+                                        placeholder={__('Input text', 'vk-blocks')}
+                                    />
+                                </button>
+                                </div>
+                            </div>;
                         }
                     } else {
 
-                        return <div>
+                        return <div className={'vk-block'}>
                             <select onChange={onStyleChange}>
                                 <option value={'primary'}
                                         selected={buttonColor === 'primary'}>{__('Primary', 'vk-blocks')}</option>
@@ -196,15 +237,27 @@ registerBlockType('vk-blocks/button', {
                                 <option value={'lg'} selected={buttonColor === 'lg'}>{__('Large', 'vk-blocks')}</option>
                                 <option value={'sm'} selected={buttonColor === 'sm'}>{__('Small', 'vk-blocks')}</option>
                             </select>
-                            <button type="button" className={`btn btn-${buttonSize} btn-${buttonColor}`}>
-                                <RichText
-                                    tagName="p"
-                                    className={'vk_button_content'}
-                                    onChange={(value) => setAttributes({content: value})}
-                                    value={content}
-                                    placeholder={__('Input text', 'vk-blocks')}
-                                />
-                            </button>
+                            <select onChange={onPositionChange}>
+                                <option value={'left'}
+                                        selected={buttonAlign === 'left'}>{__('Left', 'vk-blocks')}</option>
+                                <option value={'center'}
+                                        selected={buttonAlign === 'center'}>{__('Center', 'vk-blocks')}</option>
+                                <option value={'right'}
+                                        selected={buttonAlign === 'right'}>{__('Right', 'vk-blocks')}</option>
+                                <option value={'block'}
+                                        selected={buttonAlign === 'block'}>{__('Block', 'vk-blocks')}</option>
+                            </select>
+                            <div className={'btn-container'}>
+                                <button type="button" className={`btn btn-${buttonSize} btn-${buttonAlign} btn-${buttonColor}`}>
+                                    <RichText
+                                        tagName="p"
+                                        className={'vk_button_content'}
+                                        onChange={(value) => setAttributes({content: value})}
+                                        value={content}
+                                        placeholder={__('Input text', 'vk-blocks')}
+                                    />
+                                </button>
+                            </div>
                         </div>
                     }
                 })()}
