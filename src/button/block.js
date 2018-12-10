@@ -290,21 +290,6 @@ registerBlockType('vk-blocks/button', {
                 if (buttonColorCustom) {
                     if (buttonType === '0') {
                         return <div className={'vk-block'}>
-                            <select onChange={onSizeChange}>
-                                <option value={'lg'} selected={buttonColor === 'lg'}>{__('Large', 'vk-blocks')}</option>
-                                <option value={'sm'} selected={buttonColor === 'sm'}>{__('Small', 'vk-blocks')}</option>
-                            </select>
-                            <select onChange={onPositionChange}>
-                                <option value={'left'}
-                                        selected={buttonAlign === 'left'}>{__('Left', 'vk-blocks')}</option>
-                                <option value={'center'}
-                                        selected={buttonAlign === 'center'}>{__('Center', 'vk-blocks')}</option>
-                                <option value={'right'}
-                                        selected={buttonAlign === 'right'}>{__('Right', 'vk-blocks')}</option>
-                                <option value={'block'}
-                                        selected={buttonAlign === 'block'}>{__('Block', 'vk-blocks')}</option>
-                            </select>
-                            <div className={'btn-container'}>
                                 <a href={buttonUrl}>
                                     <button type="button"
                                             className={`btn btn-primary btn-${buttonSize} btn-${buttonAlign} ${css(styles.focus, styles.hover, styles.solid)}`}>
@@ -317,25 +302,9 @@ registerBlockType('vk-blocks/button', {
                                         />
                                     </button>
                                 </a>
-                            </div>
                         </div>;
                     } else {
                         return <div className={'vk-block'}>
-                            <select onChange={onSizeChange}>
-                                <option value={'lg'} selected={buttonColor === 'lg'}>{__('Large', 'vk-blocks')}</option>
-                                <option value={'sm'} selected={buttonColor === 'sm'}>{__('Small', 'vk-blocks')}</option>
-                            </select>
-                            <select onChange={onPositionChange}>
-                                <option value={'left'}
-                                        selected={buttonAlign === 'left'}>{__('Left', 'vk-blocks')}</option>
-                                <option value={'center'}
-                                        selected={buttonAlign === 'center'}>{__('Center', 'vk-blocks')}</option>
-                                <option value={'right'}
-                                        selected={buttonAlign === 'right'}>{__('Right', 'vk-blocks')}</option>
-                                <option value={'block'}
-                                        selected={buttonAlign === 'block'}>{__('Block', 'vk-blocks')}</option>
-                            </select>
-                            <div className={'btn-container'}>
                                 <a href={buttonUrl}>
                                 <button type="button"
                                         className={`btn btn-${buttonSize} btn-${buttonAlign} ${css(styles.outLine, styles.focus)}`}>
@@ -348,45 +317,10 @@ registerBlockType('vk-blocks/button', {
                                     />
                                 </button>
                                 </a>
-                            </div>
                         </div>;
                     }
                 } else {
-
                     return <div className={'vk-block'}>
-                        <select onChange={onStyleChange}>
-                            <option value={'primary'}
-                                    selected={buttonColor === 'primary'}>{__('Primary', 'vk-blocks')}</option>
-                            <option value={'secondary'}
-                                    selected={buttonColor === 'secondary'}>{__('Secondary', 'vk-blocks')}</option>
-                            <option value={'success'}
-                                    selected={buttonColor === 'success'}>{__('Success', 'vk-blocks')}</option>
-                            <option value={'info'}
-                                    selected={buttonColor === 'info'}>{__('Info', 'vk-blocks')}</option>
-                            <option value={'warning'}
-                                    selected={buttonColor === 'warning'}>{__('Warning', 'vk-blocks')}</option>
-                            <option value={'danger'}
-                                    selected={buttonColor === 'danger'}>{__('Danger', 'vk-blocks')}</option>
-                            <option value={'light'}
-                                    selected={buttonColor === 'light'}>{__('Light', 'vk-blocks')}</option>
-                            <option value={'dark'}
-                                    selected={buttonColor === 'dark'}>{__('Dark', 'vk-blocks')}</option>
-                        </select>
-                        <select onChange={onSizeChange}>
-                            <option value={'lg'} selected={buttonColor === 'lg'}>{__('Large', 'vk-blocks')}</option>
-                            <option value={'sm'} selected={buttonColor === 'sm'}>{__('Small', 'vk-blocks')}</option>
-                        </select>
-                        <select onChange={onPositionChange}>
-                            <option value={'left'}
-                                    selected={buttonAlign === 'left'}>{__('Left', 'vk-blocks')}</option>
-                            <option value={'center'}
-                                    selected={buttonAlign === 'center'}>{__('Center', 'vk-blocks')}</option>
-                            <option value={'right'}
-                                    selected={buttonAlign === 'right'}>{__('Right', 'vk-blocks')}</option>
-                            <option value={'block'}
-                                    selected={buttonAlign === 'block'}>{__('Block', 'vk-blocks')}</option>
-                        </select>
-                        <div className={'btn-container'}>
                             <a href={buttonUrl}>
                             <button type="button"
                                     className={`btn btn-${buttonSize} btn-${buttonAlign} btn-${buttonColor}`}>
@@ -399,7 +333,6 @@ registerBlockType('vk-blocks/button', {
                                 />
                             </button>
                             </a>
-                        </div>
                     </div>
                 }
             })()
