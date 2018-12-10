@@ -37,14 +37,6 @@ function vkblocks_blocks_assets() {
 				'editor_script' => 'vk-blocks-buid-js',
 			]
 		);
-		// Button Block.
-		register_block_type(
-			'vk-blocks/button', [
-				'style'         => 'vk-blocks-buid-css',
-				'editor_style'  => 'vk-blocks-buid-editor-css',
-				'editor_script' => 'vk-blocks-buid-js',
-			]
-		);
 		// Faq Block.
 		register_block_type(
 			'vk-blocks/faq', [
