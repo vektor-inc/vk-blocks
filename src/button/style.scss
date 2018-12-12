@@ -14,4 +14,34 @@
 	.btn-container{
 		margin: 5px 0;
 	}
+	p{
+		margin: 0;
+	}
+	a{
+		text-decoration: none!important;
+	}
+	.btn-primary:focus{
+		background:#007bff
+	}
+	.btn-secondary:focus {
+		background: #5a6268;
+	}
+	.btn-success:focus {
+		background: #28a745;
+	}
+	.btn-info {
+		background: #17a2b8;
+	}
+	.btn-warning {
+		background: #ffc107;
+	}
+	.btn-danger {
+		background: #dc3545;
+	}
+	.btn-light {
+		background: #f8f9fa;
+	}
+	.btn-dark {
+		background: #343a40;
+	}
 }
