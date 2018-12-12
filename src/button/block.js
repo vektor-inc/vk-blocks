@@ -312,80 +312,49 @@ registerBlockType('vk-blocks/button', {
         return (
             <div>
                 {(() => {
-                    if (true) {
-                        return <div className={'vk-block'}><a href={buttonUrl}><button type="button" className={`btn btn-primary btn-${buttonSize} btn-${buttonAlign} ${css(styles.focus, styles.hover, styles.solid)}`}><RichText
+                if (buttonColorCustom) {
+                    if (buttonType === '0') {
+                        return <div className={'vk-block'}>
+                            <a href={buttonUrl}>
+                                <button type="button"
+                                        className={`btn btn-primary btn-${buttonSize} btn-${buttonAlign} ${css(styles.focus, styles.hover, styles.solid)}`}>
+                                    <RichText.Content
                                         tagName="p"
                                         className={'vk_button_content'}
-                                        onChange={(value) => setAttributes({content: value})}
                                         value={content}
-                                        placeholder={__('Input text', 'vk-blocks')}
-                                    /></button></a></div>
+                                    />
+                                </button>
+                            </a>
+                        </div>
+                    } else {
+                        return <div className={'vk-block'}>
+                            <a href={buttonUrl}>
+                                <button type="button"
+                                        className={`btn btn-${buttonSize} btn-${buttonAlign} ${css(styles.outLine, styles.focus)}`}>
+                                    <RichText.Content
+                                        tagName="p"
+                                        className={'vk_button_content'}
+                                        value={content}
+                                    />
+                                </button>
+                            </a>
+                        </div>
                     }
+                } else {
+                    return <div className={'vk-block'}>
+                        <a href={buttonUrl}>
+                            <button type="button"
+                                    className={`btn btn-${buttonSize} btn-${buttonAlign} btn-${buttonColor}`}>
+                                <RichText.Content
+                                    tagName="p"
+                                    className={'vk_button_content'}
+                                    value={content}
+                                />
+                            </button>
+                        </a>
+                    </div>
+                }
                 })()}
-                {/*{(() => {*/}
-                {/*return <div className={'vk-block'}>*/}
-                {/*<a href={buttonUrl}>*/}
-                {/*<button type="button"*/}
-                {/*className={`btn btn-primary btn-${buttonSize} btn-${buttonAlign} ${css(styles.focus, styles.hover, styles.solid)}`}>*/}
-                {/*<RichText*/}
-                {/*tagName="p"*/}
-                {/*className={'vk_button_content'}*/}
-                {/*onChange={(value) => setAttributes({content: value})}*/}
-                {/*value={content}*/}
-                {/*placeholder={__('Input text', 'vk-blocks')}*/}
-                {/*/>*/}
-                {/*</button>*/}
-                {/*</a>*/}
-                {/*</div>*/}
-                {/*// if (buttonColorCustom) {*/}
-                {/*//     if (buttonType === '0') {*/}
-                {/*//         return <div className={'vk-block'}>*/}
-                {/*//             <a href={buttonUrl}>*/}
-                {/*//                 <button type="button"*/}
-                {/*//                         className={`btn btn-primary btn-${buttonSize} btn-${buttonAlign} ${css(styles.focus, styles.hover, styles.solid)}`}>*/}
-                {/*//                     <RichText*/}
-                {/*//                         tagName="p"*/}
-                {/*//                         className={'vk_button_content'}*/}
-                {/*//                         onChange={(value) => setAttributes({content: value})}*/}
-                {/*//                         value={content}*/}
-                {/*//                         placeholder={__('Input text', 'vk-blocks')}*/}
-                {/*//                     />*/}
-                {/*//                 </button>*/}
-                {/*//             </a>*/}
-                {/*//         </div>*/}
-                {/*//     } else {*/}
-                {/*//         return <div className={'vk-block'}>*/}
-                {/*//             <a href={buttonUrl}>*/}
-                {/*//                 <button type="button"*/}
-                {/*//                         className={`btn btn-${buttonSize} btn-${buttonAlign} ${css(styles.outLine, styles.focus)}`}>*/}
-                {/*//                     <RichText*/}
-                {/*//                         tagName="p"*/}
-                {/*//                         className={'vk_button_content'}*/}
-                {/*//                         onChange={(value) => setAttributes({content: value})}*/}
-                {/*//                         value={content}*/}
-                {/*//                         placeholder={__('Input text', 'vk-blocks')}*/}
-                {/*//                     />*/}
-                {/*//                 </button>*/}
-                {/*//             </a>*/}
-                {/*//         </div>*/}
-                {/*//     }*/}
-                {/*// } else {*/}
-                {/*//     return <div className={'vk-block'}>*/}
-                {/*//         <a href={buttonUrl}>*/}
-                {/*//             <button type="button"*/}
-                {/*//                     className={`btn btn-${buttonSize} btn-${buttonAlign} btn-${buttonColor}`}>*/}
-                {/*//                 <RichText*/}
-                {/*//                     tagName="p"*/}
-                {/*//                     className={'vk_button_content'}*/}
-                {/*//                     onChange={(value) => setAttributes({content: value})}*/}
-                {/*//                     value={content}*/}
-                {/*//                     placeholder={__('Input text', 'vk-blocks')}*/}
-                {/*//                 />*/}
-                {/*//             </button>*/}
-                {/*//         </a>*/}
-                {/*//     </div>*/}
-                {/*// }*/}
-                {/*})()}*/}
             </div>
         );
     },
