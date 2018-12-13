@@ -22,7 +22,7 @@ msgid "Icon Name"
 msgstr ""
 
 #: src/balloon/block.js:140
-#: src/button/block.js:321
+#: src/button/block.js:259
 msgid "Input text"
 msgstr ""
 
@@ -43,12 +43,12 @@ msgid "Please specify the layout of the balloon."
 msgstr ""
 
 #: src/balloon/block.js:88
-#: src/button/block.js:242
+#: src/button/block.js:244
 msgid "Left"
 msgstr ""
 
 #: src/balloon/block.js:89
-#: src/button/block.js:246
+#: src/button/block.js:248
 msgid "Right"
 msgstr ""
 
@@ -92,51 +92,51 @@ msgstr ""
 msgid "No background"
 msgstr ""
 
-#: src/button/block.js:220
+#: src/button/block.js:222
 msgid "Primary"
 msgstr ""
 
-#: src/button/block.js:222
+#: src/button/block.js:224
 msgid "Secondary"
 msgstr ""
 
-#: src/button/block.js:224
+#: src/button/block.js:226
 msgid "Success"
 msgstr ""
 
-#: src/button/block.js:226
+#: src/button/block.js:228
 msgid "Info"
 msgstr ""
 
-#: src/button/block.js:228
+#: src/button/block.js:230
 msgid "Warning"
 msgstr ""
 
-#: src/button/block.js:230
+#: src/button/block.js:232
 msgid "Danger"
 msgstr ""
 
-#: src/button/block.js:232
+#: src/button/block.js:234
 msgid "Light"
 msgstr ""
 
-#: src/button/block.js:234
+#: src/button/block.js:236
 msgid "Dark"
 msgstr ""
 
-#: src/button/block.js:237
+#: src/button/block.js:239
 msgid "Large"
 msgstr ""
 
-#: src/button/block.js:238
+#: src/button/block.js:240
 msgid "Small"
 msgstr ""
 
-#: src/button/block.js:244
+#: src/button/block.js:246
 msgid "Center"
 msgstr ""
 
-#: src/button/block.js:248
+#: src/button/block.js:250
 msgid "Block"
 msgstr ""
 

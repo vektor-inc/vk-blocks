@@ -321,8 +321,44 @@
 	.btn-container{
 		margin: 5px 0;
 	}
+	p{
+		margin: 0;
+	}
+	a{
+		text-decoration: none!important;
+	}
+	.btn-primary:focus{
+		background:#007bff
+	}
+	.btn-secondary:focus {
+		background: #5a6268;
+	}
+	.btn-success:focus {
+		background: #28a745;
+	}
+	.btn-info {
+		background: #17a2b8;
+	}
+	.btn-warning {
+		background: #ffc107;
+	}
+	.btn-danger {
+		background: #dc3545;
+	}
+	.btn-light {
+		background: #f8f9fa;
+	}
+	.btn-dark {
+		background: #343a40;
+	}
+	button:focus {
+		box-shadow: 0 0 0 0.2rem rgba(171, 184, 195, .25) !important;
+	}
+	button:hover {
+		opacity: 0.8 !important;
+	+
+	}
 }
-
 /*      .qaItem
 /*-------------------------------------------*/
 .vk_faq { display:block; overflow:hidden;border-bottom:1px dotted #ccc; padding:0px 0px 25px; margin:25px 0px; width:100%; position: relative; }

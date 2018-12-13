@@ -44,4 +44,10 @@
 	.btn-dark {
 		background: #343a40;
 	}
+	button:focus {
+		box-shadow: 0 0 0 0.2rem rgba(171, 184, 195, .25) !important;
+	}
+	button:hover {
+		opacity: 0.8 !important;
+	}
 }

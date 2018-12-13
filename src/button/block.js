@@ -84,29 +84,29 @@ registerBlockType('vk-blocks/button', {
             buttonAlign,
         } = attributes;
 
-        const styles = StyleSheet.create({
-            focus: {
-                ':focus': {
-                    boxShadow: '0 0 0 0.2rem rgba(171, 184, 195,.25)'
-                }
-            },
-            solid: {
-                backgroundColor: buttonColorCustom,
-                border: `1px solid ${buttonColorCustom}`,
-                ':hover': {
-                    opacity: 0.8
-                }
-            },
-            outLine:{
-                backgroundColor: 'transparent',
-                border: `1px solid ${buttonColorCustom}`,
-                color:buttonColorCustom,
-                ':hover': {
-                    backgroundColor: buttonColorCustom,
-                    color:'#fff',
-                }
-            }
-        });
+        // const styles = StyleSheet.create({
+        //     focus: {
+        //         ':focus': {
+        //             boxShadow: '0 0 0 0.2rem rgba(171, 184, 195,.25)'
+        //         }
+        //     },
+        //     solid: {
+        //         backgroundColor: buttonColorCustom,
+        //         border: `1px solid ${buttonColorCustom}`,
+        //         ':hover': {
+        //             opacity: 0.8
+        //         }
+        //     },
+        //     outLine:{
+        //         backgroundColor: 'transparent',
+        //         border: `1px solid ${buttonColorCustom}`,
+        //         color:buttonColorCustom,
+        //         ':hover': {
+        //             backgroundColor: buttonColorCustom,
+        //             color:'#fff',
+        //         }
+        //     }
+        // });
 
         function onStyleChange(event) {
             setAttributes({buttonColor: event.target.value});
@@ -171,7 +171,8 @@ registerBlockType('vk-blocks/button', {
                                 </select>
                                 <div className={'btn-container'}>
                                 <button type="button"
-                                        className={`btn btn-primary btn-${buttonSize} btn-${buttonAlign} ${css(styles.focus, styles.hover, styles.solid)}`}>
+                                    // className={`btn btn-primary btn-${buttonSize} btn-${buttonAlign} ${css(styles.focus, styles.hover, styles.solid)}`}
+                                >
                                     <RichText
                                         tagName="p"
                                         className={'vk_button_content'}
@@ -200,7 +201,8 @@ registerBlockType('vk-blocks/button', {
                                 </select>
                                 <div className={'btn-container'}>
                                 <button type="button"
-                                        className={`btn btn-${buttonSize} btn-${buttonAlign} ${css(styles.outLine, styles.focus)}`}>
+                                    // className={`btn btn-${buttonSize} btn-${buttonAlign} ${css(styles.outLine, styles.focus)}`}
+                                >
                                     <RichText
                                         tagName="p"
                                         className={'vk_button_content'}
@@ -288,16 +290,17 @@ registerBlockType('vk-blocks/button', {
         const styles = StyleSheet.create({
             focus: {
                 ':focus': {
-                    boxShadow: '0 0 0 0.2rem rgba(171, 184, 195,.25)'
+                    boxShadow: '0 0 0 0.2rem rgba(171, 184, 195,.25)',
+                    backgroundColor: buttonColorCustom
                 }
             },
-            solid: {
-                backgroundColor: buttonColorCustom,
-                border: `1px solid ${buttonColorCustom}`,
-                ':hover': {
-                    opacity: 0.8
-                }
-            },
+            // solid: {
+            //     backgroundColor: buttonColorCustom,
+            //     border: `1px solid ${buttonColorCustom}`,
+            //     ':hover': {
+            //         opacity: 0.8
+            //     }
+            // },
             outLine: {
                 backgroundColor: 'transparent',
                 border: `1px solid ${buttonColorCustom}`,
@@ -309,15 +312,55 @@ registerBlockType('vk-blocks/button', {
             }
         });
 
+        // var test = function () {
+        //     var document = window.document;
+        //     var css = document.createElement('style');
+        //     var rule = document.createTextNode(`
+        //     body {background-color: red!important;}
+        //     `);
+        //     css.media = 'screen';
+        //     css.type = 'text/css';
+        //     css.appendChild(rule);
+        //     document.getElementsByTagName('head')[0].appendChild(css);
+        // }
+
+
         return (
             <div>
+                <script>
+                    {
+                        '(function () { ' +
+                        'var document = window.document;' +
+                        'var rule = document.createTextNode("' +
+                        '.vk-block button:focus {' +
+                        `background-color: ${buttonColorCustom}!important;` +
+                        '}");' +
+                        'var is_css = document.getElementsByTagName("head")[0].children;' +
+                        'var is_css_arr = Array.prototype.slice.call(is_css);' +
+                        'var index = is_css_arr.findIndex(function(element){return element.type == "text/css";});' +
+                        'if(Number.isInteger ( index ))' +
+                        '{' +
+                        'var content = is_css[index].textContent;' +
+                        'content = content + rule;' +
+                        'is_css[index].textContent(content);' +
+                        '}else{' +
+                        'var css = document.createElement("style");' +
+                        'css.media = "screen";' +
+                        'css.type = "text/css";' +
+                        'css.appendChild(rule);' +
+                        'document.getElementsByTagName("head")[0].appendChild(css);' +
+                        '}' +
+                        '}())'}
+                </script>
                 {(() => {
                 if (buttonColorCustom) {
                     if (buttonType === '0') {
                         return <div className={'vk-block'}>
-                            <a href={buttonUrl}>
+                            <a href={buttonUrl} target={'_blank'}>
                                 <button type="button"
-                                        className={`btn btn-primary btn-${buttonSize} btn-${buttonAlign} ${css(styles.focus, styles.hover, styles.solid)}`}>
+                                        className={`btn btn-primary btn-${buttonSize} btn-${buttonAlign} btn-${buttonColorCustom}}`}
+                                        style={`background-color: ${buttonColorCustom}; border: 1px solid ${buttonColorCustom};`}
+                                >
                                     <RichText.Content
                                         tagName="p"
                                         className={'vk_button_content'}
@@ -328,7 +371,7 @@ registerBlockType('vk-blocks/button', {
                         </div>
                     } else {
                         return <div className={'vk-block'}>
-                            <a href={buttonUrl}>
+                            <a href={buttonUrl} target={'_blank'}>
                                 <button type="button"
                                         className={`btn btn-${buttonSize} btn-${buttonAlign} ${css(styles.outLine, styles.focus)}`}>
                                     <RichText.Content
@@ -342,7 +385,7 @@ registerBlockType('vk-blocks/button', {
                     }
                 } else {
                     return <div className={'vk-block'}>
-                        <a href={buttonUrl}>
+                        <a href={buttonUrl} target={'_blank'}>
                             <button type="button"
                                     className={`btn btn-${buttonSize} btn-${buttonAlign} btn-${buttonColor}`}>
                                 <RichText.Content
