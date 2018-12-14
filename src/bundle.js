@@ -4,3 +4,4 @@ import './balloon/block.js';
 import './button/block.js';
 import './faq/block.js';
 import './flow/block.js';
+import './pr-content/block.js';

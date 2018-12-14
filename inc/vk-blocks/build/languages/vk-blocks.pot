@@ -9,11 +9,13 @@ msgstr ""
 
 #: src/balloon/block.js:122
 #: src/flow/block.js:111
+#: src/pr-content/block.js:299
 msgid "Select image"
 msgstr ""
 
 #: src/balloon/block.js:122
 #: src/flow/block.js:112
+#: src/pr-content/block.js:299
 msgid "Upload image"
 msgstr ""
 
@@ -23,6 +25,7 @@ msgstr ""
 
 #: src/balloon/block.js:140
 #: src/button/block.js:220
+#: src/pr-content/block.js:287
 msgid "Input text"
 msgstr ""
 
@@ -44,11 +47,13 @@ msgstr ""
 
 #: src/balloon/block.js:88
 #: src/button/block.js:111
+#: src/pr-content/block.js:203
 msgid "Left"
 msgstr ""
 
 #: src/balloon/block.js:89
 #: src/button/block.js:113
+#: src/pr-content/block.js:202
 msgid "Right"
 msgstr ""
 
@@ -196,4 +201,72 @@ msgstr ""
 
 #: src/flow/block.js:97
 msgid "Input content"
+msgstr ""
+
+#: src/pr-content/block.js:137
+msgid "PR Content setting"
+msgstr ""
+
+#: src/pr-content/block.js:139
+msgid "Content Setting"
+msgstr ""
+
+#: src/pr-content/block.js:152
+msgid "Button Setting"
+msgstr ""
+
+#: src/pr-content/block.js:165
+msgid "URL Type"
+msgstr ""
+
+#: src/pr-content/block.js:169
+msgid "Open url in new window"
+msgstr ""
+
+#: src/pr-content/block.js:170
+msgid "Open url in current window"
+msgstr ""
+
+#: src/pr-content/block.js:175
+msgid "Button Type"
+msgstr ""
+
+#: src/pr-content/block.js:176
+msgid "Please select the from below."
+msgstr ""
+
+#: src/pr-content/block.js:179
+msgid "Solid"
+msgstr ""
+
+#: src/pr-content/block.js:180
+msgid "Ghost"
+msgstr ""
+
+#: src/pr-content/block.js:190
+msgid "Image Setting"
+msgstr ""
+
+#: src/pr-content/block.js:198
+msgid "Layout"
+msgstr ""
+
+#: src/pr-content/block.js:199
+msgid "Please select the type of pr_content_."
+msgstr ""
+
+#: src/pr-content/block.js:209
+msgid "Background Setting"
+msgstr ""
+
+#: src/pr-content/block.js:210
+msgid "When you have an image. Image is displayed with priority"
+msgstr ""
+
+#: src/pr-content/block.js:242
+msgid "Layout:"
+msgstr ""
+
+#: src/pr-content/block.js:32
+msgid "PR Content"
 msgstr ""
