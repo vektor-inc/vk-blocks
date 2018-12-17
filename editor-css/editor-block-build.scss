@@ -1,5 +1,45 @@
 .edit-post-visual-editor{
 
+.alert{
+
+  padding: 1em;
+  margin: 1em 0;
+  border-radius: 3px;
+
+  & + &{
+    margin-top: 2em;
+  }
+
+  a{
+    transition: color .3s linear, opacity .3s linear;
+    &:link, &:visited{
+      opacity: .8;
+      text-decoration: underline;
+    }
+    &:hover, &:visited{
+      opacity: 1;
+      text-decoration: none;
+    }
+  }
+
+  @each $var in (
+                  (success, #dff0d8,#3c763d,#d6e9c6),
+                  (info, #d9edf7,#31708f,#bce8f1),
+                  (warning, #fcf8e3,#8a6d3b,#faebcc),
+                  (danger, #f2dede,#a94442,#ebccd1),
+  ){
+    $class-name: nth($var, 1);
+    $color-bg: nth($var, 2);
+    $color: nth($var, 3);
+    $color-border :nth($var, 4);
+    &-#{$class-name}{
+      background-color: $color-bg;
+      color:$color;
+      border-color:$color-border;
+    }
+  }
+}
+
 .vk_balloon {
   display: flex;
   align-items: center;
@@ -265,47 +305,8 @@
 	}
 } // @media only screen and (max-width: 480px) {
 
-.alert{
-
-  padding: 1em;
-  margin: 1em 0;
-  border-radius: 3px;
-
-  & + &{
-    margin-top: 2em;
-  }
-
-  a{
-    transition: color .3s linear, opacity .3s linear;
-    &:link, &:visited{
-      opacity: .8;
-      text-decoration: underline;
-    }
-    &:hover, &:visited{
-      opacity: 1;
-      text-decoration: none;
-    }
-  }
-
-  @each $var in (
-                  (success, #dff0d8,#3c763d,#d6e9c6),
-                  (info, #d9edf7,#31708f,#bce8f1),
-                  (warning, #fcf8e3,#8a6d3b,#faebcc),
-                  (danger, #f2dede,#a94442,#ebccd1),
-  ){
-    $class-name: nth($var, 1);
-    $color-bg: nth($var, 2);
-    $color: nth($var, 3);
-    $color-border :nth($var, 4);
-    &-#{$class-name}{
-      background-color: $color-bg;
-      color:$color;
-      border-color:$color-border;
-    }
-  }
-}
-
-.vk-block{
+.vk_button{
+	margin: 5px 0;
 	.btn-left{
 		display: block;
 		margin-right: auto;
@@ -317,9 +318,6 @@
 	.btn-right{
 		display: block;
 		margin-left: auto;
-	}
-	.btn-container{
-		margin: 5px 0;
 	}
 	p{
 		margin: 0;
@@ -363,6 +361,7 @@
 		}
 	}
 }
+
 /*      .qaItem
 /*-------------------------------------------*/
 .vk_faq { display:block; overflow:hidden;border-bottom:1px dotted #ccc; padding:0px 0px 25px; margin:25px 0px; width:100%; position: relative; }

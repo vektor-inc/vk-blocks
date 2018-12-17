@@ -22,7 +22,7 @@ msgid "Icon Name"
 msgstr ""
 
 #: src/balloon/block.js:140
-#: src/button/block.js:220
+#: src/button/block.js:215
 msgid "Input text"
 msgstr ""
 
@@ -43,12 +43,12 @@ msgid "Please specify the layout of the balloon."
 msgstr ""
 
 #: src/balloon/block.js:88
-#: src/button/block.js:111
+#: src/button/block.js:112
 msgid "Left"
 msgstr ""
 
 #: src/balloon/block.js:89
-#: src/button/block.js:113
+#: src/button/block.js:114
 msgid "Right"
 msgstr ""
 
@@ -73,74 +73,82 @@ msgid "Large"
 msgstr ""
 
 #: src/button/block.js:103
+msgid "normal"
+msgstr ""
+
+#: src/button/block.js:104
 msgid "Small"
 msgstr ""
 
-#: src/button/block.js:108
+#: src/button/block.js:109
 msgid "Button Position:"
 msgstr ""
 
-#: src/button/block.js:112
+#: src/button/block.js:113
 msgid "Center"
 msgstr ""
 
-#: src/button/block.js:114
+#: src/button/block.js:115
 msgid "Block"
 msgstr ""
 
-#: src/button/block.js:119
+#: src/button/block.js:120
 msgid "Button Style:"
 msgstr ""
 
-#: src/button/block.js:122
+#: src/button/block.js:123
 msgid "Solid color"
 msgstr ""
 
-#: src/button/block.js:123
+#: src/button/block.js:124
 msgid "No background"
 msgstr ""
 
-#: src/button/block.js:128
+#: src/button/block.js:126
+msgid "If you select \"No background\", that you need to select a Custom Color."
+msgstr ""
+
+#: src/button/block.js:130
 msgid "Default Color:"
 msgstr ""
 
-#: src/button/block.js:131
+#: src/button/block.js:133
 msgid "Primary"
 msgstr ""
 
-#: src/button/block.js:132
+#: src/button/block.js:134
 msgid "Secondary"
 msgstr ""
 
-#: src/button/block.js:133
+#: src/button/block.js:135
 msgid "Success"
 msgstr ""
 
-#: src/button/block.js:134
+#: src/button/block.js:136
 msgid "Info"
 msgstr ""
 
-#: src/button/block.js:135
+#: src/button/block.js:137
 msgid "Warning"
 msgstr ""
 
-#: src/button/block.js:136
+#: src/button/block.js:138
 msgid "Danger"
 msgstr ""
 
-#: src/button/block.js:137
+#: src/button/block.js:139
 msgid "Light"
 msgstr ""
 
-#: src/button/block.js:138
+#: src/button/block.js:140
 msgid "Dark"
 msgstr ""
 
-#: src/button/block.js:143
+#: src/button/block.js:145
 msgid "Custom Color:"
 msgstr ""
 
-#: src/button/block.js:144
+#: src/button/block.js:146
 msgid ""
 "This custom color overrides the default color. If you want to use the "
 "default color, click the clear button."
@@ -162,15 +170,15 @@ msgstr ""
 msgid "Button Size:"
 msgstr ""
 
-#: src/faq/block.js:25
+#: src/faq/block.js:40
 msgid "FAQ"
 msgstr ""
 
-#: src/faq/block.js:62
+#: src/faq/block.js:77
 msgid "Please enter a question."
 msgstr ""
 
-#: src/faq/block.js:69
+#: src/faq/block.js:84
 msgid "Please enter a answer."
 msgstr ""
 

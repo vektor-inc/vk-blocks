@@ -100,6 +100,7 @@ registerBlockType('vk-blocks/button', {
                             selected={buttonSize}
                             options={[
                                 {label: __('Large', 'vk-blocks'), value: 'lg'},
+                                {label: __('normal', 'vk-blocks'), value: 'md'},
                                 {label: __('Small', 'vk-blocks'), value: 'sm'},
                             ]}
                             onChange={(value) => setAttributes({buttonSize: value})}
@@ -122,6 +123,7 @@ registerBlockType('vk-blocks/button', {
                                 {label: __('Solid color', 'vk-blocks'), value: '0'},
                                 {label: __('No background', 'vk-blocks'), value: '1'},
                             ]}
+														help={__('If you select "No background", that you need to select a Custom Color.', 'vk-blocks')}
                             onChange={(value) => setAttributes({buttonType: value})}
                         />
                         <RadioControl
@@ -152,8 +154,7 @@ registerBlockType('vk-blocks/button', {
                 </InspectorControls>
                 {(() => {
                     if (buttonColorCustom && buttonType === '0') {
-                        return <div className={'vk-block'}>
-                            <div className={'btn-container custom-btn'}>
+                        return <div className={'vk_button custom-btn'}>
                                 <button type="button"
                                         className={`btn btn-primary btn-${buttonSize} btn-${buttonAlign}`}
                                         style={{
@@ -168,11 +169,9 @@ registerBlockType('vk-blocks/button', {
                                         placeholder={__('Input text', 'vk-blocks')}
                                     />
                                 </button>
-                            </div>
                         </div>;
                     } else if (buttonColorCustom && buttonType === '1') {
-                        return <div className={'vk-block'}>
-                            <div className={'btn-container custom-btn'}>
+                        return <div className={'vk_button custom-btn'}>
                                 <button type="button"
                                         className={`btn btn-${buttonSize} btn-${buttonAlign}`}
                                         style={{
@@ -189,11 +188,9 @@ registerBlockType('vk-blocks/button', {
                                         placeholder={__('Input text', 'vk-blocks')}
                                     />
                                 </button>
-                            </div>
                         </div>;
                     } else if (!buttonColorCustom && buttonType === '0') {
-                        return <div className={'vk-block'}>
-                            <div className={'btn-container'}>
+                        return <div className={'vk_button'}>
                                 <button type="button" className={`btn btn-${buttonSize} btn-${buttonAlign} btn-${buttonColor}`}>
                                     <RichText
                                         tagName="p"
@@ -203,11 +200,9 @@ registerBlockType('vk-blocks/button', {
                                         placeholder={__('Input text', 'vk-blocks')}
                                     />
                                 </button>
-                            </div>
                         </div>;
                     } else if (!buttonColorCustom && buttonType === '1') {
-                        return <div className={'vk-block'}>
-                            <div className={'btn-container'}>
+                        return <div className={'vk_button'}>
                                 <button type="button"
                                         className={`btn btn-${buttonSize} btn-${buttonAlign} btn-outline-${buttonColor}`}
                                         style={{backgroundColor: +'transparent'}}
@@ -220,7 +215,6 @@ registerBlockType('vk-blocks/button', {
                                         placeholder={__('Input text', 'vk-blocks')}
                                     />
                                 </button>
-                            </div>
                         </div>;
                     }
                 })()}
@@ -248,11 +242,11 @@ registerBlockType('vk-blocks/button', {
         } = attributes;
 
         return (
-            <div>
+					// { buttonColorCustom ? <div className={`vk_button vk_button-colorCustom`}> : <div className={`vk_button`}> }
+					<div>
                 {(() => {
                     if (buttonColorCustom && buttonType === '0') {
-                        return <div className={'vk-block'}>
-                            <div className={'btn-container custom-btn'}>
+                        return <div className={'vk_button custom-btn'}>
                                 <button type="button"
                                         className={`btn btn-primary btn-${buttonSize} btn-${buttonAlign}`}
                                         style={{
@@ -265,11 +259,9 @@ registerBlockType('vk-blocks/button', {
                                         value={content}
                                     />
                                 </button>
-                            </div>
                         </div>;
                     } else if (buttonColorCustom && buttonType === '1') {
-                        return <div className={'vk-block'}>
-                            <div className={'btn-container custom-btn'}>
+                        return <div className={'vk_button custom-btn'}>
                                 <button type="button"
                                         className={`btn btn-${buttonSize} btn-${buttonAlign}`}
                                         style={{
@@ -284,24 +276,17 @@ registerBlockType('vk-blocks/button', {
                                         value={content}
                                     />
                                 </button>
-                            </div>
                         </div>;
                     } else if (!buttonColorCustom && buttonType === '0') {
-                        return <div className={'vk-block'}>
-                            <div className={'btn-container'}>
-                                <button type="button" className={`btn btn-${buttonSize} btn-${buttonAlign} btn-${buttonColor}`}>
+                        return <button type="button" className={`btn btn-${buttonSize} btn-${buttonAlign} btn-${buttonColor}`}>
                                     <RichText.Content
                                         tagName="p"
                                         className={'vk_button_content'}
                                         value={content}
                                     />
-                                </button>
-                            </div>
-                        </div>;
+                                </button>;
                     } else if (!buttonColorCustom && buttonType === '1') {
-                        return <div className={'vk-block'}>
-                            <div className={'btn-container'}>
-                                <button type="button"
+                        return <button type="button"
                                         className={`btn btn-${buttonSize} btn-${buttonAlign} btn-outline-${buttonColor}`}
                                         style={{backgroundColor: +'transparent'}}
                                 >
@@ -310,9 +295,7 @@ registerBlockType('vk-blocks/button', {
                                         className={'vk_button_content'}
                                         value={content}
                                     />
-                                </button>
-                            </div>
-                        </div>;
+                                </button>;
                     }
                 })()}
             </div>
