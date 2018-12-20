@@ -153,73 +153,73 @@ registerBlockType('vk-blocks/button', {
                     </PanelBody>
                 </InspectorControls>
                 <div className={buttonColorCustom ? 'vk_button vk_button-colorCustom' : 'vk_button'}>
-                {(() => {
-                    if (buttonColorCustom && buttonType === '0') {
-                        return <div className={'custom-btn'}>
-                            <button type="button"
-                                    className={`btn btn-primary btn-${buttonSize} btn-${buttonAlign}`}
-                                    style={{
-                                        backgroundColor: buttonColorCustom,
-                                        border: `1px solid ${buttonColorCustom}`
-                                    }}>
-                                <RichText
-                                    tagName="p"
-                                    className={'vk_button_content'}
-                                    onChange={(value) => setAttributes({content: value})}
-                                    value={content}
-                                    placeholder={__('Input text', 'vk-blocks')}
-                                />
-                            </button>
-                        </div>;
-                    } else if (buttonColorCustom && buttonType === '1') {
-                        return <div className={'custom-btn'}>
-                            <button type="button"
-                                    className={`btn btn-${buttonSize} btn-${buttonAlign}`}
-                                    style={{
-                                        backgroundColor: 'transparent',
-                                        border: '1px solid' + buttonColorCustom,
-                                        color: buttonColorCustom
-                                    }}
-                            >
-                                <RichText
-                                    tagName="p"
-                                    className={'vk_button_content'}
-                                    onChange={(value) => setAttributes({content: value})}
-                                    value={content}
-                                    placeholder={__('Input text', 'vk-blocks')}
-                                />
-                            </button>
-                        </div>;
-                    } else if (!buttonColorCustom && buttonType === '0') {
-                        return <div>
-                            <button type="button"
-                                    className={`btn btn-${buttonSize} btn-${buttonAlign} btn-${buttonColor}`}>
-                                <RichText
-                                    tagName="p"
-                                    className={'vk_button_content'}
-                                    onChange={(value) => setAttributes({content: value})}
-                                    value={content}
-                                    placeholder={__('Input text', 'vk-blocks')}
-                                />
-                            </button>
-                        </div>;
-                    } else if (!buttonColorCustom && buttonType === '1') {
-                        return <div>
-                            <button type="button"
-                                    className={`btn btn-${buttonSize} btn-${buttonAlign} btn-outline-${buttonColor}`}
-                                    style={{backgroundColor: +'transparent'}}
-                            >
-                                <RichText
-                                    tagName="p"
-                                    className={'vk_button_content'}
-                                    onChange={(value) => setAttributes({content: value})}
-                                    value={content}
-                                    placeholder={__('Input text', 'vk-blocks')}
-                                />
-                            </button>
-                        </div>;
-                    }
-                })()}
+                    {(() => {
+                        if (buttonColorCustom && buttonType === '0') {
+                            return <div className={'custom-btn'}>
+                                <button type="button"
+                                        className={`btn btn-primary btn-${buttonSize} btn-${buttonAlign}`}
+                                        style={{
+                                            backgroundColor: buttonColorCustom,
+                                            border: `1px solid ${buttonColorCustom}`
+                                        }}>
+                                    <RichText
+                                        tagName="p"
+                                        className={'vk_button_content'}
+                                        onChange={(value) => setAttributes({content: value})}
+                                        value={content}
+                                        placeholder={__('Input text', 'vk-blocks')}
+                                    />
+                                </button>
+                            </div>;
+                        } else if (buttonColorCustom && buttonType === '1') {
+                            return <div className={'custom-btn'}>
+                                <button type="button"
+                                        className={`btn btn-${buttonSize} btn-${buttonAlign}`}
+                                        style={{
+                                            backgroundColor: 'transparent',
+                                            border: '1px solid' + buttonColorCustom,
+                                            color: buttonColorCustom
+                                        }}
+                                >
+                                    <RichText
+                                        tagName="p"
+                                        className={'vk_button_content'}
+                                        onChange={(value) => setAttributes({content: value})}
+                                        value={content}
+                                        placeholder={__('Input text', 'vk-blocks')}
+                                    />
+                                </button>
+                            </div>;
+                        } else if (!buttonColorCustom && buttonType === '0') {
+                            return <div>
+                                <button type="button"
+                                        className={`btn btn-${buttonSize} btn-${buttonAlign} btn-${buttonColor}`}>
+                                    <RichText
+                                        tagName="p"
+                                        className={'vk_button_content'}
+                                        onChange={(value) => setAttributes({content: value})}
+                                        value={content}
+                                        placeholder={__('Input text', 'vk-blocks')}
+                                    />
+                                </button>
+                            </div>;
+                        } else if (!buttonColorCustom && buttonType === '1') {
+                            return <div>
+                                <button type="button"
+                                        className={`btn btn-${buttonSize} btn-${buttonAlign} btn-outline-${buttonColor}`}
+                                        style={{backgroundColor: +'transparent'}}
+                                >
+                                    <RichText
+                                        tagName="p"
+                                        className={'vk_button_content'}
+                                        onChange={(value) => setAttributes({content: value})}
+                                        value={content}
+                                        placeholder={__('Input text', 'vk-blocks')}
+                                    />
+                                </button>
+                            </div>;
+                        }
+                    })()}
                 </div>
             </Fragment>
         );
@@ -248,40 +248,41 @@ registerBlockType('vk-blocks/button', {
             <div className={buttonColorCustom ? 'vk_button vk_button-colorCustom' : 'vk_button'}>
                 {(() => {
                     if (buttonColorCustom && buttonType === '0') {
-                        return <div className={'custom-btn'}>
-                            <button type="button"
-                                    className={`btn btn-primary btn-${buttonSize} btn-${buttonAlign}`}
-                                    style={{
-                                        backgroundColor: buttonColorCustom,
-                                        border: `1px solid ${buttonColorCustom}`
-                                    }}>
-                                <RichText.Content
-                                    tagName="p"
-                                    className={'vk_button_content'}
-                                    value={content}
-                                />
-                            </button>
-                        </div>;
+                        return <button type="button"
+                                       className={`btn btn-primary custom-btn btn-${buttonSize} btn-${buttonAlign}`}
+                                       style={{
+                                           backgroundColor: buttonColorCustom,
+                                           border: `1px solid ${buttonColorCustom}`
+                                       }}
+                                       onClick={`window.open("${buttonUrl}")`}
+                        >
+                            <RichText.Content
+                                tagName="p"
+                                className={'vk_button_content'}
+                                value={content}
+                            />
+                        </button>;
                     } else if (buttonColorCustom && buttonType === '1') {
-                        return <div className={'custom-btn'}>
-                            <button type="button"
-                                    className={`btn btn-${buttonSize} btn-${buttonAlign}`}
-                                    style={{
-                                        backgroundColor: 'transparent',
-                                        border: '1px solid' + buttonColorCustom,
-                                        color: buttonColorCustom
-                                    }}
-                            >
-                                <RichText.Content
-                                    tagName="p"
-                                    className={'vk_button_content'}
-                                    value={content}
-                                />
-                            </button>
-                        </div>;
+                        return <button type="button"
+                                       className={`btn custom-btn btn-${buttonSize} btn-${buttonAlign}`}
+                                       style={{
+                                           backgroundColor: 'transparent',
+                                           border: '1px solid' + buttonColorCustom,
+                                           color: buttonColorCustom
+                                       }}
+                                       onClick={`window.open("${buttonUrl}")`}
+                        >
+                            <RichText.Content
+                                tagName="p"
+                                className={'vk_button_content'}
+                                value={content}
+                            />
+                        </button>;
                     } else if (!buttonColorCustom && buttonType === '0') {
                         return <button type="button"
-                                       className={`btn btn-${buttonSize} btn-${buttonAlign} btn-${buttonColor}`}>
+                                       className={`btn btn-${buttonSize} btn-${buttonAlign} btn-${buttonColor}`}
+                                       onClick={`window.open("${buttonUrl}")`}
+                        >
                             <RichText.Content
                                 tagName="p"
                                 className={'vk_button_content'}
@@ -292,6 +293,7 @@ registerBlockType('vk-blocks/button', {
                         return <button type="button"
                                        className={`btn btn-${buttonSize} btn-${buttonAlign} btn-outline-${buttonColor}`}
                                        style={{backgroundColor: +'transparent'}}
+                                       onClick={`window.open("${buttonUrl}")`}
                         >
                             <RichText.Content
                                 tagName="p"
