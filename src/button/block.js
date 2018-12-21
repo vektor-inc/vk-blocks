@@ -5,9 +5,9 @@
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
-const {RangeControl, RadioControl, PanelBody, Button, BaseControl, CheckboxControl, TextControl} = wp.components;
+const {RangeControl, RadioControl, PanelBody, Button, BaseControl, CheckboxControl, TextControl, Dashicon, IconButton,} = wp.components;
 const {Fragment} = wp.element;
-const {RichText, InspectorControls, MediaUpload, ColorPalette} = wp.editor;
+const {RichText, InspectorControls, MediaUpload, ColorPalette, URLInput,} = wp.editor;
 const BlockIcon = (
     <svg xmlns="http://www.w3.org/2000/svg" width="576" height="512" viewBox="0 0 576 512">
         <path d="M506,193.5v125H70v-125H506 M526.4,145.5H49.6c-15.2,0-27.6,12.4-27.6,27.6v165.8c0,15.2,12.4,27.6,27.6,27.6h476.8
@@ -72,7 +72,7 @@ registerBlockType('vk-blocks/button', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    edit({attributes, className, setAttributes}) {
+    edit({attributes, className, setAttributes, isSelected}) {
         const {
             content,
             buttonUrl,
@@ -87,14 +87,6 @@ registerBlockType('vk-blocks/button', {
             <Fragment>
                 <InspectorControls>
                     <PanelBody title={__('Button setting', 'vk-blocks')}>
-                        <BaseControl
-                            label={__('Link URL:', 'vk-blocks')}
-                        >
-                            <TextControl
-                                value={buttonUrl}
-                                onChange={(value) => setAttributes({buttonUrl: value})}
-                            />
-                        </BaseControl>
                         <RadioControl
                             label={__('Button Size:', 'vk-blocks')}
                             selected={buttonSize}
@@ -219,7 +211,20 @@ registerBlockType('vk-blocks/button', {
                                 </button>
                             </div>;
                         }
+
                     })()}
+                    {isSelected && (
+                        <form
+                            className="block-library-button__inline-link"
+                            onSubmit={(event) => event.preventDefault()}>
+                            <Dashicon icon="admin-links"/>
+                            <URLInput
+                                value={buttonUrl}
+                                onChange={(value) => setAttributes({buttonUrl: value})}
+                            />
+                            <IconButton icon="editor-break" label={__('Apply')} type="submit"/>
+                        </form>
+                    )}
                 </div>
             </Fragment>
         );
