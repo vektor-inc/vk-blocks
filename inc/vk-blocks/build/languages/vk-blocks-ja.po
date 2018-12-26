@@ -217,9 +217,37 @@ msgstr "タイトルを入力"
 msgid "Input content"
 msgstr "説明を入力"
 
+#: src/pr-blocks/block.js:136
+msgid "PR Block1 Setting"
+msgstr "PR Block1 設定"
+
+#: src/pr-blocks/block.js:151
+msgid "Icon 1"
+msgstr "アイコン 1"
+
+#: src/pr-blocks/block.js:174
+msgid "PR Image 1"
+msgstr "PR 画像 1"
+
+#: src/pr-blocks/block.js:194
+msgid "PR Block2 Setting"
+msgstr "PR Block2 設定"
+
+#: src/pr-blocks/block.js:209
+msgid "Icon 2"
+msgstr "アイコン 2"
+
+#: src/pr-blocks/block.js:232
+msgid "PR Image 2"
+msgstr "PR 画像 2"
+
+#: src/pr-blocks/block.js:233
+msgid "When you have an image. Image is displayed with priority"
+msgstr "画像を設定した場合は画像が優先して表示されます。"
+
 #: src/pr-blocks/block.js:252
-msgid "Setting"
-msgstr "設定"
+msgid "PR Block3 Setting"
+msgstr "PR Block3 設定"
 
 #: src/pr-blocks/block.js:254
 msgid "Link URL:"
@@ -230,8 +258,8 @@ msgid "Open link new tab."
 msgstr "リンクを別ウィンドウで開く"
 
 #: src/pr-blocks/block.js:267
-msgid "Icon"
-msgstr "アイコン"
+msgid "Icon 3"
+msgstr "アイコン 3"
 
 #: src/pr-blocks/block.js:270
 msgid "Class name of the Font Awesome icon font you want to use:"
@@ -242,10 +270,12 @@ msgid "Icon Background:"
 msgstr "アイコン背景:"
 
 #: src/pr-blocks/block.js:290
-msgid "PR Image"
-msgstr "PR 画像"
+msgid "PR Image 3"
+msgstr "PR 画像 3"
 
 #: src/pr-blocks/block.js:291
+#, fuzzy
+#| msgid "When you have an image. Image is displayed with priority"
 msgid "When you have an image. Image is displayed with priority."
 msgstr "画像を設定した場合は画像が優先して表示されます。"
 
@@ -253,11 +283,5 @@ msgstr "画像を設定した場合は画像が優先して表示されます。
 msgid "PR Block"
 msgstr "PR Block"
 
-#~ msgid "PR Block1 Setting"
-#~ msgstr "PR Block1 設定"
-
-#~ msgid "PR Block2 Setting"
-#~ msgstr "PR Block2 設定"
-
-#~ msgid "PR Block3 Setting"
-#~ msgstr "PR Block3 設定"
+#~ msgid "Setting"
+#~ msgstr "設定"

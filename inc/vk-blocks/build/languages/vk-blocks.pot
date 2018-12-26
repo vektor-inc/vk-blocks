@@ -236,6 +236,10 @@ msgstr ""
 msgid "PR Image 2"
 msgstr ""
 
+#: src/pr-blocks/block.js:233
+msgid "When you have an image. Image is displayed with priority"
+msgstr ""
+
 #: src/pr-blocks/block.js:252
 msgid "PR Block3 Setting"
 msgstr ""
@@ -265,7 +269,7 @@ msgid "PR Image 3"
 msgstr ""
 
 #: src/pr-blocks/block.js:291
-msgid "When you have an image. Image is displayed with priority"
+msgid "When you have an image. Image is displayed with priority."
 msgstr ""
 
 #: src/pr-blocks/block.js:91
