@@ -1,0 +1,56 @@
+.vk_button{
+	margin: 5px 0;
+	.btn-left{
+		display: block;
+		margin-right: auto;
+	}
+	.btn-center{
+		display: block;
+		margin: auto;
+	}
+	.btn-right{
+		display: block;
+		margin-left: auto;
+	}
+	p{
+		margin: 0;
+	}
+	a{
+		text-decoration: none!important;
+	}
+	.btn-primary:focus{
+		background:#007bff
+	}
+	.btn-primary:focus{
+		background:#007bff
+	}
+	.btn-secondary:focus {
+		background: #5a6268;
+	}
+	.btn-success:focus {
+		background: #28a745;
+	}
+	.btn-info:focus {
+		background: #17a2b8;
+	}
+	.btn-warning:focus {
+		background: #ffc107;
+	}
+	.btn-danger:focus {
+		background: #dc3545;
+	}
+	.btn-light:focus {
+		background: #f8f9fa;
+	}
+	.btn-dark:focus {
+		background: #343a40;
+	}
+	.custom-btn{
+		button:focus {
+			box-shadow: 0 0 0 0.2rem rgba(171, 184, 195, .25) !important;
+		}
+		button:hover {
+			opacity: 0.8 !important;
+		}
+	}
+}
