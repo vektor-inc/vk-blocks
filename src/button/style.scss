@@ -1,5 +1,8 @@
 .vk_button{
 	margin: 5px 0;
+	.btn{
+		display: inline-block!important;
+	}
 	.btn-left{
 		display: block;
 		margin-right: auto;
