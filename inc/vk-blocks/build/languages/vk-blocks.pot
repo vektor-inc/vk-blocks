@@ -253,11 +253,7 @@ msgid "Icon 3"
 msgstr ""
 
 #: src/pr-blocks/block.js:270
-msgid "Class name of the icon font you want to use:"
-msgstr ""
-
-#: src/pr-blocks/block.js:273
-msgid "fa-file"
+msgid "Class name of the Font Awesome icon font you want to use:"
 msgstr ""
 
 #: src/pr-blocks/block.js:280

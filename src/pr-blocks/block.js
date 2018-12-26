@@ -52,7 +52,7 @@ function set_attirbuite(number) {
         };
         attributes['icon' + i] = {
             type: 'string',
-            default: 'fa-file',
+            default: 'fas fa-file',
         };
         attributes['color' + i] = {
             type: 'string',
@@ -151,10 +151,10 @@ registerBlockType('vk-blocks/pr-blocks', {
                             label={__('Icon 1', 'vk-blocks')}
                         >
                             <TextControl
-                                label={__('Class name of the icon font you want to use:', 'vk-blocks')}
+                                label={__('Class name of the Font Awesome icon font you want to use:', 'vk-blocks')}
                                 value={icon0}
                                 onChange={(value) => setAttributes({icon0: value})}
-                                placeholder={__('fa-file', 'vk-blocks')}
+                                placeholder={'fas fa-file'}
                             />
                             <ColorPalette
                                 value={color0}
@@ -209,10 +209,10 @@ registerBlockType('vk-blocks/pr-blocks', {
                             label={__('Icon 2', 'vk-blocks')}
                         >
                             <TextControl
-                                label={__('Class name of the icon font you want to use:', 'vk-blocks')}
+                                label={__('Class name of the Font Awesome icon font you want to use:', 'vk-blocks')}
                                 value={icon1}
                                 onChange={(value) => setAttributes({icon1: value})}
-                                placeholder={__('fa-file', 'vk-blocks')}
+                                placeholder={'fas fa-file'}
                             />
                             <ColorPalette
                                 value={color1}
@@ -267,10 +267,10 @@ registerBlockType('vk-blocks/pr-blocks', {
                             label={__('Icon 3', 'vk-blocks')}
                         >
                             <TextControl
-                                label={__('Class name of the icon font you want to use:', 'vk-blocks')}
+                                label={__('Class name of the Font Awesome icon font you want to use:', 'vk-blocks')}
                                 value={icon2}
                                 onChange={(value) => setAttributes({icon2: value})}
-                                placeholder={__('fa-file', 'vk-blocks')}
+                                placeholder={'fas fa-file'}
                             />
                             <ColorPalette
                                 value={color2}
@@ -336,7 +336,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                                             backgroundColor: color0,
                                             border: `1px solid ${color0}`
                                         }}
-                                    ><i className={`fa fas fab far ${icon0} font_icon vk_prBlocks_item_icon`}
+                                    ><i className={`${icon0} vk_prBlocks_item_icon`}
                                         style={{color: '#fff'}}>
                                     </i>
                                     </div>
@@ -344,7 +344,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                                     return <div
                                         className="vk_prBlocks_item_icon_outer"
                                         style={{backgroundColor: 'transparent', border: '1px solid' + color0}}
-                                    ><i className={`fa fas fab far ${icon0} font_icon vk_prBlocks_item_icon`}
+                                    ><i className={`${icon0} vk_prBlocks_item_icon`}
                                         style={{color: color0}}>
                                     </i>
                                     </div>
@@ -393,7 +393,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                                             backgroundColor: color1,
                                             border: `1px solid ${color1}`
                                         }}
-                                    ><i className={`fa fas fab far ${icon1} font_icon vk_prBlocks_item_icon`}
+                                    ><i className={`${icon1} vk_prBlocks_item_icon`}
                                         style={{color: '#fff'}}>
                                     </i>
                                     </div>
@@ -401,7 +401,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                                     return <div
                                         className="vk_prBlocks_item_icon_outer"
                                         style={{backgroundColor: 'transparent', border: '1px solid' + color1}}
-                                    ><i className={`fa fas fab far ${icon1} font_icon vk_prBlocks_item_icon`}
+                                    ><i className={`${icon1} vk_prBlocks_item_icon`}
                                         style={{color: color1}}>
                                     </i>
                                     </div>
@@ -450,7 +450,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                                             backgroundColor: color2,
                                             border: `1px solid ${color2}`
                                         }}
-                                    ><i className={`fa fas fab far ${icon2} font_icon vk_prBlocks_item_icon`}
+                                    ><i className={`${icon2} vk_prBlocks_item_icon`}
                                         style={{color: '#fff'}}>
                                     </i>
                                     </div>
@@ -458,7 +458,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                                     return <div
                                         className="vk_prBlocks_item_icon_outer"
                                         style={{backgroundColor: 'transparent', border: '1px solid' + color2}}
-                                    ><i className={`fa fas fab far ${icon2} font_icon vk_prBlocks_item_icon`}
+                                    ><i className={`${icon2} vk_prBlocks_item_icon`}
                                         style={{color: color2}}>
                                     </i>
                                     </div>
@@ -555,7 +555,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                                             backgroundColor: color0,
                                             border: `1px solid ${color0}`
                                         }}
-                                    ><i className={`fa fas fab far ${icon0} font_icon vk_prBlocks_item_icon`}
+                                    ><i className={`${icon0} vk_prBlocks_item_icon`}
                                         style={{color: '#fff'}}>
                                     </i>
                                     </div>
@@ -563,7 +563,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                                     return <div
                                         className="vk_prBlocks_item_icon_outer"
                                         style={{backgroundColor: 'transparent', border: '1px solid' + color0}}
-                                    ><i className={`fa fas fab far ${icon0} font_icon vk_prBlocks_item_icon`}
+                                    ><i className={`${icon0} vk_prBlocks_item_icon`}
                                         style={{color: color0}}>
                                     </i>
                                     </div>
@@ -612,7 +612,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                                             backgroundColor: color1,
                                             border: `1px solid ${color1}`
                                         }}
-                                    ><i className={`fa fas fab far ${icon1} font_icon vk_prBlocks_item_icon`}
+                                    ><i className={`${icon1} vk_prBlocks_item_icon`}
                                         style={{color: '#fff'}}>
                                     </i>
                                     </div>
@@ -620,7 +620,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                                     return <div
                                         className="vk_prBlocks_item_icon_outer"
                                         style={{backgroundColor: 'transparent', border: '1px solid' + color1}}
-                                    ><i className={`fa fas fab far ${icon1} font_icon vk_prBlocks_item_icon`}
+                                    ><i className={`${icon1} vk_prBlocks_item_icon`}
                                         style={{color: color1}}>
                                     </i>
                                     </div>
@@ -669,7 +669,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                                             backgroundColor: color2,
                                             border: `1px solid ${color2}`
                                         }}
-                                    ><i className={`fa fas fab far ${icon2} font_icon vk_prBlocks_item_icon`}
+                                    ><i className={`${icon2} vk_prBlocks_item_icon`}
                                         style={{color: '#fff'}}>
                                     </i>
                                     </div>
@@ -677,7 +677,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                                     return <div
                                         className="vk_prBlocks_item_icon_outer"
                                         style={{backgroundColor: 'transparent', border: '1px solid' + color2}}
-                                    ><i className={`fa fas fab far ${icon2} font_icon vk_prBlocks_item_icon`}
+                                    ><i className={`${icon2} vk_prBlocks_item_icon`}
                                         style={{color: color2}}>
                                     </i>
                                     </div>
