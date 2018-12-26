@@ -7,8 +7,24 @@ const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blo
 const {RangeControl, RadioControl, PanelBody, Button, BaseControl, CheckboxControl, TextControl} = wp.components;
 const {Fragment} = wp.element;
 const {RichText, InspectorControls, MediaUpload, ColorPalette} = wp.editor;
-const BlockIcon = 'arrow-down';
-
+const BlockIcon = (
+	<svg xmlns="http://www.w3.org/2000/svg" width="576" height="512" viewBox="0 0 576 512">
+	<g>
+		<g>
+			<circle cx="288" cy="186.2" r="60"/>
+			<rect x="213.5" y="278.8" width="149" height="107"/>
+		</g>
+		<g>
+			<circle cx="74.5" cy="186.2" r="60"/>
+			<rect y="278.8" width="149" height="107"/>
+		</g>
+		<g>
+			<circle cx="501.5" cy="186.2" r="60"/>
+			<rect x="427" y="278.8" width="149" height="107"/>
+		</g>
+	</g>
+	</svg>
+);
 
 function set_attirbuite(number) {
 
