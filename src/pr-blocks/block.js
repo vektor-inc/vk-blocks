@@ -172,7 +172,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                         </BaseControl>
                         <BaseControl
                             label={__('PR Image 1', 'vk-blocks')}
-                            help={__('When you have an image. Image is displayed with priority', 'vk-blocks')}
+                            help={__('When you have an image. Image is displayed with priority.', 'vk-blocks')}
                         >
                             <MediaUpload
                                 onSelect={(value) => setAttributes({insertImage0: value.url})}
