@@ -308,13 +308,13 @@ registerBlockType('vk-blocks/pr', {
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
-                <article className="veu_prBlocks prBlocks row">
-                    <div className="prBlock col-sm-4">
+                <article className="vk_prBlocks row">
+                    <div className="vk_prBlocks_item col-sm-4">
                         {(() => {
 
                             if (insertImage0) {
 
-                                return <div className="prBlock_image"
+                                return <div className="vk_prBlocks_item_image"
                                             style={{
                                                 backgroundImage: 'url(' + insertImage0 + ')',
                                                 backgroundRepeat: 'no-repeat 50% center',
@@ -331,20 +331,20 @@ registerBlockType('vk-blocks/pr', {
 
                                 if (bgType0 === '0') {
                                     return <div
-                                        className="prBlock_icon_outer"
+                                        className="vk_prBlocks_item_icon_outer"
                                         style={{
                                             backgroundColor: color0,
                                             border: `1px solid ${color0}`
                                         }}
-                                    ><i className={`fa fas fab far ${icon0} font_icon prBlock_icon`}
+                                    ><i className={`fa fas fab far ${icon0} font_icon vk_prBlocks_item_icon`}
                                         style={{color: '#fff'}}>
                                     </i>
                                     </div>
                                 } else {
                                     return <div
-                                        className="prBlock_icon_outer"
+                                        className="vk_prBlocks_item_icon_outer"
                                         style={{backgroundColor: 'transparent', border: '1px solid' + color0}}
-                                    ><i className={`fa fas fab far ${icon0} font_icon prBlock_icon`}
+                                    ><i className={`fa fas fab far ${icon0} font_icon vk_prBlocks_item_icon`}
                                         style={{color: color0}}>
                                     </i>
                                     </div>
@@ -352,26 +352,26 @@ registerBlockType('vk-blocks/pr', {
                             }
                         })()}
                         <RichText
-                            className="prBlock_title"
+                            className="vk_prBlocks_item_title"
                             tagName="h1"
                             onChange={(value) => setAttributes({heading0: value})}
                             value={heading0}
                             placeholder={__('Input title', 'vk-blocks')}
                         />
                         <RichText
-                            className="prBlock_summary"
+                            className="vk_prBlocks_item_summary"
                             tagName="p"
                             onChange={(value) => setAttributes({content0: value})}
                             value={content0}
                             placeholder={__('Input content', 'vk-blocks')}
                         />
                     </div>
-                    <div className="prBlock col-sm-4">
+                    <div className="vk_prBlocks_item col-sm-4">
                         {(() => {
 
                             if (insertImage1) {
 
-                                return <div className="prBlock_image"
+                                return <div className="vk_prBlocks_item_image"
                                             style={{
                                                 backgroundImage: 'url(' + insertImage1 + ')',
                                                 backgroundRepeat: 'no-repeat 50% center',
@@ -388,20 +388,20 @@ registerBlockType('vk-blocks/pr', {
 
                                 if (bgType1 === '0') {
                                     return <div
-                                        className="prBlock_icon_outer"
+                                        className="vk_prBlocks_item_icon_outer"
                                         style={{
                                             backgroundColor: color1,
                                             border: `1px solid ${color1}`
                                         }}
-                                    ><i className={`fa fas fab far ${icon1} font_icon prBlock_icon`}
+                                    ><i className={`fa fas fab far ${icon1} font_icon vk_prBlocks_item_icon`}
                                         style={{color: '#fff'}}>
                                     </i>
                                     </div>
                                 } else {
                                     return <div
-                                        className="prBlock_icon_outer"
+                                        className="vk_prBlocks_item_icon_outer"
                                         style={{backgroundColor: 'transparent', border: '1px solid' + color1}}
-                                    ><i className={`fa fas fab far ${icon1} font_icon prBlock_icon`}
+                                    ><i className={`fa fas fab far ${icon1} font_icon vk_prBlocks_item_icon`}
                                         style={{color: color1}}>
                                     </i>
                                     </div>
@@ -409,26 +409,26 @@ registerBlockType('vk-blocks/pr', {
                             }
                         })()}
                         <RichText
-                            className="prBlock_title"
+                            className="vk_prBlocks_item_title"
                             tagName="h1"
                             onChange={(value) => setAttributes({heading1: value})}
                             value={heading1}
                             placeholder={__('Input title', 'vk-blocks')}
                         />
                         <RichText
-                            className="prBlock_summary"
+                            className="vk_prBlocks_item_summary"
                             tagName="p"
                             onChange={(value) => setAttributes({content1: value})}
                             value={content1}
                             placeholder={__('Input content', 'vk-blocks')}
                         />
                     </div>
-                    <div className="prBlock col-sm-4">
+                    <div className="vk_prBlocks_item col-sm-4">
                         {(() => {
 
                             if (insertImage2) {
 
-                                return <div className="prBlock_image"
+                                return <div className="vk_prBlocks_item_image"
                                             style={{
                                                 backgroundImage: 'url(' + insertImage2 + ')',
                                                 backgroundRepeat: 'no-repeat 50% center',
@@ -445,20 +445,20 @@ registerBlockType('vk-blocks/pr', {
 
                                 if (bgType2 === '0') {
                                     return <div
-                                        className="prBlock_icon_outer"
+                                        className="vk_prBlocks_item_icon_outer"
                                         style={{
                                             backgroundColor: color2,
                                             border: `1px solid ${color2}`
                                         }}
-                                    ><i className={`fa fas fab far ${icon2} font_icon prBlock_icon`}
+                                    ><i className={`fa fas fab far ${icon2} font_icon vk_prBlocks_item_icon`}
                                         style={{color: '#fff'}}>
                                     </i>
                                     </div>
                                 } else {
                                     return <div
-                                        className="prBlock_icon_outer"
+                                        className="vk_prBlocks_item_icon_outer"
                                         style={{backgroundColor: 'transparent', border: '1px solid' + color2}}
-                                    ><i className={`fa fas fab far ${icon2} font_icon prBlock_icon`}
+                                    ><i className={`fa fas fab far ${icon2} font_icon vk_prBlocks_item_icon`}
                                         style={{color: color2}}>
                                     </i>
                                     </div>
@@ -466,14 +466,14 @@ registerBlockType('vk-blocks/pr', {
                             }
                         })()}
                         <RichText
-                            className="prBlock_title"
+                            className="vk_prBlocks_item_title"
                             tagName="h1"
                             onChange={(value) => setAttributes({heading2: value})}
                             value={heading2}
                             placeholder={__('Input title', 'vk-blocks')}
                         />
                         <RichText
-                            className="prBlock_summary"
+                            className="vk_prBlocks_item_summary"
                             tagName="p"
                             onChange={(value) => setAttributes({content2: value})}
                             value={content2}
@@ -522,17 +522,18 @@ registerBlockType('vk-blocks/pr', {
         } = attributes;
 
         return (
-            <article className="veu_prBlocks prBlocks row">
-                <div className="prBlock col-sm-4">
+            <article className="vk_prBlocks row">
+                <div className="vk_prBlocks_item col-sm-4">
                     <a
                         href={url0}
                         target={urlOpenType0? '_blank':'_self'}
+                        className="vk_prBlocks_item_link"
                     >
                         {(() => {
 
                             if (insertImage0) {
 
-                                return <div className="prBlock_image"
+                                return <div className="vk_prBlocks_item_image"
                                             style={{
                                                 backgroundImage: 'url(' + insertImage0 + ')',
                                                 backgroundRepeat: 'no-repeat 50% center',
@@ -549,20 +550,20 @@ registerBlockType('vk-blocks/pr', {
 
                                 if (bgType0 === '0') {
                                     return <div
-                                        className="prBlock_icon_outer"
+                                        className="vk_prBlocks_item_icon_outer"
                                         style={{
                                             backgroundColor: color0,
                                             border: `1px solid ${color0}`
                                         }}
-                                    ><i className={`fa fas fab far ${icon0} font_icon prBlock_icon`}
+                                    ><i className={`fa fas fab far ${icon0} font_icon vk_prBlocks_item_icon`}
                                         style={{color: '#fff'}}>
                                     </i>
                                     </div>
                                 } else {
                                     return <div
-                                        className="prBlock_icon_outer"
+                                        className="vk_prBlocks_item_icon_outer"
                                         style={{backgroundColor: 'transparent', border: '1px solid' + color0}}
-                                    ><i className={`fa fas fab far ${icon0} font_icon prBlock_icon`}
+                                    ><i className={`fa fas fab far ${icon0} font_icon vk_prBlocks_item_icon`}
                                         style={{color: color0}}>
                                     </i>
                                     </div>
@@ -570,25 +571,26 @@ registerBlockType('vk-blocks/pr', {
                             }
                         })()}
                         <RichText.Content
-                            className="prBlock_title"
+                            className="vk_prBlocks_item_title"
                             tagName={'h1'}
                             value={heading0}/>
                         <RichText.Content
-                            className="prBlock_summary"
+                            className="vk_prBlocks_item_summary"
                             tagName={'p'}
                             value={content0}/>
                     </a>
                 </div>
-                <div className="prBlock col-sm-4">
+                <div className="vk_prBlocks_item col-sm-4">
                     <a
                         href={url1}
                         target={urlOpenType1? '_blank':'_self'}
+                        className="vk_prBlocks_item_link"
                     >
                         {(() => {
 
                             if (insertImage1) {
 
-                                return <div className="prBlock_image"
+                                return <div className="vk_prBlocks_item_image"
                                             style={{
                                                 backgroundImage: 'url(' + insertImage1 + ')',
                                                 backgroundRepeat: 'no-repeat 50% center',
@@ -605,20 +607,20 @@ registerBlockType('vk-blocks/pr', {
 
                                 if (bgType1 === '0') {
                                     return <div
-                                        className="prBlock_icon_outer"
+                                        className="vk_prBlocks_item_icon_outer"
                                         style={{
                                             backgroundColor: color1,
                                             border: `1px solid ${color1}`
                                         }}
-                                    ><i className={`fa fas fab far ${icon1} font_icon prBlock_icon`}
+                                    ><i className={`fa fas fab far ${icon1} font_icon vk_prBlocks_item_icon`}
                                         style={{color: '#fff'}}>
                                     </i>
                                     </div>
                                 } else {
                                     return <div
-                                        className="prBlock_icon_outer"
+                                        className="vk_prBlocks_item_icon_outer"
                                         style={{backgroundColor: 'transparent', border: '1px solid' + color1}}
-                                    ><i className={`fa fas fab far ${icon1} font_icon prBlock_icon`}
+                                    ><i className={`fa fas fab far ${icon1} font_icon vk_prBlocks_item_icon`}
                                         style={{color: color1}}>
                                     </i>
                                     </div>
@@ -626,25 +628,26 @@ registerBlockType('vk-blocks/pr', {
                             }
                         })()}
                         <RichText.Content
-                            className="prBlock_title"
+                            className="vk_prBlocks_item_title"
                             tagName={'h1'}
                             value={heading1}/>
                         <RichText.Content
-                            className="prBlock_summary"
+                            className="vk_prBlocks_item_summary"
                             tagName={'p'}
                             value={content1}/>
                     </a>
                 </div>
-                <div className="prBlock col-sm-4">
+                <div className="vk_prBlocks_item col-sm-4">
                     <a
                         href={url2}
                         target={urlOpenType2? '_blank':'_self'}
+                        className="vk_prBlocks_item_link"
                     >
                         {(() => {
 
                             if (insertImage2) {
 
-                                return <div className="prBlock_image"
+                                return <div className="vk_prBlocks_item_image"
                                             style={{
                                                 backgroundImage: 'url(' + insertImage2 + ')',
                                                 backgroundRepeat: 'no-repeat 50% center',
@@ -661,20 +664,20 @@ registerBlockType('vk-blocks/pr', {
 
                                 if (bgType2 === '0') {
                                     return <div
-                                        className="prBlock_icon_outer"
+                                        className="vk_prBlocks_item_icon_outer"
                                         style={{
                                             backgroundColor: color2,
                                             border: `1px solid ${color2}`
                                         }}
-                                    ><i className={`fa fas fab far ${icon2} font_icon prBlock_icon`}
+                                    ><i className={`fa fas fab far ${icon2} font_icon vk_prBlocks_item_icon`}
                                         style={{color: '#fff'}}>
                                     </i>
                                     </div>
                                 } else {
                                     return <div
-                                        className="prBlock_icon_outer"
+                                        className="vk_prBlocks_item_icon_outer"
                                         style={{backgroundColor: 'transparent', border: '1px solid' + color2}}
-                                    ><i className={`fa fas fab far ${icon2} font_icon prBlock_icon`}
+                                    ><i className={`fa fas fab far ${icon2} font_icon vk_prBlocks_item_icon`}
                                         style={{color: color2}}>
                                     </i>
                                     </div>
@@ -682,11 +685,11 @@ registerBlockType('vk-blocks/pr', {
                             }
                         })()}
                         <RichText.Content
-                            className="prBlock_title"
+                            className="vk_prBlocks_item_title"
                             tagName={'h1'}
                             value={heading2}/>
                         <RichText.Content
-                            className="prBlock_summary"
+                            className="vk_prBlocks_item_summary"
                             tagName={'p'}
                             value={content2}/>
                     </a>
