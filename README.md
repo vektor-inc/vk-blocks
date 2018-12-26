@@ -10,6 +10,12 @@ npm run build
 npm run watch
 ```
 
+## Translate Only
+
+```
+npm run build
+```
+
 ## CSS name rule
 
 ```

@@ -135,11 +135,11 @@ msgstr ""
 
 #: src/button/block.js:131
 msgid "Light"
-msgstr "明るい"
+msgstr ""
 
 #: src/button/block.js:132
 msgid "Dark"
-msgstr "暗い"
+msgstr ""
 
 #: src/button/block.js:137
 msgid "Custom Color:"
