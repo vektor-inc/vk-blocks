@@ -170,9 +170,9 @@ registerBlockType('vk-blocks/button', {
                 <div className={buttonColorCustom ? 'vk_button vk_button-colorCustom' : 'vk_button'}>
                     {(() => {
                         if (buttonColorCustom && buttonType === '0') {
-                            return <div className={'custom-btn'}>
+                            return <div className={`custom-btn btn-${buttonAlign}`}>
                                 <a
-                                    className={`btn btn-primary btn-${buttonSize} btn-${buttonAlign} active`}
+                                    className={`btn btn-primary btn-${buttonSize} active`}
                                     role={'button'}
                                     aria-pressed={true}
                                     style={{
@@ -185,13 +185,15 @@ registerBlockType('vk-blocks/button', {
                                         onChange={(value) => setAttributes({content: value})}
                                         value={content}
                                         placeholder={__('Input text', 'vk-blocks')}
+                                        formattingControls={['bold', 'italic', 'strikethrough']}
+                                        keepPlaceholderOnFocus
                                     />
                                 </a>
                             </div>;
                         } else if (buttonColorCustom && buttonType === '1') {
-                            return <div className={'custom-btn'}>
+                            return <div className={`custom-btn btn-${buttonAlign}`}>
                                 <a
-                                    className={`btn btn-${buttonSize} btn-${buttonAlign} active`}
+                                    className={`btn btn-${buttonSize} active`}
                                     role={'button'}
                                     aria-pressed={true}
                                     style={{
@@ -206,13 +208,15 @@ registerBlockType('vk-blocks/button', {
                                         onChange={(value) => setAttributes({content: value})}
                                         value={content}
                                         placeholder={__('Input text', 'vk-blocks')}
+                                        formattingControls={['bold', 'italic', 'strikethrough']}
+                                        keepPlaceholderOnFocus
                                     />
                                 </a>
                             </div>;
                         } else if (!buttonColorCustom && buttonType === '0') {
-                            return <div>
+                            return <div className={`btn-${buttonAlign}`}>
                                 <a
-                                    className={`btn btn-${buttonSize} btn-${buttonAlign} btn-${buttonColor} active`}
+                                    className={`btn btn-${buttonSize} btn-${buttonColor} active`}
                                     role={'button'}
                                     aria-pressed={true}
                                 >
@@ -222,13 +226,15 @@ registerBlockType('vk-blocks/button', {
                                         onChange={(value) => setAttributes({content: value})}
                                         value={content}
                                         placeholder={__('Input text', 'vk-blocks')}
+                                        formattingControls={['bold', 'italic', 'strikethrough']}
+                                        keepPlaceholderOnFocus
                                     />
                                 </a>
                             </div>;
                         } else if (!buttonColorCustom && buttonType === '1') {
-                            return <div>
+                            return <div className={`btn-${buttonAlign}`}>
                                 <a
-                                    className={`btn btn-${buttonSize} btn-${buttonAlign} btn-outline-${buttonColor} active`}
+                                    className={`btn btn-${buttonSize} btn-outline-${buttonColor} active`}
                                     style={{backgroundColor: +'transparent'}}
                                     role={'button'}
                                     aria-pressed={true}
@@ -239,6 +245,8 @@ registerBlockType('vk-blocks/button', {
                                         onChange={(value) => setAttributes({content: value})}
                                         value={content}
                                         placeholder={__('Input text', 'vk-blocks')}
+                                        formattingControls={['bold', 'italic', 'strikethrough']}
+                                        keepPlaceholderOnFocus
                                     />
                                 </a>
                             </div>;
@@ -285,9 +293,9 @@ registerBlockType('vk-blocks/button', {
             <div className={buttonColorCustom ? 'vk_button vk_button-colorCustom' : 'vk_button'}>
                 {(() => {
                     if (buttonColorCustom && buttonType === '0') {
-                        return <a
+                        return <div className={`custom-btn btn-${buttonAlign}`}><a
                             href={buttonUrl}
-                            className={`btn btn-primary custom-btn btn-${buttonSize} btn-${buttonAlign} active`}
+                            className={`btn btn-primary custom-btn btn-${buttonSize} active`}
                             style={{
                                 backgroundColor: buttonColorCustom,
                                 border: `1px solid ${buttonColorCustom}`
@@ -300,11 +308,11 @@ registerBlockType('vk-blocks/button', {
                                 className={'vk_button_content'}
                                 value={content}
                             />
-                        </a>
+                        </a></div>;
                     } else if (buttonColorCustom && buttonType === '1') {
-                        return <a
+                        return <div className={`custom-btn btn-${buttonAlign}`}><a
                             href={buttonUrl}
-                            className={`btn custom-btn btn-${buttonSize} btn-${buttonAlign} active`}
+                            className={`btn custom-btn btn-${buttonSize} active`}
                             style={{
                                 backgroundColor: 'transparent',
                                 border: '1px solid' + buttonColorCustom,
@@ -318,11 +326,11 @@ registerBlockType('vk-blocks/button', {
                                 className={'vk_button_content'}
                                 value={content}
                             />
-                        </a>
+                        </a></div>;
                     } else if (!buttonColorCustom && buttonType === '0') {
-                        return <a
+                        return <div className={`btn-${buttonAlign}`}><a
                             href={buttonUrl}
-                            className={`btn btn-${buttonSize} btn-${buttonAlign} btn-${buttonColor} active`}
+                            className={`btn btn-${buttonSize} btn-${buttonColor} active`}
                             role={'button'}
                             aria-pressed={true}
                             target={'_blank'}
@@ -332,11 +340,11 @@ registerBlockType('vk-blocks/button', {
                                 className={'vk_button_content'}
                                 value={content}
                             />
-                        </a>;
+                        </a></div>;
                     } else if (!buttonColorCustom && buttonType === '1') {
-                        return <a
+                        return <div className={`btn-${buttonAlign}`}><a
                             href={buttonUrl}
-                            className={`btn btn-${buttonSize} btn-${buttonAlign} btn-outline-${buttonColor} active`}
+                            className={`btn btn-${buttonSize} btn-outline-${buttonColor} active`}
                             style={{backgroundColor: +'transparent'}}
                             role={'button'}
                             aria-pressed={true}
@@ -346,7 +354,7 @@ registerBlockType('vk-blocks/button', {
                                 className={'vk_button_content'}
                                 value={content}
                             />
-                        </a>
+                        </a></div>
                     }
                 })()}
             </div>
