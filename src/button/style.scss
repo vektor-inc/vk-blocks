@@ -1,7 +1,8 @@
 .vk_button{
 	margin: 5px 0;
-	.btn{
-		display: inline-block!important;
+	.btn-parent{
+		display: inline-block;
+		width: 100%;
 	}
 	.btn-left{
 		text-align: left;
@@ -12,10 +13,14 @@
 	.btn-right{
 		text-align: right;
 	}
+	.btn-block{
+		display: block;
+	}
 	p{
 		margin: 0;
 	}
 	a{
+		display: inherit;
 		text-decoration: none!important;
 	}
 	.btn-primary:focus{

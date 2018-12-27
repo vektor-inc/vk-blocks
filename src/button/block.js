@@ -170,7 +170,7 @@ registerBlockType('vk-blocks/button', {
                 <div className={buttonColorCustom ? 'vk_button vk_button-colorCustom' : 'vk_button'}>
                     {(() => {
                         if (buttonColorCustom && buttonType === '0') {
-                            return <div className={`custom-btn btn-${buttonAlign}`}>
+                            return <div className={`btn-parent custom-btn btn-${buttonAlign}`}>
                                 <a
                                     className={`btn btn-primary btn-${buttonSize} active`}
                                     role={'button'}
@@ -191,7 +191,7 @@ registerBlockType('vk-blocks/button', {
                                 </a>
                             </div>;
                         } else if (buttonColorCustom && buttonType === '1') {
-                            return <div className={`custom-btn btn-${buttonAlign}`}>
+                            return <div className={`btn-parent custom-btn btn-${buttonAlign}`}>
                                 <a
                                     className={`btn btn-${buttonSize} active`}
                                     role={'button'}
@@ -214,7 +214,7 @@ registerBlockType('vk-blocks/button', {
                                 </a>
                             </div>;
                         } else if (!buttonColorCustom && buttonType === '0') {
-                            return <div className={`btn-${buttonAlign}`}>
+                            return <div className={`btn-parent btn-${buttonAlign}`}>
                                 <a
                                     className={`btn btn-${buttonSize} btn-${buttonColor} active`}
                                     role={'button'}
@@ -232,7 +232,7 @@ registerBlockType('vk-blocks/button', {
                                 </a>
                             </div>;
                         } else if (!buttonColorCustom && buttonType === '1') {
-                            return <div className={`btn-${buttonAlign}`}>
+                            return <div className={`btn-parent btn-${buttonAlign}`}>
                                 <a
                                     className={`btn btn-${buttonSize} btn-outline-${buttonColor} active`}
                                     style={{backgroundColor: +'transparent'}}
@@ -293,7 +293,7 @@ registerBlockType('vk-blocks/button', {
             <div className={buttonColorCustom ? 'vk_button vk_button-colorCustom' : 'vk_button'}>
                 {(() => {
                     if (buttonColorCustom && buttonType === '0') {
-                        return <div className={`custom-btn btn-${buttonAlign}`}><a
+                        return <div className={`btn-parent custom-btn btn-${buttonAlign}`}><a
                             href={buttonUrl}
                             className={`btn btn-primary custom-btn btn-${buttonSize} active`}
                             style={{
@@ -310,7 +310,7 @@ registerBlockType('vk-blocks/button', {
                             />
                         </a></div>;
                     } else if (buttonColorCustom && buttonType === '1') {
-                        return <div className={`custom-btn btn-${buttonAlign}`}><a
+                        return <div className={`btn-parent custom-btn btn-${buttonAlign}`}><a
                             href={buttonUrl}
                             className={`btn custom-btn btn-${buttonSize} active`}
                             style={{
@@ -328,7 +328,7 @@ registerBlockType('vk-blocks/button', {
                             />
                         </a></div>;
                     } else if (!buttonColorCustom && buttonType === '0') {
-                        return <div className={`btn-${buttonAlign}`}><a
+                        return <div className={`btn-parent btn-${buttonAlign}`}><a
                             href={buttonUrl}
                             className={`btn btn-${buttonSize} btn-${buttonColor} active`}
                             role={'button'}
@@ -342,7 +342,7 @@ registerBlockType('vk-blocks/button', {
                             />
                         </a></div>;
                     } else if (!buttonColorCustom && buttonType === '1') {
-                        return <div className={`btn-${buttonAlign}`}><a
+                        return <div className={`btn-parent btn-${buttonAlign}`}><a
                             href={buttonUrl}
                             className={`btn btn-${buttonSize} btn-outline-${buttonColor} active`}
                             style={{backgroundColor: +'transparent'}}
