@@ -53,11 +53,11 @@ registerBlockType('vk-blocks/pr-content', {
         },
         buttonType: {
             type: 'string',
-            default: null,
+            default: '0',
         },
         buttonColor: {
             type: 'string',
-            default: null,
+            default: 'blue',
         },
         buttonText: {
             type: 'string',
@@ -252,54 +252,70 @@ registerBlockType('vk-blocks/pr-content', {
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
-                <div>
-                    <div>
-                        {title}
-                        {titleColor}
-                        {content}
-                        {contentColor}
-                        {url}
-                        {buttonType}
-                        {buttonColor}
-                        {buttonText}
-                        {urlType}
-                        {Image}
-                        {ImageBorderColor}
-                        {layout}
-                        {bgColor}
-                        {bgImage}
-                        {overlayColor}
-                        {overlayOpacity}
-                        {marginTop}
-                        {marginBotton}
-                    </div>
+                <div className="widget widget_vk_widget_pr_content">
+                    <div className="pr-content vk-prlx">
+                        <div className="container">
 
-                    <RichText
-                        tagName="h1"
-                        onChange={(value) => setAttributes({title: value})}
-                        value={title}
-                        placeholder={__('Input text', 'vk-blocks')}
-                    />
-                    <RichText
-                        tagName="p"
-                        onChange={(value) => setAttributes({content: value})}
-                        value={content}
-                        placeholder={__('Input text', 'vk-blocks')}
-                    />
-                    <MediaUpload
-                        onSelect={ (value) => setAttributes( { Image: value.sizes.full.url } ) }
-                        type="image"
-                        className={ 'vk_balloon_icon_image' }
-                        value={ Image }
-                        render={ ( { open } ) => (
-                            <Button
-                                onClick={ open }
-                                className={ Image ? 'image-button' : 'button button-large' }
-                            >
-                                { ! Image ? __('Select image', 'vk-blocks') : <img className={ 'vk_balloon_icon_image' } src={ Image } alt={__('Upload image', 'vk-blocks') } /> }
-                            </Button>
-                        )}
-                    />
+
+                            <div className="row left">
+                                <div className="col-sm-6 pr-content-col-img">
+                                    <MediaUpload
+                                        onSelect={(value) => setAttributes({Image: value.sizes.full.url})}
+                                        type=" image"
+                                        className={'vk_balloon_icon_image'}
+                                        value={Image}
+                                        render={({open}) => (
+                                            <Button
+                                                onClick={open}
+                                                className={Image ? 'image-button' : 'button button-large'}
+                                            >
+                                                {!Image ? __('Select image', 'vk-blocks') :
+                                                    <img className={'vk_balloon_icon_image'} src={Image}
+                                                         alt={__('Upload image', 'vk-blocks')}/>}
+                                            </Button>
+                                        )}
+                                    />
+                                </div>
+                                <div className="col-sm-6 pr-content-col-text">
+                                    <RichText
+                                        tagName="h3"
+                                        className={'pr-content-title'}
+                                        onChange={(value) => setAttributes({title: value})}
+                                        value={title}
+                                        placeholder={__('Input text', 'vk-blocks')}
+                                        style={{color: titleColor}}
+                                    />
+                                    <RichText
+                                        tagName="p"
+                                        onChange={(value) => setAttributes({content: value})}
+                                        value={content}
+                                        placeholder={__('Input text', 'vk-blocks')}
+                                        style={{color: contentColor}}
+                                    />
+
+                                    {
+                                        buttonType == '0' ?
+
+                                            <div className="pr-content-btn">
+                                                <a href={url}
+                                                   className="btn btn-block btn-lg btn-primary"
+                                                   target={urlType}>{buttonText}
+                                                    style={{backgroundColor: buttonColor}}
+                                                </a>
+                                            </div>
+                                            :
+                                            <div className="pr-content-btn">
+                                                <a href={url}
+                                                   className="btn btn-block btn-lg btn-primary"
+                                                   target={urlType}>{buttonText}
+                                                    style={{backgroundColor: '#fff', border:`1px solid ${buttonColor}`}}
+                                                </a>
+                                            </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </Fragment>
         );
@@ -310,7 +326,7 @@ registerBlockType('vk-blocks/pr-content', {
      * The save function defin className }> which the different attributes should be combined
      * into the final markup, which is then serialized by Gutenberg into post_content.
      *
-     * The "save" property must be specified and must be a valid function.
+     * The " save" property must be specified and must be a valid function.
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
@@ -346,7 +362,7 @@ registerBlockType('vk-blocks/pr-content', {
                                 {/*alt=''*/}
                             {/*/>*/}
                             {/*<RichText.Content*/}
-                                {/*tagName="figcaption"*/}
+                {/*tagName=" figcaption"*/}
                                 {/*className={'vk_pr_content__icon_name'}*/}
                                 {/*value={pr_content_Name}*/}
                             {/*/>*/}
@@ -355,7 +371,7 @@ registerBlockType('vk-blocks/pr-content', {
                 {/*<RichText.Content*/}
                     {/*className={'vk_pr_content__content'}*/}
                     {/*style={{background: pr_content_BgColor, border: pr_content_BgColor}}*/}
-                    {/*tagName="p"*/}
+                {/*tagName=" p"*/}
                     {/*value={content}*/}
                 {/*/>*/}
             </div>

@@ -9,13 +9,13 @@ msgstr ""
 
 #: src/balloon/block.js:122
 #: src/flow/block.js:111
-#: src/pr-content/block.js:299
+#: src/pr-content/block.js:272
 msgid "Select image"
 msgstr ""
 
 #: src/balloon/block.js:122
 #: src/flow/block.js:112
-#: src/pr-content/block.js:299
+#: src/pr-content/block.js:274
 msgid "Upload image"
 msgstr ""
 
@@ -25,7 +25,7 @@ msgstr ""
 
 #: src/balloon/block.js:140
 #: src/button/block.js:220
-#: src/pr-content/block.js:287
+#: src/pr-content/block.js:292
 msgid "Input text"
 msgstr ""
 
