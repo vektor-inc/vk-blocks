@@ -22,6 +22,18 @@
 	a{
 		display: inherit;
 		text-decoration: none!important;
+
+		i.before {
+			margin-right: 1rem;
+		}
+
+		i.after {
+			margin-left: 1rem;
+		}
+
+		* {
+			display: inline;
+		}
 	}
 	.btn-primary:focus{
 		background:#007bff

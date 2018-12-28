@@ -10,10 +10,14 @@ export class Link extends React.Component {
         let buttonAlign = this.props.lbAlign;
         let buttonSize = this.props.lbSize;
         let buttonUrl = this.props.lbUrl;
+        let fontAwesomeIcon = this.props.lbFontAwesomeIcon;
+        let fontAwesomeOrder = this.props.lbFontAwesomeOrder;
         let richText = this.props.lbRichtext;
         let containerClass = '';
         let aClass = '';
         let aStyle = {};
+        let iconBefore = '';
+        let iconAfter = '';
 
         if (buttonColorCustom) {
 
@@ -52,6 +56,15 @@ export class Link extends React.Component {
 
         }
 
+
+        if (fontAwesomeIcon) {
+            if (fontAwesomeOrder == '0') {
+                iconBefore = <i className={`${fontAwesomeIcon} before`}></i>;
+            } else {
+                iconAfter = <i className={`${fontAwesomeIcon} after`}></i>;
+            }
+        }
+
         return (
             <div className={containerClass}>
                 <a
@@ -62,7 +75,10 @@ export class Link extends React.Component {
                     style={aStyle}
                     target={'_blank'}
                 >
+                    {iconBefore}
                     {richText}
+                    {iconAfter}
+
                 </a>
             </div>
         );

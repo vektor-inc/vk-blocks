@@ -179,13 +179,13 @@ registerBlockType('vk-blocks/button', {
                         </BaseControl>
                         <BaseControl
                             label={__('FontAwesome:', 'vk-blocks')}
-                            help={__('Ple', 'vk-blocks')}
+                            // help={__('', 'vk-blocks')}
                         >
                             <TextControl
                                 label={__('Enter fontAwesome Class', 'vk-blocks')}
                                 value={fontAwesomeIcon}
                                 onChange={(value) => setAttributes({fontAwesomeIcon: value})}
-                                placeholder={__('fas fa-address-book', 'vk-blocks')}
+                                placeholder={__('fas fa-user', 'vk-blocks')}
                             />
                             <RadioControl
                                 label={__('Icon Position:', 'vk-blocks')}
@@ -203,7 +203,10 @@ registerBlockType('vk-blocks/button', {
 
                     <Link lbColorCustom={buttonColorCustom} lbColor={buttonColor} lbType={buttonType}
                           lbAlign={buttonAlign}
-                          lbSize={buttonSize} lbRichtext={
+                          lbSize={buttonSize}
+                          lbFontAwesomeIcon={fontAwesomeIcon}
+                          lbFontAwesomeOrder={fontAwesomeOrder}
+                          lbRichtext={
                         <RichText
                             tagName="p"
                             className={'vk_button_content'}
@@ -260,6 +263,8 @@ registerBlockType('vk-blocks/button', {
                       lbAlign={buttonAlign}
                       lbSize={buttonSize}
                       lbUrl={buttonUrl}
+                      lbFontAwesomeIcon={fontAwesomeIcon}
+                      lbFontAwesomeOrder={fontAwesomeOrder}
                       lbRichtext={
                     <RichText.Content
                         tagName="p"

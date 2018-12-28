@@ -307,22 +307,27 @@
 
 .vk_button{
 	margin: 5px 0;
+	.btn-parent{
+		display: inline-block;
+		width: 100%;
+	}
 	.btn-left{
-		display: block;
-		margin-right: auto;
+		text-align: left;
 	}
 	.btn-center{
-		display: block;
-		margin: auto;
+		text-align: center;
 	}
 	.btn-right{
+		text-align: right;
+	}
+	.btn-block{
 		display: block;
-		margin-left: auto;
 	}
 	p{
 		margin: 0;
 	}
 	a{
+		display: inherit;
 		text-decoration: none!important;
 	}
 	.btn-primary:focus{
