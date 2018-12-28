@@ -196,14 +196,14 @@ registerBlockType('vk-blocks/button', {
                                 help={__('Enter Font Awesome Class.This icon will appear before text.', 'vk-blocks')}
                                 value={fontAwesomeIconBefore}
                                 onChange={(value) => setAttributes({fontAwesomeIconBefore: value})}
-                                placeholder={__('fas fa-user', 'vk-blocks')}
+                                placeholder={'fas fa-user'}
                             />
                             <TextControl
                                 label={__('After text', 'vk-blocks')}
                                 help={__('Enter Font Awesome Class.This icon will appear after text.', 'vk-blocks')}
                                 value={fontAwesomeIconAfter}
                                 onChange={(value) => setAttributes({fontAwesomeIconAfter: value})}
-                                placeholder={__('fas fa-book', 'vk-blocks')}
+                                placeholder={'fas fa-book'}
                             />
                         </BaseControl>
                     </PanelBody>

@@ -171,20 +171,12 @@ msgstr ""
 msgid "Enter Font Awesome Class.This icon will appear before text."
 msgstr ""
 
-#: src/button/block.js:199
-msgid "fas fa-user"
-msgstr ""
-
 #: src/button/block.js:202
 msgid "After text"
 msgstr ""
 
 #: src/button/block.js:203
 msgid "Enter Font Awesome Class.This icon will appear after text."
-msgstr ""
-
-#: src/button/block.js:206
-msgid "fas fa-book"
 msgstr ""
 
 #: src/button/block.js:239
