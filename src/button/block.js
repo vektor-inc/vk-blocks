@@ -158,13 +158,13 @@ registerBlockType('vk-blocks/button', {
                             selected={buttonColor}
                             options={[
                                 {label: __('Primary', 'vk-blocks'), value: 'primary'},
-                                {label: __('Secondary', 'vk-blocks'), value: 'secondary'},
+                                // {label: __('Secondary', 'vk-blocks'), value: 'secondary'},
                                 {label: __('Success', 'vk-blocks'), value: 'success'},
                                 {label: __('Info', 'vk-blocks'), value: 'info'},
                                 {label: __('Warning', 'vk-blocks'), value: 'warning'},
                                 {label: __('Danger', 'vk-blocks'), value: 'danger'},
-                                {label: __('Light', 'vk-blocks'), value: 'light'},
-                                {label: __('Dark', 'vk-blocks'), value: 'dark'},
+                                // {label: __('Light', 'vk-blocks'), value: 'light'},
+                                // {label: __('Dark', 'vk-blocks'), value: 'dark'},
                             ]}
                             onChange={(value) => setAttributes({buttonColor: value})}
                         />
