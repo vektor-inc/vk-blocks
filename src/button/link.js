@@ -10,8 +10,8 @@ export class Link extends React.Component {
         let buttonAlign = this.props.lbAlign;
         let buttonSize = this.props.lbSize;
         let buttonUrl = this.props.lbUrl;
-        let fontAwesomeIcon = this.props.lbFontAwesomeIcon;
-        let fontAwesomeOrder = this.props.lbFontAwesomeOrder;
+        let fontAwesomeIconBefore = this.props.lbFontAwesomeIconBefore;
+        let fontAwesomeIconAfter = this.props.lbFontAwesomeIconAfter;
         let richText = this.props.lbRichtext;
         let containerClass = '';
         let aClass = '';
@@ -56,13 +56,11 @@ export class Link extends React.Component {
 
         }
 
-
-        if (fontAwesomeIcon) {
-            if (fontAwesomeOrder == '0') {
-                iconBefore = <i className={`${fontAwesomeIcon} before`}></i>;
-            } else {
-                iconAfter = <i className={`${fontAwesomeIcon} after`}></i>;
-            }
+        if (fontAwesomeIconBefore) {
+            iconBefore = <i className={`${fontAwesomeIconBefore} before`}></i>;
+        }
+        if (fontAwesomeIconAfter) {
+            iconAfter = <i className={`${fontAwesomeIconAfter} after`}></i>;
         }
 
         return (

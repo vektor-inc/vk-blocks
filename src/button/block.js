@@ -87,13 +87,13 @@ registerBlockType('vk-blocks/button', {
             type: 'string',
             default: 'left',
         },
-        fontAwesomeIcon: {
+        fontAwesomeIconBefore: {
             type: 'string',
             default: null,
         },
-        fontAwesomeOrder: {
+        fontAwesomeIconAfter: {
             type: 'string',
-            default: '0',
+            default: null,
         }
     },
 
@@ -114,8 +114,8 @@ registerBlockType('vk-blocks/button', {
             buttonColor,
             buttonColorCustom,
             buttonAlign,
-            fontAwesomeIcon,
-            fontAwesomeOrder,
+            fontAwesomeIconBefore,
+            fontAwesomeIconAfter,
         } = attributes;
 
         return (
@@ -182,19 +182,16 @@ registerBlockType('vk-blocks/button', {
                             // help={__('', 'vk-blocks')}
                         >
                             <TextControl
-                                label={__('Enter fontAwesome Class', 'vk-blocks')}
-                                value={fontAwesomeIcon}
-                                onChange={(value) => setAttributes({fontAwesomeIcon: value})}
+                                label={__('Enter fontAwesome Class. This icon will appear before text.', 'vk-blocks')}
+                                value={fontAwesomeIconBefore}
+                                onChange={(value) => setAttributes({fontAwesomeIconBefore: value})}
                                 placeholder={__('fas fa-user', 'vk-blocks')}
                             />
-                            <RadioControl
-                                label={__('Icon Position:', 'vk-blocks')}
-                                selected={fontAwesomeOrder}
-                                options={[
-                                    {label: __('Before Text', 'vk-blocks'), value: '0'},
-                                    {label: __('After Text', 'vk-blocks'), value: '1'},
-                                ]}
-                                onChange={(value) => setAttributes({fontAwesomeOrder: value})}
+                            <TextControl
+                                label={__('Enter fontAwesome Class This icon will appear after text.', 'vk-blocks')}
+                                value={fontAwesomeIconAfter}
+                                onChange={(value) => setAttributes({fontAwesomeIconAfter: value})}
+                                placeholder={__('fas fa-book', 'vk-blocks')}
                             />
                         </BaseControl>
                     </PanelBody>
@@ -204,8 +201,8 @@ registerBlockType('vk-blocks/button', {
                     <Link lbColorCustom={buttonColorCustom} lbColor={buttonColor} lbType={buttonType}
                           lbAlign={buttonAlign}
                           lbSize={buttonSize}
-                          lbFontAwesomeIcon={fontAwesomeIcon}
-                          lbFontAwesomeOrder={fontAwesomeOrder}
+                          lbFontAwesomeIconBefore={fontAwesomeIconBefore}
+                          lbFontAwesomeIconAfter={fontAwesomeIconAfter}
                           lbRichtext={
                         <RichText
                             tagName="p"
@@ -252,8 +249,8 @@ registerBlockType('vk-blocks/button', {
             buttonColor,
             buttonColorCustom,
             buttonAlign,
-            fontAwesomeIcon,
-            fontAwesomeOrder
+            fontAwesomeIconBefore,
+            fontAwesomeIconAfter,
         } = attributes;
 
         return (
@@ -263,8 +260,8 @@ registerBlockType('vk-blocks/button', {
                       lbAlign={buttonAlign}
                       lbSize={buttonSize}
                       lbUrl={buttonUrl}
-                      lbFontAwesomeIcon={fontAwesomeIcon}
-                      lbFontAwesomeOrder={fontAwesomeOrder}
+                      lbFontAwesomeIconBefore={fontAwesomeIconBefore}
+                      lbFontAwesomeIconAfter={fontAwesomeIconAfter}
                       lbRichtext={
                     <RichText.Content
                         tagName="p"
