@@ -24,7 +24,7 @@ msgid "Icon Name"
 msgstr ""
 
 #: src/balloon/block.js:140
-#: src/button/block.js:232
+#: src/button/block.js:228
 msgid "Input text"
 msgstr ""
 
@@ -45,12 +45,12 @@ msgid "Please specify the layout of the balloon."
 msgstr ""
 
 #: src/balloon/block.js:88
-#: src/button/block.js:127
+#: src/button/block.js:153
 msgid "Left"
 msgstr ""
 
 #: src/balloon/block.js:89
-#: src/button/block.js:129
+#: src/button/block.js:155
 msgid "Right"
 msgstr ""
 
@@ -70,107 +70,135 @@ msgstr ""
 msgid "Thinking"
 msgstr ""
 
-#: src/button/block.js:112
+#: src/button/block.js:129
 msgid "Button setting"
 msgstr ""
 
-#: src/button/block.js:114
-msgid "Button Size:"
+#: src/button/block.js:131
+msgid "Link Target:"
 msgstr ""
 
-#: src/button/block.js:117
-msgid "Large"
-msgstr ""
-
-#: src/button/block.js:118
-msgid "normal"
-msgstr ""
-
-#: src/button/block.js:119
-msgid "Small"
-msgstr ""
-
-#: src/button/block.js:124
-msgid "Button Position:"
-msgstr ""
-
-#: src/button/block.js:128
-msgid "Center"
-msgstr ""
-
-#: src/button/block.js:130
-msgid "Block"
+#: src/button/block.js:134
+msgid "Self"
 msgstr ""
 
 #: src/button/block.js:135
+msgid "Blank"
+msgstr ""
+
+#: src/button/block.js:140
+msgid "Button Size:"
+msgstr ""
+
+#: src/button/block.js:143
+msgid "Large"
+msgstr ""
+
+#: src/button/block.js:144
+msgid "normal"
+msgstr ""
+
+#: src/button/block.js:145
+msgid "Small"
+msgstr ""
+
+#: src/button/block.js:150
+msgid "Button Position:"
+msgstr ""
+
+#: src/button/block.js:154
+msgid "Center"
+msgstr ""
+
+#: src/button/block.js:156
+msgid "Block"
+msgstr ""
+
+#: src/button/block.js:161
 msgid "Button Style:"
 msgstr ""
 
-#: src/button/block.js:138
+#: src/button/block.js:164
 #: src/pr-blocks/block.js:283
 msgid "Solid color"
 msgstr ""
 
-#: src/button/block.js:139
+#: src/button/block.js:165
 #: src/pr-blocks/block.js:284
 msgid "No background"
 msgstr ""
 
-#: src/button/block.js:141
+#: src/button/block.js:167
 msgid "If you select \"No background\", that you need to select a Custom Color."
 msgstr ""
 
-#: src/button/block.js:145
+#: src/button/block.js:171
 msgid "Default Color:"
 msgstr ""
 
-#: src/button/block.js:148
+#: src/button/block.js:174
 msgid "Primary"
 msgstr ""
 
-#: src/button/block.js:149
-msgid "Secondary"
-msgstr ""
-
-#: src/button/block.js:150
+#: src/button/block.js:176
 msgid "Success"
 msgstr ""
 
-#: src/button/block.js:151
+#: src/button/block.js:177
 msgid "Info"
 msgstr ""
 
-#: src/button/block.js:152
+#: src/button/block.js:178
 msgid "Warning"
 msgstr ""
 
-#: src/button/block.js:153
+#: src/button/block.js:179
 msgid "Danger"
 msgstr ""
 
-#: src/button/block.js:154
-msgid "Light"
+#: src/button/block.js:186
+msgid "Custom Color"
 msgstr ""
 
-#: src/button/block.js:155
-msgid "Dark"
-msgstr ""
-
-#: src/button/block.js:160
-msgid "Custom Color:"
-msgstr ""
-
-#: src/button/block.js:161
+#: src/button/block.js:187
 msgid ""
 "This custom color overrides the default color. If you want to use the "
 "default color, click the clear button."
 msgstr ""
 
-#: src/button/block.js:248
+#: src/button/block.js:195
+msgid "Font Awesome:"
+msgstr ""
+
+#: src/button/block.js:199
+msgid "Before text"
+msgstr ""
+
+#: src/button/block.js:200
+msgid "Enter Font Awesome Class.This icon will appear before text."
+msgstr ""
+
+#: src/button/block.js:203
+msgid "fas fa-user"
+msgstr ""
+
+#: src/button/block.js:206
+msgid "After text"
+msgstr ""
+
+#: src/button/block.js:207
+msgid "Enter Font Awesome Class.This icon will appear after text."
+msgstr ""
+
+#: src/button/block.js:210
+msgid "fas fa-book"
+msgstr ""
+
+#: src/button/block.js:243
 msgid "Apply"
 msgstr ""
 
-#: src/button/block.js:56
+#: src/button/block.js:58
 msgid "Button"
 msgstr ""
 

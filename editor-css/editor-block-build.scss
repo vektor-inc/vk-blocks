@@ -1,3 +1,13 @@
+.components-base-control__label {
+	 font-weight:bold;
+}
+.components-base-control .components-base-control__help {
+	margin-top:0;
+}
+.components-radio-control__option {
+	label { margin-bottom:0; }
+}
+
 .edit-post-visual-editor{
 
 .alert{
@@ -305,25 +315,59 @@
 	}
 } // @media only screen and (max-width: 480px) {
 
+/*      .qaItem
+/*-------------------------------------------*/
+.vk_faq { display:block; overflow:hidden;border-bottom:1px dotted #ccc; padding:0px 0px 25px; margin:25px 0px; width:100%; position: relative; }
+.vk_faq_title,
+.vk_faq_content {
+	border:none;padding-left: 35px;
+	&:before {
+		position: absolute;left:0;font-size:24px;line-height: 105%;
+	}
+}
+.vk_faq_title { margin-bottom:15px;font-size:18px;font-weight:700;
+  &:before { font-family:"areal";content:"Q ";color:#e50000; }
+}
+.vk_faq_content { margin:0px;
+  &:before { content:"A ";color:#337ab7;font-family: "" }
+}
+
 .vk_button{
 	margin: 5px 0;
+	.btn-parent{
+		display: inline-block;
+		width: 100%;
+	}
 	.btn-left{
-		display: block;
-		margin-right: auto;
+		text-align: left;
 	}
 	.btn-center{
-		display: block;
-		margin: auto;
+		text-align: center;
 	}
 	.btn-right{
+		text-align: right;
+	}
+	.btn-block{
 		display: block;
-		margin-left: auto;
 	}
 	p{
 		margin: 0;
 	}
 	a{
+		display: inherit;
 		text-decoration: none!important;
+
+		i.before {
+			margin-right: 0.7rem;
+		}
+
+		i.after {
+			margin-left: 0.7rem;
+		}
+
+		* {
+			display: inline;
+		}
 	}
 	.btn-primary:focus{
 		background:#007bff
@@ -360,23 +404,6 @@
 			opacity: 0.8 !important;
 		}
 	}
-}
-
-/*      .qaItem
-/*-------------------------------------------*/
-.vk_faq { display:block; overflow:hidden;border-bottom:1px dotted #ccc; padding:0px 0px 25px; margin:25px 0px; width:100%; position: relative; }
-.vk_faq_title,
-.vk_faq_content {
-	border:none;padding-left: 35px;
-	&:before {
-		position: absolute;left:0;font-size:24px;line-height: 105%;
-	}
-}
-.vk_faq_title { margin-bottom:15px;font-size:18px;font-weight:700;
-  &:before { font-family:"areal";content:"Q ";color:#e50000; }
-}
-.vk_faq_content { margin:0px;
-  &:before { content:"A ";color:#337ab7;font-family: "" }
 }
 
 //*      .flowBox

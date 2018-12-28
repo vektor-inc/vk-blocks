@@ -42,6 +42,8 @@
   "dependencies": {
     "@wordpress/i18n": "^3.1.0",
     "aphrodite": "^2.2.3",
-    "po2json": "^1.0.0-alpha"
+    "po2json": "^1.0.0-alpha",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
   }
 }
