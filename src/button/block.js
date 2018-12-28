@@ -68,8 +68,8 @@ registerBlockType('vk-blocks/button', {
             default: null,
         },
         buttonTarget: {
-            type: 'string',
-            default: null,
+            type: 'Boolean',
+            default: false,
         },
         buttonSize: {
             type: 'string',
@@ -127,14 +127,10 @@ registerBlockType('vk-blocks/button', {
             <Fragment>
                 <InspectorControls>
                     <PanelBody title={__('Button setting', 'vk-blocks')}>
-                        <RadioControl
-                            label={__('Link Target:', 'vk-blocks')}
-                            selected={buttonTarget}
-                            options={[
-                                {label: __('Self', 'vk-blocks'), value: ''},
-                                {label: __('Blank', 'vk-blocks'), value: '_blank'},
-                            ]}
-                            onChange={(value) => setAttributes({buttonTarget: value})}
+                        <CheckboxControl
+                            label={__('Open link new tab.', 'vk-blocks')}
+                            checked={buttonTarget}
+                            onChange={(checked) => setAttributes({buttonTarget: checked})}
                         />
                         <RadioControl
                             label={__('Button Size:', 'vk-blocks')}

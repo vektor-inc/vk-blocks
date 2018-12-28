@@ -72,7 +72,7 @@ export class Link extends React.Component {
                     role={'button'}
                     aria-pressed={true}
                     style={aStyle}
-                    target={buttonTarget}
+                    target={buttonTarget? '_blank':null}
                 >
                     {iconBefore}
                     {richText}
