@@ -1,3 +1,13 @@
+.components-base-control__label {
+	 font-weight:bold;
+}
+.components-base-control .components-base-control__help {
+	margin-top:0;
+}
+.components-radio-control__option {
+	label { margin-bottom:0; }
+}
+
 .edit-post-visual-editor{
 
 .alert{
@@ -329,6 +339,18 @@
 	a{
 		display: inherit;
 		text-decoration: none!important;
+
+		i.before {
+			margin-right: 0.7rem;
+		}
+
+		i.after {
+			margin-left: 0.7rem;
+		}
+
+		* {
+			display: inline;
+		}
 	}
 	.btn-primary:focus{
 		background:#007bff
