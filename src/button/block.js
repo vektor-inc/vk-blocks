@@ -2,6 +2,8 @@
  * Button block type
  *
  */
+import React from "react";
+import {Link} from "./link";
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
@@ -84,6 +86,14 @@ registerBlockType('vk-blocks/button', {
         buttonAlign: {
             type: 'string',
             default: 'left',
+        },
+        fontAwesomeIcon: {
+            type: 'string',
+            default: null,
+        },
+        fontAwesomeOrder: {
+            type: 'string',
+            default: '0',
         }
     },
 
@@ -104,6 +114,8 @@ registerBlockType('vk-blocks/button', {
             buttonColor,
             buttonColorCustom,
             buttonAlign,
+            fontAwesomeIcon,
+            fontAwesomeOrder,
         } = attributes;
 
         return (
@@ -157,7 +169,7 @@ registerBlockType('vk-blocks/button', {
                             onChange={(value) => setAttributes({buttonColor: value})}
                         />
                         <BaseControl
-                            label={__('Custom Color:', 'vk-blocks')}
+                            label={__('Custom Color', 'vk-blocks')}
                             help={__('This custom color overrides the default color. If you want to use the default color, click the clear button.', 'vk-blocks')}
                         >
                             <ColorPalette
@@ -165,77 +177,47 @@ registerBlockType('vk-blocks/button', {
                                 onChange={(value) => setAttributes({buttonColorCustom: value})}
                             />
                         </BaseControl>
+                        <BaseControl
+                            label={__('FontAwesome:', 'vk-blocks')}
+                            // help={__('', 'vk-blocks')}
+                        >
+                            <TextControl
+                                label={__('Enter fontAwesome Class', 'vk-blocks')}
+                                value={fontAwesomeIcon}
+                                onChange={(value) => setAttributes({fontAwesomeIcon: value})}
+                                placeholder={__('fas fa-user', 'vk-blocks')}
+                            />
+                            <RadioControl
+                                label={__('Icon Position:', 'vk-blocks')}
+                                selected={fontAwesomeOrder}
+                                options={[
+                                    {label: __('Before Text', 'vk-blocks'), value: '0'},
+                                    {label: __('After Text', 'vk-blocks'), value: '1'},
+                                ]}
+                                onChange={(value) => setAttributes({fontAwesomeOrder: value})}
+                            />
+                        </BaseControl>
                     </PanelBody>
                 </InspectorControls>
                 <div className={buttonColorCustom ? 'vk_button vk_button-colorCustom' : 'vk_button'}>
-                    {(() => {
-                        if (buttonColorCustom && buttonType === '0') {
-                            return <div className={'custom-btn'}>
-                                <button type="button"
-                                        className={`btn btn-primary btn-${buttonSize} btn-${buttonAlign}`}
-                                        style={{
-                                            backgroundColor: buttonColorCustom,
-                                            border: `1px solid ${buttonColorCustom}`
-                                        }}>
-                                    <RichText
-                                        tagName="p"
-                                        className={'vk_button_content'}
-                                        onChange={(value) => setAttributes({content: value})}
-                                        value={content}
-                                        placeholder={__('Input text', 'vk-blocks')}
-                                    />
-                                </button>
-                            </div>;
-                        } else if (buttonColorCustom && buttonType === '1') {
-                            return <div className={'custom-btn'}>
-                                <button type="button"
-                                        className={`btn btn-${buttonSize} btn-${buttonAlign}`}
-                                        style={{
-                                            backgroundColor: 'transparent',
-                                            border: '1px solid' + buttonColorCustom,
-                                            color: buttonColorCustom
-                                        }}
-                                >
-                                    <RichText
-                                        tagName="p"
-                                        className={'vk_button_content'}
-                                        onChange={(value) => setAttributes({content: value})}
-                                        value={content}
-                                        placeholder={__('Input text', 'vk-blocks')}
-                                    />
-                                </button>
-                            </div>;
-                        } else if (!buttonColorCustom && buttonType === '0') {
-                            return <div>
-                                <button type="button"
-                                        className={`btn btn-${buttonSize} btn-${buttonAlign} btn-${buttonColor}`}>
-                                    <RichText
-                                        tagName="p"
-                                        className={'vk_button_content'}
-                                        onChange={(value) => setAttributes({content: value})}
-                                        value={content}
-                                        placeholder={__('Input text', 'vk-blocks')}
-                                    />
-                                </button>
-                            </div>;
-                        } else if (!buttonColorCustom && buttonType === '1') {
-                            return <div>
-                                <button type="button"
-                                        className={`btn btn-${buttonSize} btn-${buttonAlign} btn-outline-${buttonColor}`}
-                                        style={{backgroundColor: +'transparent'}}
-                                >
-                                    <RichText
-                                        tagName="p"
-                                        className={'vk_button_content'}
-                                        onChange={(value) => setAttributes({content: value})}
-                                        value={content}
-                                        placeholder={__('Input text', 'vk-blocks')}
-                                    />
-                                </button>
-                            </div>;
-                        }
 
-                    })()}
+                    <Link lbColorCustom={buttonColorCustom} lbColor={buttonColor} lbType={buttonType}
+                          lbAlign={buttonAlign}
+                          lbSize={buttonSize}
+                          lbFontAwesomeIcon={fontAwesomeIcon}
+                          lbFontAwesomeOrder={fontAwesomeOrder}
+                          lbRichtext={
+                        <RichText
+                            tagName="p"
+                            className={'vk_button_content'}
+                            onChange={(value) => setAttributes({content: value})}
+                            value={content}
+                            placeholder={__('Input text', 'vk-blocks')}
+                            formattingControls={['bold', 'italic', 'strikethrough']}
+                            keepPlaceholderOnFocus
+                        />
+                    }/>
+
                     {isSelected && (
                         <form
                             className="block-library-button__inline-link"
@@ -270,67 +252,26 @@ registerBlockType('vk-blocks/button', {
             buttonColor,
             buttonColorCustom,
             buttonAlign,
+            fontAwesomeIcon,
+            fontAwesomeOrder
         } = attributes;
 
         return (
             <div className={buttonColorCustom ? 'vk_button vk_button-colorCustom' : 'vk_button'}>
-                {(() => {
-                    if (buttonColorCustom && buttonType === '0') {
-                        return <button type="button"
-                                       className={`btn btn-primary custom-btn btn-${buttonSize} btn-${buttonAlign}`}
-                                       style={{
-                                           backgroundColor: buttonColorCustom,
-                                           border: `1px solid ${buttonColorCustom}`
-                                       }}
-                                       onClick={`window.open("${buttonUrl}")`}
-                        >
-                            <RichText.Content
-                                tagName="p"
-                                className={'vk_button_content'}
-                                value={content}
-                            />
-                        </button>;
-                    } else if (buttonColorCustom && buttonType === '1') {
-                        return <button type="button"
-                                       className={`btn custom-btn btn-${buttonSize} btn-${buttonAlign}`}
-                                       style={{
-                                           backgroundColor: 'transparent',
-                                           border: '1px solid' + buttonColorCustom,
-                                           color: buttonColorCustom
-                                       }}
-                                       onClick={`window.open("${buttonUrl}")`}
-                        >
-                            <RichText.Content
-                                tagName="p"
-                                className={'vk_button_content'}
-                                value={content}
-                            />
-                        </button>;
-                    } else if (!buttonColorCustom && buttonType === '0') {
-                        return <button type="button"
-                                       className={`btn btn-${buttonSize} btn-${buttonAlign} btn-${buttonColor}`}
-                                       onClick={`window.open("${buttonUrl}")`}
-                        >
-                            <RichText.Content
-                                tagName="p"
-                                className={'vk_button_content'}
-                                value={content}
-                            />
-                        </button>;
-                    } else if (!buttonColorCustom && buttonType === '1') {
-                        return <button type="button"
-                                       className={`btn btn-${buttonSize} btn-${buttonAlign} btn-outline-${buttonColor}`}
-                                       style={{backgroundColor: +'transparent'}}
-                                       onClick={`window.open("${buttonUrl}")`}
-                        >
-                            <RichText.Content
-                                tagName="p"
-                                className={'vk_button_content'}
-                                value={content}
-                            />
-                        </button>;
-                    }
-                })()}
+
+                <Link lbColorCustom={buttonColorCustom} lbColor={buttonColor} lbType={buttonType}
+                      lbAlign={buttonAlign}
+                      lbSize={buttonSize}
+                      lbUrl={buttonUrl}
+                      lbFontAwesomeIcon={fontAwesomeIcon}
+                      lbFontAwesomeOrder={fontAwesomeOrder}
+                      lbRichtext={
+                    <RichText.Content
+                        tagName="p"
+                        className={'vk_button_content'}
+                        value={content}
+                    />
+                }/>
             </div>
         );
     },
