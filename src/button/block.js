@@ -67,6 +67,10 @@ registerBlockType('vk-blocks/button', {
             type: 'string',
             default: null,
         },
+        buttonTarget: {
+            type: 'string',
+            default: null,
+        },
         buttonSize: {
             type: 'string',
             default: 'lg',
@@ -109,6 +113,7 @@ registerBlockType('vk-blocks/button', {
         const {
             content,
             buttonUrl,
+            buttonTarget,
             buttonSize,
             buttonType,
             buttonColor,
@@ -122,6 +127,15 @@ registerBlockType('vk-blocks/button', {
             <Fragment>
                 <InspectorControls>
                     <PanelBody title={__('Button setting', 'vk-blocks')}>
+                        <RadioControl
+                            label={__('Link Target:', 'vk-blocks')}
+                            selected={buttonTarget}
+                            options={[
+                                {label: __('Self', 'vk-blocks'), value: ''},
+                                {label: __('Blank', 'vk-blocks'), value: '_blank'},
+                            ]}
+                            onChange={(value) => setAttributes({buttonTarget: value})}
+                        />
                         <RadioControl
                             label={__('Button Size:', 'vk-blocks')}
                             selected={buttonSize}
@@ -246,6 +260,7 @@ registerBlockType('vk-blocks/button', {
         const {
             content,
             buttonUrl,
+            buttonTarget,
             buttonSize,
             buttonType,
             buttonColor,
@@ -262,6 +277,7 @@ registerBlockType('vk-blocks/button', {
                       lbAlign={buttonAlign}
                       lbSize={buttonSize}
                       lbUrl={buttonUrl}
+                      lbTarget={buttonTarget}
                       lbFontAwesomeIconBefore={fontAwesomeIconBefore}
                       lbFontAwesomeIconAfter={fontAwesomeIconAfter}
                       lbRichtext={

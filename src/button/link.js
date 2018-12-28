@@ -10,6 +10,7 @@ export class Link extends React.Component {
         let buttonAlign = this.props.lbAlign;
         let buttonSize = this.props.lbSize;
         let buttonUrl = this.props.lbUrl;
+        let buttonTarget = this.props.lbTarget;
         let fontAwesomeIconBefore = this.props.lbFontAwesomeIconBefore;
         let fontAwesomeIconAfter = this.props.lbFontAwesomeIconAfter;
         let richText = this.props.lbRichtext;
@@ -71,7 +72,7 @@ export class Link extends React.Component {
                     role={'button'}
                     aria-pressed={true}
                     style={aStyle}
-                    target={'_blank'}
+                    target={buttonTarget}
                 >
                     {iconBefore}
                     {richText}
