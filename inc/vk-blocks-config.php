@@ -33,7 +33,6 @@ if ( ! function_exists( 'vkblocks_active' ) ) {
 		} else {
 			wp_register_style( 'vkblocks-bootstrap', plugin_dir_url( __FILE__ ) . '/bootstrap-4.1.3/css/bootstrap.min.css', false, '4.1.3' );
 			wp_enqueue_style( 'vkblocks-bootstrap' );
-
 		}
 
 	}

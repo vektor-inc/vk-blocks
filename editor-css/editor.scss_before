@@ -4,8 +4,7 @@
 .components-base-control .components-base-control__help {
 	margin-top:0;
 }
-.components-radio-control__option {
-	label { margin-bottom:0; }
-}
+.components-radio-control__option label { margin-bottom:0; }
+.components-checkbox-control__label { margin-bottom:0; }
 
 .edit-post-visual-editor{
