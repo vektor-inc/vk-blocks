@@ -22,7 +22,6 @@ export class Link extends React.Component {
 
         if (buttonColorCustom) {
 
-            containerClass = `btn-parent custom-btn btn-${buttonAlign}`;
             aClass = `btn btn-primary btn-${buttonSize} active`;
 
             if (buttonType === '0') {
@@ -41,10 +40,7 @@ export class Link extends React.Component {
 
         } else if (!buttonColorCustom) {
 
-            containerClass = `btn-parent custom-btn btn-${buttonAlign}`;
-
             if (buttonType === '0') {
-
                 aClass = `btn btn-${buttonSize} btn-${buttonColor} active`;
                 aStyle = {
                     backgroundColor: buttonColorCustom,
@@ -57,15 +53,18 @@ export class Link extends React.Component {
 
         }
 
+        if ( buttonAlign === 'block' ){
+        	aClass = `${aClass} btn-block`;
+        }
+
         if (fontAwesomeIconBefore) {
-            iconBefore = <i className={`${fontAwesomeIconBefore} before`}></i>;
+            iconBefore = <i className={`${fontAwesomeIconBefore} before`}></i> ;
         }
         if (fontAwesomeIconAfter) {
             iconAfter = <i className={`${fontAwesomeIconAfter} after`}></i>;
         }
 
         return (
-            <div className={containerClass}>
                 <a
                     href={buttonUrl}
                     className={aClass}
@@ -79,7 +78,6 @@ export class Link extends React.Component {
                     {iconAfter}
 
                 </a>
-            </div>
         );
     }
 }

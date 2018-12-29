@@ -208,7 +208,8 @@ registerBlockType('vk-blocks/button', {
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
-                <div className={buttonColorCustom ? 'vk_button vk_button-colorCustom' : 'vk_button'}>
+
+                <div className={buttonColorCustom ? `vk_button vk_button-align-${ buttonAlign } vk_button-color-custom` : `vk_button vk_button-align-${ buttonAlign }`}>
 
                     <Link lbColorCustom={buttonColorCustom} lbColor={buttonColor} lbType={buttonType}
                           lbAlign={buttonAlign}
@@ -236,7 +237,7 @@ registerBlockType('vk-blocks/button', {
                                 value={buttonUrl}
                                 onChange={(value) => setAttributes({buttonUrl: value})}
                             />
-                            <IconButton icon="editor-break" label={__('Apply')} type="submit"/>
+                            <IconButton icon="editor-break" label={__('Apply', 'vk-blocks')} type="submit"/>
                         </form>
                     )}
                 </div>
@@ -266,8 +267,20 @@ registerBlockType('vk-blocks/button', {
             fontAwesomeIconAfter,
         } = attributes;
 
+        let containerClass = '';
+
+        if (buttonColorCustom) {
+
+            containerClass = `vk_button vk_button-color-custom vk_button-align-${buttonAlign}`;
+
+        } else if (!buttonColorCustom) {
+
+            containerClass = `vk_button vk_button-align-${buttonAlign}`;
+
+        }
+
         return (
-            <div className={buttonColorCustom ? 'vk_button vk_button-colorCustom' : 'vk_button'}>
+            <div className={containerClass}>
 
                 <Link lbColorCustom={buttonColorCustom} lbColor={buttonColor} lbType={buttonType}
                       lbAlign={buttonAlign}

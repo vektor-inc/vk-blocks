@@ -24,7 +24,7 @@ msgid "Icon Name"
 msgstr ""
 
 #: src/balloon/block.js:140
-#: src/button/block.js:224
+#: src/button/block.js:225
 msgid "Input text"
 msgstr ""
 
@@ -179,7 +179,7 @@ msgstr ""
 msgid "Enter Font Awesome Class.This icon will appear after text."
 msgstr ""
 
-#: src/button/block.js:239
+#: src/button/block.js:240
 msgid "Apply"
 msgstr ""
 

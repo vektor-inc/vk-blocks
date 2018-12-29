@@ -1,28 +1,26 @@
 .vk_button{
 	margin: 5px 0;
-	.btn-parent{
-		display: inline-block;
-		width: 100%;
-	}
-	.btn-left{
-		text-align: left;
-	}
-	.btn-center{
-		text-align: center;
-	}
-	.btn-right{
-		text-align: right;
-	}
-	.btn-block{
-		display: block;
-	}
-	p{
-		margin: 0;
-	}
+}
+.vk_button_outer{
+	display: inline-block;
+	width: 100%;
+}
+.vk_button-align-left{
+	text-align: left;
+}
+.vk_button-align-center{
+	text-align: center;
+}
+.vk_button-align-right{
+	text-align: right;
+}
+.vk_button-align-block{
+	display: block;
+}
+.vk_button{
 	a{
-		display: inherit;
-		text-decoration: none!important;
-
+		// display: inherit;
+		// text-decoration: none!important;
 		i.before {
 			margin-right: 0.7rem;
 		}
@@ -31,43 +29,123 @@
 			margin-left: 0.7rem;
 		}
 
-		* {
-			display: inline;
-		}
+		// * {
+		// 	display: inline;
+		// }
 	}
-	.btn-primary:focus{
-		background:#007bff
-	}
-	.btn-primary:focus{
-		background:#007bff
-	}
-	.btn-secondary:focus {
-		background: #5a6268;
-	}
-	.btn-success:focus {
-		background: #28a745;
-	}
-	.btn-info:focus {
-		background: #17a2b8;
-	}
-	.btn-warning:focus {
-		background: #ffc107;
-	}
-	.btn-danger:focus {
-		background: #dc3545;
-	}
-	.btn-light:focus {
-		background: #f8f9fa;
-	}
-	.btn-dark:focus {
-		background: #343a40;
-	}
-	.custom-btn{
-		button:focus {
-			box-shadow: 0 0 0 0.2rem rgba(171, 184, 195, .25) !important;
-		}
-		button:hover {
-			opacity: 0.8 !important;
-		}
-	}
+	// .btn-primary:focus{
+	// 	background:#007bff
+	// }
+	// .btn-primary:focus{
+	// 	background:#007bff
+	// }
+	// .btn-secondary:focus {
+	// 	background: #5a6268;
+	// }
+	// .btn-success:focus {
+	// 	background: #28a745;
+	// }
+	// .btn-info:focus {
+	// 	background: #17a2b8;
+	// }
+	// .btn-warning:focus {
+	// 	background: #ffc107;
+	// }
+	// .btn-danger:focus {
+	// 	background: #dc3545;
+	// }
+	// .btn-light:focus {
+	// 	background: #f8f9fa;
+	// }
+	// .btn-dark:focus {
+	// 	background: #343a40;
+	// }
+
+}
+.vk_button-color-custom{
+	// button:focus {
+	// 	box-shadow: 0 0 0 0.2rem rgba(171, 184, 195, .25) !important;
+	// }
+	// button:hover {
+	// 	opacity: 0.8 !important;
+	// }
+}
+/*-------------------------------------------*/
+/*	Lightnig がまだ Bootstrap4 でないため手動で追加したクラス
+/*	Lighnting が 4 を同梱したら削除して化
+/*-------------------------------------------*/
+$color_primary:#007bff;
+$color_secondary:#6c757d;
+$color_success:#28a745;
+$color_info:#17a2b8;
+$color_warning:#ffc107;
+$color_danger:#dc3545;
+$color_light:#f8f9fa;
+$color_dark:#343a40;
+.btn-outline-primary{
+	color:$color_primary;
+	background: none;
+}
+.btn-outline-secondary {
+	color: $color_secondary;
+	background: none;
+}
+.btn-outline-success {
+	color: $color_success;
+	background: none;
+}
+.btn-outline-info {
+	color: $color_info;
+	background: none;
+}
+.btn-outline-warning {
+	color: $color_warning;
+	background: none;
+}
+.btn-outline-danger {
+	color: $color_danger;
+	background: none;
+}
+.btn-outline-light {
+	color: $color_light;
+	background: none;
+}
+.btn-outline-dark {
+	color: $color_dark;
+	background: none;
+}
+
+
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus{
+	background:$color_primary;
+}
+.btn-outline-secondary:hover,
+.btn-outline-secondary:focus {
+	background: $color_secondary;
+}
+.btn-outline-success:hover,
+.btn-outline-success:focus {
+	background: $color_success;
+}
+.btn-outline-info:hover,
+.btn-outline-info:focus {
+	background: $color_info;
+}
+.btn-outline-warning:hover,
+.btn-outline-warning:focus {
+	background: $color_warning;
+}
+.btn-outline-danger:hover,
+.btn-outline-danger:focus {
+	background: $color_danger;
+}
+.btn-outline-light:hover,
+.btn-outline-light:focus {
+	background: $color_light;
+}
+.btn-outline-dark:hover,
+.btn-outline-dark:focus {
+	background: $color_dark;
 }
