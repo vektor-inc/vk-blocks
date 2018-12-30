@@ -20,16 +20,19 @@ export class Link extends React.Component {
         let iconBefore = '';
         let iconAfter = '';
 
+        aClass = `btn vk_button_link`;
+
         if (buttonColorCustom) {
 
-            aClass = `btn btn-primary btn-${buttonSize}`;
+            aClass = `${aClass} btn-primary btn-${buttonSize}`;
 
+            // 塗り
             if (buttonType === '0') {
-
                 aStyle = {
                     backgroundColor: buttonColorCustom,
                     border: `1px solid ${buttonColorCustom}`
                 };
+            // 塗りなし
             } else if (buttonType === '1') {
                 aStyle = {
                     backgroundColor: 'transparent',
@@ -41,12 +44,14 @@ export class Link extends React.Component {
 				// カスタムカラーじゃない場合
         } else if (!buttonColorCustom) {
 
+            // 塗り
             if (buttonType === '0') {
-                aClass = `btn btn-${buttonSize} btn-${buttonColor}`;
-								aStyle = null;
+                aClass = `${aClass} btn-${buttonSize} btn-${buttonColor}`;
+                aStyle = null;
+            // 塗りなし
             } else if (buttonType === '1') {
-                aClass = `btn btn-${buttonSize} btn-outline-${buttonColor} active`;
-                aStyle = {backgroundColor: +'transparent'};
+                aClass = `${aClass} btn-${buttonSize} btn-outline-${buttonColor}`;
+                aStyle = null;
             }
 
         }
@@ -55,11 +60,13 @@ export class Link extends React.Component {
         	aClass = `${aClass} btn-block`;
         }
 
+
+
         if (fontAwesomeIconBefore) {
-            iconBefore = <i className={`${fontAwesomeIconBefore} before`}></i> ;
+            iconBefore = <i className={`${fontAwesomeIconBefore} vk_button_link_before`}></i> ;
         }
         if (fontAwesomeIconAfter) {
-            iconAfter = <i className={`${fontAwesomeIconAfter} after`}></i>;
+            iconAfter = <i className={`${fontAwesomeIconAfter} vk_button_link_after`}></i>;
         }
 
         return (

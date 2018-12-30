@@ -17,59 +17,15 @@
 .vk_button-align-block{
 	display: block;
 }
-.vk_button{
-	a{
-		// display: inherit;
-		// text-decoration: none!important;
-		i.before {
-			margin-right: 0.7rem;
-		}
-
-		i.after {
-			margin-left: 0.7rem;
-		}
-
-		// * {
-		// 	display: inline;
-		// }
+.vk_button_link_before { margin-right: 0.7rem; }
+.vk_button_link_after { margin-left: 0.7rem; }
+.vk_button_link_txt { display: inline; }
+.vk_button {
+	.editor-rich-text {
+		display: inline-block;
 	}
-	// .btn-primary:focus{
-	// 	background:#007bff
-	// }
-	// .btn-primary:focus{
-	// 	background:#007bff
-	// }
-	// .btn-secondary:focus {
-	// 	background: #5a6268;
-	// }
-	// .btn-success:focus {
-	// 	background: #28a745;
-	// }
-	// .btn-info:focus {
-	// 	background: #17a2b8;
-	// }
-	// .btn-warning:focus {
-	// 	background: #ffc107;
-	// }
-	// .btn-danger:focus {
-	// 	background: #dc3545;
-	// }
-	// .btn-light:focus {
-	// 	background: #f8f9fa;
-	// }
-	// .btn-dark:focus {
-	// 	background: #343a40;
-	// }
+}
 
-}
-.vk_button-color-custom{
-	// button:focus {
-	// 	box-shadow: 0 0 0 0.2rem rgba(171, 184, 195, .25) !important;
-	// }
-	// button:hover {
-	// 	opacity: 0.8 !important;
-	// }
-}
 /*-------------------------------------------*/
 /*	Lightnig がまだ Bootstrap4 でないため手動で追加したクラス
 /*	Lighnting が 4 を同梱したら削除して化
@@ -82,70 +38,122 @@ $color_warning:#ffc107;
 $color_danger:#dc3545;
 $color_light:#f8f9fa;
 $color_dark:#343a40;
-.btn-outline-primary{
+/* .btn がないと標準のBS4の指定に負ける */
+.btn.btn-primary{
+	color:#fff;
+}
+.btn.btn-secondary {
+	color:#fff;
+	background-color: $color_secondary;
+}
+.btn.btn-success {
+	color:#fff;
+}
+.btn.btn-info {
+	color:#fff;
+}
+.btn.btn-warning {
+	color:#fff;
+}
+.btn.btn-danger {
+	color:#fff;
+}
+.btn.btn-light {
+	color:#fff;
+	background-color: $color_light;
+}
+.btn.btn-dark {
+	color:#fff;
+	background-color: $color_dark;
+}
+
+/* .btn がないと標準のBS4の指定に負ける */
+.btn.btn-outline-primary{
 	color:$color_primary;
+	border:1px solid $color_primary;
 	background: none;
+	box-shadow: none;
 }
-.btn-outline-secondary {
+.btn.btn-outline-secondary {
 	color: $color_secondary;
+	border:1px solid $color_secondary;
 	background: none;
+	box-shadow: none;
 }
-.btn-outline-success {
+.btn.btn-outline-success {
 	color: $color_success;
+	border:1px solid $color_success;
 	background: none;
+	box-shadow: none;
 }
-.btn-outline-info {
+.btn.btn-outline-info {
 	color: $color_info;
+	border:1px solid $color_info;
 	background: none;
+	box-shadow: none;
 }
-.btn-outline-warning {
+.btn.btn-outline-warning {
 	color: $color_warning;
+	border:1px solid $color_warning;
 	background: none;
+	box-shadow: none;
 }
-.btn-outline-danger {
+.btn.btn-outline-danger {
 	color: $color_danger;
+	border:1px solid $color_danger;
 	background: none;
+	box-shadow: none;
 }
-.btn-outline-light {
+.btn.btn-outline-light {
 	color: $color_light;
+	border:1px solid $color_light;
 	background: none;
+	box-shadow: none;
 }
-.btn-outline-dark {
+.btn.btn-outline-dark {
 	color: $color_dark;
+	border:1px solid $color_dark;
 	background: none;
+	box-shadow: none;
 }
 
-
-
-.btn-outline-primary:hover,
-.btn-outline-primary:focus{
+.btn.btn-outline-primary:hover,
+.btn.btn-outline-primary:focus{
 	background:$color_primary;
+	color:#fff;
 }
-.btn-outline-secondary:hover,
-.btn-outline-secondary:focus {
+.btn.btn-outline-secondary:hover,
+.btn.btn-outline-secondary:focus {
 	background: $color_secondary;
+	color:#fff;
 }
-.btn-outline-success:hover,
-.btn-outline-success:focus {
+.btn.btn-outline-success:hover,
+.btn.btn-outline-success:focus {
 	background: $color_success;
+	color:#fff;
 }
-.btn-outline-info:hover,
-.btn-outline-info:focus {
+.btn.btn-outline-info:hover,
+.btn.btn-outline-info:focus {
 	background: $color_info;
+	color:#fff;
 }
-.btn-outline-warning:hover,
-.btn-outline-warning:focus {
+.btn.btn-outline-warning:hover,
+.btn.btn-outline-warning:focus {
 	background: $color_warning;
+	color:#fff;
 }
-.btn-outline-danger:hover,
-.btn-outline-danger:focus {
+.btn.btn-outline-danger:hover,
+.btn.btn-outline-danger:focus {
 	background: $color_danger;
+	color:#fff;
 }
-.btn-outline-light:hover,
-.btn-outline-light:focus {
+.btn.btn-outline-light:hover,
+.btn.btn-outline-light:focus {
 	background: $color_light;
+	color:#fff;
 }
-.btn-outline-dark:hover,
-.btn-outline-dark:focus {
+.btn.btn-outline-dark:hover,
+.btn.btn-outline-dark:focus {
 	background: $color_dark;
+	color:#fff;
 }

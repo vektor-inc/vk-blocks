@@ -73,7 +73,7 @@ registerBlockType('vk-blocks/button', {
         },
         buttonSize: {
             type: 'string',
-            default: 'lg',
+            default: 'md',
         },
         buttonType: {
             type: 'string',
@@ -168,13 +168,13 @@ registerBlockType('vk-blocks/button', {
                             selected={buttonColor}
                             options={[
                                 {label: __('Primary', 'vk-blocks'), value: 'primary'},
-                                // {label: __('Secondary', 'vk-blocks'), value: 'secondary'},
+                                {label: __('Secondary', 'vk-blocks'), value: 'secondary'},
                                 {label: __('Success', 'vk-blocks'), value: 'success'},
                                 {label: __('Info', 'vk-blocks'), value: 'info'},
                                 {label: __('Warning', 'vk-blocks'), value: 'warning'},
                                 {label: __('Danger', 'vk-blocks'), value: 'danger'},
-                                // {label: __('Light', 'vk-blocks'), value: 'light'},
-                                // {label: __('Dark', 'vk-blocks'), value: 'dark'},
+                                {label: __('Light', 'vk-blocks'), value: 'light'},
+                                {label: __('Dark', 'vk-blocks'), value: 'dark'},
                             ]}
                             onChange={(value) => setAttributes({buttonColor: value})}
                         />
@@ -219,7 +219,7 @@ registerBlockType('vk-blocks/button', {
                           lbRichtext={
                         <RichText
                             tagName="span"
-                            className={'vk_button_txt'}
+                            className={'vk_button_link_txt'}
                             onChange={(value) => setAttributes({content: value})}
                             value={content}
                             placeholder={__('Input text', 'vk-blocks')}
@@ -292,7 +292,7 @@ registerBlockType('vk-blocks/button', {
                       lbRichtext={
                     <RichText.Content
                         tagName="span"
-                        className={'vk_button_txt'}
+                        className={'vk_button_link_txt'}
                         value={content}
                     />
                 }/>

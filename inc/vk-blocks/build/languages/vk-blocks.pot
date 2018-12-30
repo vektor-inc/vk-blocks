@@ -133,6 +133,10 @@ msgstr ""
 msgid "Primary"
 msgstr ""
 
+#: src/button/block.js:171
+msgid "Secondary"
+msgstr ""
+
 #: src/button/block.js:172
 msgid "Success"
 msgstr ""
@@ -147,6 +151,14 @@ msgstr ""
 
 #: src/button/block.js:175
 msgid "Danger"
+msgstr ""
+
+#: src/button/block.js:176
+msgid "Light"
+msgstr ""
+
+#: src/button/block.js:177
+msgid "Dark"
 msgstr ""
 
 #: src/button/block.js:182
