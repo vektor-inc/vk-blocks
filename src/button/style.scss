@@ -1,9 +1,11 @@
 .vk_button{
 	margin: 5px 0;
 }
-.vk_button_outer{
-	display: inline-block;
-	width: 100%;
+.vk_button-color-custom{
+	a:hover {
+		opacity: 0.8;
+		box-shadow: 0 0 0 0.2rem rgba(171, 184, 195, .25) ;
+	}
 }
 .vk_button-align-left{
 	text-align: left;
@@ -65,6 +67,11 @@ $color_dark:#343a40;
 .btn.btn-dark {
 	color:#fff;
 	background-color: $color_dark;
+}
+
+.btn.btn-secondary:hover,
+.btn.btn-dark:hover {
+	color:#fff;
 }
 
 /* .btn がないと標準のBS4の指定に負ける */
