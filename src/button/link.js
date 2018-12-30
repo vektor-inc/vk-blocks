@@ -22,7 +22,7 @@ export class Link extends React.Component {
 
         if (buttonColorCustom) {
 
-            aClass = `btn btn-primary btn-${buttonSize} active`;
+            aClass = `btn btn-primary btn-${buttonSize}`;
 
             if (buttonType === '0') {
 
@@ -38,14 +38,12 @@ export class Link extends React.Component {
                 };
             }
 
+				// カスタムカラーじゃない場合
         } else if (!buttonColorCustom) {
 
             if (buttonType === '0') {
-                aClass = `btn btn-${buttonSize} btn-${buttonColor} active`;
-                aStyle = {
-                    backgroundColor: buttonColorCustom,
-                    border: `1px solid ${buttonColorCustom}`
-                };
+                aClass = `btn btn-${buttonSize} btn-${buttonColor}`;
+								aStyle = null;
             } else if (buttonType === '1') {
                 aClass = `btn btn-${buttonSize} btn-outline-${buttonColor} active`;
                 aStyle = {backgroundColor: +'transparent'};
