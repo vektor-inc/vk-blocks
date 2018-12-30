@@ -61,7 +61,7 @@ registerBlockType('vk-blocks/button', {
     attributes: {
         content: {
             source: 'html',
-            selector: 'p',
+            selector: 'span',
         },
         buttonUrl: {
             type: 'string',
@@ -218,8 +218,8 @@ registerBlockType('vk-blocks/button', {
                           lbFontAwesomeIconAfter={fontAwesomeIconAfter}
                           lbRichtext={
                         <RichText
-                            tagName="p"
-                            className={'vk_button_content'}
+                            tagName="span"
+                            className={'vk_button_txt'}
                             onChange={(value) => setAttributes({content: value})}
                             value={content}
                             placeholder={__('Input text', 'vk-blocks')}
@@ -291,8 +291,8 @@ registerBlockType('vk-blocks/button', {
                       lbFontAwesomeIconAfter={fontAwesomeIconAfter}
                       lbRichtext={
                     <RichText.Content
-                        tagName="p"
-												className={'vk_button_content'}
+                        tagName="span"
+                        className={'vk_button_txt'}
                         value={content}
                     />
                 }/>
