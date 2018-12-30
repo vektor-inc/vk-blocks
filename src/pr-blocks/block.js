@@ -39,8 +39,8 @@ function set_attirbuite(number) {
         };
         attributes['content' + i] = {
             type: 'string',
-                source: 'html',
-                selector: 'p',
+            source: 'html',
+            selector: 'p',
         };
         attributes['url' + i] = {
             type: 'string',
