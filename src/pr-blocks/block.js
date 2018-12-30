@@ -1,5 +1,5 @@
 /**
- * Flow block type
+ * PR Block block type
  *
  */
 const {__} = wp.i18n; // Import __() from wp.i18n
