@@ -290,7 +290,8 @@ registerBlockType('vk-blocks/button', {
                       lbFontAwesomeIconBefore={fontAwesomeIconBefore}
                       lbFontAwesomeIconAfter={fontAwesomeIconAfter}
                       lbRichtext={
-                    <RichText.Content
+                    <Content
+                        tagName="p"
                         value={content}
                     />
                 }/>
