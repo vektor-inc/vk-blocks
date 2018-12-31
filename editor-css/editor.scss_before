@@ -8,3 +8,8 @@
 .components-checkbox-control__label { margin-bottom:0; }
 
 .edit-post-visual-editor{
+
+/* これがないとGutenberg標準のエディタCSSに負ける */
+h1:first-child.vk_prBlocks_item_title{
+	margin-top:0.9em;
+}
