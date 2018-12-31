@@ -160,12 +160,13 @@ registerBlockType('vk-blocks/pr-blocks', {
                             <ColorPalette
                                 value={color1}
                                 onChange={(value) => {
-                              		if (value){
-                              			setAttributes({color1: value})
-                              		} else {
-                              			setAttributes({color1: '#0693e3'})
-                              		}
-                              	}}
+                                  if (value){
+                                    setAttributes({color1: value})
+                                  } else {
+                                    setAttributes({color1: '#0693e3'})
+                                    setAttributes({bgType1: '0'})
+                                  }
+                                }}
                             />
                             <RadioControl
                                 label={__('Icon Background:', 'vk-blocks')}
@@ -228,6 +229,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                                     setAttributes({color2: value})
                                   } else {
                                     setAttributes({color2: '#0693e3'})
+                                    setAttributes({bgType2: '0'})
                                   }
                                 }}
                             />
@@ -292,6 +294,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                                     setAttributes({color3: value})
                                   } else {
                                     setAttributes({color3: '#0693e3'})
+                                    setAttributes({bgType3: '0'})
                                   }
                                 }}
                             />
@@ -572,7 +575,10 @@ registerBlockType('vk-blocks/pr-blocks', {
 
                             } else {
 
-                                if ( ! color1 ){ color1 = '#0693e3'; }
+                              if ( ! color1 ){
+                                  color1 = '#0693e3';
+                                  bgType1 === '0';
+                              }
                                 if (bgType1 === '0') {
 
                                     return <div
@@ -630,7 +636,10 @@ registerBlockType('vk-blocks/pr-blocks', {
                                 </div>
 
                             } else {
-                                if ( ! color2 ){ color2 = '#0693e3'; }
+                              if ( ! color2 ){
+                              		color2 = '#0693e3';
+                              		bgType2 === '0';
+                              }
                                 if (bgType2 === '0') {
                                     return <div
                                         className="vk_prBlocks_item_icon_outer"
@@ -688,7 +697,10 @@ registerBlockType('vk-blocks/pr-blocks', {
                                 </div>
 
                             } else {
-                                if ( ! color3 ){ color3 = '#0693e3'; }
+                              if ( ! color3 ){
+                              		color3 = '#0693e3';
+                              		bgType3 === '0';
+                              }
                                 if (bgType3 === '0') {
                                     return <div
                                         className="vk_prBlocks_item_icon_outer"
