@@ -159,7 +159,13 @@ registerBlockType('vk-blocks/pr-blocks', {
                             />
                             <ColorPalette
                                 value={color1}
-                                onChange={(value) => setAttributes({color1: value})}
+                                onChange={(value) => {
+                              		if (value){
+                              			setAttributes({color1: value})
+                              		} else {
+                              			setAttributes({color1: '#0693e3'})
+                              		}
+                              	}}
                             />
                             <RadioControl
                                 label={__('Icon Background:', 'vk-blocks')}
@@ -217,7 +223,13 @@ registerBlockType('vk-blocks/pr-blocks', {
                             />
                             <ColorPalette
                                 value={color2}
-                                onChange={(value) => setAttributes({color2: value})}
+                                onChange={(value) => {
+                                  if (value){
+                                    setAttributes({color2: value})
+                                  } else {
+                                    setAttributes({color2: '#0693e3'})
+                                  }
+                                }}
                             />
                             <RadioControl
                                 label={__('Icon Background:', 'vk-blocks')}
@@ -275,7 +287,13 @@ registerBlockType('vk-blocks/pr-blocks', {
                             />
                             <ColorPalette
                                 value={color3}
-                                onChange={(value) => setAttributes({color3: value})}
+                                onChange={(value) => {
+                                  if (value){
+                                    setAttributes({color3: value})
+                                  } else {
+                                    setAttributes({color3: '#0693e3'})
+                                  }
+                                }}
                             />
                             <RadioControl
                                 label={__('Icon Background:', 'vk-blocks')}
