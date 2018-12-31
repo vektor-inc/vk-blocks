@@ -345,7 +345,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                                 } else {
                                     return <div
                                         className="vk_prBlocks_item_icon_outer"
-                                        style={{backgroundColor: 'transparent', border: '1px solid' + color1}}
+                                        style={{backgroundColor: 'transparent', border: '1px solid ' + color1}}
                                     ><i className={`${icon1} vk_prBlocks_item_icon`}
                                         style={{color: color1}}>
                                     </i>
@@ -403,7 +403,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                                 } else {
                                     return <div
                                         className="vk_prBlocks_item_icon_outer"
-                                        style={{backgroundColor: 'transparent', border: '1px solid' + color2}}
+                                        style={{backgroundColor: 'transparent', border: '1px solid ' + color2}}
                                     ><i className={`${icon2} vk_prBlocks_item_icon`}
                                         style={{color: color2}}>
                                     </i>
@@ -461,7 +461,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                                 } else {
                                     return <div
                                         className="vk_prBlocks_item_icon_outer"
-                                        style={{backgroundColor: 'transparent', border: '1px solid' + color3}}
+                                        style={{backgroundColor: 'transparent', border: '1px solid ' + color3}}
                                     ><i className={`${icon3} vk_prBlocks_item_icon`}
                                         style={{color: color3}}>
                                     </i>
@@ -570,7 +570,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                                 } else {
                                     return <div
                                         className="vk_prBlocks_item_icon_outer"
-                                        style={{backgroundColor: 'transparent', border: '1px solid' + color1}}
+                                        style={{backgroundColor: 'transparent', border: '1px solid ' + color1}}
                                     ><i className={`${icon1} vk_prBlocks_item_icon`}
                                         style={{color: color1}}>
                                     </i>
@@ -627,7 +627,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                                 } else {
                                     return <div
                                         className="vk_prBlocks_item_icon_outer"
-                                        style={{backgroundColor: 'transparent', border: '1px solid' + color2}}
+                                        style={{backgroundColor: 'transparent', border: '1px solid ' + color2}}
                                     ><i className={`${icon2} vk_prBlocks_item_icon`}
                                         style={{color: color2}}>
                                     </i>
@@ -685,7 +685,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                                 } else {
                                     return <div
                                         className="vk_prBlocks_item_icon_outer"
-                                        style={{backgroundColor: 'transparent', border: '1px solid' + color3}}
+                                        style={{backgroundColor: 'transparent', border: '1px solid ' + color3}}
                                     ><i className={`${icon3} vk_prBlocks_item_icon`}
                                         style={{color: color3}}>
                                     </i>
