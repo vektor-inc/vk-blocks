@@ -281,7 +281,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                                 label={__('Icon Background:', 'vk-blocks')}
                                 selected={bgType3}
                                 options={[
-                                    {label: __('Solid color', 'vk-blocks'), value: '3'},
+                                    {label: __('Solid color', 'vk-blocks'), value: '0'},
                                     {label: __('No background', 'vk-blocks'), value: '1'},
                                 ]}
                                 onChange={(value) => setAttributes({bgType3: value})}
@@ -554,7 +554,9 @@ registerBlockType('vk-blocks/pr-blocks', {
 
                             } else {
 
+                                if ( ! color1 ){ color1 = '#0693e3'; }
                                 if (bgType1 === '0') {
+
                                     return <div
                                         className="vk_prBlocks_item_icon_outer"
                                         style={{
@@ -610,7 +612,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                                 </div>
 
                             } else {
-
+                                if ( ! color2 ){ color2 = '#0693e3'; }
                                 if (bgType2 === '0') {
                                     return <div
                                         className="vk_prBlocks_item_icon_outer"
@@ -668,7 +670,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                                 </div>
 
                             } else {
-
+                                if ( ! color3 ){ color3 = '#0693e3'; }
                                 if (bgType3 === '0') {
                                     return <div
                                         className="vk_prBlocks_item_icon_outer"
