@@ -175,7 +175,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                                     {label: __('Solid color', 'vk-blocks'), value: '0'},
                                     {label: __('No background', 'vk-blocks'), value: '1'},
                                 ]}
-                                onChange={(value) => setAttributes({bgType1: value})}
+                                onChange={(value) => setAttributes({ bgType1: value })}
                             />
                         </BaseControl>
                         <BaseControl
@@ -352,7 +352,7 @@ registerBlockType('vk-blocks/pr-blocks', {
 
                             } else {
 
-                                if (bgType1 === '0') {
+                                if ( bgType1 === '0' ) {
                                     return <div
                                         className="vk_prBlocks_item_icon_outer"
                                         style={{
@@ -409,6 +409,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                                 </div>
 
                             } else {
+
 
                                 if (bgType2 === '0') {
                                     return <div
@@ -467,6 +468,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                                 </div>
 
                             } else {
+
 
                                 if (bgType3 === '0') {
                                     return <div
