@@ -36,7 +36,7 @@ export class Link extends React.Component {
             } else if (buttonType === '1') {
                 aStyle = {
                     backgroundColor: 'transparent',
-                    border: '1px solid' + buttonColorCustom,
+                    border: '1px solid ' + buttonColorCustom,
                     color: buttonColorCustom
                 };
             }
