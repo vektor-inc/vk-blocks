@@ -299,16 +299,20 @@ registerBlockType('vk-blocks/pr-content', {
                                             <div className="pr-content-btn">
                                                 <a href={url}
                                                    className="btn btn-block btn-lg btn-primary"
-                                                   target={urlType}>{buttonText}
-                                                    style={{backgroundColor: buttonColor}}
+                                                   target={urlType}
+                                                   style={{backgroundColor: buttonColor}}
+                                                >
+                                                    {buttonText}
                                                 </a>
                                             </div>
                                             :
                                             <div className="pr-content-btn">
                                                 <a href={url}
                                                    className="btn btn-block btn-lg btn-primary"
-                                                   target={urlType}>{buttonText}
-                                                    style={{backgroundColor: '#fff', border:`1px solid ${buttonColor}`}}
+                                                   target={urlType}
+                                                   style={{backgroundColor: '#fff', border: `1px solid ${buttonColor}`}}
+                                                >
+                                                    {buttonText}
                                                 </a>
                                             </div>
                                     }
