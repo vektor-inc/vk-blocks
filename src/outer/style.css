@@ -1,5 +1,16 @@
 /*-------------------------------------------*/
 /* CSS
 /*-------------------------------------------*/
+.vk_outer {
+  min-height: 100px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat; }
+
+.vk_outer-padding {
+  padding: 50px; }
+
+.vk_outer-padding-none {
+  padding: 0; }
 
 /*# sourceMappingURL=style.css.map */

@@ -2,12 +2,24 @@
  * outer block type
  *
  */
+import React from "react";
+import {Padding} from "./padding";
+
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
-const {RangeControl, RadioControl, PanelBody, Button, PanelColor} = wp.components;
+const {RangeControl, RadioControl, PanelBody, Button, PanelColor, BaseControl} = wp.components;
 const {Fragment} = wp.element;
 const {RichText, InspectorControls, MediaUpload, ColorPalette, InnerBlocks} = wp.editor;
 const BlockIcon = 'arrow-down';
+
+
+let Greeting = () => {
+    if (isMorning) {
+        return <span>GoodMorning</span>
+    } else {
+        return <span>Hello</span>
+    }
+}
 
 /**
  * Register: a Gutenberg Block.
@@ -30,7 +42,7 @@ registerBlockType('vk-blocks/outer', {
     attributes: {
         bgColor: {
             type: 'string',
-            default: null,
+            default: '#f3f4f5',
         },
         bgImage: {
             type: 'string',
@@ -38,11 +50,11 @@ registerBlockType('vk-blocks/outer', {
         },
         parallax:{
             type: 'string',
-            default: null,
+            default: '0',
         },
-        padding: {
+        is_padding: {
             type: 'string',
-            default: null,
+            default: '1',
         }
     },
 
@@ -59,7 +71,7 @@ registerBlockType('vk-blocks/outer', {
             bgColor,
             bgImage,
             parallax,
-            padding
+            is_padding
         } = attributes;
 
         return (
@@ -93,29 +105,24 @@ registerBlockType('vk-blocks/outer', {
                                 label={__('Parallax', 'vk-blocks')}
                                 selected={parallax}
                                 options={[
-                                    {label: __('ON', 'vk-blocks'), value: true},
-                                    {label: __('OFF', 'vk-blocks'), value: null}
+                                    {label: __('ON', 'vk-blocks'), value: '1'},
+                                    {label: __('OFF', 'vk-blocks'), value: '0'}
                                 ]}
                                 onChange={(value) => setAttributes({parallax: value})}
                             />
                             <RadioControl
                                 label={__('Padding', 'vk-blocks')}
-                                selected={padding}
+                                selected={is_padding}
                                 options={[
-                                    {label: __('Use default padding', 'vk-blocks'), value: true},
-                                    {label: __('Do not use default padding.', 'vk-blocks'), value: null}
+                                    {label: __('Use default padding', 'vk-blocks'), value: '1'},
+                                    {label: __('Do not use default padding.', 'vk-blocks'), value: '0'}
                                 ]}
-                                onChange={(value) => setAttributes({padding: value})}
+                                onChange={(value) => setAttributes({is_padding: value})}
                             />
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
-                <div
-                    className={ 'innerblocks' }
-                    style={{backgroundColor :'#f3f4f5'}}
-                >
-                    <InnerBlocks/>
-                </div>
+                <Padding is_padding={is_padding} bgColor={bgColor} bgImage={bgImage} parallax={parallax}/>
             </Fragment>
         );
     },
