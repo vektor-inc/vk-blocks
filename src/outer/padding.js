@@ -1,4 +1,5 @@
 import React from 'react';
+
 const {InnerBlocks} = wp.editor;
 
 export class Padding extends React.Component {
@@ -6,22 +7,47 @@ export class Padding extends React.Component {
     render() {
 
         let is_padding = this.props.is_padding;
+        let is_parallax = this.props.is_parallax;
         let bgColor = this.props.bgColor;
         let bgImage = this.props.bgImage;
-        let style = '';
+        let for_ = this.props.for_;
+        let padding;
+        let parallax;
+        let elm;
+        let containerClass;
 
+
+        //parallaxのクラス切り替え
+        if (is_parallax === '1') {
+            parallax = ' vk_outer-parallax';
+        } else {
+            parallax = ' vk_outer-parallax-none';
+        }
+
+        //paddingのクラス切り替え
         if(is_padding === '1'){
-            style =  'vk_outer vk_outer-padding';
+            padding = ' vk_outer-padding';
         }else {
-            style =  'vk_outer vk_outer-padding-none';
+            padding = ' vk_outer-padding-none';
+        }
+
+        //編集画面とサイト上の切り替え
+        if(for_ === 'edit'){
+            elm = <InnerBlocks/>;
+        }else if('save'){
+            elm = <InnerBlocks.Content/>;
+            containerClass = 'vk_outer_container';
         }
 
         return (
             <div
-                className={style}
-                style={{backgroundColor :bgColor, backgroundImage:`url(${bgImage})`}}
+                className={'vk_outer' + parallax + padding}
+                style={{backgroundColor: bgColor, backgroundImage: `url(${bgImage})`}}
             >
-                <InnerBlocks/>
+                <div
+                    className={containerClass}>
+                {elm}
+                </div>
             </div>
         );
     }

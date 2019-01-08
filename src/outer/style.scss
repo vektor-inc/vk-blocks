@@ -3,14 +3,22 @@
 /*-------------------------------------------*/
 
 .vk_outer{
-  min-height: 100px;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  .vk_outer_container{
+    min-height: 92px;
+  }
 }
 .vk_outer-padding{
   padding: 50px ;
 }
 .vk_outer-padding-none{
   padding: 0 ;
+}
+.vk_outer-parallax{
+  background-attachment: fixed;
+}
+.vk_outer-parallax-none{
+  background-attachment: unset;
 }

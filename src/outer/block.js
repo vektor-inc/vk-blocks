@@ -48,7 +48,7 @@ registerBlockType('vk-blocks/outer', {
             type: 'string',
             default: null,
         },
-        parallax:{
+        is_parallax:{
             type: 'string',
             default: '0',
         },
@@ -70,7 +70,7 @@ registerBlockType('vk-blocks/outer', {
         const {
             bgColor,
             bgImage,
-            parallax,
+            is_parallax,
             is_padding
         } = attributes;
 
@@ -103,12 +103,12 @@ registerBlockType('vk-blocks/outer', {
                             />
                             <RadioControl
                                 label={__('Parallax', 'vk-blocks')}
-                                selected={parallax}
+                                selected={is_parallax}
                                 options={[
                                     {label: __('ON', 'vk-blocks'), value: '1'},
                                     {label: __('OFF', 'vk-blocks'), value: '0'}
                                 ]}
-                                onChange={(value) => setAttributes({parallax: value})}
+                                onChange={(value) => setAttributes({is_parallax: value})}
                             />
                             <RadioControl
                                 label={__('Padding', 'vk-blocks')}
@@ -122,7 +122,7 @@ registerBlockType('vk-blocks/outer', {
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
-                <Padding is_padding={is_padding} bgColor={bgColor} bgImage={bgImage} parallax={parallax}/>
+                <Padding is_padding={is_padding} is_parallax={is_parallax} bgColor={bgColor} bgImage={bgImage} for_={'edit'}/>
             </Fragment>
         );
     },
@@ -136,15 +136,15 @@ registerBlockType('vk-blocks/outer', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     save({attributes}) {
-        // const {
-        //     heading,
-        //     content,
-        //     insertImage,
-        //     arrowFlag,
-        // } = attributes;
+        const {
+            bgColor,
+            bgImage,
+            is_parallax,
+            is_padding
+        } = attributes;
 
         return (
-            <div>Front</div>
+            <Padding is_padding={is_padding} is_parallax={is_parallax} bgColor={bgColor} bgImage={bgImage} for_={'save'}/>
         );
     },
 });
