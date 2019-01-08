@@ -9,12 +9,14 @@ msgstr ""
 
 #: src/balloon/block.js:122
 #: src/flow/block.js:111
+#: src/outer/block.js:98
 #: src/pr-blocks/block.js:324
 msgid "Select image"
 msgstr ""
 
 #: src/balloon/block.js:122
 #: src/flow/block.js:112
+#: src/outer/block.js:100
 #: src/pr-blocks/block.js:326
 msgid "Upload image"
 msgstr ""
@@ -237,6 +239,43 @@ msgstr ""
 msgid "Input content"
 msgstr ""
 
+#: src/outer/block.js:105
+msgid "Parallax"
+msgstr ""
+
+#: src/outer/block.js:108
+msgid "ON"
+msgstr ""
+
+#: src/outer/block.js:109
+msgid "OFF"
+msgstr ""
+
+#: src/outer/block.js:114
+msgid "Padding"
+msgstr ""
+
+#: src/outer/block.js:117
+msgid "Use default padding"
+msgstr ""
+
+#: src/outer/block.js:118
+msgid "Do not use default padding."
+msgstr ""
+
+#: src/outer/block.js:39
+msgid "outer"
+msgstr ""
+
+#: src/outer/block.js:82
+msgid "Background Setting"
+msgstr ""
+
+#: src/outer/block.js:83
+#: src/pr-blocks/block.js:183
+msgid "When you have an image. Image is displayed with priority"
+msgstr ""
+
 #: src/pr-blocks/block.js:137
 msgid "PR Block1 Setting"
 msgstr ""
@@ -247,10 +286,6 @@ msgstr ""
 
 #: src/pr-blocks/block.js:182
 msgid "PR Image 1"
-msgstr ""
-
-#: src/pr-blocks/block.js:183
-msgid "When you have an image. Image is displayed with priority"
 msgstr ""
 
 #: src/pr-blocks/block.js:202

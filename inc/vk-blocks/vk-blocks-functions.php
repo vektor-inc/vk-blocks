@@ -23,7 +23,7 @@ function vkblocks_blocks_assets() {
 	if ( defined( 'GUTENBERG_VERSION' ) || version_compare( $wp_version, '5.0', '>=' ) ) {
 
 
-		$arr = array('alert','balloon','button','faq','flow','pr-blocks','dev');//REPLACE-FLAG : このコメントは削除しないで下さい。wp-create-gurten-template.shで削除する基準として左の[//REPLACE-FLAG]を使っています。
+		$arr = array('alert','balloon','button','faq','flow','pr-blocks','outer');//REPLACE-FLAG : このコメントは削除しないで下さい。wp-create-gurten-template.shで削除する基準として左の[//REPLACE-FLAG]を使っています。
 		foreach ($arr as $value) {
 			register_block_type(
 				'vk-blocks/'. $value, [
