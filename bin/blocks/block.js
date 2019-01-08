@@ -65,7 +65,7 @@ registerBlockType('vk-blocks/your-block-slug', {
         } = attributes;
 
         return (
-            <div>Editor</div>
+            <div className="vk_your-block-slug">Editor</div>
         );
     },
 
@@ -86,7 +86,7 @@ registerBlockType('vk-blocks/your-block-slug', {
         } = attributes;
 
         return (
-            <div>Front</div>
+            <div className="vk_your-block-slug">Front</div>
         );
     },
 });
