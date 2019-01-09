@@ -9,13 +9,13 @@ msgstr ""
 
 #: src/balloon/block.js:122
 #: src/flow/block.js:111
-#: src/pr-content/block.js:200
+#: src/pr-content/prContent.js:53
 msgid "Select image"
 msgstr ""
 
 #: src/balloon/block.js:122
 #: src/flow/block.js:112
-#: src/pr-content/block.js:204
+#: src/pr-content/prContent.js:57
 msgid "Upload image"
 msgstr ""
 
@@ -202,86 +202,74 @@ msgstr ""
 msgid "Input content"
 msgstr ""
 
-#: src/pr-content/block.js:110
+#: src/pr-content/block.js:113
 msgid "Color Setting"
 msgstr ""
 
-#: src/pr-content/block.js:111
+#: src/pr-content/block.js:114
 msgid "Title Color"
 msgstr ""
 
-#: src/pr-content/block.js:117
+#: src/pr-content/block.js:120
 msgid "Content Color"
 msgstr ""
 
-#: src/pr-content/block.js:132
-msgid "Button Setting"
-msgstr ""
-
-#: src/pr-content/block.js:140
-msgid "URL Type"
-msgstr ""
-
-#: src/pr-content/block.js:144
-msgid "Open url in new window"
-msgstr ""
-
-#: src/pr-content/block.js:145
-msgid "Open url in current window"
-msgstr ""
-
-#: src/pr-content/block.js:150
-msgid "Button Type"
-msgstr ""
-
-#: src/pr-content/block.js:151
-msgid "Please select the from below."
-msgstr ""
-
-#: src/pr-content/block.js:154
-msgid "Solid"
-msgstr ""
-
-#: src/pr-content/block.js:155
-msgid "Ghost"
-msgstr ""
-
-#: src/pr-content/block.js:161
+#: src/pr-content/block.js:126
 msgid "Button Color"
 msgstr ""
 
-#: src/pr-content/block.js:164
-msgid "Layout Setting"
+#: src/pr-content/block.js:133
+msgid "Image Border Color"
+msgstr ""
+
+#: src/pr-content/block.js:141
+msgid "Button Setting"
+msgstr ""
+
+#: src/pr-content/block.js:143
+msgid "Button Url"
+msgstr ""
+
+#: src/pr-content/block.js:151
+msgid "URL Type"
+msgstr ""
+
+#: src/pr-content/block.js:155
+msgid "Open url in new window"
+msgstr ""
+
+#: src/pr-content/block.js:156
+msgid "Open url in current window"
+msgstr ""
+
+#: src/pr-content/block.js:161
+msgid "Button Type"
+msgstr ""
+
+#: src/pr-content/block.js:165
+msgid "Solid"
 msgstr ""
 
 #: src/pr-content/block.js:166
-msgid "Image Setting"
+msgid "Ghost"
 msgstr ""
 
-#: src/pr-content/block.js:167
-msgid "When you have an image. Image is displayed with priority"
-msgstr ""
-
-#: src/pr-content/block.js:174
-msgid "Layout"
+#: src/pr-content/block.js:173
+msgid "Layout Setting"
 msgstr ""
 
 #: src/pr-content/block.js:175
-msgid "Please select the type of pr_content_."
+msgid "Layout Type"
 msgstr ""
 
-#: src/pr-content/block.js:217
-msgid "Input title."
+#: src/pr-content/block.js:35
+msgid "PR Content"
 msgstr ""
 
-#: src/pr-content/block.js:224
-msgid "Input content."
-msgstr ""
-
-#: src/pr-content/block.js:256
+#: src/pr-content/prContent.js:133
 msgid "Input button text."
 msgstr ""
 
-#: src/pr-content/block.js:32
-msgid "PR Content"
+#: src/pr-content/prContent.js:78
+msgid "Input content."
 msgstr ""
