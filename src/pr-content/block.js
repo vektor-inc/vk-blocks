@@ -126,19 +126,27 @@ registerBlockType('vk-blocks/pr-content', {
                                 onChange={(value) => setAttributes({buttonColor: value})}
                             />
                         </BaseControl>
+                        <BaseControl
+                            label={__('Image Border Color', 'vk-blocks')}
+                        >
+                            <ColorPalette
+                                value={ImageBorderColor}
+                                onChange={(value) => setAttributes({ImageBorderColor: value})}
+                            />
+                        </BaseControl>
                     </PanelBody>
                     <PanelBody title={__('Button Setting', 'vk-blocks')}>
                         <BaseControl
-                            label={__('Button Setting', 'vk-blocks')}
+                            label={__('Button Url', 'vk-blocks')}
                         >
                             <TextControl
                                 value={url}
                                 onChange={(value) => setAttributes({url: value})}
                                 placeholder={'https://vektor-inc.co.jp/'}
                             />
+                        </BaseControl>
+                        <BaseControl label={__('URL Type', 'vk-blocks')}>
                             <RadioControl
-                                label={__('URL Type', 'vk-blocks')}
-                                help={__('Please select the from below.', 'vk-blocks')}
                                 selected={urlType}
                                 options={[
                                     {label: __('Open url in new window', 'vk-blocks'), value: '_blank'},
@@ -146,9 +154,9 @@ registerBlockType('vk-blocks/pr-content', {
                                 ]}
                                 onChange={(value) => setAttributes({urlType: value})}
                             />
+                        </BaseControl>
+                        <BaseControl label={__('Button Type', 'vk-blocks')}>
                             <RadioControl
-                                label={__('Button Type', 'vk-blocks')}
-                                help={__('Please select the from below.', 'vk-blocks')}
                                 selected={buttonType}
                                 options={[
                                     {label: __('Solid', 'vk-blocks'), value: '1'},
@@ -158,21 +166,10 @@ registerBlockType('vk-blocks/pr-content', {
                             />
 
                         </BaseControl>
-                        <BaseControl label={__('Button Color', 'vk-blocks')}></BaseControl>
-
-                    </PanelBody>
+                        </PanelBody>
                     <PanelBody title={__('Layout Setting', 'vk-blocks')}>
-                        <BaseControl
-                            label={__('Image Setting', 'vk-blocks')}
-                            help={__('When you have an image. Image is displayed with priority', 'vk-blocks')}
-                        >
-                            <ColorPalette
-                                value={ImageBorderColor}
-                                onChange={(value) => setAttributes({ImageBorderColor: value})}
-                            />
                             <RadioControl
-                                label={__('Layout', 'vk-blocks')}
-                                help={__('Please select the type of pr_content_.', 'vk-blocks')}
+                                label={__('Layout Type', 'vk-blocks')}
                                 selected={layout}
                                 options={[
                                     {label: __('Right', 'vk-blocks'), value: 'right'},
@@ -180,8 +177,6 @@ registerBlockType('vk-blocks/pr-content', {
                                 ]}
                                 onChange={(value) => setAttributes({layout: value})}
                             />
-                        </BaseControl>
-
                     </PanelBody>
                 </InspectorControls>
                     <div className="vk_pr-content">
