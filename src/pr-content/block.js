@@ -60,8 +60,8 @@ registerBlockType('vk-blocks/pr-content', {
             default: 'blue',
         },
         buttonText: {
-            type: 'string',
-            default: null,
+            source: 'html',
+            selector: 'p',
         },
         urlType: {
             type: 'string',
@@ -71,34 +71,14 @@ registerBlockType('vk-blocks/pr-content', {
             type: 'string',
             default: null,
         },
+        ImageBorderColor: {
+            type: 'string',
+            default: null,
+        },
         layout: {
             type: 'string',
             default: null,
-        },
-        bgColor: {
-            type: 'string',
-            default: null,
-        },
-        bgImage: {
-            type: 'string',
-            default: null,
-        },
-        overlayColor: {
-            type: 'string',
-            default: null,
-        },
-        overlayOpacity: {
-            type: 'string',
-            default: null,
-        },
-        marginTop: {
-            type: 'string',
-            default: null,
-        },
-        marginBotton: {
-            type: 'string',
-            default: null,
-        },
+        }
     },
 
     /**
@@ -123,31 +103,31 @@ registerBlockType('vk-blocks/pr-content', {
             Image,
             ImageBorderColor,
             layout,
-            bgColor,
-            bgImage,
-            overlayColor,
-            overlayOpacity,
-            marginTop,
-            marginBotton,
         } = attributes;
-
         return (
             <Fragment>
                 <InspectorControls>
-                    <PanelBody title={__('PR Content setting', 'vk-blocks')}>
-                        <BaseControl
-                            label={__('Content Setting', 'vk-blocks')}
-                            help={__('When you have an image. Image is displayed with priority', 'vk-blocks')}
-                        >
+                    <PanelBody title={__('Color Setting', 'vk-blocks')}>
+                        <BaseControl label={__('Title Color', 'vk-blocks')}>
                             <ColorPalette
                                 value={titleColor}
                                 onChange={(value) => setAttributes({titleColor: value})}
                             />
+                        </BaseControl>
+                        <BaseControl label={__('Content Color', 'vk-blocks')}>
                             <ColorPalette
                                 value={contentColor}
                                 onChange={(value) => setAttributes({contentColor: value})}
                             />
                         </BaseControl>
+                        <BaseControl label={__('Button Color', 'vk-blocks')}>
+                            <ColorPalette
+                                value={buttonColor}
+                                onChange={(value) => setAttributes({buttonColor: value})}
+                            />
+                        </BaseControl>
+                    </PanelBody>
+                    <PanelBody title={__('Button Setting', 'vk-blocks')}>
                         <BaseControl
                             label={__('Button Setting', 'vk-blocks')}
                         >
@@ -155,11 +135,6 @@ registerBlockType('vk-blocks/pr-content', {
                                 value={url}
                                 onChange={(value) => setAttributes({url: value})}
                                 placeholder={'https://vektor-inc.co.jp/'}
-                            />
-                            <TextControl
-                                value={buttonText}
-                                onChange={(value) => setAttributes({buttonText: value})}
-                                placeholder={'Read More'}
                             />
                             <RadioControl
                                 label={__('URL Type', 'vk-blocks')}
@@ -176,16 +151,17 @@ registerBlockType('vk-blocks/pr-content', {
                                 help={__('Please select the from below.', 'vk-blocks')}
                                 selected={buttonType}
                                 options={[
-                                    {label: __('Solid', 'vk-blocks'), value: '0'},
-                                    {label: __('Ghost', 'vk-blocks'), value: '1'}
+                                    {label: __('Solid', 'vk-blocks'), value: '1'},
+                                    {label: __('Ghost', 'vk-blocks'), value: '0'}
                                 ]}
                                 onChange={(value) => setAttributes({buttonType: value})}
                             />
-                            <ColorPalette
-                                value={buttonColor}
-                                onChange={(value) => setAttributes({buttonColor: value})}
-                            />
+
                         </BaseControl>
+                        <BaseControl label={__('Button Color', 'vk-blocks')}></BaseControl>
+
+                    </PanelBody>
+                    <PanelBody title={__('Layout Setting', 'vk-blocks')}>
                         <BaseControl
                             label={__('Image Setting', 'vk-blocks')}
                             help={__('When you have an image. Image is displayed with priority', 'vk-blocks')}
@@ -205,64 +181,16 @@ registerBlockType('vk-blocks/pr-content', {
                                 onChange={(value) => setAttributes({layout: value})}
                             />
                         </BaseControl>
-                        <BaseControl
-                            label={__('Background Setting', 'vk-blocks')}
-                            help={__('When you have an image. Image is displayed with priority', 'vk-blocks')}
-                        >
-                            <ColorPalette
-                                value={bgColor}
-                                onChange={(value) => setAttributes({bgColor: value})}
-                            />
-                            <MediaUpload
-                                onSelect={(value) => setAttributes({bgImage: value.url})}
-                                type="image"
-                                value={bgImage}
-                                render={({open}) => (
-                                    <Button
-                                        onClick={open}
-                                        className={bgImage ? 'image-button' : 'button button-large'}
-                                    >
-                                        {!bgImage ? __('Select image', 'vk-blocks') :
-                                            <img className={'icon-image'} src={bgImage}
-                                                 alt={__('Upload image', 'vk-blocks')}/>}
-                                    </Button>
-                                )}
-                            />
-                            <ColorPalette
-                                value={overlayColor}
-                                onChange={(value) => setAttributes({overlayColor: value})}
-                            />
-                            <TextControl
-                                value={overlayOpacity}
-                                onChange={(value) => setAttributes({overlayOpacity: value})}
-                                placeholder={'overlayOpacity'}
-                            />
-                        </BaseControl>
-                        <BaseControl
-                            label={__('Layout:', 'vk-blocks')}
-                        >
-                            <TextControl
-                                value={marginTop}
-                                onChange={(value) => setAttributes({marginTop: value})}
-                            />
-                            <TextControl
-                                value={marginBotton}
-                                onChange={(value) => setAttributes({marginBotton: value})}
-                            />
-                        </BaseControl>
+
                     </PanelBody>
                 </InspectorControls>
-                <div className="widget widget_vk_widget_pr_content">
-                    <div className="pr-content vk-prlx">
-                        <div className="container">
-
-
-                            <div className="row left">
-                                <div className="col-sm-6 pr-content-col-img">
+                    <div className="vk_pr-content">
+                        <div className="vk_pr-content_container">
+                            <div className={`row ${layout}`}>
+                                <div className="col-sm-6 vk_pr-content_col_img">
                                     <MediaUpload
                                         onSelect={(value) => setAttributes({Image: value.sizes.full.url})}
                                         type=" image"
-                                        className={'vk_balloon_icon_image'}
                                         value={Image}
                                         render={({open}) => (
                                             <Button
@@ -270,49 +198,63 @@ registerBlockType('vk-blocks/pr-content', {
                                                 className={Image ? 'image-button' : 'button button-large'}
                                             >
                                                 {!Image ? __('Select image', 'vk-blocks') :
-                                                    <img className={'vk_balloon_icon_image'} src={Image}
-                                                         alt={__('Upload image', 'vk-blocks')}/>}
+                                                    <img
+                                                        className={'vk_pr_content_media_image'}
+                                                        src={Image}
+                                                        alt={__('Upload image', 'vk-blocks')}
+                                                        style={{border:`1px solid ${ImageBorderColor}`}}
+                                                    />}
                                             </Button>
                                         )}
                                     />
                                 </div>
-                                <div className="col-sm-6 pr-content-col-text">
+                                <div className="col-sm-6 vk_pr-content_col_text">
                                     <RichText
                                         tagName="h3"
-                                        className={'pr-content-title'}
+                                        className={'vk_pr-content_title'}
                                         onChange={(value) => setAttributes({title: value})}
                                         value={title}
-                                        placeholder={__('Input text', 'vk-blocks')}
+                                        placeholder={__('Input title.', 'vk-blocks')}
                                         style={{color: titleColor}}
                                     />
                                     <RichText
                                         tagName="p"
                                         onChange={(value) => setAttributes({content: value})}
                                         value={content}
-                                        placeholder={__('Input text', 'vk-blocks')}
+                                        placeholder={__('Input content.', 'vk-blocks')}
                                         style={{color: contentColor}}
                                     />
 
                                     {
-                                        buttonType == '0' ?
+                                        buttonType === '1' ?
 
-                                            <div className="pr-content-btn">
+                                            <div className="vk_pr-content_btn">
                                                 <a href={url}
                                                    className="btn btn-block btn-lg btn-primary"
                                                    target={urlType}
-                                                   style={{backgroundColor: buttonColor}}
+                                                   style={{backgroundColor: buttonColor,border:`1px solid ${buttonColor}`}}
                                                 >
-                                                    {buttonText}
+                                                    <RichText
+                                                        tagName="p"
+                                                        onChange={(value) => setAttributes({buttonText: value})}
+                                                        value={buttonText}
+                                                        placeholder={__('Input button text.', 'vk-blocks')}
+                                                    />
                                                 </a>
                                             </div>
                                             :
-                                            <div className="pr-content-btn">
+                                            <div className="vk_pr-content_btn">
                                                 <a href={url}
-                                                   className="btn btn-block btn-lg btn-primary"
+                                                   className="btn btn-block btn-lg btn-primary btn-ghost"
                                                    target={urlType}
-                                                   style={{backgroundColor: '#fff', border: `1px solid ${buttonColor}`}}
+                                                   style={{backgroundColor: '#fff', border: `1px solid ${buttonColor}`, color:`${buttonColor}`}}
                                                 >
-                                                    {buttonText}
+                                                    <RichText
+                                                        tagName="p"
+                                                        onChange={(value) => setAttributes({buttonText: value})}
+                                                        value={buttonText}
+                                                        placeholder={__('Input button text.', 'vk-blocks')}
+                                                    />
                                                 </a>
                                             </div>
                                     }
@@ -320,7 +262,6 @@ registerBlockType('vk-blocks/pr-content', {
                             </div>
                         </div>
                     </div>
-                </div>
             </Fragment>
         );
     },
@@ -347,12 +288,6 @@ registerBlockType('vk-blocks/pr-content', {
             urlType,
             Image,
             layout,
-            bgColor,
-            bgImage,
-            overlayColor,
-            overlayOpacity,
-            marginTop,
-            marginBotton,
         } = attributes;
 
         return (
