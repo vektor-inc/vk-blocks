@@ -8,14 +8,18 @@ export class Padding extends React.Component {
 
         let is_padding = this.props.is_padding;
         let is_parallax = this.props.is_parallax;
+        let outerWidth = this.props.outerWidth;
         let bgColor = this.props.bgColor;
         let bgImage = this.props.bgImage;
         let for_ = this.props.for_;
         let padding;
         let parallax;
+        let classWidth;
         let elm;
         let containerClass;
 
+				//幅のクラス切り替え
+        classWidth = ` vk_outer-width-${outerWidth}`;
 
         //parallaxのクラス切り替え
         if (is_parallax === '1') {
@@ -41,7 +45,7 @@ export class Padding extends React.Component {
 
         return (
             <div
-                className={'vk_outer' + parallax + padding}
+                className={'vk_outer' + classWidth + parallax + padding}
                 style={{backgroundColor: bgColor, backgroundImage: `url(${bgImage})`}}
             >
                 <div

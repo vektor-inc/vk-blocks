@@ -36,7 +36,7 @@ let Greeting = () => {
  */
 registerBlockType('vk-blocks/outer', {
     // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-    title: __('outer', 'vk-blocks'), // Block title.
+    title: __('Outer', 'vk-blocks'), // Block title.
     icon: BlockIcon, // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
     category: 'vk-blocks-cat', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
     attributes: {
@@ -47,6 +47,10 @@ registerBlockType('vk-blocks/outer', {
         bgImage: {
             type: 'string',
             default: null,
+        },
+				outerWidth:{
+            type: 'string',
+            default: 'normal',
         },
         is_parallax:{
             type: 'string',
@@ -70,6 +74,7 @@ registerBlockType('vk-blocks/outer', {
         const {
             bgColor,
             bgImage,
+            outerWidth,
             is_parallax,
             is_padding
         } = attributes;
@@ -101,6 +106,15 @@ registerBlockType('vk-blocks/outer', {
                                     </Button>
                                 )}
                             />
+														<RadioControl
+                                label={__('Outer width', 'vk-blocks')}
+                                selected={outerWidth}
+                                options={[
+                                    {label: __('Normal', 'vk-blocks'), value: 'normal'},
+                                    {label: __('Full Wide', 'vk-blocks'), value: 'full'}
+                                ]}
+                                onChange={(value) => setAttributes({outerWidth: value})}
+                            />
                             <RadioControl
                                 label={__('Parallax', 'vk-blocks')}
                                 selected={is_parallax}
@@ -122,7 +136,7 @@ registerBlockType('vk-blocks/outer', {
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
-                <Padding is_padding={is_padding} is_parallax={is_parallax} bgColor={bgColor} bgImage={bgImage} for_={'edit'}/>
+                <Padding outerWidth={outerWidth} is_padding={is_padding} is_parallax={is_parallax} bgColor={bgColor} bgImage={bgImage} for_={'edit'}/>
             </Fragment>
         );
     },
@@ -139,12 +153,13 @@ registerBlockType('vk-blocks/outer', {
         const {
             bgColor,
             bgImage,
+						outerWidth,
             is_parallax,
             is_padding
         } = attributes;
 
         return (
-            <Padding is_padding={is_padding} is_parallax={is_parallax} bgColor={bgColor} bgImage={bgImage} for_={'save'}/>
+            <Padding outerWidth={outerWidth} is_padding={is_padding} is_parallax={is_parallax} bgColor={bgColor} bgImage={bgImage} for_={'save'}/>
         );
     },
 });
