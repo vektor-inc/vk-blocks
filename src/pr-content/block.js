@@ -53,7 +53,7 @@ registerBlockType('vk-blocks/pr-content', {
         },
         buttonType: {
             type: 'string',
-            default: '0',
+            default: '1',
         },
         buttonColor: {
             type: 'string',
@@ -219,7 +219,6 @@ registerBlockType('vk-blocks/pr-content', {
                                         placeholder={__('Input content.', 'vk-blocks')}
                                         style={{color: contentColor}}
                                     />
-
                                     {
                                         buttonType === '1' ?
 
