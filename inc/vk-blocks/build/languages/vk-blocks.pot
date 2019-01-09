@@ -9,14 +9,14 @@ msgstr ""
 
 #: src/balloon/block.js:122
 #: src/flow/block.js:111
-#: src/outer/block.js:98
+#: src/outer/block.js:103
 #: src/pr-blocks/block.js:324
 msgid "Select image"
 msgstr ""
 
 #: src/balloon/block.js:122
 #: src/flow/block.js:112
-#: src/outer/block.js:100
+#: src/outer/block.js:105
 #: src/pr-blocks/block.js:326
 msgid "Upload image"
 msgstr ""
@@ -239,39 +239,51 @@ msgstr ""
 msgid "Input content"
 msgstr ""
 
-#: src/outer/block.js:105
-msgid "Parallax"
+#: src/outer/block.js:110
+msgid "Outer width"
 msgstr ""
 
-#: src/outer/block.js:108
-msgid "ON"
-msgstr ""
-
-#: src/outer/block.js:109
-msgid "OFF"
+#: src/outer/block.js:113
+msgid "Normal"
 msgstr ""
 
 #: src/outer/block.js:114
+msgid "Full Wide"
+msgstr ""
+
+#: src/outer/block.js:119
+msgid "Parallax"
+msgstr ""
+
+#: src/outer/block.js:122
+msgid "ON"
+msgstr ""
+
+#: src/outer/block.js:123
+msgid "OFF"
+msgstr ""
+
+#: src/outer/block.js:128
 msgid "Padding"
 msgstr ""
 
-#: src/outer/block.js:117
+#: src/outer/block.js:131
 msgid "Use default padding"
 msgstr ""
 
-#: src/outer/block.js:118
+#: src/outer/block.js:132
 msgid "Do not use default padding."
 msgstr ""
 
 #: src/outer/block.js:39
-msgid "outer"
+msgid "Outer"
 msgstr ""
 
-#: src/outer/block.js:82
+#: src/outer/block.js:87
 msgid "Background Setting"
 msgstr ""
 
-#: src/outer/block.js:83
+#: src/outer/block.js:88
 #: src/pr-blocks/block.js:183
 msgid "When you have an image. Image is displayed with priority"
 msgstr ""
