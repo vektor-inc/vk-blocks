@@ -12,15 +12,6 @@ const {Fragment} = wp.element;
 const {RichText, InspectorControls, MediaUpload, ColorPalette, InnerBlocks} = wp.editor;
 const BlockIcon = 'arrow-down';
 
-
-let Greeting = () => {
-    if (isMorning) {
-        return <span>GoodMorning</span>
-    } else {
-        return <span>Hello</span>
-    }
-}
-
 /**
  * Register: a Gutenberg Block.
  *
@@ -59,7 +50,11 @@ registerBlockType('vk-blocks/outer', {
         is_padding: {
             type: 'string',
             default: '1',
-        }
+        },
+        opacity: {
+            type: 'number',
+            default: 0.5,
+        },
     },
 
     /**
@@ -76,21 +71,39 @@ registerBlockType('vk-blocks/outer', {
             bgImage,
             outerWidth,
             is_parallax,
-            is_padding
+            is_padding,
+            opacity
         } = attributes;
 
         return (
             <Fragment>
                 <InspectorControls>
-                    <PanelBody>
+                    <PanelBody title={__('Background Setting', 'vk-blocks')}>
                         <BaseControl
-                            label={__('Background Setting', 'vk-blocks')}
-                            help={__('When you have an image. Image is displayed with priority', 'vk-blocks')}
+                            label={__('Color Setting', 'vk-blocks')}
+                            help={__('Color will overcome background image. If you want to display image, clear background color or set opacity 0.', 'vk-blocks')}
                         >
                             <ColorPalette
                                 value={bgColor}
                                 onChange={(value) => setAttributes({bgColor: value})}
                             />
+                        </BaseControl>
+                        <BaseControl
+                            label={__('Opacity Setting', 'vk-blocks')}
+                        >
+                            <RangeControl
+                                value={opacity}
+                                onChange={(value) => {setAttributes({opacity: value});
+                                }}
+                                min={0}
+                                max={1}
+                                step={0.1}
+                            />
+                        </BaseControl>
+                        <BaseControl
+                            label={__('Background Setting', 'vk-blocks')}
+                            help={__('When you have an image. Image is displayed with priority', 'vk-blocks')}
+                        >
                             <MediaUpload
                                 onSelect={(value) => setAttributes({bgImage: value.url})}
                                 type="image"
@@ -124,6 +137,11 @@ registerBlockType('vk-blocks/outer', {
                                 ]}
                                 onChange={(value) => setAttributes({is_parallax: value})}
                             />
+                        </BaseControl>
+                        <BaseControl
+                            label={__('Background Setting', 'vk-blocks')}
+                            help={__('When you have an image. Image is displayed with priority', 'vk-blocks')}
+                        >
                             <RadioControl
                                 label={__('Padding', 'vk-blocks')}
                                 selected={is_padding}
@@ -136,7 +154,7 @@ registerBlockType('vk-blocks/outer', {
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
-                <Padding outerWidth={outerWidth} is_padding={is_padding} is_parallax={is_parallax} bgColor={bgColor} bgImage={bgImage} for_={'edit'}/>
+                <Padding outerWidth={outerWidth} is_padding={is_padding} is_parallax={is_parallax} bgColor={bgColor} opacity={opacity} bgImage={bgImage} for_={'edit'}/>
             </Fragment>
         );
     },
@@ -153,13 +171,14 @@ registerBlockType('vk-blocks/outer', {
         const {
             bgColor,
             bgImage,
-						outerWidth,
+            outerWidth,
             is_parallax,
-            is_padding
+            is_padding,
+            opacity
         } = attributes;
 
         return (
-            <Padding outerWidth={outerWidth} is_padding={is_padding} is_parallax={is_parallax} bgColor={bgColor} bgImage={bgImage} for_={'save'}/>
+            <Padding outerWidth={outerWidth} is_padding={is_padding} is_parallax={is_parallax} bgColor={bgColor} opacity={opacity} bgImage={bgImage} for_={'save'}/>
         );
     },
 });

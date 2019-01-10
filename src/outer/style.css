@@ -2,9 +2,9 @@
 /* CSS
 /*-------------------------------------------*/
 .vk_outer {
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat; }
+  background-position: center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important; }
   .vk_outer .vk_outer_container {
     min-height: 92px; }
 
@@ -15,9 +15,9 @@
   padding: 0; }
 
 .vk_outer-parallax {
-  background-attachment: fixed; }
+  background-attachment: fixed !important; }
 
 .vk_outer-parallax-none {
-  background-attachment: unset; }
+  background-attachment: unset !important; }
 
 /*# sourceMappingURL=style.css.map */
