@@ -2,6 +2,8 @@
  * your-block-slug block type
  *
  */
+import React from "react";
+import YourComponent from "./component.js";
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
 const {RangeControl, RadioControl, PanelBody, Button, PanelColor, BaseControl} = wp.components;
@@ -65,7 +67,10 @@ registerBlockType('vk-blocks/your-block-slug', {
         } = attributes;
 
         return (
-            <div className="vk_your-block-slug">Editor</div>
+            <div className="vk_your-block-slug">
+                <div>Editor</div>
+                <YourComponent value={}/>
+            </div>
         );
     },
 
@@ -86,7 +91,10 @@ registerBlockType('vk-blocks/your-block-slug', {
         } = attributes;
 
         return (
-            <div className="vk_your-block-slug">Front</div>
+            <div className="vk_your-block-slug">
+                <div>Front</div>
+                <YourComponent value={}/>
+            </div>
         );
     },
 });
