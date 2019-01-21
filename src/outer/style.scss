@@ -14,7 +14,6 @@
     display: block;
     max-height: 100px;
     position: absolute;
-    top: 0;
     left: 0;
   }
 }
@@ -36,7 +35,13 @@
 
 .vk_outer_border_style-upper{
   svg{
+    top: 0;
     transform: rotate(180deg);
+  }
+}
+.vk_outer_border_style-lower{
+  svg{
+    bottom: 0;
   }
 }
 

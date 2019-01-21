@@ -35,6 +35,7 @@ export class Padding extends React.Component {
         let opacity = this.props.opacity;
         let bgImage = this.props.bgImage;
         let upperTiltLevel = this.props.upperTilt;
+        let lowerTiltLevel = this.props.lowerTilt;
         let tiltBgColor = this.props.tiltBgColor;
         let for_ = this.props.for_;
         let padding;
@@ -42,7 +43,8 @@ export class Padding extends React.Component {
         let classWidth;
         let elm;
         let containerClass;
-        let tiltFlag;
+        let tiltFlagUpper;
+        let tiltFlagLower;
 
         //幅のクラス切り替え
         classWidth = ` vk_outer-width-${outerWidth}`;
@@ -64,8 +66,14 @@ export class Padding extends React.Component {
             padding = ' vk_outer-padding-none';
         }
 
+        //上側セクションの傾き切り替え
         if (upperTiltLevel) {
-            tiltFlag = true;
+            tiltFlagUpper = true;
+        }
+
+        //下側セクションの傾き切り替え
+        if (lowerTiltLevel) {
+            tiltFlagLower = true;
         }
 
         //編集画面とサイト上の切り替え
@@ -85,16 +93,22 @@ export class Padding extends React.Component {
             >
                 <div className={'vk_outer_border_style-upper'}>
                     {
-                        tiltFlag && borderStyle(upperTiltLevel, tiltBgColor)
+                        tiltFlagUpper && borderStyle(upperTiltLevel, tiltBgColor)
                     }
                 </div>
                 <div
                     className={containerClass}
                     style={{
                         paddingTop: `${upperTiltLevel}px`,
+                        paddingBottom: `${lowerTiltLevel}px`,
                     }}
                 >
                     {elm}
+                </div>
+                <div className={'vk_outer_border_style-lower'}>
+                    {
+                        tiltFlagLower && borderStyle(lowerTiltLevel, tiltBgColor)
+                    }
                 </div>
             </div>
         );

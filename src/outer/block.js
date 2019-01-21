@@ -180,8 +180,8 @@ registerBlockType('vk-blocks/outer', {
                             />
                             <RangeControl
                                 label={ __( 'Lower Tilt Level', 'vk-blocks' ) }
-                                value={ upper_tilt_level }
-                                onChange={ ( value ) => setAttributes( { upper_tilt_level: toNumber( value, 0, 100 ) } ) }
+                                value={ lower_tilt_level }
+                                onChange={ ( value ) => setAttributes( { lower_tilt_level: toNumber( value, 0, 100 ) } ) }
                                 min="0"
                                 max="100"
                             />
@@ -200,6 +200,7 @@ registerBlockType('vk-blocks/outer', {
                     opacity={opacity}
                     bgImage={bgImage}
                     upperTilt={upper_tilt_level}
+                    lowerTilt={lower_tilt_level}
                     tiltBgColor={tiltBgColor}
                     for_={'edit'}/>
             </Fragment>
@@ -236,6 +237,7 @@ registerBlockType('vk-blocks/outer', {
                 opacity={opacity}
                 bgImage={bgImage}
                 upperTilt={upper_tilt_level}
+                lowerTilt={lower_tilt_level}
                 tiltBgColor={tiltBgColor}
                 for_={'save'}/>
         );
