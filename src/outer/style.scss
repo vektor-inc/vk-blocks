@@ -6,9 +6,16 @@
   background-position: center!important;
   background-size: cover!important;
   background-repeat: no-repeat!important;
-
+  position: relative;
   .vk_outer_container{
     min-height: 92px;
+  }
+  svg{
+    display: block;
+    max-height: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 }
 .vk_outer-padding{
@@ -23,3 +30,13 @@
 .vk_outer-parallax-none{
   background-attachment: unset!important;
 }
+.editor-block-list__block-edit{
+  margin: 0!important;
+}
+
+.vk_outer_border_style-upper{
+  svg{
+    transform: rotate(180deg);
+  }
+}
+

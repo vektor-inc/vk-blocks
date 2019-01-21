@@ -1,4 +1,5 @@
 import React from 'react';
+import borderStyle from './borderStyle';
 
 const {InnerBlocks} = wp.editor;
 
@@ -33,12 +34,14 @@ export class Padding extends React.Component {
         let bgColor = this.props.bgColor;
         let opacity = this.props.opacity;
         let bgImage = this.props.bgImage;
+        let upperTiltLevel = this.props.upperTilt;
         let for_ = this.props.for_;
         let padding;
         let parallax;
         let classWidth;
         let elm;
         let containerClass;
+        let tiltFlag;
 
         //幅のクラス切り替え
         classWidth = ` vk_outer-width-${outerWidth}`;
@@ -60,6 +63,10 @@ export class Padding extends React.Component {
             padding = ' vk_outer-padding-none';
         }
 
+        if (upperTiltLevel) {
+            tiltFlag = true;
+        }
+
         //編集画面とサイト上の切り替え
         if(for_ === 'edit'){
             elm = <InnerBlocks/>;
@@ -70,14 +77,23 @@ export class Padding extends React.Component {
 
         return (
             <div
-                className={'vk_outer' + classWidth + parallax + padding}
+                className={'vk_outer' + classWidth + padding + parallax}
                 style={{
                     background: `linear-gradient(${bgColor}, ${bgColor}), url(${bgImage})`,
                 }}
             >
+                <div className={'vk_outer_border_style-upper'}>
+                    {
+                        tiltFlag && borderStyle(upperTiltLevel, bgColor)
+                    }
+                </div>
                 <div
-                    className={containerClass}>
-                {elm}
+                    className={containerClass}
+                    style={{
+                        paddingTop: `${upperTiltLevel}px`,
+                    }}
+                >
+                    {elm}
                 </div>
             </div>
         );

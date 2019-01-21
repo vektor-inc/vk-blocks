@@ -4,6 +4,7 @@
  */
 import React from "react";
 import {Padding} from "./padding";
+import toNumber from "../../../snow-monkey-blocks/src/js/helper/to-number";
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
@@ -55,6 +56,14 @@ registerBlockType('vk-blocks/outer', {
             type: 'number',
             default: 0.5,
         },
+        upper_tilt_level: {
+            type: 'number',
+            default: 0,
+        },
+        lower_tilt_level: {
+            type: 'number',
+            default: 0,
+        }
     },
 
     /**
@@ -72,7 +81,9 @@ registerBlockType('vk-blocks/outer', {
             outerWidth,
             is_parallax,
             is_padding,
-            opacity
+            opacity,
+            upper_tilt_level,
+            lower_tilt_level
         } = attributes;
 
         return (
@@ -152,9 +163,20 @@ registerBlockType('vk-blocks/outer', {
                                 onChange={(value) => setAttributes({is_padding: value})}
                             />
                         </BaseControl>
+                        <BaseControl
+                            label={__('Background Tilt Setting', 'vk-blocks')}
+                        >
+                            <RangeControl
+                                label={ __( 'Level', 'vk-blocks' ) }
+                                value={ upper_tilt_level }
+                                onChange={ ( value ) => setAttributes( { upper_tilt_level: toNumber( value, 0, 100 ) } ) }
+                                min="0"
+                                max="100"
+                            />
+                        </BaseControl>
                     </PanelBody>
                 </InspectorControls>
-                <Padding outerWidth={outerWidth} is_padding={is_padding} is_parallax={is_parallax} bgColor={bgColor} opacity={opacity} bgImage={bgImage} for_={'edit'}/>
+                <Padding outerWidth={outerWidth} is_padding={is_padding} is_parallax={is_parallax} bgColor={bgColor} opacity={opacity} bgImage={bgImage} upperTilt={upper_tilt_level} for_={'edit'}/>
             </Fragment>
         );
     },
@@ -174,11 +196,13 @@ registerBlockType('vk-blocks/outer', {
             outerWidth,
             is_parallax,
             is_padding,
-            opacity
+            opacity,
+            upper_tilt_level,
+            lower_tilt_level
         } = attributes;
 
         return (
-            <Padding outerWidth={outerWidth} is_padding={is_padding} is_parallax={is_parallax} bgColor={bgColor} opacity={opacity} bgImage={bgImage} for_={'save'}/>
+            <Padding outerWidth={outerWidth} is_padding={is_padding} is_parallax={is_parallax} bgColor={bgColor} opacity={opacity} bgImage={bgImage} upperTilt={upper_tilt_level} for_={'save'}/>
         );
     },
 });
