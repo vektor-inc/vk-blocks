@@ -4,7 +4,7 @@
  */
 import React from "react";
 import {Padding} from "./padding";
-import toNumber from "../../../snow-monkey-blocks/src/js/helper/to-number";
+import toNumber from "../_helper/to-number";
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
