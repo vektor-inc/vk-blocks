@@ -5,8 +5,8 @@ function vkblocks_active() {
 
 function vkblocks_blocks_assets() {
 
-	wp_register_style( 'vk-blocks-buid-css', VK_BLOCKS_URL . 'build/block-build.css', [], VK_BLOCKS_VERSION );
-	wp_register_style( 'vk-blocks-buid-editor-css', VK_BLOCKS_URL . 'build/block-build-editor.css', [], VK_BLOCKS_VERSION );
+	wp_register_style( 'vk-blocks-buid-css', VK_BLOCKS_URL . 'build/block-build.css', array(), VK_BLOCKS_VERSION );
+	wp_register_style( 'vk-blocks-buid-editor-css', VK_BLOCKS_URL . 'build/block-build-editor.css', array(), VK_BLOCKS_VERSION );
 	wp_register_script(
 		'vk-blocks-buid-js', VK_BLOCKS_URL . 'build/block-build.js', array(
 			'wp-blocks',
@@ -26,11 +26,11 @@ function vkblocks_blocks_assets() {
 		$arr = array('alert','balloon','button','faq','flow','pr-blocks','outer');//REPLACE-FLAG : このコメントは削除しないで下さい。wp-create-gurten-template.shで削除する基準として左の[//REPLACE-FLAG]を使っています。
 		foreach ($arr as $value) {
 			register_block_type(
-				'vk-blocks/'. $value, [
+				'vk-blocks/' . $value, array(
 					'style'         => 'vk-blocks-buid-css',
 					'editor_style'  => 'vk-blocks-buid-editor-css',
 					'editor_script' => 'vk-blocks-buid-js',
-				]
+				)
 			);
 		}
 	}
