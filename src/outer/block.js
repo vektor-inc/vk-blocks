@@ -116,9 +116,40 @@ registerBlockType('vk-blocks/outer', {
                                 step={0.1}
                             />
                         </BaseControl>
+
+												<BaseControl
+                            label={__('Width Setting', 'vk-blocks')}
+                        >
+													<RadioControl
+															label={__('Outer width', 'vk-blocks')}
+															selected={outerWidth}
+															options={[
+																	{label: __('Normal', 'vk-blocks'), value: 'normal'},
+																	{label: __('Full Wide', 'vk-blocks'), value: 'full'}
+															]}
+															onChange={(value) => setAttributes({outerWidth: value})}
+													/>
+                        </BaseControl>
+
+												<BaseControl
+                            label={__('Padding Setting', 'vk-blocks')}
+                            help=""
+                        >
+                            <RadioControl
+                                label={__('Padding', 'vk-blocks')}
+                                selected={is_padding}
+                                options={[
+                                    {label: __('Use default padding', 'vk-blocks'), value: '1'},
+                                    {label: __('Do not use default padding.', 'vk-blocks'), value: '0'}
+                                ]}
+                                onChange={(value) => setAttributes({is_padding: value})}
+                            />
+                        </BaseControl>
+
+
                         <BaseControl
-                            label={__('Background Setting', 'vk-blocks')}
-                            help={__('When you have an image. Image is displayed with priority', 'vk-blocks')}
+                            label={__('Background Image', 'vk-blocks')}
+                            help=""
                         >
                             <MediaUpload
                                 onSelect={(value) => setAttributes({bgImage: value.url})}
@@ -135,15 +166,7 @@ registerBlockType('vk-blocks/outer', {
                                     </Button>
                                 )}
                             />
-														<RadioControl
-                                label={__('Outer width', 'vk-blocks')}
-                                selected={outerWidth}
-                                options={[
-                                    {label: __('Normal', 'vk-blocks'), value: 'normal'},
-                                    {label: __('Full Wide', 'vk-blocks'), value: 'full'}
-                                ]}
-                                onChange={(value) => setAttributes({outerWidth: value})}
-                            />
+
                             <RadioControl
                                 label={__('Parallax', 'vk-blocks')}
                                 selected={is_parallax}
@@ -154,20 +177,7 @@ registerBlockType('vk-blocks/outer', {
                                 onChange={(value) => setAttributes({is_parallax: value})}
                             />
                         </BaseControl>
-                        <BaseControl
-                            label={__('Background Setting', 'vk-blocks')}
-                            help={__('When you have an image. Image is displayed with priority', 'vk-blocks')}
-                        >
-                            <RadioControl
-                                label={__('Padding', 'vk-blocks')}
-                                selected={is_padding}
-                                options={[
-                                    {label: __('Use default padding', 'vk-blocks'), value: '1'},
-                                    {label: __('Do not use default padding.', 'vk-blocks'), value: '0'}
-                                ]}
-                                onChange={(value) => setAttributes({is_padding: value})}
-                            />
-                        </BaseControl>
+
                         <BaseControl
                             label={__('Background Tilt Setting', 'vk-blocks')}
                         >
