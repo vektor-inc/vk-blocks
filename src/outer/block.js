@@ -63,7 +63,11 @@ registerBlockType('vk-blocks/outer', {
         lower_tilt_level: {
             type: 'number',
             default: 0,
-        }
+        },
+        tiltBgColor: {
+            type: 'string',
+            default: '#fff',
+        },
     },
 
     /**
@@ -83,7 +87,8 @@ registerBlockType('vk-blocks/outer', {
             is_padding,
             opacity,
             upper_tilt_level,
-            lower_tilt_level
+            lower_tilt_level,
+            tiltBgColor
         } = attributes;
 
         return (
@@ -167,16 +172,36 @@ registerBlockType('vk-blocks/outer', {
                             label={__('Background Tilt Setting', 'vk-blocks')}
                         >
                             <RangeControl
-                                label={ __( 'Level', 'vk-blocks' ) }
+                                label={ __( 'Upper Tilt Level', 'vk-blocks' ) }
                                 value={ upper_tilt_level }
                                 onChange={ ( value ) => setAttributes( { upper_tilt_level: toNumber( value, 0, 100 ) } ) }
                                 min="0"
                                 max="100"
                             />
+                            <RangeControl
+                                label={ __( 'Lower Tilt Level', 'vk-blocks' ) }
+                                value={ upper_tilt_level }
+                                onChange={ ( value ) => setAttributes( { upper_tilt_level: toNumber( value, 0, 100 ) } ) }
+                                min="0"
+                                max="100"
+                            />
+                            <ColorPalette
+                                value={tiltBgColor}
+                                onChange={(value) => setAttributes({tiltBgColor: value})}
+                            />
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
-                <Padding outerWidth={outerWidth} is_padding={is_padding} is_parallax={is_parallax} bgColor={bgColor} opacity={opacity} bgImage={bgImage} upperTilt={upper_tilt_level} for_={'edit'}/>
+                <Padding
+                    outerWidth={outerWidth}
+                    is_padding={is_padding}
+                    is_parallax={is_parallax}
+                    bgColor={bgColor}
+                    opacity={opacity}
+                    bgImage={bgImage}
+                    upperTilt={upper_tilt_level}
+                    tiltBgColor={tiltBgColor}
+                    for_={'edit'}/>
             </Fragment>
         );
     },
@@ -198,11 +223,21 @@ registerBlockType('vk-blocks/outer', {
             is_padding,
             opacity,
             upper_tilt_level,
-            lower_tilt_level
+            lower_tilt_level,
+            tiltBgColor
         } = attributes;
 
         return (
-            <Padding outerWidth={outerWidth} is_padding={is_padding} is_parallax={is_parallax} bgColor={bgColor} opacity={opacity} bgImage={bgImage} upperTilt={upper_tilt_level} for_={'save'}/>
+            <Padding
+                outerWidth={outerWidth}
+                is_padding={is_padding}
+                is_parallax={is_parallax}
+                bgColor={bgColor}
+                opacity={opacity}
+                bgImage={bgImage}
+                upperTilt={upper_tilt_level}
+                tiltBgColor={tiltBgColor}
+                for_={'save'}/>
         );
     },
 });

@@ -35,6 +35,7 @@ export class Padding extends React.Component {
         let opacity = this.props.opacity;
         let bgImage = this.props.bgImage;
         let upperTiltLevel = this.props.upperTilt;
+        let tiltBgColor = this.props.tiltBgColor;
         let for_ = this.props.for_;
         let padding;
         let parallax;
@@ -84,7 +85,7 @@ export class Padding extends React.Component {
             >
                 <div className={'vk_outer_border_style-upper'}>
                     {
-                        tiltFlag && borderStyle(upperTiltLevel, bgColor)
+                        tiltFlag && borderStyle(upperTiltLevel, tiltBgColor)
                     }
                 </div>
                 <div
