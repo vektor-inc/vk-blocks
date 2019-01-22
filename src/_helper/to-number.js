@@ -1,6 +1,6 @@
 'use strict';
 
-export default function toNumber( value, min = 0, max = null ) {
+export default function toNumber( value, min = -100, max = null ) {
 	value = Number( value );
 
 	if ( isNaN( value ) || value < min ) {

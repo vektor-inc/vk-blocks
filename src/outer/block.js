@@ -184,15 +184,15 @@ registerBlockType('vk-blocks/outer', {
                             <RangeControl
                                 label={ __( 'Upper Tilt Level', 'vk-blocks' ) }
                                 value={ upper_tilt_level }
-                                onChange={ ( value ) => setAttributes( { upper_tilt_level: toNumber( value, 0, 100 ) } ) }
-                                min="0"
+                                onChange={ ( value ) => setAttributes( { upper_tilt_level: toNumber( value, -100, 100 ) } ) }
+                                min="-100"
                                 max="100"
                             />
                             <RangeControl
                                 label={ __( 'Lower Tilt Level', 'vk-blocks' ) }
                                 value={ lower_tilt_level }
-                                onChange={ ( value ) => setAttributes( { lower_tilt_level: toNumber( value, 0, 100 ) } ) }
-                                min="0"
+                                onChange={ ( value ) => setAttributes( { lower_tilt_level: toNumber( value, -100, 100 ) } ) }
+                                min="-100"
                                 max="100"
                             />
                             <ColorPalette

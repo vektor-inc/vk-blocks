@@ -36,6 +36,8 @@ export class Padding extends React.Component {
         let bgImage = this.props.bgImage;
         let upperTiltLevel = this.props.upperTilt;
         let lowerTiltLevel = this.props.lowerTilt;
+        let absUpperTiltLevel = Math.abs(upperTiltLevel);
+        let absLowerTiltLevel = Math.abs(lowerTiltLevel);
         let tiltBgColor = this.props.tiltBgColor;
         let for_ = this.props.for_;
         let padding;
@@ -99,8 +101,8 @@ export class Padding extends React.Component {
                 <div
                     className={containerClass}
                     style={{
-                        paddingTop: `${upperTiltLevel}px`,
-                        paddingBottom: `${lowerTiltLevel}px`,
+                        paddingTop: `${absUpperTiltLevel}px`,
+                        paddingBottom: `${absLowerTiltLevel}px`,
                     }}
                 >
                     {elm}
