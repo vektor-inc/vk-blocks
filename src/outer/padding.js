@@ -1,5 +1,5 @@
 import React from 'react';
-import borderStyle from './borderStyle';
+import {sectionStyle} from './sectionStyle';
 
 const {InnerBlocks} = wp.editor;
 
@@ -36,8 +36,6 @@ export class Padding extends React.Component {
         let bgImage = this.props.bgImage;
         let upperTiltLevel = this.props.upperTilt;
         let lowerTiltLevel = this.props.lowerTilt;
-        let absUpperTiltLevel = Math.abs(upperTiltLevel);
-        let absLowerTiltLevel = Math.abs(lowerTiltLevel);
         let tiltBgColor = this.props.tiltBgColor;
         let for_ = this.props.for_;
         let padding;
@@ -95,21 +93,21 @@ export class Padding extends React.Component {
             >
                 <div className={'vk_outer_border_style-upper'}>
                     {
-                        tiltFlagUpper && borderStyle(upperTiltLevel, tiltBgColor)
+                        tiltFlagUpper && sectionStyle(upperTiltLevel, tiltBgColor)
                     }
                 </div>
                 <div
                     className={containerClass}
                     style={{
-                        paddingTop: `${absUpperTiltLevel}px`,
-                        paddingBottom: `${absLowerTiltLevel}px`,
+                        paddingTop: `${sectionStylePaddingUpper}px`,
+                        paddingBottom: `${sectionStylePaddingLower}px`,
                     }}
                 >
                     {elm}
                 </div>
                 <div className={'vk_outer_border_style-lower'}>
                     {
-                        tiltFlagLower && borderStyle(lowerTiltLevel, tiltBgColor)
+                        tiltFlagLower && sectionStyle(lowerTiltLevel, tiltBgColor)
                     }
                 </div>
             </div>
