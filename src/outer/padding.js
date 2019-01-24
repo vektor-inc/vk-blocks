@@ -43,7 +43,8 @@ export class Padding extends React.Component {
         let classWidth;
         let elm;
         let containerClass;
-        let whichSide;
+        let whichSideUpper;
+        let whichSideLower;
 
         //幅のクラス切り替え
         classWidth = ` vk_outer-width-${outerWidth}`;
@@ -67,12 +68,12 @@ export class Padding extends React.Component {
 
         //上側セクションの傾き切り替え
         if (upperTiltLevel) {
-            whichSide = 'upper';
+            whichSideUpper = 'upper';
         }
 
         //下側セクションの傾き切り替え
         if (lowerTiltLevel) {
-            whichSide = 'lower';
+            whichSideLower = 'lower';
         }
 
         //編集画面とサイト上の切り替え
@@ -91,13 +92,13 @@ export class Padding extends React.Component {
                 }}
             >
                     {
-                        sectionStyle(upperTiltLevel, tiltBgColor, whichSide)
+                        sectionStyle(upperTiltLevel, tiltBgColor, whichSideUpper)
                     }
                 <div className={containerClass}>
                     {elm}
                 </div>
                 {
-                    sectionStyle(lowerTiltLevel, tiltBgColor, whichSide)
+                    sectionStyle(lowerTiltLevel, tiltBgColor, whichSideLower)
                 }
             </div>
         );
