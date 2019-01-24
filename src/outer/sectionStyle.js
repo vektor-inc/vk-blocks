@@ -42,6 +42,32 @@ const sectionStyle = (level,color,whichSide,dividerType) =>{
         }
     };
 
+    const waveSectionStyle = () => {
+
+        if (level > 0) {
+
+            return (
+                <path
+                    d={ `m0,${ 100 - ( level / 2 ) } q20,${ level },40,0 t40,0 t40,0 V100 L0,100 z` }
+                    strokeWidth="0"
+                    fill={ color }
+                />
+            );
+        } else if (level < 0) {
+
+            const absLevel = Math.abs(level);
+
+            return (
+                <path
+                    d={ `m0,${ ( level / 2 ) + 100 } q20,${ level },40,0 t40,0 t40,0 V100 L0,100 z` }
+                    strokeWidth="0"
+                    fill={ color }
+                />
+            );
+        }
+
+    };
+
     //Paddingの条件分岐を追加
     if (dividerType === 'tilt') {
 
@@ -53,10 +79,15 @@ const sectionStyle = (level,color,whichSide,dividerType) =>{
         if (level > 0) {
             sectionPadding = Math.abs(level);
         } else if (level < 0) {
-
             sectionPadding = Math.abs(level) * 2;
         }
         lenderDivider = curveSectionStyle(level);
+
+    }else if(dividerType === 'wave'){
+
+        sectionPadding = Math.abs(level);
+        lenderDivider = waveSectionStyle(level);
+
     }
 
     //upper-paddingを追加
