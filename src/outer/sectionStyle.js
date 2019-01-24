@@ -1,6 +1,7 @@
-const sectionStyle = (level,color,whichSide) =>{
+const sectionStyle = (level,color,whichSide,dividerType) =>{
 
     let sectionPadding;
+    let lenderDivider;
 
     const tiltSectionStyle = (level) => {
 
@@ -42,17 +43,20 @@ const sectionStyle = (level,color,whichSide) =>{
     };
 
     //Paddingの条件分岐を追加
-    let type = 'curve';
-    if (type === 'tilt') {
-        sectionPadding = Math.abs(level);
+    if (dividerType === 'tilt') {
 
-    }else if(type === 'curve') {
+        sectionPadding = Math.abs(level);
+        lenderDivider = tiltSectionStyle(level);
+
+    }else if(dividerType === 'curve') {
+
         if (level > 0) {
             sectionPadding = Math.abs(level);
         } else if (level < 0) {
 
             sectionPadding = Math.abs(level) * 2;
         }
+        lenderDivider = curveSectionStyle(level);
     }
 
     //upper-paddingを追加
@@ -63,7 +67,7 @@ const sectionStyle = (level,color,whichSide) =>{
                 style={{paddingBottom: sectionPadding + `px`}}
             >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-                    {curveSectionStyle(level)}
+                    {lenderDivider}
                 </svg>
             </div>
 
@@ -77,7 +81,7 @@ const sectionStyle = (level,color,whichSide) =>{
                 style={{paddingTop: sectionPadding + `px`}}
             >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-                    {curveSectionStyle(level)}
+                    {lenderDivider}
                 </svg>
             </div>
         )

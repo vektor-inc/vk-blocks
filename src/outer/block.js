@@ -8,7 +8,7 @@ import toNumber from "../_helper/to-number";
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
-const {RangeControl, RadioControl, PanelBody, Button, PanelColor, BaseControl} = wp.components;
+const {RangeControl, RadioControl, PanelBody, Button, PanelColor, BaseControl,SelectControl} = wp.components;
 const {Fragment} = wp.element;
 const {RichText, InspectorControls, MediaUpload, ColorPalette, InnerBlocks} = wp.editor;
 const BlockIcon = 'arrow-down';
@@ -68,6 +68,10 @@ registerBlockType('vk-blocks/outer', {
             type: 'string',
             default: '#fff',
         },
+        dividerType: {
+            type: 'string',
+            default: 'tilt',
+        },
     },
 
     /**
@@ -88,7 +92,8 @@ registerBlockType('vk-blocks/outer', {
             opacity,
             upper_tilt_level,
             lower_tilt_level,
-            tiltBgColor
+            tiltBgColor,
+            dividerType
         } = attributes;
 
         return (
@@ -179,17 +184,40 @@ registerBlockType('vk-blocks/outer', {
                         </BaseControl>
 
                         <BaseControl
-                            label={__('Background Tilt Setting', 'vk-blocks')}
+                            label={__('Divider Setting', 'vk-blocks')}
                         >
+                            <SelectControl
+                                label={ __( 'Type', 'vk-blocks' ) }
+                                value={ dividerType }
+                                onChange={ ( value ) => setAttributes( { dividerType: value } ) }
+                                options={ [
+                                    {
+                                        value: 'tilt',
+                                        label: __( 'Tilt', 'vk-blocks' ),
+                                    },
+                                    {
+                                        value: 'curve',
+                                        label: __( 'Curve', 'vk-blocks' ),
+                                    },
+                                    {
+                                        value: 'wave',
+                                        label: __( 'Wave', 'vk-blocks' ),
+                                    },
+                                    {
+                                        value: 'triangle',
+                                        label: __( 'Triangle', 'vk-blocks' ),
+                                    },
+                                ] }
+                            />
                             <RangeControl
-                                label={ __( 'Upper Tilt Level', 'vk-blocks' ) }
+                                label={ __( 'Upper Divider Level', 'vk-blocks' ) }
                                 value={ upper_tilt_level }
                                 onChange={ ( value ) => setAttributes( { upper_tilt_level: toNumber( value, -100, 100 ) } ) }
                                 min="-100"
                                 max="100"
                             />
                             <RangeControl
-                                label={ __( 'Lower Tilt Level', 'vk-blocks' ) }
+                                label={ __( 'Lower Divider Level', 'vk-blocks' ) }
                                 value={ lower_tilt_level }
                                 onChange={ ( value ) => setAttributes( { lower_tilt_level: toNumber( value, -100, 100 ) } ) }
                                 min="-100"
@@ -212,6 +240,7 @@ registerBlockType('vk-blocks/outer', {
                     upperTilt={upper_tilt_level}
                     lowerTilt={lower_tilt_level}
                     tiltBgColor={tiltBgColor}
+                    dividerType={dividerType}
                     for_={'edit'}/>
             </Fragment>
         );
@@ -235,7 +264,8 @@ registerBlockType('vk-blocks/outer', {
             opacity,
             upper_tilt_level,
             lower_tilt_level,
-            tiltBgColor
+            tiltBgColor,
+            dividerType
         } = attributes;
 
         return (
@@ -249,6 +279,7 @@ registerBlockType('vk-blocks/outer', {
                 upperTilt={upper_tilt_level}
                 lowerTilt={lower_tilt_level}
                 tiltBgColor={tiltBgColor}
+                dividerType={dividerType}
                 for_={'save'}/>
         );
     },

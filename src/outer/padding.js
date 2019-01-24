@@ -37,6 +37,7 @@ export class Padding extends React.Component {
         let upperTiltLevel = this.props.upperTilt;
         let lowerTiltLevel = this.props.lowerTilt;
         let tiltBgColor = this.props.tiltBgColor;
+        let dividerType = this.props.dividerType;
         let for_ = this.props.for_;
         let padding;
         let parallax;
@@ -92,13 +93,13 @@ export class Padding extends React.Component {
                 }}
             >
                     {
-                        sectionStyle(upperTiltLevel, tiltBgColor, whichSideUpper)
+                        sectionStyle(upperTiltLevel, tiltBgColor, whichSideUpper,dividerType)
                     }
                 <div className={containerClass}>
                     {elm}
                 </div>
                 {
-                    sectionStyle(lowerTiltLevel, tiltBgColor, whichSideLower)
+                    sectionStyle(lowerTiltLevel, tiltBgColor, whichSideLower,dividerType)
                 }
             </div>
         );
