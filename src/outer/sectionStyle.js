@@ -1,6 +1,7 @@
 const sectionStyle = (level,color,whichSide,dividerType) =>{
 
     let sectionPadding;
+    let sectionClass;
     let lenderDivider;
 
     const tiltSectionStyle = (level) => {
@@ -42,7 +43,7 @@ const sectionStyle = (level,color,whichSide,dividerType) =>{
         }
     };
 
-    const waveSectionStyle = () => {
+    const waveSectionStyle = (level) => {
 
         if (level > 0) {
 
@@ -68,6 +69,16 @@ const sectionStyle = (level,color,whichSide,dividerType) =>{
 
     };
 
+    const triangleSectionStyle = (level) => {
+        return (
+            <path
+                d={ `m${ ( 100 - level ) / 2 },100 l${ level },0 l${ -1 * level / 2 },${ -1 * level } z` }
+                strokeWidth="0"
+                fill={ color }
+            />
+        );
+    };
+
     //Paddingの条件分岐を追加
     if (dividerType === 'tilt') {
 
@@ -88,13 +99,21 @@ const sectionStyle = (level,color,whichSide,dividerType) =>{
         sectionPadding = Math.abs(level);
         lenderDivider = waveSectionStyle(level);
 
+    }else if(dividerType === 'triangle'){
+
+        sectionPadding = Math.abs(level);
+        lenderDivider = triangleSectionStyle(level);
+
     }
+
+    //classにdividerTypeを追加
+    sectionClass = dividerType;
 
     //upper-paddingを追加
     if (whichSide === 'upper') {
         return (
             <div
-                className={'vk_outer_border_style-upper'}
+                className={`vk_outer_section-upper vk_outer_section-${sectionClass}`}
                 style={{paddingBottom: sectionPadding + `px`}}
             >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -108,7 +127,7 @@ const sectionStyle = (level,color,whichSide,dividerType) =>{
         return (
 
             <div
-                className={'vk_outer_border_style-lower'}
+                className={`vk_outer_section-lower vk_outer_section-${sectionClass}`}
                 style={{paddingTop: sectionPadding + `px`}}
             >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
