@@ -7,13 +7,13 @@ const {InnerBlocks} = wp.editor;
 function hex2rgba (hex, alpha) {
 
     // ロングバージョンの場合（例：#FF0000）
-    let r = hex.match(/^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i)
-    let c = null
+    let r = hex.match(/^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i);
+    let c = null;
     if (r) {
         c = r.slice(1,4).map(function(x) { return parseInt(x, 16) })
     }
     // ショートバージョンの場合（例：#F00）
-    r = hex.match(/^#([0-9a-f])([0-9a-f])([0-9a-f])$/i)
+    r = hex.match(/^#([0-9a-f])([0-9a-f])([0-9a-f])$/i);
     if (r) {
         c = r.slice(1,4).map(function(x) { return 0x11 * parseInt(x, 16) })
     }
@@ -43,8 +43,7 @@ export class Padding extends React.Component {
         let classWidth;
         let elm;
         let containerClass;
-        let tiltFlagUpper;
-        let tiltFlagLower;
+        let whichSide;
 
         //幅のクラス切り替え
         classWidth = ` vk_outer-width-${outerWidth}`;
@@ -68,12 +67,12 @@ export class Padding extends React.Component {
 
         //上側セクションの傾き切り替え
         if (upperTiltLevel) {
-            tiltFlagUpper = true;
+            whichSide = 'upper';
         }
 
         //下側セクションの傾き切り替え
         if (lowerTiltLevel) {
-            tiltFlagLower = true;
+            whichSide = 'lower';
         }
 
         //編集画面とサイト上の切り替え
@@ -91,25 +90,15 @@ export class Padding extends React.Component {
                     background: `linear-gradient(${bgColor}, ${bgColor}), url(${bgImage})`,
                 }}
             >
-                <div className={'vk_outer_border_style-upper'}>
                     {
-                        tiltFlagUpper && sectionStyle(upperTiltLevel, tiltBgColor)
+                        sectionStyle(upperTiltLevel, tiltBgColor, whichSide)
                     }
-                </div>
-                <div
-                    className={containerClass}
-                    style={{
-                        paddingTop: `${sectionStylePaddingUpper}px`,
-                        paddingBottom: `${sectionStylePaddingLower}px`,
-                    }}
-                >
+                <div className={containerClass}>
                     {elm}
                 </div>
-                <div className={'vk_outer_border_style-lower'}>
-                    {
-                        tiltFlagLower && sectionStyle(lowerTiltLevel, tiltBgColor)
-                    }
-                </div>
+                {
+                    sectionStyle(lowerTiltLevel, tiltBgColor, whichSide)
+                }
             </div>
         );
     }
