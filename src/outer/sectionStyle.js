@@ -1,7 +1,6 @@
 const sectionStyle = (level,color,whichSide) =>{
 
-    let sectionPaddingUpper;
-    let sectionPaddingLower;
+    let sectionPadding;
 
     const tiltSectionStyle = (level) => {
 
@@ -34,11 +33,8 @@ const sectionStyle = (level,color,whichSide) =>{
             />
         } else if (level < 0) {
 
-            //絶対値に変換
-            const absLevel = Math.abs(level);
-
             return <path
-                d={ `m0,${ absLevel } q50,${ level * 2 },100,0 V100 L0,100 z` }
+                d={ `m0,100 q50,${ level * 2},100,0 V100 L0,100 z` }
                 strokeWidth="0"
                 fill={color}
             />
@@ -46,10 +42,17 @@ const sectionStyle = (level,color,whichSide) =>{
     };
 
     //Paddingの条件分岐を追加
-    let type = 'tilt';
+    let type = 'curve';
     if (type === 'tilt') {
-        sectionPaddingUpper = Math.abs(level);
-        sectionPaddingLower = Math.abs(level);
+        sectionPadding = Math.abs(level);
+
+    }else if(type === 'curve') {
+        if (level > 0) {
+            sectionPadding = Math.abs(level);
+        } else if (level < 0) {
+
+            sectionPadding = Math.abs(level) * 2;
+        }
     }
 
     //upper-paddingを追加
@@ -57,10 +60,10 @@ const sectionStyle = (level,color,whichSide) =>{
         return (
             <div
                 className={'vk_outer_border_style-upper'}
-                style={{paddingBottom: sectionPaddingUpper + `px`}}
+                style={{paddingBottom: sectionPadding + `px`}}
             >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-                    {tiltSectionStyle(level)}
+                    {curveSectionStyle(level)}
                 </svg>
             </div>
 
@@ -71,10 +74,10 @@ const sectionStyle = (level,color,whichSide) =>{
 
             <div
                 className={'vk_outer_border_style-lower'}
-                style={{paddingTop: sectionPaddingLower + `px`}}
+                style={{paddingTop: sectionPadding + `px`}}
             >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-                    {tiltSectionStyle(level)}
+                    {curveSectionStyle(level)}
                 </svg>
             </div>
         )
