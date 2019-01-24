@@ -41,18 +41,19 @@
   margin: 0!important;
 }
 
-.vk_outer_border_style-upper{
+.vk_outer_section-upper{
   svg{
     top: 0;
     transform: rotate(180deg);
   }
 }
-.vk_outer_border_style-lower{
+.vk_outer_section-lower{
   svg{
     bottom: 0;
   }
 }
 .vk_outer_section-triangle svg{
+  right:0;
   margin: 0 auto;
   max-width: 200px;
 }
