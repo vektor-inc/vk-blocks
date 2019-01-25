@@ -22,8 +22,9 @@ function vkblocks_blocks_assets() {
 	$theme = wp_get_theme();
 	if ( $theme->exists() ) {
 		$theme_slug = $theme->get( 'TextDomain' );
-		if($theme_slug == 'lightning-pro')
-		wp_localize_script( 'vk-blocks-build-js', 'vk_blocks_check', array( 'is_pro' => true ) );
+		if($theme_slug == 'lightning-pro'){
+			wp_localize_script( 'vk-blocks-build-js', 'vk_blocks_check', array( 'is_pro' => true ) );
+		}
 	}
 
 	global $wp_version;
