@@ -5,6 +5,9 @@ function vkblocks_active() {
 
 function vkblocks_blocks_assets() {
 
+	define( 'is_pro', true );
+
+
 	wp_register_style( 'vk-blocks-build-css', VK_BLOCKS_URL . 'build/block-build.css', array(), VK_BLOCKS_VERSION );
 	wp_register_style( 'vk-blocks-build-editor-css', VK_BLOCKS_URL . 'build/block-build-editor.css', array(), VK_BLOCKS_VERSION );
 	wp_register_script(
@@ -17,6 +20,13 @@ function vkblocks_blocks_assets() {
 
 	if(function_exists('wp_set_script_translations' )){
 		wp_set_script_translations( 'vk-blocks-build-js', 'vk-blocks', plugin_dir_path( __FILE__ ) . 'build/languages' );
+	}
+
+	$theme = wp_get_theme();
+	if ( $theme->exists() ) {
+		$theme_slug = $theme->get( 'TextDomain' );
+		if($theme_slug == 'lightning-pro')
+		wp_localize_script( 'vk-blocks-build-js', 'vk_blocks_check', array( 'is_pro' => true ) );
 	}
 
 	global $wp_version;

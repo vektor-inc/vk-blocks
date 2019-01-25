@@ -228,19 +228,24 @@ registerBlockType('vk-blocks/outer', {
             dividerType
         } = attributes;
 
-        return (
-            <Component
-                outerWidth={outerWidth}
-                is_padding={is_padding}
-                is_parallax={is_parallax}
-                bgColor={bgColor}
-                opacity={opacity}
-                bgImage={bgImage}
-                upperTilt={upper_tilt_level}
-                lowerTilt={lower_tilt_level}
-                tiltBgColor={tiltBgColor}
-                dividerType={dividerType}
-                for_={'save'}/>
-        );
+        if (vk_blocks_check.is_pro) {
+
+            return (
+                <Component
+                    outerWidth={outerWidth}
+                    is_padding={is_padding}
+                    is_parallax={is_parallax}
+                    bgColor={bgColor}
+                    opacity={opacity}
+                    bgImage={bgImage}
+                    upperTilt={upper_tilt_level}
+                    lowerTilt={lower_tilt_level}
+                    tiltBgColor={tiltBgColor}
+                    dividerType={dividerType}
+                    for_={'save'}/>
+            );
+
+        }
+
     },
 });
