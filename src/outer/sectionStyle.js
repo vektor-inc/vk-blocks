@@ -10,8 +10,10 @@ const sectionStyle = (level,color,whichSide,dividerType) =>{
             return <path
                 d={`m0,${100 - level} L100,100 L0,100 z`}
                 strokeWidth="0"
+                fill={`red`}
                 fill={color}
             />
+
         } else if (level < 0) {
 
             //絶対値に変換
@@ -56,8 +58,6 @@ const sectionStyle = (level,color,whichSide,dividerType) =>{
             );
         } else if (level < 0) {
 
-            const absLevel = Math.abs(level);
-
             return (
                 <path
                     d={ `m0,${ ( level / 2 ) + 100 } q20,${ level },40,0 t40,0 t40,0 V100 L0,100 z` }
@@ -70,15 +70,28 @@ const sectionStyle = (level,color,whichSide,dividerType) =>{
     };
 
     const triangleSectionStyle = (level) => {
-        return (
-            <path
-                d={ `m${ ( 100 - level ) / 2 },100 l${ level },0 l${ -1 * level / 2 },${ -1 * level } z` }
-                strokeWidth="0"
-                fill={ color }
-            />
-        );
-    };
 
+        const absLevel = Math.abs(level);
+        const DivideAbs4 = absLevel / 4;
+
+        if (level > 0) {
+
+            return (
+                <path
+                    d={`m0,100 h${50 - DivideAbs4} l${DivideAbs4},-${absLevel} l${DivideAbs4},${absLevel} h${DivideAbs4} v100 h-100 z`}
+                    strokeWidth="0"
+                    fill={color}
+                />);
+        } else if (level < 0) {
+
+            return (
+                <path
+                    d={`m0,${100 - absLevel} h${50 - DivideAbs4} l${DivideAbs4},${absLevel} l${DivideAbs4},-${absLevel} h${50 - DivideAbs4} v${absLevel} h-100 z`}
+                    strokeWidth="0"
+                    fill={color}
+                />);
+        }
+    };
     //Paddingの条件分岐を追加
     if (dividerType === 'tilt') {
 
