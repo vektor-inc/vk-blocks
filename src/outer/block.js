@@ -3,7 +3,8 @@
  *
  */
 import React from "react";
-import {Padding} from "./padding";
+import {Component} from "./component";
+import {schema} from './schema.js';
 import toNumber from "../_helper/to-number";
 
 const {__} = wp.i18n; // Import __() from wp.i18n
@@ -31,48 +32,7 @@ registerBlockType('vk-blocks/outer', {
     title: __('Outer', 'vk-blocks'), // Block title.
     icon: BlockIcon, // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
     category: 'vk-blocks-cat-layout', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
-    attributes: {
-        bgColor: {
-            type: 'string',
-            default: '#f3f4f5',
-        },
-        bgImage: {
-            type: 'string',
-            default: null,
-        },
-				outerWidth:{
-            type: 'string',
-            default: 'normal',
-        },
-        is_parallax:{
-            type: 'string',
-            default: '0',
-        },
-        is_padding: {
-            type: 'string',
-            default: '1',
-        },
-        opacity: {
-            type: 'number',
-            default: 0.5,
-        },
-        upper_tilt_level: {
-            type: 'number',
-            default: 0,
-        },
-        lower_tilt_level: {
-            type: 'number',
-            default: 0,
-        },
-        tiltBgColor: {
-            type: 'string',
-            default: '#fff',
-        },
-        dividerType: {
-            type: 'string',
-            default: 'tilt',
-        },
-    },
+    attributes: schema,
 
     /**
      * The edit function describes the structure of your block in the context of the editor.
@@ -230,7 +190,7 @@ registerBlockType('vk-blocks/outer', {
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
-                <Padding
+                <Component
                     outerWidth={outerWidth}
                     is_padding={is_padding}
                     is_parallax={is_parallax}
@@ -269,7 +229,7 @@ registerBlockType('vk-blocks/outer', {
         } = attributes;
 
         return (
-            <Padding
+            <Component
                 outerWidth={outerWidth}
                 is_padding={is_padding}
                 is_parallax={is_parallax}

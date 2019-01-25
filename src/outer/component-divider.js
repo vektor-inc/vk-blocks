@@ -1,4 +1,4 @@
-const sectionStyle = (level,color,whichSide,dividerType) =>{
+const componentDivider = (level, color, whichSide, dividerType) =>{
 
     let sectionPadding;
     let sectionClass;
@@ -10,7 +10,6 @@ const sectionStyle = (level,color,whichSide,dividerType) =>{
             return <path
                 d={`m0,${100 - level} L100,100 L0,100 z`}
                 strokeWidth="0"
-                fill={`red`}
                 fill={color}
             />
 
@@ -151,4 +150,4 @@ const sectionStyle = (level,color,whichSide,dividerType) =>{
     }
 };
 
-export {sectionStyle};
+export {componentDivider};

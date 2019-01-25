@@ -1,5 +1,5 @@
 import React from 'react';
-import {sectionStyle} from './sectionStyle';
+import {componentDivider} from './component-divider';
 
 const {InnerBlocks} = wp.editor;
 
@@ -24,7 +24,7 @@ function hex2rgba (hex, alpha) {
     return `rgba(${c[0]}, ${c[1]}, ${c[2]}, ${alpha})`
 }
 
-export class Padding extends React.Component {
+export class Component extends React.Component {
 
     render() {
 
@@ -93,13 +93,13 @@ export class Padding extends React.Component {
                 }}
             >
                     {
-                        sectionStyle(upperTiltLevel, tiltBgColor, whichSideUpper,dividerType)
+                        componentDivider(upperTiltLevel, tiltBgColor, whichSideUpper,dividerType)
                     }
                 <div className={containerClass}>
                     {elm}
                 </div>
                 {
-                    sectionStyle(lowerTiltLevel, tiltBgColor, whichSideLower,dividerType)
+                    componentDivider(lowerTiltLevel, tiltBgColor, whichSideLower,dividerType)
                 }
             </div>
         );
