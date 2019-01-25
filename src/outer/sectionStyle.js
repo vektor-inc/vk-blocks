@@ -86,7 +86,7 @@ const sectionStyle = (level,color,whichSide,dividerType) =>{
 
             return (
                 <path
-                    d={`m0,${100 - absLevel} h${50 - DivideAbs4} l${DivideAbs4},${absLevel} l${DivideAbs4},-${absLevel} h${50 - DivideAbs4} v${absLevel} h-100 z`}
+                    d={`m0,${100 - absLevel} h${50 - DivideAbs4} l${DivideAbs4},${absLevel} l${DivideAbs4},-${absLevel} h${50 - DivideAbs4} v${absLevel + 1} h-100 z`}
                     strokeWidth="0"
                     fill={color}
                 />);
