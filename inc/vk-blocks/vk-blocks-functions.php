@@ -5,10 +5,10 @@ function vkblocks_active() {
 
 function vkblocks_blocks_assets() {
 
-	wp_register_style( 'vk-blocks-buid-css', VK_BLOCKS_URL . 'build/block-build.css', array(), VK_BLOCKS_VERSION );
-	wp_register_style( 'vk-blocks-buid-editor-css', VK_BLOCKS_URL . 'build/block-build-editor.css', array(), VK_BLOCKS_VERSION );
+	wp_register_style( 'vk-blocks-build-css', VK_BLOCKS_URL . 'build/block-build.css', array(), VK_BLOCKS_VERSION );
+	wp_register_style( 'vk-blocks-build-editor-css', VK_BLOCKS_URL . 'build/block-build-editor.css', array(), VK_BLOCKS_VERSION );
 	wp_register_script(
-		'vk-blocks-buid-js', VK_BLOCKS_URL . 'build/block-build.js', array(
+		'vk-blocks-build-js', VK_BLOCKS_URL . 'build/block-build.js', array(
 			'wp-blocks',
 			'wp-i18n',
 			'wp-element',
@@ -16,7 +16,7 @@ function vkblocks_blocks_assets() {
 	);
 
 	if(function_exists('wp_set_script_translations' )){
-		wp_set_script_translations( 'vk-blocks-buid-js', 'vk-blocks', plugin_dir_path( __FILE__ ) . 'build/languages' );
+		wp_set_script_translations( 'vk-blocks-build-js', 'vk-blocks', plugin_dir_path( __FILE__ ) . 'build/languages' );
 	}
 
 	global $wp_version;
@@ -27,9 +27,9 @@ function vkblocks_blocks_assets() {
 		foreach ($arr as $value) {
 			register_block_type(
 				'vk-blocks/' . $value, array(
-					'style'         => 'vk-blocks-buid-css',
-					'editor_style'  => 'vk-blocks-buid-editor-css',
-					'editor_script' => 'vk-blocks-buid-js',
+					'style'         => 'vk-blocks-build-css',
+					'editor_style'  => 'vk-blocks-build-editor-css',
+					'editor_script' => 'vk-blocks-build-js',
 				)
 			);
 		}
