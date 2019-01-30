@@ -35,11 +35,11 @@
 .editor-block-list__block-edit {
   margin: 0 !important; }
 
-.vk_outer_section-upper svg {
+.vk_outer_separator-upper svg {
   top: 0;
   transform: rotate(180deg); }
 
-.vk_outer_section-lower svg {
+.vk_outer_separator-lower svg {
   bottom: 0; }
 
 /*# sourceMappingURL=style.css.map */
