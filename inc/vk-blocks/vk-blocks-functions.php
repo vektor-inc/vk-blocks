@@ -8,11 +8,11 @@ function vkblocks_blocks_assets() {
 	wp_register_style( 'vk-blocks-build-css', VK_BLOCKS_URL . 'build/block-build.css', array(), VK_BLOCKS_VERSION );
 	wp_register_style( 'vk-blocks-build-editor-css', VK_BLOCKS_URL . 'build/block-build-editor.css', array(), VK_BLOCKS_VERSION );
 	wp_register_script(
-		'vk-blocks-build-js', VK_BLOCKS_URL . 'build/block-build.js', array(
-			'wp-blocks',
-			'wp-i18n',
-			'wp-element',
-		), VK_BLOCKS_VERSION, true
+		'vk-blocks-buid-js', VK_BLOCKS_URL . 'build/block-build.js', array(
+		'wp-blocks',
+		'wp-i18n',
+		'wp-element',
+	), VK_BLOCKS_VERSION, true
 	);
 
 	if(function_exists('wp_set_script_translations' )){
@@ -30,8 +30,7 @@ function vkblocks_blocks_assets() {
 	global $wp_version;
 	if ( defined( 'GUTENBERG_VERSION' ) || version_compare( $wp_version, '5.0', '>=' ) ) {
 
-
-		$arr = array('alert','balloon','button','faq','flow','pr-blocks','outer');//REPLACE-FLAG : このコメントは削除しないで下さい。wp-create-gurten-template.shで削除する基準として左の[//REPLACE-FLAG]を使っています。
+	$arr = array('alert','balloon','button','faq','flow','pr-blocks','outer','pr-content');//REPLACE-FLAG : このコメントは削除しないで下さい。wp-create-gurten-template.shで削除する基準として左の[//REPLACE-FLAG]を使っています。
 		foreach ($arr as $value) {
 			register_block_type(
 				'vk-blocks/' . $value, array(
