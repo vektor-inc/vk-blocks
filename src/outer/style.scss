@@ -11,14 +11,6 @@
     min-height: 92px;
   }
 }
-.vk_outer_separator {
-	svg {
-		display: block;
-    max-height: 100px;
-    position: absolute;
-    left: 0;
-	}
-}
 .vk_outer-width-full {
 	margin-left:calc(50% - 50vw);
 	margin-right:calc(50% - 50vw);
@@ -38,19 +30,28 @@
 .vk_outer-parallax-none{
   background-attachment: unset!important;
 }
-.editor-block-list__block-edit{
-  margin: 0!important;
+
+.vk_outer_separator {
+	svg {
+		display: block;
+    max-height: 100px;
+    position: absolute;
+    left: 0;
+	}
 }
-
-
-.vk_outer_separator-upper{
+.vk_outer_separator-position-upper{
   svg{
     top: 0;
     transform: rotate(180deg);
   }
 }
-.vk_outer_separator-lower{
+.vk_outer_separator-position-lower{
   svg{
     bottom: 0;
   }
+}
+
+
+.editor-block-list__block-edit{
+  margin: 0!important;
 }
