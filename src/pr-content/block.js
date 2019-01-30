@@ -38,7 +38,7 @@ registerBlockType('vk-blocks/pr-content', {
     attributes: {
         title: {
             source: 'html',
-            selector: 'h1',
+            selector: '.vk_prContent_title',
         },
         titleColor: {
             type: 'string',
@@ -64,7 +64,7 @@ registerBlockType('vk-blocks/pr-content', {
         },
         buttonText: {
             source: 'html',
-            selector: 'p',
+            selector: '.vk_prContent_btn_txt',
         },
         urlType: {
             type: 'string',

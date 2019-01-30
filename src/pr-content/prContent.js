@@ -106,14 +106,16 @@ export class PrContent extends React.Component {
                                         >
                                             {for_ === 'edit' ?
                                                 <RichText
-                                                    tagName="p"
+																										tagName="span"
+																										className="vk_prContent_btn_txt"
                                                     onChange={(value) => setAttributes({buttonText: value})}
                                                     value={buttonText}
                                                     placeholder={__('Input button text.', 'vk-blocks')}
                                                 />
                                                 :
                                                 <RichText.Content
-                                                    tagName="p"
+																										tagName="span"
+																										className="vk_prContent_btn_txt"
                                                     value={buttonText}
                                                 />
                                             }
@@ -128,14 +130,16 @@ export class PrContent extends React.Component {
                                         >
                                             {for_ === 'edit' ?
                                                 <RichText
-                                                    tagName="p"
+                                                    tagName="span"
+                                                    className="vk_prContent_btn_txt"
                                                     onChange={(value) => setAttributes({buttonText: value})}
                                                     value={buttonText}
                                                     placeholder={__('Input button text.', 'vk-blocks')}
                                                 />
                                                 :
                                                 <RichText.Content
-                                                    tagName="p"
+																										tagName="span"
+                                                    className="vk_prContent_btn_txt"
                                                     value={buttonText}
                                                 />
                                             }

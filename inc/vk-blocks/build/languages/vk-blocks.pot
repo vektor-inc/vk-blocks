@@ -463,7 +463,7 @@ msgstr ""
 msgid "PR Content"
 msgstr ""
 
-#: src/pr-content/prContent.js:134
+#: src/pr-content/prContent.js:137
 msgid "Input button text."
 msgstr ""
 
