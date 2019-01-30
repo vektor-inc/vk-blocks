@@ -25,10 +25,10 @@ export class PrContent extends React.Component {
         let for_ = this.props.for_;
 
         return (
-            <div className="vk_pr-content">
-                <div className="vk_pr-content_container">
+            <div className="vk_prContent">
+                <div className="vk_prContent_container">
                     <div className={`row ${layout}`}>
-                        <div className="col-sm-6 vk_pr-content_col_img">
+                        <div className="col-sm-6 vk_prContent_col_img">
                             {for_ === 'edit' ?
                                 <MediaUpload
                                     onSelect={(value) => setAttributes({Image: value.sizes.full.url})}
@@ -59,14 +59,14 @@ export class PrContent extends React.Component {
                                     />
                             }
                         </div>
-                        <div className="col-sm-6 vk_pr-content_col_text">
+                        <div className="col-sm-6 vk_prContent_col_text">
 
                             {
                                 for_ === 'edit' ?
                                     <div>
                                 <RichText
                                     tagName="h3"
-                                    className={'vk_pr-content_title'}
+                                    className={'vk_prContent_title'}
                                     onChange={(value) => setAttributes({title: value})}
                                     value={title}
                                     placeholder={__('Input title.', 'vk-blocks')}
@@ -85,7 +85,7 @@ export class PrContent extends React.Component {
                                         <RichText.Content
                                             tagName="h3"
                                             value={title}
-                                            className={'vk_pr-content_title'}
+                                            className={'vk_prContent_title'}
                                             style={{color: titleColor}}
                                         />
                                         <RichText.Content
@@ -98,7 +98,7 @@ export class PrContent extends React.Component {
                             {
                                 buttonType === '1' ?
 
-                                    <div className="vk_pr-content_btn">
+                                    <div className="vk_prContent_btn">
                                         <a href={url}
                                            className="btn btn-block btn-lg btn-primary"
                                            target={urlType}
@@ -120,7 +120,7 @@ export class PrContent extends React.Component {
                                         </a>
                                     </div>
                                     :
-                                    <div className="vk_pr-content_btn">
+                                    <div className="vk_prContent_btn">
                                         <a href={url}
                                            className="btn btn-block btn-lg btn-primary btn-ghost"
                                            target={urlType}
