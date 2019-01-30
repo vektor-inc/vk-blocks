@@ -9,12 +9,14 @@ msgstr ""
 
 #: src/balloon/block.js:122
 #: src/flow/block.js:111
+#: src/outer/block.js:128
 #: src/pr-blocks/block.js:324
 msgid "Select image"
 msgstr ""
 
 #: src/balloon/block.js:122
 #: src/flow/block.js:112
+#: src/outer/block.js:130
 #: src/pr-blocks/block.js:326
 msgid "Upload image"
 msgstr ""
@@ -55,6 +57,7 @@ msgid "Right"
 msgstr ""
 
 #: src/balloon/block.js:94
+#: src/outer/block.js:150
 msgid "Type"
 msgstr ""
 
@@ -235,6 +238,104 @@ msgstr ""
 #: src/flow/block.js:97
 #: src/pr-blocks/block.js:507
 msgid "Input content"
+msgstr ""
+
+#: src/outer/block.js:100
+msgid "Padding Setting"
+msgstr ""
+
+#: src/outer/block.js:104
+msgid "Padding"
+msgstr ""
+
+#: src/outer/block.js:107
+msgid "Use default padding"
+msgstr ""
+
+#: src/outer/block.js:108
+msgid "Do not use default padding."
+msgstr ""
+
+#: src/outer/block.js:116
+msgid "Background Image"
+msgstr ""
+
+#: src/outer/block.js:136
+msgid "Parallax"
+msgstr ""
+
+#: src/outer/block.js:139
+msgid "ON"
+msgstr ""
+
+#: src/outer/block.js:140
+msgid "OFF"
+msgstr ""
+
+#: src/outer/block.js:147
+msgid "Divider Setting"
+msgstr ""
+
+#: src/outer/block.js:156
+msgid "Tilt"
+msgstr ""
+
+#: src/outer/block.js:160
+msgid "Curve"
+msgstr ""
+
+#: src/outer/block.js:164
+msgid "Wave"
+msgstr ""
+
+#: src/outer/block.js:168
+msgid "Triangle"
+msgstr ""
+
+#: src/outer/block.js:173
+msgid "Upper Divider Level"
+msgstr ""
+
+#: src/outer/block.js:180
+msgid "Lower Divider Level"
+msgstr ""
+
+#: src/outer/block.js:32
+msgid "Outer"
+msgstr ""
+
+#: src/outer/block.js:62
+msgid "Background Setting"
+msgstr ""
+
+#: src/outer/block.js:64
+msgid "Color Setting"
+msgstr ""
+
+#: src/outer/block.js:65
+msgid ""
+"Color will overcome background image. If you want to display image, clear "
+"background color or set opacity 0."
+msgstr ""
+
+#: src/outer/block.js:73
+msgid "Opacity Setting"
+msgstr ""
+
+#: src/outer/block.js:86
+msgid "Width Setting"
+msgstr ""
+
+#: src/outer/block.js:89
+msgid "Outer width"
+msgstr ""
+
+#: src/outer/block.js:92
+msgid "Normal"
+msgstr ""
+
+#: src/outer/block.js:93
+msgid "Full Wide"
 msgstr ""
 
 #: src/pr-blocks/block.js:137

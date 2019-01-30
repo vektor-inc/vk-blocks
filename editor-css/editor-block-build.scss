@@ -535,6 +535,64 @@ $color_dark:#343a40;
 }
 
 /*-------------------------------------------*/
+/* CSS
+/*-------------------------------------------*/
+
+.vk_outer{
+  background-position: center!important;
+  background-size: cover!important;
+  background-repeat: no-repeat!important;
+  position: relative;
+  .vk_outer_container{
+    min-height: 92px;
+  }
+}
+.vk_outer-width-full {
+	margin-left:calc(50% - 50vw);
+	margin-right:calc(50% - 50vw);
+  padding-left:calc(50vw - 50%);
+  padding-right:calc(50vw - 50%);
+}
+
+.vk_outer-padding{
+  padding: 50px ;
+}
+.vk_outer-padding-none{
+  padding: 0 ;
+}
+.vk_outer-parallax{
+  background-attachment: fixed!important;
+}
+.vk_outer-parallax-none{
+  background-attachment: unset!important;
+}
+
+.vk_outer_separator {
+	svg {
+		display: block;
+    max-height: 100px;
+    position: absolute;
+    left: 0;
+	}
+}
+.vk_outer_separator-position-upper{
+  svg{
+    top: 0;
+    transform: rotate(180deg);
+  }
+}
+.vk_outer_separator-position-lower{
+  svg{
+    bottom: 0;
+  }
+}
+
+
+.editor-block-list__block-edit{
+  margin: 0!important;
+}
+
+/*-------------------------------------------*/
 /* .vk_prBlocks
 /*-------------------------------------------*/
 .vk_prBlocks_item {
