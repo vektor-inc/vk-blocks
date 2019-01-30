@@ -1,0 +1,304 @@
+@charset "utf-8";
+
+$border_primary : 1px solid #e3e3e3;
+$item_bottom_margin : 25px;
+
+/*
+Bootstrap3
+sm : 768〜 / md : 992〜
+Bootstrap4
+sm : 576〜 / md : 768〜
+
+なので bs 4 基準に上書きする
+
+タブレットでも３カラムにしたいが 標準のBS3の sm-6 に負ける ので flex_height_col を付与
+
+*/
+
+.flex_height_col.col-sm-6 {
+	@media (min-width: 576px) and (max-width: 767px){ width:50%; }
+}
+
+.flex_height_col.col-md-4 {
+	@media (min-width: 768px) and (max-width: 991px) { width:33.3333%; }
+}
+
+.row.flex_height:before { display: block;content:""; }
+.media_post { display:block; overflow:hidden;position: relative; background-color: #fff;width:100%;
+	.media_post_label_new {
+	  background:rgba(255,0,0,0.8);
+	  color: #FFF;
+	  font-size: 10px;
+	  padding: 60px 0px 5px;
+	  position: absolute;
+	  left: -104px;
+	  top: -44px;
+	  text-align: center;
+	  width: 200px;
+	  transform: rotate(-45deg);
+	  -ms-transform: rotate(-45deg);
+	  -moz-transform: rotate(-45deg);
+	  -webkit-transform: rotate(-45deg);
+	  -o-transform: rotate(-45deg);
+	}
+	.media_post_image { z-index: 1;display:block; overflow:hidden;
+		background-size: cover;
+		background-position: center;
+		img {
+			width: 100%;
+			height:auto;
+			opacity: 1;
+		  transition: transform 0.3s, transform 0.6s;
+		}
+	}
+	.media_post_text { display:block; overflow:hidden;
+		.media_post_meta { margin-bottom:2px;font-size:12px;
+			.media_post_date { opacity: 0.8;margin-right:8px; }
+			// .media_post_term { display: inline-block;font-size:10px;line-height:1.1em;color:#fff; padding: 3px 1em 2px;position:relative;top:-1px;
+			// 	border-radius: 1em;
+			// }
+			.media_post_term { display: inline-block;font-size:10px;line-height:1.1em;color:#fff; padding: 3px 1em 2px;position:relative;top:-1px;
+				position: absolute;top:0;right:0;
+			}
+			.vcard.author { display: none; }
+		}
+		h4.media_post_title {
+			background:none;
+			padding: 0;
+			margin-bottom:2px;
+			font-size:12px;
+			transition: font-size 0.6s, transform 0.6s;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+		.media_post_excerpt {
+			display:none;
+		}
+	}
+	&:hover {
+		.media_post_image {
+			img {
+	    		transform: scale(1.1);
+	    		transition: transform 0.6s;
+			}
+		}
+	}
+}
+.media_post_text { display:block; overflow:hidden;
+	.media_post_title { margin:0; }
+}
+
+/*-------------------------------------------*/
+/*	高さを揃える
+/*-------------------------------------------*/
+@media (min-width: 576px){
+.flex_height {
+	display: flex;
+  flex-wrap: wrap;
+	align-items: stretch;
+	.flex_height_col {
+		display: flex; // ここをflex指定しないとsafariで .media_post の高さが揃わない
+	}
+	.media_post {
+		// height:100%; // height:100%を指定すると Safariで 高さが揃わなくなる
+	}
+}
+} // @media (min-width: 768px){
+
+/*-------------------------------------------*/
+/*	.image_card
+/*-------------------------------------------*/
+.media_post.image_card {
+	margin-bottom:$item_bottom_margin;
+	.media_post_text { position: absolute;bottom: 0; z-index: 10; color: #fff;width:100%;
+		background-color: rgba(0,0,0,0.8);
+		transition: background-color 0.6s, transform 0.6s;
+		padding:10px 10px 10px 13px;
+		.media_post_term { float:right; }
+	}
+
+	.media_post_title { line-height: 1.3em;
+		width:100%;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	 }
+	&:hover {
+		.media_post_text {
+			background-color: rgba(255,0,0,0.6);
+			transition: background-color 0.6s, transform 0.6s;
+		}
+	}
+}
+
+@media (max-width: 767px){
+	.media_post.image_card {
+
+	}
+}
+
+/*-------------------------------------------*/
+/*	.image_1st
+/*-------------------------------------------*/
+@media (min-width: 768px){
+	.image_1st {
+		.media_post { margin-bottom:10px;
+			&.first { float:left;width:66%; }
+			&.normal { float:right;width:32%; }
+			&.left { float:left;margin-right:2%; }
+			&.clear { clear:both; }
+		}
+	}
+} // @media (min-width: 768px){
+
+/*-------------------------------------------*/
+/*	.image_3
+/*-------------------------------------------*/
+.image_3 {
+	.media_post_image {
+		img { display: none; }
+		height:60vw;
+		@media (min-width: 576px){ height:33vw; }
+		@media (min-width: 768px){ height:180px; }
+		@media (min-width: 992px){ height:170px; }
+		@media (min-width: 1200px){ height:180px; }
+	}
+}
+
+.col-md-12 {
+	.image_3 {
+		.media_post_image {
+			@media (min-width: 992px){ height:230px; }
+			@media (min-width: 1200px){ height:250px; }
+		}
+	}
+}
+
+/*-------------------------------------------*/
+/*	.vertical_card
+/*-------------------------------------------*/
+
+.vertical_card {
+	margin-bottom:$item_bottom_margin;
+	border:$border_primary ;
+	&:hover { border-color:#999; }
+	a { color:#333;display:block;  }
+	a:hover {  text-decoration: none;}
+	.media_post_image { overflow: hidden;text-indent: -9999px;
+	}
+	.media_post_title { line-height: 20px; }
+	.media_post_text { width:100%; }
+}
+.vertical_card.normal_image {
+	a { padding: 20px; }
+	.media_post_image { margin-bottom:20px;
+		height:48vw;
+		@media (min-width: 576px){ height:23vw; }
+		@media (min-width: 768px){ height:120px; }
+		@media (min-width: 992px){ height:85px; }
+		@media (min-width: 1200px){ height:120px; }
+	}
+}
+
+.vertical_card.large_image {
+	.media_post_text { padding: 20px; }
+	.media_post_image {
+		height:50vw;
+		@media (min-width: 576px){ height:25vw; }
+		@media (min-width: 768px){ height:130px; }
+		@media (min-width: 992px){ height:110px; }
+		@media (min-width: 1200px){ height:140px; }
+	}
+}
+
+.col-md-12 {
+	.col-md-4 {
+		.vertical_card.normal_image {
+			.media_post_image {
+				@media (min-width: 768px){ height:170px; }
+				@media (min-width: 992px){ height:150px; }
+				@media (min-width: 1200px){ height:180px; }
+			}
+		}
+		.vertical_card.large_image {
+			.media_post_image {
+				@media (min-width: 768px){ height:190px; }
+				@media (min-width: 992px){ height:170px; }
+				@media (min-width: 1200px){ height:200px; }
+			}
+		}
+	}
+}
+
+// vert_1 はもともとサイドバー用なので重要ではない
+.mainSection {
+	.vert_1 {
+		.vertical_card.normal_image {
+			.media_post_image {
+				@media (min-width: 576px){ height:50vw; }
+				@media (min-width: 768px){ height:400px; }
+				@media (min-width: 992px){ height:340px; }
+				@media (min-width: 1200px){ height:400px; }
+			}
+		}
+	}
+	.vert_large_image_1 {
+		.vertical_card.large_image{
+			.media_post_image {
+				@media (min-width: 576px){ height:50vw; }
+				@media (min-width: 768px){ height:400px; }
+				@media (min-width: 992px){ height:340px; }
+				@media (min-width: 1200px){ height:400px; }
+			}
+		}
+	}
+}
+.subSection {
+	.vert_1 {
+		.vertical_card.normal_image {
+			.media_post_image {
+				@media (min-width: 576px){ height:50vw; }
+				@media (min-width: 768px){ height:400px; }
+				@media (min-width: 992px){ height:105px; }
+				@media (min-width: 1200px){ height:125px; }
+			}
+		}
+	}
+	.vert_large_image_1 {
+		.vertical_card.large_image{
+			.media_post_image {
+				@media (min-width: 576px){ height:50vw; }
+				@media (min-width: 768px){ height:400px; }
+				@media (min-width: 992px){ height:130px; }
+				@media (min-width: 1200px){ height:150px; }
+			}
+		}
+	}
+}
+
+
+/*-------------------------------------------*/
+/*	.oblong_card
+/*-------------------------------------------*/
+
+.oblong_card {
+	border:$border_primary ;
+	a { color:#333; }
+	.media_post_image { float:left;
+		img { width:120px; }
+	}
+	.media_post_title { line-height: 16px; }
+}
+.oblong_card.normal_image {
+	padding: 15px;
+	.media_post_text  { padding-left:15px; }
+}
+.oblong_card.large_image {
+	.media_post_text { padding: 10px 15px; }
+}
+
+.oblong_1,
+.oblong_large_image_1 {
+	.oblong_card { border-bottom:none; }
+	.col-sm-12:last-child .oblong_card { border-bottom:$border_primary; }
+}

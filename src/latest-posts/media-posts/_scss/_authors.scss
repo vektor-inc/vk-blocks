@@ -1,0 +1,22 @@
+@charset "utf-8";
+
+.widget_ltg_media_authors h1 { margin-bottom:10px; }
+.author_outer {
+	padding: 20px 30px;
+	text-align: center;
+	display:block; overflow:hidden;
+	// float:left;
+	a { color:#333; }
+}
+.author_avatar {
+	margin-bottom:15px;
+}
+.author_caption {
+	font-size:12px;
+}
+
+@media (min-width: 768px){
+.subSection {
+	.author_outer { width:100%; }
+}
+}

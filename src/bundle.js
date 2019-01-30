@@ -1,4 +1,5 @@
 //Bundle JS
+import './latest-posts/block.js';
 import './outer/block.js';
 import './alert/block.js';
 import './balloon/block.js';
