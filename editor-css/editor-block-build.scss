@@ -546,14 +546,15 @@ $color_dark:#343a40;
   .vk_outer_container{
     min-height: 92px;
   }
-  svg{
-    display: block;
+}
+.vk_outer_separator {
+	svg {
+		display: block;
     max-height: 100px;
     position: absolute;
     left: 0;
-  }
+	}
 }
-
 .vk_outer-width-full {
 	margin-left:calc(50% - 50vw);
 	margin-right:calc(50% - 50vw);
@@ -577,13 +578,14 @@ $color_dark:#343a40;
   margin: 0!important;
 }
 
-.vk_outer_border_style-upper{
+
+.vk_outer_separator-upper{
   svg{
     top: 0;
     transform: rotate(180deg);
   }
 }
-.vk_outer_border_style-lower{
+.vk_outer_separator-lower{
   svg{
     bottom: 0;
   }

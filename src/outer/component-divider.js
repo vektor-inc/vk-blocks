@@ -125,7 +125,7 @@ const componentDivider = (level, color, whichSide, dividerType) =>{
     if (whichSide === 'upper') {
         return (
             <div
-                className={`vk_outer_separator-upper vk_outer_separator-${sectionClass}`}
+                className={`vk_outer_separator vk_outer_separator-upper vk_outer_separator-${sectionClass}`}
                 style={{paddingBottom: sectionPadding + `px`}}
             >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -139,7 +139,7 @@ const componentDivider = (level, color, whichSide, dividerType) =>{
         return (
 
             <div
-                className={`vk_outer_separator-lower vk_outer_separator-${sectionClass}`}
+                className={`vk_outer_separator vk_outer_separator-lower vk_outer_separator-${sectionClass}`}
                 style={{paddingTop: sectionPadding + `px`}}
             >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">

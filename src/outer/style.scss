@@ -10,14 +10,15 @@
   .vk_outer_container{
     min-height: 92px;
   }
-  svg{
-    display: block;
+}
+.vk_outer_separator {
+	svg {
+		display: block;
     max-height: 100px;
     position: absolute;
     left: 0;
-  }
+	}
 }
-
 .vk_outer-width-full {
 	margin-left:calc(50% - 50vw);
 	margin-right:calc(50% - 50vw);
@@ -40,6 +41,7 @@
 .editor-block-list__block-edit{
   margin: 0!important;
 }
+
 
 .vk_outer_separator-upper{
   svg{
