@@ -429,11 +429,11 @@ msgid "Button Text"
 msgstr ""
 
 #: src/pr-content/block.js:127
-msgid "Button Url"
+msgid "Link URL"
 msgstr ""
 
 #: src/pr-content/block.js:135
-msgid "URL Type"
+msgid "Link target"
 msgstr ""
 
 #: src/pr-content/block.js:139

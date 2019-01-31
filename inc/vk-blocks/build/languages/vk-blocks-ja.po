@@ -19,19 +19,21 @@ msgstr ""
 msgid "Alert"
 msgstr "アラート"
 
-#: src/balloon/block.js:122 src/flow/block.js:111 src/pr-blocks/block.js:302
+#: src/balloon/block.js:122 src/flow/block.js:111 src/outer/block.js:147
+#: src/pr-blocks/block.js:324 src/pr-content/component.js:59
 msgid "Select image"
 msgstr "画像を選択"
 
-#: src/balloon/block.js:122 src/flow/block.js:112 src/pr-blocks/block.js:304
+#: src/balloon/block.js:122 src/flow/block.js:112 src/outer/block.js:149
+#: src/pr-blocks/block.js:326 src/pr-content/component.js:63
 msgid "Upload image"
 msgstr "画像をアップロード"
 
 #: src/balloon/block.js:131
 msgid "Icon Name"
-msgstr ""
+msgstr "アイコンの名前"
 
-#: src/balloon/block.js:140 src/button/block.js:224
+#: src/balloon/block.js:140 src/button/block.js:225
 msgid "Input text"
 msgstr "文字を入力"
 
@@ -51,15 +53,15 @@ msgstr "位置"
 msgid "Please specify the layout of the balloon."
 msgstr "吹き出しの配置を指定してください。"
 
-#: src/balloon/block.js:88 src/button/block.js:149
+#: src/balloon/block.js:88 src/button/block.js:149 src/pr-content/block.js:180
 msgid "Left"
 msgstr "左"
 
-#: src/balloon/block.js:89 src/button/block.js:151
+#: src/balloon/block.js:89 src/button/block.js:151 src/pr-content/block.js:179
 msgid "Right"
 msgstr "右"
 
-#: src/balloon/block.js:94
+#: src/balloon/block.js:94 src/outer/block.js:169
 msgid "Type"
 msgstr "タイプ"
 
@@ -79,7 +81,7 @@ msgstr "吹き出し"
 msgid "Button setting"
 msgstr "ボタン設定"
 
-#: src/button/block.js:131 src/pr-blocks/block.js:261
+#: src/button/block.js:131 src/pr-blocks/block.js:276
 msgid "Open link new tab."
 msgstr "リンクを別ウィンドウで開く"
 
@@ -115,11 +117,11 @@ msgstr "ブロック（全幅）"
 msgid "Button Style:"
 msgstr "ボタンスタイル:"
 
-#: src/button/block.js:160 src/pr-blocks/block.js:283
+#: src/button/block.js:160 src/pr-blocks/block.js:305
 msgid "Solid color"
 msgstr "ベタ塗り"
 
-#: src/button/block.js:161 src/pr-blocks/block.js:284
+#: src/button/block.js:161 src/pr-blocks/block.js:306
 msgid "No background"
 msgstr "背景なし"
 
@@ -135,23 +137,35 @@ msgstr "標準色:"
 
 #: src/button/block.js:170
 msgid "Primary"
-msgstr ""
+msgstr "Primary"
+
+#: src/button/block.js:171
+msgid "Secondary"
+msgstr "Secondary"
 
 #: src/button/block.js:172
 msgid "Success"
-msgstr ""
+msgstr "Success"
 
 #: src/button/block.js:173
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 #: src/button/block.js:174
 msgid "Warning"
-msgstr ""
+msgstr "Warning"
 
 #: src/button/block.js:175
 msgid "Danger"
-msgstr ""
+msgstr "Danger"
+
+#: src/button/block.js:176
+msgid "Light"
+msgstr "Light"
+
+#: src/button/block.js:177
+msgid "Dark"
+msgstr "Dark"
 
 #: src/button/block.js:182
 msgid "Custom Color"
@@ -162,34 +176,34 @@ msgid ""
 "This custom color overrides the default color. If you want to use the "
 "default color, click the clear button."
 msgstr ""
-"このカスタムカラーはデフォルトのカラーを上書きします。 デフォルトの色を使"
-"用したい場合は、クリアボタンをクリックしてください。"
+"このカスタムカラーはデフォルトのカラーを上書きします。 デフォルトの色を使用"
+"したい場合は、クリアボタンをクリックしてください。"
 
-#: src/button/block.js:191
+#: src/button/block.js:191 src/pr-content/block.js:156
 msgid "Font Awesome:"
-msgstr ""
+msgstr "Font Awesome:"
 
-#: src/button/block.js:195
+#: src/button/block.js:195 src/pr-content/block.js:159
 msgid "Before text"
 msgstr "文字の前"
 
-#: src/button/block.js:196
+#: src/button/block.js:196 src/pr-content/block.js:160
 msgid "Enter Font Awesome Class.This icon will appear before text."
 msgstr ""
-"Font Awesome の class 名を入力してください。このアイコンは文字の前に表示さ"
-"れます。"
+"Font Awesome の class 名を入力してください。このアイコンは文字の前に表示され"
+"ます。"
 
-#: src/button/block.js:202
+#: src/button/block.js:202 src/pr-content/block.js:166
 msgid "After text"
 msgstr "文字の後"
 
-#: src/button/block.js:203
+#: src/button/block.js:203 src/pr-content/block.js:167
 msgid "Enter Font Awesome Class.This icon will appear after text."
 msgstr ""
-"Font Awesome の class 名を入力してください。このアイコンは文字の後に表示さ"
-"れます。"
+"Font Awesome の class 名を入力してください。このアイコンは文字の後に表示され"
+"ます。"
 
-#: src/button/block.js:239
+#: src/button/block.js:240
 msgid "Apply"
 msgstr ""
 
@@ -225,73 +239,260 @@ msgstr "矢印を表示する"
 msgid "Arrow hidden"
 msgstr "矢印を表示しない"
 
-#: src/flow/block.js:90 src/pr-blocks/block.js:473
+#: src/flow/block.js:90 src/pr-blocks/block.js:500
 msgid "Input title"
 msgstr "タイトルを入力"
 
-#: src/flow/block.js:97 src/pr-blocks/block.js:480
+#: src/flow/block.js:97 src/pr-blocks/block.js:507
 msgid "Input content"
 msgstr "説明を入力"
 
-#: src/pr-blocks/block.js:136
+#: src/outer/block.js:105
+msgid "Width Setting"
+msgstr "幅設定"
+
+#: src/outer/block.js:108
+msgid "Outer width"
+msgstr "アウターの幅"
+
+#: src/outer/block.js:111
+msgid "Normal"
+msgstr "標準"
+
+#: src/outer/block.js:112
+msgid "Full Wide"
+msgstr "全幅"
+
+#: src/outer/block.js:119
+msgid "Padding Setting"
+msgstr "余白設定"
+
+#: src/outer/block.js:123
+msgid "Padding"
+msgstr "余白"
+
+#: src/outer/block.js:126
+msgid "Use default padding"
+msgstr "標準の余白を使用"
+
+#: src/outer/block.js:127
+msgid "Do not use default padding."
+msgstr "標準の余白を使用しない（スペーサーブロックなどで独自に指定する）"
+
+#: src/outer/block.js:135
+msgid "Background Image"
+msgstr "背景画像"
+
+#: src/outer/block.js:155
+msgid "Parallax"
+msgstr ""
+
+#: src/outer/block.js:158
+msgid "ON"
+msgstr ""
+
+#: src/outer/block.js:159
+msgid "OFF"
+msgstr ""
+
+#: src/outer/block.js:166
+msgid "Divider Setting"
+msgstr "区切りの設定"
+
+#: src/outer/block.js:175
+msgid "Tilt"
+msgstr "傾斜"
+
+#: src/outer/block.js:179
+msgid "Curve"
+msgstr "カーブ"
+
+#: src/outer/block.js:183
+msgid "Wave"
+msgstr "波状"
+
+#: src/outer/block.js:187
+msgid "Triangle"
+msgstr "三角"
+
+#: src/outer/block.js:192
+msgid "Upper Divider Level"
+msgstr "上部区切りレベル"
+
+#: src/outer/block.js:199
+msgid "Lower Divider Level"
+msgstr "下部区切りレベル"
+
+#: src/outer/block.js:219
+msgid "This block is only for users who bought Lightning Pro."
+msgstr "このブロックは Lightning Pro 専用です。"
+
+#: src/outer/block.js:51
+msgid "Outer"
+msgstr ""
+
+#: src/outer/block.js:81
+msgid "Background Setting"
+msgstr "背景設定設定"
+
+#: src/outer/block.js:83 src/pr-content/block.js:88
+msgid "Color Setting"
+msgstr "色設定"
+
+#: src/outer/block.js:84
+msgid ""
+"Color will overcome background image. If you want to display image, clear "
+"background color or set opacity 0."
+msgstr ""
+"色を指定すると画像よりも優先されます。画像を表示したい場合は、背景色をクリア"
+"するか、不透明度を0に設定します。"
+
+#: src/outer/block.js:92
+msgid "Opacity Setting"
+msgstr "透過設定"
+
+#: src/pr-blocks/block.js:137
 msgid "PR Block1 Setting"
 msgstr "PR Block1 設定"
 
-#: src/pr-blocks/block.js:151
+#: src/pr-blocks/block.js:152
 msgid "Icon 1"
 msgstr "アイコン 1"
 
-#: src/pr-blocks/block.js:174
+#: src/pr-blocks/block.js:182
 msgid "PR Image 1"
 msgstr "PR 画像 1"
 
-#: src/pr-blocks/block.js:194
-msgid "PR Block2 Setting"
-msgstr "PR Block2 設定"
-
-#: src/pr-blocks/block.js:209
-msgid "Icon 2"
-msgstr "アイコン 2"
-
-#: src/pr-blocks/block.js:232
-msgid "PR Image 2"
-msgstr "PR 画像 2"
-
-#: src/pr-blocks/block.js:233
+#: src/pr-blocks/block.js:183
 msgid "When you have an image. Image is displayed with priority"
 msgstr "画像を設定した場合は画像が優先して表示されます。"
 
-#: src/pr-blocks/block.js:252
+#: src/pr-blocks/block.js:202
+msgid "PR Block2 Setting"
+msgstr "PR Block2 設定"
+
+#: src/pr-blocks/block.js:217
+msgid "Icon 2"
+msgstr "アイコン 2"
+
+#: src/pr-blocks/block.js:247
+msgid "PR Image 2"
+msgstr "PR 画像 2"
+
+#: src/pr-blocks/block.js:267
 msgid "PR Block3 Setting"
 msgstr "PR Block3 設定"
 
-#: src/pr-blocks/block.js:254
+#: src/pr-blocks/block.js:269
 msgid "Link URL:"
 msgstr "リンクURL:"
 
-#: src/pr-blocks/block.js:267
+#: src/pr-blocks/block.js:282
 msgid "Icon 3"
 msgstr "アイコン 3"
 
-#: src/pr-blocks/block.js:270
+#: src/pr-blocks/block.js:285
 msgid "Class name of the Font Awesome icon font you want to use:"
 msgstr "アイコンを使う場合は Font Awesome のアイコンのclass名:"
 
-#: src/pr-blocks/block.js:280
+#: src/pr-blocks/block.js:302
 msgid "Icon Background:"
 msgstr "アイコン背景:"
 
-#: src/pr-blocks/block.js:290
+#: src/pr-blocks/block.js:312
 msgid "PR Image 3"
 msgstr "PR 画像 3"
 
-#: src/pr-blocks/block.js:291
+#: src/pr-blocks/block.js:313
 msgid "When you have an image. Image is displayed with priority."
 msgstr "画像を設定した場合は画像が優先して表示されます。"
 
 #: src/pr-blocks/block.js:91
-msgid "PR Block"
-msgstr "PR Block"
+msgid "PR Blocks (Beta)"
+msgstr "PR Blocks (Beta)"
 
-#~ msgid "Setting"
-#~ msgstr "設定"
+#: src/pr-content/block.js:101
+msgid "Button Color"
+msgstr "ボタンの色"
+
+#: src/pr-content/block.js:108
+msgid "Image Border Color"
+msgstr "画像の線の色"
+
+#: src/pr-content/block.js:116
+msgid "Button Setting"
+msgstr "ボタン設定"
+
+#: src/pr-content/block.js:118
+msgid "Button Text"
+msgstr "ボタンの文字"
+
+#: src/pr-content/block.js:127
+msgid "Link URL"
+msgstr "リンクURL"
+
+#: src/pr-content/block.js:135
+msgid "Link target"
+msgstr "リンクターゲット"
+
+#: src/pr-content/block.js:139
+msgid "Open url in new window"
+msgstr "リンクを別ウィンドウで開く"
+
+#: src/pr-content/block.js:140
+msgid "Open url in current window"
+msgstr "リンクを同じウィンドウで開く"
+
+#: src/pr-content/block.js:145
+msgid "Button Type"
+msgstr "ボタンタイプ"
+
+#: src/pr-content/block.js:149
+msgid "Solid"
+msgstr "ベタ塗り"
+
+#: src/pr-content/block.js:150
+msgid "Ghost"
+msgstr "ゴーストボタン"
+
+#: src/pr-content/block.js:174
+msgid "Layout Setting"
+msgstr "レイアウト設定"
+
+#: src/pr-content/block.js:176
+msgid "Layout Type"
+msgstr "レイアウトタイプ"
+
+#: src/pr-content/block.js:58
+msgid "PR Content"
+msgstr "PR Content"
+
+#: src/pr-content/block.js:89
+msgid "Title Color"
+msgstr "見出しの色"
+
+#: src/pr-content/block.js:95
+msgid "Content Color"
+msgstr "本文の色"
+
+#: src/pr-content/component.js:79
+msgid "Input title."
+msgstr "タイトルを入力してください。"
+
+#: src/pr-content/component.js:86
+msgid "Input content."
+msgstr "本文を入力してください。"
+
+#~ msgid "Link url"
+#~ msgstr "リンクURL"
+
+#~ msgid "Button Url"
+#~ msgstr "リンクURL"
+
+#, fuzzy
+#~| msgid "Type"
+#~ msgid "URL Type"
+#~ msgstr "タイプ"
+
+#~ msgid "PR Block"
+#~ msgstr "PR Block"

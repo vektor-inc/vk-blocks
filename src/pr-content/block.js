@@ -124,7 +124,7 @@ registerBlockType('vk-blocks/pr-content', {
                             />
                         </BaseControl>
                         <BaseControl
-                            label={__('Button Url', 'vk-blocks')}
+                            label={__('Link URL', 'vk-blocks')}
                         >
                             <TextControl
                                 value={url}
@@ -132,7 +132,7 @@ registerBlockType('vk-blocks/pr-content', {
                                 placeholder={'https://vektor-inc.co.jp/'}
                             />
                         </BaseControl>
-                        <BaseControl label={__('URL Type', 'vk-blocks')}>
+                        <BaseControl label={__('Link target', 'vk-blocks')}>
                             <RadioControl
                                 selected={urlType}
                                 options={[
