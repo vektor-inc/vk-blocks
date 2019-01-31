@@ -48,16 +48,13 @@ registerBlockType('vk-blocks/pr-content', {
      */
     edit: function ({attributes, className, setAttributes}) {
         const {
-            title,
             titleColor,
-            content,
             contentColor,
             url,
             buttonType,
             buttonColor,
             buttonText,
             urlType,
-            Image,
             ImageBorderColor,
             layout,
         } = attributes;
@@ -93,6 +90,15 @@ registerBlockType('vk-blocks/pr-content', {
                         </BaseControl>
                     </PanelBody>
                     <PanelBody title={__('Button Setting', 'vk-blocks')}>
+                        <BaseControl
+                            label={__('Button Text', 'vk-blocks')}
+                        >
+                            <TextControl
+                                value={buttonText}
+                                onChange={(value) => setAttributes({buttonText: value})}
+                                placeholder={'Input button text.'}
+                            />
+                        </BaseControl>
                         <BaseControl
                             label={__('Button Url', 'vk-blocks')}
                         >
