@@ -51,7 +51,12 @@ export class Component extends React.Component {
         classWidth = ` vk_outer-width-${outerWidth}`;
 
         //hexからrgbaに変換
-        bgColor = hex2rgba(bgColor,opacity);
+        if(bgColor){
+            bgColor = hex2rgba(bgColor,opacity);
+        }else {
+            //背景色をクリアした時は、白に変更
+            bgColor = hex2rgba('#fff',opacity);
+        }
 
         //parallaxのクラス切り替え
         if (is_parallax === '1') {
