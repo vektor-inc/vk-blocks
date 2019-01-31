@@ -152,11 +152,12 @@ registerBlockType('vk-blocks/outer', {
                             />
 
                             <RadioControl
-                                label={__('Parallax', 'vk-blocks')}
+                                label={__('Background Effect', 'vk-blocks')}
                                 selected={is_parallax}
                                 options={[
-                                    {label: __('ON', 'vk-blocks'), value: '1'},
-                                    {label: __('OFF', 'vk-blocks'), value: '0'}
+                                    {label: __('None', 'vk-blocks'), value: 'none'},
+                                    {label: __('Fixed', 'vk-blocks'), value: 'fixed'},
+                                    {label: __('Parallax', 'vk-blocks'), value: 'parallax'}
                                 ]}
                                 onChange={(value) => setAttributes({is_parallax: value})}
                             />

@@ -61,7 +61,7 @@ msgid "Right"
 msgstr ""
 
 #: src/balloon/block.js:94
-#: src/outer/block.js:169
+#: src/outer/block.js:170
 msgid "Type"
 msgstr ""
 
@@ -286,46 +286,50 @@ msgid "Background Image"
 msgstr ""
 
 #: src/outer/block.js:155
-msgid "Parallax"
+msgid "Background Effect"
 msgstr ""
 
 #: src/outer/block.js:158
-msgid "ON"
+msgid "None"
 msgstr ""
 
 #: src/outer/block.js:159
-msgid "OFF"
+msgid "Fixed"
 msgstr ""
 
-#: src/outer/block.js:166
+#: src/outer/block.js:160
+msgid "Parallax"
+msgstr ""
+
+#: src/outer/block.js:167
 msgid "Divider Setting"
 msgstr ""
 
-#: src/outer/block.js:175
+#: src/outer/block.js:176
 msgid "Tilt"
 msgstr ""
 
-#: src/outer/block.js:179
+#: src/outer/block.js:180
 msgid "Curve"
 msgstr ""
 
-#: src/outer/block.js:183
+#: src/outer/block.js:184
 msgid "Wave"
 msgstr ""
 
-#: src/outer/block.js:187
+#: src/outer/block.js:188
 msgid "Triangle"
 msgstr ""
 
-#: src/outer/block.js:192
+#: src/outer/block.js:193
 msgid "Upper Divider Level"
 msgstr ""
 
-#: src/outer/block.js:199
+#: src/outer/block.js:200
 msgid "Lower Divider Level"
 msgstr ""
 
-#: src/outer/block.js:219
+#: src/outer/block.js:220
 msgid "This block is only for users who bought Lightning Pro."
 msgstr ""
 

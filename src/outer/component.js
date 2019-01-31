@@ -62,10 +62,12 @@ export class Component extends React.Component {
         }
 
         //parallaxのクラス切り替え
-        if (is_parallax === '1') {
-            parallax = ' vk_outer-parallax';
+        if (is_parallax === 'parallax') {
+            parallax = ' vk-prlx';
+				} else if (is_parallax === 'fixed') {
+		        parallax = ' vk_outer-effect-fixed';
         } else {
-            parallax = ' vk_outer-parallax-none';
+            parallax = ' vk_outer-effect-none';
         }
 
         //paddingのクラス切り替え
@@ -90,7 +92,7 @@ export class Component extends React.Component {
             elm = <InnerBlocks/>;
         }else if('save'){
             elm = <InnerBlocks.Content/>;
-            containerClass = 'vk_outer_container container';
+            containerClass = 'vk_outer_container';
         }
 
         return (
