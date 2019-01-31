@@ -9,18 +9,20 @@ export class Component extends React.Component {
 
     render() {
 
-        let title = this.props.title;
-        let content = this.props.content;
-        let layout = this.props.layout;
-        let Image = this.props.Image;
-        let titleColor = this.props.titleColor;
-        let contentColor = this.props.contentColor;
-        let buttonColor = this.props.buttonColor;
-        let ImageBorderColor = this.props.ImageBorderColor;
-        let url = this.props.url;
-        let urlType = this.props.urlType;
-        let buttonText = this.props.buttonText;
-        let buttonType = this.props.buttonType;
+        const {
+            title,
+            titleColor,
+            content,
+            contentColor,
+            url,
+            buttonType,
+            buttonColor,
+            buttonText,
+            urlType,
+            Image,
+            ImageBorderColor,
+            layout,
+        } = this.props.attributes;
         let setAttributes = this.props.setAttributes;
         let for_ = this.props.for_;
 

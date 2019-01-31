@@ -137,21 +137,10 @@ registerBlockType('vk-blocks/pr-content', {
                     </PanelBody>
                 </InspectorControls>
                 <Component
-                    title={title}
-                    content={content}
-                    buttonText={buttonText}
-                    titleColor={titleColor}
-                    contentColor={contentColor}
-                    url={url}
-                    buttonType={buttonType}
-                    buttonColor={buttonColor}
-                    urlType={urlType}
-                    Image={Image}
-                    ImageBorderColor={ImageBorderColor}
-                    layout={layout}
+                    attributes={attributes}
                     setAttributes={setAttributes}
-                    for_ = {'edit'}
-            />
+                    for_={'edit'}
+                />
             </Fragment>
         );
     },
@@ -166,36 +155,11 @@ registerBlockType('vk-blocks/pr-content', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     save({attributes, className}) {
-        const {
-            title,
-            titleColor,
-            content,
-            contentColor,
-            url,
-            buttonType,
-            buttonColor,
-            buttonText,
-            urlType,
-            Image,
-            ImageBorderColor,
-            layout,
-        } = attributes;
 
         return (
             <Component
-                title={title}
-                content={content}
-                buttonText={buttonText}
-                titleColor={titleColor}
-                contentColor={contentColor}
-                url={url}
-                buttonType={buttonType}
-                buttonColor={buttonColor}
-                urlType={urlType}
-                Image={Image}
-                ImageBorderColor={ImageBorderColor}
-                layout={layout}
-                for_ = {'save'}
+                attributes={attributes}
+                for_={'save'}
             />
         );
     },
