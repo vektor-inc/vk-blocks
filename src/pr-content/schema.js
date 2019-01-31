@@ -28,6 +28,7 @@ export const schema = {
 	buttonText: {
 		source: 'html',
 			selector: '.vk_prContent_btn_txt',
+		default: '',
 	},
 	urlType: {
 		type: 'string',
@@ -44,5 +45,11 @@ export const schema = {
 	layout: {
 		type: 'string',
 	default: 'left',
+	},
+	fontAwesomeIconBefore:{
+		type: 'string',
+	},
+	fontAwesomeIconAfter:{
+		type: 'string',
 	}
 };

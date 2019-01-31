@@ -57,6 +57,8 @@ registerBlockType('vk-blocks/pr-content', {
             urlType,
             ImageBorderColor,
             layout,
+            fontAwesomeIconBefore,
+            fontAwesomeIconAfter
         } = attributes;
         return (
             <Fragment>
@@ -127,7 +129,24 @@ registerBlockType('vk-blocks/pr-content', {
                                 ]}
                                 onChange={(value) => setAttributes({buttonType: value})}
                             />
-
+                        </BaseControl>
+                        <BaseControl
+                            label={__('Font Awesome:', 'vk-blocks')}
+                        >
+                            <TextControl
+                                label={__('Before text', 'vk-blocks')}
+                                help={__('Enter Font Awesome Class.This icon will appear before text.', 'vk-blocks')}
+                                value={fontAwesomeIconBefore}
+                                onChange={(value) => setAttributes({fontAwesomeIconBefore: value})}
+                                placeholder={'fas fa-user'}
+                            />
+                            <TextControl
+                                label={__('After text', 'vk-blocks')}
+                                help={__('Enter Font Awesome Class.This icon will appear after text.', 'vk-blocks')}
+                                value={fontAwesomeIconAfter}
+                                onChange={(value) => setAttributes({fontAwesomeIconAfter: value})}
+                                placeholder={'fas fa-book'}
+                            />
                         </BaseControl>
                         </PanelBody>
                     <PanelBody title={__('Layout Setting', 'vk-blocks')}>

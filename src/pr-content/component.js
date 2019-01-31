@@ -1,4 +1,5 @@
 import React from "react";
+import {Fontawesome} from "./component-fontawesome";
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {Button} = wp.components;
@@ -9,6 +10,7 @@ export class Component extends React.Component {
 
     render() {
 
+        const attributes = this.props.attributes;
         const {
             title,
             titleColor,
@@ -22,7 +24,9 @@ export class Component extends React.Component {
             Image,
             ImageBorderColor,
             layout,
-        } = this.props.attributes;
+            fontAwesomeIconBefore,
+            fontAwesomeIconAfter
+        } = attributes;
         let setAttributes = this.props.setAttributes;
         let for_ = this.props.for_;
 
@@ -123,7 +127,9 @@ export class Component extends React.Component {
                                                            color: `#ffffff`
                                                        }}
                                                     >
-                                                        <span className="vk_prContent_btn_txt">{buttonText}</span>
+                                                        <Fontawesome
+                                                            attributes={attributes}
+                                                        />
                                                     </a>
                                                 </div>);
                                         } else {
@@ -138,7 +144,9 @@ export class Component extends React.Component {
                                                            color: `${buttonColor}`
                                                        }}
                                                     >
-                                                        <span className="vk_prContent_btn_txt">{buttonText}</span>
+                                                        <Fontawesome
+                                                            attributes={attributes}
+                                                        />
                                                     </a>
                                                 </div>);
                                         }
