@@ -654,6 +654,11 @@ $color_dark:#343a40;
 
 @charset "utf-8";
 
+.vk_prContent .row {
+	margin-left:-15px;
+	margin-right:-15px;
+}
+
 @media (max-width: 767px) {
 
 	.vk_prContent_col_img {
@@ -758,6 +763,5 @@ $color_dark:#343a40;
 .edit-post-visual-editor p {
 	margin-bottom: 0!important;
 }
-
 
 }

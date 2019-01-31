@@ -90,7 +90,7 @@ export class Component extends React.Component {
             elm = <InnerBlocks/>;
         }else if('save'){
             elm = <InnerBlocks.Content/>;
-            containerClass = 'vk_outer_container';
+            containerClass = 'vk_outer_container container';
         }
 
         return (
