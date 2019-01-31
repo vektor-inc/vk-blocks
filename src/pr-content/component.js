@@ -5,7 +5,7 @@ const {Button} = wp.components;
 const {MediaUpload} = wp.editor;
 let {RichText} = wp.editor;
 
-export class PrContent extends React.Component {
+export class Component extends React.Component {
 
     render() {
 

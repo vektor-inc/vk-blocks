@@ -4,7 +4,8 @@
  */
 
 import React from "react";
-import {PrContent} from "./prContent.js";
+import {schema} from './schema.js';
+import {Component} from "./component.js";
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
@@ -35,54 +36,7 @@ registerBlockType('vk-blocks/pr-content', {
     title: __('PR Content', 'vk-blocks'), // Block title.
     icon: BlockIcon, // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
     category: 'vk-blocks-cat', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
-    attributes: {
-        title: {
-            source: 'html',
-            selector: '.vk_prContent_title',
-        },
-        titleColor: {
-            type: 'string',
-        },
-        content: {
-            source: 'html',
-            selector: 'p',
-        },
-        contentColor: {
-            type: 'string',
-        },
-        url: {
-            type: 'string',
-            default: null,
-        },
-        buttonType: {
-            type: 'string',
-            default: '1',
-        },
-        buttonColor: {
-            type: 'string',
-            default: 'blue',
-        },
-        buttonText: {
-            source: 'html',
-            selector: '.vk_prContent_btn_txt',
-        },
-        urlType: {
-            type: 'string',
-            default: '_blank',
-        },
-        Image: {
-            type: 'string',
-            default: null,
-        },
-        ImageBorderColor: {
-            type: 'string',
-            default: null,
-        },
-        layout: {
-            type: 'string',
-            default: 'left',
-        }
-    },
+    attributes: schema,
 
     /**
      * The edit function describes the structure of your block in the context of the editor.
@@ -182,7 +136,7 @@ registerBlockType('vk-blocks/pr-content', {
                             />
                     </PanelBody>
                 </InspectorControls>
-                <PrContent
+                <Component
                     title={title}
                     content={content}
                     buttonText={buttonText}
@@ -228,7 +182,7 @@ registerBlockType('vk-blocks/pr-content', {
         } = attributes;
 
         return (
-            <PrContent
+            <Component
                 title={title}
                 content={content}
                 buttonText={buttonText}
