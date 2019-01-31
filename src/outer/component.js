@@ -28,16 +28,19 @@ export class Component extends React.Component {
 
     render() {
 
-        let is_padding = this.props.is_padding;
-        let is_parallax = this.props.is_parallax;
-        let outerWidth = this.props.outerWidth;
-        let bgColor = this.props.bgColor;
-        let opacity = this.props.opacity;
-        let bgImage = this.props.bgImage;
-        let upperTiltLevel = this.props.upperTilt;
-        let lowerTiltLevel = this.props.lowerTilt;
-        let tiltBgColor = this.props.tiltBgColor;
-        let dividerType = this.props.dividerType;
+        let {
+            bgColor,
+            bgImage,
+            outerWidth,
+            is_parallax,
+            is_padding,
+            opacity,
+            upper_tilt_level,
+            lower_tilt_level,
+            tiltBgColor,
+            dividerType
+        } = this.props.attributes;
+
         let for_ = this.props.for_;
         let padding;
         let parallax;
@@ -51,7 +54,12 @@ export class Component extends React.Component {
         classWidth = ` vk_outer-width-${outerWidth}`;
 
         //hexからrgbaに変換
-        bgColor = hex2rgba(bgColor,opacity);
+        if(bgColor){
+            bgColor = hex2rgba(bgColor,opacity);
+        }else {
+            //背景色をクリアした時は、白に変更
+            bgColor = hex2rgba('#fff',opacity);
+        }
 
         //parallaxのクラス切り替え
         if (is_parallax === '1') {
@@ -68,12 +76,12 @@ export class Component extends React.Component {
         }
 
         //上側セクションの傾き切り替え
-        if (upperTiltLevel) {
+        if (upper_tilt_level) {
             whichSideUpper = 'upper';
         }
 
         //下側セクションの傾き切り替え
-        if (lowerTiltLevel) {
+        if (lower_tilt_level) {
             whichSideLower = 'lower';
         }
 
@@ -93,13 +101,13 @@ export class Component extends React.Component {
                 }}
             >
                     {
-                        componentDivider(upperTiltLevel, tiltBgColor, whichSideUpper,dividerType)
+                        componentDivider(upper_tilt_level, tiltBgColor, whichSideUpper,dividerType)
                     }
                 <div className={containerClass}>
                     {elm}
                 </div>
                 {
-                    componentDivider(lowerTiltLevel, tiltBgColor, whichSideLower,dividerType)
+                    componentDivider(lower_tilt_level, tiltBgColor, whichSideLower,dividerType)
                 }
             </div>
         );

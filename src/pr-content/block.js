@@ -4,7 +4,8 @@
  */
 
 import React from "react";
-import {PrContent} from "./prContent.js";
+import {schema} from './schema.js';
+import {Component} from "./component.js";
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
@@ -57,54 +58,7 @@ registerBlockType('vk-blocks/pr-content', {
     title: __('PR Content', 'vk-blocks'), // Block title.
     icon: BlockIcon, // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
     category: 'vk-blocks-cat', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
-    attributes: {
-        title: {
-            source: 'html',
-            selector: '.vk_prContent_title',
-        },
-        titleColor: {
-            type: 'string',
-        },
-        content: {
-            source: 'html',
-            selector: 'p',
-        },
-        contentColor: {
-            type: 'string',
-        },
-        url: {
-            type: 'string',
-            default: null,
-        },
-        buttonType: {
-            type: 'string',
-            default: '1',
-        },
-        buttonColor: {
-            type: 'string',
-            default: 'blue',
-        },
-        buttonText: {
-            source: 'html',
-            selector: '.vk_prContent_btn_txt',
-        },
-        urlType: {
-            type: 'string',
-            default: '_blank',
-        },
-        Image: {
-            type: 'string',
-            default: null,
-        },
-        ImageBorderColor: {
-            type: 'string',
-            default: null,
-        },
-        layout: {
-            type: 'string',
-            default: 'left',
-        }
-    },
+    attributes: schema,
 
     /**
      * The edit function describes the structure of your block in the context of the editor.
@@ -116,16 +70,13 @@ registerBlockType('vk-blocks/pr-content', {
      */
     edit: function ({attributes, className, setAttributes}) {
         const {
-            title,
             titleColor,
-            content,
             contentColor,
             url,
             buttonType,
             buttonColor,
             buttonText,
             urlType,
-            Image,
             ImageBorderColor,
             layout,
         } = attributes;
@@ -161,6 +112,15 @@ registerBlockType('vk-blocks/pr-content', {
                         </BaseControl>
                     </PanelBody>
                     <PanelBody title={__('Button Setting', 'vk-blocks')}>
+                        <BaseControl
+                            label={__('Button Text', 'vk-blocks')}
+                        >
+                            <TextControl
+                                value={buttonText}
+                                onChange={(value) => setAttributes({buttonText: value})}
+                                placeholder={'Input button text.'}
+                            />
+                        </BaseControl>
                         <BaseControl
                             label={__('Button Url', 'vk-blocks')}
                         >
@@ -204,22 +164,11 @@ registerBlockType('vk-blocks/pr-content', {
                             />
                     </PanelBody>
                 </InspectorControls>
-                <PrContent
-                    title={title}
-                    content={content}
-                    buttonText={buttonText}
-                    titleColor={titleColor}
-                    contentColor={contentColor}
-                    url={url}
-                    buttonType={buttonType}
-                    buttonColor={buttonColor}
-                    urlType={urlType}
-                    Image={Image}
-                    ImageBorderColor={ImageBorderColor}
-                    layout={layout}
+                <Component
+                    attributes={attributes}
                     setAttributes={setAttributes}
-                    for_ = {'edit'}
-            />
+                    for_={'edit'}
+                />
             </Fragment>
         );
     },
@@ -234,36 +183,11 @@ registerBlockType('vk-blocks/pr-content', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     save({attributes, className}) {
-        const {
-            title,
-            titleColor,
-            content,
-            contentColor,
-            url,
-            buttonType,
-            buttonColor,
-            buttonText,
-            urlType,
-            Image,
-            ImageBorderColor,
-            layout,
-        } = attributes;
 
         return (
-            <PrContent
-                title={title}
-                content={content}
-                buttonText={buttonText}
-                titleColor={titleColor}
-                contentColor={contentColor}
-                url={url}
-                buttonType={buttonType}
-                buttonColor={buttonColor}
-                urlType={urlType}
-                Image={Image}
-                ImageBorderColor={ImageBorderColor}
-                layout={layout}
-                for_ = {'save'}
+            <Component
+                attributes={attributes}
+                for_={'save'}
             />
         );
     },

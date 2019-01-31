@@ -5,6 +5,7 @@
 import React from "react";
 import NewComponent from "./component.js";
 import {schema} from './schema.js';
+import {Component} from "../../src/outer/component";
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
 const {RangeControl, RadioControl, PanelBody, Button, PanelColor, BaseControl} = wp.components;
@@ -51,7 +52,10 @@ registerBlockType('vk-blocks/your-block-slug', {
         return (
             <div className="vk_your-block-slug">
                 <div>Editor</div>
-                <NewComponent value={}/>
+                <NewComponent
+                    attributes={attributes}
+                    for_={'edit'}
+                />
             </div>
         );
     },
@@ -65,17 +69,14 @@ registerBlockType('vk-blocks/your-block-slug', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     save({attributes}) {
-        const {
-            heading,
-            content,
-            insertImage,
-            arrowFlag,
-        } = attributes;
 
         return (
             <div className="vk_your-block-slug">
                 <div>Front</div>
-                <NewComponent value={}/>
+                <NewComponent
+                    attributes={attributes}
+                    for_={'save'}
+                />
             </div>
         );
     },

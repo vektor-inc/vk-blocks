@@ -190,18 +190,15 @@ registerBlockType('vk-blocks/outer', {
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
-                <Component
-                    outerWidth={outerWidth}
-                    is_padding={is_padding}
-                    is_parallax={is_parallax}
-                    bgColor={bgColor}
-                    opacity={opacity}
-                    bgImage={bgImage}
-                    upperTilt={upper_tilt_level}
-                    lowerTilt={lower_tilt_level}
-                    tiltBgColor={tiltBgColor}
-                    dividerType={dividerType}
-                    for_={'edit'}/>
+                {
+                    vk_blocks_check.is_pro
+                        ?
+                        <Component
+                            attributes={attributes}
+                            for_={'edit'}/>
+                            :
+                        <div>{__('This block is only for users who bought Lightning Pro.', 'vk-blocks')}</div>
+                }
             </Fragment>
         );
     },
@@ -215,36 +212,16 @@ registerBlockType('vk-blocks/outer', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     save({attributes}) {
-        const {
-            bgColor,
-            bgImage,
-            outerWidth,
-            is_parallax,
-            is_padding,
-            opacity,
-            upper_tilt_level,
-            lower_tilt_level,
-            tiltBgColor,
-            dividerType
-        } = attributes;
+        {
+            if (vk_blocks_check.is_pro) {
 
-        if (vk_blocks_check.is_pro) {
+                return (
+                    <Component
+                        attributes={attributes}
+                        for_={'save'}/>
+                );
 
-            return (
-                <Component
-                    outerWidth={outerWidth}
-                    is_padding={is_padding}
-                    is_parallax={is_parallax}
-                    bgColor={bgColor}
-                    opacity={opacity}
-                    bgImage={bgImage}
-                    upperTilt={upper_tilt_level}
-                    lowerTilt={lower_tilt_level}
-                    tiltBgColor={tiltBgColor}
-                    dividerType={dividerType}
-                    for_={'save'}/>
-            );
-
+            }
         }
 
     },
