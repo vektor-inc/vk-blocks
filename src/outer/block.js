@@ -190,18 +190,24 @@ registerBlockType('vk-blocks/outer', {
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
-                <Component
-                    outerWidth={outerWidth}
-                    is_padding={is_padding}
-                    is_parallax={is_parallax}
-                    bgColor={bgColor}
-                    opacity={opacity}
-                    bgImage={bgImage}
-                    upperTilt={upper_tilt_level}
-                    lowerTilt={lower_tilt_level}
-                    tiltBgColor={tiltBgColor}
-                    dividerType={dividerType}
-                    for_={'edit'}/>
+                {
+                    vk_blocks_check.is_pro
+                        ?
+                        <Component
+                            outerWidth={outerWidth}
+                            is_padding={is_padding}
+                            is_parallax={is_parallax}
+                            bgColor={bgColor}
+                            opacity={opacity}
+                            bgImage={bgImage}
+                            upperTilt={upper_tilt_level}
+                            lowerTilt={lower_tilt_level}
+                            tiltBgColor={tiltBgColor}
+                            dividerType={dividerType}
+                            for_={'edit'}/>
+                            :
+                        <div>{__('This block is only for users who bought Lightning Pro.', 'vk-blocks')}</div>
+                }
             </Fragment>
         );
     },
@@ -228,23 +234,25 @@ registerBlockType('vk-blocks/outer', {
             dividerType
         } = attributes;
 
-        if (vk_blocks_check.is_pro) {
+        {
+            if (vk_blocks_check.is_pro) {
 
-            return (
-                <Component
-                    outerWidth={outerWidth}
-                    is_padding={is_padding}
-                    is_parallax={is_parallax}
-                    bgColor={bgColor}
-                    opacity={opacity}
-                    bgImage={bgImage}
-                    upperTilt={upper_tilt_level}
-                    lowerTilt={lower_tilt_level}
-                    tiltBgColor={tiltBgColor}
-                    dividerType={dividerType}
-                    for_={'save'}/>
-            );
+                return (
+                    <Component
+                        outerWidth={outerWidth}
+                        is_padding={is_padding}
+                        is_parallax={is_parallax}
+                        bgColor={bgColor}
+                        opacity={opacity}
+                        bgImage={bgImage}
+                        upperTilt={upper_tilt_level}
+                        lowerTilt={lower_tilt_level}
+                        tiltBgColor={tiltBgColor}
+                        dividerType={dividerType}
+                        for_={'save'}/>
+                );
 
+            }
         }
 
     },
