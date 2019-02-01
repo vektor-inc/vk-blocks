@@ -708,6 +708,9 @@ $color_dark:#343a40;
 	border-bottom: none;
 	box-shadow: none;
 }
+.vk_prContent_text {
+	margin-bottom:1.2em;
+}
 
 
 @media (min-width: 768px) {
@@ -753,22 +756,10 @@ $color_dark:#343a40;
 	}
 }
 
-.vk_pr_content_media_image {
+.vk_prContent_media_image {
 	max-width: 100%;
 	height: auto;
 	vertical-align: middle;
-}
-
-.vk_prContent_btn {
-	margin-top: 3em;
-	padding: 10px;
-	p{
-		margin: 0;
-	}
-}
-
-.edit-post-visual-editor p {
-	margin-bottom: 0!important;
 }
 
 }

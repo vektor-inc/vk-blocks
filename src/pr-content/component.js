@@ -33,7 +33,7 @@ export class Component extends React.Component {
 				let aClass = '';
 				let aStyle = {};
 
-				aClass = `btn vk_button_link btn-block btn-lg`;
+				aClass = `vk_button_link vk_brContent_btn btn btn-block btn-lg`;
 
 				if (buttonColorCustom) {
 
@@ -86,7 +86,7 @@ export class Component extends React.Component {
                                         >
                                             {!Image ? __('Select image', 'vk-blocks') :
                                                 <img
-                                                    className={'vk_pr_content_media_image'}
+                                                    className={'vk_prContent_media_image'}
                                                     src={Image}
                                                     alt={__('Upload image', 'vk-blocks')}
                                                     style={{border:`1px solid ${ImageBorderColor}`}}
@@ -97,7 +97,7 @@ export class Component extends React.Component {
                                 :
                                 !Image ? __('Select image', 'vk-blocks') :
                                     <img
-                                        className={'vk_pr_content_media_image'}
+                                        className={'vk_prContent_media_image'}
                                         src={Image}
                                         alt={__('Upload image', 'vk-blocks')}
                                         style={{border: `1px solid ${ImageBorderColor}`}}
@@ -120,6 +120,7 @@ export class Component extends React.Component {
                                                 />
                                                 < RichText
                                                     tagName="p"
+																										className={'vk_prContent_text'}
                                                     onChange={(value) => setAttributes({content: value})}
                                                     value={content}
                                                     placeholder={__('Input content.', 'vk-blocks')}
@@ -138,6 +139,7 @@ export class Component extends React.Component {
                                                 />
                                                 <RichText.Content
                                                     tagName="p"
+																										className={'vk_prContent_text'}
                                                     value={content}
                                                     style={{color: contentColor}}
                                                 />
@@ -156,7 +158,6 @@ export class Component extends React.Component {
                                         //ボタンタイプを切り替え。
                                         if (buttonType === '1') {
                                             return (
-                                                <div className="vk_prContent_btn">
                                                     <a href={url}
                                                        className={aClass}
                                                        target={buttonTarget? '_blank':null}
@@ -166,10 +167,9 @@ export class Component extends React.Component {
                                                             attributes={attributes}
                                                         />
                                                     </a>
-                                                </div>);
+                                                );
                                         } else {
                                             return (
-                                                <div className="vk_prContent_btn">
                                                     <a href={url}
                                                        className={aClass}
                                                        target={buttonTarget? '_blank':null}
@@ -179,7 +179,7 @@ export class Component extends React.Component {
                                                             attributes={attributes}
                                                         />
                                                     </a>
-                                                </div>);
+                                                );
                                         }
                                     }
                                 })()

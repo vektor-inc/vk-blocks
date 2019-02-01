@@ -476,6 +476,6 @@ msgstr ""
 msgid "Input title."
 msgstr ""
 
-#: src/pr-content/component.js:125
+#: src/pr-content/component.js:126
 msgid "Input content."
 msgstr ""

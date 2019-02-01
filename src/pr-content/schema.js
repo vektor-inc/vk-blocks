@@ -8,7 +8,7 @@ export const schema = {
 	},
 	content: {
 		source: 'html',
-			selector: 'p',
+			selector: '.vk_prContent_text',
 	},
 	contentColor: {
 		type: 'string',
@@ -19,7 +19,7 @@ export const schema = {
 	},
 	buttonType: {
 		type: 'string',
-	default: '1',
+	default: '0',
 	},
 	buttonColor: {
 		type: 'string',
