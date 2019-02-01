@@ -4,7 +4,6 @@
  */
 import React from "react";
 import {schema} from './schema.js';
-import toNumber from "../_helper/to-number";
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
@@ -34,7 +33,7 @@ registerBlockType('vk-blocks/latest-posts', {
     // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
     title: __('Latest Posts', 'vk-blocks'), // Block title.
     icon: BlockIcon, // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
-    category: 'vk-blocks-cat', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
+    category: 'vk-blocks-cat', // Block category —s Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
     attributes: schema,
 
     /**
@@ -64,19 +63,11 @@ registerBlockType('vk-blocks/latest-posts', {
                                 options={ [
                                     {
                                         value: 'image_1st',
-                                        label: __( 'Tilt', 'vk-blocks' ),
+                                        label: __( 'image_1st', 'vk-blocks' ),
                                     },
                                     {
-                                        value: 'curve',
-                                        label: __( 'Curve', 'vk-blocks' ),
-                                    },
-                                    {
-                                        value: 'wave',
-                                        label: __( 'Wave', 'vk-blocks' ),
-                                    },
-                                    {
-                                        value: 'triangle',
-                                        label: __( 'Triangle', 'vk-blocks' ),
+                                        value: 'image_2st',
+                                        label: __( 'image_2st', 'vk-blocks' ),
                                     },
                                 ] }
                             />
