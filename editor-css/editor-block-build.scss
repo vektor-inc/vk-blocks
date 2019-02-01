@@ -14,6 +14,11 @@ h1:first-child.vk_prBlocks_item_title{
 	margin-top:0.9em;
 }
 
+/* メインのカラム幅 */
+.wp-block {
+    max-width: 780px;
+}
+
 .alert{
 
   padding: 1em;
