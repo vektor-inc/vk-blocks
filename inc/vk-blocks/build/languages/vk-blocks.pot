@@ -50,13 +50,13 @@ msgstr ""
 
 #: src/balloon/block.js:88
 #: src/button/block.js:149
-#: src/pr-content/block.js:180
+#: src/pr-content/block.js:175
 msgid "Left"
 msgstr ""
 
 #: src/balloon/block.js:89
 #: src/button/block.js:151
-#: src/pr-content/block.js:179
+#: src/pr-content/block.js:174
 msgid "Right"
 msgstr ""
 
@@ -83,6 +83,7 @@ msgstr ""
 
 #: src/button/block.js:131
 #: src/pr-blocks/block.js:276
+#: src/pr-content/block.js:130
 msgid "Open link new tab."
 msgstr ""
 
@@ -180,29 +181,29 @@ msgid ""
 msgstr ""
 
 #: src/button/block.js:191
-#: src/pr-content/block.js:156
+#: src/pr-content/block.js:151
 msgid "Font Awesome:"
 msgstr ""
 
 #: src/button/block.js:195
-#: src/pr-content/block.js:159
+#: src/pr-content/block.js:154
 msgid "Before text"
 msgstr ""
 
 #: src/button/block.js:196
-#: src/pr-content/block.js:160
+#: src/pr-content/block.js:155
 msgid ""
 "Enter Font Awesome Class.This icon will appear before text. Ex) fas "
 "fa-arrow-circle-right"
 msgstr ""
 
 #: src/button/block.js:202
-#: src/pr-content/block.js:166
+#: src/pr-content/block.js:161
 msgid "After text"
 msgstr ""
 
 #: src/button/block.js:203
-#: src/pr-content/block.js:167
+#: src/pr-content/block.js:162
 msgid ""
 "Enter Font Awesome Class.This icon will appear after text. Ex) fas "
 "fa-external-link-alt"
@@ -271,7 +272,7 @@ msgid "Parallax (It will not work in preview)"
 msgstr ""
 
 #: src/outer/block.js:138
-#: src/pr-content/block.js:174
+#: src/pr-content/block.js:169
 msgid "Layout Setting"
 msgstr ""
 
@@ -414,51 +415,39 @@ msgstr ""
 msgid "PR Blocks (Beta)"
 msgstr ""
 
-#: src/pr-content/block.js:101
-msgid "Button Color"
-msgstr ""
-
-#: src/pr-content/block.js:108
+#: src/pr-content/block.js:102
 msgid "Image Border Color"
 msgstr ""
 
-#: src/pr-content/block.js:116
+#: src/pr-content/block.js:110
 msgid "Button Setting"
 msgstr ""
 
-#: src/pr-content/block.js:118
+#: src/pr-content/block.js:112
 msgid "Button Text"
 msgstr ""
 
-#: src/pr-content/block.js:127
+#: src/pr-content/block.js:121
 msgid "Link URL"
 msgstr ""
 
-#: src/pr-content/block.js:135
-msgid "Link target"
-msgstr ""
-
-#: src/pr-content/block.js:139
-msgid "Open url in new window"
-msgstr ""
-
-#: src/pr-content/block.js:140
-msgid "Open url in current window"
-msgstr ""
-
-#: src/pr-content/block.js:145
+#: src/pr-content/block.js:134
 msgid "Button Type"
 msgstr ""
 
-#: src/pr-content/block.js:149
+#: src/pr-content/block.js:138
 msgid "Solid"
 msgstr ""
 
-#: src/pr-content/block.js:150
+#: src/pr-content/block.js:139
 msgid "Ghost"
 msgstr ""
 
-#: src/pr-content/block.js:176
+#: src/pr-content/block.js:144
+msgid "Button Color"
+msgstr ""
+
+#: src/pr-content/block.js:171
 msgid "Layout Type"
 msgstr ""
 

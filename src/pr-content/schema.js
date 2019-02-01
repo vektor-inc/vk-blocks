@@ -30,9 +30,9 @@ export const schema = {
 			selector: '.vk_prContent_btn_txt',
 		default: '',
 	},
-	urlType: {
-		type: 'string',
-	default: '_blank',
+	buttonTarget: {
+		type: 'Boolean',
+	default: false,
 	},
 	Image: {
 		type: 'string',

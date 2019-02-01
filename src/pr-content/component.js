@@ -20,7 +20,7 @@ export class Component extends React.Component {
             buttonType,
             buttonColor,
             buttonText,
-            urlType,
+            buttonTarget,
             Image,
             ImageBorderColor,
             layout,
@@ -120,7 +120,7 @@ export class Component extends React.Component {
                                                 <div className="vk_prContent_btn">
                                                     <a href={url}
                                                        className="btn btn-block btn-lg btn-primary"
-                                                       target={urlType}
+                                                       target={buttonTarget? '_blank':null}
                                                        style={{
                                                            backgroundColor: buttonColor,
                                                            border: `1px solid ${buttonColor}`,
@@ -137,7 +137,7 @@ export class Component extends React.Component {
                                                 <div className="vk_prContent_btn">
                                                     <a href={url}
                                                        className="btn btn-block btn-lg btn-primary btn-ghost"
-                                                       target={urlType}
+                                                       target={buttonTarget? '_blank':null}
                                                        style={{
                                                            backgroundColor: '#fff',
                                                            border: `1px solid ${buttonColor}`,

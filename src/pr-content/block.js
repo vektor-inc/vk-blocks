@@ -76,7 +76,7 @@ registerBlockType('vk-blocks/pr-content', {
             buttonType,
             buttonColor,
             buttonText,
-            urlType,
+						buttonTarget,
             ImageBorderColor,
             layout,
             fontAwesomeIconBefore,
@@ -96,12 +96,6 @@ registerBlockType('vk-blocks/pr-content', {
                             <ColorPalette
                                 value={contentColor}
                                 onChange={(value) => setAttributes({contentColor: value})}
-                            />
-                        </BaseControl>
-                        <BaseControl label={__('Button Color', 'vk-blocks')}>
-                            <ColorPalette
-                                value={buttonColor}
-                                onChange={(value) => setAttributes({buttonColor: value})}
                             />
                         </BaseControl>
                         <BaseControl
@@ -132,16 +126,11 @@ registerBlockType('vk-blocks/pr-content', {
                                 placeholder={'https://vektor-inc.co.jp/'}
                             />
                         </BaseControl>
-                        <BaseControl label={__('Link target', 'vk-blocks')}>
-                            <RadioControl
-                                selected={urlType}
-                                options={[
-                                    {label: __('Open url in new window', 'vk-blocks'), value: '_blank'},
-                                    {label: __('Open url in current window', 'vk-blocks'), value: '_self'}
-                                ]}
-                                onChange={(value) => setAttributes({urlType: value})}
-                            />
-                        </BaseControl>
+												<CheckboxControl
+                            label={__('Open link new tab.', 'vk-blocks')}
+                            checked={buttonTarget}
+                            onChange={(checked) => setAttributes({buttonTarget: checked})}
+                        />
                         <BaseControl label={__('Button Type', 'vk-blocks')}>
                             <RadioControl
                                 selected={buttonType}
@@ -150,6 +139,12 @@ registerBlockType('vk-blocks/pr-content', {
                                     {label: __('Ghost', 'vk-blocks'), value: '0'}
                                 ]}
                                 onChange={(value) => setAttributes({buttonType: value})}
+                            />
+                        </BaseControl>
+												<BaseControl label={__('Button Color', 'vk-blocks')}>
+                            <ColorPalette
+                                value={buttonColor}
+                                onChange={(value) => setAttributes({buttonColor: value})}
                             />
                         </BaseControl>
                         <BaseControl
