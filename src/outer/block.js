@@ -65,8 +65,8 @@ registerBlockType('vk-blocks/outer', {
         const {
             bgColor,
             bgImage,
+            bgPosition,
             outerWidth,
-            is_parallax,
             is_padding,
             opacity,
             upper_tilt_level,
@@ -122,14 +122,14 @@ registerBlockType('vk-blocks/outer', {
                             />
 
                             <RadioControl
-                                label={__('Background Effect', 'vk-blocks')}
-                                selected={is_parallax}
+                                label={__('Background Position', 'vk-blocks')}
+                                selected={bgPosition}
                                 options={[
-                                    {label: __('None', 'vk-blocks'), value: 'none'},
+                                    {label: __('normal', 'vk-blocks'), value: 'normal'},
                                     {label: __('Fixed', 'vk-blocks'), value: 'fixed'},
                                     {label: __('Parallax (It will not work in preview)', 'vk-blocks'), value: 'parallax'}
                                 ]}
-                                onChange={(value) => setAttributes({is_parallax: value})}
+                                onChange={(value) => setAttributes({bgPosition: value})}
                             />
                         </BaseControl>
 

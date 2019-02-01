@@ -95,6 +95,7 @@ msgid "Large"
 msgstr ""
 
 #: src/button/block.js:140
+#: src/outer/block.js:128
 msgid "normal"
 msgstr ""
 
@@ -254,11 +255,7 @@ msgid "Background Image"
 msgstr ""
 
 #: src/outer/block.js:125
-msgid "Background Effect"
-msgstr ""
-
-#: src/outer/block.js:128
-msgid "None"
+msgid "Background Position"
 msgstr ""
 
 #: src/outer/block.js:129

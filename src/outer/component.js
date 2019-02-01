@@ -31,8 +31,8 @@ export class Component extends React.Component {
         let {
             bgColor,
             bgImage,
+            bgPosition,
             outerWidth,
-            is_parallax,
             is_padding,
             opacity,
             upper_tilt_level,
@@ -42,8 +42,8 @@ export class Component extends React.Component {
         } = this.props.attributes;
 
         let for_ = this.props.for_;
-        let padding;
-        let parallax;
+        let classPadding;
+        let classBgPosition;
         let classWidth;
         let elm;
         let containerClass;
@@ -61,20 +61,20 @@ export class Component extends React.Component {
             bgColor = hex2rgba('#fff',opacity);
         }
 
-        //parallaxのクラス切り替え
-        if (is_parallax === 'parallax') {
-            parallax = ' vk_outer-effect-parallax vk-prlx';
-				} else if (is_parallax === 'fixed') {
-		        parallax = ' vk_outer-effect-fixed';
+        //classBgPositionのクラス切り替え
+        if (bgPosition === 'parallax') {
+            classBgPosition = ' vk_outer-bgPosition-parallax vk-prlx';
+				} else if (bgPosition === 'fixed') {
+		        classBgPosition = ' vk_outer-bgPosition-fixed';
         } else {
-            parallax = ' vk_outer-effect-none';
+            classBgPosition = ' vk_outer-bgPosition-normal';
         }
 
-        //paddingのクラス切り替え
+        //classPaddingのクラス切り替え
         if(is_padding === '1'){
-            padding = ' vk_outer-padding';
+            classPadding = ' vk_outer-padding';
         }else {
-            padding = ' vk_outer-padding-none';
+            classPadding = ' vk_outer-padding-none';
         }
 
         //上側セクションの傾き切り替え
@@ -97,7 +97,7 @@ export class Component extends React.Component {
 
         return (
             <div
-                className={'vk_outer' + classWidth + padding + parallax}
+                className={'vk_outer' + classWidth + classPadding + classBgPosition}
                 style={{
                     background: `linear-gradient(${bgColor}, ${bgColor}), url(${bgImage})`,
                 }}

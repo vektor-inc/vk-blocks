@@ -24,11 +24,11 @@
 .vk_outer-padding-none{
   padding: 0 ;
 }
-.vk_outer-effect-fixed{
+.vk_outer-bgPosition-fixed{
   background-attachment: fixed !important;
 	background-size: cover !important;
 }
-.vk_outer-effect-none{
+.vk_outer-bgPosition-normal{
   background-attachment: unset !important;
 	background-size: cover !important;
 }
