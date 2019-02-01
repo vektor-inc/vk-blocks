@@ -128,8 +128,7 @@ msgstr "背景なし"
 #: src/button/block.js:163
 msgid ""
 "If you select \"No background\", that you need to select a Custom Color."
-msgstr ""
-"もし「背景なし」を選択した場合はカスタムカラーで色を指定してください。"
+msgstr "もし「背景なし」を選択した場合はカスタムカラーで色を指定してください。"
 
 #: src/button/block.js:167
 msgid "Default Color:"
@@ -176,8 +175,8 @@ msgid ""
 "This custom color overrides the default color. If you want to use the "
 "default color, click the clear button."
 msgstr ""
-"このカスタムカラーはデフォルトのカラーを上書きします。 デフォルトの色を使用"
-"したい場合は、クリアボタンをクリックしてください。"
+"このカスタムカラーはデフォルトのカラーを上書きします。 デフォルトの色を使用し"
+"たい場合は、クリアボタンをクリックしてください。"
 
 #: src/button/block.js:191 src/pr-content/block.js:156
 msgid "Font Awesome:"
@@ -187,21 +186,25 @@ msgstr "Font Awesome:"
 msgid "Before text"
 msgstr "文字の前"
 
-#: src/button/block.js:196 src/pr-content/block.js:160
-msgid "Enter Font Awesome Class.This icon will appear before text."
+#: src/button/block.js:196
+msgid ""
+"Enter Font Awesome Class.This icon will appear before text. Ex) fas fa-arrow-"
+"circle-right"
 msgstr ""
 "Font Awesome の class 名を入力してください。このアイコンは文字の前に表示され"
-"ます。"
+"ます。 例) fas fa-arrow-circle-right"
 
 #: src/button/block.js:202 src/pr-content/block.js:166
 msgid "After text"
 msgstr "文字の後"
 
-#: src/button/block.js:203 src/pr-content/block.js:167
-msgid "Enter Font Awesome Class.This icon will appear after text."
+#: src/button/block.js:203
+msgid ""
+"Enter Font Awesome Class.This icon will appear after text. Ex) fas fa-"
+"external-link-alt"
 msgstr ""
 "Font Awesome の class 名を入力してください。このアイコンは文字の後に表示され"
-"ます。"
+"ます。 例) fas fa-external-link-alt"
 
 #: src/button/block.js:240
 msgid "Apply"
@@ -452,6 +455,18 @@ msgstr "ベタ塗り"
 #: src/pr-content/block.js:150
 msgid "Ghost"
 msgstr "ゴーストボタン"
+
+#: src/pr-content/block.js:160
+msgid "Enter Font Awesome Class.This icon will appear before text."
+msgstr ""
+"Font Awesome の class 名を入力してください。このアイコンは文字の前に表示され"
+"ます。"
+
+#: src/pr-content/block.js:167
+msgid "Enter Font Awesome Class.This icon will appear after text."
+msgstr ""
+"Font Awesome の class 名を入力してください。このアイコンは文字の後に表示され"
+"ます。"
 
 #: src/pr-content/block.js:176
 msgid "Layout Type"

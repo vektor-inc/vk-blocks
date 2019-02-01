@@ -191,7 +191,9 @@ msgstr ""
 
 #: src/button/block.js:196
 #: src/pr-content/block.js:160
-msgid "Enter Font Awesome Class.This icon will appear before text."
+msgid ""
+"Enter Font Awesome Class.This icon will appear before text. Ex) fas "
+"fa-arrow-circle-right"
 msgstr ""
 
 #: src/button/block.js:202
@@ -201,7 +203,9 @@ msgstr ""
 
 #: src/button/block.js:203
 #: src/pr-content/block.js:167
-msgid "Enter Font Awesome Class.This icon will appear after text."
+msgid ""
+"Enter Font Awesome Class.This icon will appear after text. Ex) fas "
+"fa-external-link-alt"
 msgstr ""
 
 #: src/button/block.js:240
