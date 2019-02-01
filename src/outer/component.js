@@ -63,7 +63,7 @@ export class Component extends React.Component {
 
         //parallaxのクラス切り替え
         if (is_parallax === 'parallax') {
-            parallax = ' vk-prlx';
+            parallax = ' vk_outer-effect-parallax vk-prlx';
 				} else if (is_parallax === 'fixed') {
 		        parallax = ' vk_outer-effect-fixed';
         } else {

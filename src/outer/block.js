@@ -101,36 +101,6 @@ registerBlockType('vk-blocks/outer', {
                             />
                         </BaseControl>
 
-												<BaseControl
-                            label={__('Width Setting', 'vk-blocks')}
-                        >
-													<RadioControl
-															label={__('Outer width', 'vk-blocks')}
-															selected={outerWidth}
-															options={[
-																	{label: __('Normal', 'vk-blocks'), value: 'normal'},
-																	{label: __('Full Wide', 'vk-blocks'), value: 'full'}
-															]}
-															onChange={(value) => setAttributes({outerWidth: value})}
-													/>
-                        </BaseControl>
-
-												<BaseControl
-                            label={__('Padding Setting', 'vk-blocks')}
-                            help=""
-                        >
-                            <RadioControl
-                                label={__('Padding', 'vk-blocks')}
-                                selected={is_padding}
-                                options={[
-                                    {label: __('Use default padding', 'vk-blocks'), value: '1'},
-                                    {label: __('Do not use default padding.', 'vk-blocks'), value: '0'}
-                                ]}
-                                onChange={(value) => setAttributes({is_padding: value})}
-                            />
-                        </BaseControl>
-
-
                         <BaseControl
                             label={__('Background Image', 'vk-blocks')}
                             help=""
@@ -157,58 +127,82 @@ registerBlockType('vk-blocks/outer', {
                                 options={[
                                     {label: __('None', 'vk-blocks'), value: 'none'},
                                     {label: __('Fixed', 'vk-blocks'), value: 'fixed'},
-                                    {label: __('Parallax', 'vk-blocks'), value: 'parallax'}
+                                    {label: __('Parallax (It will not work in preview)', 'vk-blocks'), value: 'parallax'}
                                 ]}
                                 onChange={(value) => setAttributes({is_parallax: value})}
                             />
                         </BaseControl>
 
-                        <BaseControl
-                            label={__('Divider Setting', 'vk-blocks')}
-                        >
-                            <SelectControl
-                                label={ __( 'Type', 'vk-blocks' ) }
-                                value={ dividerType }
-                                onChange={ ( value ) => setAttributes( { dividerType: value } ) }
-                                options={ [
-                                    {
-                                        value: 'tilt',
-                                        label: __( 'Tilt', 'vk-blocks' ),
-                                    },
-                                    {
-                                        value: 'curve',
-                                        label: __( 'Curve', 'vk-blocks' ),
-                                    },
-                                    {
-                                        value: 'wave',
-                                        label: __( 'Wave', 'vk-blocks' ),
-                                    },
-                                    {
-                                        value: 'triangle',
-                                        label: __( 'Triangle', 'vk-blocks' ),
-                                    },
-                                ] }
-                            />
-                            <RangeControl
-                                label={ __( 'Upper Divider Level', 'vk-blocks' ) }
-                                value={ upper_tilt_level }
-                                onChange={ ( value ) => setAttributes( { upper_tilt_level: toNumber( value, -100, 100 ) } ) }
-                                min="-100"
-                                max="100"
-                            />
-                            <RangeControl
-                                label={ __( 'Lower Divider Level', 'vk-blocks' ) }
-                                value={ lower_tilt_level }
-                                onChange={ ( value ) => setAttributes( { lower_tilt_level: toNumber( value, -100, 100 ) } ) }
-                                min="-100"
-                                max="100"
-                            />
-                            <ColorPalette
-                                value={tiltBgColor}
-                                onChange={(value) => setAttributes({tiltBgColor: value})}
-                            />
-                        </BaseControl>
+
                     </PanelBody>
+										<PanelBody title={__('Layout Setting', 'vk-blocks')}>
+											<BaseControl>
+
+												<RadioControl
+														label={__('Outer width', 'vk-blocks')}
+														selected={outerWidth}
+														options={[
+																{label: __('Normal', 'vk-blocks'), value: 'normal'},
+																{label: __('Full Wide', 'vk-blocks'), value: 'full'}
+														]}
+														onChange={(value) => setAttributes({outerWidth: value})}
+												/>
+													<RadioControl
+															label={__('Padding', 'vk-blocks')}
+															selected={is_padding}
+															options={[
+																	{label: __('Use default padding', 'vk-blocks'), value: '1'},
+																	{label: __('Do not use default padding.', 'vk-blocks'), value: '0'}
+															]}
+															onChange={(value) => setAttributes({is_padding: value})}
+													/>
+											</BaseControl>
+										</PanelBody>
+										<PanelBody title={__('Divider Setting', 'vk-blocks')}>
+											<BaseControl>
+												<SelectControl
+														label={ __( 'Type', 'vk-blocks' ) }
+														value={ dividerType }
+														onChange={ ( value ) => setAttributes( { dividerType: value } ) }
+														options={ [
+																{
+																		value: 'tilt',
+																		label: __( 'Tilt', 'vk-blocks' ),
+																},
+																{
+																		value: 'curve',
+																		label: __( 'Curve', 'vk-blocks' ),
+																},
+																{
+																		value: 'wave',
+																		label: __( 'Wave', 'vk-blocks' ),
+																},
+																{
+																		value: 'triangle',
+																		label: __( 'Triangle', 'vk-blocks' ),
+																},
+														] }
+												/>
+												<RangeControl
+														label={ __( 'Upper Divider Level', 'vk-blocks' ) }
+														value={ upper_tilt_level }
+														onChange={ ( value ) => setAttributes( { upper_tilt_level: toNumber( value, -100, 100 ) } ) }
+														min="-100"
+														max="100"
+												/>
+												<RangeControl
+														label={ __( 'Lower Divider Level', 'vk-blocks' ) }
+														value={ lower_tilt_level }
+														onChange={ ( value ) => setAttributes( { lower_tilt_level: toNumber( value, -100, 100 ) } ) }
+														min="-100"
+														max="100"
+												/>
+												<ColorPalette
+														value={tiltBgColor}
+														onChange={(value) => setAttributes({tiltBgColor: value})}
+												/>
+												</BaseControl>
+										</PanelBody>
                 </InspectorControls>
                 {
                     vk_blocks_check.is_pro

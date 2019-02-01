@@ -9,7 +9,7 @@ msgstr ""
 
 #: src/balloon/block.js:122
 #: src/flow/block.js:111
-#: src/outer/block.js:147
+#: src/outer/block.js:117
 #: src/pr-blocks/block.js:324
 #: src/pr-content/component.js:59
 msgid "Select image"
@@ -17,7 +17,7 @@ msgstr ""
 
 #: src/balloon/block.js:122
 #: src/flow/block.js:112
-#: src/outer/block.js:149
+#: src/outer/block.js:119
 #: src/pr-blocks/block.js:326
 #: src/pr-content/component.js:63
 msgid "Upload image"
@@ -61,7 +61,7 @@ msgid "Right"
 msgstr ""
 
 #: src/balloon/block.js:94
-#: src/outer/block.js:170
+#: src/outer/block.js:164
 msgid "Type"
 msgstr ""
 
@@ -250,86 +250,83 @@ msgid "Input content"
 msgstr ""
 
 #: src/outer/block.js:105
-msgid "Width Setting"
-msgstr ""
-
-#: src/outer/block.js:108
-msgid "Outer width"
-msgstr ""
-
-#: src/outer/block.js:111
-msgid "Normal"
-msgstr ""
-
-#: src/outer/block.js:112
-msgid "Full Wide"
-msgstr ""
-
-#: src/outer/block.js:119
-msgid "Padding Setting"
-msgstr ""
-
-#: src/outer/block.js:123
-msgid "Padding"
-msgstr ""
-
-#: src/outer/block.js:126
-msgid "Use default padding"
-msgstr ""
-
-#: src/outer/block.js:127
-msgid "Do not use default padding."
-msgstr ""
-
-#: src/outer/block.js:135
 msgid "Background Image"
 msgstr ""
 
-#: src/outer/block.js:155
+#: src/outer/block.js:125
 msgid "Background Effect"
 msgstr ""
 
-#: src/outer/block.js:158
+#: src/outer/block.js:128
 msgid "None"
 msgstr ""
 
-#: src/outer/block.js:159
+#: src/outer/block.js:129
 msgid "Fixed"
 msgstr ""
 
-#: src/outer/block.js:160
-msgid "Parallax"
+#: src/outer/block.js:130
+msgid "Parallax (It will not work in preview)"
 msgstr ""
 
-#: src/outer/block.js:167
+#: src/outer/block.js:138
+#: src/pr-content/block.js:174
+msgid "Layout Setting"
+msgstr ""
+
+#: src/outer/block.js:142
+msgid "Outer width"
+msgstr ""
+
+#: src/outer/block.js:145
+msgid "Normal"
+msgstr ""
+
+#: src/outer/block.js:146
+msgid "Full Wide"
+msgstr ""
+
+#: src/outer/block.js:151
+msgid "Padding"
+msgstr ""
+
+#: src/outer/block.js:154
+msgid "Use default padding"
+msgstr ""
+
+#: src/outer/block.js:155
+msgid "Do not use default padding."
+msgstr ""
+
+#: src/outer/block.js:161
 msgid "Divider Setting"
 msgstr ""
 
-#: src/outer/block.js:176
+#: src/outer/block.js:170
 msgid "Tilt"
 msgstr ""
 
-#: src/outer/block.js:180
+#: src/outer/block.js:174
 msgid "Curve"
 msgstr ""
 
-#: src/outer/block.js:184
+#: src/outer/block.js:178
 msgid "Wave"
 msgstr ""
 
-#: src/outer/block.js:188
+#: src/outer/block.js:182
 msgid "Triangle"
 msgstr ""
 
-#: src/outer/block.js:193
+#: src/outer/block.js:187
 msgid "Upper Divider Level"
 msgstr ""
 
-#: src/outer/block.js:200
+#: src/outer/block.js:194
 msgid "Lower Divider Level"
 msgstr ""
 
-#: src/outer/block.js:220
+#: src/outer/block.js:214
 msgid "This block is only for users who bought Lightning Pro."
 msgstr ""
 
@@ -458,10 +455,6 @@ msgstr ""
 
 #: src/pr-content/block.js:150
 msgid "Ghost"
-msgstr ""
-
-#: src/pr-content/block.js:174
-msgid "Layout Setting"
 msgstr ""
 
 #: src/pr-content/block.js:176
