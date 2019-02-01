@@ -11,7 +11,7 @@ msgstr ""
 #: src/flow/block.js:111
 #: src/outer/block.js:117
 #: src/pr-blocks/block.js:324
-#: src/pr-content/component.js:59
+#: src/pr-content/component.js:98
 msgid "Select image"
 msgstr ""
 
@@ -19,7 +19,7 @@ msgstr ""
 #: src/flow/block.js:112
 #: src/outer/block.js:119
 #: src/pr-blocks/block.js:326
-#: src/pr-content/component.js:63
+#: src/pr-content/component.js:102
 msgid "Upload image"
 msgstr ""
 
@@ -50,13 +50,13 @@ msgstr ""
 
 #: src/balloon/block.js:88
 #: src/button/block.js:149
-#: src/pr-content/block.js:175
+#: src/pr-content/block.js:191
 msgid "Left"
 msgstr ""
 
 #: src/balloon/block.js:89
 #: src/button/block.js:151
-#: src/pr-content/block.js:174
+#: src/pr-content/block.js:190
 msgid "Right"
 msgstr ""
 
@@ -83,7 +83,7 @@ msgstr ""
 
 #: src/button/block.js:131
 #: src/pr-blocks/block.js:276
-#: src/pr-content/block.js:130
+#: src/pr-content/block.js:131
 msgid "Open link new tab."
 msgstr ""
 
@@ -135,38 +135,47 @@ msgid "If you select \"No background\", that you need to select a Custom Color."
 msgstr ""
 
 #: src/button/block.js:167
+#: src/pr-content/block.js:146
 msgid "Default Color:"
 msgstr ""
 
 #: src/button/block.js:170
+#: src/pr-content/block.js:149
 msgid "Primary"
 msgstr ""
 
 #: src/button/block.js:171
+#: src/pr-content/block.js:150
 msgid "Secondary"
 msgstr ""
 
 #: src/button/block.js:172
+#: src/pr-content/block.js:151
 msgid "Success"
 msgstr ""
 
 #: src/button/block.js:173
+#: src/pr-content/block.js:152
 msgid "Info"
 msgstr ""
 
 #: src/button/block.js:174
+#: src/pr-content/block.js:153
 msgid "Warning"
 msgstr ""
 
 #: src/button/block.js:175
+#: src/pr-content/block.js:154
 msgid "Danger"
 msgstr ""
 
 #: src/button/block.js:176
+#: src/pr-content/block.js:155
 msgid "Light"
 msgstr ""
 
 #: src/button/block.js:177
+#: src/pr-content/block.js:156
 msgid "Dark"
 msgstr ""
 
@@ -181,29 +190,29 @@ msgid ""
 msgstr ""
 
 #: src/button/block.js:191
-#: src/pr-content/block.js:151
+#: src/pr-content/block.js:167
 msgid "Font Awesome:"
 msgstr ""
 
 #: src/button/block.js:195
-#: src/pr-content/block.js:154
+#: src/pr-content/block.js:170
 msgid "Before text"
 msgstr ""
 
 #: src/button/block.js:196
-#: src/pr-content/block.js:155
+#: src/pr-content/block.js:171
 msgid ""
 "Enter Font Awesome Class.This icon will appear before text. Ex) fas "
 "fa-arrow-circle-right"
 msgstr ""
 
 #: src/button/block.js:202
-#: src/pr-content/block.js:161
+#: src/pr-content/block.js:177
 msgid "After text"
 msgstr ""
 
 #: src/button/block.js:203
-#: src/pr-content/block.js:162
+#: src/pr-content/block.js:178
 msgid ""
 "Enter Font Awesome Class.This icon will appear after text. Ex) fas "
 "fa-external-link-alt"
@@ -272,7 +281,7 @@ msgid "Parallax (It will not work in preview)"
 msgstr ""
 
 #: src/outer/block.js:138
-#: src/pr-content/block.js:169
+#: src/pr-content/block.js:185
 msgid "Layout Setting"
 msgstr ""
 
@@ -341,7 +350,7 @@ msgid "Background Setting"
 msgstr ""
 
 #: src/outer/block.js:83
-#: src/pr-content/block.js:88
+#: src/pr-content/block.js:89
 msgid "Color Setting"
 msgstr ""
 
@@ -415,39 +424,39 @@ msgstr ""
 msgid "PR Blocks (Beta)"
 msgstr ""
 
-#: src/pr-content/block.js:102
+#: src/pr-content/block.js:103
 msgid "Image Border Color"
 msgstr ""
 
-#: src/pr-content/block.js:110
+#: src/pr-content/block.js:111
 msgid "Button Setting"
 msgstr ""
 
-#: src/pr-content/block.js:112
+#: src/pr-content/block.js:113
 msgid "Button Text"
 msgstr ""
 
-#: src/pr-content/block.js:121
+#: src/pr-content/block.js:122
 msgid "Link URL"
 msgstr ""
 
-#: src/pr-content/block.js:134
+#: src/pr-content/block.js:135
 msgid "Button Type"
 msgstr ""
 
-#: src/pr-content/block.js:138
+#: src/pr-content/block.js:139
 msgid "Solid"
 msgstr ""
 
-#: src/pr-content/block.js:139
+#: src/pr-content/block.js:140
 msgid "Ghost"
 msgstr ""
 
-#: src/pr-content/block.js:144
+#: src/pr-content/block.js:160
 msgid "Button Color"
 msgstr ""
 
-#: src/pr-content/block.js:171
+#: src/pr-content/block.js:187
 msgid "Layout Type"
 msgstr ""
 
@@ -455,18 +464,18 @@ msgstr ""
 msgid "PR Content"
 msgstr ""
 
-#: src/pr-content/block.js:89
+#: src/pr-content/block.js:90
 msgid "Title Color"
 msgstr ""
 
-#: src/pr-content/block.js:95
+#: src/pr-content/block.js:96
 msgid "Content Color"
 msgstr ""
 
-#: src/pr-content/component.js:79
+#: src/pr-content/component.js:118
 msgid "Input title."
 msgstr ""
 
-#: src/pr-content/component.js:86
+#: src/pr-content/component.js:125
 msgid "Input content."
 msgstr ""

@@ -23,11 +23,15 @@ export const schema = {
 	},
 	buttonColor: {
 		type: 'string',
-	default: 'blue',
+		default: 'primary',
+	},
+	buttonColorCustom: {
+		type: 'string',
+		default: null,
 	},
 	buttonText: {
 		source: 'html',
-			selector: '.vk_prContent_btn_txt',
+		selector: '.vk_prContent_btn_txt',
 		default: '',
 	},
 	buttonTarget: {

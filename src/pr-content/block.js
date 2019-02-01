@@ -74,7 +74,8 @@ registerBlockType('vk-blocks/pr-content', {
             contentColor,
             url,
             buttonType,
-            buttonColor,
+						buttonColor,
+            buttonColorCustom,
             buttonText,
 						buttonTarget,
             ImageBorderColor,
@@ -135,16 +136,31 @@ registerBlockType('vk-blocks/pr-content', {
                             <RadioControl
                                 selected={buttonType}
                                 options={[
-                                    {label: __('Solid', 'vk-blocks'), value: '1'},
-                                    {label: __('Ghost', 'vk-blocks'), value: '0'}
+                                    {label: __('Solid', 'vk-blocks'), value: '0'},
+                                    {label: __('Ghost', 'vk-blocks'), value: '1'}
                                 ]}
                                 onChange={(value) => setAttributes({buttonType: value})}
                             />
                         </BaseControl>
+												<RadioControl
+                            label={__('Default Color:', 'vk-blocks')}
+                            selected={buttonColor}
+                            options={[
+                                {label: __('Primary', 'vk-blocks'), value: 'primary'},
+                                {label: __('Secondary', 'vk-blocks'), value: 'secondary'},
+                                {label: __('Success', 'vk-blocks'), value: 'success'},
+                                {label: __('Info', 'vk-blocks'), value: 'info'},
+                                {label: __('Warning', 'vk-blocks'), value: 'warning'},
+                                {label: __('Danger', 'vk-blocks'), value: 'danger'},
+                                {label: __('Light', 'vk-blocks'), value: 'light'},
+                                {label: __('Dark', 'vk-blocks'), value: 'dark'},
+                            ]}
+                            onChange={(value) => setAttributes({buttonColor: value})}
+                        />
 												<BaseControl label={__('Button Color', 'vk-blocks')}>
                             <ColorPalette
-                                value={buttonColor}
-                                onChange={(value) => setAttributes({buttonColor: value})}
+                                value={buttonColorCustom}
+                                onChange={(value) => setAttributes({buttonColorCustom: value})}
                             />
                         </BaseControl>
                         <BaseControl

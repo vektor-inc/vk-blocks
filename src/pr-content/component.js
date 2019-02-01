@@ -18,7 +18,8 @@ export class Component extends React.Component {
             contentColor,
             url,
             buttonType,
-            buttonColor,
+						buttonColor,
+            buttonColorCustom,
             buttonText,
             buttonTarget,
             Image,
@@ -29,6 +30,44 @@ export class Component extends React.Component {
         } = attributes;
         let setAttributes = this.props.setAttributes;
         let for_ = this.props.for_;
+				let aClass = '';
+				let aStyle = {};
+
+				aClass = `btn vk_button_link btn-block btn-lg`;
+
+				if (buttonColorCustom) {
+
+            aClass = `${aClass} btn-primary`;
+
+            // 塗り
+            if (buttonType === '0') {
+                aStyle = {
+                    backgroundColor: buttonColorCustom,
+                    border: `1px solid ${buttonColorCustom}`
+                };
+            // 塗りなし
+            } else if (buttonType === '1') {
+                aStyle = {
+                    backgroundColor: 'transparent',
+                    border: '1px solid ' + buttonColorCustom,
+                    color: buttonColorCustom
+                };
+            }
+
+				// カスタムカラーじゃない場合
+        } else if (!buttonColorCustom) {
+
+            // 塗り
+            if (buttonType === '0') {
+                aClass = `${aClass} btn-${buttonColor}`;
+                aStyle = null;
+            // 塗りなし
+            } else if (buttonType === '1') {
+                aClass = `${aClass} btn-outline-${buttonColor}`;
+                aStyle = null;
+            }
+
+        }
 
         return (
             <div className="vk_prContent">
@@ -119,13 +158,9 @@ export class Component extends React.Component {
                                             return (
                                                 <div className="vk_prContent_btn">
                                                     <a href={url}
-                                                       className="btn btn-block btn-lg btn-primary"
+                                                       className={aClass}
                                                        target={buttonTarget? '_blank':null}
-                                                       style={{
-                                                           backgroundColor: buttonColor,
-                                                           border: `1px solid ${buttonColor}`,
-                                                           color: `#ffffff`
-                                                       }}
+                                                       style={aStyle}
                                                     >
                                                         <Fontawesome
                                                             attributes={attributes}
@@ -136,13 +171,9 @@ export class Component extends React.Component {
                                             return (
                                                 <div className="vk_prContent_btn">
                                                     <a href={url}
-                                                       className="btn btn-block btn-lg btn-primary btn-ghost"
+                                                       className={aClass}
                                                        target={buttonTarget? '_blank':null}
-                                                       style={{
-                                                           backgroundColor: '#fff',
-                                                           border: `1px solid ${buttonColor}`,
-                                                           color: `${buttonColor}`
-                                                       }}
+                                                       style={aStyle}
                                                     >
                                                         <Fontawesome
                                                             attributes={attributes}
