@@ -74,9 +74,10 @@ registerBlockType('vk-blocks/pr-content', {
             contentColor,
             url,
             buttonType,
-            buttonColor,
+						buttonColor,
+            buttonColorCustom,
             buttonText,
-            urlType,
+						buttonTarget,
             ImageBorderColor,
             layout,
             fontAwesomeIconBefore,
@@ -96,12 +97,6 @@ registerBlockType('vk-blocks/pr-content', {
                             <ColorPalette
                                 value={contentColor}
                                 onChange={(value) => setAttributes({contentColor: value})}
-                            />
-                        </BaseControl>
-                        <BaseControl label={__('Button Color', 'vk-blocks')}>
-                            <ColorPalette
-                                value={buttonColor}
-                                onChange={(value) => setAttributes({buttonColor: value})}
                             />
                         </BaseControl>
                         <BaseControl
@@ -132,24 +127,40 @@ registerBlockType('vk-blocks/pr-content', {
                                 placeholder={'https://vektor-inc.co.jp/'}
                             />
                         </BaseControl>
-                        <BaseControl label={__('Link target', 'vk-blocks')}>
-                            <RadioControl
-                                selected={urlType}
-                                options={[
-                                    {label: __('Open url in new window', 'vk-blocks'), value: '_blank'},
-                                    {label: __('Open url in current window', 'vk-blocks'), value: '_self'}
-                                ]}
-                                onChange={(value) => setAttributes({urlType: value})}
-                            />
-                        </BaseControl>
+												<CheckboxControl
+                            label={__('Open link new tab.', 'vk-blocks')}
+                            checked={buttonTarget}
+                            onChange={(checked) => setAttributes({buttonTarget: checked})}
+                        />
                         <BaseControl label={__('Button Type', 'vk-blocks')}>
                             <RadioControl
                                 selected={buttonType}
                                 options={[
-                                    {label: __('Solid', 'vk-blocks'), value: '1'},
-                                    {label: __('Ghost', 'vk-blocks'), value: '0'}
+                                    {label: __('Solid', 'vk-blocks'), value: '0'},
+                                    {label: __('Ghost', 'vk-blocks'), value: '1'}
                                 ]}
                                 onChange={(value) => setAttributes({buttonType: value})}
+                            />
+                        </BaseControl>
+												<RadioControl
+                            label={__('Default Color:', 'vk-blocks')}
+                            selected={buttonColor}
+                            options={[
+                                {label: __('Primary', 'vk-blocks'), value: 'primary'},
+                                {label: __('Secondary', 'vk-blocks'), value: 'secondary'},
+                                {label: __('Success', 'vk-blocks'), value: 'success'},
+                                {label: __('Info', 'vk-blocks'), value: 'info'},
+                                {label: __('Warning', 'vk-blocks'), value: 'warning'},
+                                {label: __('Danger', 'vk-blocks'), value: 'danger'},
+                                {label: __('Light', 'vk-blocks'), value: 'light'},
+                                {label: __('Dark', 'vk-blocks'), value: 'dark'},
+                            ]}
+                            onChange={(value) => setAttributes({buttonColor: value})}
+                        />
+												<BaseControl label={__('Button Color', 'vk-blocks')}>
+                            <ColorPalette
+                                value={buttonColorCustom}
+                                onChange={(value) => setAttributes({buttonColorCustom: value})}
                             />
                         </BaseControl>
                         <BaseControl
@@ -158,17 +169,17 @@ registerBlockType('vk-blocks/pr-content', {
                         >
                             <TextControl
                                 label={__('Before text', 'vk-blocks')}
-                                help={__('Enter Font Awesome Class.This icon will appear before text.', 'vk-blocks')}
+                                help={__('Enter Font Awesome Class.This icon will appear before text. Ex) fas fa-arrow-circle-right', 'vk-blocks')}
                                 value={fontAwesomeIconBefore}
                                 onChange={(value) => setAttributes({fontAwesomeIconBefore: value})}
-                                placeholder={'fas fa-user'}
+                                placeholder={'fas fa-arrow-circle-right'}
                             />
                             <TextControl
                                 label={__('After text', 'vk-blocks')}
-                                help={__('Enter Font Awesome Class.This icon will appear after text.', 'vk-blocks')}
+                                help={__('Enter Font Awesome Class.This icon will appear after text. Ex) fas fa-external-link-alt', 'vk-blocks')}
                                 value={fontAwesomeIconAfter}
                                 onChange={(value) => setAttributes({fontAwesomeIconAfter: value})}
-                                placeholder={'fas fa-book'}
+                                placeholder={'fas fa-external-link-alt'}
                             />
                         </BaseControl>
                         </PanelBody>

@@ -8,7 +8,7 @@ export const schema = {
 	},
 	content: {
 		source: 'html',
-			selector: 'p',
+			selector: '.vk_prContent_text',
 	},
 	contentColor: {
 		type: 'string',
@@ -19,20 +19,24 @@ export const schema = {
 	},
 	buttonType: {
 		type: 'string',
-	default: '1',
+	default: '0',
 	},
 	buttonColor: {
 		type: 'string',
-	default: 'blue',
+		default: 'primary',
+	},
+	buttonColorCustom: {
+		type: 'string',
+		default: null,
 	},
 	buttonText: {
 		source: 'html',
-			selector: '.vk_prContent_btn_txt',
+		selector: '.vk_prContent_btn_txt',
 		default: '',
 	},
-	urlType: {
-		type: 'string',
-	default: '_blank',
+	buttonTarget: {
+		type: 'Boolean',
+	default: false,
 	},
 	Image: {
 		type: 'string',

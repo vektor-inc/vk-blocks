@@ -18,9 +18,10 @@ export class Component extends React.Component {
             contentColor,
             url,
             buttonType,
-            buttonColor,
+						buttonColor,
+            buttonColorCustom,
             buttonText,
-            urlType,
+            buttonTarget,
             Image,
             ImageBorderColor,
             layout,
@@ -29,6 +30,44 @@ export class Component extends React.Component {
         } = attributes;
         let setAttributes = this.props.setAttributes;
         let for_ = this.props.for_;
+				let aClass = '';
+				let aStyle = {};
+
+				aClass = `vk_button_link vk_brContent_btn btn btn-block btn-lg`;
+
+				if (buttonColorCustom) {
+
+            aClass = `${aClass} btn-primary`;
+
+            // 塗り
+            if (buttonType === '0') {
+                aStyle = {
+                    backgroundColor: buttonColorCustom,
+                    border: `1px solid ${buttonColorCustom}`
+                };
+            // 塗りなし
+            } else if (buttonType === '1') {
+                aStyle = {
+                    backgroundColor: 'transparent',
+                    border: '1px solid ' + buttonColorCustom,
+                    color: buttonColorCustom
+                };
+            }
+
+				// カスタムカラーじゃない場合
+        } else if (!buttonColorCustom) {
+
+            // 塗り
+            if (buttonType === '0') {
+                aClass = `${aClass} btn-${buttonColor}`;
+                aStyle = null;
+            // 塗りなし
+            } else if (buttonType === '1') {
+                aClass = `${aClass} btn-outline-${buttonColor}`;
+                aStyle = null;
+            }
+
+        }
 
         return (
             <div className="vk_prContent">
@@ -47,7 +86,7 @@ export class Component extends React.Component {
                                         >
                                             {!Image ? __('Select image', 'vk-blocks') :
                                                 <img
-                                                    className={'vk_pr_content_media_image'}
+                                                    className={'vk_prContent_media_image'}
                                                     src={Image}
                                                     alt={__('Upload image', 'vk-blocks')}
                                                     style={{border:`1px solid ${ImageBorderColor}`}}
@@ -58,7 +97,7 @@ export class Component extends React.Component {
                                 :
                                 !Image ? __('Select image', 'vk-blocks') :
                                     <img
-                                        className={'vk_pr_content_media_image'}
+                                        className={'vk_prContent_media_image'}
                                         src={Image}
                                         alt={__('Upload image', 'vk-blocks')}
                                         style={{border: `1px solid ${ImageBorderColor}`}}
@@ -81,6 +120,7 @@ export class Component extends React.Component {
                                                 />
                                                 < RichText
                                                     tagName="p"
+																										className={'vk_prContent_text'}
                                                     onChange={(value) => setAttributes({content: value})}
                                                     value={content}
                                                     placeholder={__('Input content.', 'vk-blocks')}
@@ -99,6 +139,7 @@ export class Component extends React.Component {
                                                 />
                                                 <RichText.Content
                                                     tagName="p"
+																										className={'vk_prContent_text'}
                                                     value={content}
                                                     style={{color: contentColor}}
                                                 />
@@ -117,38 +158,28 @@ export class Component extends React.Component {
                                         //ボタンタイプを切り替え。
                                         if (buttonType === '1') {
                                             return (
-                                                <div className="vk_prContent_btn">
                                                     <a href={url}
-                                                       className="btn btn-block btn-lg btn-primary"
-                                                       target={urlType}
-                                                       style={{
-                                                           backgroundColor: buttonColor,
-                                                           border: `1px solid ${buttonColor}`,
-                                                           color: `#ffffff`
-                                                       }}
+                                                       className={aClass}
+                                                       target={buttonTarget? '_blank':null}
+                                                       style={aStyle}
                                                     >
                                                         <Fontawesome
                                                             attributes={attributes}
                                                         />
                                                     </a>
-                                                </div>);
+                                                );
                                         } else {
                                             return (
-                                                <div className="vk_prContent_btn">
                                                     <a href={url}
-                                                       className="btn btn-block btn-lg btn-primary btn-ghost"
-                                                       target={urlType}
-                                                       style={{
-                                                           backgroundColor: '#fff',
-                                                           border: `1px solid ${buttonColor}`,
-                                                           color: `${buttonColor}`
-                                                       }}
+                                                       className={aClass}
+                                                       target={buttonTarget? '_blank':null}
+                                                       style={aStyle}
                                                     >
                                                         <Fontawesome
                                                             attributes={attributes}
                                                         />
                                                     </a>
-                                                </div>);
+                                                );
                                         }
                                     }
                                 })()
