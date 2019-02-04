@@ -11,11 +11,15 @@ export const schema = {
 		type: 'string',
 	default: 'normal',
 	},
-	is_parallax:{
+	bgPosition:{
 		type: 'string',
-	default: '0',
+	default: 'normal',
 	},
-	is_padding: {
+	padding_left_and_right: {
+		type: 'string',
+	default: '1',
+	},
+	padding_top_and_bottom: {
 		type: 'string',
 	default: '1',
 	},

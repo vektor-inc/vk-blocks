@@ -33,7 +33,8 @@ export class Component extends React.Component {
             bgImage,
             bgPosition,
             outerWidth,
-            is_padding,
+            padding_left_and_right,
+            padding_top_and_bottom,
             opacity,
             upper_tilt_level,
             lower_tilt_level,
@@ -42,7 +43,8 @@ export class Component extends React.Component {
         } = this.props.attributes;
 
         let for_ = this.props.for_;
-        let classPadding;
+        let classPaddingLR;
+        let classPaddingVertical;
         let classBgPosition;
         let classWidth;
         let elm;
@@ -70,11 +72,18 @@ export class Component extends React.Component {
             classBgPosition = ' vk_outer-bgPosition-normal';
         }
 
-        //classPaddingのクラス切り替え
-        if(is_padding === '1'){
-            classPadding = ' vk_outer-padding';
-        }else {
-            classPadding = ' vk_outer-padding-none';
+				//classPaddingLRのクラス切り替え
+        if(padding_left_and_right === '1'){
+            classPaddingLR = ' vk_outer-paddingLR-use';
+        } else {
+            classPaddingLR = ' vk_outer-paddingLR-none';
+        }
+
+        //classPaddingVerticalのクラス切り替え
+        if(padding_top_and_bottom === '1'){
+            classPaddingVertical = ' vk_outer-paddingVertical-use';
+        } else {
+            classPaddingVertical = ' vk_outer-paddingVertical-none';
         }
 
         //上側セクションの傾き切り替え
@@ -97,7 +106,7 @@ export class Component extends React.Component {
 
         return (
             <div
-                className={'vk_outer' + classWidth + classPadding + classBgPosition}
+                className={ 'vk_outer' + classWidth + classPaddingLR + classPaddingVertical + classBgPosition }
                 style={{
                     background: `linear-gradient(${bgColor}, ${bgColor}), url(${bgImage})`,
                 }}

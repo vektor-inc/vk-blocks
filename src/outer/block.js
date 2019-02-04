@@ -67,7 +67,8 @@ registerBlockType('vk-blocks/outer', {
             bgImage,
             bgPosition,
             outerWidth,
-            is_padding,
+            padding_left_and_right,
+            padding_top_and_bottom,
             opacity,
             upper_tilt_level,
             lower_tilt_level,
@@ -147,14 +148,23 @@ registerBlockType('vk-blocks/outer', {
 														]}
 														onChange={(value) => setAttributes({outerWidth: value})}
 												/>
+												<RadioControl
+														label={__('Padding (left and right)', 'vk-blocks')}
+														selected={padding_left_and_right}
+														options={[
+																{label: __('Use default padding', 'vk-blocks'), value: '1'},
+																{label: __('Do not use default padding (When it is full width etc.).', 'vk-blocks'), value: '0'}
+														]}
+														onChange={(value) => setAttributes({padding_left_and_right: value})}
+												/>
 													<RadioControl
-															label={__('Padding', 'vk-blocks')}
-															selected={is_padding}
+															label={__('Padding (top and bottom)', 'vk-blocks')}
+															selected={padding_top_and_bottom}
 															options={[
 																	{label: __('Use default padding', 'vk-blocks'), value: '1'},
-																	{label: __('Do not use default padding.', 'vk-blocks'), value: '0'}
+																	{label: __('Do not use default padding (Set it yourself using a spacer block etc.).', 'vk-blocks'), value: '0'}
 															]}
-															onChange={(value) => setAttributes({is_padding: value})}
+															onChange={(value) => setAttributes({padding_top_and_bottom: value})}
 													/>
 											</BaseControl>
 										</PanelBody>

@@ -558,14 +558,15 @@ $color_dark:#343a40;
   padding-left:calc(50vw - 50%);
   padding-right:calc(50vw - 50%);
 }
-
-.vk_outer-padding{
+.vk_outer-paddingLR-use{
+  padding-left: 50px ;
+	padding-right: 50px ;
+}
+.vk_outer-paddingVertical-use{
   padding-top: 50px ;
 	padding-bottom: 50px ;
 }
-.vk_outer-padding-none{
-  padding: 0 ;
-}
+
 .vk_outer-bgPosition-fixed{
   background-attachment: fixed !important;
 	background-size: cover !important;
