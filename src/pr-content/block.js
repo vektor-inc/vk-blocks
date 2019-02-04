@@ -165,7 +165,7 @@ registerBlockType('vk-blocks/pr-content', {
                         </BaseControl>
                         <BaseControl
                             label={__('Font Awesome:', 'vk-blocks')}
-                            help={<a href={`https://fontawesome.com/icons?d=gallery`} target={`_blank`}>{__('Please choose your favorite icon from here.', 'vk-blocks')}</a>}
+                            help={<a href={`https://fontawesome.com/icons?d=gallery&m=free`} target={`_blank`}>{__('Please choose your favorite icon from here.', 'vk-blocks')}</a>}
                         >
                             <TextControl
                                 label={__('Before text', 'vk-blocks')}
