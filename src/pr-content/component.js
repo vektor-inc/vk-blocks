@@ -30,13 +30,15 @@ export class Component extends React.Component {
         } = attributes;
         let setAttributes = this.props.setAttributes;
         let for_ = this.props.for_;
+				let containerClass = '';
 				let aClass = '';
 				let aStyle = {};
 
+				containerClass = 'vk_button';
 				aClass = `vk_button_link vk_brContent_btn btn btn-block btn-lg`;
 
 				if (buttonColorCustom) {
-
+						containerClass = '${containerClass} vk_button_color-custom';
             aClass = `${aClass} btn-primary`;
 
             // 塗り
@@ -151,36 +153,20 @@ export class Component extends React.Component {
 
                                 //ボタンテキストが入力されるとボタンを表示。
                                 (() => {
-                                    if (buttonText === '') {
-
-                                    }else {
-
-                                        //ボタンタイプを切り替え。
-                                        if (buttonType === '1') {
-                                            return (
-                                                    <a href={url}
-                                                       className={aClass}
-                                                       target={buttonTarget? '_blank':null}
-                                                       style={aStyle}
-                                                    >
-                                                        <Fontawesome
-                                                            attributes={attributes}
-                                                        />
-                                                    </a>
-                                                );
-                                        } else {
-                                            return (
-                                                    <a href={url}
-                                                       className={aClass}
-                                                       target={buttonTarget? '_blank':null}
-                                                       style={aStyle}
-                                                    >
-                                                        <Fontawesome
-                                                            attributes={attributes}
-                                                        />
-                                                    </a>
-                                                );
-                                        }
+                                    if (buttonText !== '' && buttonText !== undefined ) {
+                                        return (
+																					<div className={containerClass}>
+                                            <a href={url}
+                                               className={aClass}
+                                               target={buttonTarget? '_blank':null}
+                                               style={aStyle}
+                                            >
+                                                <Fontawesome
+                                                    attributes={attributes}
+                                                />
+                                            </a>
+																					</div>
+                                        );
                                     }
                                 })()
                             }

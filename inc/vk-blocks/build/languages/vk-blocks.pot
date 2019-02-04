@@ -11,7 +11,7 @@ msgstr ""
 #: src/flow/block.js:111
 #: src/outer/block.js:118
 #: src/pr-blocks/block.js:324
-#: src/pr-content/component.js:98
+#: src/pr-content/component.js:100
 msgid "Select image"
 msgstr ""
 
@@ -19,7 +19,7 @@ msgstr ""
 #: src/flow/block.js:112
 #: src/outer/block.js:120
 #: src/pr-blocks/block.js:326
-#: src/pr-content/component.js:102
+#: src/pr-content/component.js:104
 msgid "Upload image"
 msgstr ""
 
@@ -485,10 +485,10 @@ msgstr ""
 msgid "Content Color"
 msgstr ""
 
-#: src/pr-content/component.js:118
+#: src/pr-content/component.js:120
 msgid "Input title."
 msgstr ""
 
-#: src/pr-content/component.js:126
+#: src/pr-content/component.js:128
 msgid "Input content."
 msgstr ""
