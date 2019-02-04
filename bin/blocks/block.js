@@ -3,9 +3,10 @@
  *
  */
 import React from "react";
-import NewComponent from "./component.js";
-import {schema} from './schema.js';
-import {Component} from "../../src/outer/component";
+import NewComponent from "./component";
+import {schema} from './schema';
+// import {deprecated} from './deprecated/deprecated';
+
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
 const {RangeControl, RadioControl, PanelBody, Button, PanelColor, BaseControl} = wp.components;
@@ -80,4 +81,7 @@ registerBlockType('vk-blocks/your-block-slug', {
             </div>
         );
     },
+
+    //Please comment out, when you need to use deprecated.
+    // deprecated:deprecated
 });
