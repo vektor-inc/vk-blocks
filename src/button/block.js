@@ -3,7 +3,8 @@
  *
  */
 import React from "react";
-import {Link} from "./link";
+import {Component} from "./component";
+import {deprecated} from "./deprecated/deprecated";
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
@@ -63,6 +64,10 @@ registerBlockType('vk-blocks/button', {
             source: 'html',
             selector: 'span',
         },
+        subCaption: {
+            type: 'string',
+            default: null,
+        },
         buttonUrl: {
             type: 'string',
             default: null,
@@ -112,6 +117,7 @@ registerBlockType('vk-blocks/button', {
     edit({attributes, className, setAttributes, isSelected}) {
         const {
             content,
+            subCaption,
             buttonUrl,
             buttonTarget,
             buttonSize,
@@ -127,6 +133,12 @@ registerBlockType('vk-blocks/button', {
             <Fragment>
                 <InspectorControls>
                     <PanelBody title={__('Button setting', 'vk-blocks')}>
+                        <TextControl
+                            label={__('Sub Caption', 'vk-blocks')}
+                            value={subCaption}
+                            onChange={(value) => setAttributes({subCaption: value})}
+                            placeholder={'Sub Caption'}
+                        />
                         <CheckboxControl
                             label={__('Open link new tab.', 'vk-blocks')}
                             checked={buttonTarget}
@@ -211,12 +223,13 @@ registerBlockType('vk-blocks/button', {
 
                 <div className={buttonColorCustom ? `vk_button vk_button-align-${ buttonAlign } vk_button-color-custom` : `vk_button vk_button-align-${ buttonAlign }`}>
 
-                    <Link lbColorCustom={buttonColorCustom} lbColor={buttonColor} lbType={buttonType}
-                          lbAlign={buttonAlign}
-                          lbSize={buttonSize}
-                          lbFontAwesomeIconBefore={fontAwesomeIconBefore}
-                          lbFontAwesomeIconAfter={fontAwesomeIconAfter}
-                          lbRichtext={
+                    <Component lbColorCustom={buttonColorCustom} lbColor={buttonColor} lbType={buttonType}
+                               lbAlign={buttonAlign}
+                               lbSize={buttonSize}
+                               lbFontAwesomeIconBefore={fontAwesomeIconBefore}
+                               lbFontAwesomeIconAfter={fontAwesomeIconAfter}
+                               lbsubCaption={subCaption}
+                               lbRichtext={
                         <RichText
                             tagName="span"
                             className={'vk_button_link_txt'}
@@ -256,6 +269,7 @@ registerBlockType('vk-blocks/button', {
     save({attributes, className}) {
         const {
             content,
+            subCaption,
             buttonUrl,
             buttonTarget,
             buttonSize,
@@ -282,14 +296,15 @@ registerBlockType('vk-blocks/button', {
         return (
             <div className={containerClass}>
 
-                <Link lbColorCustom={buttonColorCustom} lbColor={buttonColor} lbType={buttonType}
-                      lbAlign={buttonAlign}
-                      lbSize={buttonSize}
-                      lbUrl={buttonUrl}
-                      lbTarget={buttonTarget}
-                      lbFontAwesomeIconBefore={fontAwesomeIconBefore}
-                      lbFontAwesomeIconAfter={fontAwesomeIconAfter}
-                      lbRichtext={
+                <Component lbColorCustom={buttonColorCustom} lbColor={buttonColor} lbType={buttonType}
+                           lbAlign={buttonAlign}
+                           lbSize={buttonSize}
+                           lbUrl={buttonUrl}
+                           lbTarget={buttonTarget}
+                           lbFontAwesomeIconBefore={fontAwesomeIconBefore}
+                           lbFontAwesomeIconAfter={fontAwesomeIconAfter}
+                           lbsubCaption={subCaption}
+                           lbRichtext={
                     <RichText.Content
                         tagName="span"
                         className={'vk_button_link_txt'}
@@ -299,4 +314,6 @@ registerBlockType('vk-blocks/button', {
             </div>
         );
     },
+
+    deprecated: deprecated
 });

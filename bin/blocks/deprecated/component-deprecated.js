@@ -1,6 +1,6 @@
 import React from 'react';
 
-export class Link extends React.Component {
+export class ComponentDeprecated extends React.Component {
 
     render() {
 
@@ -14,6 +14,7 @@ export class Link extends React.Component {
         let fontAwesomeIconBefore = this.props.lbFontAwesomeIconBefore;
         let fontAwesomeIconAfter = this.props.lbFontAwesomeIconAfter;
         let richText = this.props.lbRichtext;
+        let subCaption = this.props.lbsubCaption;
         let containerClass = '';
         let aClass = '';
         let aStyle = {};
