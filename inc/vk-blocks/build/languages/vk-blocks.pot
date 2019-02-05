@@ -196,7 +196,7 @@ msgstr ""
 
 #: src/button/block.js:192
 #: src/pr-content/block.js:168
-msgid "Please choose your favorite icon from here."
+msgid "Font Awesome icon list"
 msgstr ""
 
 #: src/button/block.js:195

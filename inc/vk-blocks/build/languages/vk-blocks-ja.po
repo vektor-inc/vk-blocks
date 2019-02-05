@@ -20,12 +20,12 @@ msgid "Alert"
 msgstr "アラート"
 
 #: src/balloon/block.js:122 src/flow/block.js:111 src/outer/block.js:118
-#: src/pr-blocks/block.js:324 src/pr-content/component.js:98
+#: src/pr-blocks/block.js:324 src/pr-content/component.js:100
 msgid "Select image"
 msgstr "画像を選択"
 
 #: src/balloon/block.js:122 src/flow/block.js:112 src/outer/block.js:120
-#: src/pr-blocks/block.js:326 src/pr-content/component.js:102
+#: src/pr-blocks/block.js:326 src/pr-content/component.js:104
 msgid "Upload image"
 msgstr "画像をアップロード"
 
@@ -184,8 +184,8 @@ msgid "Font Awesome:"
 msgstr "Font Awesome:"
 
 #: src/button/block.js:192 src/pr-content/block.js:168
-msgid "Please choose your favorite icon from here."
-msgstr ""
+msgid "Font Awesome icon list"
+msgstr "Font Awesome アイコンリスト"
 
 #: src/button/block.js:195 src/pr-content/block.js:171
 msgid "Before text"
@@ -473,11 +473,11 @@ msgstr "見出しの色"
 msgid "Content Color"
 msgstr "本文の色"
 
-#: src/pr-content/component.js:118
+#: src/pr-content/component.js:120
 msgid "Input title."
 msgstr "タイトルを入力してください。"
 
-#: src/pr-content/component.js:126
+#: src/pr-content/component.js:128
 msgid "Input content."
 msgstr "本文を入力してください。"
 
