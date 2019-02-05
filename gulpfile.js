@@ -53,6 +53,7 @@ gulp.task('js', function () {
 // watch
 gulp.task('watch', function () {
     gulp.watch('src/**/*.js', ['js']);
+    gulp.watch('editor-css/editor.scss_before', ['sass_editor']);
     gulp.watch('src/**/*.scss', ['sass','sass_editor']);
     // gulp.watch('src/**/*.scss', ['sass']);
 });

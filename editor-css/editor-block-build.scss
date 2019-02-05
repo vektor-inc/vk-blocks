@@ -15,8 +15,12 @@ h1:first-child.vk_prBlocks_item_title{
 }
 
 /* メインのカラム幅 */
-.wp-block {
-    max-width: 780px;
+.wp-block,
+.editor-block-list__layout > .wp-block {
+		max-width:calc( 100% - 20% );
+		.wp-block {
+			max-width:100%;
+		}
 }
 
 .alert{
@@ -542,7 +546,14 @@ $color_dark:#343a40;
 /*-------------------------------------------*/
 /* CSS
 /*-------------------------------------------*/
-
+$media-sm-up : 576px;
+$media-md-up : 768px;
+$media-lg-up : 992px;
+$media-xl-up : 1200px;
+$media-sm-down : 575.98px;
+$media-md-down : 767.98px;
+$media-lg-down : 991.98px;
+$media-xl-down : 1199.98px;
 .vk_outer{
   background-position: center;
   background-size: cover;
@@ -558,13 +569,50 @@ $color_dark:#343a40;
   padding-left:calc(50vw - 50%);
   padding-right:calc(50vw - 50%);
 }
+$padding-none:1.5em;
+$padding-sm:2em;
+$padding-md:2.5em;
+$padding-lg:3em;
+$padding-xl:3.5em;
 .vk_outer-paddingLR-use{
-  padding-left: 50px ;
-	padding-right: 50px ;
+  padding-left: $padding-none ;
+	padding-right: $padding-none ;
+	@media ( min-width: $media-sm-up ){
+		padding-left: $padding-sm ;
+		padding-right: $padding-sm ;
+	}
+	@media ( min-width: $media-md-up ){
+		padding-left: $padding-md ;
+		padding-right: $padding-md ;
+	}
+	@media ( min-width: $media-lg-up ){
+		padding-left: $padding-lg ;
+		padding-right: $padding-lg ;
+	}
+	@media ( min-width: $media-xl-up ){
+		padding-left: $padding-xl ;
+		padding-right: $padding-xl ;
+	}
 }
 .vk_outer-paddingVertical-use{
-  padding-top: 50px ;
-	padding-bottom: 50px ;
+	padding-top: $padding-none ;
+	padding-bottom: $padding-none ;
+	@media ( min-width: $media-sm-up ){
+		padding-top: $padding-sm ;
+		padding-bottom: $padding-sm ;
+	}
+	@media ( min-width: $media-md-up ){
+		padding-top: $padding-md ;
+		padding-bottom: $padding-md ;
+	}
+	@media ( min-width: $media-lg-up ){
+		padding-top: $padding-lg ;
+		padding-bottom: $padding-lg ;
+	}
+	@media ( min-width: $media-xl-up ){
+		padding-top: $padding-xl ;
+		padding-bottom: $padding-xl ;
+	}
 }
 
 .vk_outer-bgPosition-fixed{
@@ -638,7 +686,7 @@ $color_dark:#343a40;
 	margin-top:0.9em;
 	margin-bottom: 0.7em;
 	text-align: center;
-	font-size: 18px;
+	font-size: 21px;
 	line-height: 1.4em;
 }
 .vk_prBlocks_item_image{
@@ -654,8 +702,7 @@ $color_dark:#343a40;
 .vk_prBlocks_item_summary{
 	margin-bottom: 0.5em;
 	text-align: center;
-	font-size: 14px;
-	line-height: 1.6em;
+	line-height: 1.8em;
 	&:hover{
 		text-decoration: underline;
 	}
@@ -720,10 +767,8 @@ $color_dark:#343a40;
 	padding: 0;
 	border-bottom: none;
 	box-shadow: none;
-}
-
-.vk_prContent_title {
 	border-left: none;
+	margin-bottom:0.8em;
 }
 
 .vk_prContent_title:after {
@@ -738,7 +783,8 @@ $color_dark:#343a40;
 }
 
 .vk_prContent_text {
-	margin-bottom:1.2em;
+	line-height: 2em;
+	margin-bottom:1.7em;
 }
 
 .vk_prContent_col_img {

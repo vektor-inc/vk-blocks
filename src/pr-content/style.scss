@@ -57,10 +57,8 @@
 	padding: 0;
 	border-bottom: none;
 	box-shadow: none;
-}
-
-.vk_prContent_title {
 	border-left: none;
+	margin-bottom:0.8em;
 }
 
 .vk_prContent_title:after {
@@ -75,7 +73,8 @@
 }
 
 .vk_prContent_text {
-	margin-bottom:1.2em;
+	line-height: 2em;
+	margin-bottom:1.7em;
 }
 
 .vk_prContent_col_img {
