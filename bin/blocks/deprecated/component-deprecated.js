@@ -3,6 +3,7 @@ import React from 'react';
 export class ComponentDeprecated extends React.Component {
 
     render() {
+
         let {
             heading,
             content,
