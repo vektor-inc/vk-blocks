@@ -19,6 +19,13 @@
 .vk_button-align-block{
 	display: block;
 }
+
+#vk_button_link{
+	display: inline-flex;
+	align-items: center;
+	//Button Position Block用
+	justify-content: center;
+}
 .vk_button_link_before { margin-right: 0.7rem; }
 .vk_button_link_after { margin-left: 0.7rem; }
 .vk_button_link_txt { display: inline; }

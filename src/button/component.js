@@ -73,6 +73,7 @@ export class Component extends React.Component {
         return (
                 <a
                     href={buttonUrl}
+                    id={'vk_button_link'}
                     className={aClass}
                     role={'button'}
                     aria-pressed={true}
@@ -80,11 +81,12 @@ export class Component extends React.Component {
                     target={buttonTarget? '_blank':null}
                 >
                     {iconBefore}
-                    {richText}
-                    {/*サブキャプションが入力された時のみ表示*/}
-                    {subCaption && <p className={'vk_button_link_subCaption'}>{subCaption}</p>}
+                    <div>
+                        {richText}
+                        {/*サブキャプションが入力された時のみ表示*/}
+                        {subCaption && <p className={'vk_button_link_subCaption'}>{subCaption}</p>}
+                    </div>
                     {iconAfter}
-
                 </a>
         );
     }

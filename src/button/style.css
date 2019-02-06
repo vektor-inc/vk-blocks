@@ -18,6 +18,11 @@
 .vk_button-align-block {
   display: block; }
 
+#vk_button_link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center; }
+
 .vk_button_link_before {
   margin-right: 0.7rem; }
 
