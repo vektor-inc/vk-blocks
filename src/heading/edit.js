@@ -21,7 +21,7 @@ export default function HeadingEdit( {
 	className,
 } ) {
 	const { align, content, level, placeholder } = attributes;
-	const tagName = 'h' + level;
+		const tagName = 'h' + level;
 
 	return (
 		<Fragment>

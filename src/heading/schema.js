@@ -14,5 +14,5 @@ export const schema = {
     },
     placeholder: {
         type: 'string',
-    },
+    }
 };
