@@ -32,7 +32,7 @@ gulp.task('sass', function () {
 });
 
 
-gulp.task('sass_editor', function () {
+gulp.task('sass_editor', function (){
     return gulp.src([ './editor-css/editor.scss_before',  './src/**/*.scss', './editor-css/editor.scss_after'])
 				.pipe(concat('editor-block-build.scss'))
 				.pipe(gulp.dest('./editor-css/'))
@@ -90,6 +90,7 @@ gulp.task('dist', function() {
 							"!./tests/**",
 							"!./dist/**",
 							"!./src/**",
+							"!./bin/**",
 							"!./editor-css/**",
 							"!./node_modules/**"
             ],
