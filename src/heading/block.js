@@ -1,3 +1,4 @@
+
 /**
  * heading block type
  *
@@ -33,6 +34,11 @@ registerBlockType('vk-blocks/heading', {
     icon: BlockIcon, // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
     category: 'vk-blocks-cat', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
     attributes: schema,
+    supports : {
+        className: false,
+        anchor: true,
+    },
+
 
     /**
      * The edit function describes the structure of your block in the context of the editor.
@@ -51,13 +57,12 @@ registerBlockType('vk-blocks/heading', {
         return (
             <Fragment>
                 <BlockControls>
-                    <HeadingToolbar selectedLevel={ level } onChange={ ( newLevel ) => setAttributes( { level: newLevel } ) } />
+                    <HeadingToolbar minLevel={ 2 } maxLevel={ 5 } selectedLevel={ level } onChange={ ( newLevel ) => setAttributes( { level: newLevel } ) } />
                 </BlockControls>
                 <InspectorControls>
                     <PanelBody title={ __( 'Heading Settings' ) }>
-                        <div>サイドパネル</div>
-                        {/*<p>{ __( 'Level' ) }</p>*/}
-                        {/*<HeadingToolbar minLevel={ 1 } maxLevel={ 7 } selectedLevel={ level } onChange={ ( newLevel ) => setAttributes( { level: newLevel } ) } />*/}
+                        <p>{ __( 'Level' ) }</p>
+                        <HeadingToolbar minLevel={ 1 } maxLevel={ 7 } selectedLevel={ level } onChange={ ( newLevel ) => setAttributes( { level: newLevel } ) } />
                         {/*<p>{ __( 'Text Alignment' ) }</p>*/}
                         {/*<AlignmentToolbar*/}
                             {/*value={ align }*/}

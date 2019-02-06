@@ -11,10 +11,12 @@ import { View } from 'react-native';
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n';
-import { Component } from '@wordpress/element';
-import { RichText, BlockControls } from '@wordpress/editor';
-import { parse, createBlock } from '@wordpress/blocks';
+const {__} = wp.i18n; // Import __() from wp.i18n
+const { Component } = wp.element;
+const { PanelBody } = wp.components;
+const { parse, createBlock } = wp.blocks;
+const { RichText, BlockControls } = wp.editor;
+
 
 /**
  * Internal dependencies

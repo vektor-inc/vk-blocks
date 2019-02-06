@@ -6,11 +6,11 @@ import HeadingToolbar from './heading-toolbar';
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n';
-import { Fragment } from '@wordpress/element';
-import { PanelBody } from '@wordpress/components';
-import { createBlock } from '@wordpress/blocks';
-import { RichText, BlockControls, InspectorControls, AlignmentToolbar } from '@wordpress/editor';
+const {__} = wp.i18n; // Import __() from wp.i18n
+const { Fragment } = wp.element;
+const { PanelBody } = wp.components;
+const { createBlock } = wp.blocks;
+const { RichText, BlockControls, InspectorControls, AlignmentToolbar } = wp.editor;
 
 export default function HeadingEdit( {
 	attributes,
