@@ -11,7 +11,7 @@ if ( ! function_exists( 'vkblocks_active' ) ) {
 	// Set asset URL.
 	define( 'VK_BLOCKS_URL', plugin_dir_url( __FILE__ ) . 'vk-blocks/' );
 	// Set version number.
-	define( 'VK_BLOCKS_VERSION', '0.3.0' );
+	define( 'VK_BLOCKS_VERSION', '0.4.0' );
 
 	global $vk_blocks_prefix;
 	$vk_blocks_prefix = apply_filters( 'vk_blocks_prefix', 'VK ' );
@@ -36,7 +36,7 @@ if ( ! function_exists( 'vkblocks_active' ) ) {
 		}
 
 	}
-	// add_action( 'admin_enqueue_scripts', 'vkblocks_load_bootstrap_admin' );
-	// add_action( 'wp_enqueue_scripts', 'vkblocks_load_bootstrap_admin' );
+	 // add_action( 'admin_enqueue_scripts', 'vkblocks_load_bootstrap_admin' );
+	 // add_action( 'wp_enqueue_scripts', 'vkblocks_load_bootstrap_admin' );
 
 }
