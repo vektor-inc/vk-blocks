@@ -113,7 +113,7 @@ export class Component extends React.Component {
                                 (() => {
                                     if (for_ === 'edit') {
                                         return (
-                                            <div>
+                                            <React.Fragment>
                                                 <RichText
                                                     tagName="h3"
                                                     className={'vk_prContent_colTxt_title'}
@@ -130,11 +130,11 @@ export class Component extends React.Component {
                                                     placeholder={__('Input content.', 'vk-blocks')}
                                                     style={{color: contentColor}}
                                                 />
-                                            </div>
+                                            </React.Fragment>
                                         );
                                     } else {
                                         return (
-                                            <div>
+                                            <React.Fragment>
                                                 <RichText.Content
                                                     tagName="h3"
                                                     value={title}
@@ -147,7 +147,7 @@ export class Component extends React.Component {
                                                     value={content}
                                                     style={{color: contentColor}}
                                                 />
-                                            </div>);
+                                            </React.Fragment>);
                                     }
                                 })()
                             }
