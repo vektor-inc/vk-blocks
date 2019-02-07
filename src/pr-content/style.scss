@@ -3,10 +3,13 @@
 /* Layout
 /*-------------------------------------------*/
 .vk_prContent {
-	display: flex;
 	margin-left:-15px;
 	margin-right:-15px;
- @media (min-width: 768px) {
+ @media (min-width: 576px) {
+	 display: flex;
+	 .col-sm-6 {
+		 width:50%;
+	 }
 	 &-layout {
 		&-imageLeft {
 			flex-direction: row;
@@ -42,8 +45,10 @@
 			box-shadow: none;
 			border-left: none;
 			margin-bottom:0.8em;
-			@media (max-width: 767px) {
-				margin-top: 30px;
+			@media (max-width: 575.98px) {
+				&:first-child{
+					margin-top: 30px;
+				}
 			}
 		&:after {
 			content: "";
