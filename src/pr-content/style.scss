@@ -65,6 +65,11 @@
 			line-height: 2em;
 			margin-bottom:1.7em;
 	  }
+	  &_btn.btn {
+			@media (min-width: 992px) {
+		 	 font-size:16px;
+		 	}
+	  }
 	} // &_colTxt {
 	&_colImg{
 		&_image {

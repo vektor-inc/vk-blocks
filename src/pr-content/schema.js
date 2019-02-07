@@ -31,7 +31,7 @@ export const schema = {
 	},
 	buttonText: {
 		source: 'html',
-		selector: '.vk_brContent_btn',
+		selector: '.vk_button_link_txt',
 		default: '',
 	},
 	buttonTarget: {

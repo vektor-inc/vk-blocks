@@ -21,11 +21,11 @@ export class Fontawesome extends React.Component {
         }
 
         return (
-                <div>
+					<React.Fragment>
                     {iconBefore}
-                    <span className="vk_prContent_btn_txt">{buttonText}</span>
+                    <span className="vk_button_link_txt">{buttonText}</span>
                     {iconAfter}
-                </div>
+          </React.Fragment>
         );
     }
 }

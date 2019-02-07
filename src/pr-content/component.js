@@ -32,7 +32,7 @@ export class Component extends React.Component {
         let for_ = this.props.for_;
 				let containerClass = 'vk_prContent';
 				let btnClass = 'vk_button';
-				let aClass = 'vk_button_link vk_brContent_btn btn btn-block btn-lg';
+				let aClass = 'btn btn-block vk_button_link vk_prContent_colTxt_btn';
 				let aStyle = {};
 
 				if (layout === 'right') {
