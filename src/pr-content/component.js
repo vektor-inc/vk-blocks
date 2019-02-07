@@ -30,15 +30,19 @@ export class Component extends React.Component {
         } = attributes;
         let setAttributes = this.props.setAttributes;
         let for_ = this.props.for_;
-				let containerClass = '';
-				let aClass = '';
+				let containerClass = 'vk_prContent';
+				let btnClass = 'vk_button';
+				let aClass = 'vk_button_link vk_brContent_btn btn btn-block btn-lg';
 				let aStyle = {};
 
-				containerClass = 'vk_button';
-				aClass = `vk_button_link vk_brContent_btn btn btn-block btn-lg`;
+				if (layout === 'right') {
+					containerClass = `${containerClass} vk_prContent-layout-imageRight`;
+				} else {
+					containerClass = `${containerClass} vk_prContent-layout-imageLeft`;
+				}
 
 				if (buttonColorCustom) {
-						containerClass = '${containerClass} vk_button_color-custom';
+						btnClass = `${btnClass} vk_button-color-custom`;
             aClass = `${aClass} btn-primary`;
 
             // 塗り
@@ -72,10 +76,8 @@ export class Component extends React.Component {
         }
 
         return (
-            <div className="vk_prContent">
-                <div className="vk_prContent_container">
-                    <div className={`row ${layout}`}>
-                        <div className="col-sm-6 vk_prContent_col_img">
+            <div className={containerClass}>
+                        <div className="col-sm-6 vk_prContent_colImg">
                             {for_ === 'edit' ?
                                 <MediaUpload
                                     onSelect={(value) => setAttributes({Image: value.sizes.full.url})}
@@ -88,7 +90,7 @@ export class Component extends React.Component {
                                         >
                                             {!Image ? __('Select image', 'vk-blocks') :
                                                 <img
-                                                    className={'vk_prContent_media_image'}
+                                                    className={'vk_prContent_colImg_image'}
                                                     src={Image}
                                                     alt={__('Upload image', 'vk-blocks')}
                                                     style={{border:`1px solid ${ImageBorderColor}`}}
@@ -106,7 +108,7 @@ export class Component extends React.Component {
                                     />
                             }
                         </div>
-                        <div className="col-sm-6 vk_prContent_col_text">
+                        <div className="col-sm-6 vk_prContent_colTxt">
                             {
                                 (() => {
                                     if (for_ === 'edit') {
@@ -114,7 +116,7 @@ export class Component extends React.Component {
                                             <div>
                                                 <RichText
                                                     tagName="h3"
-                                                    className={'vk_prContent_title'}
+                                                    className={'vk_prContent_colTxt_title'}
                                                     onChange={(value) => setAttributes({title: value})}
                                                     value={title}
                                                     placeholder={__('Input title.', 'vk-blocks')}
@@ -122,7 +124,7 @@ export class Component extends React.Component {
                                                 />
                                                 < RichText
                                                     tagName="p"
-																										className={'vk_prContent_text'}
+																										className={'vk_prContent_colTxt_text'}
                                                     onChange={(value) => setAttributes({content: value})}
                                                     value={content}
                                                     placeholder={__('Input content.', 'vk-blocks')}
@@ -136,12 +138,12 @@ export class Component extends React.Component {
                                                 <RichText.Content
                                                     tagName="h3"
                                                     value={title}
-                                                    className={'vk_prContent_title'}
+                                                    className={'vk_prContent_colTxt_title'}
                                                     style={{color: titleColor}}
                                                 />
                                                 <RichText.Content
                                                     tagName="p"
-																										className={'vk_prContent_text'}
+																										className={'vk_prContent_colTxt_text'}
                                                     value={content}
                                                     style={{color: contentColor}}
                                                 />
@@ -155,7 +157,7 @@ export class Component extends React.Component {
                                 (() => {
                                     if (buttonText !== '' && buttonText !== undefined ) {
                                         return (
-																					<div className={containerClass}>
+																					<div className={btnClass}>
                                             <a href={url}
                                                className={aClass}
                                                target={buttonTarget? '_blank':null}
@@ -171,8 +173,6 @@ export class Component extends React.Component {
                                 })()
                             }
                         </div>
-                    </div>
-                </div>
             </div>
         );
     }

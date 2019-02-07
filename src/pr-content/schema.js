@@ -1,14 +1,14 @@
 export const schema = {
 	title: {
 		source: 'html',
-			selector: '.vk_prContent_title',
+			selector: '.vk_prContent_colTxt_title',
 	},
 	titleColor: {
 		type: 'string',
 	},
 	content: {
 		source: 'html',
-			selector: '.vk_prContent_text',
+			selector: '.vk_prContent_colTxt_text',
 	},
 	contentColor: {
 		type: 'string',
@@ -31,7 +31,7 @@ export const schema = {
 	},
 	buttonText: {
 		source: 'html',
-		selector: '.vk_prContent_btn_txt',
+		selector: '.vk_brContent_btn',
 		default: '',
 	},
 	buttonTarget: {
