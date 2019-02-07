@@ -80,13 +80,11 @@ export class Component extends React.Component {
                     style={aStyle}
                     target={buttonTarget? '_blank':null}
                 >
-                    {iconBefore}
-                    <div>
+												{iconBefore}
                         {richText}
+												{iconAfter}
                         {/*サブキャプションが入力された時のみ表示*/}
                         {subCaption && <p className={'vk_button_link_subCaption'}>{subCaption}</p>}
-                    </div>
-                    {iconAfter}
                 </a>
         );
     }
