@@ -101,7 +101,7 @@ export class Component extends React.Component {
                                 :
                                 !Image ? __('Select image', 'vk-blocks') :
                                     <img
-                                        className={'vk_prContent_media_image'}
+                                        className={'vk_prContent_colImg_image'}
                                         src={Image}
                                         alt={__('Upload image', 'vk-blocks')}
                                         style={{border: `1px solid ${ImageBorderColor}`}}
