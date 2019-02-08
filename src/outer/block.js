@@ -70,10 +70,11 @@ registerBlockType('vk-blocks/outer', {
             padding_left_and_right,
             padding_top_and_bottom,
             opacity,
-            upper_tilt_level,
-            lower_tilt_level,
-            tiltBgColor,
-            dividerType
+            upper_level,
+            lower_level,
+			upperDividerBgColor,
+			lowerDividerBgColor,
+			dividerType
         } = attributes;
 
         return (
@@ -195,21 +196,25 @@ registerBlockType('vk-blocks/outer', {
 												/>
 												<RangeControl
 														label={ __( 'Upper Divider Level', 'vk-blocks' ) }
-														value={ upper_tilt_level }
-														onChange={ ( value ) => setAttributes( { upper_tilt_level: toNumber( value, -100, 100 ) } ) }
-														min="-100"
-														max="100"
-												/>
-												<RangeControl
-														label={ __( 'Lower Divider Level', 'vk-blocks' ) }
-														value={ lower_tilt_level }
-														onChange={ ( value ) => setAttributes( { lower_tilt_level: toNumber( value, -100, 100 ) } ) }
+														value={ upper_level }
+														onChange={ ( value ) => setAttributes( { upper_level: toNumber( value, -100, 100 ) } ) }
 														min="-100"
 														max="100"
 												/>
 												<ColorPalette
-														value={tiltBgColor}
-														onChange={(value) => setAttributes({tiltBgColor: value})}
+												value={upperDividerBgColor}
+												onChange={(value) => setAttributes({upperDividerBgColor: value})}
+												/>
+												<RangeControl
+														label={ __( 'Lower Divider Level', 'vk-blocks' ) }
+														value={ lower_level }
+														onChange={ ( value ) => setAttributes( { lower_level: toNumber( value, -100, 100 ) } ) }
+														min="-100"
+														max="100"
+												/>
+												<ColorPalette
+													value={lowerDividerBgColor}
+													onChange={(value) => setAttributes({lowerDividerBgColor: value})}
 												/>
 												</BaseControl>
 										</PanelBody>

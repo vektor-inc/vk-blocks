@@ -36,9 +36,10 @@ export class Component extends React.Component {
             padding_left_and_right,
             padding_top_and_bottom,
             opacity,
-            upper_tilt_level,
-            lower_tilt_level,
-            tiltBgColor,
+            upper_level,
+            lower_level,
+            upperDividerBgColor,
+            lowerDividerBgColor,
             dividerType
         } = this.props.attributes;
 
@@ -87,12 +88,12 @@ export class Component extends React.Component {
         }
 
         //上側セクションの傾き切り替え
-        if (upper_tilt_level) {
+        if (upper_level) {
             whichSideUpper = 'upper';
         }
 
         //下側セクションの傾き切り替え
-        if (lower_tilt_level) {
+        if (lower_level) {
             whichSideLower = 'lower';
         }
 
@@ -112,13 +113,13 @@ export class Component extends React.Component {
                 }}
             >
                     {
-                        componentDivider(upper_tilt_level, tiltBgColor, whichSideUpper,dividerType)
+                        componentDivider(upper_level, upperDividerBgColor, whichSideUpper, dividerType)
                     }
                 <div className={containerClass}>
                     {elm}
                 </div>
                 {
-                    componentDivider(lower_tilt_level, tiltBgColor, whichSideLower,dividerType)
+                    componentDivider(lower_level, lowerDividerBgColor, whichSideLower, dividerType)
                 }
             </div>
         );
