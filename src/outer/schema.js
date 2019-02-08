@@ -35,7 +35,11 @@ export const schema = {
 		type: 'number',
 	default: 0,
 	},
-	tiltBgColor: {
+	upperDividerBgColor: {
+		type: 'string',
+	default: '#fff',
+	},
+	lowerDividerBgColor: {
 		type: 'string',
 	default: '#fff',
 	},
