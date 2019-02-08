@@ -38,7 +38,8 @@ export class Component extends React.Component {
             opacity,
             upper_level,
             lower_level,
-            tiltBgColor,
+            upperDividerBgColor,
+            lowerDividerBgColor,
             dividerType
         } = this.props.attributes;
 
@@ -112,13 +113,13 @@ export class Component extends React.Component {
                 }}
             >
                     {
-                        componentDivider(upper_level, tiltBgColor, whichSideUpper,dividerType)
+                        componentDivider(upper_level, upperDividerBgColor, whichSideUpper, dividerType)
                     }
                 <div className={containerClass}>
                     {elm}
                 </div>
                 {
-                    componentDivider(lower_level, tiltBgColor, whichSideLower,dividerType)
+                    componentDivider(lower_level, lowerDividerBgColor, whichSideLower, dividerType)
                 }
             </div>
         );

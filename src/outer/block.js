@@ -72,8 +72,9 @@ registerBlockType('vk-blocks/outer', {
             opacity,
             upper_level,
             lower_level,
-            tiltBgColor,
-            dividerType
+			upperDividerBgColor,
+			lowerDividerBgColor,
+			dividerType
         } = attributes;
 
         return (
@@ -200,6 +201,10 @@ registerBlockType('vk-blocks/outer', {
 														min="-100"
 														max="100"
 												/>
+												<ColorPalette
+												value={upperDividerBgColor}
+												onChange={(value) => setAttributes({upperDividerBgColor: value})}
+												/>
 												<RangeControl
 														label={ __( 'Lower Divider Level', 'vk-blocks' ) }
 														value={ lower_level }
@@ -208,8 +213,8 @@ registerBlockType('vk-blocks/outer', {
 														max="100"
 												/>
 												<ColorPalette
-														value={tiltBgColor}
-														onChange={(value) => setAttributes({tiltBgColor: value})}
+													value={lowerDividerBgColor}
+													onChange={(value) => setAttributes({lowerDividerBgColor: value})}
 												/>
 												</BaseControl>
 										</PanelBody>

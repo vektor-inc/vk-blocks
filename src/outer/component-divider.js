@@ -1,10 +1,10 @@
-const componentDivider = (level, color, whichSide, dividerType) =>{
+const componentDivider = (level, color, whichSide, dividerType) => {
 
     let sectionPadding;
     let sectionClass;
     let lenderDivider;
 
-    const tiltSectionStyle = (level,color) => {
+    const tiltSectionStyle = (level, color) => {
 
         if (level > 0) {
             return <path
@@ -26,7 +26,7 @@ const componentDivider = (level, color, whichSide, dividerType) =>{
         }
     };
 
-    const curveSectionStyle = (level,color) => {
+    const curveSectionStyle = (level, color) => {
         if (level > 0) {
 
             return <path
@@ -44,7 +44,7 @@ const componentDivider = (level, color, whichSide, dividerType) =>{
         }
     };
 
-    const waveSectionStyle = (level,color) => {
+    const waveSectionStyle = (level, color) => {
 
         if (level > 0) {
 
@@ -52,7 +52,7 @@ const componentDivider = (level, color, whichSide, dividerType) =>{
                 <path
                     d={ `m0,${ 100 - ( level / 2 ) } q20,${ level },40,0 t40,0 t40,0 V100 L0,100 z` }
                     strokeWidth="0"
-                    fill={ color }
+                    fill={color}
                 />
             );
         } else if (level < 0) {
@@ -61,14 +61,14 @@ const componentDivider = (level, color, whichSide, dividerType) =>{
                 <path
                     d={ `m0,${ ( level / 2 ) + 100 } q20,${ level },40,0 t40,0 t40,0 V100 L0,100 z` }
                     strokeWidth="0"
-                    fill={ color }
+                    fill={color}
                 />
             );
         }
 
     };
 
-    const triangleSectionStyle = (level,color) => {
+    const triangleSectionStyle = (level, color) => {
 
         const absLevel = Math.abs(level);
         const DivideAbs4 = absLevel / 4;
@@ -101,7 +101,7 @@ const componentDivider = (level, color, whichSide, dividerType) =>{
     if (dividerType === 'tilt') {
 
         sectionPadding = Math.abs(level);
-        lenderDivider = tiltSectionStyle(level,color);
+        lenderDivider = tiltSectionStyle(level, color);
 
     }else if(dividerType === 'curve') {
 
@@ -110,17 +110,17 @@ const componentDivider = (level, color, whichSide, dividerType) =>{
         } else if (level < 0) {
             sectionPadding = Math.abs(level) * 2;
         }
-        lenderDivider = curveSectionStyle(level,color);
+        lenderDivider = curveSectionStyle(level, color);
 
     }else if(dividerType === 'wave'){
 
         sectionPadding = Math.abs(level);
-        lenderDivider = waveSectionStyle(level,color);
+        lenderDivider = waveSectionStyle(level, color);
 
     }else if(dividerType === 'triangle'){
 
         sectionPadding = Math.abs(level);
-        lenderDivider = triangleSectionStyle(level,color);
+        lenderDivider = triangleSectionStyle(level, color);
 
     }
 
