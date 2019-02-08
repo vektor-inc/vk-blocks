@@ -4,6 +4,7 @@
  */
 import React from "react";
 import {schema} from './schema';
+import {SpacerComponent} from "./component";
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
@@ -77,15 +78,21 @@ registerBlockType('vk-blocks/spacer', {
                                 value={pc}
                                 onChange={(value) => setAttributes({pc: value})}
                             />
+                            <RangeControl
+                                label={__('Tablet', 'vk-blocks')}
+                                value={tablet}
+                                onChange={(value) => setAttributes({tablet: value})}
+                            />
+                            <RangeControl
+                                label={__('Mobile', 'vk-blocks')}
+                                value={mobile}
+                                onChange={(value) => setAttributes({mobile: value})}
+                            />
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
                 <div className="vk_spacer">
-                    <div
-                        style={{height: pc + unit}}
-                    >
-
-                    </div>
+                    <SpacerComponent attributes={attributes}/>
                 </div>
             </Fragment>
         );
