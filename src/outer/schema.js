@@ -27,11 +27,11 @@ export const schema = {
 		type: 'number',
 	default: 0.5,
 	},
-	upper_tilt_level: {
+	upper_level: {
 		type: 'number',
 	default: 0,
 	},
-	lower_tilt_level: {
+	lower_level: {
 		type: 'number',
 	default: 0,
 	},
