@@ -3,15 +3,13 @@
  *
  */
 import React from "react";
-import NewComponent from "./component";
 import {schema} from './schema';
-// import {deprecated} from './deprecated/deprecated';
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
-const {RangeControl, RadioControl, PanelBody, Button, PanelColor, BaseControl} = wp.components;
+const {RangeControl, PanelBody, BaseControl,SelectControl} = wp.components;
 const {Fragment} = wp.element;
-const {RichText, InspectorControls, MediaUpload, ColorPalette} = wp.editor;
+const {InspectorControls} = wp.editor;
 const BlockIcon = 'arrow-down';
 
 /**
@@ -44,20 +42,52 @@ registerBlockType('vk-blocks/spacer', {
      */
     edit({attributes, setAttributes}) {
         const {
-            heading,
-            content,
-            insertImage,
-            arrowFlag,
+            unit,
+            pc,
+            tablet,
+            mobile,
         } = attributes;
 
         return (
-            <div className="vk_spacer">
-                <div>Editor</div>
-                <NewComponent
-                    attributes={attributes}
-                    for_={'edit'}
-                />
-            </div>
+            <Fragment>
+                <InspectorControls>
+                    <PanelBody>
+                        <SelectControl
+                            label={__('Unit Type', 'vk-blocks')}
+                            value={unit}
+                            onChange={(value) => setAttributes({unit: value})}
+                            options={[
+                                {
+                                    value: 'px',
+                                    label: __('px', 'vk-blocks'),
+                                },
+                                {
+                                    value: 'em',
+                                    label: __('em', 'vk-blocks'),
+                                },
+                                {
+                                    value: 'vw',
+                                    label: __('vw', 'vk-blocks'),
+                                }
+                            ]}
+                        />
+                        <BaseControl label={__('Height for each device.', 'vk-blocks')}>
+                            <RangeControl
+                                label={__('PC', 'vk-blocks')}
+                                value={pc}
+                                onChange={(value) => setAttributes({pc: value})}
+                            />
+                        </BaseControl>
+                    </PanelBody>
+                </InspectorControls>
+                <div className="vk_spacer">
+                    <div
+                        style={{height: pc + unit}}
+                    >
+
+                    </div>
+                </div>
+            </Fragment>
         );
     },
 

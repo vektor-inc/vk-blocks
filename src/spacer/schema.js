@@ -1,20 +1,18 @@
 export const schema = {
-    heading: {
+    unit: {
         type: 'string',
-        source: 'html',
-        selector: 'h1',
+        default: 'px',
     },
-    content: {
-        type: 'string',
-        source: 'html',
-        selector: 'p',
-    },
-    bgImage: {
-        type: 'string',
-        default: null,
-    },
-    opacity: {
+    pc: {
         type: 'number',
-        default: 0.5,
+        default: 50,
+    },
+    tablet: {
+        type: 'number',
+        default: 10,
+    },
+    mobile: {
+        type: 'number',
+        default: 10,
     },
 };
