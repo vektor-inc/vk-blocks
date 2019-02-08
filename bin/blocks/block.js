@@ -51,13 +51,25 @@ registerBlockType('vk-blocks/your-block-slug', {
         } = attributes;
 
         return (
-            <div className="vk_your-block-slug">
-                <div>Editor</div>
-                <NewComponent
-                    attributes={attributes}
-                    for_={'edit'}
-                />
-            </div>
+            <Fragment>
+                <InspectorControls>
+                    <PanelBody title={__('Color Setting', 'vk-blocks')}>
+                        <BaseControl label={__('Title Color', 'vk-blocks')}>
+                            <ColorPalette
+                                value={content}
+                                onChange={(value) => setAttributes({content: value})}
+                            />
+                        </BaseControl>
+                    </PanelBody>
+                </InspectorControls>
+                <div className="vk_spacer">
+                    <div>Editor</div>
+                    <NewComponent
+                        attributes={attributes}
+                        for_={'edit'}
+                    />
+                </div>
+            </Fragment>
         );
     },
 
