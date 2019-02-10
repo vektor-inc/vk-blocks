@@ -1,5 +1,28 @@
 /*-------------------------------------------*/
 /* CSS
 /*-------------------------------------------*/
+@media (max-width: 576px) {
+  .vk_spacer #pc {
+    display: none; }
+  .vk_spacer #tablet {
+    display: none; }
+  .vk_spacer #mobile {
+    display: block; } }
+@media (min-width: 577px) and (max-width: 768px) {
+  .vk_spacer #pc {
+    display: none; }
+  .vk_spacer #tablet {
+    display: block; }
+  .vk_spacer #mobile {
+    display: none; } }
+@media (min-width: 769px) {
+  .vk_spacer #pc {
+    display: block; }
+  .vk_spacer #tablet {
+    display: none; }
+  .vk_spacer #mobile {
+    display: none; } }
+.components-range-control__slider {
+  display: none; }
 
 /*# sourceMappingURL=style.css.map */
