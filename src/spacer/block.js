@@ -91,9 +91,7 @@ registerBlockType('vk-blocks/spacer', {
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
-                <div className="vk_spacer">
-                    <SpacerComponent attributes={attributes}/>
-                </div>
+                <SpacerComponent attributes={attributes}/>
             </Fragment>
         );
     },
@@ -107,15 +105,8 @@ registerBlockType('vk-blocks/spacer', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     save({attributes}) {
-
         return (
-            <div className="vk_spacer">
-                <div>Front</div>
-                <NewComponent
-                    attributes={attributes}
-                    for_={'save'}
-                />
-            </div>
+            <SpacerComponent attributes={attributes}/>
         );
     },
 
