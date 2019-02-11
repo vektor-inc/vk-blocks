@@ -496,3 +496,39 @@ msgstr ""
 #: src/pr-content/component.js:130
 msgid "Input content."
 msgstr ""
+
+#: src/spacer/block.js:31
+msgid "Spacer"
+msgstr ""
+
+#: src/spacer/block.js:57
+msgid "Unit Type"
+msgstr ""
+
+#: src/spacer/block.js:63
+msgid "px"
+msgstr ""
+
+#: src/spacer/block.js:67
+msgid "em"
+msgstr ""
+
+#: src/spacer/block.js:71
+msgid "vw"
+msgstr ""
+
+#: src/spacer/block.js:75
+msgid "Height for each device."
+msgstr ""
+
+#: src/spacer/block.js:77
+msgid "PC"
+msgstr ""
+
+#: src/spacer/block.js:82
+msgid "Tablet"
+msgstr ""
+
+#: src/spacer/block.js:87
+msgid "Mobile"
+msgstr ""
