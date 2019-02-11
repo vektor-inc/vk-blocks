@@ -557,6 +557,40 @@ $color_dark:#343a40;
 /*-------------------------------------------*/
 /* CSS
 /*-------------------------------------------*/
+
+@mixin reset() {
+	background: none;
+	border:none;
+	border-radius: 0;
+	padding:0;
+	&:after {
+		border:none;
+	}
+}
+
+.is-style-vk_heading-style {
+	&-plain {
+		@include reset;
+	}
+	&-plainNoMargin {
+		@include reset;
+		margin:0;
+	}
+	&-borderBottomSolidNormal {
+		@include reset;
+		border-bottom:1px solid #000;
+		padding-bottom:5px;
+	}
+	&-borderBottomSolidHeavy {
+		@include reset;
+		border-bottom:2px solid #000;
+		padding-bottom:5px;
+	}
+}
+
+/*-------------------------------------------*/
+/* CSS
+/*-------------------------------------------*/
 $media-sm-up : 576px;
 $media-md-up : 768px;
 $media-lg-up : 992px;

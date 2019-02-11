@@ -278,7 +278,19 @@ msgid "Regular"
 msgstr ""
 
 #: src/heading/block.js:6
-msgid "Stripes"
+msgid "Plain"
+msgstr ""
+
+#: src/heading/block.js:7
+msgid "Plain (No margin)"
+msgstr ""
+
+#: src/heading/block.js:8
+msgid "Border bottom"
+msgstr ""
+
+#: src/heading/block.js:9
+msgid "Border bottom heavy"
 msgstr ""
 
 #: src/outer/block.js:107
