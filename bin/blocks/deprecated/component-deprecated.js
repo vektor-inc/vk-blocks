@@ -1,6 +1,6 @@
 import React from 'react';
 
-export class NewComponent extends React.Component {
+export class ComponentDeprecated extends React.Component {
 
     render() {
 
@@ -14,7 +14,7 @@ export class NewComponent extends React.Component {
         let for_ = this.props.for_;
 
         return (
-            <div className={"vk_your-block-slug"}>hello</div>
+            <div className={"vk_your-block-slug"}>Deprecated</div>
         );
     }
 }
