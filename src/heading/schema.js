@@ -5,6 +5,12 @@ export const schema = {
         selector: 'h1,h2,h3,h4,h5,h6',
         default: '',
     },
+    subText: {
+        type: 'string',
+        source: 'html',
+        selector: 'p',
+        default: '',
+    },
     level: {
         type: 'number',
         default: 2,
