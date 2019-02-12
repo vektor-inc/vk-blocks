@@ -4,15 +4,15 @@
 
 @mixin switchVisibility($pc,$tablet,$mobile) {
   .vk_spacer {
-    #pc {
+    .vk_spacer-display-pc {
       display: $pc;
     }
 
-    #tablet {
+    .vk_spacer-display-tablet {
       display: $tablet;
     }
 
-    #mobile {
+    .vk_spacer-display-mobile {
       display: $mobile;
     }
   }

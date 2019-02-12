@@ -2,25 +2,25 @@
 /* CSS
 /*-------------------------------------------*/
 @media (max-width: 576px) {
-  .vk_spacer #pc {
+  .vk_spacer .vk_spacer-display-pc {
     display: none; }
-  .vk_spacer #tablet {
+  .vk_spacer .vk_spacer-display-tablet {
     display: none; }
-  .vk_spacer #mobile {
+  .vk_spacer .vk_spacer-display-mobile {
     display: block; } }
 @media (min-width: 577px) and (max-width: 768px) {
-  .vk_spacer #pc {
+  .vk_spacer .vk_spacer-display-pc {
     display: none; }
-  .vk_spacer #tablet {
+  .vk_spacer .vk_spacer-display-tablet {
     display: block; }
-  .vk_spacer #mobile {
+  .vk_spacer .vk_spacer-display-mobile {
     display: none; } }
 @media (min-width: 769px) {
-  .vk_spacer #pc {
+  .vk_spacer .vk_spacer-display-pc {
     display: block; }
-  .vk_spacer #tablet {
+  .vk_spacer .vk_spacer-display-tablet {
     display: none; }
-  .vk_spacer #mobile {
+  .vk_spacer .vk_spacer-display-mobile {
     display: none; } }
 .components-range-control__slider {
   display: none; }
