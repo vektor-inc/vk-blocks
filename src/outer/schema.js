@@ -17,7 +17,7 @@ export const schema = {
 	},
 	padding_left_and_right: {
 		type: 'string',
-	default: '1',
+	default: '0',
 	},
 	padding_top_and_bottom: {
 		type: 'string',

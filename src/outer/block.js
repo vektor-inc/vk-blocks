@@ -150,11 +150,11 @@ registerBlockType('vk-blocks/outer', {
 														onChange={(value) => setAttributes({outerWidth: value})}
 												/>
 												<RadioControl
-														label={__('Padding (left and right)', 'vk-blocks')}
+														label={__('Contents area padding (left and right)', 'vk-blocks')}
 														selected={padding_left_and_right}
 														options={[
-																{label: __('Use default padding', 'vk-blocks'), value: '1'},
-																{label: __('Do not use default padding (When it is full width etc.).', 'vk-blocks'), value: '0'}
+																{label: __('Do not use contents area default padding (When case of full width etc.).', 'vk-blocks'), value: '0'},
+																{label: __('Use contents area default padding (When case of not full width and use background etc.).', 'vk-blocks'), value: '1'}
 														]}
 														onChange={(value) => setAttributes({padding_left_and_right: value})}
 												/>
