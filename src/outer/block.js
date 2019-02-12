@@ -4,14 +4,14 @@
  */
 import React from "react";
 import {Component} from "./component";
-import {schema} from './schema.js';
+import {schema} from './schema';
 import toNumber from "../_helper/to-number";
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
-const {RangeControl, RadioControl, PanelBody, Button, PanelColor, BaseControl,SelectControl} = wp.components;
+const {RangeControl, RadioControl, PanelBody, Button, BaseControl,SelectControl} = wp.components;
 const {Fragment} = wp.element;
-const {RichText, InspectorControls, MediaUpload, ColorPalette, InnerBlocks} = wp.editor;
+const {InspectorControls, MediaUpload, ColorPalette} = wp.editor;
 const BlockIcon = (
 	<svg xmlns="http://www.w3.org/2000/svg" width="576" height="512" viewBox="0 0 576 512">
 	<path d="M288,381c50.7,0,92-41.3,92-92s-41.3-92-92-92s-92,41.3-92,92S237.3,381,288,381z M288,227c34.2,0,62,27.8,62,62
