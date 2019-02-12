@@ -19,6 +19,12 @@ export const schema = {
         type: 'string',
         default: '#000000',
     },
+    titleSize: {
+        type: 'string',
+    },
+    subTextSize: {
+        type: 'string',
+    },
     level: {
         type: 'number',
         default: 2,

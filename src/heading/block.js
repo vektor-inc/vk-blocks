@@ -48,7 +48,7 @@ registerBlockType('vk-blocks/heading', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     edit({attributes, setAttributes}) {
-        const {title, subText,titleColor,subTextColor,level,} = attributes;
+        const {title, subText,titleColor,subTextColor,titleSize,subTextSize,level,} = attributes;
         const tagName = 'h' + level;
 
         return (
@@ -64,6 +64,11 @@ registerBlockType('vk-blocks/heading', {
                             value={titleColor}
                             onChange={(value) => setAttributes({titleColor: value})}
                         />
+                        <RangeControl
+                            value={titleSize}
+                            onChange={(value) => {setAttributes({titleSize: value});
+                            }}
+                        />
                     </PanelBody>
                     <PanelBody title={ __( 'Sub Text Settings' ) }>
                         <ColorPalette
@@ -77,7 +82,7 @@ registerBlockType('vk-blocks/heading', {
                     tagName={tagName}
                     value={title}
                     onChange={(value) => setAttributes({title: value})}
-                    style={{color:titleColor}}
+                    style={{color:titleColor, fontSize:titleSize+'px'}}
                     className={`vk_heading_title-style-`}
                     placeholder={ __( 'Input title…' ) }
                 />
