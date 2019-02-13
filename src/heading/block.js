@@ -3,8 +3,8 @@
  *
  */
 import React from "react";
-import HeadingToolbar from './heading-toolbar';
 import {schema} from './schema';
+import HeadingToolbar from './heading-toolbar';
 
 // import YourComponent from "./component.js";
 const {__} = wp.i18n; // Import __() from wp.i18n
@@ -132,7 +132,7 @@ registerBlockType('vk-blocks/heading', {
                         tagName={'p'}
                         value={subText}
                         onChange={(value) => setAttributes({subText: value})}
-                        style={{color: subTextColor}} getComputedStyle
+                        style={{color: subTextColor,fontSize: subTextSize + 'px'}}
                         className={`vk_heading_subtext-style-${titleStyle}`}
                         placeholder={__('Input sub text…')}
                 />
@@ -150,14 +150,24 @@ registerBlockType('vk-blocks/heading', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     save({attributes}) {
-        const {title, level} = attributes;
+        const {level, title, subText, titleColor, subTextColor, titleSize, subTextSize, titleStyle} = attributes;
         const tagName = 'h' + level;
 
         return (
-            <RichText.Content
-                tagName={tagName}
-                value={title}
-            />
+            <div className={`vk_heading vk_heading-style-${titleStyle}`}>
+                <RichText.Content
+                    tagName={tagName}
+                    value={title}
+                    style={{color: titleColor, fontSize: titleSize + 'px'}}
+                    className={`vk_heading_title-style-${titleStyle}`}
+                />
+                <RichText.Content
+                    tagName={'p'}
+                    value={subText}
+                    style={{color: subTextColor,fontSize: subTextSize + 'px'}}
+                    className={`vk_heading_subtext-style-${titleStyle}`}
+                />
+            </div>
         );
     },
 });
