@@ -25,15 +25,14 @@ export const schema = {
     },
     subTextSize: {
         type: 'string',
+        default: '16',
     },
     level: {
         type: 'number',
         default: 2,
     },
-    align: {
+    titleStyle: {
         type: 'string',
+        default: 'default',
     },
-    placeholder: {
-        type: 'string',
-    }
 };

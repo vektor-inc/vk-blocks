@@ -48,7 +48,7 @@ registerBlockType('vk-blocks/heading', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     edit({attributes, setAttributes}) {
-        const {title, subText, titleColor, subTextColor, titleSize, subTextSize, level} = attributes;
+        const {level, title, subText, titleColor, subTextColor, titleSize, subTextSize, titleStyle} = attributes;
         const tagName = 'h' + level;
 
         let setTitleFontSize = (newLevel) => {
@@ -101,24 +101,40 @@ registerBlockType('vk-blocks/heading', {
                             value={subTextColor}
                             onChange={(value) => setAttributes({subTextColor: value})}
                         />
+                        <RangeControl
+                            value={subTextSize}
+                            onChange={(value) => {setAttributes({subTextSize: value});
+                            }}
+                        />
+                    </PanelBody>
+                    <PanelBody title={__('Style Settings')}>
+                        <RadioControl
+                            label={__('Button Position:', 'vk-blocks')}
+                            selected={titleStyle}
+                            options={[
+                                {label: __('Default', 'vk-blocks'), value: 'default'},
+                                {label: __('Plane', 'vk-blocks'), value: 'plane'}
+                            ]}
+                            onChange={(value) => setAttributes({titleStyle: value})}
+                        />
                     </PanelBody>
                 </InspectorControls>
-                <div className={`vk_heading vk_heading-style-`}>
+                <div className={`vk_heading vk_heading-style-${titleStyle}`}>
                     <RichText
-                    tagName={tagName}
-                    value={title}
-                    onChange={(value) => setAttributes({title: value})}
-                    style={{color:titleColor, fontSize:titleSize+'px'}}
-                    className={`vk_heading_title-style-`}
-                    placeholder={ __( 'Input title…' ) }
-                />
-                <RichText
-                    tagName={'p'}
-                    value={subText}
-                    onChange={(value) => setAttributes({subText: value})}
-                    style={{color: subTextColor}} getComputedStyle
-                    className={`vk_heading_subtext-style-`}
-                    placeholder={ __( 'Input sub text…' ) }
+                        tagName={tagName}
+                        value={title}
+                        onChange={(value) => setAttributes({title: value})}
+                        style={{color: titleColor, fontSize: titleSize + 'px'}}
+                        className={`vk_heading_title-style-${titleStyle}`}
+                        placeholder={__('Input title…')}
+                    />
+                    <RichText
+                        tagName={'p'}
+                        value={subText}
+                        onChange={(value) => setAttributes({subText: value})}
+                        style={{color: subTextColor}} getComputedStyle
+                        className={`vk_heading_subtext-style-${titleStyle}`}
+                        placeholder={__('Input sub text…')}
                 />
                 </div>
             </Fragment>
