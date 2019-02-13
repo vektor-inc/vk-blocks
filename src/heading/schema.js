@@ -21,6 +21,7 @@ export const schema = {
     },
     titleSize: {
         type: 'string',
+        default: '24',
     },
     subTextSize: {
         type: 'string',

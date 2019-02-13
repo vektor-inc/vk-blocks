@@ -51,15 +51,41 @@ registerBlockType('vk-blocks/heading', {
         const {title, subText, titleColor, subTextColor, titleSize, subTextSize, level} = attributes;
         const tagName = 'h' + level;
 
+        let setTitleFontSize = (newLevel) => {
+
+            setAttributes({level: newLevel});
+
+            switch (newLevel) {
+                case 1:
+                    setAttributes({titleSize: 36});
+                    break;
+                case 2:
+                    setAttributes({titleSize: 24});
+                    break;
+                case 3:
+                    setAttributes({titleSize: 24});
+                    break;
+                case 4:
+                    setAttributes({titleSize: 20});
+                    break;
+                case 5:
+                    setAttributes({titleSize: 18});
+                    break;
+                case 6:
+                    setAttributes({titleSize: 16});
+                    break;
+            }
+        };
+
         return (
             <Fragment>
                 <BlockControls>
-                    <HeadingToolbar minLevel={ 2 } maxLevel={ 5 } selectedLevel={ level } onChange={ ( newLevel ) => setAttributes( { level: newLevel } ) } setAttributes={setAttributes} />
+                    <HeadingToolbar minLevel={2} maxLevel={5} selectedLevel={level} onChange={setTitleFontSize}/>
                 </BlockControls>
                 <InspectorControls>
-                    <PanelBody title={ __( 'Heading Settings' ) }>s
+                    <PanelBody title={ __( 'Heading Settings' ) }>
                         <p>{ __( 'Level' ) }</p>
-                        <HeadingToolbar minLevel={ 1 } maxLevel={ 7 } selectedLevel={ level } onChange={ ( newLevel ) => setAttributes( { level: newLevel } ) } setAttributes={setAttributes}/>
+                        <HeadingToolbar minLevel={1} maxLevel={7} selectedLevel={level} onChange={setTitleFontSize}/>
                         <ColorPalette
                             value={titleColor}
                             onChange={(value) => setAttributes({titleColor: value})}

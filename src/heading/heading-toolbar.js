@@ -23,11 +23,7 @@ class HeadingToolbar extends Component {
 
 
 	render() {
-		const {minLevel, maxLevel, selectedLevel, onChange,setAttributes} = this.props;
-
-		if (selectedLevel === 2) {
-			setAttributes({titleSize: 50});
-		}
+		const {minLevel, maxLevel, selectedLevel, onChange} = this.props;
 
 		return (
 			<Toolbar
