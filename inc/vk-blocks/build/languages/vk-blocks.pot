@@ -327,11 +327,17 @@ msgid "Full Wide"
 msgstr ""
 
 #: src/outer/block.js:153
-msgid "Padding (left and right)"
+msgid "Contents area padding (left and right)"
+msgstr ""
+
+#: src/outer/block.js:156
+msgid "Do not use contents area default padding (When case of full width etc.)."
 msgstr ""
 
 #: src/outer/block.js:157
-msgid "Do not use default padding (When it is full width etc.)."
+msgid ""
+"Use contents area default padding (When case of not full width and use "
+"background etc.)."
 msgstr ""
 
 #: src/outer/block.js:162

@@ -4,14 +4,14 @@
  */
 import React from "react";
 import {Component} from "./component";
-import {schema} from './schema.js';
+import {schema} from './schema';
 import toNumber from "../_helper/to-number";
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
-const {RangeControl, RadioControl, PanelBody, Button, PanelColor, BaseControl,SelectControl} = wp.components;
+const {RangeControl, RadioControl, PanelBody, Button, BaseControl,SelectControl} = wp.components;
 const {Fragment} = wp.element;
-const {RichText, InspectorControls, MediaUpload, ColorPalette, InnerBlocks} = wp.editor;
+const {InspectorControls, MediaUpload, ColorPalette} = wp.editor;
 const BlockIcon = (
 	<svg xmlns="http://www.w3.org/2000/svg" width="576" height="512" viewBox="0 0 576 512">
 	<path d="M288,381c50.7,0,92-41.3,92-92s-41.3-92-92-92s-92,41.3-92,92S237.3,381,288,381z M288,227c34.2,0,62,27.8,62,62
@@ -150,11 +150,11 @@ registerBlockType('vk-blocks/outer', {
 														onChange={(value) => setAttributes({outerWidth: value})}
 												/>
 												<RadioControl
-														label={__('Padding (left and right)', 'vk-blocks')}
+														label={__('Contents area padding (left and right)', 'vk-blocks')}
 														selected={padding_left_and_right}
 														options={[
-																{label: __('Use default padding', 'vk-blocks'), value: '1'},
-																{label: __('Do not use default padding (When it is full width etc.).', 'vk-blocks'), value: '0'}
+																{label: __('Do not use contents area default padding (When case of full width etc.).', 'vk-blocks'), value: '0'},
+																{label: __('Use contents area default padding (When case of not full width and use background etc.).', 'vk-blocks'), value: '1'}
 														]}
 														onChange={(value) => setAttributes({padding_left_and_right: value})}
 												/>

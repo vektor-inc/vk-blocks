@@ -52,6 +52,7 @@ export class Component extends React.Component {
         let containerClass;
         let whichSideUpper;
         let whichSideLower;
+        let bgStyle;
 
         //幅のクラス切り替え
         classWidth = ` vk_outer-width-${outerWidth}`;
@@ -105,11 +106,18 @@ export class Component extends React.Component {
             containerClass = 'vk_outer_container';
         }
 
+        //背景画像の有り無しでstyleを切り替え
+        if(bgImage){
+            bgStyle = `linear-gradient(${bgColor}, ${bgColor}), url(${bgImage})`;
+        }else {
+            bgStyle = `linear-gradient(${bgColor}, ${bgColor})`;
+        }
+
         return (
             <div
                 className={ 'vk_outer' + classWidth + classPaddingLR + classPaddingVertical + classBgPosition }
                 style={{
-                    background: `linear-gradient(${bgColor}, ${bgColor}), url(${bgImage})`,
+                    background: bgStyle,
                 }}
             >
                     {
