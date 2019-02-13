@@ -83,8 +83,8 @@ registerBlockType('vk-blocks/heading', {
                     <HeadingToolbar minLevel={2} maxLevel={5} selectedLevel={level} onChange={setTitleFontSize}/>
                 </BlockControls>
                 <InspectorControls>
-                    <PanelBody title={ __( 'Heading Settings' ) }>
-                        <p>{ __( 'Level' ) }</p>
+                    <PanelBody title={ __( 'Heading Settings', 'vk-blocks' ) }>
+                        <p>{ __( 'Level', 'vk-blocks' ) }</p>
                         <HeadingToolbar minLevel={1} maxLevel={7} selectedLevel={level} onChange={setTitleFontSize}/>
                         <ColorPalette
                             value={titleColor}
@@ -96,7 +96,7 @@ registerBlockType('vk-blocks/heading', {
                             }}
                         />
                     </PanelBody>
-                    <PanelBody title={ __( 'Sub Text Settings' ) }>
+                    <PanelBody title={ __( 'Sub Text Settings', 'vk-blocks' ) }>
                         <ColorPalette
                             value={subTextColor}
                             onChange={(value) => setAttributes({subTextColor: value})}
@@ -107,7 +107,7 @@ registerBlockType('vk-blocks/heading', {
                             }}
                         />
                     </PanelBody>
-                    <PanelBody title={__('Style Settings')}>
+                    <PanelBody title={__('Style Settings', 'vk-blocks')}>
                         <RadioControl
                             label={__('Button Position:', 'vk-blocks')}
                             selected={titleStyle}
@@ -126,7 +126,7 @@ registerBlockType('vk-blocks/heading', {
                         onChange={(value) => setAttributes({title: value})}
                         style={{color: titleColor, fontSize: titleSize + 'px'}}
                         className={`vk_heading_title-style-${titleStyle}`}
-                        placeholder={__('Input title…')}
+                        placeholder={__('Input title…', 'vk-blocks')}
                     />
                     <RichText
                         tagName={'p'}
@@ -134,7 +134,7 @@ registerBlockType('vk-blocks/heading', {
                         onChange={(value) => setAttributes({subText: value})}
                         style={{color: subTextColor,fontSize: subTextSize + 'px'}}
                         className={`vk_heading_subtext-style-${titleStyle}`}
-                        placeholder={__('Input sub text…')}
+                        placeholder={__('Input sub text…', 'vk-blocks')}
                 />
                 </div>
             </Fragment>
