@@ -1,5 +1,38 @@
 /*-------------------------------------------*/
 /* CSS
 /*-------------------------------------------*/
+.is-style-vk_heading-style-plain {
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0; }
+  .is-style-vk_heading-style-plain:after {
+    border: none; }
+.is-style-vk_heading-style-plainNoMargin {
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0; }
+  .is-style-vk_heading-style-plainNoMargin:after {
+    border: none; }
+.is-style-vk_heading-style-borderBottomSolidNormal {
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  border-bottom: 1px solid #000;
+  padding-bottom: 5px; }
+  .is-style-vk_heading-style-borderBottomSolidNormal:after {
+    border: none; }
+.is-style-vk_heading-style-borderBottomSolidHeavy {
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  border-bottom: 2px solid #000;
+  padding-bottom: 5px; }
+  .is-style-vk_heading-style-borderBottomSolidHeavy:after {
+    border: none; }
 
 /*# sourceMappingURL=style.css.map */
