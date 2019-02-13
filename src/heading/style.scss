@@ -1,3 +1,8 @@
 /*-------------------------------------------*/
 /* CSS
 /*-------------------------------------------*/
+//Gutenberg編集画面のRangeControlのレイアウト調整
+.components-base-control__field{
+  width: 100%;
+  padding: 20px 0;
+}
