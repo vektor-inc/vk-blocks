@@ -48,18 +48,18 @@ registerBlockType('vk-blocks/heading', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     edit({attributes, setAttributes}) {
-        const {title, subText,titleColor,subTextColor,titleSize,subTextSize,level,} = attributes;
+        const {title, subText, titleColor, subTextColor, titleSize, subTextSize, level} = attributes;
         const tagName = 'h' + level;
 
         return (
             <Fragment>
                 <BlockControls>
-                    <HeadingToolbar minLevel={ 2 } maxLevel={ 5 } selectedLevel={ level } onChange={ ( newLevel ) => setAttributes( { level: newLevel } ) } />
+                    <HeadingToolbar minLevel={ 2 } maxLevel={ 5 } selectedLevel={ level } onChange={ ( newLevel ) => setAttributes( { level: newLevel } ) } setAttributes={setAttributes} />
                 </BlockControls>
                 <InspectorControls>
-                    <PanelBody title={ __( 'Heading Settings' ) }>
+                    <PanelBody title={ __( 'Heading Settings' ) }>s
                         <p>{ __( 'Level' ) }</p>
-                        <HeadingToolbar minLevel={ 1 } maxLevel={ 7 } selectedLevel={ level } onChange={ ( newLevel ) => setAttributes( { level: newLevel } ) } />
+                        <HeadingToolbar minLevel={ 1 } maxLevel={ 7 } selectedLevel={ level } onChange={ ( newLevel ) => setAttributes( { level: newLevel } ) } setAttributes={setAttributes}/>
                         <ColorPalette
                             value={titleColor}
                             onChange={(value) => setAttributes({titleColor: value})}
@@ -90,7 +90,7 @@ registerBlockType('vk-blocks/heading', {
                     tagName={'p'}
                     value={subText}
                     onChange={(value) => setAttributes({subText: value})}
-                    style={{color:subTextColor}}
+                    style={{color: subTextColor}} getComputedStyle
                     className={`vk_heading_subtext-style-`}
                     placeholder={ __( 'Input sub text…' ) }
                 />

@@ -1,3 +1,4 @@
+import React from "react";
 
 /**
  * WordPress dependenciess
@@ -9,7 +10,7 @@ const { Component } = wp.element;
 const { Toolbar } = wp.components;
 
 class HeadingToolbar extends Component {
-	createLevelControl( targetLevel, selectedLevel, onChange ) {
+	createLevelControl(targetLevel, selectedLevel, onChange) {
 		return {
 			icon: 'heading',
 			// translators: %s: heading level e.g: "1", "2", "3"
@@ -20,10 +21,17 @@ class HeadingToolbar extends Component {
 		};
 	}
 
+
 	render() {
-		const { minLevel, maxLevel, selectedLevel, onChange } = this.props;
+		const {minLevel, maxLevel, selectedLevel, onChange,setAttributes} = this.props;
+
+		if (selectedLevel === 2) {
+			setAttributes({titleSize: 50});
+		}
+
 		return (
-				<Toolbar controls={ range( minLevel, maxLevel ).map( ( index ) => this.createLevelControl( index, selectedLevel, onChange ) ) } />
+			<Toolbar
+				controls={range(minLevel, maxLevel).map((index) => this.createLevelControl(index, selectedLevel, onChange))}/>
 		);
 	}
 }
