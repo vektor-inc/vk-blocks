@@ -6,7 +6,7 @@
   "scripts": {
     "watch": "gulp watch",
     "build": "gulp build && npm run translate",
-    "translate": "npx po2json ./inc/vk-blocks/build/languages/vk-blocks-ja.po ./inc/vk-blocks/build/languages/vk-blocks-ja-vk-blocks-buid-js.json -f jed",
+    "translate": "npx po2json ./inc/vk-blocks/build/languages/vk-blocks-ja.po ./inc/vk-blocks/build/languages/vk-blocks-ja-vk-blocks-build-js.json -f jed",
     "gulp": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

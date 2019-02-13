@@ -14,6 +14,15 @@ h1:first-child.vk_prBlocks_item_title{
 	margin-top:0.9em;
 }
 
+/* メインのカラム幅 */
+.wp-block,
+.editor-block-list__layout > .wp-block {
+		max-width:calc( 100% - 20% );
+		.wp-block {
+			max-width:100%;
+		}
+}
+
 .alert{
 
   padding: 1em;
@@ -321,33 +330,44 @@ h1:first-child.vk_prBlocks_item_title{
 
 .vk_button{
 	margin: 5px 0;
-}
-.vk_button-color-custom{
-	a:hover {
-		opacity: 0.8;
-		box-shadow: 0 0 0 0.2rem rgba(171, 184, 195, .25) ;
+	&-color-custom{
+		a:hover{
+			opacity: 0.8;
+			box-shadow: 0 0 0 0.2rem rgba(171, 184, 195, .25) ;
+		}
 	}
-}
-.vk_button-align-left{
-	text-align: left;
-}
-.vk_button-align-center{
-	text-align: center;
-}
-.vk_button-align-right{
-	text-align: right;
-}
-.vk_button-align-block{
-	display: block;
-}
-.vk_button_link_before { margin-right: 0.7rem; }
-.vk_button_link_after { margin-left: 0.7rem; }
-.vk_button_link_txt { display: inline; }
-.vk_button {
-	.editor-rich-text {
+	&-align{
+		&-left{
+			text-align: left;
+		}
+		&-center{
+			text-align: center;
+		}
+		&-right{
+			text-align: right;
+		}
+		&-block{
+			display: block;
+		}
+	}
+	&_link{
+		&.btn { // .btn指定がないと管理画面で標準の .btn の指定に負ける
+			padding-top: .7em;
+			padding-bottom: .6em;
+		}
+		&_before{ margin-right: 0.7rem; }
+		&_after{ margin-left: 0.7rem; }
+		&_subCaption{
+			display:block; overflow:hidden;
+			margin: 0;
+			font-size: 80%;
+		}
+	}
+	.editor-rich-text{
 		display: inline-block;
 	}
 }
+
 
 /*-------------------------------------------*/
 /*	Lightnig がまだ Bootstrap4 でないため手動で追加したクラス
@@ -365,33 +385,33 @@ $color_dark:#343a40;
 .btn.btn-primary{
 	color:#fff;
 }
-.btn.btn-secondary {
+.btn.btn-secondary{
 	color:#fff;
 	background-color: $color_secondary;
 }
-.btn.btn-success {
+.btn.btn-success{
 	color:#fff;
 }
-.btn.btn-info {
+.btn.btn-info{
 	color:#fff;
 }
-.btn.btn-warning {
+.btn.btn-warning{
 	color:#fff;
 }
-.btn.btn-danger {
+.btn.btn-danger{
 	color:#fff;
 }
-.btn.btn-light {
+.btn.btn-light{
 	color:#fff;
 	background-color: $color_light;
 }
-.btn.btn-dark {
+.btn.btn-dark{
 	color:#fff;
 	background-color: $color_dark;
 }
 
 .btn.btn-secondary:hover,
-.btn.btn-dark:hover {
+.btn.btn-dark:hover{
 	color:#fff;
 }
 
@@ -402,43 +422,43 @@ $color_dark:#343a40;
 	background: none;
 	box-shadow: none;
 }
-.btn.btn-outline-secondary {
+.btn.btn-outline-secondary{
 	color: $color_secondary;
 	border:1px solid $color_secondary;
 	background: none;
 	box-shadow: none;
 }
-.btn.btn-outline-success {
+.btn.btn-outline-success{
 	color: $color_success;
 	border:1px solid $color_success;
 	background: none;
 	box-shadow: none;
 }
-.btn.btn-outline-info {
+.btn.btn-outline-info{
 	color: $color_info;
 	border:1px solid $color_info;
 	background: none;
 	box-shadow: none;
 }
-.btn.btn-outline-warning {
+.btn.btn-outline-warning{
 	color: $color_warning;
 	border:1px solid $color_warning;
 	background: none;
 	box-shadow: none;
 }
-.btn.btn-outline-danger {
+.btn.btn-outline-danger{
 	color: $color_danger;
 	border:1px solid $color_danger;
 	background: none;
 	box-shadow: none;
 }
-.btn.btn-outline-light {
+.btn.btn-outline-light{
 	color: $color_light;
 	border:1px solid $color_light;
 	background: none;
 	box-shadow: none;
 }
-.btn.btn-outline-dark {
+.btn.btn-outline-dark{
 	color: $color_dark;
 	border:1px solid $color_dark;
 	background: none;
@@ -451,39 +471,56 @@ $color_dark:#343a40;
 	color:#fff;
 }
 .btn.btn-outline-secondary:hover,
-.btn.btn-outline-secondary:focus {
+.btn.btn-outline-secondary:focus{
 	background: $color_secondary;
 	color:#fff;
 }
 .btn.btn-outline-success:hover,
-.btn.btn-outline-success:focus {
+.btn.btn-outline-success:focus{
 	background: $color_success;
 	color:#fff;
 }
 .btn.btn-outline-info:hover,
-.btn.btn-outline-info:focus {
+.btn.btn-outline-info:focus{
 	background: $color_info;
 	color:#fff;
 }
 .btn.btn-outline-warning:hover,
-.btn.btn-outline-warning:focus {
+.btn.btn-outline-warning:focus{
 	background: $color_warning;
 	color:#fff;
 }
 .btn.btn-outline-danger:hover,
-.btn.btn-outline-danger:focus {
+.btn.btn-outline-danger:focus{
 	background: $color_danger;
 	color:#fff;
 }
 .btn.btn-outline-light:hover,
-.btn.btn-outline-light:focus {
+.btn.btn-outline-light:focus{
 	background: $color_light;
 	color:#fff;
 }
 .btn.btn-outline-dark:hover,
-.btn.btn-outline-dark:focus {
+.btn.btn-outline-dark:focus{
 	background: $color_dark;
 	color:#fff;
+}
+
+/*      .qaItem
+/*-------------------------------------------*/
+.vk_faq { display:block; overflow:hidden;border-bottom:1px dotted #ccc; padding:0px 0px 25px; margin:25px 0px; width:100%; position: relative; }
+.vk_faq_title,
+.vk_faq_content {
+	border:none;padding-left: 35px;
+	&:before {
+		position: absolute;left:0;font-size:24px;line-height: 105%;
+	}
+}
+.vk_faq_title { margin-bottom:15px;font-size:18px;font-weight:700;
+  &:before { font-family:"areal";content:"Q ";color:#e50000; }
+}
+.vk_faq_content { margin:0px;
+  &:before { content:"A ";color:#337ab7;font-family: "" }
 }
 
 //*      .flowBox
@@ -517,22 +554,147 @@ $color_dark:#343a40;
 	box-sizing: border-box;
 }
 
-/*      .qaItem
 /*-------------------------------------------*/
-.vk_faq { display:block; overflow:hidden;border-bottom:1px dotted #ccc; padding:0px 0px 25px; margin:25px 0px; width:100%; position: relative; }
-.vk_faq_title,
-.vk_faq_content {
-	border:none;padding-left: 35px;
-	&:before {
-		position: absolute;left:0;font-size:24px;line-height: 105%;
+/* CSS
+/*-------------------------------------------*/
+
+@mixin reset() {
+	background: none;
+	border:none;
+	border-radius: 0;
+	padding:0;
+	&:after {
+		border:none;
 	}
 }
-.vk_faq_title { margin-bottom:15px;font-size:18px;font-weight:700;
-  &:before { font-family:"areal";content:"Q ";color:#e50000; }
+
+.is-style-vk_heading-style {
+	&-plain {
+		@include reset;
+	}
+	&-plainNoMargin {
+		@include reset;
+		margin:0;
+	}
+	&-borderBottomSolidNormal {
+		@include reset;
+		border-bottom:1px solid #000;
+		padding-bottom:5px;
+	}
+	&-borderBottomSolidHeavy {
+		@include reset;
+		border-bottom:2px solid #000;
+		padding-bottom:5px;
+	}
 }
-.vk_faq_content { margin:0px;
-  &:before { content:"A ";color:#337ab7;font-family: "" }
+
+/*-------------------------------------------*/
+/* CSS
+/*-------------------------------------------*/
+$media-sm-up : 576px;
+$media-md-up : 768px;
+$media-lg-up : 992px;
+$media-xl-up : 1200px;
+$media-sm-down : 575.98px;
+$media-md-down : 767.98px;
+$media-lg-down : 991.98px;
+$media-xl-down : 1199.98px;
+.vk_outer{
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  .vk_outer_container{
+    min-height: 92px;
+  }
 }
+.vk_outer-width-full {
+	margin-left:calc(50% - 50vw);
+	margin-right:calc(50% - 50vw);
+  padding-left:calc(50vw - 50%);
+  padding-right:calc(50vw - 50%);
+}
+$padding-none:1.5em;
+$padding-sm:2em;
+$padding-md:2.5em;
+$padding-lg:3em;
+$padding-xl:3.5em;
+.vk_outer-paddingLR-use{
+  padding-left: $padding-none ;
+	padding-right: $padding-none ;
+	@media ( min-width: $media-sm-up ){
+		padding-left: $padding-sm ;
+		padding-right: $padding-sm ;
+	}
+	@media ( min-width: $media-md-up ){
+		padding-left: $padding-md ;
+		padding-right: $padding-md ;
+	}
+	@media ( min-width: $media-lg-up ){
+		padding-left: $padding-lg ;
+		padding-right: $padding-lg ;
+	}
+	@media ( min-width: $media-xl-up ){
+		padding-left: $padding-xl ;
+		padding-right: $padding-xl ;
+	}
+}
+.vk_outer-paddingVertical-use{
+	padding-top: $padding-none ;
+	padding-bottom: $padding-none ;
+	@media ( min-width: $media-sm-up ){
+		padding-top: $padding-sm ;
+		padding-bottom: $padding-sm ;
+	}
+	@media ( min-width: $media-md-up ){
+		padding-top: $padding-md ;
+		padding-bottom: $padding-md ;
+	}
+	@media ( min-width: $media-lg-up ){
+		padding-top: $padding-lg ;
+		padding-bottom: $padding-lg ;
+	}
+	@media ( min-width: $media-xl-up ){
+		padding-top: $padding-xl ;
+		padding-bottom: $padding-xl ;
+	}
+}
+
+.vk_outer-bgPosition-fixed{
+  background-attachment: fixed !important;
+	background-size: cover !important;
+}
+.vk_outer-bgPosition-normal{
+  background-attachment: unset !important;
+	background-size: cover !important;
+}
+
+.vk_outer_separator {
+	svg {
+		display: block;
+    max-height: 100px;
+    position: absolute;
+    left: 0;
+	}
+}
+.vk_outer_separator-position-upper{
+  svg{
+    top: 0;
+    transform: rotate(180deg);
+  }
+}
+.vk_outer_separator-position-lower{
+  svg{
+    bottom: 0;
+  }
+}
+
+.vk_outer .editor-block-list__block {
+	margin: 0;
+}
+// .editor-block-list__block-edit{
+//   margin: 0!important;
+// }
 
 /*-------------------------------------------*/
 /* .vk_prBlocks
@@ -569,7 +731,7 @@ $color_dark:#343a40;
 	margin-top:0.9em;
 	margin-bottom: 0.7em;
 	text-align: center;
-	font-size: 18px;
+	font-size: 21px;
 	line-height: 1.4em;
 }
 .vk_prBlocks_item_image{
@@ -585,11 +747,97 @@ $color_dark:#343a40;
 .vk_prBlocks_item_summary{
 	margin-bottom: 0.5em;
 	text-align: center;
-	font-size: 14px;
-	line-height: 1.6em;
+	line-height: 1.8em;
 	&:hover{
 		text-decoration: underline;
 	}
 }
+
+@charset "utf-8";
+/*-------------------------------------------*/
+/* Layout
+/*-------------------------------------------*/
+.vk_prContent {
+	margin-left:-15px;
+	margin-right:-15px;
+ @media (min-width: 576px) {
+	 display: flex;
+	 .col-sm-6 {
+		 width:50%;
+	 }
+	 &-layout {
+		&-imageLeft {
+			flex-direction: row;
+		}
+
+		&-imageRight {
+			flex-direction: row-reverse;
+		}
+
+		&-imageLeft .vk_prContent_colImg {
+			padding-right: 2em;
+		}
+
+		&-imageRight .vk_prContent_colImg {
+			padding-left: 2em;
+		}
+	 }
+	} // @media (min-width: 768px) {
+}
+
+
+/*-------------------------------------------*/
+/* others
+/*-------------------------------------------*/
+.vk_prContent {
+	&_colTxt {
+		vertical-align: top;;
+		&_title {
+			background-color: transparent;
+			font-weight: bold;
+			padding: 0;
+			border-bottom: none;
+			box-shadow: none;
+			border-left: none;
+			margin-bottom:0.8em;
+			@media (max-width: 575.98px) {
+				&:first-child{
+					margin-top: 30px;
+				}
+			}
+		&:after {
+			content: "";
+				line-height: 0;
+				display: block;
+				overflow: hidden;
+				position: absolute;
+				bottom: -1px;
+				width: 0;
+				border: none;
+			}
+		}
+	  &_text {
+			line-height: 2em;
+			margin-bottom:1.7em;
+	  }
+	  &_btn.btn {
+			@media (min-width: 992px) {
+		 	 font-size:16px;
+		 	}
+	  }
+	} // &_colTxt {
+	&_colImg{
+		&_image {
+			max-width: 100%;
+			height: auto;
+		}
+		.components-button.button{
+			margin: 1em;
+		}
+		.components-button.image-button {
+			margin: 0;
+		}
+	}
+} // .vk_prContent {
 
 }

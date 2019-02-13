@@ -13,3 +13,12 @@
 h1:first-child.vk_prBlocks_item_title{
 	margin-top:0.9em;
 }
+
+/* メインのカラム幅 */
+.wp-block,
+.editor-block-list__layout > .wp-block {
+		max-width:calc( 100% - 20% );
+		.wp-block {
+			max-width:100%;
+		}
+}

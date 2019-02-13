@@ -3,10 +3,13 @@
  *
  */
 import React from "react";
-import YourComponent from "./component.js";
+import NewComponent from "./component";
+import {schema} from './schema';
+// import {deprecated} from './deprecated/deprecated';
+
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
-const {RangeControl, RadioControl, PanelBody, Button, PanelColor} = wp.components;
+const {RangeControl, RadioControl, PanelBody, Button, PanelColor, BaseControl} = wp.components;
 const {Fragment} = wp.element;
 const {RichText, InspectorControls, MediaUpload, ColorPalette} = wp.editor;
 const BlockIcon = 'arrow-down';
@@ -29,26 +32,7 @@ registerBlockType('vk-blocks/your-block-slug', {
     title: __('your-block-slug', 'vk-blocks'), // Block title.
     icon: BlockIcon, // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
     category: 'vk-blocks-cat', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
-    attributes: {
-        heading: {
-            type: 'string',
-            source: 'html',
-            selector: 'dt',
-        },
-        content: {
-            type: 'string',
-            source: 'html',
-            selector: 'dd',
-        },
-        arrowFlag: {
-            type: 'string',
-            default: 'vk_flow-arrow-on',
-        },
-        insertImage: {
-            type: 'string',
-            default: null, // no image by default!
-        }
-    },
+    attributes: schema,
 
     /**
      * The edit function describes the structure of your block in the context of the editor.
@@ -67,8 +51,12 @@ registerBlockType('vk-blocks/your-block-slug', {
         } = attributes;
 
         return (
-            <div>
-                <YourComponent value={}/>
+            <div className="vk_your-block-slug">
+                <div>Editor</div>
+                <NewComponent
+                    attributes={attributes}
+                    for_={'edit'}
+                />
             </div>
         );
     },
@@ -82,17 +70,18 @@ registerBlockType('vk-blocks/your-block-slug', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     save({attributes}) {
-        const {
-            heading,
-            content,
-            insertImage,
-            arrowFlag,
-        } = attributes;
 
         return (
-            <div>
-                <YourComponent value={}/>
+            <div className="vk_your-block-slug">
+                <div>Front</div>
+                <NewComponent
+                    attributes={attributes}
+                    for_={'save'}
+                />
             </div>
         );
     },
+
+    //Please comment out, when you need to use deprecated.
+    // deprecated:deprecated
 });
