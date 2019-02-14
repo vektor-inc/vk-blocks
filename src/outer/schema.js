@@ -43,8 +43,20 @@ export const schema = {
 		type: 'string',
 	default: '#fff',
 	},
-	dividerType: {
+	borderWidth: {
+		type: 'number',
+		default: 0,
+	},
+	borderStyle: {
 		type: 'string',
-	default: 'tilt',
+		default: 'none',
+	},
+	borderColor: {
+		type: 'string',
+		default: '#000',
+	},
+	borderRadius: {
+		type: 'number',
+		default: 0,
 	},
 };

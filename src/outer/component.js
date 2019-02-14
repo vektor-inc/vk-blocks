@@ -40,7 +40,11 @@ export class Component extends React.Component {
             lower_level,
             upperDividerBgColor,
             lowerDividerBgColor,
-            dividerType
+            dividerType,
+            borderWidth,
+            borderStyle,
+            borderColor,
+            borderRadius
         } = this.props.attributes;
 
         let for_ = this.props.for_;
@@ -118,6 +122,8 @@ export class Component extends React.Component {
                 className={ 'vk_outer' + classWidth + classPaddingLR + classPaddingVertical + classBgPosition }
                 style={{
                     background: bgStyle,
+                    border: `${borderWidth}px ${borderStyle} ${borderColor}`,
+                    borderRadius: `${borderRadius}px`
                 }}
             >
                     {
