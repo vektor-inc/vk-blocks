@@ -230,10 +230,11 @@ registerBlockType('vk-blocks/outer', {
 					</PanelBody>
 					<PanelBody title={__('Border Setting', 'vk-blocks')}>
 						<BaseControl
-							label={__('Border will disappear when divider effect is applied.', 'vk-blocks')}
+							// label={__('Border will disappear when divider effect is applied.', 'vk-blocks')}
 						>
+						<p>{__('Border will disappear when divider effect is applied.', 'vk-blocks')}</p>
 							<SelectControl
-								label={__('Style', 'vk-blocks')}
+								label={__('Border type', 'vk-blocks')}
 								value={borderStyle}
 								onChange={(value) => setAttributes({borderStyle: value})}
 								options={[
