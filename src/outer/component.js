@@ -119,6 +119,11 @@ export class Component extends React.Component {
             bgStyle = `linear-gradient(${bgColor}, ${bgColor})`;
         }
 
+        //borderColorクリア時に白をセットする
+        if (!borderColor) {
+            borderColor = '#fff';
+        }
+
         //Dividerエフェクトがない時のみ枠線を追加
         if(upper_level === 0 && lower_level === 0){
             borderProperty = `${borderWidth}px ${borderStyle} ${borderColor}`;
