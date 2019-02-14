@@ -57,6 +57,8 @@ export class Component extends React.Component {
         let whichSideUpper;
         let whichSideLower;
         let bgStyle;
+        let borderProperty;
+        let borderRadiusProperty;
 
         //幅のクラス切り替え
         classWidth = ` vk_outer-width-${outerWidth}`;
@@ -117,13 +119,22 @@ export class Component extends React.Component {
             bgStyle = `linear-gradient(${bgColor}, ${bgColor})`;
         }
 
+        //Dividerエフェクトがない時のみ枠線を追加
+        if(upper_level === 0 && lower_level === 0){
+            borderProperty = `${borderWidth}px ${borderStyle} ${borderColor}`;
+            borderRadiusProperty = `${borderRadius}px`;
+        }else {
+            borderProperty = 'none';
+            borderRadiusProperty = `0px`;
+        }
+
         return (
             <div
                 className={ 'vk_outer' + classWidth + classPaddingLR + classPaddingVertical + classBgPosition }
                 style={{
                     background: bgStyle,
-                    border: `${borderWidth}px ${borderStyle} ${borderColor}`,
-                    borderRadius: `${borderRadius}px`
+                    border: borderProperty,
+                    borderRadius: borderRadiusProperty
                 }}
             >
                     {
