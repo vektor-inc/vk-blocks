@@ -126,9 +126,14 @@ registerBlockType('vk-blocks/outer', {
                                     </Button>
                                 )}
                             />
+														</BaseControl>
 
+														<BaseControl
+																label={__('Background image Position', 'vk-blocks')}
+																help=""
+														>
                             <RadioControl
-                                label={__('Background Position', 'vk-blocks')}
+                                // label={__('Background Position', 'vk-blocks')}
                                 selected={bgPosition}
                                 options={[
                                     {label: __('normal', 'vk-blocks'), value: 'normal'},
