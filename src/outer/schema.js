@@ -17,7 +17,7 @@ export const schema = {
 	},
 	padding_left_and_right: {
 		type: 'string',
-	default: '1',
+	default: '0',
 	},
 	padding_top_and_bottom: {
 		type: 'string',
@@ -27,20 +27,40 @@ export const schema = {
 		type: 'number',
 	default: 0.5,
 	},
-	upper_tilt_level: {
+	upper_level: {
 		type: 'number',
 	default: 0,
 	},
-	lower_tilt_level: {
+	lower_level: {
 		type: 'number',
 	default: 0,
-	},
-	tiltBgColor: {
-		type: 'string',
-	default: '#fff',
 	},
 	dividerType: {
 		type: 'string',
-	default: 'tilt',
+		default: 'tilt',
+	},
+	upperDividerBgColor: {
+		type: 'string',
+	default: '#fff',
+	},
+	lowerDividerBgColor: {
+		type: 'string',
+	default: '#fff',
+	},
+	borderWidth: {
+		type: 'number',
+		default: 0,
+	},
+	borderStyle: {
+		type: 'string',
+		default: 'none',
+	},
+	borderColor: {
+		type: 'string',
+		default: '#000',
+	},
+	borderRadius: {
+		type: 'number',
+		default: 0,
 	},
 };

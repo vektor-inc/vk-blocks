@@ -4,14 +4,14 @@
  */
 import React from "react";
 import {Component} from "./component";
-import {schema} from './schema.js';
+import {schema} from './schema';
 import toNumber from "../_helper/to-number";
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
-const {RangeControl, RadioControl, PanelBody, Button, PanelColor, BaseControl,SelectControl} = wp.components;
+const {RangeControl, RadioControl, PanelBody, Button, BaseControl,SelectControl} = wp.components;
 const {Fragment} = wp.element;
-const {RichText, InspectorControls, MediaUpload, ColorPalette, InnerBlocks} = wp.editor;
+const {InspectorControls, MediaUpload, ColorPalette} = wp.editor;
 const BlockIcon = (
 	<svg xmlns="http://www.w3.org/2000/svg" width="576" height="512" viewBox="0 0 576 512">
 	<path d="M288,381c50.7,0,92-41.3,92-92s-41.3-92-92-92s-92,41.3-92,92S237.3,381,288,381z M288,227c34.2,0,62,27.8,62,62
@@ -70,10 +70,15 @@ registerBlockType('vk-blocks/outer', {
             padding_left_and_right,
             padding_top_and_bottom,
             opacity,
-            upper_tilt_level,
-            lower_tilt_level,
-            tiltBgColor,
-            dividerType
+            upper_level,
+            lower_level,
+			upperDividerBgColor,
+			lowerDividerBgColor,
+			dividerType,
+			borderWidth,
+			borderStyle,
+			borderColor,
+			borderRadius
         } = attributes;
 
         return (
@@ -121,9 +126,14 @@ registerBlockType('vk-blocks/outer', {
                                     </Button>
                                 )}
                             />
+														</BaseControl>
 
+														<BaseControl
+																label={__('Background image Position', 'vk-blocks')}
+																help=""
+														>
                             <RadioControl
-                                label={__('Background Position', 'vk-blocks')}
+                                // label={__('Background Position', 'vk-blocks')}
                                 selected={bgPosition}
                                 options={[
                                     {label: __('normal', 'vk-blocks'), value: 'normal'},
@@ -133,86 +143,163 @@ registerBlockType('vk-blocks/outer', {
                                 onChange={(value) => setAttributes({bgPosition: value})}
                             />
                         </BaseControl>
-
-
                     </PanelBody>
-										<PanelBody title={__('Layout Setting', 'vk-blocks')}>
-											<BaseControl>
-
-												<RadioControl
-														label={__('Outer width', 'vk-blocks')}
-														selected={outerWidth}
-														options={[
-																{label: __('Normal', 'vk-blocks'), value: 'normal'},
-																{label: __('Full Wide', 'vk-blocks'), value: 'full'}
-														]}
-														onChange={(value) => setAttributes({outerWidth: value})}
-												/>
-												<RadioControl
-														label={__('Padding (left and right)', 'vk-blocks')}
-														selected={padding_left_and_right}
-														options={[
-																{label: __('Use default padding', 'vk-blocks'), value: '1'},
-																{label: __('Do not use default padding (When it is full width etc.).', 'vk-blocks'), value: '0'}
-														]}
-														onChange={(value) => setAttributes({padding_left_and_right: value})}
-												/>
-													<RadioControl
-															label={__('Padding (top and bottom)', 'vk-blocks')}
-															selected={padding_top_and_bottom}
-															options={[
-																	{label: __('Use default padding', 'vk-blocks'), value: '1'},
-																	{label: __('Do not use default padding (Set it yourself using a spacer block etc.).', 'vk-blocks'), value: '0'}
-															]}
-															onChange={(value) => setAttributes({padding_top_and_bottom: value})}
-													/>
-											</BaseControl>
-										</PanelBody>
-										<PanelBody title={__('Divider Setting', 'vk-blocks')}>
-											<BaseControl>
-												<SelectControl
-														label={ __( 'Type', 'vk-blocks' ) }
-														value={ dividerType }
-														onChange={ ( value ) => setAttributes( { dividerType: value } ) }
-														options={ [
-																{
-																		value: 'tilt',
-																		label: __( 'Tilt', 'vk-blocks' ),
-																},
-																{
-																		value: 'curve',
-																		label: __( 'Curve', 'vk-blocks' ),
-																},
-																{
-																		value: 'wave',
-																		label: __( 'Wave', 'vk-blocks' ),
-																},
-																{
-																		value: 'triangle',
-																		label: __( 'Triangle', 'vk-blocks' ),
-																},
-														] }
-												/>
-												<RangeControl
-														label={ __( 'Upper Divider Level', 'vk-blocks' ) }
-														value={ upper_tilt_level }
-														onChange={ ( value ) => setAttributes( { upper_tilt_level: toNumber( value, -100, 100 ) } ) }
-														min="-100"
-														max="100"
-												/>
-												<RangeControl
-														label={ __( 'Lower Divider Level', 'vk-blocks' ) }
-														value={ lower_tilt_level }
-														onChange={ ( value ) => setAttributes( { lower_tilt_level: toNumber( value, -100, 100 ) } ) }
-														min="-100"
-														max="100"
-												/>
-												<ColorPalette
-														value={tiltBgColor}
-														onChange={(value) => setAttributes({tiltBgColor: value})}
-												/>
-												</BaseControl>
-										</PanelBody>
+					<PanelBody title={__('Layout Setting', 'vk-blocks')}>
+						<BaseControl>
+							<RadioControl
+								label={__('Outer width', 'vk-blocks')}
+								selected={outerWidth}
+								options={[
+									{label: __('Normal', 'vk-blocks'), value: 'normal'},
+									{label: __('Full Wide', 'vk-blocks'), value: 'full'}
+								]}
+								onChange={(value) => setAttributes({outerWidth: value})}
+							/>
+							<RadioControl
+								label={__('Contents area padding (left and right)', 'vk-blocks')}
+								selected={padding_left_and_right}
+								options={[
+									{
+										label: __('Do not use contents area default padding (When case of full width etc.).', 'vk-blocks'),
+										value: '0'
+									},
+									{
+										label: __('Use contents area default padding (When case of not full width and use background etc.).', 'vk-blocks'),
+										value: '1'
+									}
+								]}
+								onChange={(value) => setAttributes({padding_left_and_right: value})}
+							/>
+							<RadioControl
+								label={__('Padding (top and bottom)', 'vk-blocks')}
+								selected={padding_top_and_bottom}
+								options={[
+									{label: __('Use default padding', 'vk-blocks'), value: '1'},
+									{
+										label: __('Do not use default padding (Set it yourself using a spacer block etc.).', 'vk-blocks'),
+										value: '0'
+									}
+								]}
+								onChange={(value) => setAttributes({padding_top_and_bottom: value})}
+							/>
+						</BaseControl>
+					</PanelBody>
+					<PanelBody title={__('Divider Setting', 'vk-blocks')}>
+						<BaseControl>
+							<SelectControl
+								label={__('Type', 'vk-blocks')}
+								value={dividerType}
+								onChange={(value) => setAttributes({dividerType: value})}
+								options={[
+									{
+										value: 'tilt',
+										label: __('Tilt', 'vk-blocks'),
+									},
+									{
+										value: 'curve',
+										label: __('Curve', 'vk-blocks'),
+									},
+									{
+										value: 'wave',
+										label: __('Wave', 'vk-blocks'),
+									},
+									{
+										value: 'triangle',
+										label: __('Triangle', 'vk-blocks'),
+									},
+								]}
+							/>
+							<RangeControl
+								label={__('Upper Divider Level', 'vk-blocks')}
+								value={upper_level}
+								onChange={(value) => setAttributes({upper_level: toNumber(value, -100, 100)})}
+								min="-100"
+								max="100"
+							/>
+							<ColorPalette
+								value={upperDividerBgColor}
+								onChange={(value) => setAttributes({upperDividerBgColor: value})}
+							/>
+							<RangeControl
+								label={__('Lower Divider Level', 'vk-blocks')}
+								value={lower_level}
+								onChange={(value) => setAttributes({lower_level: toNumber(value, -100, 100)})}
+								min="-100"
+								max="100"
+							/>
+							<ColorPalette
+								value={lowerDividerBgColor}
+								onChange={(value) => setAttributes({lowerDividerBgColor: value})}
+							/>
+						</BaseControl>
+					</PanelBody>
+					<PanelBody title={__('Border Setting', 'vk-blocks')}>
+						<BaseControl
+							// label={__('Border will disappear when divider effect is applied.', 'vk-blocks')}
+						>
+						<p>{__('Border will disappear when divider effect is applied.', 'vk-blocks')}</p>
+							<SelectControl
+								label={__('Border type', 'vk-blocks')}
+								value={borderStyle}
+								onChange={(value) => setAttributes({borderStyle: value})}
+								options={[
+									{
+										value: 'none',
+										label: __('None', 'vk-blocks'),
+									},
+									{
+										value: 'solid',
+										label: __('Solid', 'vk-blocks'),
+									},
+									{
+										value: 'dotted',
+										label: __('Dotted', 'vk-blocks'),
+									},
+									{
+										value: 'dashed',
+										label: __('Dashed', 'vk-blocks'),
+									},
+									{
+										value: 'double',
+										label: __('Double', 'vk-blocks'),
+									},
+									{
+										value: 'groove',
+										label: __('Groove', 'vk-blocks'),
+									},
+									{
+										value: 'ridge',
+										label: __('Ridge', 'vk-blocks'),
+									},
+									{
+										value: 'inset',
+										label: __('Inset', 'vk-blocks'),
+									},
+									{
+										value: 'outset',
+										label: __('Outset', 'vk-blocks'),
+									},
+								]}
+							/>
+							<ColorPalette
+								value={borderColor}
+								onChange={(value) => setAttributes({borderColor: value})}
+							/>
+							<RangeControl
+								label={__('Border width', 'vk-blocks')}
+								value={borderWidth}
+								onChange={(value) => setAttributes({borderWidth:value})}
+								min="0"
+							/>
+							<RangeControl
+								label={__('Border radius', 'vk-blocks')}
+								value={borderRadius}
+								onChange={(value) => setAttributes({borderRadius: toNumber(value, -100, 100)})}
+								min="-100"
+								max="100"
+							/>
+						</BaseControl>
+					</PanelBody>
                 </InspectorControls>
                 {
                     vk_blocks_check.is_pro

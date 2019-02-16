@@ -101,7 +101,7 @@ export class Component extends React.Component {
                                 :
                                 !Image ? __('Select image', 'vk-blocks') :
                                     <img
-                                        className={'vk_prContent_media_image'}
+                                        className={'vk_prContent_colImg_image'}
                                         src={Image}
                                         alt={__('Upload image', 'vk-blocks')}
                                         style={{border: `1px solid ${ImageBorderColor}`}}
@@ -113,7 +113,7 @@ export class Component extends React.Component {
                                 (() => {
                                     if (for_ === 'edit') {
                                         return (
-                                            <div>
+                                            <React.Fragment>
                                                 <RichText
                                                     tagName="h3"
                                                     className={'vk_prContent_colTxt_title'}
@@ -130,11 +130,11 @@ export class Component extends React.Component {
                                                     placeholder={__('Input content.', 'vk-blocks')}
                                                     style={{color: contentColor}}
                                                 />
-                                            </div>
+                                            </React.Fragment>
                                         );
                                     } else {
                                         return (
-                                            <div>
+                                            <React.Fragment>
                                                 <RichText.Content
                                                     tagName="h3"
                                                     value={title}
@@ -147,7 +147,7 @@ export class Component extends React.Component {
                                                     value={content}
                                                     style={{color: contentColor}}
                                                 />
-                                            </div>);
+                                            </React.Fragment>);
                                     }
                                 })()
                             }

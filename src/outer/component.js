@@ -36,10 +36,15 @@ export class Component extends React.Component {
             padding_left_and_right,
             padding_top_and_bottom,
             opacity,
-            upper_tilt_level,
-            lower_tilt_level,
-            tiltBgColor,
-            dividerType
+            upper_level,
+            lower_level,
+            upperDividerBgColor,
+            lowerDividerBgColor,
+            dividerType,
+            borderWidth,
+            borderStyle,
+            borderColor,
+            borderRadius
         } = this.props.attributes;
 
         let for_ = this.props.for_;
@@ -51,6 +56,9 @@ export class Component extends React.Component {
         let containerClass;
         let whichSideUpper;
         let whichSideLower;
+        let bgStyle;
+        let borderProperty;
+        let borderRadiusProperty;
 
         //幅のクラス切り替え
         classWidth = ` vk_outer-width-${outerWidth}`;
@@ -87,12 +95,12 @@ export class Component extends React.Component {
         }
 
         //上側セクションの傾き切り替え
-        if (upper_tilt_level) {
+        if (upper_level) {
             whichSideUpper = 'upper';
         }
 
         //下側セクションの傾き切り替え
-        if (lower_tilt_level) {
+        if (lower_level) {
             whichSideLower = 'lower';
         }
 
@@ -104,21 +112,44 @@ export class Component extends React.Component {
             containerClass = 'vk_outer_container';
         }
 
+        //背景画像の有り無しでstyleを切り替え
+        if(bgImage){
+            bgStyle = `linear-gradient(${bgColor}, ${bgColor}), url(${bgImage})`;
+        }else {
+            bgStyle = `linear-gradient(${bgColor}, ${bgColor})`;
+        }
+
+        //borderColorクリア時に白をセットする
+        if (!borderColor) {
+            borderColor = '#fff';
+        }
+
+        //Dividerエフェクトがない時のみ枠線を追加
+        if(upper_level === 0 && lower_level === 0){
+            borderProperty = `${borderWidth}px ${borderStyle} ${borderColor}`;
+            borderRadiusProperty = `${borderRadius}px`;
+        }else {
+            borderProperty = 'none';
+            borderRadiusProperty = `0px`;
+        }
+
         return (
             <div
                 className={ 'vk_outer' + classWidth + classPaddingLR + classPaddingVertical + classBgPosition }
                 style={{
-                    background: `linear-gradient(${bgColor}, ${bgColor}), url(${bgImage})`,
+                    background: bgStyle,
+                    border: borderProperty,
+                    borderRadius: borderRadiusProperty
                 }}
             >
                     {
-                        componentDivider(upper_tilt_level, tiltBgColor, whichSideUpper,dividerType)
+                        componentDivider(upper_level, upperDividerBgColor, whichSideUpper, dividerType)
                     }
                 <div className={containerClass}>
                     {elm}
                 </div>
                 {
-                    componentDivider(lower_tilt_level, tiltBgColor, whichSideLower,dividerType)
+                    componentDivider(lower_level, lowerDividerBgColor, whichSideLower, dividerType)
                 }
             </div>
         );
