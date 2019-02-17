@@ -48,7 +48,7 @@ registerBlockType('vk-blocks/heading', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     edit({attributes, setAttributes}) {
-        const {level, title, titleColor, titleSize, titleMarginBottom, subText, subTextColor, subTextSize, titleStyle} = attributes;
+        const {level, title, titleColor, titleSize, subText, subTextColor, subTextSize, titleStyle} = attributes;
         const tagName = 'h' + level;
 
         let setTitleFontSize = (newLevel) => {
@@ -96,15 +96,7 @@ registerBlockType('vk-blocks/heading', {
                             onChange={(value) => {setAttributes({titleSize: value});
                             }}
                             min={0.5}
-                            max={3}
-                            step={0.1}
-                        />
-                        <RangeControl
-                            value={titleMarginBottom}
-                            onChange={(value) => {setAttributes({titleMarginBottom: value});
-                            }}
-                            min={0}
-                            max={3}
+                            max={4}
                             step={0.1}
                         />
                     </PanelBody>
@@ -140,7 +132,7 @@ registerBlockType('vk-blocks/heading', {
                         value={title}
                         onChange={(value) => setAttributes({title: value})}
                         style={{color: titleColor, fontSize: titleSize + 'rem'}}
-                        className={`vk_heading_title-style-${titleStyle}`}
+                        className={`vk_heading_title vk_heading_title-style-${titleStyle}`}
                         placeholder={__('Input title…', 'vk-blocks')}
                     />
                     <RichText
@@ -148,7 +140,7 @@ registerBlockType('vk-blocks/heading', {
                         value={subText}
                         onChange={(value) => setAttributes({subText: value})}
                         style={{color: subTextColor,fontSize: subTextSize + 'rem'}}
-                        className={`vk_heading_subtext-style-${titleStyle}`}
+                        className={`vk_heading_subtext vk_heading_subtext-style-${titleStyle}`}
                         placeholder={__('Input sub text…', 'vk-blocks')}
                 />
                 </div>
@@ -165,7 +157,7 @@ registerBlockType('vk-blocks/heading', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     save({attributes}) {
-        const {level, title, titleColor, titleSize, titleMarginBottom, subText, subTextColor, subTextSize, titleStyle} = attributes;
+        const {level, title, titleColor, titleSize, subText, subTextColor, subTextSize, titleStyle} = attributes;
         const tagName = 'h' + level;
 
         return (
@@ -174,13 +166,13 @@ registerBlockType('vk-blocks/heading', {
                     tagName={tagName}
                     value={title}
                     style={{color: titleColor, fontSize: titleSize + 'rem'}}
-                    className={`vk_heading_title-style-${titleStyle}`}
+                    className={`vk_heading_title vk_heading_title-style-${titleStyle}`}
                 />
                 <RichText.Content
                     tagName={'p'}
                     value={subText}
                     style={{color: subTextColor,fontSize: subTextSize + 'rem'}}
-                    className={`vk_heading_subtext-style-${titleStyle}`}
+                    className={`vk_heading_subtext vk_heading_subtext-style-${titleStyle}`}
                 />
             </div>
         );

@@ -11,22 +11,14 @@
 	}
 }
 
-.vk_heading_title-style {
-	&-plain {
-		@include reset;
+.vk_heading_title {
+	margin-bottom:0;
+	&-style {
+		&-plain {
+			@include reset;
+		}
 	}
-//	&-plainNoMargin {
-//		@include reset;
-//		margin:0;
-//	}
-//	&-borderBottomSolidNormal {
-//		@include reset;
-//		border-bottom:1px solid #000;
-//		padding-bottom:5px;
-//	}
-//	&-borderBottomSolidHeavy {
-//		@include reset;
-//		border-bottom:2px solid #000;
-//		padding-bottom:5px;
-//	}
+}
+.vk_heading_subtext {
+	margin-bottom:0;
 }

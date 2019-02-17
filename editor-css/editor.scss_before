@@ -8,7 +8,13 @@
 .components-checkbox-control__label { margin-bottom:0; }
 .components-color-palette { display:block; overflow:hidden; }
 
+html {
+font-size:10px;
+}
+
 .edit-post-visual-editor.editor-styles-wrapper{
+
+
 
 /* これがないとGutenberg標準のエディタCSSに負ける */
 h1:first-child.vk_prBlocks_item_title{

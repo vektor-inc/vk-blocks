@@ -8,7 +8,13 @@
 .components-checkbox-control__label { margin-bottom:0; }
 .components-color-palette { display:block; overflow:hidden; }
 
+html {
+font-size:10px;
+}
+
 .edit-post-visual-editor.editor-styles-wrapper{
+
+
 
 /* これがないとGutenberg標準のエディタCSSに負ける */
 h1:first-child.vk_prBlocks_item_title{
@@ -587,24 +593,16 @@ $color_dark:#343a40;
 	}
 }
 
-.vk_heading_title-style {
-	&-plain {
-		@include reset;
+.vk_heading_title {
+	margin-bottom:0;
+	&-style {
+		&-plain {
+			@include reset;
+		}
 	}
-//	&-plainNoMargin {
-//		@include reset;
-//		margin:0;
-//	}
-//	&-borderBottomSolidNormal {
-//		@include reset;
-//		border-bottom:1px solid #000;
-//		padding-bottom:5px;
-//	}
-//	&-borderBottomSolidHeavy {
-//		@include reset;
-//		border-bottom:2px solid #000;
-//		padding-bottom:5px;
-//	}
+}
+.vk_heading_subtext {
+	margin-bottom:0;
 }
 
 /*-------------------------------------------*/

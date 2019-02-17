@@ -273,31 +273,31 @@ msgstr ""
 msgid "Input content"
 msgstr ""
 
-#: src/heading/block.js:111
+#: src/heading/block.js:103
 msgid "Sub Text Settings"
 msgstr ""
 
-#: src/heading/block.js:125
+#: src/heading/block.js:117
 msgid "Style Settings"
 msgstr ""
 
-#: src/heading/block.js:127
+#: src/heading/block.js:119
 msgid "Title style:"
 msgstr ""
 
-#: src/heading/block.js:130
+#: src/heading/block.js:122
 msgid "Default"
 msgstr ""
 
-#: src/heading/block.js:131
+#: src/heading/block.js:123
 msgid "Plain"
 msgstr ""
 
-#: src/heading/block.js:144
+#: src/heading/block.js:136
 msgid "Input title…"
 msgstr ""
 
-#: src/heading/block.js:152
+#: src/heading/block.js:144
 msgid "Input sub text…"
 msgstr ""
 
