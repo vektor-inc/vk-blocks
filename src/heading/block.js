@@ -108,7 +108,6 @@ registerBlockType('vk-blocks/heading', {
                             value={subTextSize}
                             onChange={(value) => {setAttributes({subTextSize: value});
                             }}
-                            }}
                             min={0.5}
                             max={3}
                             step={0.1}
@@ -116,11 +115,11 @@ registerBlockType('vk-blocks/heading', {
                     </PanelBody>
                     <PanelBody title={__('Style Settings', 'vk-blocks')}>
                         <RadioControl
-                            label={__('Button Position:', 'vk-blocks')}
+                            label={__('Title style:', 'vk-blocks')}
                             selected={titleStyle}
                             options={[
                                 {label: __('Default', 'vk-blocks'), value: 'default'},
-                                {label: __('Plane', 'vk-blocks'), value: 'plane'}
+                                {label: __('Plain', 'vk-blocks'), value: 'plain'}
                             ]}
                             onChange={(value) => setAttributes({titleStyle: value})}
                         />

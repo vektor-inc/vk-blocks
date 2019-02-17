@@ -109,7 +109,6 @@ msgid "Small"
 msgstr ""
 
 #: src/button/block.js:158
-#: src/heading/block.js:115
 msgid "Button Position:"
 msgstr ""
 
@@ -278,23 +277,27 @@ msgstr ""
 msgid "Sub Text Settings"
 msgstr ""
 
-#: src/heading/block.js:113
+#: src/heading/block.js:116
 msgid "Style Settings"
 msgstr ""
 
 #: src/heading/block.js:118
+msgid "Title style:"
+msgstr ""
+
+#: src/heading/block.js:121
 msgid "Default"
 msgstr ""
 
-#: src/heading/block.js:119
-msgid "Plane"
+#: src/heading/block.js:122
+msgid "Plain"
 msgstr ""
 
-#: src/heading/block.js:132
+#: src/heading/block.js:135
 msgid "Input title…"
 msgstr ""
 
-#: src/heading/block.js:140
+#: src/heading/block.js:143
 msgid "Input sub text…"
 msgstr ""
 
