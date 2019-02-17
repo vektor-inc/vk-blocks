@@ -23,6 +23,10 @@ export const schema = {
         type: 'string',
         default: '2',
     },
+    titleMarginBottom: {
+        type: 'string',
+        default: '1.5',
+    },
     subTextSize: {
         type: 'string',
         default: '1.2',

@@ -48,7 +48,7 @@ registerBlockType('vk-blocks/heading', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     edit({attributes, setAttributes}) {
-        const {level, title, subText, titleColor, subTextColor, titleSize, subTextSize, titleStyle} = attributes;
+        const {level, title, subText, titleColor, subTextColor, titleSize, titleMarginBottom, subTextSize, titleStyle} = attributes;
         const tagName = 'h' + level;
 
         let setTitleFontSize = (newLevel) => {
@@ -96,6 +96,14 @@ registerBlockType('vk-blocks/heading', {
                             onChange={(value) => {setAttributes({titleSize: value});
                             }}
                             min={0.5}
+                            max={3}
+                            step={0.1}
+                        />
+												<RangeControl
+                            value={titleMarginBottom}
+                            onChange={(value) => {setAttributes({titleMarginBottom: value});
+                            }}
+                            min={0}
                             max={3}
                             step={0.1}
                         />
@@ -157,7 +165,7 @@ registerBlockType('vk-blocks/heading', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     save({attributes}) {
-        const {level, title, subText, titleColor, subTextColor, titleSize, subTextSize, titleStyle} = attributes;
+        const {level, title, titleColor, titleSize, titleMarginBottom, subText,  subTextColor,  subTextSize, titleStyle} = attributes;
         const tagName = 'h' + level;
 
         return (
