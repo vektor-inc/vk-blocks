@@ -20,16 +20,16 @@ export const schema = {
         default: '#000000',
     },
     titleSize: {
-        type: 'string',
-        default: '2',
+        type: 'number',
+        default: 2,
     },
     titleMarginBottom: {
-        type: 'string',
-        default: '1.5',
+        type: 'number',
+        default: 1.5,
     },
     subTextSize: {
-        type: 'string',
-        default: '1.2',
+        type: 'number',
+        default: 1.2,
     },
     level: {
         type: 'number',
