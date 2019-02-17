@@ -9,7 +9,7 @@ export const schema = {
         type: 'string',
         source: 'html',
         selector: 'p',
-        default: '',
+        default: null,
     },
     titleColor: {
         type: 'string',

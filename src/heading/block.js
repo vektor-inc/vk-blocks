@@ -9,7 +9,7 @@ import HeadingToolbar from './heading-toolbar';
 // import YourComponent from "./component.js";
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType,createBlock} = wp.blocks; // Import registerBlockType() from wp.blocks
-const {RangeControl, RadioControl, PanelBody, Button, PanelColor} = wp.components;
+const {RangeControl, RadioControl, PanelBody, Button, PanelColor,TextControl} = wp.components;
 const {Fragment} = wp.element;
 const {RichText, InspectorControls, MediaUpload, ColorPalette, BlockControls, Toolbar, AlignmentToolbar } = wp.editor;
 const BlockIcon = 'arrow-down';
@@ -137,6 +137,12 @@ registerBlockType('vk-blocks/heading', {
                         />
                     </PanelBody>
                     <PanelBody title={ __( 'Sub Text Settings', 'vk-blocks' ) }>
+                      <TextControl
+                          label={__('Sub Caption', 'vk-blocks')}
+                          value={subText}
+                          onChange={(value) => setAttributes({subText: value})}
+                          placeholder={'Input sub text…'}
+                      />
                       <label>{__('Text size (rem)', 'vk-blocks')}</label>
                       <RangeControl
                           value={subTextSize}
@@ -165,14 +171,21 @@ registerBlockType('vk-blocks/heading', {
                         className={`vk_heading_title vk_heading_title-style-${titleStyle}`}
                         placeholder={__('Input title…', 'vk-blocks')}
                     />
-                    <RichText
-                        tagName={'p'}
-                        value={subText}
-                        onChange={(value) => setAttributes({subText: value})}
-                        style={{color: subTextColor,fontSize: subTextSize + 'rem',textAlign: align}}
-                        className={`vk_heading_subtext vk_heading_subtext-style-${titleStyle}`}
-                        placeholder={__('Input sub text…', 'vk-blocks')}
-                />
+                    {
+                        // サブテキスト
+                        (() => {
+                            if (subText !== '' && subText !== undefined ) {
+                                return (
+                                  <RichText.Content
+                                      tagName={'p'}
+                                      value={subText}
+                                      style={ { color: subTextColor,fontSize: subTextSize + 'rem',textAlign: align } }
+                                      className={`vk_heading_subtext vk_heading_subtext-style-${titleStyle}`}
+                                  />
+                              );
+                            }
+                        })()
+                    }
                 </div>
             </Fragment>
         );
@@ -202,7 +215,7 @@ registerBlockType('vk-blocks/heading', {
                     className={`vk_heading_title vk_heading_title-style-${titleStyle}`}
                 />
                 {
-                    //ボタンテキストが入力されるとボタンを表示。
+                    // サブテキスト
                     (() => {
                         if (subText !== '' && subText !== undefined ) {
                             return (

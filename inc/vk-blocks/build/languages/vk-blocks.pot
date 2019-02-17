@@ -82,6 +82,7 @@ msgid "Button setting"
 msgstr ""
 
 #: src/button/block.js:137
+#: src/heading/block.js:141
 msgid "Sub Caption"
 msgstr ""
 
@@ -293,16 +294,12 @@ msgstr ""
 msgid "Sub Text Settings"
 msgstr ""
 
-#: src/heading/block.js:140
+#: src/heading/block.js:146
 msgid "Text size (rem)"
 msgstr ""
 
-#: src/heading/block.js:166
+#: src/heading/block.js:172
 msgid "Input title…"
-msgstr ""
-
-#: src/heading/block.js:174
-msgid "Input sub text…"
 msgstr ""
 
 #: src/heading/block.js:32
