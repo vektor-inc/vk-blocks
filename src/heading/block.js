@@ -176,12 +176,21 @@ registerBlockType('vk-blocks/heading', {
                     style={ { color: titleColor, fontSize: titleSize + 'rem',textAlign: align } }
                     className={`vk_heading_title vk_heading_title-style-${titleStyle}`}
                 />
-                <RichText.Content
-                    tagName={'p'}
-                    value={subText}
-                    style={ { color: subTextColor,fontSize: subTextSize + 'rem',textAlign: align } }
-                    className={`vk_heading_subtext vk_heading_subtext-style-${titleStyle}`}
-                />
+								{
+										//ボタンテキストが入力されるとボタンを表示。
+										(() => {
+												if (subText !== '' && subText !== undefined ) {
+														return (
+															<RichText.Content
+							                    tagName={'p'}
+							                    value={subText}
+							                    style={ { color: subTextColor,fontSize: subTextSize + 'rem',textAlign: align } }
+							                    className={`vk_heading_subtext vk_heading_subtext-style-${titleStyle}`}
+							                />
+													);
+												}
+										})()
+								}
             </div>
         );
     },
