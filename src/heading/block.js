@@ -115,7 +115,7 @@ registerBlockType('vk-blocks/heading', {
                 <InspectorControls>
                     <PanelBody title={__('Style Settings', 'vk-blocks')}>
                         <RadioControl
-                            label={__('Heading style:', 'vk-blocks')}
+                            label={__('Heading style', 'vk-blocks')}
                             selected={titleStyle}
                             options={[
                                 {label: __('Default', 'vk-blocks'), value: 'default'},
@@ -168,7 +168,7 @@ registerBlockType('vk-blocks/heading', {
                     </PanelBody>
                     <PanelBody title={ __( 'Sub Text Settings', 'vk-blocks' ) }>
                       <TextControl
-                          label={__('Sub Caption', 'vk-blocks')}
+                          label={ __( 'Sub Caption', 'vk-blocks' ) }
                           value={subText}
                           onChange={(value) => setAttributes({subText: value})}
                           placeholder={'Input sub text…'}

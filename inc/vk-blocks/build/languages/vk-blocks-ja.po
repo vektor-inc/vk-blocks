@@ -81,9 +81,9 @@ msgstr "吹き出し"
 msgid "Button setting"
 msgstr "ボタン設定"
 
-#: src/button/block.js:137
+#: src/button/block.js:137 src/heading/block.js:171
 msgid "Sub Caption"
-msgstr ""
+msgstr "サブテキスト"
 
 #: src/button/block.js:143 src/pr-blocks/block.js:276
 #: src/pr-content/block.js:131
@@ -258,6 +258,63 @@ msgstr "タイトルを入力"
 #: src/flow/block.js:97 src/pr-blocks/block.js:507
 msgid "Input content"
 msgstr "説明を入力"
+
+#: src/heading/block.js:116
+msgid "Style Settings"
+msgstr "スタイル設定"
+
+#: src/heading/block.js:118
+msgid "Heading style"
+msgstr "見出しスタイル"
+
+#: src/heading/block.js:121
+msgid "Default"
+msgstr "標準"
+
+#: src/heading/block.js:122
+msgid "Plain"
+msgstr "装飾無し"
+
+#: src/heading/block.js:126
+msgid "Margin bottom size (rem)"
+msgstr "下部の余白"
+
+#: src/heading/block.js:136
+msgid "Heading Settings"
+msgstr "見出し設定"
+
+#: src/heading/block.js:137
+msgid "Level"
+msgstr "レベル"
+
+#: src/heading/block.js:139
+msgid "Text Alignment"
+msgstr "テキストの水平位置"
+
+#: src/heading/block.js:155
+msgid "Heading margin bottom size (rem)"
+msgstr "見出し下部の余白 (rem)"
+
+#: src/heading/block.js:169
+msgid "Sub Text Settings"
+msgstr "サブテキスト設定"
+
+#: src/heading/block.js:176
+msgid "Text size (rem)"
+msgstr "文字サイズ (rem)"
+
+#: src/heading/block.js:202
+msgid "Input title…"
+msgstr "タイトルを入力"
+
+#: src/heading/block.js:62
+msgid "Heading"
+msgstr "見出し"
+
+# %s: heading level e.g: "1", "2", "3"
+#: src/heading/heading-toolbar.js:17
+msgid "Heading %d"
+msgstr ""
 
 #: src/outer/block.js:111
 msgid "Background Image"
@@ -550,9 +607,6 @@ msgstr "本文を入力してください。"
 
 #~ msgid "Use contents area default padding"
 #~ msgstr "コンテンツエリアの左右に標準の余白を使用"
-
-#~ msgid "Padding"
-#~ msgstr "余白"
 
 #~ msgid "Link target"
 #~ msgstr "リンクターゲット"

@@ -279,7 +279,7 @@ msgid "Style Settings"
 msgstr ""
 
 #: src/heading/block.js:118
-msgid "Heading style:"
+msgid "Heading style"
 msgstr ""
 
 #: src/heading/block.js:121
