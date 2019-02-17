@@ -28,8 +28,8 @@
 
 /*# sourceMappingURL=../map/flow/style.css.map */
 
-{"version":3,"sources":["style.css"],"names":[],"mappings":"AAAA,kBAAkB,eAAe,CAAC,8BAA8B,gBAAgB,YAAY,gBAAgB,SAAS,CAAC,oCAAoC,WAAW,CAAC,oBAAoB,eAAe,CAAC","file":"../../heading/style.css","sourcesContent":[".vk_heading_title{margin-bottom:0}.vk_heading_title-style-plain{background:none;border:none;border-radius:0;padding:0}.vk_heading_title-style-plain:after{border:none}.vk_heading_subtext{margin-bottom:0}\n"]}
-.vk_heading_title{margin-bottom:0}.vk_heading_title-style-plain{background:none;border:none;border-radius:0;padding:0}.vk_heading_title-style-plain:after{border:none}.vk_heading_subtext{margin-bottom:0}
+{"version":3,"sources":["style.css"],"names":[],"mappings":"AAAA,kBAAkB,mBAAmB,CAAC,8BAA8B,gBAAgB,YAAY,gBAAgB,SAAS,CAAC,oCAAoC,WAAW,CAAC,oBAAoB,eAAe,CAAC","file":"../../heading/style.css","sourcesContent":[".vk_heading_title{margin-bottom:0.3em}.vk_heading_title-style-plain{background:none;border:none;border-radius:0;padding:0}.vk_heading_title-style-plain:after{border:none}.vk_heading_subtext{margin-bottom:0}\n"]}
+.vk_heading_title{margin-bottom:0.3em}.vk_heading_title-style-plain{background:none;border:none;border-radius:0;padding:0}.vk_heading_title-style-plain:after{border:none}.vk_heading_subtext{margin-bottom:0}
 
 /*# sourceMappingURL=../map/heading/style.css.map */
 

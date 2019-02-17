@@ -273,31 +273,35 @@ msgstr ""
 msgid "Input content"
 msgstr ""
 
-#: src/heading/block.js:103
+#: src/heading/block.js:100
+msgid "Text size (rem)"
+msgstr ""
+
+#: src/heading/block.js:110
 msgid "Sub Text Settings"
 msgstr ""
 
-#: src/heading/block.js:117
+#: src/heading/block.js:124
 msgid "Style Settings"
 msgstr ""
 
-#: src/heading/block.js:119
+#: src/heading/block.js:126
 msgid "Title style:"
 msgstr ""
 
-#: src/heading/block.js:122
+#: src/heading/block.js:129
 msgid "Default"
 msgstr ""
 
-#: src/heading/block.js:123
+#: src/heading/block.js:130
 msgid "Plain"
 msgstr ""
 
-#: src/heading/block.js:136
+#: src/heading/block.js:143
 msgid "Input title…"
 msgstr ""
 
-#: src/heading/block.js:144
+#: src/heading/block.js:151
 msgid "Input sub text…"
 msgstr ""
 
@@ -313,8 +317,8 @@ msgstr ""
 msgid "Level"
 msgstr ""
 
-#: src/heading/block.js:93
-msgid "Text size (rem)"
+#: src/heading/block.js:89
+msgid "Text Alignment"
 msgstr ""
 
 # %s: heading level e.g: "1", "2", "3"

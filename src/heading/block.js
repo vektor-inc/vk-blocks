@@ -11,7 +11,7 @@ const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType,createBlock} = wp.blocks; // Import registerBlockType() from wp.blocks
 const {RangeControl, RadioControl, PanelBody, Button, PanelColor} = wp.components;
 const {Fragment} = wp.element;
-const {RichText, InspectorControls, MediaUpload, ColorPalette,BlockControls,Toolbar} = wp.editor;
+const {RichText, InspectorControls, MediaUpload, ColorPalette, BlockControls, Toolbar, AlignmentToolbar } = wp.editor;
 const BlockIcon = 'arrow-down';
 
 /**
@@ -48,7 +48,7 @@ registerBlockType('vk-blocks/heading', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     edit({attributes, setAttributes}) {
-        const {level, title, titleColor, titleSize, subText, subTextColor, subTextSize, titleStyle} = attributes;
+        const { level, align, title, titleColor, titleSize, subText, subTextColor, subTextSize, titleStyle } = attributes;
         const tagName = 'h' + level;
 
         let setTitleFontSize = (newLevel) => {
@@ -86,6 +86,13 @@ registerBlockType('vk-blocks/heading', {
                     <PanelBody title={ __( 'Heading Settings', 'vk-blocks' ) }>
                         <label>{ __( 'Level', 'vk-blocks' ) }</label>
                         <HeadingToolbar minLevel={1} maxLevel={7} selectedLevel={level} onChange={setTitleFontSize}/>
+                        <p>{ __( 'Text Alignment' ) }</p>
+                        <AlignmentToolbar
+                          value={ align }
+                          onChange={ ( value ) => {
+                            setAttributes( { align: value } );
+                          } }
+                        />
                         <ColorPalette
                             value={titleColor}
                             onChange={(value) => setAttributes({titleColor: value})}
@@ -131,7 +138,7 @@ registerBlockType('vk-blocks/heading', {
                         tagName={tagName}
                         value={title}
                         onChange={(value) => setAttributes({title: value})}
-                        style={{color: titleColor, fontSize: titleSize + 'rem'}}
+                        style={{color: titleColor, fontSize: titleSize + 'rem',textAlign: align}}
                         className={`vk_heading_title vk_heading_title-style-${titleStyle}`}
                         placeholder={__('Input title…', 'vk-blocks')}
                     />
@@ -139,7 +146,7 @@ registerBlockType('vk-blocks/heading', {
                         tagName={'p'}
                         value={subText}
                         onChange={(value) => setAttributes({subText: value})}
-                        style={{color: subTextColor,fontSize: subTextSize + 'rem'}}
+                        style={{color: subTextColor,fontSize: subTextSize + 'rem',textAlign: align}}
                         className={`vk_heading_subtext vk_heading_subtext-style-${titleStyle}`}
                         placeholder={__('Input sub text…', 'vk-blocks')}
                 />
@@ -157,7 +164,7 @@ registerBlockType('vk-blocks/heading', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     save({attributes}) {
-        const {level, title, titleColor, titleSize, subText, subTextColor, subTextSize, titleStyle} = attributes;
+        const { level, align, title, titleColor, titleSize, subText, subTextColor, subTextSize, titleStyle } = attributes;
         const tagName = 'h' + level;
 
         return (
@@ -165,13 +172,13 @@ registerBlockType('vk-blocks/heading', {
                 <RichText.Content
                     tagName={tagName}
                     value={title}
-                    style={{color: titleColor, fontSize: titleSize + 'rem'}}
+                    style={ { color: titleColor, fontSize: titleSize + 'rem',textAlign: align } }
                     className={`vk_heading_title vk_heading_title-style-${titleStyle}`}
                 />
                 <RichText.Content
                     tagName={'p'}
                     value={subText}
-                    style={{color: subTextColor,fontSize: subTextSize + 'rem'}}
+                    style={ { color: subTextColor,fontSize: subTextSize + 'rem',textAlign: align } }
                     className={`vk_heading_subtext vk_heading_subtext-style-${titleStyle}`}
                 />
             </div>

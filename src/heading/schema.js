@@ -31,6 +31,9 @@ export const schema = {
         type: 'number',
         default: 2,
     },
+		align: {
+        type: 'string',
+    },
     titleStyle: {
         type: 'string',
         default: 'default',
