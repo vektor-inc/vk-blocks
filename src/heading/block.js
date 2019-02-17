@@ -57,22 +57,22 @@ registerBlockType('vk-blocks/heading', {
 
             switch (newLevel) {
                 case 1:
-                    setAttributes({titleSize: 36});
+                    setAttributes({titleSize: 2.2});
                     break;
                 case 2:
-                    setAttributes({titleSize: 24});
+                    setAttributes({titleSize: 2});
                     break;
                 case 3:
-                    setAttributes({titleSize: 24});
+                    setAttributes({titleSize: 1.8});
                     break;
                 case 4:
-                    setAttributes({titleSize: 20});
+                    setAttributes({titleSize: 1.4});
                     break;
                 case 5:
-                    setAttributes({titleSize: 18});
+                    setAttributes({titleSize: 1.2});
                     break;
                 case 6:
-                    setAttributes({titleSize: 16});
+                    setAttributes({titleSize: 1});
                     break;
             }
         };
@@ -94,6 +94,9 @@ registerBlockType('vk-blocks/heading', {
                             value={titleSize}
                             onChange={(value) => {setAttributes({titleSize: value});
                             }}
+                            min={0.5}
+                            max={3}
+                            step={0.1}
                         />
                     </PanelBody>
                     <PanelBody title={ __( 'Sub Text Settings', 'vk-blocks' ) }>
@@ -105,6 +108,10 @@ registerBlockType('vk-blocks/heading', {
                             value={subTextSize}
                             onChange={(value) => {setAttributes({subTextSize: value});
                             }}
+                            }}
+                            min={0.5}
+                            max={3}
+                            step={0.1}
                         />
                     </PanelBody>
                     <PanelBody title={__('Style Settings', 'vk-blocks')}>
@@ -124,7 +131,7 @@ registerBlockType('vk-blocks/heading', {
                         tagName={tagName}
                         value={title}
                         onChange={(value) => setAttributes({title: value})}
-                        style={{color: titleColor, fontSize: titleSize + 'px'}}
+                        style={{color: titleColor, fontSize: titleSize + 'rem'}}
                         className={`vk_heading_title-style-${titleStyle}`}
                         placeholder={__('Input title…', 'vk-blocks')}
                     />
@@ -132,7 +139,7 @@ registerBlockType('vk-blocks/heading', {
                         tagName={'p'}
                         value={subText}
                         onChange={(value) => setAttributes({subText: value})}
-                        style={{color: subTextColor,fontSize: subTextSize + 'px'}}
+                        style={{color: subTextColor,fontSize: subTextSize + 'rem'}}
                         className={`vk_heading_subtext-style-${titleStyle}`}
                         placeholder={__('Input sub text…', 'vk-blocks')}
                 />
@@ -158,13 +165,13 @@ registerBlockType('vk-blocks/heading', {
                 <RichText.Content
                     tagName={tagName}
                     value={title}
-                    style={{color: titleColor, fontSize: titleSize + 'px'}}
+                    style={{color: titleColor, fontSize: titleSize + 'rem'}}
                     className={`vk_heading_title-style-${titleStyle}`}
                 />
                 <RichText.Content
                     tagName={'p'}
                     value={subText}
-                    style={{color: subTextColor,fontSize: subTextSize + 'px'}}
+                    style={{color: subTextColor,fontSize: subTextSize + 'rem'}}
                     className={`vk_heading_subtext-style-${titleStyle}`}
                 />
             </div>

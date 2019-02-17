@@ -21,11 +21,11 @@ export const schema = {
     },
     titleSize: {
         type: 'string',
-        default: '24',
+        default: '2',
     },
     subTextSize: {
         type: 'string',
-        default: '16',
+        default: '1.2',
     },
     level: {
         type: 'number',
