@@ -57,22 +57,22 @@ registerBlockType('vk-blocks/heading', {
 
             switch (newLevel) {
                 case 1:
-                    setAttributes({titleSize: 2.2});
+                    setAttributes({titleSize: 3.0});
                     break;
                 case 2:
-                    setAttributes({titleSize: 2});
+                    setAttributes({titleSize: 2.6});
                     break;
                 case 3:
-                    setAttributes({titleSize: 1.8});
+                    setAttributes({titleSize: 2.2});
                     break;
                 case 4:
-                    setAttributes({titleSize: 1.4});
+                    setAttributes({titleSize: 2.0});
                     break;
                 case 5:
-                    setAttributes({titleSize: 1.2});
+                    setAttributes({titleSize: 1.8});
                     break;
                 case 6:
-                    setAttributes({titleSize: 1});
+                    setAttributes({titleSize: 1.6});
                     break;
             }
         };
@@ -83,6 +83,17 @@ registerBlockType('vk-blocks/heading', {
                     <HeadingToolbar minLevel={2} maxLevel={5} selectedLevel={level} onChange={setTitleFontSize}/>
                 </BlockControls>
                 <InspectorControls>
+                    <PanelBody title={__('Style Settings', 'vk-blocks')}>
+                        <RadioControl
+                            label={__('Title style:', 'vk-blocks')}
+                            selected={titleStyle}
+                            options={[
+                                {label: __('Default', 'vk-blocks'), value: 'default'},
+                                {label: __('Plain', 'vk-blocks'), value: 'plain'}
+                            ]}
+                            onChange={(value) => setAttributes({titleStyle: value})}
+                        />
+                    </PanelBody>
                     <PanelBody title={ __( 'Heading Settings', 'vk-blocks' ) }>
                         <label>{ __( 'Level', 'vk-blocks' ) }</label>
                         <HeadingToolbar minLevel={1} maxLevel={7} selectedLevel={level} onChange={setTitleFontSize}/>
@@ -112,6 +123,7 @@ registerBlockType('vk-blocks/heading', {
                             value={subTextColor}
                             onChange={(value) => setAttributes({subTextColor: value})}
                         />
+                        <label>{__('Text size (rem)', 'vk-blocks')}</label>
                         <RangeControl
                             value={subTextSize}
                             onChange={(value) => {setAttributes({subTextSize: value});
@@ -119,17 +131,6 @@ registerBlockType('vk-blocks/heading', {
                             min={0.5}
                             max={3}
                             step={0.1}
-                        />
-                    </PanelBody>
-                    <PanelBody title={__('Style Settings', 'vk-blocks')}>
-                        <RadioControl
-                            label={__('Title style:', 'vk-blocks')}
-                            selected={titleStyle}
-                            options={[
-                                {label: __('Default', 'vk-blocks'), value: 'default'},
-                                {label: __('Plain', 'vk-blocks'), value: 'plain'}
-                            ]}
-                            onChange={(value) => setAttributes({titleStyle: value})}
                         />
                     </PanelBody>
                 </InspectorControls>
