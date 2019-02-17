@@ -84,12 +84,13 @@ registerBlockType('vk-blocks/heading', {
                 </BlockControls>
                 <InspectorControls>
                     <PanelBody title={ __( 'Heading Settings', 'vk-blocks' ) }>
-                        <p>{ __( 'Level', 'vk-blocks' ) }</p>
+                        <label>{ __( 'Level', 'vk-blocks' ) }</label>
                         <HeadingToolbar minLevel={1} maxLevel={7} selectedLevel={level} onChange={setTitleFontSize}/>
                         <ColorPalette
                             value={titleColor}
                             onChange={(value) => setAttributes({titleColor: value})}
                         />
+												<label>{__('Text size (rem)', 'vk-blocks')}</label>
                         <RangeControl
                             value={titleSize}
                             onChange={(value) => {setAttributes({titleSize: value});
