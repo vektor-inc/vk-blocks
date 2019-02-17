@@ -48,7 +48,7 @@ registerBlockType('vk-blocks/heading', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     edit({attributes, setAttributes}) {
-        const { level, align, title, titleColor, titleSize, subText, subTextColor, subTextSize, titleStyle } = attributes;
+        const { level, align, title, titleColor, titleSize, subText, subTextColor, subTextSize, titleStyle,titleMarginBottom,outerMarginBottom } = attributes;
         const tagName = 'h' + level;
 
         let setTitleFontSize = (newLevel) => {
@@ -85,13 +85,22 @@ registerBlockType('vk-blocks/heading', {
                 <InspectorControls>
                     <PanelBody title={__('Style Settings', 'vk-blocks')}>
                         <RadioControl
-                            label={__('Title style:', 'vk-blocks')}
+                            label={__('Heading style:', 'vk-blocks')}
                             selected={titleStyle}
                             options={[
                                 {label: __('Default', 'vk-blocks'), value: 'default'},
                                 {label: __('Plain', 'vk-blocks'), value: 'plain'}
                             ]}
                             onChange={(value) => setAttributes({titleStyle: value})}
+                        />
+                        <label>{__('Margin bottom size (rem)', 'vk-blocks')}</label>
+                        <RangeControl
+                            value={outerMarginBottom}
+                            onChange={(value) => {setAttributes({outerMarginBottom: value});
+                            }}
+                            min={-1}
+                            max={8}
+                            step={0.1}
                         />
                     </PanelBody>
                     <PanelBody title={ __( 'Heading Settings', 'vk-blocks' ) }>
@@ -104,10 +113,6 @@ registerBlockType('vk-blocks/heading', {
                             setAttributes( { align: value } );
                           } }
                         />
-                        <ColorPalette
-                            value={titleColor}
-                            onChange={(value) => setAttributes({titleColor: value})}
-                        />
                         <label>{__('Text size (rem)', 'vk-blocks')}</label>
                         <RangeControl
                             value={titleSize}
@@ -117,29 +122,46 @@ registerBlockType('vk-blocks/heading', {
                             max={4}
                             step={0.1}
                         />
-                    </PanelBody>
-                    <PanelBody title={ __( 'Sub Text Settings', 'vk-blocks' ) }>
-                        <ColorPalette
-                            value={subTextColor}
-                            onChange={(value) => setAttributes({subTextColor: value})}
-                        />
-                        <label>{__('Text size (rem)', 'vk-blocks')}</label>
+                        <label>{__('Heading margin bottom size (rem)', 'vk-blocks')}</label>
                         <RangeControl
-                            value={subTextSize}
-                            onChange={(value) => {setAttributes({subTextSize: value});
+                            value={titleMarginBottom}
+                            onChange={(value) => {setAttributes({titleMarginBottom: value});
                             }}
-                            min={0.5}
+                            min={-1}
                             max={3}
                             step={0.1}
                         />
+                        <ColorPalette
+                            value={titleColor}
+                            onChange={(value) => setAttributes({titleColor: value})}
+                        />
+                    </PanelBody>
+                    <PanelBody title={ __( 'Sub Text Settings', 'vk-blocks' ) }>
+                      <label>{__('Text size (rem)', 'vk-blocks')}</label>
+                      <RangeControl
+                          value={subTextSize}
+                          onChange={(value) => {setAttributes({subTextSize: value});
+                          }}
+                          min={0.5}
+                          max={3}
+                          step={0.1}
+                      />
+                      <ColorPalette
+                          value={subTextColor}
+                          onChange={(value) => setAttributes({subTextColor: value})}
+                      />
                     </PanelBody>
                 </InspectorControls>
-                <div className={`vk_heading vk_heading-style-${titleStyle}`}>
+
+                <div
+                  className = {`vk_heading vk_heading-style-${titleStyle}`}
+                  style={ { marginBottom: outerMarginBottom + `rem` } }
+                >
                     <RichText
                         tagName={tagName}
                         value={title}
                         onChange={(value) => setAttributes({title: value})}
-                        style={{color: titleColor, fontSize: titleSize + 'rem',textAlign: align}}
+                        style={ { color: titleColor, fontSize: titleSize + 'rem',textAlign: align,marginBottom:titleMarginBottom + 'rem' } }
                         className={`vk_heading_title vk_heading_title-style-${titleStyle}`}
                         placeholder={__('Input title…', 'vk-blocks')}
                     />
@@ -165,32 +187,35 @@ registerBlockType('vk-blocks/heading', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     save({attributes}) {
-        const { level, align, title, titleColor, titleSize, subText, subTextColor, subTextSize, titleStyle } = attributes;
+        const { level, align, title, titleColor, titleSize, subText, subTextColor, subTextSize, titleStyle,titleMarginBottom,outerMarginBottom } = attributes;
         const tagName = 'h' + level;
 
         return (
-            <div className={`vk_heading vk_heading-style-${titleStyle}`}>
+            <div
+              className = {`vk_heading vk_heading-style-${titleStyle}`}
+              style={ { marginBottom: outerMarginBottom + `rem` } }
+            >
                 <RichText.Content
                     tagName={tagName}
                     value={title}
-                    style={ { color: titleColor, fontSize: titleSize + 'rem',textAlign: align } }
+                    style={ { color: titleColor, fontSize: titleSize + 'rem',textAlign: align,marginBottom:titleMarginBottom + 'rem' } }
                     className={`vk_heading_title vk_heading_title-style-${titleStyle}`}
                 />
-								{
-										//ボタンテキストが入力されるとボタンを表示。
-										(() => {
-												if (subText !== '' && subText !== undefined ) {
-														return (
-															<RichText.Content
-							                    tagName={'p'}
-							                    value={subText}
-							                    style={ { color: subTextColor,fontSize: subTextSize + 'rem',textAlign: align } }
-							                    className={`vk_heading_subtext vk_heading_subtext-style-${titleStyle}`}
-							                />
-													);
-												}
-										})()
-								}
+                {
+                    //ボタンテキストが入力されるとボタンを表示。
+                    (() => {
+                        if (subText !== '' && subText !== undefined ) {
+                            return (
+                              <RichText.Content
+                                  tagName={'p'}
+                                  value={subText}
+                                  style={ { color: subTextColor,fontSize: subTextSize + 'rem',textAlign: align } }
+                                  className={`vk_heading_subtext vk_heading_subtext-style-${titleStyle}`}
+                              />
+                          );
+                        }
+                    })()
+                }
             </div>
         );
     },

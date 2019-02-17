@@ -23,6 +23,9 @@ export const schema = {
         type: 'number',
         default: 2.6,
     },
+    titleMarginBottom: {
+        type: 'number',
+    },
     subTextSize: {
         type: 'number',
         default: 1.8,
@@ -37,5 +40,8 @@ export const schema = {
     titleStyle: {
         type: 'string',
         default: 'default',
+    },
+		outerMarginBottom: {
+        type: 'number',
     },
 };
