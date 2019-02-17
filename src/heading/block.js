@@ -57,10 +57,10 @@ registerBlockType('vk-blocks/heading', {
 
             switch (newLevel) {
                 case 1:
-                    setAttributes({titleSize: 3.0});
+                    setAttributes({titleSize: 3.6});
                     break;
                 case 2:
-                    setAttributes({titleSize: 2.6});
+                    setAttributes({titleSize: 2.8});
                     break;
                 case 3:
                     setAttributes({titleSize: 2.2});

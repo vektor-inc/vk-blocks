@@ -1,4 +1,18 @@
 export const schema = {
+    level: {
+        type: 'number',
+        default: 2,
+    },
+    align: {
+        type: 'string',
+    },
+    titleStyle: {
+        type: 'string',
+        default: 'default',
+    },
+    outerMarginBottom: {
+        type: 'number',
+    },
     title: {
         type: 'string',
         source: 'html',
@@ -9,7 +23,14 @@ export const schema = {
         type: 'string',
         default: '#000000',
     },
-		subText: {
+    titleSize: {
+        type: 'number',
+        default: 2.6,
+    },
+    titleMarginBottom: {
+        type: 'number',
+    },
+    subText: {
         source: 'html',
         selector: 'p',
         default: '',
@@ -18,29 +39,8 @@ export const schema = {
         type: 'string',
         default: '#000000',
     },
-    titleSize: {
-        type: 'number',
-        default: 2.6,
-    },
-    titleMarginBottom: {
-        type: 'number',
-    },
     subTextSize: {
         type: 'number',
         default: 1.8,
-    },
-    level: {
-        type: 'number',
-        default: 2,
-    },
-		align: {
-        type: 'string',
-    },
-    titleStyle: {
-        type: 'string',
-        default: 'default',
-    },
-		outerMarginBottom: {
-        type: 'number',
     },
 };
