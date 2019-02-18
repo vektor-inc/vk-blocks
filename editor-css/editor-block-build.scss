@@ -6,8 +6,17 @@
 }
 .components-radio-control__option label { margin-bottom:0; }
 .components-checkbox-control__label { margin-bottom:0; }
+.components-color-palette { display:block; overflow:hidden; }
 
-.edit-post-visual-editor{
+// これがないと rem 指定してる見出しなどが大きくなりすぎる
+// 見出しがrem指定なのは今後画面サイズによって html の font size を可変にして 見出しサイズも自動可変させるため
+html {
+font-size:10px;
+}
+
+.edit-post-visual-editor.editor-styles-wrapper{
+
+
 
 /* これがないとGutenberg標準のエディタCSSに負ける */
 h1:first-child.vk_prBlocks_item_title{
@@ -21,6 +30,25 @@ h1:first-child.vk_prBlocks_item_title{
 		.wp-block {
 			max-width:100%;
 		}
+}
+
+@media (min-width: 600px){
+.wp-block-columns {
+	margin-left:-15px;
+	margin-right:-15px;
+}
+.wp-block-column {
+	flex-basis: auto;
+	margin-left:15px;
+	margin-right:15px;
+	width: calc( 50% - 30px ) ;
+	&:not(:first-child),
+	&:not(:last-child),
+	&:nth-child(odd){
+		margin-left:15px;
+		margin-right:15px;
+	}
+}
 }
 
 .alert{
@@ -557,6 +585,32 @@ $color_dark:#343a40;
 /*-------------------------------------------*/
 /* CSS
 /*-------------------------------------------*/
+@mixin reset() {
+	background: none;
+	border:none;
+	border-radius: 0;
+	padding:0;
+	font-weight: normal;
+	box-shadow:none;
+	&:after {
+		border:none;
+	}
+}
+
+.vk_heading_title {
+	&-style {
+		&-plain {
+			@include reset;
+		}
+	}
+}
+.vk_heading_subtext {
+	margin-bottom:0;
+}
+
+/*-------------------------------------------*/
+/* CSS
+/*-------------------------------------------*/
 $media-sm-up : 576px;
 $media-md-up : 768px;
 $media-lg-up : 992px;
@@ -762,9 +816,8 @@ $padding-xl:3.5em;
 			background-color: transparent;
 			font-weight: bold;
 			padding: 0;
-			border-bottom: none;
 			box-shadow: none;
-			border-left: none;
+			border: none;
 			margin-bottom:0.8em;
 			@media (max-width: 575.98px) {
 				&:first-child{

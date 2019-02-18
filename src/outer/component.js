@@ -40,7 +40,11 @@ export class Component extends React.Component {
             lower_level,
             upperDividerBgColor,
             lowerDividerBgColor,
-            dividerType
+            dividerType,
+            borderWidth,
+            borderStyle,
+            borderColor,
+            borderRadius
         } = this.props.attributes;
 
         let for_ = this.props.for_;
@@ -52,6 +56,9 @@ export class Component extends React.Component {
         let containerClass;
         let whichSideUpper;
         let whichSideLower;
+        let bgStyle;
+        let borderProperty;
+        let borderRadiusProperty;
 
         //幅のクラス切り替え
         classWidth = ` vk_outer-width-${outerWidth}`;
@@ -105,11 +112,34 @@ export class Component extends React.Component {
             containerClass = 'vk_outer_container';
         }
 
+        //背景画像の有り無しでstyleを切り替え
+        if(bgImage){
+            bgStyle = `linear-gradient(${bgColor}, ${bgColor}), url(${bgImage})`;
+        }else {
+            bgStyle = `linear-gradient(${bgColor}, ${bgColor})`;
+        }
+
+        //borderColorクリア時に白をセットする
+        if (!borderColor) {
+            borderColor = '#fff';
+        }
+
+        //Dividerエフェクトがない時のみ枠線を追加
+        if(upper_level === 0 && lower_level === 0){
+            borderProperty = `${borderWidth}px ${borderStyle} ${borderColor}`;
+            borderRadiusProperty = `${borderRadius}px`;
+        }else {
+            borderProperty = 'none';
+            borderRadiusProperty = `0px`;
+        }
+
         return (
             <div
                 className={ 'vk_outer' + classWidth + classPaddingLR + classPaddingVertical + classBgPosition }
                 style={{
-                    background: `linear-gradient(${bgColor}, ${bgColor}), url(${bgImage})`,
+                    background: bgStyle,
+                    border: borderProperty,
+                    borderRadius: borderRadiusProperty
                 }}
             >
                     {

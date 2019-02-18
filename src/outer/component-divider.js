@@ -76,11 +76,12 @@ const componentDivider = (level, color, whichSide, dividerType) => {
         if (level > 0) {
 
             return (
-                <path
-                    d={`m0,100 h${50 - DivideAbs4} l${DivideAbs4},-${absLevel} l${DivideAbs4},${absLevel} h${DivideAbs4} v100 h-100 z`}
-                    strokeWidth="0"
-                    fill={color}
-                />);
+                    <path
+                        d={`m0,100 h${50 - DivideAbs4} l${DivideAbs4},-${absLevel} l${DivideAbs4},${absLevel} h${DivideAbs4} v100 h-100 z`}
+                        strokeWidth="0"
+                        fill={color}
+                    />
+                );
         } else if (level < 0) {
 
             return (
