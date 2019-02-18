@@ -35,6 +35,10 @@ export const schema = {
         selector: 'p',
         default: '',
     },
+    subTextFlag: {
+        type: 'string',
+        default: 'on',
+    },
     subTextColor: {
         type: 'string',
         default: '#000000',

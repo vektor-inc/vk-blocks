@@ -9,7 +9,7 @@ import HeadingToolbar from './heading-toolbar';
 // import YourComponent from "./component.js";
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
-const {RangeControl,PanelBody,TextControl,SelectControl} = wp.components;
+const {RangeControl,PanelBody,RadioControl,SelectControl} = wp.components;
 const {Fragment} = wp.element;
 const {RichText, InspectorControls, ColorPalette, BlockControls, AlignmentToolbar } = wp.editor;
 const BlockIcon = (
@@ -78,7 +78,7 @@ registerBlockType('vk-blocks/heading', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     edit({attributes, setAttributes}) {
-        const { level, align, title, titleColor, titleSize, subText, subTextColor, subTextSize, titleStyle,titleMarginBottom,outerMarginBottom } = attributes;
+        const {level, align, title, titleColor, titleSize, subText, subTextFlag, subTextColor, subTextSize, titleStyle, titleMarginBottom, outerMarginBottom} = attributes;
         const tagName = 'h' + level;
 
         let setTitleFontSize = (newLevel) => {
@@ -167,12 +167,15 @@ registerBlockType('vk-blocks/heading', {
                         />
                     </PanelBody>
                     <PanelBody title={ __( 'Sub Text Settings', 'vk-blocks' ) }>
-                      <TextControl
-                          label={ __( 'Sub Caption', 'vk-blocks' ) }
-                          value={subText}
-                          onChange={(value) => setAttributes({subText: value})}
-                          placeholder={'Input sub text…'}
-                      />
+                        <RadioControl
+                            label={__('Position', 'vk-blocks')}
+                            selected={subTextFlag}
+                            options={[
+                                {label: __('Display', 'vk-blocks'), value: 'on'},
+                                {label: __('Hide', 'vk-blocks'), value: 'off'},
+                            ]}
+                            onChange={(value) => setAttributes({subTextFlag: value})}
+                        />
                       <label>{__('Text size (rem)', 'vk-blocks')}</label>
                       <RangeControl
                           value={subTextSize}
@@ -204,15 +207,17 @@ registerBlockType('vk-blocks/heading', {
                     {
                         // サブテキスト
                         (() => {
-                            if (subText !== '' && subText !== undefined ) {
+                            if (subTextFlag === 'on') {
                                 return (
-                                  <RichText.Content
-                                      tagName={'p'}
-                                      value={subText}
-                                      style={ { color: subTextColor,fontSize: subTextSize + 'rem',textAlign: align } }
-                                      className={`vk_heading_subtext vk_heading_subtext-style-${titleStyle}`}
-                                  />
-                              );
+                                    <RichText
+                                        tagName={'p'}
+                                        value={subText}
+                                        onChange={(value) => setAttributes({subText: value})}
+                                        style={{color: subTextColor, fontSize: subTextSize + 'rem', textAlign: align}}
+                                        className={`vk_heading_subtext vk_heading_subtext-style-${titleStyle}`}
+                                        placeholder={__('Input sub text…', 'vk-blocks')}
+                                    />
+                                );
                             }
                         })()
                     }
@@ -230,7 +235,7 @@ registerBlockType('vk-blocks/heading', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     save({attributes}) {
-        const { level, align, title, titleColor, titleSize, subText, subTextColor, subTextSize, titleStyle,titleMarginBottom,outerMarginBottom } = attributes;
+        const { level, align, title, titleColor, titleSize, subText,subTextFlag, subTextColor, subTextSize, titleStyle,titleMarginBottom,outerMarginBottom } = attributes;
         const tagName = 'h' + level;
 
         return (
@@ -247,15 +252,15 @@ registerBlockType('vk-blocks/heading', {
                 {
                     // サブテキスト
                     (() => {
-                        if (subText !== '' && subText !== undefined ) {
+                        if (subTextFlag === 'on') {
                             return (
-                              <RichText.Content
-                                  tagName={'p'}
-                                  value={subText}
-                                  style={ { color: subTextColor,fontSize: subTextSize + 'rem',textAlign: align } }
-                                  className={`vk_heading_subtext vk_heading_subtext-style-${titleStyle}`}
-                              />
-                          );
+                                <RichText.Content
+                                    tagName={'p'}
+                                    value={subText}
+                                    style={{color: subTextColor, fontSize: subTextSize + 'rem', textAlign: align}}
+                                    className={`vk_heading_subtext vk_heading_subtext-style-${titleStyle}`}
+                                />
+                            );
                         }
                     })()
                 }
