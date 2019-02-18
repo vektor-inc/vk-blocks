@@ -8,10 +8,10 @@ import HeadingToolbar from './heading-toolbar';
 
 // import YourComponent from "./component.js";
 const {__} = wp.i18n; // Import __() from wp.i18n
-const {registerBlockType,createBlock} = wp.blocks; // Import registerBlockType() from wp.blocks
-const {RangeControl, RadioControl, PanelBody, Button, PanelColor,TextControl} = wp.components;
+const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
+const {RangeControl,PanelBody,TextControl,SelectControl} = wp.components;
 const {Fragment} = wp.element;
-const {RichText, InspectorControls, MediaUpload, ColorPalette, BlockControls, Toolbar, AlignmentToolbar } = wp.editor;
+const {RichText, InspectorControls, ColorPalette, BlockControls, AlignmentToolbar } = wp.editor;
 const BlockIcon = (
     <svg xmlns="http://www.w3.org/2000/svg" width="576" height="512" viewBox="0 0 576 512">
 		<g>
@@ -114,14 +114,14 @@ registerBlockType('vk-blocks/heading', {
                 </BlockControls>
                 <InspectorControls>
                     <PanelBody title={__('Style Settings', 'vk-blocks')}>
-                        <RadioControl
+                        <SelectControl
                             label={__('Heading style', 'vk-blocks')}
-                            selected={titleStyle}
+                            value={titleStyle}
+                            onChange={(value) => setAttributes({titleStyle: value})}
                             options={[
                                 {label: __('Default', 'vk-blocks'), value: 'default'},
                                 {label: __('Plain', 'vk-blocks'), value: 'plain'}
                             ]}
-                            onChange={(value) => setAttributes({titleStyle: value})}
                         />
                         <label>{__('Margin bottom size (rem)', 'vk-blocks')}</label>
                         <RangeControl
