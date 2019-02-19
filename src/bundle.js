@@ -1,5 +1,6 @@
 //Bundle JS
 import './outer/block.js';
+import './heading/block.js';
 import './alert/block.js';
 import './balloon/block.js';
 import './button/block.js';

@@ -16,5 +16,5 @@ export const schema = {
     opacity: {
         type: 'number',
         default: 0.5,
-    },
+    }
 };

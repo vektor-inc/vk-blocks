@@ -82,6 +82,7 @@ msgid "Button setting"
 msgstr ""
 
 #: src/button/block.js:137
+#: src/heading/block.js:171
 msgid "Sub Caption"
 msgstr ""
 
@@ -271,6 +272,63 @@ msgstr ""
 #: src/flow/block.js:97
 #: src/pr-blocks/block.js:507
 msgid "Input content"
+msgstr ""
+
+#: src/heading/block.js:116
+msgid "Style Settings"
+msgstr ""
+
+#: src/heading/block.js:118
+msgid "Heading style"
+msgstr ""
+
+#: src/heading/block.js:121
+msgid "Default"
+msgstr ""
+
+#: src/heading/block.js:122
+msgid "Plain"
+msgstr ""
+
+#: src/heading/block.js:126
+msgid "Margin bottom size (rem)"
+msgstr ""
+
+#: src/heading/block.js:136
+msgid "Heading Settings"
+msgstr ""
+
+#: src/heading/block.js:137
+msgid "Level"
+msgstr ""
+
+#: src/heading/block.js:139
+msgid "Text Alignment"
+msgstr ""
+
+#: src/heading/block.js:155
+msgid "Heading margin bottom size (rem)"
+msgstr ""
+
+#: src/heading/block.js:169
+msgid "Sub Text Settings"
+msgstr ""
+
+#: src/heading/block.js:176
+msgid "Text size (rem)"
+msgstr ""
+
+#: src/heading/block.js:202
+msgid "Input title…"
+msgstr ""
+
+#: src/heading/block.js:62
+msgid "Heading"
+msgstr ""
+
+# %s: heading level e.g: "1", "2", "3"
+#: src/heading/heading-toolbar.js:17
+msgid "Heading %d"
 msgstr ""
 
 #: src/outer/block.js:111
