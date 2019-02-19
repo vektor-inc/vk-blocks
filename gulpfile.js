@@ -59,7 +59,7 @@ gulp.task('watch', function () {
 });
 
 // Build
-gulp.task('build', ['js', 'sass']);
+gulp.task('build', ['js', 'sass', 'sass_editor']);
 
 // Default Tasks
 gulp.task('default', ['watch']);
