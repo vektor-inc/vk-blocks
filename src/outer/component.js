@@ -44,7 +44,8 @@ export class Component extends React.Component {
             borderWidth,
             borderStyle,
             borderColor,
-            borderRadius
+            borderRadius,
+            anchor
         } = this.props.attributes;
 
         let for_ = this.props.for_;
@@ -135,6 +136,7 @@ export class Component extends React.Component {
 
         return (
             <div
+                id={anchor}
                 className={ 'vk_outer' + classWidth + classPaddingLR + classPaddingVertical + classBgPosition }
                 style={{
                     background: bgStyle,
