@@ -32,8 +32,3 @@
 @media (min-width: 769px) {
   @include switchVisibility(block, none, none);
 }
-
-//レンジスライダー非表示
-.components-range-control__slider {
-  display: none;
-}
