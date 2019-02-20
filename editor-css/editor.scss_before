@@ -14,6 +14,11 @@ html {
 font-size:10px;
 }
 
+/*スライダーを表示。デフォルトだとbootstrapに非表示にされてしまう*/
+input[type=range] {
+    margin: 1px;
+}
+
 .edit-post-visual-editor.editor-styles-wrapper{
 
 
