@@ -14,6 +14,11 @@ html {
 font-size:10px;
 }
 
+/*スライダーを表示。デフォルトだとbootstrapに非表示にされてしまう*/
+input[type=range] {
+    margin: 1px;
+}
+
 .edit-post-visual-editor.editor-styles-wrapper{
 
 
@@ -31,7 +36,6 @@ h1:first-child.vk_prBlocks_item_title{
 			max-width:100%;
 		}
 }
-
 @media (min-width: 600px){
 .wp-block-columns {
 	margin-left:-15px;
@@ -717,64 +721,6 @@ $padding-xl:3.5em;
 // }
 
 /*-------------------------------------------*/
-/* .vk_prBlocks
-/*-------------------------------------------*/
-.vk_prBlocks_item {
-	@media screen and (max-width:992px){
-		margin-bottom: 1.5em;
-	}
-}
-.vk_prBlocks_item_link {
-	color: #333;
-	&:hover{
-		color: #333;
-		text-decoration: none;
-	}
-}
-.vk_prBlocks_item_icon_outer {
-	display: block;
-	position:relative;
-	margin: 0 auto ;
-	width: 80px;
-	height: 80px;
-	border-radius: 50%;
-}
-.vk_prBlocks_item_icon {
-	position:absolute;
-	top:50%;
-	left:50%;
-	transform: translateY(-50%) translateX(-50%);
-	font-size: 36px;
-	color: #fff;
-}
-.vk_prBlocks_item_title{
-	margin-top:0.9em;
-	margin-bottom: 0.7em;
-	text-align: center;
-	font-size: 21px;
-	line-height: 1.4em;
-}
-.vk_prBlocks_item_image{
-	position: relative;
-	display: block;
-	width: 120px;
-	height:120px;
-	margin: 0 auto;
-	overflow: hidden;
-	border-radius: 50%;
-	text-indent:-9999px;
-}
-.vk_prBlocks_item_summary{
-	margin-bottom: 0.5em;
-	text-align: center;
-	line-height: 1.8em;
-	&:hover{
-		text-decoration: underline;
-	}
-}
-
-@charset "utf-8";
-/*-------------------------------------------*/
 /* Layout
 /*-------------------------------------------*/
 .vk_prContent {
@@ -860,6 +806,63 @@ $padding-xl:3.5em;
 } // .vk_prContent {
 
 /*-------------------------------------------*/
+/* .vk_prBlocks
+/*-------------------------------------------*/
+.vk_prBlocks_item {
+	@media screen and (max-width:992px){
+		margin-bottom: 1.5em;
+	}
+}
+.vk_prBlocks_item_link {
+	color: #333;
+	&:hover{
+		color: #333;
+		text-decoration: none;
+	}
+}
+.vk_prBlocks_item_icon_outer {
+	display: block;
+	position:relative;
+	margin: 0 auto ;
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+}
+.vk_prBlocks_item_icon {
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform: translateY(-50%) translateX(-50%);
+	font-size: 36px;
+	color: #fff;
+}
+.vk_prBlocks_item_title{
+	margin-top:0.9em;
+	margin-bottom: 0.7em;
+	text-align: center;
+	font-size: 21px;
+	line-height: 1.4em;
+}
+.vk_prBlocks_item_image{
+	position: relative;
+	display: block;
+	width: 120px;
+	height:120px;
+	margin: 0 auto;
+	overflow: hidden;
+	border-radius: 50%;
+	text-indent:-9999px;
+}
+.vk_prBlocks_item_summary{
+	margin-bottom: 0.5em;
+	text-align: center;
+	line-height: 1.8em;
+	&:hover{
+		text-decoration: underline;
+	}
+}
+
+/*-------------------------------------------*/
 /* CSS
 /*-------------------------------------------*/
 
@@ -892,10 +895,5 @@ $padding-xl:3.5em;
 // Large devices (desktops, 769px以上)
 @media (min-width: 769px) {
   @include switchVisibility(block, none, none);
-}
-
-//レンジスライダー非表示
-.components-range-control__slider {
-  display: none;
 }
 }

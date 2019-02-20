@@ -643,21 +643,25 @@ msgid "em"
 msgstr ""
 
 #: src/spacer/block.js:71
-msgid "vw"
+msgid "rem"
 msgstr ""
 
 #: src/spacer/block.js:75
+msgid "vw"
+msgstr ""
+
+#: src/spacer/block.js:79
 msgid "Height for each device."
 msgstr ""
 
-#: src/spacer/block.js:77
+#: src/spacer/block.js:81
 msgid "PC"
 msgstr ""
 
-#: src/spacer/block.js:82
+#: src/spacer/block.js:86
 msgid "Tablet"
 msgstr ""
 
-#: src/spacer/block.js:87
+#: src/spacer/block.js:91
 msgid "Mobile"
 msgstr ""

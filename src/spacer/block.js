@@ -67,6 +67,10 @@ registerBlockType('vk-blocks/spacer', {
                                     label: __('em', 'vk-blocks'),
                                 },
                                 {
+                                    value: 'rem',
+                                    label: __('rem', 'vk-blocks'),
+                                },
+                                {
                                     value: 'vw',
                                     label: __('vw', 'vk-blocks'),
                                 }
