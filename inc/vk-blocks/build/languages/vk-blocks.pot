@@ -626,42 +626,42 @@ msgstr ""
 msgid "Input content."
 msgstr ""
 
-#: src/spacer/block.js:31
-msgid "Spacer"
+#: src/spacer/block.js:100
+msgid "Mobile"
 msgstr ""
 
-#: src/spacer/block.js:57
+#: src/spacer/block.js:40
+msgid "Responsive Spacer"
+msgstr ""
+
+#: src/spacer/block.js:66
 msgid "Unit Type"
 msgstr ""
 
-#: src/spacer/block.js:63
+#: src/spacer/block.js:72
 msgid "px"
 msgstr ""
 
-#: src/spacer/block.js:67
+#: src/spacer/block.js:76
 msgid "em"
 msgstr ""
 
-#: src/spacer/block.js:71
+#: src/spacer/block.js:80
 msgid "rem"
 msgstr ""
 
-#: src/spacer/block.js:75
+#: src/spacer/block.js:84
 msgid "vw"
 msgstr ""
 
-#: src/spacer/block.js:79
+#: src/spacer/block.js:88
 msgid "Height for each device."
 msgstr ""
 
-#: src/spacer/block.js:81
+#: src/spacer/block.js:90
 msgid "PC"
 msgstr ""
 
-#: src/spacer/block.js:86
+#: src/spacer/block.js:95
 msgid "Tablet"
-msgstr ""
-
-#: src/spacer/block.js:91
-msgid "Mobile"
 msgstr ""
