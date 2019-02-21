@@ -150,12 +150,14 @@ registerBlockType('vk-blocks/pr-blocks', {
                         </BaseControl>
                         <BaseControl
                             label={__('Icon 1', 'vk-blocks')}
+
                         >
                             <TextControl
                                 label={__('Class name of the Font Awesome icon font you want to use:', 'vk-blocks')}
                                 value={icon1}
                                 onChange={(value) => setAttributes({icon1: value})}
                                 placeholder={'fas fa-file'}
+                                help = { <a href={`https://fontawesome.com/icons?d=gallery&m=free`} target={`_blank`}>{__('Font Awesome icon list', 'vk-blocks')}</a> }
                             />
                             <ColorPalette
                                 value={color1}
@@ -221,6 +223,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                                 value={icon2}
                                 onChange={(value) => setAttributes({icon2: value})}
                                 placeholder={'fas fa-file'}
+                                help = { <a href={`https://fontawesome.com/icons?d=gallery&m=free`} target={`_blank`}>{__('Font Awesome icon list', 'vk-blocks')}</a> }
                             />
                             <ColorPalette
                                 value={color2}
@@ -286,6 +289,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                                 value={icon3}
                                 onChange={(value) => setAttributes({icon3: value})}
                                 placeholder={'fas fa-file'}
+                                help = { <a href={`https://fontawesome.com/icons?d=gallery&m=free`} target={`_blank`}>{__('Font Awesome icon list', 'vk-blocks')}</a> }
                             />
                             <ColorPalette
                                 value={color3}

@@ -4,7 +4,7 @@ Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 4.6
 Tested up to: 5.0.3
-Stable tag: 0.5.1
+Stable tag: 0.6.0
 Requires PHP: 5.6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -25,6 +25,8 @@ This is a plugin that extends Gutenberg's blocks.
 * Button
 * PR Blocks
 * PR Content
+* Title（with sub text）
+* Responsive Spacer
 
 [ Editing and correction ]
 
@@ -50,6 +52,15 @@ e.g.
 1. VK Blocks examples.
 
 == Changelog ==
+
+= 0.6.0 =
+[Add New Block] Title
+[Add New Block] Responsive Spacer
+[Bug fix][ outer ] FireFox and Eddge design fix
+[Add Function][ Outer ] Add link id setting
+
+= 0.5.2 =
+[Bug fix][ outer ] Lightning Pro theme（No child） no work bug fix
 
 = 0.5.1 =
 [Bug fix][ outer ] Child theme no work bug fix

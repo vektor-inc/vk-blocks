@@ -52,6 +52,9 @@ registerBlockType('vk-blocks/outer', {
     icon: BlockIcon, // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
     category: 'vk-blocks-cat-layout', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
     attributes: schema,
+	supports:{
+    	anchor:true,
+	},
 
     /**
      * The edit function describes the structure of your block in the context of the editor.
@@ -209,24 +212,34 @@ registerBlockType('vk-blocks/outer', {
 									},
 								]}
 							/>
+						</BaseControl>
+						<BaseControl
+							label={__('Upper Divider Level', 'vk-blocks')}
+						>
 							<RangeControl
-								label={__('Upper Divider Level', 'vk-blocks')}
 								value={upper_level}
 								onChange={(value) => setAttributes({upper_level: toNumber(value, -100, 100)})}
 								min="-100"
 								max="100"
 							/>
+						</BaseControl>
+						<BaseControl>
 							<ColorPalette
 								value={upperDividerBgColor}
 								onChange={(value) => setAttributes({upperDividerBgColor: value})}
 							/>
+						</BaseControl>
+						<BaseControl
+							label={__('Lower Divider Level', 'vk-blocks')}
+						>
 							<RangeControl
-								label={__('Lower Divider Level', 'vk-blocks')}
 								value={lower_level}
 								onChange={(value) => setAttributes({lower_level: toNumber(value, -100, 100)})}
 								min="-100"
 								max="100"
 							/>
+						</BaseControl>
+						<BaseControl>
 							<ColorPalette
 								value={lowerDividerBgColor}
 								onChange={(value) => setAttributes({lowerDividerBgColor: value})}
@@ -281,18 +294,26 @@ registerBlockType('vk-blocks/outer', {
 									},
 								]}
 							/>
+						</BaseControl>
+						<BaseControl>
 							<ColorPalette
 								value={borderColor}
 								onChange={(value) => setAttributes({borderColor: value})}
 							/>
+						</BaseControl>
+						<BaseControl
+							label={__('Border width', 'vk-blocks')}
+						>
 							<RangeControl
-								label={__('Border width', 'vk-blocks')}
 								value={borderWidth}
 								onChange={(value) => setAttributes({borderWidth:value})}
 								min="0"
 							/>
+						</BaseControl>
+						<BaseControl
+							label={__('Border radius', 'vk-blocks')}
+						>
 							<RangeControl
-								label={__('Border radius', 'vk-blocks')}
 								value={borderRadius}
 								onChange={(value) => setAttributes({borderRadius: toNumber(value, -100, 100)})}
 								min="-100"
