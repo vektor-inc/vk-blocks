@@ -82,9 +82,10 @@ $padding-xl:3.5em;
 .vk_outer_separator {
 	svg {
 		display: block;
-    max-height: 100px;
-    position: absolute;
-    left: 0;
+		max-height: 100px;
+		position: absolute;
+		left: 0;
+		width: 100%;
 	}
 }
 .vk_outer_separator-position-upper{
@@ -105,3 +106,5 @@ $padding-xl:3.5em;
 // .editor-block-list__block-edit{
 //   margin: 0!important;
 // }
+
+
