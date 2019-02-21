@@ -10,7 +10,7 @@ msgstr ""
 #: src/balloon/block.js:122
 #: src/flow/block.js:111
 #: src/outer/block.js:126
-#: src/pr-blocks/block.js:324
+#: src/pr-blocks/block.js:328
 #: src/pr-content/component.js:102
 msgid "Select image"
 msgstr ""
@@ -18,7 +18,7 @@ msgstr ""
 #: src/balloon/block.js:122
 #: src/flow/block.js:112
 #: src/outer/block.js:128
-#: src/pr-blocks/block.js:326
+#: src/pr-blocks/block.js:330
 #: src/pr-content/component.js:106
 msgid "Upload image"
 msgstr ""
@@ -87,7 +87,7 @@ msgid "Sub Caption"
 msgstr ""
 
 #: src/button/block.js:143
-#: src/pr-blocks/block.js:276
+#: src/pr-blocks/block.js:279
 #: src/pr-content/block.js:131
 msgid "Open link new tab."
 msgstr ""
@@ -126,12 +126,12 @@ msgid "Button Style:"
 msgstr ""
 
 #: src/button/block.js:172
-#: src/pr-blocks/block.js:305
+#: src/pr-blocks/block.js:309
 msgid "Solid color"
 msgstr ""
 
 #: src/button/block.js:173
-#: src/pr-blocks/block.js:306
+#: src/pr-blocks/block.js:310
 msgid "No background"
 msgstr ""
 
@@ -200,6 +200,7 @@ msgid "Font Awesome:"
 msgstr ""
 
 #: src/button/block.js:204
+#: src/pr-blocks/block.js:292
 #: src/pr-content/block.js:168
 msgid "Font Awesome icon list"
 msgstr ""
@@ -265,12 +266,12 @@ msgid "Arrow hidden"
 msgstr ""
 
 #: src/flow/block.js:90
-#: src/pr-blocks/block.js:500
+#: src/pr-blocks/block.js:504
 msgid "Input title"
 msgstr ""
 
 #: src/flow/block.js:97
-#: src/pr-blocks/block.js:507
+#: src/pr-blocks/block.js:511
 msgid "Input content"
 msgstr ""
 
@@ -522,51 +523,51 @@ msgstr ""
 msgid "Icon 1"
 msgstr ""
 
-#: src/pr-blocks/block.js:182
+#: src/pr-blocks/block.js:184
 msgid "PR Image 1"
 msgstr ""
 
-#: src/pr-blocks/block.js:183
+#: src/pr-blocks/block.js:185
 msgid "When you have an image. Image is displayed with priority"
 msgstr ""
 
-#: src/pr-blocks/block.js:202
+#: src/pr-blocks/block.js:204
 msgid "PR Block2 Setting"
 msgstr ""
 
-#: src/pr-blocks/block.js:217
+#: src/pr-blocks/block.js:219
 msgid "Icon 2"
 msgstr ""
 
-#: src/pr-blocks/block.js:247
+#: src/pr-blocks/block.js:250
 msgid "PR Image 2"
 msgstr ""
 
-#: src/pr-blocks/block.js:267
+#: src/pr-blocks/block.js:270
 msgid "PR Block3 Setting"
 msgstr ""
 
-#: src/pr-blocks/block.js:269
+#: src/pr-blocks/block.js:272
 msgid "Link URL:"
 msgstr ""
 
-#: src/pr-blocks/block.js:282
+#: src/pr-blocks/block.js:285
 msgid "Icon 3"
 msgstr ""
 
-#: src/pr-blocks/block.js:285
+#: src/pr-blocks/block.js:288
 msgid "Class name of the Font Awesome icon font you want to use:"
 msgstr ""
 
-#: src/pr-blocks/block.js:302
+#: src/pr-blocks/block.js:306
 msgid "Icon Background:"
 msgstr ""
 
-#: src/pr-blocks/block.js:312
+#: src/pr-blocks/block.js:316
 msgid "PR Image 3"
 msgstr ""
 
-#: src/pr-blocks/block.js:313
+#: src/pr-blocks/block.js:317
 msgid "When you have an image. Image is displayed with priority."
 msgstr ""
 
