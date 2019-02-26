@@ -4,7 +4,7 @@
   "description": "",
   "main": "gulpfile.js",
   "scripts": {
-    "start": "npm install && npm run build && npm run watch",
+    "start": "npm install && npm run build && npm run watch && wp browse --wp-admin",
     "watch": "gulp watch",
     "build": "gulp build && npm run translate",
     "translate": "npx po2json ./inc/vk-blocks/build/languages/vk-blocks-ja.po ./inc/vk-blocks/build/languages/vk-blocks-ja-vk-blocks-build-js.json -f jed",
