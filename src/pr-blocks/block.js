@@ -340,182 +340,21 @@ registerBlockType('vk-blocks/pr-blocks', {
                 </InspectorControls>
                 <article className="vk_prBlocks row">
 
-                    <div className="vk_prBlocks_item col-sm-4">
-                        {(() => {
-
-                            if (insertImage1) {
-
-                                return <div className="vk_prBlocks_item_image"
-                                            style={{
-                                                backgroundImage: 'url(' + insertImage1 + ')',
-                                                backgroundRepeat: 'no-repeat 50% center',
-                                                backgroundSize: 'cover'
-                                            }}
-                                >
-                                    <img
-                                        src={insertImage1}
-                                        alt=''
-                                    />
-                                </div>
-
-                            } else {
-
-
-                                if (bgType1 === '0') {
-                                    return <div
-                                        className="vk_prBlocks_item_icon_outer"
-                                        style={{
-                                            backgroundColor: color1,
-                                            border: `1px solid ${color1}`
-                                        }}
-                                    ><i className={`${icon1} vk_prBlocks_item_icon`}
-                                        style={{color: '#fff'}}>
-                                    </i>
-                                    </div>
-                                } else {
-                                    return <div
-                                        className="vk_prBlocks_item_icon_outer"
-                                        style={{backgroundColor: 'transparent', border: '1px solid ' + color1}}
-                                    ><i className={`${icon1} vk_prBlocks_item_icon`}
-                                        style={{color: color1}}>
-                                    </i>
-                                    </div>
-                                }
-                            }
-                        })()}
-                        <RichText
-                            className="vk_prBlocks_item_title vk_prBlocks_item_title-1"
-                            tagName="h1"
-                            onChange={(value) => setAttributes({heading1: value})}
-                            value={heading1}
-                            placeholder={__('Input title', 'vk-blocks')}
-                        />
-                        <RichText
-                            className="vk_prBlocks_item_summary vk_prBlocks_item_summary-1"
-                            tagName="p"
-                            onChange={(value) => setAttributes({content1: value})}
-                            value={content1}
-                            placeholder={__('Input content', 'vk-blocks')}
-                        />
-                    </div>
-
-                    <div className="vk_prBlocks_item col-sm-4">
-                        {(() => {
-
-                            if (insertImage2) {
-
-                                return <div className="vk_prBlocks_item_image"
-                                            style={{
-                                                backgroundImage: 'url(' + insertImage2 + ')',
-                                                backgroundRepeat: 'no-repeat 50% center',
-                                                backgroundSize: 'cover'
-                                            }}
-                                >
-                                    <img
-                                        src={insertImage2}
-                                        alt=''
-                                    />
-                                </div>
-
-                            } else {
-
-
-                                if (bgType2 === '0') {
-                                    return <div
-                                        className="vk_prBlocks_item_icon_outer"
-                                        style={{
-                                            backgroundColor: color2,
-                                            border: `1px solid ${color2}`
-                                        }}
-                                    ><i className={`${icon2} vk_prBlocks_item_icon`}
-                                        style={{color: '#fff'}}>
-                                    </i>
-                                    </div>
-                                } else {
-                                    return <div
-                                        className="vk_prBlocks_item_icon_outer"
-                                        style={{backgroundColor: 'transparent', border: '1px solid ' + color2}}
-                                    ><i className={`${icon2} vk_prBlocks_item_icon`}
-                                        style={{color: color2}}>
-                                    </i>
-                                    </div>
-                                }
-                            }
-                        })()}
-                        <RichText
-                            className="vk_prBlocks_item_title vk_prBlocks_item_title-2"
-                            tagName="h1"
-                            onChange={(value) => setAttributes({heading2: value})}
-                            value={heading2}
-                            placeholder={__('Input title', 'vk-blocks')}
-                        />
-                        <RichText
-                            className="vk_prBlocks_item_summary vk_prBlocks_item_summary-2"
-                            tagName="p"
-                            onChange={(value) => setAttributes({content2: value})}
-                            value={content2}
-                            placeholder={__('Input content', 'vk-blocks')}
-                        />
-                    </div>
-
-                    <div className="vk_prBlocks_item col-sm-4">
-                        {(() => {
-
-                            if (insertImage3) {
-
-                                return <div className="vk_prBlocks_item_image"
-                                            style={{
-                                                backgroundImage: 'url(' + insertImage3 + ')',
-                                                backgroundRepeat: 'no-repeat 50% center',
-                                                backgroundSize: 'cover'
-                                            }}
-                                >
-                                    <img
-                                        src={insertImage3}
-                                        alt=''
-                                    />
-                                </div>
-
-                            } else {
-
-
-                                if (bgType3 === '0') {
-                                    return <div
-                                        className="vk_prBlocks_item_icon_outer"
-                                        style={{
-                                            backgroundColor: color3,
-                                            border: `1px solid ${color3}`
-                                        }}
-                                    ><i className={`${icon3} vk_prBlocks_item_icon`}
-                                        style={{color: '#fff'}}>
-                                    </i>
-                                    </div>
-                                } else {
-                                    return <div
-                                        className="vk_prBlocks_item_icon_outer"
-                                        style={{backgroundColor: 'transparent', border: '1px solid ' + color3}}
-                                    ><i className={`${icon3} vk_prBlocks_item_icon`}
-                                        style={{color: color3}}>
-                                    </i>
-                                    </div>
-                                }
-                            }
-                        })()}
-                        <RichText
-                            className="vk_prBlocks_item_title vk_prBlocks_item_title-3"
-                            tagName="h1"
-                            onChange={(value) => setAttributes({heading3: value})}
-                            value={heading3}
-                            placeholder={__('Input title', 'vk-blocks')}
-                        />
-                        <RichText
-                            className="vk_prBlocks_item_summary vk_prBlocks_item_summary-3"
-                            tagName="p"
-                            onChange={(value) => setAttributes({content3: value})}
-                            value={content3}
-                            placeholder={__('Input content', 'vk-blocks')}
-                        />
-                    </div>
+                    <ComponentBlock
+                        attributes={attributes}
+                        blockNum={1}
+                        for_={'edit'}
+                    />
+                    <ComponentBlock
+                        attributes={attributes}
+                        blockNum={2}
+                        for_={'edit'}
+                    />
+                    <ComponentBlock
+                        attributes={attributes}
+                        blockNum={3}
+                        for_={'edit'}
+                    />
 
                 </article>
             </Fragment>
@@ -533,7 +372,7 @@ registerBlockType('vk-blocks/pr-blocks', {
     save({attributes}) {
 
         return (
-            <div>
+            <article className="vk_prBlocks row">
                 <ComponentBlock
                     attributes={attributes}
                     blockNum={1}
@@ -549,9 +388,10 @@ registerBlockType('vk-blocks/pr-blocks', {
                     blockNum={3}
                     for_={'save'}
                 />
-            </div>
+            </article>
         );
     }
-    // deprecated: version0_6_0
+
+    // deprecated: version0_6_0;
 
 });
