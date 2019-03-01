@@ -3,13 +3,13 @@
  *
  */
 import React from "react";
-import {ComponentBlock} from "./component-block";
 import {version0_6_0} from "./deprecated/0.6.0/block";
+import {ComponentBlock} from "./component-block";
 
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
-const {RangeControl, RadioControl, PanelBody, Button, BaseControl, CheckboxControl, TextControl} = wp.components;
+const {RadioControl, PanelBody, Button, BaseControl, CheckboxControl, TextControl} = wp.components;
 const {Fragment} = wp.element;
 const {RichText, InspectorControls, MediaUpload, ColorPalette} = wp.editor;
 const BlockIcon = (
@@ -31,11 +31,11 @@ const BlockIcon = (
 	</svg>
 );
 
-function set_attirbuite(number) {
+function set_attributes(number) {
 
     var attributes = {};
 
-    for (var i = 1; i <= number; i++) {
+    for (let i = 1; i <= number; i++) {
 
         attributes['heading' + i] = {
             type: 'string',
@@ -96,7 +96,7 @@ registerBlockType('vk-blocks/pr-blocks', {
     title: __('PR Blocks (Beta)', 'vk-blocks'), // Block title.
     icon: BlockIcon, // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
     category: 'vk-blocks-cat', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
-    attributes: set_attirbuite(4),
+    attributes: set_attributes(4),
 
     /**
      * The edit function describes the structure of your block in the context of the editor.
@@ -138,6 +138,7 @@ registerBlockType('vk-blocks/pr-blocks', {
         return [
             <Fragment>
                 <InspectorControls>
+
                     <PanelBody title={__('PR Block1 Setting', 'vk-blocks')}>
                         <BaseControl
                             label={__('Link URL:', 'vk-blocks')}
@@ -161,17 +162,18 @@ registerBlockType('vk-blocks/pr-blocks', {
                                 value={icon1}
                                 onChange={(value) => setAttributes({icon1: value})}
                                 placeholder={'fas fa-file'}
-                                help = { <a href={`https://fontawesome.com/icons?d=gallery&m=free`} target={`_blank`}>{__('Font Awesome icon list', 'vk-blocks')}</a> }
+                                help={<a href={`https://fontawesome.com/icons?d=gallery&m=free`}
+                                         target={`_blank`}>{__('Font Awesome icon list', 'vk-blocks')}</a>}
                             />
                             <ColorPalette
                                 value={color1}
                                 onChange={(value) => {
-                                  if (value){
-                                    setAttributes({color1: value})
-                                  } else {
-                                    setAttributes({color1: '#0693e3'})
-                                    setAttributes({bgType1: '0'})
-                                  }
+                                    if (value) {
+                                        setAttributes({color1: value})
+                                    } else {
+                                        setAttributes({color1: '#0693e3'})
+                                        setAttributes({bgType1: '0'})
+                                    }
                                 }}
                             />
                             <RadioControl
@@ -181,7 +183,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                                     {label: __('Solid color', 'vk-blocks'), value: '0'},
                                     {label: __('No background', 'vk-blocks'), value: '1'},
                                 ]}
-                                onChange={(value) => setAttributes({ bgType1: value })}
+                                onChange={(value) => setAttributes({bgType1: value})}
                             />
                         </BaseControl>
                         <BaseControl
@@ -227,17 +229,18 @@ registerBlockType('vk-blocks/pr-blocks', {
                                 value={icon2}
                                 onChange={(value) => setAttributes({icon2: value})}
                                 placeholder={'fas fa-file'}
-                                help = { <a href={`https://fontawesome.com/icons?d=gallery&m=free`} target={`_blank`}>{__('Font Awesome icon list', 'vk-blocks')}</a> }
+                                help={<a href={`https://fontawesome.com/icons?d=gallery&m=free`}
+                                         target={`_blank`}>{__('Font Awesome icon list', 'vk-blocks')}</a>}
                             />
                             <ColorPalette
                                 value={color2}
                                 onChange={(value) => {
-                                  if (value){
-                                    setAttributes({color2: value})
-                                  } else {
-                                    setAttributes({color2: '#0693e3'})
-                                    setAttributes({bgType2: '0'})
-                                  }
+                                    if (value) {
+                                        setAttributes({color2: value})
+                                    } else {
+                                        setAttributes({color2: '#0693e3'})
+                                        setAttributes({bgType2: '0'})
+                                    }
                                 }}
                             />
                             <RadioControl
@@ -293,17 +296,18 @@ registerBlockType('vk-blocks/pr-blocks', {
                                 value={icon3}
                                 onChange={(value) => setAttributes({icon3: value})}
                                 placeholder={'fas fa-file'}
-                                help = { <a href={`https://fontawesome.com/icons?d=gallery&m=free`} target={`_blank`}>{__('Font Awesome icon list', 'vk-blocks')}</a> }
+                                help={<a href={`https://fontawesome.com/icons?d=gallery&m=free`}
+                                         target={`_blank`}>{__('Font Awesome icon list', 'vk-blocks')}</a>}
                             />
                             <ColorPalette
                                 value={color3}
                                 onChange={(value) => {
-                                  if (value){
-                                    setAttributes({color3: value})
-                                  } else {
-                                    setAttributes({color3: '#0693e3'})
-                                    setAttributes({bgType3: '0'})
-                                  }
+                                    if (value) {
+                                        setAttributes({color3: value})
+                                    } else {
+                                        setAttributes({color3: '#0693e3'})
+                                        setAttributes({bgType3: '0'})
+                                    }
                                 }}
                             />
                             <RadioControl
@@ -339,23 +343,24 @@ registerBlockType('vk-blocks/pr-blocks', {
                     </PanelBody>
                 </InspectorControls>
                 <article className="vk_prBlocks row">
-
                     <ComponentBlock
                         attributes={attributes}
+                        setAttributes={setAttributes}
                         blockNum={1}
                         for_={'edit'}
                     />
                     <ComponentBlock
                         attributes={attributes}
+                        setAttributes={setAttributes}
                         blockNum={2}
                         for_={'edit'}
                     />
                     <ComponentBlock
                         attributes={attributes}
+                        setAttributes={setAttributes}
                         blockNum={3}
                         for_={'edit'}
                     />
-
                 </article>
             </Fragment>
         ];
@@ -390,8 +395,8 @@ registerBlockType('vk-blocks/pr-blocks', {
                 />
             </article>
         );
-    }
+    },
 
-    // deprecated: version0_6_0;
+    deprecated: version0_6_0
 
 });

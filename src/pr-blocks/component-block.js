@@ -35,7 +35,8 @@ export class ComponentBlock extends React.Component {
             insertImage3
         } = this.props.attributes;
         let for_ = this.props.for_;
-        let blockNum = this.props.blockNum - 1;
+        let blockNum = this.props.blockNum;
+        let blockNumArrIndex = this.props.blockNum -1;
 
         const heading = [heading1, heading2, heading3];
         const content = [content1, content2, content3];
@@ -52,44 +53,44 @@ export class ComponentBlock extends React.Component {
 
         let drawElement = (() => {
 
-            if (insertImage[blockNum]) {
+            if (insertImage[blockNumArrIndex]) {
 
                 return <div className="vk_prBlocks_item_image"
                             style={{
-                                backgroundImage: `url(${insertImage[blockNum]})`,
+                                backgroundImage: `url(${insertImage[blockNumArrIndex]})`,
                                 backgroundRepeat: 'no-repeat 50% center',
                                 backgroundSize: 'cover'
                             }}
                 >
                     <img
-                        src={insertImage[blockNum]}
+                        src={insertImage[blockNumArrIndex]}
                         alt=''
                     />
                 </div>
 
             } else {
 
-                if (!color[blockNum]) {
-                    color[blockNum] = '#0693e3';
+                if (!color[blockNumArrIndex]) {
+                    color[blockNumArrIndex] = '#0693e3';
                 }
-                if (bgType[blockNum] === '0') {
+                if (bgType[blockNumArrIndex] === '0') {
 
                     return <div
                         className="vk_prBlocks_item_icon_outer"
                         style={{
-                            backgroundColor: color[blockNum],
-                            border: `1px solid ${color[blockNum]}`
+                            backgroundColor: color[blockNumArrIndex],
+                            border: `1px solid ${color[blockNumArrIndex]}`
                         }}
-                    ><i className={`${icon[blockNum]} vk_prBlocks_item_icon`}
+                    ><i className={`${icon[blockNumArrIndex]} vk_prBlocks_item_icon`}
                         style={{color: '#fff'}}>
                     </i>
                     </div>
                 } else {
                     return <div
                         className="vk_prBlocks_item_icon_outer"
-                        style={{backgroundColor: 'transparent', border: '1px solid ' + color[blockNum]}}
-                    ><i className={`${icon[blockNum]} vk_prBlocks_item_icon`}
-                        style={{color: color[blockNum]}}>
+                        style={{backgroundColor: 'transparent', border: '1px solid ' + color[blockNumArrIndex]}}
+                    ><i className={`${icon[blockNumArrIndex]} vk_prBlocks_item_icon`}
+                        style={{color: color[blockNumArrIndex]}}>
                     </i>
                     </div>
                 }
@@ -100,50 +101,50 @@ export class ComponentBlock extends React.Component {
         //編集画面とフロント側の切り替え
         if (for_ === 'edit') {
 
-            if (blockNum === 0) {
+            if (blockNum === 1) {
 
                 richTextH1Save = <RichText
-                    className="vk_prBlocks_item_title vk_prBlocks_item_title-0"
+                    className="vk_prBlocks_item_title vk_prBlocks_item_title-1"
                     tagName={'h1'}
                     onChange={(value) => setAttributes({heading1: value})}
                     value={heading1}
                     placeholder={__('Input Title', 'vk-blocks')}
                 />;
                 richTextPSave = <RichText
-                    className="vk_prBlocks_item_summary vk_prBlocks_item_summary-0"
+                    className="vk_prBlocks_item_summary vk_prBlocks_item_summary-1"
                     tagName={'p'}
                     onChange={(value) => setAttributes({content1: value})}
                     value={content1}
                     placeholder={__('Input Content', 'vk-blocks')}
                 />;
 
-            } else if (blockNum === 1) {
+            } else if (blockNum === 2) {
 
                 richTextH1Save = <RichText
-                    className="vk_prBlocks_item_title vk_prBlocks_item_title-1"
+                    className="vk_prBlocks_item_title vk_prBlocks_item_title-2"
                     tagName={'h1'}
                     onChange={(value) => setAttributes({heading2: value})}
                     value={heading2}
                     placeholder={__('Input Title', 'vk-blocks')}
                 />;
                 richTextPSave = <RichText
-                    className="vk_prBlocks_item_summary vk_prBlocks_item_summary-1"
+                    className="vk_prBlocks_item_summary vk_prBlocks_item_summary-2"
                     tagName={'p'}
                     onChange={(value) => setAttributes({content2: value})}
                     value={content2}
                     placeholder={__('Input Content', 'vk-blocks')}
                 />;
 
-            } else if (blockNum === 2) {
+            } else if (blockNum === 3) {
                 richTextH1Save = <RichText
-                    className="vk_prBlocks_item_title vk_prBlocks_item_title-2"
+                    className="vk_prBlocks_item_title vk_prBlocks_item_title-3"
                     tagName={'h1'}
                     onChange={(value) => setAttributes({heading3: value})}
                     value={heading3}
                     placeholder={__('Input Title', 'vk-blocks')}
                 />;
                 richTextPSave = <RichText
-                    className="vk_prBlocks_item_summary vk_prBlocks_item_summary-2"
+                    className="vk_prBlocks_item_summary vk_prBlocks_item_summary-3"
                     tagName={'p'}
                     onChange={(value) => setAttributes({content3: value})}
                     value={content3}
@@ -156,20 +157,20 @@ export class ComponentBlock extends React.Component {
             richTextH1Save = <RichText.Content
                 className={`vk_prBlocks_item_title vk_prBlocks_item_title-${blockNum}`}
                 tagName={'h1'}
-                value={heading[blockNum]}/>;
+                value={heading[blockNumArrIndex]}/>;
             richTextPSave = <RichText.Content
                 className={`vk_prBlocks_item_summary vk_prBlocks_item_summary-${blockNum}`}
                 tagName={'p'}
-                value={content[blockNum]}/>;
+                value={content[blockNumArrIndex]}/>;
         }
 
 
         // aタグ判定
         if (url[blockNum]) {
             return (
-                <div>
-                    <a href={url[blockNum]} className="vk_prBlocks_item_link"
-                       target={urlOpenType[blockNum] ? '_blank' : '_self'} rel="noopener noreferrer">
+                <div className="vk_prBlocks_item col-sm-4">
+                    <a href={url[blockNumArrIndex]} className="vk_prBlocks_item_link"
+                       target={urlOpenType[blockNumArrIndex] ? '_blank' : '_self'} rel="noopener noreferrer">
                         {drawElement}
                         {richTextH1Save}
                         {richTextPSave}
@@ -178,7 +179,7 @@ export class ComponentBlock extends React.Component {
             );
         } else {
             return (
-                <div>
+                <div className="vk_prBlocks_item col-sm-4">
                     {drawElement}
                     {richTextH1Save}
                     {richTextPSave}
