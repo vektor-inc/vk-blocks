@@ -1,54 +1,55 @@
 /*-------------------------------------------*/
-/* .vk_prBlocks
-/*-------------------------------------------*/
-@media screen and (max-width: 992px) {
-  .vk_prBlocks_item {
-    margin-bottom: 1.5em; } }
-
-.vk_prBlocks_item_link {
-  color: #333; }
-  .vk_prBlocks_item_link:hover {
-    color: #333;
-    text-decoration: none; }
-
-.vk_prBlocks_item_icon_outer {
+.veu_flowBox {
   display: block;
-  position: relative;
-  margin: 0 auto;
-  width: 80px;
-  height: 80px;
-  border-radius: 50%; }
+  overflow: hidden; }
 
-.vk_prBlocks_item_icon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateY(-50%) translateX(-50%);
-  font-size: 36px;
-  color: #fff; }
-
-.vk_prBlocks_item_title {
-  margin-top: 0.9em;
-  margin-bottom: 0.7em;
-  text-align: center;
-  font-size: 21px;
-  line-height: 1.4em; }
-
-.vk_prBlocks_item_image {
-  position: relative;
+.veu_flowBox.arrowFlag-on:after {
+  content: "";
+  background: url("../images/arrow_bottom.svg") center 50% no-repeat;
+  background-size: 50px 50px;
   display: block;
-  width: 120px;
-  height: 120px;
-  margin: 0 auto;
   overflow: hidden;
-  border-radius: 50%;
-  text-indent: -9999px; }
+  height: 50px;
+  width: 50px;
+  margin: 0 auto; }
 
-.vk_prBlocks_item_summary {
-  margin-bottom: 0.5em;
-  text-align: center;
-  line-height: 1.8em; }
-  .vk_prBlocks_item_summary:hover {
-    text-decoration: underline; }
+.veu_flowBox.arrowFlag-off {
+  padding-bottom: 0px;
+  margin-bottom: 30px; }
 
-/*# sourceMappingURL=style.css.map */
+.veu_flowBox.arrowFlag-off:after {
+  content: "";
+  font-size: 0;
+  background-image: none; }
+
+.veu_flowBox dl {
+  display: block;
+  overflow: hidden;
+  padding: 20px 25px;
+  border: 3px solid #e5e5e5;
+  margin: 0; }
+
+.veu_flowBox dl dt,
+.veu_flowBox dl dd {
+  padding-left: 0;
+  border: none; }
+
+.veu_flowBox dl dt.title {
+  border-bottom: 1px dotted #ccc;
+  margin-bottom: 10px;
+  font-size: 1.2em; }
+
+.veu_flowBox dl dd {
+  margin-bottom: 0px; }
+
+.veu_flowBox dl dd h4 {
+  margin: 0px;
+  padding: 0px; }
+
+.veu_flowBox dl dd p {
+  margin-bottom: 10px; }
+
+.veu_flowBox dl dd ul {
+  margin-bottom: 0px; }
+
+/*# sourceMappingURL=flow.css.map */

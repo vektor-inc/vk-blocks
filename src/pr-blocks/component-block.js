@@ -166,7 +166,7 @@ export class ComponentBlock extends React.Component {
 
 
         // aタグ判定
-        if (url[blockNum]) {
+        if (url[blockNumArrIndex]) {
             return (
                 <div className="vk_prBlocks_item col-sm-4">
                     <a href={url[blockNumArrIndex]} className="vk_prBlocks_item_link"
