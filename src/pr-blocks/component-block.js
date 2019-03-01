@@ -1,11 +1,13 @@
 import React from 'react';
 
+const {__} = wp.i18n; // Import __() from wp.i18n
 const {RichText} = wp.editor;
 
 export class ComponentBlock extends React.Component {
 
     render() {
 
+        let setAttributes = this.props.setAttributes;
         let {
             heading1,
             heading2,
@@ -44,8 +46,10 @@ export class ComponentBlock extends React.Component {
         const bgType = [bgType1, bgType2, bgType3];
         const insertImage = [insertImage1, insertImage2, insertImage3];
 
-        let richTexth1Save = '';
+        let richTextH1Save = '';
         let richTextPSave = '';
+
+
         let drawElement = (() => {
 
             if (insertImage[blockNum]) {
@@ -94,39 +98,80 @@ export class ComponentBlock extends React.Component {
 
 
         //編集画面とフロント側の切り替え
-        if (for_ === 'save') {
-            richTexth1Save = <RichText.Content
-                className="vk_prBlocks_item_title vk_prBlocks_item_title-1"
+        if (for_ === 'edit') {
+
+            if (blockNum === 0) {
+
+                richTextH1Save = <RichText
+                    className="vk_prBlocks_item_title vk_prBlocks_item_title-0"
+                    tagName={'h1'}
+                    onChange={(value) => setAttributes({heading1: value})}
+                    value={heading1}
+                    placeholder={__('Input Title', 'vk-blocks')}
+                />;
+                richTextPSave = <RichText
+                    className="vk_prBlocks_item_summary vk_prBlocks_item_summary-0"
+                    tagName={'p'}
+                    onChange={(value) => setAttributes({content1: value})}
+                    value={content1}
+                    placeholder={__('Input Content', 'vk-blocks')}
+                />;
+
+            } else if (blockNum === 1) {
+
+                richTextH1Save = <RichText
+                    className="vk_prBlocks_item_title vk_prBlocks_item_title-1"
+                    tagName={'h1'}
+                    onChange={(value) => setAttributes({heading2: value})}
+                    value={heading2}
+                    placeholder={__('Input Title', 'vk-blocks')}
+                />;
+                richTextPSave = <RichText
+                    className="vk_prBlocks_item_summary vk_prBlocks_item_summary-1"
+                    tagName={'p'}
+                    onChange={(value) => setAttributes({content2: value})}
+                    value={content2}
+                    placeholder={__('Input Content', 'vk-blocks')}
+                />;
+
+            } else if (blockNum === 2) {
+                richTextH1Save = <RichText
+                    className="vk_prBlocks_item_title vk_prBlocks_item_title-2"
+                    tagName={'h1'}
+                    onChange={(value) => setAttributes({heading3: value})}
+                    value={heading3}
+                    placeholder={__('Input Title', 'vk-blocks')}
+                />;
+                richTextPSave = <RichText
+                    className="vk_prBlocks_item_summary vk_prBlocks_item_summary-2"
+                    tagName={'p'}
+                    onChange={(value) => setAttributes({content3: value})}
+                    value={content3}
+                    placeholder={__('Input Content', 'vk-blocks')}
+                />;
+            }
+
+        } else if (for_ === 'save') {
+
+            richTextH1Save = <RichText.Content
+                className={`vk_prBlocks_item_title vk_prBlocks_item_title-${blockNum}`}
                 tagName={'h1'}
                 value={heading[blockNum]}/>;
-
             richTextPSave = <RichText.Content
-                className="vk_prBlocks_item_summary vk_prBlocks_item_summary-1"
-                tagName={'p'}
-                value={content[blockNum]}/>;
-
-        } else if (for_ === 'edit') {
-
-            richTexth1Save = <RichText
-                className="vk_prBlocks_item_title vk_prBlocks_item_title-1"
-                tagName={'h1'}
-                value={heading[blockNum]}/>;
-
-            richTextPSave = <RichText
-                className="vk_prBlocks_item_summary vk_prBlocks_item_summary-1"
+                className={`vk_prBlocks_item_summary vk_prBlocks_item_summary-${blockNum}`}
                 tagName={'p'}
                 value={content[blockNum]}/>;
         }
 
 
-        //aタグ判定
+        // aタグ判定
         if (url[blockNum]) {
             return (
                 <div>
                     <a href={url[blockNum]} className="vk_prBlocks_item_link"
                        target={urlOpenType[blockNum] ? '_blank' : '_self'} rel="noopener noreferrer">
                         {drawElement}
-                        {richTexth1Save}
+                        {richTextH1Save}
                         {richTextPSave}
                     </a>
                 </div>
@@ -135,7 +180,7 @@ export class ComponentBlock extends React.Component {
             return (
                 <div>
                     {drawElement}
-                    {richTexth1Save}
+                    {richTextH1Save}
                     {richTextPSave}
                 </div>
             );
