@@ -5,6 +5,7 @@
 import React from "react";
 import {schema} from './schema';
 import HeadingToolbar from './heading-toolbar';
+import {Version0_6_0} from './deprecated/0.6.0/block';
 
 // import YourComponent from "./component.js";
 const {__} = wp.i18n; // Import __() from wp.i18n
@@ -267,4 +268,6 @@ registerBlockType('vk-blocks/heading', {
             </div>
         );
     },
+
+    deprecated:Version0_6_0
 });
