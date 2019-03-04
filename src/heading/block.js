@@ -109,13 +109,6 @@ registerBlockType('vk-blocks/heading', {
             }
         };
 
-        //outerMarginBottomが指定なしの時の処理
-        if (outerMarginBottom) {
-            let outerMarginBottomdiv = ''
-        } else {
-            let outerMarginBottomdiv = '';
-        }
-
         return (
             <Fragment>
                 <BlockControls>
