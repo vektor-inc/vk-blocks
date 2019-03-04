@@ -40,7 +40,7 @@ function set_attributes(number) {
         attributes['heading' + i] = {
             type: 'string',
             source: 'html',
-            selector: 'h1.vk_prBlocks_item_title-' + i,
+            selector: '.vk_prBlocks_item_title-' + i,
         };
         attributes['content' + i] = {
             type: 'string',
@@ -377,7 +377,7 @@ registerBlockType('vk-blocks/pr-blocks', {
     save({attributes}) {
 
         return (
-            <article className="vk_prBlocks row">
+            <div className="vk_prBlocks row">
                 <ComponentBlock
                     attributes={attributes}
                     blockNum={1}
@@ -393,7 +393,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                     blockNum={3}
                     for_={'save'}
                 />
-            </article>
+            </div>
         );
     },
 
