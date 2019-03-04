@@ -18,7 +18,7 @@ export class Component extends React.Component {
             contentColor,
             url,
             buttonType,
-						buttonColor,
+            buttonColor,
             buttonColorCustom,
             buttonText,
             buttonTarget,
@@ -30,19 +30,20 @@ export class Component extends React.Component {
         } = attributes;
         let setAttributes = this.props.setAttributes;
         let for_ = this.props.for_;
-				let containerClass = 'vk_prContent';
-				let btnClass = 'vk_button';
-				let aClass = 'btn btn-block vk_button_link vk_prContent_colTxt_btn';
-				let aStyle = {};
+        let containerClass = 'vk_prContent';
+        let btnClass = 'vk_button';
+        let aClass = 'btn btn-block vk_button_link vk_prContent_colTxt_btn';
+        let aStyle = {};
+        let imageBorderProperty = '';
 
-				if (layout === 'right') {
-					containerClass = `${containerClass} vk_prContent-layout-imageRight`;
-				} else {
-					containerClass = `${containerClass} vk_prContent-layout-imageLeft`;
-				}
+        if (layout === 'right') {
+            containerClass = `${containerClass} vk_prContent-layout-imageRight`;
+        } else {
+            containerClass = `${containerClass} vk_prContent-layout-imageLeft`;
+        }
 
-				if (buttonColorCustom) {
-						btnClass = `${btnClass} vk_button-color-custom`;
+        if (buttonColorCustom) {
+            btnClass = `${btnClass} vk_button-color-custom`;
             aClass = `${aClass} btn-primary`;
 
             // 塗り
@@ -75,6 +76,16 @@ export class Component extends React.Component {
 
         }
 
+        //borderColorが指定されなかった場合はボーダーを非表示に
+        if (ImageBorderColor === null || ImageBorderColor === undefined) {
+
+            imageBorderProperty = 'none';
+
+        } else {
+            imageBorderProperty = `1px solid ${ImageBorderColor}`;
+        }
+
+
         return (
             <div className={containerClass}>
                         <div className="col-sm-6 vk_prContent_colImg">
@@ -93,7 +104,7 @@ export class Component extends React.Component {
                                                     className={'vk_prContent_colImg_image'}
                                                     src={Image}
                                                     alt={__('Upload image', 'vk-blocks')}
-                                                    style={{border:`1px solid ${ImageBorderColor}`}}
+                                                    style={{border: imageBorderProperty}}
                                                 />}
                                         </Button>
                                     )}
@@ -104,7 +115,7 @@ export class Component extends React.Component {
                                         className={'vk_prContent_colImg_image'}
                                         src={Image}
                                         alt={__('Upload image', 'vk-blocks')}
-                                        style={{border: `1px solid ${ImageBorderColor}`}}
+                                        style={{border: imageBorderProperty}}
                                     />
                             }
                         </div>

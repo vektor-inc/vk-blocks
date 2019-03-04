@@ -44,7 +44,7 @@ export const schema = {
 	},
 	ImageBorderColor: {
 		type: 'string',
-	default: null,
+		default: null,
 	},
 	layout: {
 		type: 'string',
