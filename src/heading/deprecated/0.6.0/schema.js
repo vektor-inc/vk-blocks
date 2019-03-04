@@ -12,7 +12,6 @@ export const schema = {
     },
     outerMarginBottom: {
         type: 'number',
-        default: null,
     },
     title: {
         type: 'string',
@@ -30,7 +29,6 @@ export const schema = {
     },
     titleMarginBottom: {
         type: 'number',
-        default: null,
     },
     subText: {
         source: 'html',
