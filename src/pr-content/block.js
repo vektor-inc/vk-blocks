@@ -71,7 +71,7 @@ registerBlockType('vk-blocks/pr-content', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    edit: function ({attributes, className, setAttributes, classSwitcher}) {
+    edit: function ({attributes, className, setAttributes}) {
 
         const {
             titleColor,
@@ -227,7 +227,7 @@ registerBlockType('vk-blocks/pr-content', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    save({attributes, className, classSwitcher}) {
+    save({attributes, className}) {
         const {
             layout,
         } = attributes;
