@@ -21,6 +21,7 @@
     "@wordpress/scripts": "^2.5.0",
     "autoprefixer": "^9.3.1",
     "babel-loader": "^8.0.2",
+    "classnames": "^2.2.6",
     "css-loader": "^1.0.1",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.1.0",

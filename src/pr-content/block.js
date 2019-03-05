@@ -9,6 +9,7 @@ import {Component} from "./component.js";
 import {deprecated} from "./deprecated/deprecated";
 
 
+
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
 const {RangeControl, RadioControl, PanelBody, Button, BaseControl, CheckboxControl, TextControl} = wp.components;
@@ -200,6 +201,7 @@ registerBlockType('vk-blocks/pr-content', {
                 <Component
                     attributes={attributes}
                     setAttributes={setAttributes}
+                    className={className}
                     for_={'edit'}
                 />
             </Fragment>
@@ -220,6 +222,7 @@ registerBlockType('vk-blocks/pr-content', {
         return (
             <Component
                 attributes={attributes}
+                className={className}
                 for_={'save'}
             />
         );
