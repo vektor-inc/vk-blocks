@@ -1,4 +1,5 @@
 import React from "react";
+import classNames from 'classnames';
 import {Fontawesome} from "./component-fontawesome";
 
 const {__} = wp.i18n; // Import __() from wp.i18n
@@ -28,7 +29,9 @@ export class Component extends React.Component {
             fontAwesomeIconBefore,
             fontAwesomeIconAfter
         } = attributes;
+
         let setAttributes = this.props.setAttributes;
+        let className = this.props.className;
         let for_ = this.props.for_;
         let containerClass = 'vk_prContent';
         let btnClass = 'vk_button';
@@ -37,9 +40,9 @@ export class Component extends React.Component {
         let imageBorderProperty = '';
 
         if (layout === 'right') {
-            containerClass = `${containerClass} vk_prContent-layout-imageRight`;
+            containerClass = classNames(className, containerClass, 'vk_prContent-layout-imageRight');
         } else {
-            containerClass = `${containerClass} vk_prContent-layout-imageLeft`;
+            containerClass = classNames(className, containerClass, 'vk_prContent-layout-imageLeft');
         }
 
         if (buttonColorCustom) {
