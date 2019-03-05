@@ -4,16 +4,16 @@
  */
 
 import React from "react";
-import {schema} from './schema.js';
-import {Component} from "./component.js";
-import {deprecated} from "./deprecated/deprecated";
+import {schema} from './schema';
+import {Component} from "./component";
+import {deprecated} from "./deprecated/block";
 
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
-const {RangeControl, RadioControl, PanelBody, Button, BaseControl, CheckboxControl, TextControl} = wp.components;
+const {RadioControl, PanelBody, BaseControl, CheckboxControl, TextControl} = wp.components;
 const {Fragment} = wp.element;
-const {RichText, InspectorControls, MediaUpload, ColorPalette} = wp.editor;
+const {InspectorControls, ColorPalette} = wp.editor;
 const BlockIcon = (
     <svg xmlns="http://www.w3.org/2000/svg" width="576" height="512" viewBox="0 0 576 512">
 		<g>
@@ -42,6 +42,7 @@ const BlockIcon = (
 		</g>
     </svg>
 );
+
 /**
  * Register: aa Gutenberg Block.
  *
@@ -70,7 +71,8 @@ registerBlockType('vk-blocks/pr-content', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    edit: function ({attributes, className, setAttributes}) {
+    edit: function ({attributes, className, setAttributes, classSwitcher}) {
+
         const {
             titleColor,
             contentColor,
@@ -85,6 +87,14 @@ registerBlockType('vk-blocks/pr-content', {
             fontAwesomeIconBefore,
             fontAwesomeIconAfter
         } = attributes;
+
+        let containerClass = 'vk_prContent';
+        if (layout === 'right') {
+            containerClass = `${containerClass} vk_prContent-layout-imageRight`;
+        } else {
+            containerClass = `${containerClass} vk_prContent-layout-imageLeft`;
+        }
+
         return (
             <Fragment>
                 <InspectorControls>
@@ -197,11 +207,13 @@ registerBlockType('vk-blocks/pr-content', {
                             />
                     </PanelBody>
                 </InspectorControls>
-                <Component
-                    attributes={attributes}
-                    setAttributes={setAttributes}
-                    for_={'edit'}
-                />
+                <div className={containerClass}>
+                    <Component
+                        attributes={attributes}
+                        setAttributes={setAttributes}
+                        for_={'edit'}
+                    />
+                </div>
             </Fragment>
         );
     },
@@ -215,16 +227,26 @@ registerBlockType('vk-blocks/pr-content', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    save({attributes, className}) {
+    save({attributes, className, classSwitcher}) {
+        const {
+            layout,
+        } = attributes;
 
+        let containerClass = 'vk_prContent';
+        if (layout === 'right') {
+            containerClass = `${containerClass} vk_prContent-layout-imageRight`;
+        } else {
+            containerClass = `${containerClass} vk_prContent-layout-imageLeft`;
+        }
         return (
-            <Component
-                attributes={attributes}
-                for_={'save'}
-            />
+            <div className={containerClass}>
+                <Component
+                    attributes={attributes}
+                    for_={'save'}
+                />
+            </div>
         );
     },
 
     deprecated: deprecated
-
 });
