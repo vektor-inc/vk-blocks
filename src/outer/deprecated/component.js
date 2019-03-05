@@ -1,5 +1,6 @@
 import React from 'react';
 import {componentDivider} from './component-divider';
+
 const {InnerBlocks} = wp.editor;
 
 //hexカラーコード定義をrgbaに変換
@@ -47,7 +48,6 @@ export class Component extends React.Component {
             anchor
         } = this.props.attributes;
 
-        let className = this.props.className;
         let for_ = this.props.for_;
         let classPaddingLR;
         let classPaddingVertical;
@@ -137,7 +137,7 @@ export class Component extends React.Component {
         return (
             <div
                 id={anchor}
-                className={ className + ' vk_outer' + classWidth + classPaddingLR + classPaddingVertical + classBgPosition }
+                className={ 'vk_outer' + classWidth + classPaddingLR + classPaddingVertical + classBgPosition }
                 style={{
                     background: bgStyle,
                     border: borderProperty,

@@ -64,7 +64,7 @@ registerBlockType('vk-blocks/outer', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    edit({attributes, setAttributes}) {
+    edit({attributes, setAttributes,className}) {
         const {
             bgColor,
             bgImage,
@@ -325,9 +325,10 @@ registerBlockType('vk-blocks/outer', {
                 {
                     vk_blocks_check.is_pro
                         ?
-                        <Component
-                            attributes={attributes}
-                            for_={'edit'}/>
+							<Component
+								attributes={attributes}
+								className={className}
+								for_={'edit'}/>
                             :
                         <div>{__('This block is only for users who bought Lightning Pro.', 'vk-blocks')}</div>
                 }
@@ -343,16 +344,16 @@ registerBlockType('vk-blocks/outer', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    save({attributes}) {
+    save({attributes,className}) {
         {
             if (vk_blocks_check.is_pro) {
 
                 return (
-                    <Component
-                        attributes={attributes}
-                        for_={'save'}/>
+						<Component
+							attributes={attributes}
+							className={className}
+							for_={'save'}/>
                 );
-
             }
         }
 
