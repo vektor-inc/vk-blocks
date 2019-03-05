@@ -5,7 +5,7 @@
 import React from "react";
 import NewComponent from "./component";
 import {schema} from './schema';
-// import {deprecated} from './deprecated/deprecated';
+// import {deprecated} from './deprecated/block';
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
