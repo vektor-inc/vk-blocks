@@ -1,11 +1,6 @@
 import React from 'react';
 import {componentDivider} from './component-divider';
-
 const {InnerBlocks} = wp.editor;
-
-const exportfunction = ()=>{
-    return "hello";
-};
 
 //hexカラーコード定義をrgbaに変換
 function hex2rgba (hex, alpha) {
