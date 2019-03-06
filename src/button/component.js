@@ -79,6 +79,7 @@ export class Component extends React.Component {
                     aria-pressed={true}
                     style={aStyle}
                     target={buttonTarget? '_blank':null}
+                    rel={'noopener noreferrer'}
                 >
 												{iconBefore}
                         {richText}
