@@ -3,7 +3,7 @@
  *
  */
 import React from "react";
-import {version0_6_0} from "./deprecated/0.6.0/block";
+import {version0_6_0} from "./deprecated/block";
 import {ComponentBlock} from "./component-block";
 
 
