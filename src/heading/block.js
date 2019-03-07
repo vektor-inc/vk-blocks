@@ -5,7 +5,7 @@
 import React from "react";
 import {schema} from './schema';
 import HeadingToolbar from './heading-toolbar';
-import {Version0_6_0} from './deprecated/0.6.0/block';
+import {Version0_6_0} from './deprecated/block';
 
 // import YourComponent from "./component.js";
 const {__} = wp.i18n; // Import __() from wp.i18n
@@ -293,7 +293,6 @@ registerBlockType('vk-blocks/heading', {
     save({attributes}) {
         const {level, align, title, titleColor, titleSize, subText, subTextFlag, subTextColor, subTextSize, titleStyle, titleMarginBottom, outerMarginBottom} = attributes;
         const tagName = 'h' + level;
-
 
         return (
             <Fragment>
