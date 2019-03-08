@@ -1,4 +1,5 @@
 import React from "react";
+const {RichText} = wp.editor;
 
 export const deprecated = [
     {
