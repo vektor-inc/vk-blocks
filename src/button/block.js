@@ -130,6 +130,17 @@ registerBlockType('vk-blocks/button', {
         } = attributes;
 
         let containerClass;
+        if (buttonColorCustom) {
+            containerClass = `vk_button vk_button-align-${buttonAlign} vk_button-color-custom`;
+        } else {
+            containerClass = `vk_button vk_button-align-${buttonAlign}`;
+        }
+
+        if (className) {
+            containerClass = `${className} vk_button vk_button-align-${buttonAlign} vk_button-color-custom`;
+        } else {
+            containerClass = `${className} vk_button vk_button-align-${buttonAlign}`;
+        }
 
         return (
             <Fragment>
@@ -222,21 +233,6 @@ registerBlockType('vk-blocks/button', {
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
-
-                {((containerClass,className) => {
-                    if (buttonColorCustom) {
-                        containerClass = `vk_button vk_button-align-${buttonAlign} vk_button-color-custom`;
-                    } else {
-                        containerClass = `vk_button vk_button-align-${buttonAlign}`;
-                    }
-
-                    if(className){
-                        containerClass = `${className} vk_button vk_button-align-${buttonAlign} vk_button-color-custom`;
-                    }else {
-                        containerClass = `${className} vk_button vk_button-align-${buttonAlign}`;
-                    }
-                })()}
-
                 <div className={containerClass}>
 
                     <Component lbColorCustom={buttonColorCustom} lbColor={buttonColor} lbType={buttonType}
