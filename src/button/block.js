@@ -129,6 +129,8 @@ registerBlockType('vk-blocks/button', {
             fontAwesomeIconAfter,
         } = attributes;
 
+        let containerClass;
+
         return (
             <Fragment>
                 <InspectorControls>
@@ -221,8 +223,21 @@ registerBlockType('vk-blocks/button', {
                     </PanelBody>
                 </InspectorControls>
 
-                <div
-                    className={buttonColorCustom ? `${className} vk_button vk_button-align-${buttonAlign} vk_button-color-custom` : `${className} vk_button vk_button-align-${buttonAlign}`}>
+                {((containerClass,className) => {
+                    if (buttonColorCustom) {
+                        containerClass = `vk_button vk_button-align-${buttonAlign} vk_button-color-custom`;
+                    } else {
+                        containerClass = `vk_button vk_button-align-${buttonAlign}`;
+                    }
+
+                    if(className){
+                        containerClass = `${className} vk_button vk_button-align-${buttonAlign} vk_button-color-custom`;
+                    }else {
+                        containerClass = `${className} vk_button vk_button-align-${buttonAlign}`;
+                    }
+                })()}
+
+                <div className={containerClass}>
 
                     <Component lbColorCustom={buttonColorCustom} lbColor={buttonColor} lbType={buttonType}
                                lbAlign={buttonAlign}
@@ -283,7 +298,6 @@ registerBlockType('vk-blocks/button', {
         } = attributes;
 
         let containerClass = '';
-
         if (buttonColorCustom) {
 
             containerClass = `vk_button vk_button-color-custom vk_button-align-${buttonAlign}`;
@@ -294,8 +308,14 @@ registerBlockType('vk-blocks/button', {
 
         }
 
+        if(className){
+            containerClass = className + ' ' + containerClass;
+        }else {
+            containerClass
+        }
+
         return (
-            <div className={className + ' ' + containerClass}>
+            <div className={containerClass}>
 
                 <Component lbColorCustom={buttonColorCustom} lbColor={buttonColor} lbType={buttonType}
                            lbAlign={buttonAlign}
