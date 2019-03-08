@@ -2,6 +2,7 @@
  * Alert block type
  *
  */
+import {deprecated} from './deprecated';
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks;
@@ -27,7 +28,7 @@ registerBlockType( 'vk-blocks/alert', {
     }
   },
 
-  edit({attributes, setAttributes}) {
+  edit({attributes, setAttributes, className}) {
       const {
           style,
           content
@@ -42,7 +43,7 @@ registerBlockType( 'vk-blocks/alert', {
     }
 
     return (
-        <div className={`alert alert-${style}`}>
+        <div className={`${className} alert alert-${style}`}>
         <select onChange={onStyleChange}>
             <option value={'success'} selected={style === 'success'}>Success</option>
             <option value={'info'} selected={style === 'info'}>Info</option>
@@ -58,18 +59,18 @@ registerBlockType( 'vk-blocks/alert', {
     );
   },
 
-  save({attributes}) {
+  save({attributes,className}) {
       const {
           style,
           content
       } = attributes;
     return (
-        <div className={`alert alert-${style}`}>
+        <div className={`${className} alert alert-${style}`}>
         <RichText.Content
             tagName={'p'}
             value={content}/>
       </div>
     );
   },
-
+    deprecated: deprecated,
 } );
