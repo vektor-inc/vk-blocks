@@ -221,7 +221,8 @@ registerBlockType('vk-blocks/button', {
                     </PanelBody>
                 </InspectorControls>
 
-                <div className={buttonColorCustom ? `vk_button vk_button-align-${ buttonAlign } vk_button-color-custom` : `vk_button vk_button-align-${ buttonAlign }`}>
+                <div
+                    className={buttonColorCustom ? `${className} vk_button vk_button-align-${buttonAlign} vk_button-color-custom` : `${className} vk_button vk_button-align-${buttonAlign}`}>
 
                     <Component lbColorCustom={buttonColorCustom} lbColor={buttonColor} lbType={buttonType}
                                lbAlign={buttonAlign}
@@ -294,7 +295,7 @@ registerBlockType('vk-blocks/button', {
         }
 
         return (
-            <div className={containerClass}>
+            <div className={className + ' ' + containerClass}>
 
                 <Component lbColorCustom={buttonColorCustom} lbColor={buttonColor} lbType={buttonType}
                            lbAlign={buttonAlign}
