@@ -310,8 +310,6 @@ registerBlockType('vk-blocks/button', {
 
         if(className){
             containerClass = className + ' ' + containerClass;
-        }else {
-            containerClass
         }
 
         return (
