@@ -106,7 +106,7 @@ registerBlockType('vk-blocks/pr-blocks', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    edit({attributes, setAttributes}) {
+    edit: function ({attributes, setAttributes}) {
 
         const {
             heading1,
@@ -395,6 +395,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                 />
             </div>
         );
+
     },
 
     deprecated: version0_6_0
