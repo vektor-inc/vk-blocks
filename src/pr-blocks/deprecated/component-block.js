@@ -164,32 +164,19 @@ export class ComponentBlock extends React.Component {
                 value={content[blockNumArrIndex]}/>;
         }
 
-
-        // aタグ判定
-        if (url[blockNumArrIndex] && for_ === 'save') {
-            return (
-                <div className="vk_prBlocks_item col-sm-4">
-                    <a href={url[blockNumArrIndex]}
-                       target={urlOpenType[blockNumArrIndex] ? '_blank' : '_self'}
-                       className="vk_prBlocks_item_link"
-                       rel="noopener noreferrer"
-                    >
-                        {drawElement}
-                        {richTextH1Save}
-                        {richTextPSave}
-                    </a>
-                </div>
-            );
-        } else {
-            return (
-                <div className="vk_prBlocks_item col-sm-4">
+        return (
+            <div className="vk_prBlocks_item col-sm-4">
+                <a href={url[blockNumArrIndex]}
+                   target={urlOpenType[blockNumArrIndex] ? '_blank' : '_self'}
+                   className="vk_prBlocks_item_link"
+                   rel="noopener noreferrer"
+                >
                     {drawElement}
                     {richTextH1Save}
                     {richTextPSave}
-                </div>
-            );
-        }
-
+                </a>
+            </div>
+        );
 
     }
 }

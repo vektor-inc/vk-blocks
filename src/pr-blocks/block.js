@@ -3,7 +3,7 @@
  *
  */
 import React from "react";
-import {version0_6_0} from "./deprecated/block";
+import {deprecated} from "./deprecated/block";
 import {ComponentBlock} from "./component-block";
 
 
@@ -398,6 +398,6 @@ registerBlockType('vk-blocks/pr-blocks', {
 
     },
 
-    deprecated: version0_6_0
+    deprecated: deprecated
 
 });

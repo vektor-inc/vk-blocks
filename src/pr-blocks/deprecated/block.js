@@ -95,7 +95,7 @@ function set_attributes2(number) {
     return attributes;
 }
 
-export const version0_6_0 = [
+export const deprecated = [
     {
         attributes: set_attributes(4),
 
