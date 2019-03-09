@@ -135,6 +135,13 @@ registerBlockType('vk-blocks/pr-blocks', {
             insertImage3
         } = attributes;
 
+        let containerClass;
+        if (className) {
+            containerClass = `${className} vk_prBlocks row`;
+        } else {
+            containerClass = `vk_prBlocks row`;
+        }
+
         return [
             <Fragment>
                 <InspectorControls>
@@ -342,7 +349,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
-                <div className={`${className} vk_prBlocks row`}>
+                <div className={containerClass}>
                     <ComponentBlock
                         attributes={attributes}
                         setAttributes={setAttributes}
@@ -376,8 +383,15 @@ registerBlockType('vk-blocks/pr-blocks', {
      */
     save({attributes,className}) {
 
+        let containerClass;
+        if (className) {
+            containerClass = `${className} vk_prBlocks row`;
+        } else {
+            containerClass = `vk_prBlocks row`;
+        }
+
         return (
-            <div className={`${className} vk_prBlocks row`}>
+            <div className={containerClass}>
                 <ComponentBlock
                     attributes={attributes}
                     blockNum={1}
