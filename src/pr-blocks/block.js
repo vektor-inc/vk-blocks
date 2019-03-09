@@ -106,7 +106,7 @@ registerBlockType('vk-blocks/pr-blocks', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    edit: function ({attributes, setAttributes}) {
+    edit: function ({attributes, setAttributes, className}) {
 
         const {
             heading1,
@@ -342,7 +342,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
-                <article className="vk_prBlocks row">
+                <div className={`${className} vk_prBlocks row`}>
                     <ComponentBlock
                         attributes={attributes}
                         setAttributes={setAttributes}
@@ -361,7 +361,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                         blockNum={3}
                         for_={'edit'}
                     />
-                </article>
+                </div>
             </Fragment>
         ];
     },
@@ -374,10 +374,10 @@ registerBlockType('vk-blocks/pr-blocks', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    save({attributes}) {
+    save({attributes,className}) {
 
         return (
-            <div className="vk_prBlocks row">
+            <div className={`${className} vk_prBlocks row`}>
                 <ComponentBlock
                     attributes={attributes}
                     blockNum={1}
