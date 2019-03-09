@@ -79,7 +79,7 @@ registerBlockType('vk-blocks/heading', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    edit({attributes, setAttributes}) {
+    edit({attributes, setAttributes, className}) {
         const {level, align, title, titleColor, titleSize, subText, subTextFlag, subTextColor, subTextSize, titleStyle, titleMarginBottom, outerMarginBottom} = attributes;
         const tagName = 'h' + level;
 
@@ -197,12 +197,9 @@ registerBlockType('vk-blocks/heading', {
                         />
                     </PanelBody>
                 </InspectorControls>
-
                 {
                     outerMarginBottom == null ?
-                        <div
-                            className={`vk_heading vk_heading-style-${titleStyle}`}
-                        >
+                        <div className={`${className} vk_heading vk_heading-style-${titleStyle}`}>
                             <RichText
                                 tagName={tagName}
                                 value={title}
@@ -239,7 +236,7 @@ registerBlockType('vk-blocks/heading', {
                         </div>
                         :
                         <div
-                            className={`vk_heading vk_heading-style-${titleStyle}`}
+                            className={`${className} vk_heading vk_heading-style-${titleStyle}`}
                             style={{marginBottom: outerMarginBottom + `rem`}}
                         >
                             <RichText
@@ -290,7 +287,7 @@ registerBlockType('vk-blocks/heading', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    save({attributes}) {
+    save({attributes, className}) {
         const {level, align, title, titleColor, titleSize, subText, subTextFlag, subTextColor, subTextSize, titleStyle, titleMarginBottom, outerMarginBottom} = attributes;
         const tagName = 'h' + level;
 
@@ -298,7 +295,7 @@ registerBlockType('vk-blocks/heading', {
             <Fragment>
                 {
                     outerMarginBottom == null ?
-                        <div className={`vk_heading vk_heading-style-${titleStyle}`}>
+                        <div className={`${className} vk_heading vk_heading-style-${titleStyle}`}>
                             <RichText.Content
                                 tagName={tagName}
                                 value={title}
@@ -331,7 +328,7 @@ registerBlockType('vk-blocks/heading', {
                         </div>
                         :
                         <div
-                            className={`vk_heading vk_heading-style-${titleStyle}`}
+                            className={`${className} vk_heading vk_heading-style-${titleStyle}`}
                             style={{marginBottom: outerMarginBottom + `rem`}}
                         >
                             <RichText.Content

@@ -4,7 +4,7 @@
  */
 import React from "react";
 import {schema} from './schema';
-import HeadingToolbar from './heading-toolbar';
+
 const {RichText, InspectorControls, ColorPalette, BlockControls, AlignmentToolbar} = wp.editor;
 
 function set_attirbuite(number) {
@@ -317,6 +317,143 @@ export const Version0_6_0 = [
                         </a>
                     </div>
                 </article>
+            );
+        },
+    },
+    {
+        attributes: {
+            level: {
+                type: 'number',
+                default: 2,
+            },
+            align: {
+                type: 'string',
+            },
+            titleStyle: {
+                type: 'string',
+                default: 'default',
+            },
+            outerMarginBottom: {
+                type: 'number',
+                default: null,
+            },
+            title: {
+                type: 'string',
+                source: 'html',
+                selector: 'h1,h2,h3,h4,h5,h6',
+                default: '',
+            },
+            titleColor: {
+                type: 'string',
+                default: '#000000',
+            },
+            titleSize: {
+                type: 'number',
+                default: 2.6,
+            },
+            titleMarginBottom: {
+                type: 'number',
+                default: null,
+            },
+            subText: {
+                source: 'html',
+                selector: 'p',
+                default: '',
+            },
+            subTextFlag: {
+                type: 'string',
+                default: 'on',
+            },
+            subTextColor: {
+                type: 'string',
+                default: '#000000',
+            },
+            subTextSize: {
+                type: 'number',
+                default: 1.8,
+            },
+        },
+        supports: {
+            className: false,
+            anchor: true,
+        },
+        save({attributes}) {
+            const {level, align, title, titleColor, titleSize, subText, subTextFlag, subTextColor, subTextSize, titleStyle, titleMarginBottom, outerMarginBottom} = attributes;
+            const tagName = 'h' + level;
+
+            return (
+                <Fragment>
+                    {
+                        outerMarginBottom == null ?
+                            <div className={`vk_heading vk_heading-style-${titleStyle}`}>
+                                <RichText.Content
+                                    tagName={tagName}
+                                    value={title}
+                                    style={{
+                                        color: titleColor,
+                                        fontSize: titleSize + 'rem',
+                                        textAlign: align,
+                                    }}
+                                    className={`vk_heading_title vk_heading_title-style-${titleStyle}`}
+                                />
+                                {
+                                    // サブテキスト
+                                    (() => {
+                                        if (subTextFlag === 'on') {
+                                            return (
+                                                <RichText.Content
+                                                    tagName={'p'}
+                                                    value={subText}
+                                                    style={{
+                                                        color: subTextColor,
+                                                        fontSize: subTextSize + 'rem',
+                                                        textAlign: align
+                                                    }}
+                                                    className={`vk_heading_subtext vk_heading_subtext-style-${titleStyle}`}
+                                                />
+                                            );
+                                        }
+                                    })()
+                                }
+                            </div>
+                            :
+                            <div
+                                className={`vk_heading vk_heading-style-${titleStyle}`}
+                                style={{marginBottom: outerMarginBottom + `rem`}}
+                            >
+                                <RichText.Content
+                                    tagName={tagName}
+                                    value={title}
+                                    style={{
+                                        color: titleColor,
+                                        fontSize: titleSize + 'rem',
+                                        textAlign: align,
+                                        marginBottom: titleMarginBottom + 'rem'
+                                    }}
+                                    className={`vk_heading_title vk_heading_title-style-${titleStyle}`}
+                                />
+                                {
+                                    // サブテキスト
+                                    (() => {
+                                        if (subTextFlag === 'on') {
+                                            return (
+                                                <RichText.Content
+                                                    tagName={'p'}
+                                                    value={subText}
+                                                    style={{
+                                                        color: subTextColor,
+                                                        fontSize: subTextSize + 'rem',
+                                                        textAlign: align
+                                                    }}
+                                                    className={`vk_heading_subtext vk_heading_subtext-style-${titleStyle}`}
+                                                />
+                                            );
+                                        }
+                                    })()
+                                }
+                            </div>
+                    }
+                </Fragment>
             );
         },
     }
