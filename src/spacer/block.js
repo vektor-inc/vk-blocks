@@ -5,6 +5,7 @@
 import React from "react";
 import {schema} from './schema';
 import {SpacerComponent} from "./component";
+import {deprecated} from "./deprecated/deprecated";
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
@@ -50,7 +51,7 @@ registerBlockType('vk-blocks/spacer', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    edit({attributes, setAttributes}) {
+    edit({attributes, setAttributes, className}) {
         const {
             unit,
             pc,
@@ -104,7 +105,10 @@ registerBlockType('vk-blocks/spacer', {
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
-                <SpacerComponent attributes={attributes}/>
+                <SpacerComponent
+                    attributes={attributes}
+                    className={className}
+                />
             </Fragment>
         );
     },
@@ -124,5 +128,5 @@ registerBlockType('vk-blocks/spacer', {
     },
 
     //Please comment out, when you need to use deprecated.
-    // deprecated:deprecated
+    deprecated: deprecated
 });

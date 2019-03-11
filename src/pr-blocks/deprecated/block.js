@@ -1,4 +1,5 @@
 import React from "react";
+import {ComponentBlock} from "./component-block";
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {RadioControl, PanelBody, Button, BaseControl, CheckboxControl, TextControl} = wp.components;
@@ -6,6 +7,50 @@ const {Fragment} = wp.element;
 const {RichText, InspectorControls, MediaUpload, ColorPalette} = wp.editor;
 
 function set_attributes(number) {
+
+    var attributes = {};
+
+    for (var i = 1; i <= number; i++) {
+
+        attributes['heading' + i] = {
+            type: 'string',
+            source: 'html',
+            selector: 'h3.vk_prBlocks_item_title-' + i,
+        };
+        attributes['content' + i] = {
+            type: 'string',
+            source: 'html',
+            selector: 'p.vk_prBlocks_item_summary-' + i,
+        };
+        attributes['url' + i] = {
+            type: 'string',
+            default: null,
+        };
+        attributes['urlOpenType' + i] = {
+            type: 'Boolean',
+            default: false,
+        };
+        attributes['icon' + i] = {
+            type: 'string',
+            default: 'fas fa-file',
+        };
+        attributes['color' + i] = {
+            type: 'string',
+            default: '#0693e3',
+        };
+        attributes['bgType' + i] = {
+            type: 'string',
+            default: '0',
+        };
+        attributes['insertImage' + i] = {
+            type: 'string',
+            default: null,
+        };
+    }
+
+    return attributes;
+}
+function set_attributes2(number) {
 
     var attributes = {};
 
@@ -50,7 +95,7 @@ function set_attributes(number) {
     return attributes;
 }
 
-export const version0_6_0 = [
+export const deprecated = [
     {
         attributes: set_attributes(4),
 
@@ -83,7 +128,7 @@ export const version0_6_0 = [
             } = attributes;
 
             return (
-                <article className="vk_prBlocks row">
+                <div className="vk_prBlocks row">
 
                     <div className="vk_prBlocks_item col-sm-4">
                         <a
@@ -268,9 +313,36 @@ export const version0_6_0 = [
                                 value={content3}/>
                         </a>
                     </div>
-                </article>
+                </div>
             );
         },
 
 
-    }];
+    },
+    {
+        attributes: set_attributes2(4),
+        save({attributes}) {
+
+            return (
+                <article className="vk_prBlocks row">
+                    <ComponentBlock
+                        attributes={attributes}
+                        blockNum={1}
+                        for_={'save'}
+                    />
+                    <ComponentBlock
+                        attributes={attributes}
+                        blockNum={2}
+                        for_={'save'}
+                    />
+                    <ComponentBlock
+                        attributes={attributes}
+                        blockNum={3}
+                        for_={'save'}
+                    />
+                </article>
+            );
+
+        },
+    }
+];

@@ -105,7 +105,7 @@ export class ComponentBlock extends React.Component {
 
                 richTextH1Save = <RichText
                     className="vk_prBlocks_item_title vk_prBlocks_item_title-1"
-                    tagName={'h3'}
+                    tagName={'h1'}
                     onChange={(value) => setAttributes({heading1: value})}
                     value={heading1}
                     placeholder={__('Input Title', 'vk-blocks')}
@@ -122,7 +122,7 @@ export class ComponentBlock extends React.Component {
 
                 richTextH1Save = <RichText
                     className="vk_prBlocks_item_title vk_prBlocks_item_title-2"
-                    tagName={'h3'}
+                    tagName={'h1'}
                     onChange={(value) => setAttributes({heading2: value})}
                     value={heading2}
                     placeholder={__('Input Title', 'vk-blocks')}
@@ -138,7 +138,7 @@ export class ComponentBlock extends React.Component {
             } else if (blockNum === 3) {
                 richTextH1Save = <RichText
                     className="vk_prBlocks_item_title vk_prBlocks_item_title-3"
-                    tagName={'h3'}
+                    tagName={'h1'}
                     onChange={(value) => setAttributes({heading3: value})}
                     value={heading3}
                     placeholder={__('Input Title', 'vk-blocks')}
@@ -156,7 +156,7 @@ export class ComponentBlock extends React.Component {
 
             richTextH1Save = <RichText.Content
                 className={`vk_prBlocks_item_title vk_prBlocks_item_title-${blockNum}`}
-                tagName={'h3'}
+                tagName={'h1'}
                 value={heading[blockNumArrIndex]}/>;
             richTextPSave = <RichText.Content
                 className={`vk_prBlocks_item_summary vk_prBlocks_item_summary-${blockNum}`}
@@ -164,30 +164,19 @@ export class ComponentBlock extends React.Component {
                 value={content[blockNumArrIndex]}/>;
         }
 
-
-        // aタグ判定
-        if (url[blockNumArrIndex] && for_ === 'save') {
-            return (
-                <div className="vk_prBlocks_item col-sm-4">
-                    <a href={url[blockNumArrIndex]} className="vk_prBlocks_item_link"
-                       target={urlOpenType[blockNumArrIndex] ? '_blank' : '_self'}
-                       rel="noopener noreferrer">
-                        {drawElement}
-                        {richTextH1Save}
-                        {richTextPSave}
-                    </a>
-                </div>
-            );
-        } else {
-            return (
-                <div className="vk_prBlocks_item col-sm-4">
+        return (
+            <div className="vk_prBlocks_item col-sm-4">
+                <a href={url[blockNumArrIndex]}
+                   target={urlOpenType[blockNumArrIndex] ? '_blank' : '_self'}
+                   className="vk_prBlocks_item_link"
+                   rel="noopener noreferrer"
+                >
                     {drawElement}
                     {richTextH1Save}
                     {richTextPSave}
-                </div>
-            );
-        }
-
+                </a>
+            </div>
+        );
 
     }
 }

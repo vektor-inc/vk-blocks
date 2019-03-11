@@ -3,7 +3,7 @@
  *
  */
 import React from "react";
-import {version0_6_0} from "./deprecated/block";
+import {deprecated} from "./deprecated/block";
 import {ComponentBlock} from "./component-block";
 
 
@@ -106,7 +106,7 @@ registerBlockType('vk-blocks/pr-blocks', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    edit({attributes, setAttributes}) {
+    edit: function ({attributes, setAttributes, className}) {
 
         const {
             heading1,
@@ -134,6 +134,13 @@ registerBlockType('vk-blocks/pr-blocks', {
             insertImage2,
             insertImage3
         } = attributes;
+
+        let containerClass;
+        if (className) {
+            containerClass = `${className} vk_prBlocks row`;
+        } else {
+            containerClass = `vk_prBlocks row`;
+        }
 
         return [
             <Fragment>
@@ -342,7 +349,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
-                <article className="vk_prBlocks row">
+                <div className={containerClass}>
                     <ComponentBlock
                         attributes={attributes}
                         setAttributes={setAttributes}
@@ -361,7 +368,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                         blockNum={3}
                         for_={'edit'}
                     />
-                </article>
+                </div>
             </Fragment>
         ];
     },
@@ -374,10 +381,17 @@ registerBlockType('vk-blocks/pr-blocks', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    save({attributes}) {
+    save({attributes,className}) {
+
+        let containerClass;
+        if (className) {
+            containerClass = `${className} vk_prBlocks row`;
+        } else {
+            containerClass = `vk_prBlocks row`;
+        }
 
         return (
-            <div className="vk_prBlocks row">
+            <div className={containerClass}>
                 <ComponentBlock
                     attributes={attributes}
                     blockNum={1}
@@ -395,8 +409,9 @@ registerBlockType('vk-blocks/pr-blocks', {
                 />
             </div>
         );
+
     },
 
-    deprecated: version0_6_0
+    deprecated: deprecated
 
 });

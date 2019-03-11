@@ -1,6 +1,6 @@
 import React from 'react';
 
-export class Component extends React.Component {
+export class ComponentDeprecatedSubcaptionNoopennerId extends React.Component {
 
     render() {
 
@@ -74,18 +74,17 @@ export class Component extends React.Component {
                 <a
                     href={buttonUrl}
                     id={'vk_button_link'}
-                    style={aStyle}
                     className={aClass}
                     role={'button'}
                     aria-pressed={true}
+                    style={aStyle}
                     target={buttonTarget? '_blank':null}
-                    rel={'noopener noreferrer'}
                 >
-                    {iconBefore}
-                    {richText}
-                    {iconAfter}
-                    {/*サブキャプションが入力された時のみ表示*/}
-                    {subCaption && <p className={'vk_button_link_subCaption'}>{subCaption}</p>}
+												{iconBefore}
+                        {richText}
+												{iconAfter}
+                        {/*サブキャプションが入力された時のみ表示*/}
+                        {subCaption && <p className={'vk_button_link_subCaption'}>{subCaption}</p>}
                 </a>
         );
     }

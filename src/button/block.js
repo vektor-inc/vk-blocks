@@ -129,6 +129,19 @@ registerBlockType('vk-blocks/button', {
             fontAwesomeIconAfter,
         } = attributes;
 
+        let containerClass;
+        if (buttonColorCustom) {
+            containerClass = `vk_button vk_button-align-${buttonAlign} vk_button-color-custom`;
+        } else {
+            containerClass = `vk_button vk_button-align-${buttonAlign}`;
+        }
+
+        if (className) {
+            containerClass = `${className} vk_button vk_button-align-${buttonAlign} vk_button-color-custom`;
+        } else {
+            containerClass = `${className} vk_button vk_button-align-${buttonAlign}`;
+        }
+
         return (
             <Fragment>
                 <InspectorControls>
@@ -220,8 +233,7 @@ registerBlockType('vk-blocks/button', {
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
-
-                <div className={buttonColorCustom ? `vk_button vk_button-align-${ buttonAlign } vk_button-color-custom` : `vk_button vk_button-align-${ buttonAlign }`}>
+                <div className={containerClass}>
 
                     <Component lbColorCustom={buttonColorCustom} lbColor={buttonColor} lbType={buttonType}
                                lbAlign={buttonAlign}
@@ -282,7 +294,6 @@ registerBlockType('vk-blocks/button', {
         } = attributes;
 
         let containerClass = '';
-
         if (buttonColorCustom) {
 
             containerClass = `vk_button vk_button-color-custom vk_button-align-${buttonAlign}`;
@@ -291,6 +302,10 @@ registerBlockType('vk-blocks/button', {
 
             containerClass = `vk_button vk_button-align-${buttonAlign}`;
 
+        }
+
+        if(className){
+            containerClass = className + ' ' + containerClass;
         }
 
         return (
