@@ -67,6 +67,8 @@ registerBlockType('vk-blocks/heading', {
     category: 'vk-blocks-cat', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
     attributes: schema,
     supports: {
+        className:true,
+        customClassName:true,
         anchor: true,
     },
 
