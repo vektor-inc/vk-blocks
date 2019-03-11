@@ -3,8 +3,8 @@ Contributors: vektor-inc,kurudrive,naoki0h
 Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 4.6
-Tested up to: 5.0.3
-Stable tag: 0.6.0
+Tested up to: 5.1.0
+Stable tag: 0.7.0
 Requires PHP: 5.6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -52,6 +52,11 @@ e.g.
 1. VK Blocks examples.
 
 == Changelog ==
+
+= 0.7.0 =
+[Bug fix][ PR Blocks ] When link url not set that no print a Tags
+[Specification change][ PR Blocks ] Change outer tag article to div
+[Specification change][ PR Blocks ] Change h1 tag to h3 tag
 
 = 0.6.0 =
 [Add New Block] Title
