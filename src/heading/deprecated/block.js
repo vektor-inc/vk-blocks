@@ -4,6 +4,7 @@
  */
 import React from "react";
 import {schema} from './schema';
+const {Fragment} = wp.element;
 
 const {RichText, InspectorControls, ColorPalette, BlockControls, AlignmentToolbar} = wp.editor;
 
