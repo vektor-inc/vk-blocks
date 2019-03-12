@@ -202,6 +202,7 @@ registerBlockType('vk-blocks/heading', {
                         />
                     </PanelBody>
                 </InspectorControls>
+                <div>{console.log(titleMarginBottom)}</div>
                 {
                     outerMarginBottom == null ?
                         <div className={containerClass}>
@@ -213,6 +214,7 @@ registerBlockType('vk-blocks/heading', {
                                     color: titleColor,
                                     fontSize: titleSize + 'rem',
                                     textAlign: align,
+                                    marginBottom: titleMarginBottom + 'rem'
                                 }}
                                 className={`vk_heading_title vk_heading_title-style-${titleStyle}`}
                                 placeholder={__('Input title…', 'vk-blocks')}
