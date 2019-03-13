@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from "classnames";
+
 const {RichText} = wp.editor;
 const {__} = wp.i18n; // Import __() from wp.i18n
 
@@ -16,7 +17,7 @@ export class Component extends React.Component {
         let tStyle;
 
         //containerのマージンを切り替え
-        if(titleMarginBottom != null){
+        if (outerMarginBottom != null) {
             cStyle = {marginBottom: outerMarginBottom + `rem`};
         }
 
