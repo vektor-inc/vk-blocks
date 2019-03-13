@@ -43,7 +43,7 @@ msgid "Balloon setting"
 msgstr ""
 
 #: src/balloon/block.js:84
-#: src/heading/block.js:181
+#: src/heading/block.js:177
 msgid "Position"
 msgstr ""
 
@@ -275,68 +275,68 @@ msgstr ""
 msgid "Input content"
 msgstr ""
 
-#: src/heading/block.js:123
+#: src/heading/block.js:119
 msgid "Style Settings"
 msgstr ""
 
-#: src/heading/block.js:125
+#: src/heading/block.js:121
 msgid "Heading style"
 msgstr ""
 
-#: src/heading/block.js:129
+#: src/heading/block.js:125
 msgid "Default"
 msgstr ""
 
-#: src/heading/block.js:130
+#: src/heading/block.js:126
 msgid "Plain"
 msgstr ""
 
-#: src/heading/block.js:133
+#: src/heading/block.js:129
 msgid "Margin bottom size (rem)"
 msgstr ""
 
-#: src/heading/block.js:144
+#: src/heading/block.js:140
 msgid "Heading Settings"
 msgstr ""
 
-#: src/heading/block.js:145
+#: src/heading/block.js:141
 msgid "Level"
 msgstr ""
 
-#: src/heading/block.js:147
+#: src/heading/block.js:143
 msgid "Text Alignment"
 msgstr ""
 
-#: src/heading/block.js:164
+#: src/heading/block.js:160
 msgid "Heading margin bottom size (rem)"
 msgstr ""
 
-#: src/heading/block.js:179
+#: src/heading/block.js:175
 msgid "Sub Text Settings"
 msgstr ""
 
-#: src/heading/block.js:184
+#: src/heading/block.js:180
 msgid "Display"
 msgstr ""
 
-#: src/heading/block.js:185
+#: src/heading/block.js:181
 msgid "Hide"
 msgstr ""
 
-#: src/heading/block.js:189
+#: src/heading/block.js:185
 msgid "Text size (rem)"
 msgstr ""
 
-#: src/heading/block.js:258
-msgid "Input title…"
+#: src/heading/block.js:66
+msgid "Heading"
 msgstr ""
 
-#: src/heading/block.js:275
+#: src/heading/component.js:105
 msgid "Input sub text…"
 msgstr ""
 
-#: src/heading/block.js:65
-msgid "Heading"
+#: src/heading/component.js:88
+msgid "Input title…"
 msgstr ""
 
 # %s: heading level e.g: "1", "2", "3"
