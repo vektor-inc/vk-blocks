@@ -678,3 +678,7 @@ msgstr ""
 #: src/spacer/block.js:96
 msgid "Tablet"
 msgstr ""
+
+#: src/table-of-contents/block.js:35
+msgid "table-of-contents"
+msgstr ""

@@ -2,9 +2,10 @@
  * table-of-contents block type
  *
  */
-import React from "react";
-import NewComponent from "./component";
+// import NewComponent from "./component";
 import {schema} from './schema';
+import TableOfContents from './TableOfContents';
+
 // import {deprecated} from './deprecated/block';
 
 const {__} = wp.i18n; // Import __() from wp.i18n
@@ -13,6 +14,8 @@ const {RangeControl, RadioControl, PanelBody, Button, PanelColor, BaseControl} =
 const {Fragment} = wp.element;
 const {RichText, InspectorControls, MediaUpload, ColorPalette} = wp.editor;
 const BlockIcon = 'arrow-down';
+const {data} = wp.data;
+
 
 /**
  * Register: a Gutenberg Block.
@@ -50,25 +53,13 @@ registerBlockType('vk-blocks/table-of-contents', {
             arrowFlag,
         } = attributes;
 
+        const toc = new TableOfContents();
+        let result = toc.createTocHtml(toc.getHtagsInEditor());
+
         return (
             <Fragment>
-                <InspectorControls>
-                    <PanelBody title={__('Color Setting', 'vk-blocks')}>
-                        <BaseControl label={__('Title Color', 'vk-blocks')}>
-                            <ColorPalette
-                                value={content}
-                                onChange={(value) => setAttributes({content: value})}
-                            />
-                        </BaseControl>
-                    </PanelBody>
-                </InspectorControls>
-                <div className="vk_spacer">
-                    <div>Editor</div>
-                    <NewComponent
-                        attributes={attributes}
-                        for_={'edit'}
-                    />
-                </div>
+                {result}
+                {console.log(result)}
             </Fragment>
         );
     },
@@ -86,10 +77,10 @@ registerBlockType('vk-blocks/table-of-contents', {
         return (
             <div className="vk_table-of-contents">
                 <div>Front</div>
-                <NewComponent
-                    attributes={attributes}
-                    for_={'save'}
-                />
+                {/*<NewComponent*/}
+                    {/*attributes={attributes}*/}
+                    {/*for_={'save'}*/}
+                {/*/>*/}
             </div>
         );
     },
