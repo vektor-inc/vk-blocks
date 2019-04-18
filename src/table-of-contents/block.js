@@ -54,12 +54,14 @@ registerBlockType('vk-blocks/table-of-contents', {
         } = attributes;
 
         const toc = new TableOfContents();
-        let result = toc.createTocHtml(toc.getHtagsInEditor());
+        let tocHtml = toc.createTocHtml(toc.getHtagsInEditor());
+        let render = toc.appendTocBlock(tocHtml);
 
         return (
             <Fragment>
-                {result}
-                {console.log(result)}
+                <div className="vk_table-of-contents">
+                    <div>Table of Contents</div>
+                </div>
             </Fragment>
         );
     },
