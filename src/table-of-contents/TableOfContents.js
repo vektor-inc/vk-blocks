@@ -32,16 +32,18 @@ class TableOfContents {
     createTocHtml(hTagList) {
 
         let ul = document.createElement("ul");
-        let li = document.createElement("li");
 
-        hTagList.forEach(function (hTag) {
+        for (let i = 0; i < hTagList.length; i++) {
 
-            if (hTag.innerText) {
+            let li = document.createElement("li");
 
-                li.innerText = hTag.innerText;
+            if (hTagList[i].innerText) {
+
+                li.innerText = hTagList[i].innerText;
                 ul.appendChild(li);
             }
-        });
+
+        }
 
         return ul;
     }
