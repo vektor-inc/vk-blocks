@@ -49,10 +49,22 @@ class TableOfContents {
     appendTocBlock(html) {
 
         let blockElm = document.getElementsByClassName('vk_table-of-contents');
+
         if (!blockElm[0]) {
             return
         }
-        console.log(blockElm[0]);
+
+        let blockElmChildren = blockElm[0].children;
+
+        for (let i = 0; i < blockElmChildren.length; i++) {
+
+            if(blockElmChildren[i].tagName === "UL"){
+
+                blockElm[0].removeChild(blockElmChildren[i]);
+            }
+
+        }
+
         blockElm[0].appendChild(html);
 
         return blockElm;
