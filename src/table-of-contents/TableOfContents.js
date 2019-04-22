@@ -43,19 +43,19 @@ class TableOfContents extends React.Component {
         return (
             <div>
                 <ul>
-                    {source.map((data) => {
+                    {source.map((data,index) => {
 
                         switch (data.tagName) {
                             case 'H2':
-                                return <li>{data.innerText}</li>;
+                                return <li><a href={`/#vk-htags-${index}`}>{data.innerText}</a></li>;
                             case 'H3':
-                                return <ul><li>{data.innerText}</li></ul>;
+                                return <ul><li><a href={`/#vk-htags-${index}`}>{data.innerText}</a></li></ul>;
                             case 'H4':
-                                return <ul><ul><li>{data.innerText}</li></ul></ul>;
+                                return <ul><ul><li><a href={`/#vk-htags-${index}`}>{data.innerText}</a></li></ul></ul>;
                             case 'H5':
-                                return <ul><ul><ul><li>{data.innerText}</li></ul></ul></ul>;
+                                return <ul><ul><ul><li><a href={`/#vk-htags-${index}`}>{data.innerText}</a></li></ul></ul></ul>;
                             case 'H6':
-                                return <ul><ul><ul><ul><li>{data.innerText}</li></ul></ul></ul></ul>;
+                                return <ul><ul><ul><ul><li><a href={`/#vk-htags-${index}`}>{data.innerText}</a></li></ul></ul></ul></ul>;
                         }
                     })}
                 </ul>
@@ -63,5 +63,7 @@ class TableOfContents extends React.Component {
         );
     }
 }
+
+
 
 export default TableOfContents;
