@@ -42,13 +42,26 @@ class TableOfContents extends React.Component {
 
         return (
             <div>
-                {source.map((data) => {
-                    return <li>{data.innerText}</li>;
-                })}
+                <ul>
+                    {source.map((data) => {
+
+                        switch (data.tagName) {
+                            case 'H2':
+                                return <li>{data.innerText}</li>;
+                            case 'H3':
+                                return <ul><li>{data.innerText}</li></ul>;
+                            case 'H4':
+                                return <ul><ul><li>{data.innerText}</li></ul></ul>;
+                            case 'H5':
+                                return <ul><ul><ul><li>{data.innerText}</li></ul></ul></ul>;
+                            case 'H6':
+                                return <ul><ul><ul><ul><li>{data.innerText}</li></ul></ul></ul></ul>;
+                        }
+                    })}
+                </ul>
             </div>
         );
     }
 }
 
 export default TableOfContents;
-
