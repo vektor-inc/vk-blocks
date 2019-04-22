@@ -1,4 +1,5 @@
 import React from "react";
+
 class TableOfContents extends React.Component {
 
     /**
@@ -31,63 +32,21 @@ class TableOfContents extends React.Component {
         return sourceOfTocHtml;
     };
 
-    /**
-     * Create Table of Contents Html.
-     * @param hTagList
-     * @returns {HTMLElement} html list of hTag text.
-     */
-    createTocHtml(hTagList) {
-
-        let ul = document.createElement("ul");
-
-        for (let i = 0; i < hTagList.length; i++) {
-
-            let li = document.createElement("li");
-
-            if (hTagList[i].innerText) {
-
-                li.innerText = hTagList[i].innerText;
-                ul.appendChild(li);
-            }
-
-        }
-
-        return ul;
-    }
-
-    appendTocBlock(html) {
-
-        let blockElm = document.getElementsByClassName('vk_table-of-contents');
-
-        if (!blockElm[0]) {
-            return
-        }
-
-        let blockElmChildren = blockElm[0].children;
-
-        for (let i = 0; i < blockElmChildren.length; i++) {
-
-            if(blockElmChildren[i].tagName === "UL"){
-
-                blockElm[0].removeChild(blockElmChildren[i]);
-            }
-
-        }
-
-        blockElm[0].appendChild(html);
-
-        return blockElm;
-    }
-
     render(){
 
         let {
-            style
+            style,
+            source
         } = this.props.attributes;
         let for_ = this.props.for_;
 
-        return(<div>hello</div>);
-
+        return (
+            <div>
+                {source.map((data) => {
+                    return <li>{data.innerText}</li>;
+                })}
+            </div>
+        );
     }
 }
 
