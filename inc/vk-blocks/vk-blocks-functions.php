@@ -53,7 +53,16 @@ function vkblocks_blocks_assets() {
 						],
 						'render_callback' => function ( $attributes ) {
 
-						},
+							$source = $attributes['source'];
+							$return = '';
+
+							for ($index = 0; $index < count($source); $index++) {
+
+								$return .= $source[$index]['innerText'];
+							}
+
+							return $return;
+						}
 					)
 				);
 			} else {

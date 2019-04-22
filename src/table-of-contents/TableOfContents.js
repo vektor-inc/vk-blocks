@@ -1,9 +1,5 @@
-class TableOfContents {
-
-    constructor(ajaxurl, nonce) {
-        this.nonce = nonce;
-        this._ajaxurl = ajaxurl;
-    }
+import React from "react";
+class TableOfContents extends React.Component {
 
     /**
      *  Get Gutenberg's editor content elements.
@@ -26,7 +22,10 @@ class TableOfContents {
         let sourceOfTocHtml = [];
 
         nodeList.forEach(function (item, index) {
-            sourceOfTocHtml[index] = [nodeList[index]['tagName'], nodeList[index]['innerText']];
+            sourceOfTocHtml[index] = {
+                'tagName': nodeList[index]['tagName'],
+                'innerText': nodeList[index]['innerText']
+            }
         });
 
         return sourceOfTocHtml;
@@ -80,6 +79,17 @@ class TableOfContents {
         return blockElm;
     }
 
+    render(){
+
+        let {
+            style
+        } = this.props.attributes;
+        let for_ = this.props.for_;
+
+        return(<div>hello</div>);
+
+    }
 }
 
 export default TableOfContents;
+

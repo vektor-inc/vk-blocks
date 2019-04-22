@@ -5,6 +5,7 @@
 // import NewComponent from "./component";
 import {schema} from './schema';
 import TableOfContents from './TableOfContents';
+import React from "react";
 
 // import {deprecated} from './deprecated/block';
 
@@ -57,9 +58,9 @@ registerBlockType('vk-blocks/table-of-contents', {
             <Fragment>
                 <div className="vk_table-of-contents">
                     <div>Table of Contents</div>
-                    <ServerSideRender
-                        block="vk-blocks/table-of-contents"
+                    <TableOfContents
                         attributes={attributes}
+                        for_={'edit'}
                     />
                 </div>
             </Fragment>
