@@ -10,7 +10,7 @@ import TableOfContents from './TableOfContents';
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
-const {RangeControl, RadioControl, PanelBody, Button, PanelColor, BaseControl} = wp.components;
+const {ServerSideRender, PanelBody, SelectControl,BaseControl} = wp.components;
 const {Fragment} = wp.element;
 const {RichText, InspectorControls, MediaUpload, ColorPalette} = wp.editor;
 const BlockIcon = 'arrow-down';
@@ -32,7 +32,7 @@ const {data} = wp.data;
  */
 registerBlockType('vk-blocks/table-of-contents', {
     // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-    title: __('table-of-contents', 'vk-blocks'), // Block title.
+    title: __('Table of Contents', 'vk-blocks'), // Block title.
     icon: BlockIcon, // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
     category: 'vk-blocks-cat', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
     attributes: schema,
@@ -47,20 +47,20 @@ registerBlockType('vk-blocks/table-of-contents', {
      */
     edit({attributes, setAttributes}) {
         const {
-            heading,
-            content,
-            insertImage,
-            arrowFlag,
+           style
         } = attributes;
 
         const toc = new TableOfContents();
-        let tocHtml = toc.createTocHtml(toc.getHtagsInEditor());
-        let render = toc.appendTocBlock(tocHtml);
+        attributes['source'] = toc.getHtagsInEditor();
 
         return (
             <Fragment>
                 <div className="vk_table-of-contents">
                     <div>Table of Contents</div>
+                    <ServerSideRender
+                        block="vk-blocks/table-of-contents"
+                        attributes={attributes}
+                    />
                 </div>
             </Fragment>
         );
@@ -77,13 +77,7 @@ registerBlockType('vk-blocks/table-of-contents', {
     save({attributes}) {
 
         return (
-            <div className="vk_table-of-contents">
-                <div>Front</div>
-                {/*<NewComponent*/}
-                    {/*attributes={attributes}*/}
-                    {/*for_={'save'}*/}
-                {/*/>*/}
-            </div>
+            null
         );
     },
 

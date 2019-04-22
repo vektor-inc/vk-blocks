@@ -15,13 +15,21 @@ class TableOfContents {
     }
 
     /**
-     * Get H*tag in editor and return array of html.
+     * Get H*tag in editor and return array of innerText and tagName.
      * @returns {Array}
      */
     getHtagsInEditor() {
 
-        let nodeList = this.getEditorElm().querySelectorAll("h1, h2, h3, h4, h5, h6");
-        return Array.from(nodeList);
+        let nodeList_raw = this.getEditorElm().querySelectorAll("h1, h2, h3, h4, h5, h6");
+        let nodeList = Array.from(nodeList_raw);
+
+        let sourceOfTocHtml = [];
+
+        nodeList.forEach(function (item, index) {
+            sourceOfTocHtml[index] = [nodeList[index]['tagName'], nodeList[index]['innerText']];
+        });
+
+        return sourceOfTocHtml;
     };
 
     /**
