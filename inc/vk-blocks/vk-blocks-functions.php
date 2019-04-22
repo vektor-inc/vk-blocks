@@ -36,44 +36,13 @@ function vkblocks_blocks_assets() {
 		$arr = array( 'alert', 'balloon', 'button', 'faq', 'flow', 'pr-blocks', 'pr-content', 'outer' ,'spacer' ,'heading','table-of-contents');//REPLACE-FLAG : このコメントは削除しないで下さい。wp-create-gurten-template.shで削除する基準として左の[//REPLACE-FLAG]を使っています。
 		foreach ( $arr as $value ) {
 
-			if ( $value == 'table-of-contents' ) {
-				register_block_type(
-					'vk-blocks/' . $value, array(
-						'style'           => 'vk-blocks-build-css',
-						'editor_style'    => 'vk-blocks-build-editor-css',
-						'editor_script'   => 'vk-blocks-build-js',
-						'attributes'      => [
-							'style'     => [
-								'type'    => 'string',
-								'default' => 'default',
-							],
-							'source' => [
-								'type'    => 'array',
-							]
-						],
-						'render_callback' => function ( $attributes ) {
-
-							$source = $attributes['source'];
-							$return = '';
-
-							for ($index = 0; $index < count($source); $index++) {
-
-								$return .= $source[$index]['innerText'];
-							}
-
-							return $return;
-						}
-					)
-				);
-			} else {
-				register_block_type(
+			register_block_type(
 					'vk-blocks/' . $value, array(
 						'style'         => 'vk-blocks-build-css',
 						'editor_style'  => 'vk-blocks-build-editor-css',
 						'editor_script' => 'vk-blocks-build-js',
 					)
-				);
-			}
+			);
 		}
 	}
 }
