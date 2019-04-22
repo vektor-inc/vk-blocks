@@ -2,12 +2,10 @@
  * table-of-contents block type
  *
  */
-// import NewComponent from "./component";
+import React from "react";
 import {schema} from './schema';
 import TableOfContents from './TableOfContents';
-import React from "react";
-
-// import {deprecated} from './deprecated/block';
+// import './viewHelper.js';
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
@@ -57,7 +55,6 @@ registerBlockType('vk-blocks/table-of-contents', {
         return (
             <Fragment>
                 <div className="vk_table-of-contents">
-                    <div>Table of Contents</div>
                     <TableOfContents
                         attributes={attributes}
                         for_={'edit'}
@@ -77,8 +74,17 @@ registerBlockType('vk-blocks/table-of-contents', {
      */
     save({attributes}) {
 
+        const tocView = new TableOfContents();
+
         return (
-            null
+            <Fragment>
+                <div className="vk_table-of-contents">
+                    <TableOfContents
+                        attributes={attributes}
+                        for_={'save'}
+                    />
+                </div>
+            </Fragment>
         );
     },
 
