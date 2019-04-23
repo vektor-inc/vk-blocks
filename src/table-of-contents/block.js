@@ -88,6 +88,4 @@ registerBlockType('vk-blocks/table-of-contents', {
         );
     },
 
-    //Please comment out, when you need to use deprecated.
-    // deprecated:deprecated
 });
