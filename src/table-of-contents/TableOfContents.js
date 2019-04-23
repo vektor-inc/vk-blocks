@@ -37,41 +37,6 @@ class TableOfContents extends React.Component {
         return sourceOfTocHtml;
     };
 
-    //in viewDom
-    //out html collection
-    getHtagsInView() {
-        let nodeList_raw = this.getDom('entry-content');
-        console.log(nodeList_raw);
-        return nodeList_raw;
-    }
-
-    //in html collection
-    //out html collection  | id to href
-    // appendTocBlock(html) {
-    //
-    //     let blockElm = document.getElementsByClassName('vk_table-of-contents');
-    //
-    //     if (!blockElm[0]) {
-    //         return
-    //     }
-    //
-    //     let blockElmChildren = blockElm[0].children;
-    //
-    //     for (let i = 0; i < blockElmChildren.length; i++) {
-    //
-    //         if (blockElmChildren[i].tagName === "UL") {
-    //
-    //             blockElm[0].removeChild(blockElmChildren[i]);
-    //         }
-    //
-    //     }
-    //
-    //     blockElm[0].appendChild(html);
-    //
-    //     return blockElm;
-    // }
-
-
     render() {
 
         let {

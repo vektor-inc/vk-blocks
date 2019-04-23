@@ -5,7 +5,6 @@
 import React from "react";
 import {schema} from './schema';
 import TableOfContents from './TableOfContents';
-// import './viewHelper.js';
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
@@ -74,7 +73,8 @@ registerBlockType('vk-blocks/table-of-contents', {
      */
     save({attributes}) {
 
-        const tocView = new TableOfContents();
+        const toc = new TableOfContents();
+        attributes['source'] = toc.getHtagsInEditor();
 
         return (
             <Fragment>
