@@ -31,9 +31,6 @@ class TableOfContents extends React.Component {
 
         nodeList.forEach(function (item, index) {
 
-            console.log(nodeList[index]);
-
-
             sourceOfTocHtml[index] = {
                 'tagName': nodeList[index]['tagName'],
                 'innerText': nodeList[index]['innerText']
@@ -54,28 +51,31 @@ class TableOfContents extends React.Component {
 
         return (
             <div className={className + ' vk_table-of-contents'}>
-                <div className={'vk_table-of-contents-title'}>{__('Table of Contents', 'vk-blocks')}</div>
-                <ul className={'vk_table-of-contents-list'}>
+                <div className={'vk_table-of-contents_title'}>{__('Table of Contents', 'vk-blocks')}</div>
+                <ul className={'vk_table-of-contents_list'}>
                     {source.map((data,index) => {
 
                         switch (data.tagName) {
                             case 'H2':
-                                return <li><a href={`#vk-htags-${index}`}>{data.innerText}</a></li>;
+                                return <li className={'vk_table-of-contents_list_item'}>
+                                    <a href=""
+                                       className={'vk_table-of-contents-list_item_link'}>{data.innerText}</a>
+                                </li>;
                             case 'H3':
                                 return <ul>
-                                    <li><a href={`#vk-htags-${index}`}>{data.innerText}</a></li>
+                                    <li><a href="">{data.innerText}</a></li>
                                 </ul>;
                             case 'H4':
                                 return <ul>
                                     <ul>
-                                        <li><a href={`#vk-htags-${index}`}>{data.innerText}</a></li>
+                                        <li><a href="">{data.innerText}</a></li>
                                     </ul>
                                 </ul>;
                             case 'H5':
                                 return <ul>
                                     <ul>
                                         <ul>
-                                            <li><a href={`#vk-htags-${index}`}>{data.innerText}</a></li>
+                                            <li><a href="">{data.innerText}</a></li>
                                         </ul>
                                     </ul>
                                 </ul>;
@@ -84,7 +84,7 @@ class TableOfContents extends React.Component {
                                     <ul>
                                         <ul>
                                             <ul>
-                                                <li><a href={`#vk-htags-${index}`}>{data.innerText}</a></li>
+                                                <li><a href="">{data.innerText}</a></li>
                                             </ul>
                                         </ul>
                                     </ul>

@@ -9,11 +9,10 @@ function vkblocks_blocks_assets() {
 	wp_register_style( 'vk-blocks-build-editor-css', VK_BLOCKS_URL . 'build/block-build-editor.css', array(), VK_BLOCKS_VERSION );
 	wp_register_script(
 		'vk-blocks-build-js', VK_BLOCKS_URL . 'build/block-build.js', array(
-			'wp-blocks',
-			'wp-i18n',
-			'wp-element',
-		), VK_BLOCKS_VERSION, true
-	);
+		'wp-blocks',
+		'wp-i18n',
+		'wp-element',
+	), VK_BLOCKS_VERSION, true );
 
 	if ( function_exists( 'wp_set_script_translations' ) ) {
 		wp_set_script_translations( 'vk-blocks-build-js', 'vk-blocks', plugin_dir_path( __FILE__ ) . 'build/languages' );
@@ -35,12 +34,11 @@ function vkblocks_blocks_assets() {
 
 		$arr = array( 'alert', 'balloon', 'button', 'faq', 'flow', 'pr-blocks', 'pr-content', 'outer' ,'spacer' ,'heading','table-of-contents');//REPLACE-FLAG : このコメントは削除しないで下さい。wp-create-gurten-template.shで削除する基準として左の[//REPLACE-FLAG]を使っています。
 		foreach ( $arr as $value ) {
-
 			register_block_type(
 					'vk-blocks/' . $value, array(
-						'style'         => 'vk-blocks-build-css',
-						'editor_style'  => 'vk-blocks-build-editor-css',
-						'editor_script' => 'vk-blocks-build-js',
+					'style'         => 'vk-blocks-build-css',
+					'editor_style'  => 'vk-blocks-build-editor-css',
+					'editor_script' =>'vk-blocks-build-js',
 					)
 			);
 		}
@@ -68,3 +66,8 @@ function vkblocks_blocks_categories( $categories, $post ) {
 	);
 }
 add_filter( 'block_categories', 'vkblocks_blocks_categories', 10, 2 );
+
+function vkblocks_blocks_load_scripts(){
+	wp_enqueue_script('vk-blocks-toc-helper-js', VK_BLOCKS_URL . '../../src/table-of-contents/viewHelper.js', array(), VK_BLOCKS_VERSION, true );
+}
+add_action( 'wp_enqueue_scripts', 'vkblocks_blocks_load_scripts' );

@@ -1,7 +1,11 @@
 window.onload = () => {
 
-    let Htags = getDom('entry-content');
-    appendIdHtags(Htags);
+    let hTags = getDom('entry-content');
+    appendIdHtags(hTags);
+
+    let aTags = document.getElementsByClassName('vk_table-of-contents-list_item_link');
+    assignIdHref(aTags,hTags);
+
 };
 
 /**
@@ -19,12 +23,6 @@ let getDom = (targetClass) => {
     }
 };
 
-let appendIdTocBlock = (nodeList) => {
-
-
-
-};
-
 /**
  * Append span#{id} to inside H Tags in view.
  * @param nodeList
@@ -40,3 +38,18 @@ let appendIdHtags = (nodeList) => {
         }
     }
 };
+
+/**
+ * Add Htag's ID to href of Table of Contents block.
+ * @param aTags
+ * @param Htags
+ */
+let assignIdHref = (aTags,Htags) => {
+
+    for (let i = 0; i < aTags.length; i++) {
+
+        aTags[i].attributes[0].nodeValue = Htags[i].id;
+    }
+
+};
+
