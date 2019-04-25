@@ -25,13 +25,12 @@ let getDom = (targetClass) => {
  */
 let appendIdHtags = (nodeList) => {
 
-    console.log(nodeList);
-
     for (let i = 0; i < nodeList.length; i++) {
 
-        let id = document.createElement("span");
-        id.id = "vk-htags-" + i;
-        nodeList[i].appendChild(id);
+        let hTag = nodeList[i];
 
+        if(!hTag.id){
+            hTag.id = "vk-htags-" + i;
+        }
     }
 };
