@@ -1,5 +1,7 @@
 import React from "react";
 
+const {__} = wp.i18n; // Import __() from wp.i18n
+
 class TableOfContents extends React.Component {
 
     /**
@@ -28,6 +30,10 @@ class TableOfContents extends React.Component {
         let sourceOfTocHtml = [];
 
         nodeList.forEach(function (item, index) {
+
+            console.log(nodeList[index]);
+
+
             sourceOfTocHtml[index] = {
                 'tagName': nodeList[index]['tagName'],
                 'innerText': nodeList[index]['innerText']
@@ -41,14 +47,15 @@ class TableOfContents extends React.Component {
 
         let {
             style,
-            source
+            source,
+            className
         } = this.props.attributes;
         let for_ = this.props.for_;
 
         return (
-            <div>
-                <div>Table of Contents</div>
-                <ul>
+            <div className={className + ' vk_table-of-contents'}>
+                <div className={'vk_table-of-contents-title'}>{__('Table of Contents', 'vk-blocks')}</div>
+                <ul className={'vk_table-of-contents-list'}>
                     {source.map((data,index) => {
 
                         switch (data.tagName) {

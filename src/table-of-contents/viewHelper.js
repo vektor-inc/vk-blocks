@@ -19,6 +19,12 @@ let getDom = (targetClass) => {
     }
 };
 
+let appendIdTocBlock = (nodeList) => {
+
+
+
+};
+
 /**
  * Append span#{id} to inside H Tags in view.
  * @param nodeList

@@ -43,13 +43,14 @@ registerBlockType('vk-blocks/table-of-contents', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    edit({attributes, setAttributes}) {
+    edit({attributes, setAttributes, className}) {
         const {
            style
         } = attributes;
 
         const toc = new TableOfContents();
         attributes['source'] = toc.getHtagsInEditor();
+        attributes['className'] = className;
 
         return (
             <Fragment>
@@ -71,19 +72,18 @@ registerBlockType('vk-blocks/table-of-contents', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    save({attributes}) {
+    save({attributes, className}) {
 
         const toc = new TableOfContents();
         attributes['source'] = toc.getHtagsInEditor();
+        attributes['className'] = className;
 
         return (
             <Fragment>
-                <div className="vk_table-of-contents">
                     <TableOfContents
                         attributes={attributes}
                         for_={'save'}
                     />
-                </div>
             </Fragment>
         );
     },
