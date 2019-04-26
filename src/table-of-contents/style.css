@@ -1,5 +1,23 @@
 /*-------------------------------------------*/
 /* CSS
 /*-------------------------------------------*/
+.editor-styles-wrapper ul {
+  list-style: none !important;
+}
+.editor-styles-wrapper ul li.vk_table-of-contents_list_item-h3 {
+  margin-left: 2rem;
+}
+.editor-styles-wrapper ul li.vk_table-of-contents_list_item-h4 {
+  margin-left: 4rem;
+}
+.editor-styles-wrapper ul li.vk_table-of-contents_list_item-h5 {
+  margin-left: 8rem;
+}
+.editor-styles-wrapper ul li.vk_table-of-contents_list_item-h6 {
+  margin-left: 12rem;
+}
+.editor-styles-wrapper ul ul {
+  list-style: none !important;
+}
 
 /*# sourceMappingURL=style.css.map */

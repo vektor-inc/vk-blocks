@@ -60,16 +60,20 @@ class TableOfContents {
             className = className + ' ';
         }
 
-        let returnHtml = <div className={className + 'vk_table-of-contents-' + style}>
+        let bootstrapUL = ' list-group';
+        let bootstrapLi = ' list-group-item';
+        let h = '-h';
+
+        let returnHtml = <div className={className + 'vk_table-of-contents' + style}>
             <div className={'vk_table-of-contents_title'}>{__('Table of Contents', 'vk-blocks')}</div>
-            <ul className={'vk_table-of-contents_list'}>
+            <ul className={'vk_table-of-contents_list' + bootstrapUL + style}>
                 {source.map((data, index) => {
 
                     let baseClass = 'vk_table-of-contents_list_';
 
                     switch (data.tagName) {
                         case 'H2':
-                            return <li className={baseClass + 'item'}>
+                            return <li className={baseClass + 'item' + h + '2' + bootstrapLi}>
                                 <a href="" className={baseClass + 'item_link'}>
                                     {data.innerText}
                                 </a>
@@ -77,7 +81,7 @@ class TableOfContents {
 
                         case 'H3':
                             return <ul>
-                                <li className={baseClass + 'item'}>
+                                <li className={baseClass + 'item' + h + '3' + bootstrapLi}>
                                     <a href="" className={baseClass + 'item_link'}>
                                         {data.innerText}
                                     </a>
@@ -86,7 +90,7 @@ class TableOfContents {
                         case 'H4':
                             return <ul>
                                 <ul>
-                                    <li className={baseClass + 'item'}>
+                                    <li className={baseClass + 'item' + h + '4' + bootstrapLi}>
                                         <a href="" className={baseClass + 'item_link'}>
                                             {data.innerText}
                                         </a>
@@ -97,7 +101,7 @@ class TableOfContents {
                             return <ul>
                                 <ul>
                                     <ul>
-                                        <li className={baseClass + 'item'}>
+                                        <li className={baseClass + 'item' + h + '5' + bootstrapLi}>
                                             <a href="" className={baseClass + 'item_link'}>
                                                 {data.innerText}
                                             </a>
@@ -110,7 +114,7 @@ class TableOfContents {
                                 <ul>
                                     <ul>
                                         <ul>
-                                            <li className={baseClass + 'item'}>
+                                            <li className={baseClass + 'item' + h + '6' + bootstrapLi}>
                                                 <a href="" className={baseClass + 'item_link'}>
                                                     {data.innerText}
                                                 </a>

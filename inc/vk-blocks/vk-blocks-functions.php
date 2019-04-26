@@ -95,6 +95,15 @@ function vkblocks_blocks_categories( $categories, $post ) {
 add_filter( 'block_categories', 'vkblocks_blocks_categories', 10, 2 );
 
 function vkblocks_blocks_load_scripts(){
+	wp_enqueue_style( 'vk-blocks-bootstrap', 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css', array(), VK_BLOCKS_VERSION, 'all' );
 	wp_enqueue_script('vk-blocks-toc-helper-js', VK_BLOCKS_URL . '../../src/table-of-contents/viewHelper.js', array(), VK_BLOCKS_VERSION, true );
 }
 add_action( 'wp_enqueue_scripts', 'vkblocks_blocks_load_scripts' );
+
+function vkblocks_blocks_load_admin_styles( $hook ) {
+	if ( !$hook == 'post-new.php' && !$hook == 'post.php' ) {
+		return;
+	}
+	wp_enqueue_style( 'vk-blocks-bootstrap', 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css', array(), VK_BLOCKS_VERSION, 'all' );
+}
+add_action( 'admin_enqueue_scripts', 'vkblocks_blocks_load_admin_styles' );

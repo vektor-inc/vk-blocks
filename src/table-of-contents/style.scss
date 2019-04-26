@@ -1,3 +1,25 @@
 /*-------------------------------------------*/
 /* CSS
 /*-------------------------------------------*/
+$toc-left-margin: 2rem;
+
+.editor-styles-wrapper{
+  ul{
+    list-style: none !important;
+    li.vk_table-of-contents_list_item-h3{
+      margin-left: $toc-left-margin;
+    }
+    li.vk_table-of-contents_list_item-h4{
+      margin-left: $toc-left-margin * 2;
+    }
+    li.vk_table-of-contents_list_item-h5{
+      margin-left: $toc-left-margin * 4;
+    }
+    li.vk_table-of-contents_list_item-h6{
+      margin-left: $toc-left-margin * 6;
+    }
+    ul{
+      list-style: none !important;
+    }
+  }
+}

@@ -64,12 +64,12 @@ registerBlockType('vk-blocks/table-of-contents', {
                                 onChange={(value) => setAttributes({style: value})}
                                 options={[
                                     {
-                                        value: 'default',
-                                        label: __('Default', 'vk-blocks'),
+                                        value: '',
+                                        label: __('Basic', 'vk-blocks'),
                                     },
                                     {
-                                        value: 'stripe',
-                                        label: __('Stripe', 'vk-blocks'),
+                                        value: '-flush',
+                                        label: __('Flush', 'vk-blocks'),
                                     }
                                 ]}
                             />
