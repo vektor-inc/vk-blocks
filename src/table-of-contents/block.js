@@ -12,8 +12,6 @@ const {ServerSideRender, PanelBody, SelectControl,BaseControl} = wp.components;
 const {Fragment} = wp.element;
 const {RichText, InspectorControls, MediaUpload, ColorPalette} = wp.editor;
 const BlockIcon = 'arrow-down';
-const {data} = wp.data;
-
 
 /**
  * Register: a Gutenberg Block.
@@ -43,21 +41,45 @@ registerBlockType('vk-blocks/table-of-contents', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    edit({attributes, setAttributes, className}) {
+    edit({attributes, setAttributes, className,}) {
         const {
-           style
+            style,
         } = attributes;
 
-        attributes['className'] = className;
+        const toc = new TableOfContents();
+        let source = toc.getHtagsInEditor();
+        let html = toc.returnHtml(source, style, className);
+        setAttributes({renderHtml: html});
 
         return (
             <Fragment>
-                <div className="vk_table-of-contents">
-                    <TableOfContents
+                <InspectorControls>
+                    <PanelBody>
+                        <BaseControl
+                            label={__('Style', 'vk-blocks')}
+                            help={__('When you add heading tags after you insert Table of Contents block, please click this block again. Then this block will generate the preview again.', 'vk-blocks')}
+                        >
+                            <SelectControl
+                                value={style}
+                                onChange={(value) => setAttributes({style: value})}
+                                options={[
+                                    {
+                                        value: 'default',
+                                        label: __('Default', 'vk-blocks'),
+                                    },
+                                    {
+                                        value: 'stripe',
+                                        label: __('Stripe', 'vk-blocks'),
+                                    }
+                                ]}
+                            />
+                        </BaseControl>
+                    </PanelBody>
+                </InspectorControls>
+                <ServerSideRender
+                    block='vk-blocks/table-of-contents'
                         attributes={attributes}
-                        for_={'edit'}
                     />
-                </div>
             </Fragment>
         );
     },
@@ -70,16 +92,8 @@ registerBlockType('vk-blocks/table-of-contents', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    save({attributes}) {
-
-        return (
-            <Fragment>
-                    <TableOfContents
-                        attributes={attributes}
-                        for_={'save'}
-                    />
-            </Fragment>
-        );
+    save() {
+        return null;
     },
 
 });
