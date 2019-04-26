@@ -11,7 +11,7 @@ class TableOfContents extends React.Component {
      */
     getDom(targetClass) {
         let editor = document.getElementsByClassName(targetClass);
-        if (!editor) {
+        if (editor[0] === undefined) {
             return false;
         } else {
             return editor[0].querySelectorAll("h1, h2, h3, h4, h5, h6");
@@ -25,6 +25,11 @@ class TableOfContents extends React.Component {
     getHtagsInEditor() {
 
         let nodeList_raw = this.getDom('edit-post-visual-editor');
+
+        if(nodeList_raw === undefined){
+            return false;
+        }
+
         let nodeList = Array.from(nodeList_raw);
 
         let sourceOfTocHtml = [];
@@ -41,41 +46,64 @@ class TableOfContents extends React.Component {
     };
 
     render() {
+        const toc = new TableOfContents();
 
+        let source = toc.getHtagsInEditor();
         let {
             style,
-            source,
             className
         } = this.props.attributes;
         let for_ = this.props.for_;
 
+        if (!className) {
+            className = '';
+        } else {
+            className = className + ' ';
+        }
+
         return (
-            <div className={className + ' vk_table-of-contents'}>
+            <div className={className + 'vk_table-of-contents'}>
                 <div className={'vk_table-of-contents_title'}>{__('Table of Contents', 'vk-blocks')}</div>
                 <ul className={'vk_table-of-contents_list'}>
                     {source.map((data,index) => {
 
+                        let baseClass = 'vk_table-of-contents_list_';
+
                         switch (data.tagName) {
                             case 'H2':
-                                return <li className={'vk_table-of-contents_list_item'}>
-                                    <a href=""
-                                       className={'vk_table-of-contents-list_item_link'}>{data.innerText}</a>
+                                return <li className={baseClass + 'item'}>
+                                    <a href="" className={baseClass + 'item_link'}>
+                                        {data.innerText}
+                                    </a>
                                 </li>;
+
                             case 'H3':
                                 return <ul>
-                                    <li><a href="">{data.innerText}</a></li>
+                                    <li className={baseClass + 'item'}>
+                                        <a href="" className={baseClass + 'item_link'}>
+                                            {data.innerText}
+                                        </a>
+                                    </li>
                                 </ul>;
                             case 'H4':
                                 return <ul>
                                     <ul>
-                                        <li><a href="">{data.innerText}</a></li>
+                                        <li className={baseClass + 'item'}>
+                                            <a href="" className={baseClass + 'item_link'}>
+                                                {data.innerText}
+                                            </a>
+                                        </li>
                                     </ul>
                                 </ul>;
                             case 'H5':
                                 return <ul>
                                     <ul>
                                         <ul>
-                                            <li><a href="">{data.innerText}</a></li>
+                                            <li className={baseClass + 'item'}>
+                                                <a href="" className={baseClass + 'item_link'}>
+                                                    {data.innerText}
+                                                </a>
+                                            </li>
                                         </ul>
                                     </ul>
                                 </ul>;
@@ -84,7 +112,11 @@ class TableOfContents extends React.Component {
                                     <ul>
                                         <ul>
                                             <ul>
-                                                <li><a href="">{data.innerText}</a></li>
+                                                <li className={baseClass + 'item'}>
+                                                    <a href="" className={baseClass + 'item_link'}>
+                                                        {data.innerText}
+                                                    </a>
+                                                </li>
                                             </ul>
                                         </ul>
                                     </ul>
