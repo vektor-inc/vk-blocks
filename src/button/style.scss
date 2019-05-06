@@ -1,32 +1,43 @@
 .vk_button{
 	margin: 5px 0;
-}
-.vk_button-color-custom{
-	a:hover {
-		opacity: 0.8;
-		box-shadow: 0 0 0 0.2rem rgba(171, 184, 195, .25) ;
+	&-color-custom{
+		a:hover{
+			opacity: 0.8;
+			box-shadow: 0 0 0 0.2rem rgba(171, 184, 195, .25) ;
+		}
 	}
-}
-.vk_button-align-left{
-	text-align: left;
-}
-.vk_button-align-center{
-	text-align: center;
-}
-.vk_button-align-right{
-	text-align: right;
-}
-.vk_button-align-block{
-	display: block;
-}
-.vk_button_link_before { margin-right: 0.7rem; }
-.vk_button_link_after { margin-left: 0.7rem; }
-.vk_button_link_txt { display: inline; }
-.vk_button {
-	.editor-rich-text {
+	&-align{
+		&-left{
+			text-align: left;
+		}
+		&-center{
+			text-align: center;
+		}
+		&-right{
+			text-align: right;
+		}
+		&-block{
+			display: block;
+		}
+	}
+	&_link{
+		&.btn { // .btn指定がないと管理画面で標準の .btn の指定に負ける
+			padding-top: .7em;
+			padding-bottom: .6em;
+		}
+		&_before{ margin-right: 0.7rem; }
+		&_after{ margin-left: 0.7rem; }
+		&_subCaption{
+			display:block; overflow:hidden;
+			margin: 0;
+			font-size: 80%;
+		}
+	}
+	.editor-rich-text{
 		display: inline-block;
 	}
 }
+
 
 /*-------------------------------------------*/
 /*	Lightnig がまだ Bootstrap4 でないため手動で追加したクラス
@@ -44,33 +55,33 @@ $color_dark:#343a40;
 .btn.btn-primary{
 	color:#fff;
 }
-.btn.btn-secondary {
+.btn.btn-secondary{
 	color:#fff;
 	background-color: $color_secondary;
 }
-.btn.btn-success {
+.btn.btn-success{
 	color:#fff;
 }
-.btn.btn-info {
+.btn.btn-info{
 	color:#fff;
 }
-.btn.btn-warning {
+.btn.btn-warning{
 	color:#fff;
 }
-.btn.btn-danger {
+.btn.btn-danger{
 	color:#fff;
 }
-.btn.btn-light {
+.btn.btn-light{
 	color:#fff;
 	background-color: $color_light;
 }
-.btn.btn-dark {
+.btn.btn-dark{
 	color:#fff;
 	background-color: $color_dark;
 }
 
 .btn.btn-secondary:hover,
-.btn.btn-dark:hover {
+.btn.btn-dark:hover{
 	color:#fff;
 }
 
@@ -81,43 +92,43 @@ $color_dark:#343a40;
 	background: none;
 	box-shadow: none;
 }
-.btn.btn-outline-secondary {
+.btn.btn-outline-secondary{
 	color: $color_secondary;
 	border:1px solid $color_secondary;
 	background: none;
 	box-shadow: none;
 }
-.btn.btn-outline-success {
+.btn.btn-outline-success{
 	color: $color_success;
 	border:1px solid $color_success;
 	background: none;
 	box-shadow: none;
 }
-.btn.btn-outline-info {
+.btn.btn-outline-info{
 	color: $color_info;
 	border:1px solid $color_info;
 	background: none;
 	box-shadow: none;
 }
-.btn.btn-outline-warning {
+.btn.btn-outline-warning{
 	color: $color_warning;
 	border:1px solid $color_warning;
 	background: none;
 	box-shadow: none;
 }
-.btn.btn-outline-danger {
+.btn.btn-outline-danger{
 	color: $color_danger;
 	border:1px solid $color_danger;
 	background: none;
 	box-shadow: none;
 }
-.btn.btn-outline-light {
+.btn.btn-outline-light{
 	color: $color_light;
 	border:1px solid $color_light;
 	background: none;
 	box-shadow: none;
 }
-.btn.btn-outline-dark {
+.btn.btn-outline-dark{
 	color: $color_dark;
 	border:1px solid $color_dark;
 	background: none;
@@ -130,37 +141,37 @@ $color_dark:#343a40;
 	color:#fff;
 }
 .btn.btn-outline-secondary:hover,
-.btn.btn-outline-secondary:focus {
+.btn.btn-outline-secondary:focus{
 	background: $color_secondary;
 	color:#fff;
 }
 .btn.btn-outline-success:hover,
-.btn.btn-outline-success:focus {
+.btn.btn-outline-success:focus{
 	background: $color_success;
 	color:#fff;
 }
 .btn.btn-outline-info:hover,
-.btn.btn-outline-info:focus {
+.btn.btn-outline-info:focus{
 	background: $color_info;
 	color:#fff;
 }
 .btn.btn-outline-warning:hover,
-.btn.btn-outline-warning:focus {
+.btn.btn-outline-warning:focus{
 	background: $color_warning;
 	color:#fff;
 }
 .btn.btn-outline-danger:hover,
-.btn.btn-outline-danger:focus {
+.btn.btn-outline-danger:focus{
 	background: $color_danger;
 	color:#fff;
 }
 .btn.btn-outline-light:hover,
-.btn.btn-outline-light:focus {
+.btn.btn-outline-light:focus{
 	background: $color_light;
 	color:#fff;
 }
 .btn.btn-outline-dark:hover,
-.btn.btn-outline-dark:focus {
+.btn.btn-outline-dark:focus{
 	background: $color_dark;
 	color:#fff;
 }

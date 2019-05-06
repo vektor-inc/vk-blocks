@@ -1,6 +1,5 @@
 import React from 'react';
 import {componentDivider} from './component-divider';
-
 const {InnerBlocks} = wp.editor;
 
 //hexカラーコード定義をrgbaに変換
@@ -28,52 +27,81 @@ export class Component extends React.Component {
 
     render() {
 
-        let is_padding = this.props.is_padding;
-        let is_parallax = this.props.is_parallax;
-        let outerWidth = this.props.outerWidth;
-        let bgColor = this.props.bgColor;
-        let opacity = this.props.opacity;
-        let bgImage = this.props.bgImage;
-        let upperTiltLevel = this.props.upperTilt;
-        let lowerTiltLevel = this.props.lowerTilt;
-        let tiltBgColor = this.props.tiltBgColor;
-        let dividerType = this.props.dividerType;
+        let {
+            bgColor,
+            bgImage,
+            bgPosition,
+            outerWidth,
+            padding_left_and_right,
+            padding_top_and_bottom,
+            opacity,
+            upper_level,
+            lower_level,
+            upperDividerBgColor,
+            lowerDividerBgColor,
+            dividerType,
+            borderWidth,
+            borderStyle,
+            borderColor,
+            borderRadius,
+            anchor
+        } = this.props.attributes;
+
+        let className = this.props.className;
         let for_ = this.props.for_;
-        let padding;
-        let parallax;
+        let classPaddingLR;
+        let classPaddingVertical;
+        let classBgPosition;
         let classWidth;
         let elm;
         let containerClass;
         let whichSideUpper;
         let whichSideLower;
+        let bgStyle;
+        let borderProperty;
+        let borderRadiusProperty;
 
         //幅のクラス切り替え
         classWidth = ` vk_outer-width-${outerWidth}`;
 
         //hexからrgbaに変換
-        bgColor = hex2rgba(bgColor,opacity);
-
-        //parallaxのクラス切り替え
-        if (is_parallax === '1') {
-            parallax = ' vk_outer-parallax';
-        } else {
-            parallax = ' vk_outer-parallax-none';
+        if(bgColor){
+            bgColor = hex2rgba(bgColor,opacity);
+        }else {
+            //背景色をクリアした時は、白に変更
+            bgColor = hex2rgba('#fff',opacity);
         }
 
-        //paddingのクラス切り替え
-        if(is_padding === '1'){
-            padding = ' vk_outer-padding';
-        }else {
-            padding = ' vk_outer-padding-none';
+        //classBgPositionのクラス切り替え
+        if (bgPosition === 'parallax') {
+            classBgPosition = ' vk_outer-bgPosition-parallax vk-prlx';
+				} else if (bgPosition === 'fixed') {
+		        classBgPosition = ' vk_outer-bgPosition-fixed';
+        } else {
+            classBgPosition = ' vk_outer-bgPosition-normal';
+        }
+
+				//classPaddingLRのクラス切り替え
+        if(padding_left_and_right === '1'){
+            classPaddingLR = ' vk_outer-paddingLR-use';
+        } else {
+            classPaddingLR = ' vk_outer-paddingLR-none';
+        }
+
+        //classPaddingVerticalのクラス切り替え
+        if(padding_top_and_bottom === '1'){
+            classPaddingVertical = ' vk_outer-paddingVertical-use';
+        } else {
+            classPaddingVertical = ' vk_outer-paddingVertical-none';
         }
 
         //上側セクションの傾き切り替え
-        if (upperTiltLevel) {
+        if (upper_level) {
             whichSideUpper = 'upper';
         }
 
         //下側セクションの傾き切り替え
-        if (lowerTiltLevel) {
+        if (lower_level) {
             whichSideLower = 'lower';
         }
 
@@ -85,21 +113,45 @@ export class Component extends React.Component {
             containerClass = 'vk_outer_container';
         }
 
+        //背景画像の有り無しでstyleを切り替え
+        if(bgImage){
+            bgStyle = `linear-gradient(${bgColor}, ${bgColor}), url(${bgImage})`;
+        }else {
+            bgStyle = `linear-gradient(${bgColor}, ${bgColor})`;
+        }
+
+        //borderColorクリア時に白をセットする
+        if (!borderColor) {
+            borderColor = '#fff';
+        }
+
+        //Dividerエフェクトがない時のみ枠線を追加
+        if(upper_level === 0 && lower_level === 0){
+            borderProperty = `${borderWidth}px ${borderStyle} ${borderColor}`;
+            borderRadiusProperty = `${borderRadius}px`;
+        }else {
+            borderProperty = 'none';
+            borderRadiusProperty = `0px`;
+        }
+
         return (
             <div
-                className={'vk_outer' + classWidth + padding + parallax}
+                id={anchor}
+                className={ className + ' vk_outer' + classWidth + classPaddingLR + classPaddingVertical + classBgPosition }
                 style={{
-                    background: `linear-gradient(${bgColor}, ${bgColor}), url(${bgImage})`,
+                    background: bgStyle,
+                    border: borderProperty,
+                    borderRadius: borderRadiusProperty
                 }}
             >
                     {
-                        componentDivider(upperTiltLevel, tiltBgColor, whichSideUpper,dividerType)
+                        componentDivider(upper_level, upperDividerBgColor, whichSideUpper, dividerType)
                     }
                 <div className={containerClass}>
                     {elm}
                 </div>
                 {
-                    componentDivider(lowerTiltLevel, tiltBgColor, whichSideLower,dividerType)
+                    componentDivider(lower_level, lowerDividerBgColor, whichSideLower, dividerType)
                 }
             </div>
         );

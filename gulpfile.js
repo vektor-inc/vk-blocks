@@ -15,7 +15,7 @@ gulp.task('sass', function () {
         .pipe($.plumber({
             errorHandler: $.notify.onError('<%= error.message %>')
         }))
-        .pipe($.sourcemaps.init({loadMaps: true}))
+        // .pipe($.sourcemaps.init({loadMaps: true}))
         .pipe($.sass({
             errLogToConsole: true,
             outputStyle: 'compressed',
@@ -24,7 +24,7 @@ gulp.task('sass', function () {
             ]
         }))
         .pipe($.autoprefixer({browsers: ['last 2 version', '> 5%']}))
-        .pipe($.sourcemaps.write('./map'))
+        // .pipe($.sourcemaps.write('./map'))
 
         //bundle css files by gulp-concat
         .pipe(concat('block-build.css'))
@@ -32,7 +32,7 @@ gulp.task('sass', function () {
 });
 
 
-gulp.task('sass_editor', function () {
+gulp.task('sass_editor', function (){
     return gulp.src([ './editor-css/editor.scss_before',  './src/**/*.scss', './editor-css/editor.scss_after'])
 				.pipe(concat('editor-block-build.scss'))
 				.pipe(gulp.dest('./editor-css/'))
@@ -53,12 +53,13 @@ gulp.task('js', function () {
 // watch
 gulp.task('watch', function () {
     gulp.watch('src/**/*.js', ['js']);
+    gulp.watch('editor-css/editor.scss_before', ['sass_editor']);
     gulp.watch('src/**/*.scss', ['sass','sass_editor']);
     // gulp.watch('src/**/*.scss', ['sass']);
 });
 
 // Build
-gulp.task('build', ['js', 'sass']);
+gulp.task('build', ['js', 'sass', 'sass_editor']);
 
 // Default Tasks
 gulp.task('default', ['watch']);
@@ -89,6 +90,7 @@ gulp.task('dist', function() {
 							"!./tests/**",
 							"!./dist/**",
 							"!./src/**",
+							"!./bin/**",
 							"!./editor-css/**",
 							"!./node_modules/**"
             ],

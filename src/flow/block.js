@@ -2,6 +2,7 @@
  * Flow block type
  *
  */
+import {deprecated} from './deprecated'
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
 const {RangeControl, RadioControl, PanelBody, Button, PanelColor} = wp.components;
@@ -56,7 +57,7 @@ registerBlockType('vk-blocks/flow', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    edit({attributes, setAttributes}) {
+    edit({attributes, setAttributes,className}) {
         const {
             heading,
             content,
@@ -79,7 +80,7 @@ registerBlockType('vk-blocks/flow', {
                     </PanelBody>
                 </InspectorControls>
 
-                <div className={`${ arrowFlag } vk_flow`}>
+                <div className={`${className} ${ arrowFlag } vk_flow`}>
 									<div className={ 'vk_flow_frame' } >
                     <dl className={ 'vk_flow_frame_text' }>
                         <RichText
@@ -129,7 +130,7 @@ registerBlockType('vk-blocks/flow', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    save({attributes}) {
+    save({attributes,className}) {
         const {
             heading,
             content,
@@ -138,7 +139,7 @@ registerBlockType('vk-blocks/flow', {
         } = attributes;
 
         return (
-            <div className={`${ arrowFlag } vk_flow`}>
+            <div className={`${className} ${ arrowFlag } vk_flow`}>
 							<div className={ 'vk_flow_frame' }>
                 <dl className={ 'vk_flow_frame_text' }>
                     <RichText.Content
@@ -148,18 +149,20 @@ registerBlockType('vk-blocks/flow', {
                     />
                     <RichText.Content
                         tagName="dd"
-												className={ 'vk_flow_frame_text_content' }
+                        className={ 'vk_flow_frame_text_content' }
                         value={content}
                     />
                 </dl>
-								{ insertImage ?
-									<div className={ 'vk_flow_frame_image' }>
-										<img
-												src={ insertImage }
-												alt=''
+                                { insertImage ?
+                                    <div className={ 'vk_flow_frame_image' }>
+                                        <img
+                                            src={ insertImage }
+                                            alt=''
 										/></div> : '' }
 							</div>
             </div>
         );
     },
+
+    deprecated:deprecated
 });

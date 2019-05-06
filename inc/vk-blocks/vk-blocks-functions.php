@@ -19,7 +19,7 @@ function vkblocks_blocks_assets() {
 		), VK_BLOCKS_VERSION, true
 	);
 
-	if(function_exists('wp_set_script_translations' )){
+	if ( function_exists( 'wp_set_script_translations' ) ) {
 		wp_set_script_translations( 'vk-blocks-build-js', 'vk-blocks', plugin_dir_path( __FILE__ ) . 'build/languages' );
 	}
 

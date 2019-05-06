@@ -2,9 +2,14 @@
  * PR Block block type
  *
  */
+import React from "react";
+import {deprecated} from "./deprecated/block";
+import {ComponentBlock} from "./component-block";
+
+
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
-const {RangeControl, RadioControl, PanelBody, Button, BaseControl, CheckboxControl, TextControl} = wp.components;
+const {RadioControl, PanelBody, Button, BaseControl, CheckboxControl, TextControl} = wp.components;
 const {Fragment} = wp.element;
 const {RichText, InspectorControls, MediaUpload, ColorPalette} = wp.editor;
 const BlockIcon = (
@@ -26,16 +31,16 @@ const BlockIcon = (
 	</svg>
 );
 
-function set_attirbuite(number) {
+function set_attributes(number) {
 
     var attributes = {};
 
-    for (var i = 1; i <= number; i++) {
+    for (let i = 1; i <= number; i++) {
 
         attributes['heading' + i] = {
             type: 'string',
             source: 'html',
-            selector: 'h1.vk_prBlocks_item_title-' + i,
+            selector: '.vk_prBlocks_item_title-' + i,
         };
         attributes['content' + i] = {
             type: 'string',
@@ -91,7 +96,7 @@ registerBlockType('vk-blocks/pr-blocks', {
     title: __('PR Blocks (Beta)', 'vk-blocks'), // Block title.
     icon: BlockIcon, // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
     category: 'vk-blocks-cat', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
-    attributes: set_attirbuite(4),
+    attributes: set_attributes(4),
 
     /**
      * The edit function describes the structure of your block in the context of the editor.
@@ -101,7 +106,7 @@ registerBlockType('vk-blocks/pr-blocks', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    edit({attributes, setAttributes}) {
+    edit: function ({attributes, setAttributes, className}) {
 
         const {
             heading1,
@@ -130,6 +135,13 @@ registerBlockType('vk-blocks/pr-blocks', {
             insertImage3
         } = attributes;
 
+        let containerClass;
+        if (className) {
+            containerClass = `${className} vk_prBlocks row`;
+        } else {
+            containerClass = `vk_prBlocks row`;
+        }
+
         return [
             <Fragment>
                 <InspectorControls>
@@ -150,22 +162,25 @@ registerBlockType('vk-blocks/pr-blocks', {
                         </BaseControl>
                         <BaseControl
                             label={__('Icon 1', 'vk-blocks')}
+
                         >
                             <TextControl
                                 label={__('Class name of the Font Awesome icon font you want to use:', 'vk-blocks')}
                                 value={icon1}
                                 onChange={(value) => setAttributes({icon1: value})}
                                 placeholder={'fas fa-file'}
+                                help={<a href={`https://fontawesome.com/icons?d=gallery&m=free`}
+                                         target={`_blank`}>{__('Font Awesome icon list', 'vk-blocks')}</a>}
                             />
                             <ColorPalette
                                 value={color1}
                                 onChange={(value) => {
-                                  if (value){
-                                    setAttributes({color1: value})
-                                  } else {
-                                    setAttributes({color1: '#0693e3'})
-                                    setAttributes({bgType1: '0'})
-                                  }
+                                    if (value) {
+                                        setAttributes({color1: value})
+                                    } else {
+                                        setAttributes({color1: '#0693e3'})
+                                        setAttributes({bgType1: '0'})
+                                    }
                                 }}
                             />
                             <RadioControl
@@ -175,7 +190,7 @@ registerBlockType('vk-blocks/pr-blocks', {
                                     {label: __('Solid color', 'vk-blocks'), value: '0'},
                                     {label: __('No background', 'vk-blocks'), value: '1'},
                                 ]}
-                                onChange={(value) => setAttributes({ bgType1: value })}
+                                onChange={(value) => setAttributes({bgType1: value})}
                             />
                         </BaseControl>
                         <BaseControl
@@ -221,16 +236,18 @@ registerBlockType('vk-blocks/pr-blocks', {
                                 value={icon2}
                                 onChange={(value) => setAttributes({icon2: value})}
                                 placeholder={'fas fa-file'}
+                                help={<a href={`https://fontawesome.com/icons?d=gallery&m=free`}
+                                         target={`_blank`}>{__('Font Awesome icon list', 'vk-blocks')}</a>}
                             />
                             <ColorPalette
                                 value={color2}
                                 onChange={(value) => {
-                                  if (value){
-                                    setAttributes({color2: value})
-                                  } else {
-                                    setAttributes({color2: '#0693e3'})
-                                    setAttributes({bgType2: '0'})
-                                  }
+                                    if (value) {
+                                        setAttributes({color2: value})
+                                    } else {
+                                        setAttributes({color2: '#0693e3'})
+                                        setAttributes({bgType2: '0'})
+                                    }
                                 }}
                             />
                             <RadioControl
@@ -286,16 +303,18 @@ registerBlockType('vk-blocks/pr-blocks', {
                                 value={icon3}
                                 onChange={(value) => setAttributes({icon3: value})}
                                 placeholder={'fas fa-file'}
+                                help={<a href={`https://fontawesome.com/icons?d=gallery&m=free`}
+                                         target={`_blank`}>{__('Font Awesome icon list', 'vk-blocks')}</a>}
                             />
                             <ColorPalette
                                 value={color3}
                                 onChange={(value) => {
-                                  if (value){
-                                    setAttributes({color3: value})
-                                  } else {
-                                    setAttributes({color3: '#0693e3'})
-                                    setAttributes({bgType3: '0'})
-                                  }
+                                    if (value) {
+                                        setAttributes({color3: value})
+                                    } else {
+                                        setAttributes({color3: '#0693e3'})
+                                        setAttributes({bgType3: '0'})
+                                    }
                                 }}
                             />
                             <RadioControl
@@ -330,185 +349,26 @@ registerBlockType('vk-blocks/pr-blocks', {
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
-                <article className="vk_prBlocks row">
-
-                    <div className="vk_prBlocks_item col-sm-4">
-                        {(() => {
-
-                            if (insertImage1) {
-
-                                return <div className="vk_prBlocks_item_image"
-                                            style={{
-                                                backgroundImage: 'url(' + insertImage1 + ')',
-                                                backgroundRepeat: 'no-repeat 50% center',
-                                                backgroundSize: 'cover'
-                                            }}
-                                >
-                                    <img
-                                        src={insertImage1}
-                                        alt=''
-                                    />
-                                </div>
-
-                            } else {
-
-                                if ( bgType1 === '0' ) {
-                                    return <div
-                                        className="vk_prBlocks_item_icon_outer"
-                                        style={{
-                                            backgroundColor: color1,
-                                            border: `1px solid ${color1}`
-                                        }}
-                                    ><i className={`${icon1} vk_prBlocks_item_icon`}
-                                        style={{color: '#fff'}}>
-                                    </i>
-                                    </div>
-                                } else {
-                                    return <div
-                                        className="vk_prBlocks_item_icon_outer"
-                                        style={{backgroundColor: 'transparent', border: '1px solid ' + color1}}
-                                    ><i className={`${icon1} vk_prBlocks_item_icon`}
-                                        style={{color: color1}}>
-                                    </i>
-                                    </div>
-                                }
-                            }
-                        })()}
-                        <RichText
-                            className="vk_prBlocks_item_title vk_prBlocks_item_title-1"
-                            tagName="h1"
-                            onChange={(value) => setAttributes({heading1: value})}
-                            value={heading1}
-                            placeholder={__('Input title', 'vk-blocks')}
-                        />
-                        <RichText
-                            className="vk_prBlocks_item_summary vk_prBlocks_item_summary-1"
-                            tagName="p"
-                            onChange={(value) => setAttributes({content1: value})}
-                            value={content1}
-                            placeholder={__('Input content', 'vk-blocks')}
-                        />
-                    </div>
-
-                    <div className="vk_prBlocks_item col-sm-4">
-                        {(() => {
-
-                            if (insertImage2) {
-
-                                return <div className="vk_prBlocks_item_image"
-                                            style={{
-                                                backgroundImage: 'url(' + insertImage2 + ')',
-                                                backgroundRepeat: 'no-repeat 50% center',
-                                                backgroundSize: 'cover'
-                                            }}
-                                >
-                                    <img
-                                        src={insertImage2}
-                                        alt=''
-                                    />
-                                </div>
-
-                            } else {
-
-
-                                if (bgType2 === '0') {
-                                    return <div
-                                        className="vk_prBlocks_item_icon_outer"
-                                        style={{
-                                            backgroundColor: color2,
-                                            border: `1px solid ${color2}`
-                                        }}
-                                    ><i className={`${icon2} vk_prBlocks_item_icon`}
-                                        style={{color: '#fff'}}>
-                                    </i>
-                                    </div>
-                                } else {
-                                    return <div
-                                        className="vk_prBlocks_item_icon_outer"
-                                        style={{backgroundColor: 'transparent', border: '1px solid ' + color2}}
-                                    ><i className={`${icon2} vk_prBlocks_item_icon`}
-                                        style={{color: color2}}>
-                                    </i>
-                                    </div>
-                                }
-                            }
-                        })()}
-                        <RichText
-                            className="vk_prBlocks_item_title vk_prBlocks_item_title-2"
-                            tagName="h1"
-                            onChange={(value) => setAttributes({heading2: value})}
-                            value={heading2}
-                            placeholder={__('Input title', 'vk-blocks')}
-                        />
-                        <RichText
-                            className="vk_prBlocks_item_summary vk_prBlocks_item_summary-2"
-                            tagName="p"
-                            onChange={(value) => setAttributes({content2: value})}
-                            value={content2}
-                            placeholder={__('Input content', 'vk-blocks')}
-                        />
-                    </div>
-
-                    <div className="vk_prBlocks_item col-sm-4">
-                        {(() => {
-
-                            if (insertImage3) {
-
-                                return <div className="vk_prBlocks_item_image"
-                                            style={{
-                                                backgroundImage: 'url(' + insertImage3 + ')',
-                                                backgroundRepeat: 'no-repeat 50% center',
-                                                backgroundSize: 'cover'
-                                            }}
-                                >
-                                    <img
-                                        src={insertImage3}
-                                        alt=''
-                                    />
-                                </div>
-
-                            } else {
-
-
-                                if (bgType3 === '0') {
-                                    return <div
-                                        className="vk_prBlocks_item_icon_outer"
-                                        style={{
-                                            backgroundColor: color3,
-                                            border: `1px solid ${color3}`
-                                        }}
-                                    ><i className={`${icon3} vk_prBlocks_item_icon`}
-                                        style={{color: '#fff'}}>
-                                    </i>
-                                    </div>
-                                } else {
-                                    return <div
-                                        className="vk_prBlocks_item_icon_outer"
-                                        style={{backgroundColor: 'transparent', border: '1px solid ' + color3}}
-                                    ><i className={`${icon3} vk_prBlocks_item_icon`}
-                                        style={{color: color3}}>
-                                    </i>
-                                    </div>
-                                }
-                            }
-                        })()}
-                        <RichText
-                            className="vk_prBlocks_item_title vk_prBlocks_item_title-3"
-                            tagName="h1"
-                            onChange={(value) => setAttributes({heading3: value})}
-                            value={heading3}
-                            placeholder={__('Input title', 'vk-blocks')}
-                        />
-                        <RichText
-                            className="vk_prBlocks_item_summary vk_prBlocks_item_summary-3"
-                            tagName="p"
-                            onChange={(value) => setAttributes({content3: value})}
-                            value={content3}
-                            placeholder={__('Input content', 'vk-blocks')}
-                        />
-                    </div>
-
-                </article>
+                <div className={containerClass}>
+                    <ComponentBlock
+                        attributes={attributes}
+                        setAttributes={setAttributes}
+                        blockNum={1}
+                        for_={'edit'}
+                    />
+                    <ComponentBlock
+                        attributes={attributes}
+                        setAttributes={setAttributes}
+                        blockNum={2}
+                        for_={'edit'}
+                    />
+                    <ComponentBlock
+                        attributes={attributes}
+                        setAttributes={setAttributes}
+                        blockNum={3}
+                        for_={'edit'}
+                    />
+                </div>
             </Fragment>
         ];
     },
@@ -521,221 +381,37 @@ registerBlockType('vk-blocks/pr-blocks', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    save({attributes}) {
-        const {
-					heading1,
-					heading2,
-					heading3,
-					content1,
-					content2,
-					content3,
-					url1,
-					url2,
-					url3,
-					urlOpenType1,
-					urlOpenType2,
-					urlOpenType3,
-					icon1,
-					icon2,
-					icon3,
-					color1,
-					color2,
-					color3,
-					bgType1,
-					bgType2,
-					bgType3,
-					insertImage1,
-					insertImage2,
-					insertImage3
-        } = attributes;
+    save({attributes,className}) {
+
+        let containerClass;
+        if (className) {
+            containerClass = `${className} vk_prBlocks row`;
+        } else {
+            containerClass = `vk_prBlocks row`;
+        }
 
         return (
-            <article className="vk_prBlocks row">
-
-                <div className="vk_prBlocks_item col-sm-4">
-                    <a
-                        href={url1}
-                        target={urlOpenType1? '_blank':'_self'}
-                        className="vk_prBlocks_item_link"
-                    >
-                        {(() => {
-
-                            if (insertImage1) {
-
-                                return <div className="vk_prBlocks_item_image"
-                                            style={{
-                                                backgroundImage: 'url(' + insertImage1 + ')',
-                                                backgroundRepeat: 'no-repeat 50% center',
-                                                backgroundSize: 'cover'
-                                            }}
-                                >
-                                    <img
-                                        src={insertImage1}
-                                        alt=''
-                                    />
-                                </div>
-
-                            } else {
-
-                              if ( ! color1 ){
-                                  color1 = '#0693e3';
-                                  bgType1 === '0';
-                              }
-                                if (bgType1 === '0') {
-
-                                    return <div
-                                        className="vk_prBlocks_item_icon_outer"
-                                        style={{
-                                            backgroundColor: color1,
-                                            border: `1px solid ${color1}`
-                                        }}
-                                    ><i className={`${icon1} vk_prBlocks_item_icon`}
-                                        style={{color: '#fff'}}>
-                                    </i>
-                                    </div>
-                                } else {
-                                    return <div
-                                        className="vk_prBlocks_item_icon_outer"
-                                        style={{backgroundColor: 'transparent', border: '1px solid ' + color1}}
-                                    ><i className={`${icon1} vk_prBlocks_item_icon`}
-                                        style={{color: color1}}>
-                                    </i>
-                                    </div>
-                                }
-                            }
-                        })()}
-                        <RichText.Content
-                            className="vk_prBlocks_item_title vk_prBlocks_item_title-1"
-                            tagName={'h1'}
-                            value={heading1}/>
-                        <RichText.Content
-                            className="vk_prBlocks_item_summary vk_prBlocks_item_summary-1"
-                            tagName={'p'}
-                            value={content1}/>
-                    </a>
-                </div>
-                <div className="vk_prBlocks_item col-sm-4">
-                    <a
-                        href={url2}
-                        target={urlOpenType2? '_blank':'_self'}
-                        className="vk_prBlocks_item_link"
-                    >
-                        {(() => {
-
-                            if (insertImage2) {
-
-                                return <div className="vk_prBlocks_item_image"
-                                            style={{
-                                                backgroundImage: 'url(' + insertImage2 + ')',
-                                                backgroundRepeat: 'no-repeat 50% center',
-                                                backgroundSize: 'cover'
-                                            }}
-                                >
-                                    <img
-                                        src={insertImage2}
-                                        alt=''
-                                    />
-                                </div>
-
-                            } else {
-                              if ( ! color2 ){
-                              		color2 = '#0693e3';
-                              		bgType2 === '0';
-                              }
-                                if (bgType2 === '0') {
-                                    return <div
-                                        className="vk_prBlocks_item_icon_outer"
-                                        style={{
-                                            backgroundColor: color2,
-                                            border: `1px solid ${color2}`
-                                        }}
-                                    ><i className={`${icon2} vk_prBlocks_item_icon`}
-                                        style={{color: '#fff'}}>
-                                    </i>
-                                    </div>
-                                } else {
-                                    return <div
-                                        className="vk_prBlocks_item_icon_outer"
-                                        style={{backgroundColor: 'transparent', border: '1px solid ' + color2}}
-                                    ><i className={`${icon2} vk_prBlocks_item_icon`}
-                                        style={{color: color2}}>
-                                    </i>
-                                    </div>
-                                }
-                            }
-                        })()}
-                        <RichText.Content
-                            className="vk_prBlocks_item_title vk_prBlocks_item_title-2"
-                            tagName={'h1'}
-                            value={heading2}/>
-                        <RichText.Content
-                            className="vk_prBlocks_item_summary vk_prBlocks_item_summary-2"
-                            tagName={'p'}
-                            value={content2}/>
-                    </a>
-                </div>
-
-                <div className="vk_prBlocks_item col-sm-4">
-                    <a
-                        href={url3}
-                        target={urlOpenType3? '_blank':'_self'}
-                        className="vk_prBlocks_item_link"
-                    >
-                        {(() => {
-
-                            if (insertImage3) {
-
-                                return <div className="vk_prBlocks_item_image"
-                                            style={{
-                                                backgroundImage: 'url(' + insertImage3 + ')',
-                                                backgroundRepeat: 'no-repeat 50% center',
-                                                backgroundSize: 'cover'
-                                            }}
-                                >
-                                    <img
-                                        src={insertImage3}
-                                        alt=''
-                                    />
-                                </div>
-
-                            } else {
-                              if ( ! color3 ){
-                              		color3 = '#0693e3';
-                              		bgType3 === '0';
-                              }
-                                if (bgType3 === '0') {
-                                    return <div
-                                        className="vk_prBlocks_item_icon_outer"
-                                        style={{
-                                            backgroundColor: color3,
-                                            border: `1px solid ${color3}`
-                                        }}
-                                    ><i className={`${icon3} vk_prBlocks_item_icon`}
-                                        style={{color: '#fff'}}>
-                                    </i>
-                                    </div>
-                                } else {
-                                    return <div
-                                        className="vk_prBlocks_item_icon_outer"
-                                        style={{backgroundColor: 'transparent', border: '1px solid ' + color3}}
-                                    ><i className={`${icon3} vk_prBlocks_item_icon`}
-                                        style={{color: color3}}>
-                                    </i>
-                                    </div>
-                                }
-                            }
-                        })()}
-                        <RichText.Content
-                            className="vk_prBlocks_item_title vk_prBlocks_item_title-3"
-                            tagName={'h1'}
-                            value={heading3}/>
-                        <RichText.Content
-                            className="vk_prBlocks_item_summary vk_prBlocks_item_summary-3"
-                            tagName={'p'}
-                            value={content3}/>
-                    </a>
-                </div>
-            </article>
+            <div className={containerClass}>
+                <ComponentBlock
+                    attributes={attributes}
+                    blockNum={1}
+                    for_={'save'}
+                />
+                <ComponentBlock
+                    attributes={attributes}
+                    blockNum={2}
+                    for_={'save'}
+                />
+                <ComponentBlock
+                    attributes={attributes}
+                    blockNum={3}
+                    for_={'save'}
+                />
+            </div>
         );
+
     },
+
+    deprecated: deprecated
+
 });

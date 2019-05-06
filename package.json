@@ -4,11 +4,12 @@
   "description": "",
   "main": "gulpfile.js",
   "scripts": {
+    "start": "npm install && npm run build && npm run watch && wp plugin activate vk-blocks && wp browse --wp-admin",
     "watch": "gulp watch",
     "build": "gulp build && npm run translate",
-    "translate": "npx po2json ./inc/vk-blocks/build/languages/vk-blocks-ja.po ./inc/vk-blocks/build/languages/vk-blocks-ja-vk-blocks-buid-js.json -f jed",
+    "translate": "npx po2json ./inc/vk-blocks/build/languages/vk-blocks-ja.po ./inc/vk-blocks/build/languages/vk-blocks-ja-vk-blocks-build-js.json -f jed",
     "gulp": "gulp",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "wp-scripts test-unit-js --config tests/jest.config.json"
   },
   "author": "",
   "license": "MIT",
@@ -17,8 +18,10 @@
     "@babel/plugin-transform-react-jsx": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "@wordpress/babel-plugin-makepot": "^2.1.2",
+    "@wordpress/scripts": "^2.5.0",
     "autoprefixer": "^9.3.1",
     "babel-loader": "^8.0.2",
+    "classnames": "^2.2.6",
     "css-loader": "^1.0.1",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.1.0",
@@ -44,6 +47,7 @@
     "aphrodite": "^2.2.3",
     "po2json": "^1.0.0-alpha",
     "react": "^16.7.0",
-    "react-dom": "^16.7.0"
+    "react-dom": "^16.7.0",
+    "react-responsive": "^6.1.1"
   }
 }

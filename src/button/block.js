@@ -3,7 +3,8 @@
  *
  */
 import React from "react";
-import {Link} from "./link";
+import {Component} from "./component";
+import {deprecated} from "./deprecated/deprecated";
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
@@ -63,6 +64,10 @@ registerBlockType('vk-blocks/button', {
             source: 'html',
             selector: 'span',
         },
+        subCaption: {
+            type: 'string',
+            default: null,
+        },
         buttonUrl: {
             type: 'string',
             default: null,
@@ -112,6 +117,7 @@ registerBlockType('vk-blocks/button', {
     edit({attributes, className, setAttributes, isSelected}) {
         const {
             content,
+            subCaption,
             buttonUrl,
             buttonTarget,
             buttonSize,
@@ -123,10 +129,29 @@ registerBlockType('vk-blocks/button', {
             fontAwesomeIconAfter,
         } = attributes;
 
+        let containerClass;
+        if (buttonColorCustom) {
+            containerClass = `vk_button vk_button-align-${buttonAlign} vk_button-color-custom`;
+        } else {
+            containerClass = `vk_button vk_button-align-${buttonAlign}`;
+        }
+
+        if (className) {
+            containerClass = `${className} vk_button vk_button-align-${buttonAlign} vk_button-color-custom`;
+        } else {
+            containerClass = `${className} vk_button vk_button-align-${buttonAlign}`;
+        }
+
         return (
             <Fragment>
                 <InspectorControls>
                     <PanelBody title={__('Button setting', 'vk-blocks')}>
+                        <TextControl
+                            label={__('Sub Caption', 'vk-blocks')}
+                            value={subCaption}
+                            onChange={(value) => setAttributes({subCaption: value})}
+                            placeholder={'Sub Caption'}
+                        />
                         <CheckboxControl
                             label={__('Open link new tab.', 'vk-blocks')}
                             checked={buttonTarget}
@@ -189,34 +214,34 @@ registerBlockType('vk-blocks/button', {
                         </BaseControl>
                         <BaseControl
                             label={__('Font Awesome:', 'vk-blocks')}
-                            // help={__('', 'vk-blocks')}
+                            help={<a href={`https://fontawesome.com/icons?d=gallery&m=free`} target={`_blank`}>{__('Font Awesome icon list', 'vk-blocks')}</a>}
                         >
                             <TextControl
                                 label={__('Before text', 'vk-blocks')}
-                                help={__('Enter Font Awesome Class.This icon will appear before text.', 'vk-blocks')}
+                                help={__('Enter Font Awesome Class.This icon will appear before text. Ex) fas fa-arrow-circle-right', 'vk-blocks')}
                                 value={fontAwesomeIconBefore}
                                 onChange={(value) => setAttributes({fontAwesomeIconBefore: value})}
-                                placeholder={'fas fa-user'}
+                                placeholder={'fas fa-arrow-circle-right'}
                             />
                             <TextControl
                                 label={__('After text', 'vk-blocks')}
-                                help={__('Enter Font Awesome Class.This icon will appear after text.', 'vk-blocks')}
+                                help={__('Enter Font Awesome Class.This icon will appear after text. Ex) fas fa-external-link-alt', 'vk-blocks')}
                                 value={fontAwesomeIconAfter}
                                 onChange={(value) => setAttributes({fontAwesomeIconAfter: value})}
-                                placeholder={'fas fa-book'}
+                                placeholder={'fas fa-external-link-alt'}
                             />
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
+                <div className={containerClass}>
 
-                <div className={buttonColorCustom ? `vk_button vk_button-align-${ buttonAlign } vk_button-color-custom` : `vk_button vk_button-align-${ buttonAlign }`}>
-
-                    <Link lbColorCustom={buttonColorCustom} lbColor={buttonColor} lbType={buttonType}
-                          lbAlign={buttonAlign}
-                          lbSize={buttonSize}
-                          lbFontAwesomeIconBefore={fontAwesomeIconBefore}
-                          lbFontAwesomeIconAfter={fontAwesomeIconAfter}
-                          lbRichtext={
+                    <Component lbColorCustom={buttonColorCustom} lbColor={buttonColor} lbType={buttonType}
+                               lbAlign={buttonAlign}
+                               lbSize={buttonSize}
+                               lbFontAwesomeIconBefore={fontAwesomeIconBefore}
+                               lbFontAwesomeIconAfter={fontAwesomeIconAfter}
+                               lbsubCaption={subCaption}
+                               lbRichtext={
                         <RichText
                             tagName="span"
                             className={'vk_button_link_txt'}
@@ -256,6 +281,7 @@ registerBlockType('vk-blocks/button', {
     save({attributes, className}) {
         const {
             content,
+            subCaption,
             buttonUrl,
             buttonTarget,
             buttonSize,
@@ -268,7 +294,6 @@ registerBlockType('vk-blocks/button', {
         } = attributes;
 
         let containerClass = '';
-
         if (buttonColorCustom) {
 
             containerClass = `vk_button vk_button-color-custom vk_button-align-${buttonAlign}`;
@@ -279,17 +304,22 @@ registerBlockType('vk-blocks/button', {
 
         }
 
+        if(className){
+            containerClass = className + ' ' + containerClass;
+        }
+
         return (
             <div className={containerClass}>
 
-                <Link lbColorCustom={buttonColorCustom} lbColor={buttonColor} lbType={buttonType}
-                      lbAlign={buttonAlign}
-                      lbSize={buttonSize}
-                      lbUrl={buttonUrl}
-                      lbTarget={buttonTarget}
-                      lbFontAwesomeIconBefore={fontAwesomeIconBefore}
-                      lbFontAwesomeIconAfter={fontAwesomeIconAfter}
-                      lbRichtext={
+                <Component lbColorCustom={buttonColorCustom} lbColor={buttonColor} lbType={buttonType}
+                           lbAlign={buttonAlign}
+                           lbSize={buttonSize}
+                           lbUrl={buttonUrl}
+                           lbTarget={buttonTarget}
+                           lbFontAwesomeIconBefore={fontAwesomeIconBefore}
+                           lbFontAwesomeIconAfter={fontAwesomeIconAfter}
+                           lbsubCaption={subCaption}
+                           lbRichtext={
                     <RichText.Content
                         tagName="span"
                         className={'vk_button_link_txt'}
@@ -299,4 +329,6 @@ registerBlockType('vk-blocks/button', {
             </div>
         );
     },
+
+    deprecated: deprecated
 });

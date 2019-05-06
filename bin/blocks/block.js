@@ -3,8 +3,10 @@
  *
  */
 import React from "react";
-import NewComponent from "./component.js";
-import {schema} from './schema.js';
+import NewComponent from "./component";
+import {schema} from './schema';
+// import {deprecated} from './deprecated/block';
+
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
 const {RangeControl, RadioControl, PanelBody, Button, PanelColor, BaseControl} = wp.components;
@@ -49,10 +51,25 @@ registerBlockType('vk-blocks/your-block-slug', {
         } = attributes;
 
         return (
-            <div className="vk_your-block-slug">
-                <div>Editor</div>
-                <NewComponent value={}/>
-            </div>
+            <Fragment>
+                <InspectorControls>
+                    <PanelBody title={__('Color Setting', 'vk-blocks')}>
+                        <BaseControl label={__('Title Color', 'vk-blocks')}>
+                            <ColorPalette
+                                value={content}
+                                onChange={(value) => setAttributes({content: value})}
+                            />
+                        </BaseControl>
+                    </PanelBody>
+                </InspectorControls>
+                <div className="vk_spacer">
+                    <div>Editor</div>
+                    <NewComponent
+                        attributes={attributes}
+                        for_={'edit'}
+                    />
+                </div>
+            </Fragment>
         );
     },
 
@@ -65,18 +82,18 @@ registerBlockType('vk-blocks/your-block-slug', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     save({attributes}) {
-        const {
-            heading,
-            content,
-            insertImage,
-            arrowFlag,
-        } = attributes;
 
         return (
             <div className="vk_your-block-slug">
                 <div>Front</div>
-                <NewComponent value={}/>
+                <NewComponent
+                    attributes={attributes}
+                    for_={'save'}
+                />
             </div>
         );
     },
+
+    //Please comment out, when you need to use deprecated.
+    // deprecated:deprecated
 });

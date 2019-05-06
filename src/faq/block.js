@@ -2,6 +2,8 @@
  * Faq block type
  *
  */
+import {deprecated} from './deprecated';
+
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
 const {RichText} = wp.editor;
@@ -61,14 +63,14 @@ registerBlockType('vk-blocks/faq', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    edit({attributes, setAttributes}) {
+    edit({attributes, setAttributes,className}) {
         const {
             heading,
             content
         } = attributes;
 
         return (
-            <dl className={'vk_faq'}>
+            <dl className={`${className} vk_faq`}>
                 <RichText
                     tagName="dt"
 										className={ 'vk_faq_title' }
@@ -95,25 +97,26 @@ registerBlockType('vk-blocks/faq', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    save({attributes}) {
+    save({attributes,className}) {
         const {
             heading,
             content
         } = attributes;
 
         return (
-            <dl className={ 'vk_faq' }>
+            <dl className={ `${className} vk_faq` }>
                 <RichText.Content
                     tagName="dt"
-										className={ 'vk_faq_title' }
+                    className={ 'vk_faq_title' }
                     value={heading}
                 />
                 <RichText.Content
                     tagName="dd"
-										className={ 'vk_faq_content' }
+                    className={ 'vk_faq_content' }
                     value={content}
                 />
             </dl>
         );
     },
+    deprecated: deprecated
 });
