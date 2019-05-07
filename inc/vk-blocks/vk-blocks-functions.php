@@ -1,7 +1,7 @@
 <?php
 
 //サーバーサイドレンダリングスクリプトを読み込み。
-require_once (dirname(dirname(dirname(__FILE__))) . '/src/latest-posts/block.php');
+require_once( dirname( dirname( dirname( __FILE__ ) ) ) . '/src/latest-posts/block.php' );
 
 function vkblocks_active() {
 	return true;
@@ -37,46 +37,46 @@ function vkblocks_blocks_assets() {
 	global $wp_version;
 	if ( defined( 'GUTENBERG_VERSION' ) || version_compare( $wp_version, '5.0', '>=' ) ) {
 
+		$arr = array( 'alert', 'balloon', 'button', 'faq', 'flow', 'pr-blocks', 'pr-content', 'outer', 'spacer', 'heading', 'latest-posts' );//REPLACE-FLAG : このコメントは削除しないで下さい。wp-create-gurten-template.shで削除する基準として左の[//REPLACE-FLAG]を使っています。
 
-		$arr = array('alert','balloon','button','faq','flow','pr-blocks','outer','latest-posts');//REPLACE-FLAG : このコメントは削除しないで下さい。wp-create-gurten-template.shで削除する基準として左の[//REPLACE-FLAG]を使っています。
-		foreach ($arr as $value) {
+		foreach ( $arr as $value ) {
 
 			//ダイナミックブロックの時、サーバーサイドレンダリングスクリプトを読み込み。
-			if($value == 'latest-posts'){
+			if ( $value == 'latest-posts' ) {
 				register_block_type(
 					'vk-blocks/' . $value, array(
 						'attributes'      => array(
-							'layout'       => array(
-								'type' => 'string',
+							'layout'      => array(
+								'type'    => 'string',
 								'default' => 'image_1st',
 							),
-							'numberPosts'     => array(
+							'numberPosts' => array(
 								'type'    => 'number',
 								'default' => 3,
 							),
 						),
-						'style'         => 'vk-blocks-build-css',
-						'editor_style'  => 'vk-blocks-build-editor-css',
-						'editor_script' => 'vk-blocks-build-js',
+						'style'           => 'vk-blocks-build-css',
+						'editor_style'    => 'vk-blocks-build-editor-css',
+						'editor_script'   => 'vk-blocks-build-js',
 						'render_callback' => 'vk_blocks_render_latest_posts',
-//						'render_callback' => 'vk-blocks-render'.$value,
+					//                      'render_callback' => 'vk-blocks-render'.$value,
 					)
-				);
-			}else{
+				); // register_block_type(
+			} else {
 				register_block_type(
 					'vk-blocks/' . $value, array(
 						'style'         => 'vk-blocks-build-css',
 						'editor_style'  => 'vk-blocks-build-editor-css',
 						'editor_script' => 'vk-blocks-build-js',
 					)
-				);
-			}
-		}
-	}
-}
-add_action( 'init', 'vkblocks_blocks_assets' );
+				); //register_block_type(
+			} // if ( $value == 'latest-posts' ) {
+		} // foreach ( $arr as $value ) {
+	} // if ( defined( 'GUTENBERG_VERSION' ) || version_compare( $wp_version, '5.0', '>=' ) ) {
+} // function vkblocks_blocks_assets() {
+	add_action( 'init', 'vkblocks_blocks_assets' );
 
-// Add Block Category,
+	// Add Block Category,
 function vkblocks_blocks_categories( $categories, $post ) {
 	global $vk_blocks_prefix;
 	return array_merge(
@@ -95,4 +95,4 @@ function vkblocks_blocks_categories( $categories, $post ) {
 		)
 	);
 }
-add_filter( 'block_categories', 'vkblocks_blocks_categories', 10, 2 );
+	add_filter( 'block_categories', 'vkblocks_blocks_categories', 10, 2 );
