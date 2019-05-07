@@ -20,7 +20,7 @@ if ( ! function_exists( 'vkblocks_active' ) ) {
 	// ExUnitなど読み込み先によってはあらかじめ読み込んでいるので不要の場合がある
 	require_once( 'font-awesome-config.php' );
 
-	// 管理画面へのbootstrapの読み込み
+	// 管理画面へのBoostrapの読み込み
 	function vkblocks_load_bootstrap_admin( $hook_suffix ) {
 
 		if ( is_admin() ) {
@@ -36,6 +36,13 @@ if ( ! function_exists( 'vkblocks_active' ) ) {
 			wp_enqueue_style( 'vkblocks-bootstrap' );
 		}
 
+	}
+
+	/**
+	 * Boostrapの読み込みを取り消し
+	 */
+	function vkblocks_remove_bootstrap_admin( ) {
+		wp_dequeue_style( 'vkblocks-bootstrap' );
 	}
 
 	/**
@@ -58,7 +65,7 @@ if ( ! function_exists( 'vkblocks_active' ) ) {
 
 		$wp_customize->add_setting( 'vkblocks_load_bootstrap', array(
 			'default'           => true,
-			'sanitize_callback' => 'sanitize_email',
+			'sanitize_callback' => 'vkblocks_sanitize_checkbox',
 		) );
 
 		$wp_customize->add_section( 'vkblocks_load_bootstrap_section', array(
@@ -74,13 +81,17 @@ if ( ! function_exists( 'vkblocks_active' ) ) {
 			'settings'    => 'vkblocks_load_bootstrap',
 		) ) );
 	}
-
 	add_action( 'customize_register', 'vkblocks_customize_register' );
 
 	//カスタマイザーでチェックがあればBoostrapを読み込み
-	if(get_theme_mod( 'checkbox_sample', true ) ) {
+	if ( get_theme_mod( 'vkblocks_load_bootstrap', true ) ) {
 
 		add_action( 'admin_enqueue_scripts', 'vkblocks_load_bootstrap_admin' );
 		add_action( 'wp_enqueue_scripts', 'vkblocks_load_bootstrap_admin' );
+
+	} else {
+
+		add_action( 'admin_enqueue_scripts', 'vkblocks_remove_bootstrap_admin' );
+		add_action( 'wp_enqueue_scripts', 'vkblocks_remove_bootstrap_admin' );
 	}
 }
