@@ -7,7 +7,7 @@ import {schema} from './schema.js';
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
-const {RangeControl, RadioControl, PanelBody, Button, PanelColor, BaseControl,SelectControl} = wp.components;
+const {RangeControl, PanelBody, BaseControl, SelectControl, CheckboxControl} = wp.components;
 const {Fragment} = wp.element;
 const {RichText, InspectorControls, MediaUpload, ColorPalette} = wp.editor;
 const BlockIcon = 'arrow-down';
@@ -45,11 +45,21 @@ registerBlockType('vk-blocks/latest-posts', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
 
-    edit({attributes, setAttributes}) {
+    edit: withSelect((select) => {
+        return {
+            postTypes: select('core').getPostTypes()
+        };
+    })(({postTypes, className, attributes}) => {
+
         const {
             numberPosts,
             layout,
         } = attributes;
+
+        if (postTypes) {
+            let test = postTypes[0].slug;
+            console.log(test);
+        }
 
         return (
             <Fragment>
@@ -57,37 +67,112 @@ registerBlockType('vk-blocks/latest-posts', {
                     <PanelBody title={__('Latest Posts Setting', 'vk-blocks')}>
                         <BaseControl>
                             <SelectControl
-                                label={ __( 'Layout', 'vk-blocks' ) }
-                                value={ layout }
-                                onChange={ ( value ) => setAttributes( { layout: value } ) }
-                                options={ [
+                                label={__('Layout', 'vk-blocks')}
+                                value={layout}
+                                onChange={(value) => setAttributes({layout: value})}
+                                options={[
                                     {
                                         value: 'image_1st',
-                                        label: __( 'image_1st', 'vk-blocks' ),
+                                        label: __('image_1st', 'vk-blocks'),
                                     },
                                     {
                                         value: 'image_2st',
-                                        label: __( 'image_2st', 'vk-blocks' ),
+                                        label: __('image_2st', 'vk-blocks'),
                                     },
-                                ] }
+                                ]}
                             />
                             <RangeControl
-                                label={ __( 'Number of Posts', 'vk-blocks' ) }
-                                value={ numberPosts }
-                                onChange={ ( value ) => setAttributes( { numberPosts: value } ) }
+                                label={__('Number of Posts', 'vk-blocks')}
+                                value={numberPosts}
+                                onChange={(value) => setAttributes({numberPosts: value})}
                                 min="1"
                                 max="10"
                             />
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
-                <ServerSideRender
-                    block="vk-blocks/latest-posts"
-                    attributes={attributes}
-                />
+                <div>
+                </div>
             </Fragment>
-        );
-    },
+        )
+    }),
+
+    // edit({attributes, setAttributes}) {
+    //
+    //
+    //
+    //     // let checkBox = (array) =>{
+    //     //
+    //     //     let checkBoxElms = [];
+    //     //     array.forEach(
+    //     //
+    //     //         checkBoxElms.push(<CheckboxControl
+    //     //             heading="User"
+    //     //             label="Is author"
+    //     //             help="Is the user a author or not?"
+    //     //             checked={ isChecked }
+    //     //             onChange={ ( isChecked ) => { setState( { isChecked } ) } }
+    //     //         />)
+    //     //     );
+    //     //     return checkBoxElms;
+    //     // };
+    //
+    //     // function MyAuthorsListBase( { authors } ) {
+    //     //     return (
+    //     //         <ul>
+    //     //             { authors.map( ( author ) => (
+    //     //                 <li key={ author.id }>{ author.name }</li>
+    //     //             ) ) }
+    //     //         </ul>
+    //     //     );
+    //     // }
+    //
+    //     function PriceDisplay( { postTypes } ) {
+    //         return postTypes;
+    //     }
+    //
+    //     const HammerPriceDisplay = withSelect( ( select ) => {
+    //         const { test } = select('core').getPostTypes();
+    //
+    //         return {
+    //             posttype: test,
+    //         };
+    //     } )( PriceDisplay );
+    //
+    //     return (
+    //         <Fragment>
+    //             <InspectorControls>
+    //                 <PanelBody title={__('Latest Posts Setting', 'vk-blocks')}>
+    //                     <BaseControl>
+    //                         <SelectControl
+    //                             label={ __( 'Layout', 'vk-blocks' ) }
+    //                             value={ layout }
+    //                             onChange={ ( value ) => setAttributes( { layout: value } ) }
+    //                             options={ [
+    //                                 {
+    //                                     value: 'image_1st',
+    //                                     label: __( 'image_1st', 'vk-blocks' ),
+    //                                 },
+    //                                 {
+    //                                     value: 'image_2st',
+    //                                     label: __( 'image_2st', 'vk-blocks' ),
+    //                                 },
+    //                             ] }
+    //                         />
+    //                         <RangeControl
+    //                             label={ __( 'Number of Posts', 'vk-blocks' ) }
+    //                             value={ numberPosts }
+    //                             onChange={ ( value ) => setAttributes( { numberPosts: value } ) }
+    //                             min="1"
+    //                             max="10"
+    //                         />
+    //                     </BaseControl>
+    //                 </PanelBody>
+    //             </InspectorControls>
+    //             <HammerPriceDisplay />
+    //         </Fragment>
+    //     );
+    // },
 
     /**
      * The save function defin className }> which the different attributes should be combined
