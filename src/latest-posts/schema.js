@@ -7,4 +7,13 @@ export const schema = {
         type: 'number',
         default: 3,
     },
+    // isChecked:{
+    //     type: 'boolean',
+    //     default:true,
+    // }
+    isChecked:{
+        type: 'array',
+        default:[true]
+    }
 };
+

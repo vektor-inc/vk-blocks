@@ -57,26 +57,28 @@ registerBlockType('vk-blocks/latest-posts', {
             isChecked
         } = attributes;
 
-
-
         const addPostTypeCheckBox = (postTypes) => {
 
             if (!postTypes) {return false}
 
             let checkBoxes = [];
 
-            // checkBoxElms.push(<CheckboxControl
-            //     heading="User"
-            //     label="Is author"
-            //     help="Is the user a author or not?"
-            //     checked={isChecked}
-            //     onChange={(isChecked) => {
-            //         setAttributes({isChecked})
-            //     }}
-            // />);
-
             for(let i in postTypes){
-                checkBoxes.push(<li>{postTypes[i].slug}</li>);
+
+                checkBoxes.push(
+                    <CheckboxControl
+                        label={postTypes[i].slug}
+                        checked={isChecked[i]}
+                        onChange={
+                            (value) => {
+                                isChecked[i] = value;
+                                setAttributes({isChecked: isChecked});
+                                {
+                                    console.log(attributes)
+                                }
+                            }
+                        }
+                    />);
             }
             return(
                 <ul>
@@ -84,8 +86,6 @@ registerBlockType('vk-blocks/latest-posts', {
                 </ul>
             );
         };
-
-
 
         return (
             <Fragment>
@@ -122,7 +122,7 @@ registerBlockType('vk-blocks/latest-posts', {
                 </InspectorControls>
                 <div>
                     Hello
-                    {console.log(attributes)}
+                    {/*{console.log(attributes)}*/}
                 </div>
             </Fragment>
         )
