@@ -11,7 +11,7 @@ const {RangeControl, PanelBody, BaseControl, SelectControl, CheckboxControl} = w
 const {Fragment} = wp.element;
 const {RichText, InspectorControls, MediaUpload, ColorPalette} = wp.editor;
 const BlockIcon = 'arrow-down';
-const {withSelect, select} = wp.data;
+const {withSelect} = wp.data;
 const {ServerSideRender} = wp.components;
 
 
@@ -49,17 +49,43 @@ registerBlockType('vk-blocks/latest-posts', {
         return {
             postTypes: select('core').getPostTypes()
         };
-    })(({postTypes, className, attributes}) => {
+    })(({postTypes, className, attributes, setAttributes}) => {
 
         const {
             numberPosts,
             layout,
+            isChecked
         } = attributes;
 
-        if (postTypes) {
-            let test = postTypes[0].slug;
-            console.log(test);
-        }
+
+
+        const addPostTypeCheckBox = (postTypes) => {
+
+            if (!postTypes) {return false}
+
+            let checkBoxes = [];
+
+            // checkBoxElms.push(<CheckboxControl
+            //     heading="User"
+            //     label="Is author"
+            //     help="Is the user a author or not?"
+            //     checked={isChecked}
+            //     onChange={(isChecked) => {
+            //         setAttributes({isChecked})
+            //     }}
+            // />);
+
+            for(let i in postTypes){
+                checkBoxes.push(<li>{postTypes[i].slug}</li>);
+            }
+            return(
+                <ul>
+                    {checkBoxes}
+                </ul>
+            );
+        };
+
+
 
         return (
             <Fragment>
@@ -88,15 +114,19 @@ registerBlockType('vk-blocks/latest-posts', {
                                 min="1"
                                 max="10"
                             />
+                            {
+                                addPostTypeCheckBox(postTypes)
+                            }
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
                 <div>
+                    Hello
+                    {console.log(attributes)}
                 </div>
             </Fragment>
         )
     }),
-
     // edit({attributes, setAttributes}) {
     //
     //
