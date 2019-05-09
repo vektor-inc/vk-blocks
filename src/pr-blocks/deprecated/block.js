@@ -324,7 +324,7 @@ export const deprecated = [
         save({attributes}) {
 
             return (
-                <article className="vk_prBlocks row">
+                <div className="vk_prBlocks row">
                     <ComponentBlock
                         attributes={attributes}
                         blockNum={1}
@@ -340,7 +340,7 @@ export const deprecated = [
                         blockNum={3}
                         for_={'save'}
                     />
-                </article>
+                </div>
             );
 
         },
