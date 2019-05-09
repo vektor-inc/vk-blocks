@@ -506,6 +506,7 @@ msgstr ""
 
 #: src/outer/block.js:93
 #: src/pr-content/block.js:92
+#: src/staff/block.js:56
 msgid "Color Setting"
 msgstr ""
 
@@ -622,6 +623,7 @@ msgid "PR Content"
 msgstr ""
 
 #: src/pr-content/block.js:93
+#: src/staff/block.js:57
 msgid "Title Color"
 msgstr ""
 
@@ -677,4 +679,8 @@ msgstr ""
 
 #: src/spacer/block.js:96
 msgid "Tablet"
+msgstr ""
+
+#: src/staff/block.js:32
+msgid "staff"
 msgstr ""
