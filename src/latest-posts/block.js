@@ -57,6 +57,9 @@ registerBlockType('vk-blocks/latest-posts', {
             isChecked
         } = attributes;
 
+        let parseIsChecked = JSON.parse(isChecked);
+        console.log(parseIsChecked);
+
         const addPostTypeCheckBox = (postTypes) => {
 
             if (!postTypes) {return false}
@@ -68,13 +71,13 @@ registerBlockType('vk-blocks/latest-posts', {
                 checkBoxes.push(
                     <CheckboxControl
                         label={postTypes[i].slug}
-                        checked={isChecked[i]}
+                        checked={parseIsChecked[i]}
                         onChange={
                             (value) => {
-                                isChecked[i] = value;
-                                setAttributes({isChecked: isChecked});
+                                parseIsChecked[i] = value;
+                                setAttributes({isChecked: JSON.stringify(parseIsChecked)});
                                 {
-                                    console.log(attributes)
+                                    // console.log(attributes)
                                 }
                             }
                         }
@@ -121,7 +124,7 @@ registerBlockType('vk-blocks/latest-posts', {
                     </PanelBody>
                 </InspectorControls>
                 <div>
-                    Hello
+                    Hi
                     {/*{console.log(attributes)}*/}
                 </div>
             </Fragment>
