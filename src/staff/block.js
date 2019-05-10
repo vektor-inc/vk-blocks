@@ -44,10 +44,10 @@ registerBlockType('vk-blocks/staff', {
      */
     edit({attributes, setAttributes}) {
         const {
-            heading,
-            content,
-            insertImage,
-            arrowFlag,
+            // heading,
+            // content,
+            // insertImage,
+            // arrowFlag,
         } = attributes;
 
         return (
@@ -55,10 +55,7 @@ registerBlockType('vk-blocks/staff', {
                 <InspectorControls>
                     <PanelBody title={__('Color Setting', 'vk-blocks')}>
                         <BaseControl label={__('Title Color', 'vk-blocks')}>
-                            <ColorPalette
-                                value={content}
-                                onChange={(value) => setAttributes({content: value})}
-                            />
+
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
