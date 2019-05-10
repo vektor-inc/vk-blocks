@@ -42,12 +42,14 @@ registerBlockType('vk-blocks/staff', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    edit({attributes, setAttributes}) {
+    edit({attributes, setAttributes, className}) {
         const {
-            // heading,
-            // content,
-            // insertImage,
-            // arrowFlag,
+            vk_staff_text_name,
+            vk_staff_text_caption,
+            vk_staff_text_position,
+            vk_staff_text_profileTitle,
+            vk_staff_text_profileText,
+            vk_staff_photo_image
         } = attributes;
 
         return (
@@ -60,9 +62,10 @@ registerBlockType('vk-blocks/staff', {
                     </PanelBody>
                 </InspectorControls>
                 <div className="vk_staff">
-                    <div>Editor</div>
                     <NewComponent
                         attributes={attributes}
+                        setAttributes={setAttributes}
+                        className={className}
                         for_={'edit'}
                     />
                 </div>
