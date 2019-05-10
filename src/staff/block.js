@@ -3,7 +3,7 @@
  *
  */
 import React from "react";
-// import NewComponent from "./component";
+import NewComponent from "./component";
 import {schema} from './schema';
 // import {deprecated} from './deprecated/block';
 
@@ -64,10 +64,10 @@ registerBlockType('vk-blocks/staff', {
                 </InspectorControls>
                 <div className="vk_staff">
                     <div>Editor</div>
-                    // <NewComponent
-                    //     attributes={attributes}
-                    //     for_={'edit'}
-                    // />
+                    <NewComponent
+                        attributes={attributes}
+                        for_={'edit'}
+                    />
                 </div>
             </Fragment>
         );

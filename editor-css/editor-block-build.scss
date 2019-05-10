@@ -36,25 +36,6 @@ h1:first-child.vk_prBlocks_item_title{
 			max-width:100%;
 		}
 }
-@media (min-width: 600px){
-.wp-block-columns {
-	margin-left:-15px;
-	margin-right:-15px;
-}
-.wp-block-column {
-	flex-basis: auto;
-	margin-left:15px;
-	margin-right:15px;
-	width: calc( 50% - 30px ) ;
-	&:not(:first-child),
-	&:not(:last-child),
-	&:nth-child(odd){
-		margin-left:15px;
-		margin-right:15px;
-	}
-}
-}
-
 .alert{
 
   padding: 1em;
@@ -93,6 +74,25 @@ h1:first-child.vk_prBlocks_item_title{
       border-color:$color-border;
     }
   }
+}
+
+@media (min-width: 600px){
+.wp-block-columns {
+	margin-left:-15px;
+	margin-right:-15px;
+}
+.wp-block-column {
+	flex-basis: auto;
+	margin-left:15px;
+	margin-right:15px;
+	width: calc( 50% - 30px ) ;
+	&:not(:first-child),
+	&:not(:last-child),
+	&:nth-child(odd){
+		margin-left:15px;
+		margin-right:15px;
+	}
+}
 }
 
 .vk_balloon {
@@ -904,4 +904,105 @@ $padding-xl:3.5em;
 /*-------------------------------------------*/
 /* CSS
 /*-------------------------------------------*/
+$font_serif:"ＭＳ Ｐ明朝", "MS PMincho","ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", "serif";
+.vk_staff {
+	display: table;
+	.vk_staff_text{
+		display: table-cell;
+		vertical-align: top;
+		width: 60%;
+		&_name {
+			text-align: left;
+			box-shadow: none;
+			font-size: 3rem;
+			font-family: $font_serif;
+			line-height: 1.0;
+			margin-bottom: 0.5rem;
+			border: none;
+			padding: 0;
+			background-color: transparent;
+			&:before,
+			&:after {
+				border: none;
+			}
+		}
+
+		&_caption {
+			font-family: $font_serif;
+			font-size: 14px;
+			display: block;
+			margin: 0 0 0.5rem 4px;
+			letter-spacing: 5px;
+			// color: #008a32;
+		}
+		&_position {
+			font-size: 14px;
+			line-height: 1.6em;
+			font-family: $font_serif;
+		}
+		&_profileTitle{
+			font-size: 18px;
+			font-family: $font_serif;
+			padding-top: 0;
+			padding-left: 0;
+			padding-bottom: 2px;
+			margin-bottom: 1.2rem;
+			border-top: none;
+			border-bottom: 1px solid #ccc;
+			&:before,
+			&:after {
+				border: none;
+			}
+		}
+		&_profileText {
+			font-size: 14px;
+		}
+	}
+	.vk_staff_photo {
+		&_image {
+			width: 80%;
+			margin: 0 0 0 auto;
+			display: block;
+			border: 4px solid #efefef;
+		}
+	}
+}
+
+// .staff-profile-table {
+// 	margin-top: 2em;
+// 	margin-bottom: 80px;
+// 	border: none;
+// }
+//
+// .staff-profile-table dl {
+// 	display: table;
+// 	width: 100%;
+// }
+//
+// .staff-profile-table dt,
+// .staff-profile-table dd {
+// 	display: table-cell;
+// 	border-bottom: 1px solid #ccc;
+// 	padding-left: 10px;
+// 	font-size: 14px;
+// 	padding-bottom: 4px;
+// }
+//
+// .staff-profile-table dl {
+// 	margin: 0 0 1rem;
+// }
+//
+// .staff-profile-table dt {
+// 	background: none;
+// 	font-weight: lighter;
+// 	border-left-width: 2px;
+// 	border-left-style: solid;
+// 	width: 30%;
+// }
+//
+// .staff-profile-table dd {
+// 	border-left: none;
+// 	width: 70%;
+// }
+
 }
