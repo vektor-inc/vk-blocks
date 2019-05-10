@@ -42,7 +42,7 @@ registerBlockType('vk-blocks/your-block-slug', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    edit({attributes, setAttributes}) {
+    edit({attributes, setAttributes,className}) {
         const {
             heading,
             content,
@@ -66,6 +66,7 @@ registerBlockType('vk-blocks/your-block-slug', {
                     <div>Editor</div>
                     <NewComponent
                         attributes={attributes}
+                        className={className}
                         for_={'edit'}
                     />
                 </div>
@@ -81,13 +82,14 @@ registerBlockType('vk-blocks/your-block-slug', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    save({attributes}) {
+    save({attributes,className}) {
 
         return (
             <div className="vk_your-block-slug">
                 <div>Front</div>
                 <NewComponent
                     attributes={attributes}
+                    className={className}
                     for_={'save'}
                 />
             </div>

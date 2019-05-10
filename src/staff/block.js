@@ -9,9 +9,9 @@ import {schema} from './schema';
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
-const {RangeControl, RadioControl, PanelBody, Button, PanelColor, BaseControl} = wp.components;
+const {TextControl, PanelBody, BaseControl} = wp.components;
 const {Fragment} = wp.element;
-const {RichText, InspectorControls, MediaUpload, ColorPalette} = wp.editor;
+const {InspectorControls} = wp.editor;
 const BlockIcon = 'arrow-down';
 
 /**
@@ -44,21 +44,19 @@ registerBlockType('vk-blocks/staff', {
      */
     edit({attributes, setAttributes, className}) {
         const {
-            vk_staff_text_name,
-            vk_staff_text_caption,
-            vk_staff_text_position,
-            vk_staff_text_profileTitle,
-            vk_staff_text_profileText,
-            vk_staff_photo_image
+            vk_staff_photo_image_alt
         } = attributes;
 
         return (
             <Fragment>
                 <InspectorControls>
-                    <PanelBody title={__('Color Setting', 'vk-blocks')}>
-                        <BaseControl label={__('Title Color', 'vk-blocks')}>
-
-                        </BaseControl>
+                    <PanelBody title={__('Staff Block Setting', 'vk-blocks')}>
+                        <TextControl
+                            label={__('Alt text', 'vk-blocks')}
+                            help={__('Set the alt text for profile image', 'vk-blocks')}
+                            value={vk_staff_photo_image_alt}
+                            onChange={(value) => setAttributes({vk_staff_photo_image_alt:value})}
+                        />
                     </PanelBody>
                 </InspectorControls>
                 <div className="vk_staff">
