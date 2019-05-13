@@ -58,7 +58,6 @@ registerBlockType('vk-blocks/latest-posts', {
         } = attributes;
 
         let parseIsChecked = JSON.parse(isChecked);
-        console.log(parseIsChecked);
 
         const addPostTypeCheckBox = (postTypes) => {
 
@@ -68,17 +67,16 @@ registerBlockType('vk-blocks/latest-posts', {
 
             for(let i in postTypes){
 
+                let postTypesSlug = postTypes[i].slug;
+
                 checkBoxes.push(
                     <CheckboxControl
-                        label={postTypes[i].slug}
-                        checked={parseIsChecked[i]}
+                        label={postTypesSlug}
+                        checked={parseIsChecked[postTypesSlug]}
                         onChange={
                             (value) => {
-                                parseIsChecked[i] = value;
+                                parseIsChecked[postTypesSlug] = value;
                                 setAttributes({isChecked: JSON.stringify(parseIsChecked)});
-                                {
-                                    // console.log(attributes)
-                                }
                             }
                         }
                     />);
@@ -124,91 +122,17 @@ registerBlockType('vk-blocks/latest-posts', {
                     </PanelBody>
                 </InspectorControls>
                 <div>
-                    Hi
-                    {/*{console.log(attributes)}*/}
+                    <ServerSideRender
+                        block="vk-blocks/latest-posts"
+                        attributes={attributes}
+                    />
                 </div>
             </Fragment>
         )
     }),
-    // edit({attributes, setAttributes}) {
-    //
-    //
-    //
-    //     // let checkBox = (array) =>{
-    //     //
-    //     //     let checkBoxElms = [];
-    //     //     array.forEach(
-    //     //
-    //     //         checkBoxElms.push(<CheckboxControl
-    //     //             heading="User"
-    //     //             label="Is author"
-    //     //             help="Is the user a author or not?"
-    //     //             checked={ isChecked }
-    //     //             onChange={ ( isChecked ) => { setState( { isChecked } ) } }
-    //     //         />)
-    //     //     );
-    //     //     return checkBoxElms;
-    //     // };
-    //
-    //     // function MyAuthorsListBase( { authors } ) {
-    //     //     return (
-    //     //         <ul>
-    //     //             { authors.map( ( author ) => (
-    //     //                 <li key={ author.id }>{ author.name }</li>
-    //     //             ) ) }
-    //     //         </ul>
-    //     //     );
-    //     // }
-    //
-    //     function PriceDisplay( { postTypes } ) {
-    //         return postTypes;
-    //     }
-    //
-    //     const HammerPriceDisplay = withSelect( ( select ) => {
-    //         const { test } = select('core').getPostTypes();
-    //
-    //         return {
-    //             posttype: test,
-    //         };
-    //     } )( PriceDisplay );
-    //
-    //     return (
-    //         <Fragment>
-    //             <InspectorControls>
-    //                 <PanelBody title={__('Latest Posts Setting', 'vk-blocks')}>
-    //                     <BaseControl>
-    //                         <SelectControl
-    //                             label={ __( 'Layout', 'vk-blocks' ) }
-    //                             value={ layout }
-    //                             onChange={ ( value ) => setAttributes( { layout: value } ) }
-    //                             options={ [
-    //                                 {
-    //                                     value: 'image_1st',
-    //                                     label: __( 'image_1st', 'vk-blocks' ),
-    //                                 },
-    //                                 {
-    //                                     value: 'image_2st',
-    //                                     label: __( 'image_2st', 'vk-blocks' ),
-    //                                 },
-    //                             ] }
-    //                         />
-    //                         <RangeControl
-    //                             label={ __( 'Number of Posts', 'vk-blocks' ) }
-    //                             value={ numberPosts }
-    //                             onChange={ ( value ) => setAttributes( { numberPosts: value } ) }
-    //                             min="1"
-    //                             max="10"
-    //                         />
-    //                     </BaseControl>
-    //                 </PanelBody>
-    //             </InspectorControls>
-    //             <HammerPriceDisplay />
-    //         </Fragment>
-    //     );
-    // },
 
     /**
-     * The save function defin className }> which the different attributes should be combined
+     * The save function define className }> which the different attributes should be combined
      * into the final markup, which is then serialized by Gutenberg into post_content.
      *
      * The "save" property must be specified and must be a valid function.

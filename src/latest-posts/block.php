@@ -3,10 +3,19 @@
 
 class VkBlocksLatestPosts{
 
-	public function render_latest_posts( $attributes ) {
 
-		$layout      = $attributes['layout'];
-		$numberPosts = $attributes['numberPosts'];
+	/**
+	 * Return html to display latest post list.
+	 *
+	 * @param $layout
+	 * @param $numberPosts
+	 * @param $isChecked | array(string postType => boolean true | false);
+	 *
+	 * @return string
+	 */
+	public function render_latest_posts( $layout, $numberPosts, $isChecked ) {
+
+		return "<div>これはエラーを回避するために仮で入れています。削除してください。</div>";
 
 		$layoutClass = '';
 
@@ -138,4 +147,23 @@ class VkBlocksLatestPosts{
 		$elm .= '</div>';
 		return $elm;
 	}
+}
+
+
+/**
+ * Gutenberg Callback function.
+ *
+ * @param $attributes
+ *
+ * @return string
+ */
+function vk_blocks_render_latest_posts( $attributes ) {
+
+	$layout      = $attributes['layout'];
+	$numberPosts = $attributes['numberPosts'];
+	$isChecked   = json_decode( $attributes['isChecked'], true );
+
+	$LatestPosts = new VkBlocksLatestPosts();
+	return $LatestPosts->render_latest_posts( $layout, $numberPosts, $isChecked );
+
 }

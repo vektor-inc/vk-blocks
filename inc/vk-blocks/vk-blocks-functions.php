@@ -54,12 +54,16 @@ function vkblocks_blocks_assets() {
 								'type'    => 'number',
 								'default' => 3,
 							),
+
+							'isChecked' => array(
+								'type'    => 'string',
+								'default' => '{}',
+							),
 						),
 						'style'           => 'vk-blocks-build-css',
 						'editor_style'    => 'vk-blocks-build-editor-css',
 						'editor_script'   => 'vk-blocks-build-js',
 						'render_callback' => 'vk_blocks_render_latest_posts',
-					//                      'render_callback' => 'vk-blocks-render'.$value,
 					)
 				); // register_block_type(
 			} else {
