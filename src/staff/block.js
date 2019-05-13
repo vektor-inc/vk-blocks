@@ -3,14 +3,13 @@
  *
  */
 import React from "react";
-import NewComponent from "./component";
+import {NewComponent} from "./component";
 import {schema} from './schema';
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
 const {TextControl, PanelBody} = wp.components;
 const {Fragment} = wp.element;
-const {RichText} = wp.editor;
 const {InspectorControls} = wp.editor;
 const BlockIcon = 'arrow-down';
 
@@ -79,8 +78,10 @@ registerBlockType('vk-blocks/staff', {
      */
     save({attributes}) {
         return (
-            <NewComonent
+            <NewComponent
                 attributes={attributes}
+                setAttributes={''}
+                className={''}
                 for_={'save'}
             />
         );

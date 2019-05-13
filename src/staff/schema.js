@@ -7,12 +7,12 @@ export const schema = {
     vk_staff_text_caption: {
         type: 'string',
         source: 'html',
-        selector: 'p',
+        selector: 'p.vk_staff_text_caption',
     },
     vk_staff_text_position: {
         type: 'string',
         source: 'html',
-        selector: 'p',
+        selector: 'p.vk_staff_text_position',
     },
     vk_staff_text_profileTitle: {
         type: 'string',
@@ -22,7 +22,7 @@ export const schema = {
     vk_staff_text_profileText: {
         type: 'string',
         source: 'html',
-        selector: 'p',
+        selector: 'p.vk_staff_text_profileText',
     },
     vk_staff_photo_image: {
         type: 'string',

@@ -4,9 +4,10 @@ const {__} = wp.i18n; // Import __() from wp.i18n
 const {RichText, MediaUpload} = wp.editor;
 const {Button} = wp.components;
 
-export default class NewComponent extends React.Component {
+export class NewComponent extends React.Component {
 
     render() {
+
         let {
             vk_staff_text_name,
             vk_staff_text_caption,
@@ -83,37 +84,43 @@ export default class NewComponent extends React.Component {
 
         } else if (for_ === 'save') {
 
-            returnELm = <div className={`vk_staff`}>
+            returnELm = <div className={`${className} vk_staff`}>
                 <div className={`vk_staff_text`}>
-                    <RichText.content
+                    <RichText.Content
                         tagName="h2"
                         className={'vk_staff_text_name'}
                         value={vk_staff_text_name}/>
-                    <RichText.content
+                    <RichText.Content
                         tagName="p"
                         className={'vk_staff_text_caption'}
                         value={vk_staff_text_caption}
                     />
-                    <RichText.content
+                    <RichText.Content
                         tagName="p"
                         className={'vk_staff_text_position'}
                         value={vk_staff_text_position}
                     />
-                    <RichText.content
+                    <RichText.Content
                         tagName="h3"
                         className={'vk_staff_text_profileTitle'}
                         value={vk_staff_text_profileTitle}
                     />
-                    <RichText.content
+                    <RichText.Content
                         tagName="p"
                         className={'vk_staff_text_profileText'}
                         value={vk_staff_text_profileText}
                     />
                 </div>
-                <div className={`vk_staff_photo`}>
-                    {vk_staff_photo_image & <img className={'vk_balloon_icon_image'} src={vk_staff_photo_image}
-                                                 alt={__(vk_staff_photo_image_alt, 'vk-blocks')}/>}
-                </div>
+                {vk_staff_photo_image ?
+                    <div className={`vk_staff_photo`}>
+                                <img className={'vk_balloon_icon_image'} src={vk_staff_photo_image} alt={
+                                    vk_staff_photo_image_alt ? __(vk_staff_photo_image_alt, 'vk-blocks')
+                                        :
+                                        ""
+                                }/>
+                    </div>
+                    : ''
+                }
             </div>;
         }
         return (returnELm);
