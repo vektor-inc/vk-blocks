@@ -31,7 +31,7 @@ export class NewComponent extends React.Component {
                         className={ 'vk_staff_text_name' }
                         onChange={ ( value ) => setAttributes( { vk_staff_text_name: value } ) }
                         value={ vk_staff_text_name }
-                        placeholder={__('Taro Yamada', 'vk-blocks') }
+                        placeholder={__('Your Name', 'vk-blocks') }
                     />
                     <RichText
                         tagName="p"
@@ -45,21 +45,21 @@ export class NewComponent extends React.Component {
                         className={ 'vk_staff_text_position' }
                         onChange={ ( value ) => setAttributes( { vk_staff_text_position: value } ) }
                         value={ vk_staff_text_position }
-                        placeholder={__('Vektor,Inc. CEO', 'vk-blocks') }
+                        placeholder={__('Job title', 'vk-blocks') }
                     />
                     <RichText
                         tagName="h3"
                         className={ 'vk_staff_text_profileTitle' }
                         onChange={ ( value ) => setAttributes( { vk_staff_text_profileTitle: value } ) }
                         value={ vk_staff_text_profileTitle }
-                        placeholder={__('Profile', 'vk-blocks') }
+                        placeholder={__('Profile Title', 'vk-blocks') }
                     />
                     <RichText
                         tagName="p"
                         className={ 'vk_staff_text_profileText' }
                         onChange={ ( value ) => setAttributes( { vk_staff_text_profileText: value } ) }
                         value={ vk_staff_text_profileText }
-                        placeholder={__('ProfileText', 'vk-blocks') }
+                        placeholder={__('Profile Content', 'vk-blocks') }
                     />
                 </div>
                 <div className={`vk_staff_photo`}>
