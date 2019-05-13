@@ -75,7 +75,7 @@ registerBlockType('vk-blocks/your-block-slug', {
     },
 
     /**
-     * The save function defin className }> which the different attributes should be combined
+     * The save function define className }> which the different attributes should be combined
      * into the final markup, which is then serialized by Gutenberg into post_content.
      *
      * The "save" property must be specified and must be a valid function.

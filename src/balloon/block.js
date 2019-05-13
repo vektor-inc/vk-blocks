@@ -125,7 +125,7 @@ registerBlockType('vk-blocks/balloon', {
 						/>
                         <RichText
                             tagName="figcaption"
-														className={ 'vk_balloon_icon_name' }
+							className={ 'vk_balloon_icon_name' }
                             onChange={ ( value ) => setAttributes( { balloonName: value } ) }
                             value={ balloonName }
                             placeholder={__('Icon Name', 'vk-blocks') }

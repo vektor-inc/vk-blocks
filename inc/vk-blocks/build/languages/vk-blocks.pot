@@ -13,6 +13,7 @@ msgstr ""
 #: src/pr-blocks/block.js:343
 #: src/pr-content/component.js:116
 #: src/pr-content/deprecated/component-deprecated.js:102
+#: src/staff/component.js:75
 msgid "Select image"
 msgstr ""
 
@@ -506,7 +507,6 @@ msgstr ""
 
 #: src/outer/block.js:93
 #: src/pr-content/block.js:92
-#: src/staff/block.js:56
 msgid "Color Setting"
 msgstr ""
 
@@ -623,7 +623,6 @@ msgid "PR Content"
 msgstr ""
 
 #: src/pr-content/block.js:93
-#: src/staff/block.js:57
 msgid "Title Color"
 msgstr ""
 
@@ -682,5 +681,37 @@ msgid "Tablet"
 msgstr ""
 
 #: src/staff/block.js:32
-msgid "staff"
+msgid "Staff"
+msgstr ""
+
+#: src/staff/block.js:53
+msgid "Staff Block Setting"
+msgstr ""
+
+#: src/staff/block.js:55
+msgid "Alt text"
+msgstr ""
+
+#: src/staff/block.js:56
+msgid "Set the alt text for profile image"
+msgstr ""
+
+#: src/staff/component.js:33
+msgid "Taro Yamada"
+msgstr ""
+
+#: src/staff/component.js:40
+msgid "Caption"
+msgstr ""
+
+#: src/staff/component.js:47
+msgid "Vektor,Inc. CEO"
+msgstr ""
+
+#: src/staff/component.js:54
+msgid "Profile"
+msgstr ""
+
+#: src/staff/component.js:61
+msgid "ProfileText"
 msgstr ""

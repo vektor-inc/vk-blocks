@@ -80,51 +80,39 @@ export default class NewComponent extends React.Component {
                     />
                 </div>
             </div>;
+
         } else if (for_ === 'save') {
 
-            returnELm = <div className={`${className} vk_staff`}>
+            returnELm = <div className={`vk_staff`}>
                 <div className={`vk_staff_text`}>
                     <RichText.content
                         tagName="h2"
                         className={'vk_staff_text_name'}
-                        onChange={(value) => setAttributes({vk_staff_text_name: value})}
-                        value={vk_staff_text_name}
-                        placeholder={__('Taro Yamada', 'vk-blocks')}
-                    />
+                        value={vk_staff_text_name}/>
                     <RichText.content
                         tagName="p"
                         className={'vk_staff_text_caption'}
-                        onChange={(value) => setAttributes({vk_staff_text_caption: value})}
                         value={vk_staff_text_caption}
-                        placeholder={__('Caption', 'vk-blocks')}
                     />
                     <RichText.content
                         tagName="p"
                         className={'vk_staff_text_position'}
-                        onChange={(value) => setAttributes({vk_staff_text_position: value})}
                         value={vk_staff_text_position}
-                        placeholder={__('Vektor,Inc. CEO', 'vk-blocks')}
                     />
                     <RichText.content
                         tagName="h3"
                         className={'vk_staff_text_profileTitle'}
-                        onChange={(value) => setAttributes({vk_staff_text_profileTitle: value})}
                         value={vk_staff_text_profileTitle}
-                        placeholder={__('Profile', 'vk-blocks')}
                     />
                     <RichText.content
                         tagName="p"
                         className={'vk_staff_text_profileText'}
-                        onChange={(value) => setAttributes({vk_staff_text_profileText: value})}
                         value={vk_staff_text_profileText}
-                        placeholder={__('ProfileText', 'vk-blocks')}
                     />
                 </div>
                 <div className={`vk_staff_photo`}>
-                    {!vk_staff_photo_image ? __('Select image', 'vk-blocks') :
-                        <img className={'vk_balloon_icon_image'} src={vk_staff_photo_image}
-                             alt={__(vk_staff_photo_image_alt, 'vk-blocks')}/>})}
-                    />
+                    {vk_staff_photo_image & <img className={'vk_balloon_icon_image'} src={vk_staff_photo_image}
+                                                 alt={__(vk_staff_photo_image_alt, 'vk-blocks')}/>}
                 </div>
             </div>;
         }

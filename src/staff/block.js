@@ -5,12 +5,12 @@
 import React from "react";
 import NewComponent from "./component";
 import {schema} from './schema';
-// import {deprecated} from './deprecated/block';
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
-const {TextControl, PanelBody, BaseControl} = wp.components;
+const {TextControl, PanelBody} = wp.components;
 const {Fragment} = wp.element;
+const {RichText} = wp.editor;
 const {InspectorControls} = wp.editor;
 const BlockIcon = 'arrow-down';
 
@@ -29,7 +29,7 @@ const BlockIcon = 'arrow-down';
  */
 registerBlockType('vk-blocks/staff', {
     // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-    title: __('staff', 'vk-blocks'), // Block title.
+    title: __('Staff', 'vk-blocks'), // Block title.
     icon: BlockIcon, // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
     category: 'vk-blocks-cat', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
     attributes: schema,
@@ -59,14 +59,12 @@ registerBlockType('vk-blocks/staff', {
                         />
                     </PanelBody>
                 </InspectorControls>
-                <div className="vk_staff">
                     <NewComponent
                         attributes={attributes}
                         setAttributes={setAttributes}
                         className={className}
                         for_={'edit'}
                     />
-                </div>
             </Fragment>
         );
     },
@@ -80,18 +78,11 @@ registerBlockType('vk-blocks/staff', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     save({attributes}) {
-
         return (
-            <div className="vk_staff">
-                <div>Front</div>
-                <NewComponent
-                    attributes={attributes}
-                    for_={'save'}
-                />
-            </div>
+            <NewComonent
+                attributes={attributes}
+                for_={'save'}
+            />
         );
-    },
-
-    //Please comment out, when you need to use deprecated.
-    // deprecated:deprecated
+    }
 });
