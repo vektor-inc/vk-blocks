@@ -65,7 +65,7 @@ const addCheckBox = (args) => {
                 renderPostTypes(checkBoxes, dataSlug, returnArray, setAttributes);
                 break;
 
-            case 'category':
+            case 'taxonomy':
                 renderCategory(checkBoxes, dataSlug, returnArray, setAttributes);
                 break;
 

@@ -4,6 +4,7 @@
  */
 import React from "react";
 import addCheckBox from '../_helper/checkbox';
+import {getTaxonomySlugs, setUpTaxonomyData} from './taxonomy-utils';
 import {schema} from './schema.js';
 
 const {__} = wp.i18n; // Import __() from wp.i18n
@@ -14,45 +15,6 @@ const {InspectorControls} = wp.editor;
 const BlockIcon = 'arrow-down';
 const {withSelect} = wp.data;
 const {ServerSideRender} = wp.components;
-
-const getTaxonomySlugs = (taxonomies) => {
-
-    if (!taxonomies) {
-        return false
-    }
-
-    let slugs = [];
-    for (let i = 0; i <= taxonomies.length - 1; i++) {
-        slugs.push(taxonomies[i].slug);
-    }
-    return slugs;
-};
-
-const setUpTaxonomyData = (taxonomies, slugs, select) => {
-
-    let Taxonomy = [];
-
-    for (let i = 0; i <= slugs.length - 1; i++) {
-        let tax = (select('core').getEntityRecords('taxonomy', taxonomies[i].slug));
-
-        if (tax != null) {
-
-            for (let i = 0; i <= tax.length - 1; i++) {
-
-                if (tax[i].slug != null) {
-
-                    Taxonomy[tax[i].slug] = {
-                        name: tax[i].name,
-                        slug: tax[i].slug,
-                        taxonomyType: tax[i].taxonomy,
-                    }
-                }
-            }
-        }
-    }
-
-    return Taxonomy;
-};
 
 /**
  * Register: a Gutenberg Block.
@@ -92,7 +54,7 @@ registerBlockType('vk-blocks/latest-posts', {
         return {
             coreData: {
                 postTypes: select('core').getPostTypes(),
-                category: taxonomyData,
+                taxonomy: taxonomyData,
             }
         };
 
@@ -114,8 +76,8 @@ registerBlockType('vk-blocks/latest-posts', {
         };
 
         let argsCategory = {
-            name: 'category',
-            data: coreData.category,
+            name: 'taxonomy',
+            data: coreData.taxonomy,
             returnArray: JSON.parse(isCheckedTaxonomy),
             setAttributes: setAttributes
         };
