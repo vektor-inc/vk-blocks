@@ -14,6 +14,10 @@ export const schema = {
     isCheckedTaxonomy:{
         type: 'string',
         default: '{}'
+    },
+    isCheckedTags:{
+        type: 'string',
+        default: '{}'
     }
 };
 

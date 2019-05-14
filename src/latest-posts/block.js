@@ -4,7 +4,7 @@
  */
 import React from "react";
 import addCheckBox from '../_helper/checkbox';
-import {getTaxonomySlugs, setUpTaxonomyData} from './taxonomy-utils';
+import {getTagTaxonomySlugs, getTaxonomySlugs, setUpTaxonomyData} from './taxonomy-utils';
 import {schema} from './schema.js';
 
 const {__} = wp.i18n; // Import __() from wp.i18n
@@ -48,13 +48,18 @@ registerBlockType('vk-blocks/latest-posts', {
     edit: withSelect((select) => {
 
         let taxonomies = select('core').getTaxonomies();
+
         let slugs = getTaxonomySlugs(taxonomies);
         let taxonomyData = setUpTaxonomyData(taxonomies, slugs, select);
+
+        let tagSlugs = getTagTaxonomySlugs(taxonomies);
+        let tagTaxonomyData = setUpTaxonomyData(taxonomies, tagSlugs, select);
 
         return {
             coreData: {
                 postTypes: select('core').getPostTypes(),
                 taxonomy: taxonomyData,
+                post_tag: tagTaxonomyData,
             }
         };
 
@@ -64,7 +69,8 @@ registerBlockType('vk-blocks/latest-posts', {
             numberPosts,
             layout,
             isCheckedPostType,
-            isCheckedTaxonomy
+            isCheckedTaxonomy,
+            isCheckedTags
         } = attributes;
 
 
@@ -75,10 +81,17 @@ registerBlockType('vk-blocks/latest-posts', {
             setAttributes: setAttributes
         };
 
-        let argsCategory = {
+        let argsTaxonomy = {
             name: 'taxonomy',
             data: coreData.taxonomy,
             returnArray: JSON.parse(isCheckedTaxonomy),
+            setAttributes: setAttributes
+        };
+
+        let argsTags = {
+            name: 'post_tag',
+            data: coreData.post_tag,
+            returnArray: JSON.parse(isCheckedTags),
             setAttributes: setAttributes
         };
 
@@ -125,7 +138,14 @@ registerBlockType('vk-blocks/latest-posts', {
                             label={__('Filter by Taxonomy', 'vk-blocks')}
                         >
                             {
-                                addCheckBox(argsCategory)
+                                addCheckBox(argsTaxonomy)
+                            }
+                        </BaseControl>
+                        <BaseControl
+                            label={__('Filter by Tags', 'vk-blocks')}
+                        >
+                            {
+                                addCheckBox(argsTags)
                             }
                         </BaseControl>
                     </PanelBody>

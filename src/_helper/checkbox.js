@@ -25,7 +25,7 @@ const renderPostTypes = (checkBoxes, dataSlug, returnArray, setAttributes) => {
         />));
 };
 
-const renderCategory = (checkBoxes, dataSlug, returnArray, setAttributes) => {
+const renderTaxonomy = (checkBoxes, dataSlug, returnArray, setAttributes) => {
     return (checkBoxes.push(
         <CheckboxControl
             label={dataSlug}
@@ -34,6 +34,20 @@ const renderCategory = (checkBoxes, dataSlug, returnArray, setAttributes) => {
                 (value) => {
                     returnArray[dataSlug] = value;
                     setAttributes({isCheckedTaxonomy: JSON.stringify(returnArray)});
+                }
+            }
+        />));
+};
+
+const renderTags = (checkBoxes, dataSlug, returnArray, setAttributes) => {
+    return (checkBoxes.push(
+        <CheckboxControl
+            label={dataSlug}
+            checked={returnArray[dataSlug]}
+            onChange={
+                (value) => {
+                    returnArray[dataSlug] = value;
+                    setAttributes({isCheckedTags: JSON.stringify(returnArray)});
                 }
             }
         />));
@@ -66,7 +80,11 @@ const addCheckBox = (args) => {
                 break;
 
             case 'taxonomy':
-                renderCategory(checkBoxes, dataSlug, returnArray, setAttributes);
+                renderTaxonomy(checkBoxes, dataSlug, returnArray, setAttributes);
+                break;
+
+            case 'post_tag':
+                renderTags(checkBoxes, dataSlug, returnArray, setAttributes);
                 break;
 
             default:

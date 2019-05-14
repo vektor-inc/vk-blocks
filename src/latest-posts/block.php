@@ -18,6 +18,7 @@ class VkBlocksLatestPosts{
 		$numberPosts       = $attributes['numberPosts'];
 		$isCheckedPostType = json_decode( $attributes['isCheckedPostType'], true );
 		$isCheckedTaxonomy = json_decode( $attributes['isCheckedTaxonomy'], true );
+		$isCheckedTags     = json_decode( $attributes['isCheckedTags'], true );
 
 		$layoutClass = '';
 

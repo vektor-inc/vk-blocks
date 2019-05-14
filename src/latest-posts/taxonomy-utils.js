@@ -6,7 +6,32 @@ const getTaxonomySlugs = (taxonomies) => {
 
     let slugs = [];
     for (let i = 0; i <= taxonomies.length - 1; i++) {
-        slugs.push(taxonomies[i].slug);
+
+        if (taxonomies[i].slug !== 'post_tag') {
+
+            slugs.push(taxonomies[i].slug);
+
+        }
+
+    }
+    return slugs;
+};
+
+const getTagTaxonomySlugs = (taxonomies) => {
+
+    if (!taxonomies) {
+        return false
+    }
+
+    let slugs = [];
+    for (let i = 0; i <= taxonomies.length - 1; i++) {
+
+        if (taxonomies[i].slug === 'post_tag') {
+
+            slugs.push(taxonomies[i].slug);
+
+        }
+
     }
     return slugs;
 };
@@ -16,7 +41,8 @@ const setUpTaxonomyData = (taxonomies, slugs, select) => {
     let Taxonomy = [];
 
     for (let i = 0; i <= slugs.length - 1; i++) {
-        let tax = (select('core').getEntityRecords('taxonomy', taxonomies[i].slug));
+
+        let tax = (select('core').getEntityRecords('taxonomy', slugs[i]));
 
         if (tax != null) {
 
@@ -33,8 +59,7 @@ const setUpTaxonomyData = (taxonomies, slugs, select) => {
             }
         }
     }
-
     return Taxonomy;
 };
 
-export {getTaxonomySlugs, setUpTaxonomyData};
+export {getTaxonomySlugs, getTagTaxonomySlugs, setUpTaxonomyData};

@@ -62,6 +62,10 @@ function vkblocks_blocks_assets() {
 								'type'    => 'string',
 								'default' => '{}',
 							),
+							'isCheckedTags' => array(
+								'type'    => 'string',
+								'default' => '{}',
+							)
 						),
 						'style'           => 'vk-blocks-build-css',
 						'editor_style'    => 'vk-blocks-build-editor-css',
