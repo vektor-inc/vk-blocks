@@ -61,10 +61,23 @@ registerBlockType('vk-blocks/latest-posts', {
             numberPosts,
             layout,
             isCheckedPostType,
+            isCheckedTaxonomy
         } = attributes;
 
-        let postTypes = coreData.postTypes;
-        let parseIsChecked = JSON.parse(isCheckedPostType);
+
+        let argsPostTypes = {
+            name: 'postTypes',
+            data: coreData.postTypes,
+            returnArray: JSON.parse(isCheckedPostType),
+            setAttributes: setAttributes
+        };
+
+        let argsCategory = {
+            name: 'category',
+            data: coreData.category,
+            returnArray: JSON.parse(isCheckedTaxonomy),
+            setAttributes: setAttributes
+        };
 
         return (
             <Fragment>
@@ -94,13 +107,15 @@ registerBlockType('vk-blocks/latest-posts', {
                                 max="10"
                             />
                             {
-                                addCheckBox(postTypes,parseIsChecked,setAttributes)
+                                addCheckBox(argsPostTypes)
+                            }
+                            {
+                                addCheckBox(argsCategory)
                             }
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
                 <div>
-                    {console.log(coreData)}
                     <ServerSideRender
                         block="vk-blocks/latest-posts"
                         attributes={attributes}

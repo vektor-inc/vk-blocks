@@ -11,9 +11,9 @@ export const schema = {
         type: 'string',
         default: '{}'
     },
-    // isCheckedTaxonomy:{
-    //     type: 'string',
-    //     default: '{}'
-    // }
+    isCheckedTaxonomy:{
+        type: 'string',
+        default: '{}'
+    }
 };
 

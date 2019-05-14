@@ -3,29 +3,74 @@ import React from "react";
 
 const {CheckboxControl} = wp.components;
 
-const addCheckBox = (checkBoxData, parseIsChecked,setAttributes) => {
+/**
+ *
+ * @param checkBoxes
+ * @param dataSlug
+ * @param returnArray
+ * @param setAttributes
+ * @returns {*}
+ */
+const renderPostTypes = (checkBoxes, dataSlug, returnArray, setAttributes) => {
+    return (checkBoxes.push(
+        <CheckboxControl
+            label={dataSlug}
+            checked={returnArray[dataSlug]}
+            onChange={
+                (value) => {
+                    returnArray[dataSlug] = value;
+                    setAttributes({isCheckedPostType: JSON.stringify(returnArray)});
+                }
+            }
+        />));
+};
 
-    if (!checkBoxData) {
+const renderCategory = (checkBoxes, dataSlug, returnArray, setAttributes) => {
+    return (checkBoxes.push(
+        <CheckboxControl
+            label={dataSlug}
+            checked={returnArray[dataSlug]}
+            onChange={
+                (value) => {
+                    returnArray[dataSlug] = value;
+                    setAttributes({isCheckedTaxonomy: JSON.stringify(returnArray)});
+                }
+            }
+        />));
+};
+
+/**
+ *
+ * @param args
+ * @returns {*}
+ */
+const addCheckBox = (args) => {
+
+    if (!args.data) {
         return false
     }
 
-    let checkBoxes = [];
+    const name = args.name;
+    const data = args.data;
+    const returnArray = args.returnArray;
+    const setAttributes = args.setAttributes;
+    const checkBoxes = [];
 
-    for (let i in checkBoxData) {
+    for (let i in data) {
 
-        let checkBoxDataSlug = checkBoxData[i].slug;
+        let dataSlug = data[i].slug;
 
-        checkBoxes.push(
-            <CheckboxControl
-                label={checkBoxDataSlug}
-                checked={parseIsChecked[checkBoxDataSlug]}
-                onChange={
-                    (value) => {
-                        parseIsChecked[checkBoxDataSlug] = value;
-                        setAttributes({isCheckedPostType: JSON.stringify(parseIsChecked)});
-                    }
-                }
-            />);
+        switch (name) {
+            case 'postTypes':
+                renderPostTypes(checkBoxes, dataSlug, returnArray, setAttributes);
+                break;
+
+            case 'category':
+                renderCategory(checkBoxes, dataSlug, returnArray, setAttributes);
+                break;
+
+            default:
+        }
     }
     return (
         <ul>
