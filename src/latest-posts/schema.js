@@ -7,9 +7,13 @@ export const schema = {
         type: 'number',
         default: 3,
     },
-    isChecked:{
+    isCheckedPostType:{
         type: 'string',
         default: '{}'
-    }
+    },
+    // isCheckedTaxonomy:{
+    //     type: 'string',
+    //     default: '{}'
+    // }
 };
 

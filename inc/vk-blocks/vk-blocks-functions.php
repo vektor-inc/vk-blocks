@@ -54,8 +54,7 @@ function vkblocks_blocks_assets() {
 								'type'    => 'number',
 								'default' => 3,
 							),
-
-							'isChecked' => array(
+							'isCheckedPostType' => array(
 								'type'    => 'string',
 								'default' => '{}',
 							),

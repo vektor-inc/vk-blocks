@@ -161,7 +161,7 @@ function vk_blocks_render_latest_posts( $attributes ) {
 
 	$layout      = $attributes['layout'];
 	$numberPosts = $attributes['numberPosts'];
-	$isChecked   = json_decode( $attributes['isChecked'], true );
+	$isChecked   = json_decode( $attributes['isCheckedPostType'], true );
 
 	$LatestPosts = new VkBlocksLatestPosts();
 	return $LatestPosts->render_latest_posts( $layout, $numberPosts, $isChecked );

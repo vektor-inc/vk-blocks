@@ -3,6 +3,7 @@
  *
  */
 import React from "react";
+import addCheckBox from '../_helper/checkbox';
 import {schema} from './schema.js';
 
 const {__} = wp.i18n; // Import __() from wp.i18n
@@ -46,47 +47,24 @@ registerBlockType('vk-blocks/latest-posts', {
      */
 
     edit: withSelect((select) => {
+
         return {
-            postTypes: select('core').getPostTypes()
+            coreData: {
+                postTypes: select('core').getPostTypes(),
+                category: select('core').getEntityRecords('taxonomy', 'category')
+            }
         };
-    })(({postTypes, className, attributes, setAttributes}) => {
+
+    })(({coreData, className, attributes, setAttributes}) => {
 
         const {
             numberPosts,
             layout,
-            isChecked
+            isCheckedPostType,
         } = attributes;
 
-        let parseIsChecked = JSON.parse(isChecked);
-
-        const addPostTypeCheckBox = (postTypes) => {
-
-            if (!postTypes) {return false}
-
-            let checkBoxes = [];
-
-            for(let i in postTypes){
-
-                let postTypesSlug = postTypes[i].slug;
-
-                checkBoxes.push(
-                    <CheckboxControl
-                        label={postTypesSlug}
-                        checked={parseIsChecked[postTypesSlug]}
-                        onChange={
-                            (value) => {
-                                parseIsChecked[postTypesSlug] = value;
-                                setAttributes({isChecked: JSON.stringify(parseIsChecked)});
-                            }
-                        }
-                    />);
-            }
-            return(
-                <ul>
-                    {checkBoxes}
-                </ul>
-            );
-        };
+        let postTypes = coreData.postTypes;
+        let parseIsChecked = JSON.parse(isCheckedPostType);
 
         return (
             <Fragment>
@@ -116,12 +94,13 @@ registerBlockType('vk-blocks/latest-posts', {
                                 max="10"
                             />
                             {
-                                addPostTypeCheckBox(postTypes)
+                                addCheckBox(postTypes,parseIsChecked,setAttributes)
                             }
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
                 <div>
+                    {console.log(coreData)}
                     <ServerSideRender
                         block="vk-blocks/latest-posts"
                         attributes={attributes}
