@@ -8,13 +8,51 @@ import {schema} from './schema.js';
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
-const {RangeControl, PanelBody, BaseControl, SelectControl, CheckboxControl} = wp.components;
+const {RangeControl, PanelBody, BaseControl, SelectControl} = wp.components;
 const {Fragment} = wp.element;
-const {RichText, InspectorControls, MediaUpload, ColorPalette} = wp.editor;
+const {InspectorControls} = wp.editor;
 const BlockIcon = 'arrow-down';
 const {withSelect} = wp.data;
 const {ServerSideRender} = wp.components;
 
+const getTaxonomySlugs = (taxonomies) => {
+
+    if (!taxonomies) {
+        return false
+    }
+
+    let slugs = [];
+    for (let i = 0; i <= taxonomies.length - 1; i++) {
+        slugs.push(taxonomies[i].slug);
+    }
+    return slugs;
+};
+
+const setUpTaxonomyData = (taxonomies, slugs, select) => {
+
+    let Taxonomy = [];
+
+    for (let i = 0; i <= slugs.length - 1; i++) {
+        let tax = (select('core').getEntityRecords('taxonomy', taxonomies[i].slug));
+
+        if (tax != null) {
+
+            for (let i = 0; i <= tax.length - 1; i++) {
+
+                if (tax[i].slug != null) {
+
+                    Taxonomy[tax[i].slug] = {
+                        name: tax[i].name,
+                        slug: tax[i].slug,
+                        taxonomyType: tax[i].taxonomy,
+                    }
+                }
+            }
+        }
+    }
+
+    return Taxonomy;
+};
 
 /**
  * Register: a Gutenberg Block.
@@ -29,7 +67,6 @@ const {ServerSideRender} = wp.components;
  * @return {?WPBlock}          The block, if it has been successfully
  *                             registered; otherwise `undefined`.
  */
-
 registerBlockType('vk-blocks/latest-posts', {
     // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
     title: __('Latest Posts', 'vk-blocks'), // Block title.
@@ -48,10 +85,14 @@ registerBlockType('vk-blocks/latest-posts', {
 
     edit: withSelect((select) => {
 
+        let taxonomies = select('core').getTaxonomies();
+        let slugs = getTaxonomySlugs(taxonomies);
+        let taxonomyData = setUpTaxonomyData(taxonomies, slugs, select);
+
         return {
             coreData: {
                 postTypes: select('core').getPostTypes(),
-                category: select('core').getEntityRecords('taxonomy', 'category')
+                category: taxonomyData,
             }
         };
 
@@ -83,9 +124,10 @@ registerBlockType('vk-blocks/latest-posts', {
             <Fragment>
                 <InspectorControls>
                     <PanelBody title={__('Latest Posts Setting', 'vk-blocks')}>
-                        <BaseControl>
+                        <BaseControl
+                            label={__('Layout', 'vk-blocks')}
+                        >
                             <SelectControl
-                                label={__('Layout', 'vk-blocks')}
                                 value={layout}
                                 onChange={(value) => setAttributes({layout: value})}
                                 options={[
@@ -99,16 +141,27 @@ registerBlockType('vk-blocks/latest-posts', {
                                     },
                                 ]}
                             />
+                        </BaseControl>
+                        <BaseControl
+                            label={__('Number of Posts', 'vk-blocks')}
+                        >
                             <RangeControl
-                                label={__('Number of Posts', 'vk-blocks')}
                                 value={numberPosts}
                                 onChange={(value) => setAttributes({numberPosts: value})}
                                 min="1"
                                 max="10"
                             />
+                        </BaseControl>
+                        <BaseControl
+                            label={__('Filter by PostTypes', 'vk-blocks')}
+                        >
                             {
                                 addCheckBox(argsPostTypes)
                             }
+                        </BaseControl>
+                        <BaseControl
+                            label={__('Filter by Taxonomy', 'vk-blocks')}
+                        >
                             {
                                 addCheckBox(argsCategory)
                             }

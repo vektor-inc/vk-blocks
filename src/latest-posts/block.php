@@ -3,19 +3,21 @@
 
 class VkBlocksLatestPosts{
 
-
 	/**
 	 * Return html to display latest post list.
 	 *
-	 * @param $layout
-	 * @param $numberPosts
-	 * @param $isChecked | array(string postType => boolean true | false);
+	 * @param $attributes
 	 *
 	 * @return string
 	 */
-	public function render_latest_posts( $layout, $numberPosts, $isChecked ) {
+	public function render_latest_posts( $attributes ) {
 
-		return "<div>これはエラーを回避するために仮で入れています。削除してください。</div>";
+		return "<div>このHTMLはサーバーサイドレンダリングエラーを回避するために挿入されています。開発を始める時はこれを削除して任意のHTMLに変更してください。</div>";
+
+		$layout            = $attributes['layout'];
+		$numberPosts       = $attributes['numberPosts'];
+		$isCheckedPostType = json_decode( $attributes['isCheckedPostType'], true );
+		$isCheckedTaxonomy = json_decode( $attributes['isCheckedTaxonomy'], true );
 
 		$layoutClass = '';
 
@@ -159,11 +161,8 @@ class VkBlocksLatestPosts{
  */
 function vk_blocks_render_latest_posts( $attributes ) {
 
-	$layout      = $attributes['layout'];
-	$numberPosts = $attributes['numberPosts'];
-	$isChecked   = json_decode( $attributes['isCheckedPostType'], true );
-
 	$LatestPosts = new VkBlocksLatestPosts();
-	return $LatestPosts->render_latest_posts( $layout, $numberPosts, $isChecked );
+
+	return $LatestPosts->render_latest_posts( $attributes );
 
 }
