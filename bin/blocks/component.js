@@ -1,6 +1,6 @@
 import React from 'react';
 
-export class NewComponent extends React.Component {
+export default class NewComponent extends React.Component {
 
     render() {
 

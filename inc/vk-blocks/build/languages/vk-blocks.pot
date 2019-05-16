@@ -11,6 +11,9 @@ msgstr ""
 #: src/flow/block.js:112
 #: src/outer/block.js:127
 #: src/pr-blocks/block.js:343
+
+#: src/pr-content/component.js:116
+#: src/pr-content/deprecated/component-deprecated.js:102
 msgid "Select image"
 msgstr ""
 
@@ -18,6 +21,9 @@ msgstr ""
 #: src/flow/block.js:113
 #: src/outer/block.js:129
 #: src/pr-blocks/block.js:345
+
+#: src/pr-content/component.js:120
+#: src/pr-content/deprecated/component-deprecated.js:106
 msgid "Upload image"
 msgstr ""
 
@@ -349,6 +355,18 @@ msgstr ""
 
 #: src/latest-posts/block.js:75
 msgid "Number of Posts"
+
+#: src/heading/component.js:105
+msgid "Input sub text…"
+msgstr ""
+
+#: src/heading/component.js:88
+msgid "Input title…"
+msgstr ""
+
+# %s: heading level e.g: "1", "2", "3"
+#: src/heading/heading-toolbar.js:17
+msgid "Heading %d"
 msgstr ""
 
 #: src/outer/block.js:102
@@ -582,6 +600,16 @@ msgstr ""
 msgid "PR Blocks (Beta)"
 msgstr ""
 
+#: src/pr-blocks/component-block.js:144
+#: src/pr-blocks/deprecated/component-block.js:144
+msgid "Input Title"
+msgstr ""
+
+#: src/pr-blocks/component-block.js:151
+#: src/pr-blocks/deprecated/component-block.js:151
+msgid "Input Content"
+msgstr ""
+
 #: src/pr-content/block.js:106
 msgid "Image Border Color"
 msgstr ""
@@ -624,4 +652,55 @@ msgstr ""
 
 #: src/pr-content/block.js:99
 msgid "Content Color"
+
+msgstr ""
+
+#: src/pr-content/component.js:136
+#: src/pr-content/deprecated/component-deprecated.js:122
+msgid "Input title."
+msgstr ""
+
+#: src/pr-content/component.js:144
+#: src/pr-content/deprecated/component-deprecated.js:130
+msgid "Input content."
+msgstr ""
+
+#: src/spacer/block.js:101
+msgid "Mobile"
+msgstr ""
+
+#: src/spacer/block.js:41
+msgid "Responsive Spacer"
+msgstr ""
+
+#: src/spacer/block.js:67
+msgid "Unit Type"
+msgstr ""
+
+#: src/spacer/block.js:73
+msgid "px"
+msgstr ""
+
+#: src/spacer/block.js:77
+msgid "em"
+msgstr ""
+
+#: src/spacer/block.js:81
+msgid "rem"
+msgstr ""
+
+#: src/spacer/block.js:85
+msgid "vw"
+msgstr ""
+
+#: src/spacer/block.js:89
+msgid "Height for each device."
+msgstr ""
+
+#: src/spacer/block.js:91
+msgid "PC"
+msgstr ""
+
+#: src/spacer/block.js:96
+msgid "Tablet"
 msgstr ""
