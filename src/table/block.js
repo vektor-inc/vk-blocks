@@ -42,6 +42,7 @@ registerBlockType('vk-blocks/table', {
     edit({attributes, setAttributes, className}) {
         const {
             colNum,
+            rowNum
         } = attributes;
 
         return (
@@ -56,9 +57,18 @@ registerBlockType('vk-blocks/table', {
                                 onChange={(value) => setAttributes({colNum: value})}
                             />
                         </BaseControl>
+                        <BaseControl label={__('Row Number', 'vk-blocks')}>
+                            <RangeControl
+                                value={rowNum}
+                                min={0}
+                                max={10}
+                                onChange={(value) => setAttributes({rowNum: value})}
+                            />
+                        </BaseControl>
                     </PanelBody>
                 </InspectorControls>
                 <div className={`${className} vk_table`}>
+                    <div>hello</div>
                     <Component
                         attributes={attributes}
                         for_={'edit'}
