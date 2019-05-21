@@ -1,17 +1,14 @@
 /**
- * table block type
- *
+ * Table block type
  */
-import React from "react";
-import NewComponent from "./component";
+import Component from "./component";
 import {schema} from './schema';
-// import {deprecated} from './deprecated/block';
-
+import React from "react";
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
-const {RangeControl, RadioControl, PanelBody, Button, PanelColor, BaseControl} = wp.components;
+const {RangeControl, PanelBody, BaseControl} = wp.components;
 const {Fragment} = wp.element;
-const {RichText, InspectorControls, MediaUpload, ColorPalette} = wp.editor;
+const {InspectorControls,InnerBlocks} = wp.editor;
 const BlockIcon = 'arrow-down';
 
 /**
@@ -29,7 +26,7 @@ const BlockIcon = 'arrow-down';
  */
 registerBlockType('vk-blocks/table', {
     // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-    title: __('table', 'vk-blocks'), // Block title.
+    title: __('Table', 'vk-blocks'), // Block title.
     icon: BlockIcon, // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
     category: 'vk-blocks-cat', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
     attributes: schema,
@@ -42,29 +39,27 @@ registerBlockType('vk-blocks/table', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    edit({attributes, setAttributes}) {
+    edit({attributes, setAttributes, className}) {
         const {
-            heading,
-            content,
-            insertImage,
-            arrowFlag,
+            colNum,
         } = attributes;
 
         return (
             <Fragment>
                 <InspectorControls>
-                    <PanelBody title={__('Color Setting', 'vk-blocks')}>
-                        <BaseControl label={__('Title Color', 'vk-blocks')}>
-                            <ColorPalette
-                                value={content}
-                                onChange={(value) => setAttributes({content: value})}
+                    <PanelBody title={__('Table Setting', 'vk-blocks')}>
+                        <BaseControl label={__('Column Number', 'vk-blocks')}>
+                            <RangeControl
+                                value={colNum}
+                                min={0}
+                                max={10}
+                                onChange={(value) => setAttributes({colNum: value})}
                             />
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
-                <div className="vk_spacer">
-                    <div>Editor</div>
-                    <NewComponent
+                <div className={`${className} vk_table`}>
+                    <Component
                         attributes={attributes}
                         for_={'edit'}
                     />
@@ -84,9 +79,8 @@ registerBlockType('vk-blocks/table', {
     save({attributes}) {
 
         return (
-            <div className="vk_table">
-                <div>Front</div>
-                <NewComponent
+            <div className={`vk_table`}>
+                <Component
                     attributes={attributes}
                     for_={'save'}
                 />
