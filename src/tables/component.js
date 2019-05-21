@@ -22,7 +22,7 @@ export default class Component extends React.Component {
         } = this.props.attributes;
         let for_ = this.props.for_;
         let content;
-        const ALLOWED_BLOCKS = ['core/paragraph'];
+        const ALLOWED_BLOCKS = ['vk-blocks/table'];
 
         /**
          * Get Block to repeat.
@@ -30,9 +30,7 @@ export default class Component extends React.Component {
          * @returns {Array}
          */
         const getColumn = (columns) => {
-            return times(columns, () => {
-                return <td>{["core/paragraph"]}</td>;
-            });
+            return times(columns, () => ["vk-blocks/table"]);
         };
 
         /**

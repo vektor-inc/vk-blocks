@@ -1,5 +1,5 @@
 /**
- * Table block type
+ * Tables block type
  */
 import Component from "./component";
 import {schema} from './schema';
@@ -24,17 +24,12 @@ const BlockIcon = 'arrow-down';
  * @return {?WPBlock}          The block, if it has been successfully
  *                             registered; otherwise `undefined`.
  */
-registerBlockType('vk-blocks/table', {
+registerBlockType('vk-blocks/tables', {
     // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
     title: __('Table', 'vk-blocks'), // Block title.
     icon: BlockIcon, // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
     category: 'vk-blocks-cat', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
     attributes: schema,
-    supports: {
-        inserter: false,
-        reusable: false,
-        html: false,
-    },
 
     /**
      * The edit function describes the structure of your block in the context of the editor.
@@ -52,35 +47,32 @@ registerBlockType('vk-blocks/table', {
 
         return (
             <Fragment>
-                {/*<InspectorControls>*/}
-                    {/*<PanelBody title={__('Table Setting', 'vk-blocks')}>*/}
-                        {/*<BaseControl label={__('Column Number', 'vk-blocks')}>*/}
-                            {/*<RangeControl*/}
-                                {/*value={colNum}*/}
-                                {/*min={0}*/}
-                                {/*max={10}*/}
-                                {/*onChange={(value) => setAttributes({colNum: value})}*/}
-                            {/*/>*/}
-                        {/*</BaseControl>*/}
-                        {/*<BaseControl label={__('Row Number', 'vk-blocks')}>*/}
-                            {/*<RangeControl*/}
-                                {/*value={rowNum}*/}
-                                {/*min={0}*/}
-                                {/*max={10}*/}
-                                {/*onChange={(value) => setAttributes({rowNum: value})}*/}
-                            {/*/>*/}
-                        {/*</BaseControl>*/}
-                    {/*</PanelBody>*/}
-                {/*</InspectorControls>*/}
-                {/*<div className={`${className} vk_table`}>*/}
-                    {/*<div>hello1</div>*/}
-                    {/*<Component*/}
-                        {/*attributes={attributes}*/}
-                        {/*for_={'edit'}*/}
-                    {/*/>*/}
-                {/*</div>*/}
-                <div className={`vk_table`}>
-                    render Table
+                <InspectorControls>
+                    <PanelBody title={__('Table Setting', 'vk-blocks')}>
+                        <BaseControl label={__('Column Number', 'vk-blocks')}>
+                            <RangeControl
+                                value={colNum}
+                                min={0}
+                                max={10}
+                                onChange={(value) => setAttributes({colNum: value})}
+                            />
+                        </BaseControl>
+                        <BaseControl label={__('Row Number', 'vk-blocks')}>
+                            <RangeControl
+                                value={rowNum}
+                                min={0}
+                                max={10}
+                                onChange={(value) => setAttributes({rowNum: value})}
+                            />
+                        </BaseControl>
+                    </PanelBody>
+                </InspectorControls>
+                <div className={`${className} vk_table`}>
+                    <div>hello1</div>
+                    <Component
+                        attributes={attributes}
+                        for_={'edit'}
+                    />
                 </div>
             </Fragment>
         );
