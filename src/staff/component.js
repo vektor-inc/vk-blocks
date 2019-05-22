@@ -74,7 +74,7 @@ export class NewComponent extends React.Component {
                                 className={vk_staff_photo_image ? 'image-button' : 'button button-large'}
                             >
                                 {!vk_staff_photo_image ? __('Select image', 'vk-blocks') :
-                                    <img className={'vk_balloon_icon_image'} src={vk_staff_photo_image}
+                                    <img className={'vk_staff_photo_image'} src={vk_staff_photo_image}
                                          alt={__(vk_staff_photo_image_alt, 'vk-blocks')}/>}
                             </Button>
                         )}
@@ -113,7 +113,7 @@ export class NewComponent extends React.Component {
                 </div>
                 {vk_staff_photo_image ?
                     <div className={`vk_staff_photo`}>
-                                <img className={'vk_balloon_icon_image'} src={vk_staff_photo_image} alt={
+                                <img className={'vk_staff_photo_image'} src={vk_staff_photo_image} alt={
                                     vk_staff_photo_image_alt ? __(vk_staff_photo_image_alt, 'vk-blocks')
                                         :
                                         ""

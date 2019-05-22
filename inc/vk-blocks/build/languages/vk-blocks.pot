@@ -13,7 +13,7 @@ msgstr ""
 #: src/pr-blocks/block.js:343
 #: src/pr-content/component.js:116
 #: src/pr-content/deprecated/component-deprecated.js:102
-#: src/staff/component.js:75
+#: src/staff/component.js:76
 msgid "Select image"
 msgstr ""
 
@@ -680,38 +680,38 @@ msgstr ""
 msgid "Tablet"
 msgstr ""
 
-#: src/staff/block.js:32
+#: src/staff/block.js:31
 msgid "Staff"
 msgstr ""
 
-#: src/staff/block.js:53
+#: src/staff/block.js:52
 msgid "Staff Block Setting"
 msgstr ""
 
-#: src/staff/block.js:55
+#: src/staff/block.js:54
 msgid "Alt text"
 msgstr ""
 
-#: src/staff/block.js:56
+#: src/staff/block.js:55
 msgid "Set the alt text for profile image"
 msgstr ""
 
-#: src/staff/component.js:33
-msgid "Taro Yamada"
+#: src/staff/component.js:34
+msgid "Your Name"
 msgstr ""
 
-#: src/staff/component.js:40
+#: src/staff/component.js:41
 msgid "Caption"
 msgstr ""
 
-#: src/staff/component.js:47
-msgid "Vektor,Inc. CEO"
+#: src/staff/component.js:48
+msgid "Job title"
 msgstr ""
 
-#: src/staff/component.js:54
-msgid "Profile"
+#: src/staff/component.js:55
+msgid "Profile Title"
 msgstr ""
 
-#: src/staff/component.js:61
-msgid "ProfileText"
+#: src/staff/component.js:62
+msgid "Profile Content"
 msgstr ""
