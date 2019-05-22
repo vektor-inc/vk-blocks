@@ -1,5 +1,5 @@
 //Bundle JS
-import './table/block.js';
+import './tr/block.js';
 import './tables/block.js';
 import './spacer/block.js';
 import './outer/block.js';

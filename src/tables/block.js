@@ -1,15 +1,18 @@
 /**
  * Tables block type
  */
-import Component from "./component";
+import {Component} from "./component";
 import {schema} from './schema';
 import React from "react";
+
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
 const {RangeControl, PanelBody, BaseControl} = wp.components;
 const {Fragment} = wp.element;
 const {InspectorControls,InnerBlocks} = wp.editor;
 const BlockIcon = 'arrow-down';
+const {withSelect} = wp.data;
+
 
 /**
  * Register: a Gutenberg Block.
@@ -26,7 +29,7 @@ const BlockIcon = 'arrow-down';
  */
 registerBlockType('vk-blocks/tables', {
     // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-    title: __('Table', 'vk-blocks'), // Block title.
+    title: __('Tables', 'vk-blocks'), // Block title.
     icon: BlockIcon, // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
     category: 'vk-blocks-cat', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
     attributes: schema,
@@ -39,11 +42,20 @@ registerBlockType('vk-blocks/tables', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    edit({attributes, setAttributes, className}) {
+
+
+    edit: withSelect((select) => {
+
+       return select('core/block-editor').getSelectedBlockClientId();
+
+    })(({clientId, className, attributes, setAttributes}) => {
         const {
             colNum,
             rowNum
         } = attributes;
+
+            // const parentBlock = select( 'core/editor' ).getBlocksByClientId( clientId )[ 0 ];
+            // const childBlocks = parentBlock.innerBlocks;
 
         return (
             <Fragment>
@@ -68,7 +80,10 @@ registerBlockType('vk-blocks/tables', {
                     </PanelBody>
                 </InspectorControls>
                 <div className={`${className} vk_table`}>
-                    <div>hello1</div>
+                    <div>hello</div>
+                    {
+                        console.log(clientId)
+                    }
                     <Component
                         attributes={attributes}
                         for_={'edit'}
@@ -76,7 +91,7 @@ registerBlockType('vk-blocks/tables', {
                 </div>
             </Fragment>
         );
-    },
+    }),
 
     /**
      * The save function defin className }> which the different attributes should be combined

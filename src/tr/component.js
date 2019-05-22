@@ -75,7 +75,9 @@ export default class Component extends React.Component {
 
         const addRow = (rowNum, colNum, callback = repeatElm) => {
 
-            return <tr>{callback(colNum, getColumn)}</tr>;
+            // return <tr>{callback(colNum, getColumn)}</tr>;
+
+            return <tr> THIS  IS ROW!</tr>;
 
         };
 

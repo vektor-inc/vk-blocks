@@ -1,9 +1,11 @@
 /**
  * Table block type
  */
-import Component from "./component";
-import {schema} from './schema';
-import React from "react";
+import {repeatElm} from "../tables/component";
+import {schema} from '../tables/schema';
+const { lodash } = window;
+const { times } = lodash;
+
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
 const {RangeControl, PanelBody, BaseControl} = wp.components;
@@ -24,7 +26,7 @@ const BlockIcon = 'arrow-down';
  * @return {?WPBlock}          The block, if it has been successfully
  *                             registered; otherwise `undefined`.
  */
-registerBlockType('vk-blocks/table', {
+registerBlockType('vk-blocks/td', {
     // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
     title: __('Table', 'vk-blocks'), // Block title.
     icon: BlockIcon, // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
@@ -50,40 +52,16 @@ registerBlockType('vk-blocks/table', {
             rowNum
         } = attributes;
 
-        return (
-            <Fragment>
-                {/*<InspectorControls>*/}
-                    {/*<PanelBody title={__('Table Setting', 'vk-blocks')}>*/}
-                        {/*<BaseControl label={__('Column Number', 'vk-blocks')}>*/}
-                            {/*<RangeControl*/}
-                                {/*value={colNum}*/}
-                                {/*min={0}*/}
-                                {/*max={10}*/}
-                                {/*onChange={(value) => setAttributes({colNum: value})}*/}
-                            {/*/>*/}
-                        {/*</BaseControl>*/}
-                        {/*<BaseControl label={__('Row Number', 'vk-blocks')}>*/}
-                            {/*<RangeControl*/}
-                                {/*value={rowNum}*/}
-                                {/*min={0}*/}
-                                {/*max={10}*/}
-                                {/*onChange={(value) => setAttributes({rowNum: value})}*/}
-                            {/*/>*/}
-                        {/*</BaseControl>*/}
-                    {/*</PanelBody>*/}
-                {/*</InspectorControls>*/}
-                {/*<div className={`${className} vk_table`}>*/}
-                    {/*<div>hello1</div>*/}
-                    {/*<Component*/}
-                        {/*attributes={attributes}*/}
-                        {/*for_={'edit'}*/}
-                    {/*/>*/}
-                {/*</div>*/}
-                <div className={`vk_table`}>
-                    render Table
-                </div>
-            </Fragment>
-        );
+        /**
+         * Get Paragraph to repeat.
+         * @param columns
+         * @returns {Array}
+         */
+        const getParagraph = (columns) => {
+            return times(columns, () => ['core/paragraph']);
+        };
+
+        return (<td>{repeatElm(colNum, 'edit', ['core/paragraph'], getParagraph)}</td>);
     },
 
     /**
@@ -95,15 +73,12 @@ registerBlockType('vk-blocks/table', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     save({attributes}) {
+        const {
+            colNum,
+            rowNum
+        } = attributes;
 
-        return (
-            <div className={`vk_table`}>
-                <Component
-                    attributes={attributes}
-                    for_={'save'}
-                />
-            </div>
-        );
+        return (<td>{repeatElm(colNum, 'save', ['core/paragraph'], getParagraph)}</td>);
     },
 
     //Please comment out, when you need to use deprecated.

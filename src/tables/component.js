@@ -1,18 +1,9 @@
 import React from 'react';
-
 const { lodash } = window;
 const { times } = lodash;
 const {InnerBlocks} = wp.editor;
 
-/**
- * Returns the layouts configuration for a given number of columns.
- *
- * @param {number} columns Number of columns.
- *
- * @return {Object[]} Columns layout configuration.
- */
-
-export default class Component extends React.Component {
+export class Component extends React.Component {
 
     render() {
 
@@ -21,35 +12,35 @@ export default class Component extends React.Component {
             rowNum
         } = this.props.attributes;
         let for_ = this.props.for_;
-        let content;
-        const ALLOWED_BLOCKS = ['vk-blocks/table'];
+        const ALLOWED_BLOCKS = ['vk-blocks/tr'];
 
         /**
          * Get Block to repeat.
-         * @param columns
+         * @param rowNum
          * @returns {Array}
          */
-        const getColumn = (columns) => {
-            return times(columns, () => ["vk-blocks/table"]);
+        const getRowsTemplate = (rowNum) => {
+            return times(rowNum, () => ["vk-blocks/tr"]);
         };
+
 
         /**
          * Switch Element type for Editor or View.
-         * @param colNum
-         * @param callback
+         * @param rowNum
          * @returns {*}
          */
-        const switchViewEdit = (colNum, callback) => {
+        const switchViewEdit = (rowNum) => {
+            let content = '';
             //エディタとビューの切り替え
             if (for_ === 'edit') {
                 return content = <InnerBlocks
-                    template={callback(colNum)}
+                    template={getRowsTemplate(rowNum)}
                     templateLock="all"
                     ALLOWED_BLOCKS={ALLOWED_BLOCKS}
                 />
             } else if ('save') {
                 return content = <InnerBlocks.Content
-                    template={callback(colNum)}
+                    template={getRowsTemplate(rowNum)}
                     templateLock="all"
                     ALLOWED_BLOCKS={ALLOWED_BLOCKS}
                 />
@@ -57,32 +48,19 @@ export default class Component extends React.Component {
         };
 
         /**
-         * Add Element indicated by repeatNum.
-         * @param repeatNum
-         * @param callback
+         * Add Row indicated by RangeControl Number.
+         * @param rowNum
          * @returns {string}
          */
-        const repeatElm = (repeatNum, callback) => {
+        const addRow = (rowNum) => {
 
             let returnElm = '';
-            for (let i = 0; i < repeatNum; i++) {
-                returnElm = switchViewEdit(repeatNum, callback);
+            for (let i = 0; i < rowNum; i++) {
+                returnElm = switchViewEdit(rowNum);
             }
             return returnElm;
         };
 
-        const addRow = (rowNum, colNum, callback = repeatElm) => {
-
-            return <tr>{callback(colNum, getColumn)}</tr>;
-
-        };
-
-        return (
-            <table>
-                <tbody>
-                {addRow(rowNum, colNum)}
-                </tbody>
-            </table>
-        );
+        return (addRow(rowNum));
     }
 }
