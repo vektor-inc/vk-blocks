@@ -46,16 +46,28 @@ registerBlockType('vk-blocks/tables', {
 
     edit: withSelect((select) => {
 
-       return select('core/block-editor').getSelectedBlockClientId();
+        const clientId = select('core/block-editor').getSelectedBlockClientId();
+        // var child = select('core/editor').getBlocksByClientId(clientId)[0].innerBlocks[0]
+        // const parentBlock = select('core/editor').getBlocksByClientId(clientId);
+        return {
+            coreData: {
+                editorData: select('core/editor'),
+                clientId: clientId,
+            }
+        };
 
-    })(({clientId, className, attributes, setAttributes}) => {
+    })(({coreData, className, attributes, setAttributes}) => {
         const {
             colNum,
             rowNum
         } = attributes;
 
-            // const parentBlock = select( 'core/editor' ).getBlocksByClientId( clientId )[ 0 ];
-            // const childBlocks = parentBlock.innerBlocks;
+        const clientId = coreData.clientId;
+        const editorData = coreData.editorData;
+        let child = editorData.getBlocksByClientId(clientId)[0];
+        // let child = editorData.getBlocksByClientId(clientId)[0].innerBlocks[0];
+
+        // const childBlocks = parentBlock.innerBlocks;
 
         return (
             <Fragment>
@@ -80,14 +92,24 @@ registerBlockType('vk-blocks/tables', {
                     </PanelBody>
                 </InspectorControls>
                 <div className={`${className} vk_table`}>
-                    <div>hello</div>
+                    <div>hello3</div>
+                    {
+                        console.log(editorData)
+                    }
                     {
                         console.log(clientId)
                     }
-                    <Component
-                        attributes={attributes}
-                        for_={'edit'}
+                    {
+                        console.log(child)
+                    }
+                    <InnerBlocks
+                        template={['core/paragraph']}
+                        templateLock="all"
                     />
+                    {/*<Component*/}
+                        {/*attributes={attributes}*/}
+                        {/*for_={'edit'}*/}
+                    {/*/>*/}
                 </div>
             </Fragment>
         );

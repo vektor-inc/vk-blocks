@@ -1,7 +1,7 @@
 /**
  * Table block type
  */
-import {repeatElm} from "../tables/component";
+import {repeatElm} from "./component";
 import {schema} from '../tables/schema';
 const { lodash } = window;
 const { times } = lodash;
@@ -26,17 +26,17 @@ const BlockIcon = 'arrow-down';
  * @return {?WPBlock}          The block, if it has been successfully
  *                             registered; otherwise `undefined`.
  */
-registerBlockType('vk-blocks/td', {
+registerBlockType('vk-blocks/tr', {
     // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-    title: __('Table', 'vk-blocks'), // Block title.
+    title: __('Tr', 'vk-blocks'), // Block title.
     icon: BlockIcon, // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
     category: 'vk-blocks-cat', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
     attributes: schema,
-    supports: {
-        inserter: false,
-        reusable: false,
-        html: false,
-    },
+    // supports: {
+    //     inserter: false,
+    //     reusable: false,
+    //     html: false,
+    // },
 
     /**
      * The edit function describes the structure of your block in the context of the editor.
@@ -61,7 +61,8 @@ registerBlockType('vk-blocks/td', {
             return times(columns, () => ['core/paragraph']);
         };
 
-        return (<td>{repeatElm(colNum, 'edit', ['core/paragraph'], getParagraph)}</td>);
+        return (<tr>Thisis {rowNum}</tr>);
+        // return (<tr>getParagraph(rowNum)</tr>);
     },
 
     /**
