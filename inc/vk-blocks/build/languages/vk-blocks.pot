@@ -680,19 +680,19 @@ msgstr ""
 msgid "Tablet"
 msgstr ""
 
-#: src/staff/block.js:31
+#: src/staff/block.js:54
 msgid "Staff"
 msgstr ""
 
-#: src/staff/block.js:52
+#: src/staff/block.js:75
 msgid "Staff Block Setting"
 msgstr ""
 
-#: src/staff/block.js:54
+#: src/staff/block.js:77
 msgid "Alt text"
 msgstr ""
 
-#: src/staff/block.js:55
+#: src/staff/block.js:78
 msgid "Set the alt text for profile image"
 msgstr ""
 
