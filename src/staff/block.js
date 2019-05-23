@@ -88,8 +88,8 @@ registerBlockType('vk-blocks/staff', {
                                         label: __('Default', 'vk-blocks'),
                                     },
                                     {
-                                        value: 'reverse',
-                                        label: __('Reverse', 'vk-blocks'),
+                                        value: 'image-left',
+                                        label: __('Image left', 'vk-blocks'),
                                     },
                                 ]}
                             />
