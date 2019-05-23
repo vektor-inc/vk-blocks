@@ -9,10 +9,10 @@ export const schema = {
         source: 'html',
         selector: 'p.vk_staff_text_caption',
     },
-    vk_staff_text_position: {
+    vk_staff_text_role: {
         type: 'string',
         source: 'html',
-        selector: 'p.vk_staff_text_position',
+        selector: 'p.vk_staff_text_role',
     },
     vk_staff_text_profileTitle: {
         type: 'string',

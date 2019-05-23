@@ -11,7 +11,7 @@ export class NewComponent extends React.Component {
         let {
             vk_staff_text_name,
             vk_staff_text_caption,
-            vk_staff_text_position,
+            vk_staff_text_role,
             vk_staff_text_profileTitle,
             vk_staff_text_profileText,
             vk_staff_photo_image,
@@ -50,10 +50,10 @@ export class NewComponent extends React.Component {
                     />
                     <RichText
                         tagName="p"
-                        className={'vk_staff_text_position'}
+                        className={'vk_staff_text_role'}
                         style={{color: vk_staff_positionColor}}
-                        onChange={(value) => setAttributes({vk_staff_text_position: value})}
-                        value={vk_staff_text_position}
+                        onChange={(value) => setAttributes({vk_staff_text_role: value})}
+                        value={vk_staff_text_role}
                         placeholder={__('Job title', 'vk-blocks')}
                     />
                     <RichText
@@ -110,9 +110,9 @@ export class NewComponent extends React.Component {
                     />
                     <RichText.Content
                         tagName="p"
-                        className={'vk_staff_text_position'}
+                        className={'vk_staff_text_role'}
                         style={{color: vk_staff_positionColor}}
-                        value={vk_staff_text_position}
+                        value={vk_staff_text_role}
                     />
                     <RichText.Content
                         tagName="h3"

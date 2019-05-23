@@ -96,7 +96,7 @@ registerBlockType('vk-blocks/staff', {
                     </PanelBody>
                     <PanelBody title={__('Color', 'vk-blocks')}>
                         <BaseControl
-                            label={__('Name', 'vk-blocks')}
+                            label={__('Staff name', 'vk-blocks')}
                         >
                             <ColorPalette
                                 value={vk_staff_nameColor}
@@ -104,7 +104,7 @@ registerBlockType('vk-blocks/staff', {
                             />
                         </BaseControl>
                         <BaseControl
-                            label={__('Caption', 'vk-blocks')}
+                            label={__('Name caption', 'vk-blocks')}
                         >
                             <ColorPalette
                                 value={vk_staff_captionColor}
@@ -112,7 +112,7 @@ registerBlockType('vk-blocks/staff', {
                             />
                         </BaseControl>
                         <BaseControl
-                            label={__('Position', 'vk-blocks')}
+                            label={__('Role position', 'vk-blocks')}
                         >
                             <ColorPalette
                                 value={vk_staff_positionColor}
