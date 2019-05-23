@@ -2,7 +2,8 @@
  * Table block type
  */
 import {repeatElm} from "./component";
-import {schema} from '../tables/schema';
+import {schema} from './schema';
+
 const { lodash } = window;
 const { times } = lodash;
 
@@ -32,11 +33,11 @@ registerBlockType('vk-blocks/tr', {
     icon: BlockIcon, // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
     category: 'vk-blocks-cat', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
     attributes: schema,
-    // supports: {
-    //     inserter: false,
-    //     reusable: false,
-    //     html: false,
-    // },
+    supports: {
+        inserter: false,
+        reusable: false,
+        html: false,
+    },
 
     /**
      * The edit function describes the structure of your block in the context of the editor.
@@ -61,7 +62,8 @@ registerBlockType('vk-blocks/tr', {
             return times(columns, () => ['core/paragraph']);
         };
 
-        return (<tr>Thisis {rowNum}</tr>);
+
+        return (<tr>Thisis {rowNum}{console.log(rowNum)}</tr>);
         // return (<tr>getParagraph(rowNum)</tr>);
     },
 

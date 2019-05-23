@@ -5,13 +5,16 @@ import {Component} from "./component";
 import {schema} from './schema';
 import React from "react";
 
+const {withSelect, withDispatch} = wp.data;
+const {compose} = wp.compose;
+
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
 const {RangeControl, PanelBody, BaseControl} = wp.components;
 const {Fragment} = wp.element;
 const {InspectorControls,InnerBlocks} = wp.editor;
 const BlockIcon = 'arrow-down';
-const {withSelect} = wp.data;
+
 
 
 /**
@@ -43,31 +46,41 @@ registerBlockType('vk-blocks/tables', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
 
-
     edit: withSelect((select) => {
-
         const clientId = select('core/block-editor').getSelectedBlockClientId();
-        // var child = select('core/editor').getBlocksByClientId(clientId)[0].innerBlocks[0]
+        let child = select('core/editor').getBlocksByClientId(clientId)[0].innerBlocks[0];
         // const parentBlock = select('core/editor').getBlocksByClientId(clientId);
-        return {
-            coreData: {
-                editorData: select('core/editor'),
-                clientId: clientId,
-            }
-        };
+        return {child: child};
 
-    })(({coreData, className, attributes, setAttributes}) => {
+    })
+
+    // (
+    // withDispatch((dispatch, {child}) => {
+    //     // let updateSchema = {
+    //     //     colNum: {
+    //     //         type: 'number',
+    //     //         default: 2,
+    //     //     },
+    //     //     rowNum: {
+    //     //         type: 'number',
+    //     //         default: 1,
+    //     //     }
+    //     // };
+    //     console.log(child);
+    //     console.log(dispatch);
+    //     return {child: child};
+    //
+    //     // dispatch('core/editor').updateBlockAttributes(child.clientId, updateSchema);
+    // }))
+
+    (({child, className, attributes, setAttributes}) => {
         const {
             colNum,
             rowNum
         } = attributes;
 
-        const clientId = coreData.clientId;
-        const editorData = coreData.editorData;
-        let child = editorData.getBlocksByClientId(clientId)[0];
-        // let child = editorData.getBlocksByClientId(clientId)[0].innerBlocks[0];
 
-        // const childBlocks = parentBlock.innerBlocks;
+        dispatch('core/editor');
 
         return (
             <Fragment>
@@ -92,24 +105,10 @@ registerBlockType('vk-blocks/tables', {
                     </PanelBody>
                 </InspectorControls>
                 <div className={`${className} vk_table`}>
-                    <div>hello3</div>
-                    {
-                        console.log(editorData)
-                    }
-                    {
-                        console.log(clientId)
-                    }
-                    {
-                        console.log(child)
-                    }
-                    <InnerBlocks
-                        template={['core/paragraph']}
-                        templateLock="all"
+                    <Component
+                        attributes={attributes}
+                        for_={'edit'}
                     />
-                    {/*<Component*/}
-                        {/*attributes={attributes}*/}
-                        {/*for_={'edit'}*/}
-                    {/*/>*/}
                 </div>
             </Fragment>
         );
