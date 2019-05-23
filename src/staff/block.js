@@ -72,7 +72,8 @@ registerBlockType('vk-blocks/staff', {
             vk_staff_captionColor,
             vk_staff_positionColor,
             vk_staff_profileTitleColor,
-            vk_staff_profileTextColor
+            vk_staff_profileTextColor,
+            vk_staff_imageBorder
         } = attributes;
 
         return (
@@ -135,6 +136,22 @@ registerBlockType('vk-blocks/staff', {
                                 onChange={(value) => setAttributes({vk_staff_profileTextColor: value})}
                             />
                         </BaseControl>
+                    </PanelBody>
+                    <PanelBody title={__('Image Border', 'vk-blocks')}>
+                        <SelectControl
+                            value={vk_staff_imageBorder}
+                            onChange={(value) => setAttributes({vk_staff_imageBorder: value})}
+                            options={[
+                                {
+                                    value: 'default',
+                                    label: __('Default', 'vk-blocks'),
+                                },
+                                {
+                                    value: 'none',
+                                    label: __('None', 'vk-blocks'),
+                                },
+                            ]}
+                        />
                     </PanelBody>
                     <PanelBody title={__('Alt text', 'vk-blocks')}>
                         <BaseControl

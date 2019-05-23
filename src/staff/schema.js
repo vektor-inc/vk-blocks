@@ -55,5 +55,9 @@ export const schema = {
     vk_staff_profileTextColor: {
         type: 'string',
         default: 'inherit',
+    },
+    vk_staff_imageBorder: {
+        type: 'string',
+        default: 'default',
     }
 };

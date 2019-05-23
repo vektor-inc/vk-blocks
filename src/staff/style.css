@@ -31,7 +31,7 @@
   margin: 0 0 0.5rem 4px;
   letter-spacing: 5px;
 }
-.vk_staff .vk_staff_text_position {
+.vk_staff .vk_staff_text_role {
   font-size: 14px;
   line-height: 1.6em;
   font-family: "ＭＳ Ｐ明朝", "MS PMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", "serif";
@@ -55,20 +55,26 @@
 .vk_staff .vk_staff_photo {
   display: table-cell;
   vertical-align: top;
+  text-align: center;
   width: 40%;
 }
 .vk_staff .vk_staff_photo_image {
   width: 80%;
   margin: 0 0 0 auto;
   display: block;
+}
+.vk_staff .vk_staff_photo .vk_staff_photo_image-border-default {
   border: 4px solid #efefef;
 }
+.vk_staff .vk_staff_photo .vk_staff_photo_image-border-none {
+  border: none;
+}
 
-.vk_staff_layout-reverse {
+.vk_staff_layout-image-left {
   display: flex;
   flex-direction: row-reverse;
 }
-.vk_staff_layout-reverse .vk_staff_photo_image {
+.vk_staff_layout-image-left .vk_staff_photo_image {
   margin: 0 auto 0 0;
 }
 

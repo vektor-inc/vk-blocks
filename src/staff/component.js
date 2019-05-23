@@ -21,7 +21,8 @@ export class NewComponent extends React.Component {
             vk_staff_captionColor,
             vk_staff_positionColor,
             vk_staff_profileTitleColor,
-            vk_staff_profileTextColor
+            vk_staff_profileTextColor,
+            vk_staff_imageBorder
         } = this.props.attributes;
         let setAttributes = this.props.setAttributes;
         let className = this.props.className;
@@ -85,7 +86,7 @@ export class NewComponent extends React.Component {
                                 className={vk_staff_photo_image ? 'image-button' : 'button button-large'}
                             >
                                 {!vk_staff_photo_image ? __('Select image', 'vk-blocks') :
-                                    <img className={'vk_staff_photo_image'} src={vk_staff_photo_image}
+                                    <img className={`vk_staff_photo_image vk_staff_photo_image-border-${vk_staff_imageBorder}`} src={vk_staff_photo_image}
                                          alt={__(vk_staff_photo_image_alt, 'vk-blocks')}/>}
                             </Button>
                         )}
@@ -129,7 +130,7 @@ export class NewComponent extends React.Component {
                 </div>
                 {vk_staff_photo_image ?
                     <div className={`vk_staff_photo`}>
-                                <img className={'vk_staff_photo_image'} src={vk_staff_photo_image} alt={
+                                <img className={`vk_staff_photo_image vk_staff_photo_image-border-${vk_staff_imageBorder}`} src={vk_staff_photo_image} alt={
                                     vk_staff_photo_image_alt ? __(vk_staff_photo_image_alt, 'vk-blocks')
                                         :
                                         ""

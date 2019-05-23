@@ -58,16 +58,24 @@ $font_serif:"ＭＳ Ｐ明朝", "MS PMincho","ヒラギノ明朝 Pro W3", "Hirag
 	.vk_staff_photo {
 		display: table-cell;
 		vertical-align: top;
+		text-align: center;
 		width: 40%;
 		&_image {
 			width: 80%;
 			margin: 0 0 0 auto;
 			display: block;
+		}
+
+		.vk_staff_photo_image-border-default {
 			border: 4px solid #efefef;
+		}
+
+		.vk_staff_photo_image-border-none {
+			border: none;
 		}
 	}
 }
-.vk_staff_layout-reverse {
+.vk_staff_layout-image-left {
 	display: flex;
 	flex-direction: row-reverse;
 	.vk_staff_photo_image {
