@@ -31,5 +31,9 @@ export const schema = {
     vk_staff_photo_image_alt: {
         type: 'string',
         default: 'Profile Picture',
+    },
+    vk_staff_layout: {
+        type: 'string',
+        default: 'default',
     }
 };

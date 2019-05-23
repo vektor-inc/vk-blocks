@@ -8,7 +8,7 @@ import {schema} from './schema';
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
-const {TextControl, PanelBody} = wp.components;
+const {TextControl, PanelBody, BaseControl, SelectControl} = wp.components;
 const {Fragment} = wp.element;
 const {InspectorControls} = wp.editor;
 const BlockIcon = (
@@ -66,19 +66,41 @@ registerBlockType('vk-blocks/staff', {
      */
     edit({attributes, setAttributes, className}) {
         const {
-            vk_staff_photo_image_alt
+            vk_staff_photo_image_alt,
+            vk_staff_layout
         } = attributes;
 
         return (
             <Fragment>
                 <InspectorControls>
                     <PanelBody title={__('Staff Block Setting', 'vk-blocks')}>
-                        <TextControl
+                        <BaseControl
+                            label={__('Layout', 'vk-blocks')}
+                        >
+                            <SelectControl
+                                value={vk_staff_layout}
+                                onChange={(value) => setAttributes({vk_staff_layout: value})}
+                                options={[
+                                    {
+                                        value: 'default',
+                                        label: __('Default', 'vk-blocks'),
+                                    },
+                                    {
+                                        value: 'reverse',
+                                        label: __('Reverse', 'vk-blocks'),
+                                    },
+                                ]}
+                            />
+                        </BaseControl>
+                        <BaseControl
                             label={__('Alt text', 'vk-blocks')}
                             help={__('Set the alt text for profile image', 'vk-blocks')}
-                            value={vk_staff_photo_image_alt}
-                            onChange={(value) => setAttributes({vk_staff_photo_image_alt:value})}
-                        />
+                        >
+                            <TextControl
+                                value={vk_staff_photo_image_alt}
+                                onChange={(value) => setAttributes({vk_staff_photo_image_alt: value})}
+                            />
+                        </BaseControl>
                     </PanelBody>
                 </InspectorControls>
                     <NewComponent
