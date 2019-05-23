@@ -56,6 +56,9 @@ $font_serif:"ＭＳ Ｐ明朝", "MS PMincho","ヒラギノ明朝 Pro W3", "Hirag
 		}
 	}
 	.vk_staff_photo {
+		display: table-cell;
+		vertical-align: top;
+		width: 40%;
 		&_image {
 			width: 80%;
 			margin: 0 0 0 auto;

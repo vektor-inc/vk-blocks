@@ -52,6 +52,11 @@
 .vk_staff .vk_staff_text_profileText {
   font-size: 14px;
 }
+.vk_staff .vk_staff_photo {
+  display: table-cell;
+  vertical-align: top;
+  width: 40%;
+}
 .vk_staff .vk_staff_photo_image {
   width: 80%;
   margin: 0 0 0 auto;

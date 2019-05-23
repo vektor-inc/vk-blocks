@@ -38,22 +38,22 @@ export const schema = {
     },
     vk_staff_nameColor: {
         type: 'string',
-        default: 'default',
+        default: 'inherit',
     },
     vk_staff_captionColor: {
         type: 'string',
-        default: 'default',
+        default: 'inherit',
     },
     vk_staff_positionColor: {
         type: 'string',
-        default: 'default',
+        default: 'inherit',
     },
     vk_staff_profileTitleColor: {
         type: 'string',
-        default: 'default',
+        default: 'inherit',
     },
     vk_staff_profileTextColor: {
         type: 'string',
-        default: 'default',
+        default: 'inherit',
     }
 };
