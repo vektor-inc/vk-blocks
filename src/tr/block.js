@@ -2,7 +2,7 @@
  * Table block type
  */
 import {repeatElm} from "./component";
-import {schema} from './schema';
+import {schema} from '../tables/schema';
 
 const { lodash } = window;
 const { times } = lodash;
@@ -63,7 +63,7 @@ registerBlockType('vk-blocks/tr', {
         };
 
 
-        return (<tr>Thisis {rowNum}{console.log(rowNum)}</tr>);
+        return (<tr>Thisis {rowNum}</tr>);
         // return (<tr>getParagraph(rowNum)</tr>);
     },
 

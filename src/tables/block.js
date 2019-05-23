@@ -5,7 +5,7 @@ import {Component} from "./component";
 import {schema} from './schema';
 import React from "react";
 
-const {withSelect, withDispatch} = wp.data;
+const {withSelect, withDispatch, select, dispatch, subscribe} = wp.data;
 const {compose} = wp.compose;
 
 const {__} = wp.i18n; // Import __() from wp.i18n
@@ -46,41 +46,33 @@ registerBlockType('vk-blocks/tables', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
 
-    edit: withSelect((select) => {
-        const clientId = select('core/block-editor').getSelectedBlockClientId();
-        let child = select('core/editor').getBlocksByClientId(clientId)[0].innerBlocks[0];
-        // const parentBlock = select('core/editor').getBlocksByClientId(clientId);
-        return {child: child};
-
-    })
-
-    // (
-    // withDispatch((dispatch, {child}) => {
-    //     // let updateSchema = {
-    //     //     colNum: {
-    //     //         type: 'number',
-    //     //         default: 2,
-    //     //     },
-    //     //     rowNum: {
-    //     //         type: 'number',
-    //     //         default: 1,
-    //     //     }
-    //     // };
-    //     console.log(child);
-    //     console.log(dispatch);
-    //     return {child: child};
-    //
-    //     // dispatch('core/editor').updateBlockAttributes(child.clientId, updateSchema);
-    // }))
-
-    (({child, className, attributes, setAttributes}) => {
+    edit({child, className, attributes, setAttributes}) {
         const {
             colNum,
             rowNum
         } = attributes;
 
+        const clientId = select('core/block-editor').getSelectedBlockClientId();
 
-        dispatch('core/editor');
+
+        subscribe(() =>{
+
+            let child = select('core/editor').getBlocksByClientId(clientId)[0].innerBlocks;
+            console.log(child);
+            // let child = select('core/editor').getBlocksByClientId(clientId)[0].innerBlocks[0];
+            // dispatch('core/editor').updateBlockAttributes(child.clientId, childAttributes);
+        });
+
+
+
+        const updateChildBlockAttributes = (value) => {
+
+            setAttributes({rowNum: value});
+
+            let childAttributes = {
+                rowNum: value
+            };
+        };
 
         return (
             <Fragment>
@@ -99,7 +91,7 @@ registerBlockType('vk-blocks/tables', {
                                 value={rowNum}
                                 min={0}
                                 max={10}
-                                onChange={(value) => setAttributes({rowNum: value})}
+                                onChange={updateChildBlockAttributes}
                             />
                         </BaseControl>
                     </PanelBody>
@@ -112,7 +104,7 @@ registerBlockType('vk-blocks/tables', {
                 </div>
             </Fragment>
         );
-    }),
+    },
 
     /**
      * The save function defin className }> which the different attributes should be combined
