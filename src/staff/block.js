@@ -10,7 +10,7 @@ const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
 const {TextControl, PanelBody, BaseControl, SelectControl} = wp.components;
 const {Fragment} = wp.element;
-const {InspectorControls} = wp.editor;
+const {InspectorControls, ColorPalette} = wp.editor;
 const BlockIcon = (
 	<svg xmlns="http://www.w3.org/2000/svg" width="576" height="512" viewBox="0 0 576 512">
 	<path d="M528,34H48C21.5,34,0,55.5,0,82v352c0,26.5,21.5,48,48,48h480c26.5,0,48-21.5,48-48V82C576,55.5,554.5,34,528,34z M528,434
@@ -67,16 +67,18 @@ registerBlockType('vk-blocks/staff', {
     edit({attributes, setAttributes, className}) {
         const {
             vk_staff_photo_image_alt,
-            vk_staff_layout
+            vk_staff_layout,
+            vk_staff_nameColor,
+            vk_staff_captionColor,
+            vk_staff_positionColor,
+            vk_staff_profileTitleColor,
+            vk_staff_profileTextColor
         } = attributes;
 
         return (
             <Fragment>
                 <InspectorControls>
-                    <PanelBody title={__('Staff Block Setting', 'vk-blocks')}>
-                        <BaseControl
-                            label={__('Layout', 'vk-blocks')}
-                        >
+                    <PanelBody title={__('Layout', 'vk-blocks')}>
                             <SelectControl
                                 value={vk_staff_layout}
                                 onChange={(value) => setAttributes({vk_staff_layout: value})}
@@ -91,9 +93,51 @@ registerBlockType('vk-blocks/staff', {
                                     },
                                 ]}
                             />
+                    </PanelBody>
+                    <PanelBody title={__('Color', 'vk-blocks')}>
+                        <BaseControl
+                            label={__('Name', 'vk-blocks')}
+                        >
+                            <ColorPalette
+                                value={vk_staff_nameColor}
+                                onChange={(value) => setAttributes({vk_staff_nameColor: value})}
+                            />
                         </BaseControl>
                         <BaseControl
-                            label={__('Alt text', 'vk-blocks')}
+                            label={__('Caption', 'vk-blocks')}
+                        >
+                            <ColorPalette
+                                value={vk_staff_captionColor}
+                                onChange={(value) => setAttributes({vk_staff_captionColor: value})}
+                            />
+                        </BaseControl>
+                        <BaseControl
+                            label={__('Position', 'vk-blocks')}
+                        >
+                            <ColorPalette
+                                value={vk_staff_positionColor}
+                                onChange={(value) => setAttributes({vk_staff_positionColor: value})}
+                            />
+                        </BaseControl>
+                        <BaseControl
+                            label={__('Profile Title', 'vk-blocks')}
+                        >
+                            <ColorPalette
+                                value={vk_staff_profileTitleColor}
+                                onChange={(value) => setAttributes({vk_staff_profileTitleColor: value})}
+                            />
+                        </BaseControl>
+                        <BaseControl
+                            label={__('Profile Text', 'vk-blocks')}
+                        >
+                            <ColorPalette
+                                value={vk_staff_profileTextColor}
+                                onChange={(value) => setAttributes({vk_staff_profileTextColor: value})}
+                            />
+                        </BaseControl>
+                    </PanelBody>
+                    <PanelBody title={__('Alt text', 'vk-blocks')}>
+                        <BaseControl
                             help={__('Set the alt text for profile image', 'vk-blocks')}
                         >
                             <TextControl

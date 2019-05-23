@@ -16,7 +16,12 @@ export class NewComponent extends React.Component {
             vk_staff_text_profileText,
             vk_staff_photo_image,
             vk_staff_photo_image_alt,
-            vk_staff_layout
+            vk_staff_layout,
+            vk_staff_nameColor,
+            vk_staff_captionColor,
+            vk_staff_positionColor,
+            vk_staff_profileTitleColor,
+            vk_staff_profileTextColor
         } = this.props.attributes;
         let setAttributes = this.props.setAttributes;
         let className = this.props.className;
@@ -30,6 +35,7 @@ export class NewComponent extends React.Component {
                     <RichText
                         tagName="h2"
                         className={'vk_staff_text_name'}
+                        style={{color: vk_staff_nameColor}}
                         onChange={(value) => setAttributes({vk_staff_text_name: value})}
                         value={vk_staff_text_name}
                         placeholder={__('Your Name', 'vk-blocks')}
@@ -37,6 +43,7 @@ export class NewComponent extends React.Component {
                     <RichText
                         tagName="p"
                         className={'vk_staff_text_caption'}
+                        style={{color: vk_staff_captionColor}}
                         onChange={(value) => setAttributes({vk_staff_text_caption: value})}
                         value={vk_staff_text_caption}
                         placeholder={__('Caption', 'vk-blocks')}
@@ -44,6 +51,7 @@ export class NewComponent extends React.Component {
                     <RichText
                         tagName="p"
                         className={'vk_staff_text_position'}
+                        style={{color: vk_staff_positionColor}}
                         onChange={(value) => setAttributes({vk_staff_text_position: value})}
                         value={vk_staff_text_position}
                         placeholder={__('Job title', 'vk-blocks')}
@@ -51,6 +59,7 @@ export class NewComponent extends React.Component {
                     <RichText
                         tagName="h3"
                         className={'vk_staff_text_profileTitle'}
+                        style={{color: vk_staff_profileTitleColor}}
                         onChange={(value) => setAttributes({vk_staff_text_profileTitle: value})}
                         value={vk_staff_text_profileTitle}
                         placeholder={__('Profile Title', 'vk-blocks')}
@@ -58,6 +67,7 @@ export class NewComponent extends React.Component {
                     <RichText
                         tagName="p"
                         className={'vk_staff_text_profileText'}
+                        style={{color: vk_staff_profileTextColor}}
                         onChange={(value) => setAttributes({vk_staff_text_profileText: value})}
                         value={vk_staff_text_profileText}
                         placeholder={__('Profile Content', 'vk-blocks')}
@@ -90,25 +100,30 @@ export class NewComponent extends React.Component {
                     <RichText.Content
                         tagName="h2"
                         className={'vk_staff_text_name'}
+                        style={{color: vk_staff_nameColor}}
                         value={vk_staff_text_name}/>
                     <RichText.Content
                         tagName="p"
                         className={'vk_staff_text_caption'}
+                        style={{color: vk_staff_captionColor}}
                         value={vk_staff_text_caption}
                     />
                     <RichText.Content
                         tagName="p"
                         className={'vk_staff_text_position'}
+                        style={{color: vk_staff_positionColor}}
                         value={vk_staff_text_position}
                     />
                     <RichText.Content
                         tagName="h3"
                         className={'vk_staff_text_profileTitle'}
+                        style={{color: vk_staff_profileTitleColor}}
                         value={vk_staff_text_profileTitle}
                     />
                     <RichText.Content
                         tagName="p"
                         className={'vk_staff_text_profileText'}
+                        style={{color: vk_staff_profileTextColor}}
                         value={vk_staff_text_profileText}
                     />
                 </div>
