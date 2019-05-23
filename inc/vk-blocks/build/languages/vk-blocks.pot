@@ -13,6 +13,7 @@ msgstr ""
 #: src/pr-blocks/block.js:343
 #: src/pr-content/component.js:116
 #: src/pr-content/deprecated/component-deprecated.js:102
+#: src/staff/component.js:88
 msgid "Select image"
 msgstr ""
 
@@ -284,6 +285,7 @@ msgid "Heading style"
 msgstr ""
 
 #: src/heading/block.js:125
+#: src/staff/block.js:147
 msgid "Default"
 msgstr ""
 
@@ -448,6 +450,7 @@ msgid "Border type"
 msgstr ""
 
 #: src/outer/block.js:262
+#: src/staff/block.js:151
 msgid "None"
 msgstr ""
 
@@ -677,4 +680,69 @@ msgstr ""
 
 #: src/spacer/block.js:96
 msgid "Tablet"
+msgstr ""
+
+#: src/staff/block.js:100
+msgid "Staff name"
+msgstr ""
+
+#: src/staff/block.js:108
+msgid "Name caption"
+msgstr ""
+
+#: src/staff/block.js:116
+#: src/staff/component.js:58
+msgid "Role position"
+msgstr ""
+
+#: src/staff/block.js:124
+msgid "Profile Title"
+msgstr ""
+
+#: src/staff/block.js:132
+msgid "Profile Text"
+msgstr ""
+
+#: src/staff/block.js:140
+msgid "Image Border"
+msgstr ""
+
+#: src/staff/block.js:156
+msgid "Alt text"
+msgstr ""
+
+#: src/staff/block.js:158
+msgid "Set the alt text for profile image"
+msgstr ""
+
+#: src/staff/block.js:54
+msgid "Staff"
+msgstr ""
+
+#: src/staff/block.js:82
+msgid "Layout"
+msgstr ""
+
+#: src/staff/block.js:93
+msgid "Image left"
+msgstr ""
+
+#: src/staff/block.js:98
+msgid "Color"
+msgstr ""
+
+#: src/staff/component.js:42
+msgid "Your Name"
+msgstr ""
+
+#: src/staff/component.js:50
+msgid "Caption"
+msgstr ""
+
+#: src/staff/component.js:66
+msgid "Profile title"
+msgstr ""
+
+#: src/staff/component.js:74
+msgid "Profile text"
 msgstr ""

@@ -106,5 +106,5 @@ gulp.task('dist_ex', function() {
             ],
             { base: './inc/vk-blocks/' }
         )
-        .pipe( gulp.dest( '../vk-all-in-one-expansion-unit/plugins/vk-blocks' ) ); // distディレクトリに出力
+        .pipe( gulp.dest( '../vk-all-in-one-expansion-unit/inc/vk-blocks' ) ); // distディレクトリに出力
 } );
