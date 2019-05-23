@@ -2,7 +2,7 @@
  * Table block type
  */
 import {repeatElm} from "./component";
-import {schema} from '../tables/schema';
+import {schema} from './schema';
 
 const { lodash } = window;
 const { times } = lodash;

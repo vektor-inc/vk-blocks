@@ -51,27 +51,25 @@ registerBlockType('vk-blocks/tables', {
             colNum,
             rowNum
         } = attributes;
-
         const clientId = select('core/block-editor').getSelectedBlockClientId();
 
 
-        subscribe(() =>{
+        // subscribe(() =>{
 
-            let child = select('core/editor').getBlocksByClientId(clientId)[0].innerBlocks;
-            console.log(child);
+            // let child = select('core/editor').getBlocksByClientId(clientId)[0].innerBlocks;
+            // console.log(child);
             // let child = select('core/editor').getBlocksByClientId(clientId)[0].innerBlocks[0];
             // dispatch('core/editor').updateBlockAttributes(child.clientId, childAttributes);
-        });
-
-
+        // });
 
         const updateChildBlockAttributes = (value) => {
 
             setAttributes({rowNum: value});
-
             let childAttributes = {
                 rowNum: value
             };
+            let child = select('core/editor').getBlocksByClientId(clientId)[0].innerBlocks[0];
+            dispatch('core/editor').updateBlockAttributes(child.clientId, childAttributes);
         };
 
         return (
