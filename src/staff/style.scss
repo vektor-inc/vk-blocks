@@ -2,11 +2,13 @@
 /* CSS
 /*-------------------------------------------*/
 $font_serif:"ＭＳ Ｐ明朝", "MS PMincho","ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", "serif";
+
 .vk_staff {
-	display: flex;
-	.vk_staff_text{
-		display: table-cell;
+	display:block;
+	overflow:hidden;
+	&_text{
 		vertical-align: top;
+		float:left;
 		width: 60%;
 		&_name {
 			text-align: left;
@@ -25,7 +27,7 @@ $font_serif:"ＭＳ Ｐ明朝", "MS PMincho","ヒラギノ明朝 Pro W3", "Hirag
 		}
 
 		&_caption {
-			font-family: $font_serif;
+			// font-family: $font_serif;
 			font-size: 14px;
 			display: block;
 			margin: 0 0 0.5rem 4px;
@@ -35,11 +37,11 @@ $font_serif:"ＭＳ Ｐ明朝", "MS PMincho","ヒラギノ明朝 Pro W3", "Hirag
 		&_role {
 			font-size: 14px;
 			line-height: 1.6em;
-			font-family: $font_serif;
+			// font-family: $font_serif;
 		}
 		&_profileTitle{
 			font-size: 18px;
-			font-family: $font_serif;
+			// font-family: $font_serif;
 			padding-top: 0;
 			padding-left: 0;
 			padding-bottom: 2px;
@@ -55,31 +57,43 @@ $font_serif:"ＭＳ Ｐ明朝", "MS PMincho","ヒラギノ明朝 Pro W3", "Hirag
 			font-size: 14px;
 		}
 	}
-	.vk_staff_photo {
-		display: table-cell;
+	&_photo {
+		float:right;
+		display: block;
 		vertical-align: top;
 		text-align: center;
-		width: 40%;
-		&_image {
-			width: 80%;
-			margin: 0 0 0 auto;
+		width: 30%;
+		button {
+			width:100%;
+		}
+		.image-button{
+			padding: 0;
+			margin:0;
 			display: block;
 		}
-
-		.vk_staff_photo_image-border-default {
+		&-border-default {
 			border: 4px solid #efefef;
+			padding: 1px;
 		}
-
-		.vk_staff_photo_image-border-none {
+		&-border-none {
 			border: none;
+		}
+		&_image {
+			width: 100%;
+			margin: 0;
+			display: block;
 		}
 	}
 }
-.vk_staff_layout-image-left {
-	display: flex;
-	flex-direction: row-reverse;
-	.vk_staff_photo_image {
-		margin: 0 auto 0 0;
+
+.vk_staff-layout{
+	&-imageLeft {
+		.vk_staff_text{
+			float:right;
+		}
+		.vk_staff_photo{
+			float:left;
+		}
 	}
 }
 

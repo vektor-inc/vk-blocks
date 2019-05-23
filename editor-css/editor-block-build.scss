@@ -587,29 +587,64 @@ $color_dark:#343a40;
 }
 
 /*-------------------------------------------*/
-/* CSS
+/* .vk_prBlocks
 /*-------------------------------------------*/
-@mixin reset() {
-	background: none;
-	border:none;
-	border-radius: 0;
-	padding:0;
-	font-weight: normal;
-	box-shadow:none;
-	&:after {
-		border:none;
+.vk_prBlocks_item {
+	@media screen and (max-width:992px){
+		margin-bottom: 1.5em;
 	}
 }
-
-.vk_heading_title {
-	&-style {
-		&-plain {
-			@include reset;
+.vk_prBlocks_item {
+	&_link {
+		color: #333;
+		&:hover{
+			color: #333;
+			text-decoration: none;
 		}
 	}
-}
-.vk_heading_subtext {
-	margin-bottom:0;
+	&_icon_outer {
+		display: block;
+		position:relative;
+		margin: 0 auto ;
+		width: 80px;
+		height: 80px;
+		border-radius: 50%;
+	}
+	&_icon {
+		position:absolute;
+		top:50%;
+		left:50%;
+		transform: translateY(-50%) translateX(-50%);
+		font-size: 36px;
+		color: #fff;
+	}
+	&_title{
+		margin-top:0.9em;
+		margin-bottom: 0.6em;
+		text-align: center;
+		font-size: 21px;
+		line-height: 1.4em;
+		border:none;
+		padding:0;
+		&::after{
+			border: none;
+		}
+	}
+	&_image{
+		position: relative;
+		display: block;
+		width: 120px;
+		height:120px;
+		margin: 0 auto;
+		overflow: hidden;
+		border-radius: 50%;
+		text-indent:-9999px;
+	}
+	&_summary{
+		margin-bottom: 0.5em;
+		text-align: center;
+		line-height: 1.8em;
+	}
 }
 
 /*-------------------------------------------*/
@@ -722,65 +757,200 @@ $padding-xl:3.5em;
 // }
 
 /*-------------------------------------------*/
-/* .vk_prBlocks
+/* CSS
 /*-------------------------------------------*/
-.vk_prBlocks_item {
-	@media screen and (max-width:992px){
-		margin-bottom: 1.5em;
+@mixin reset() {
+	background: none;
+	border:none;
+	border-radius: 0;
+	padding:0;
+	font-weight: normal;
+	box-shadow:none;
+	&:after {
+		border:none;
 	}
 }
-.vk_prBlocks_item {
-	&_link {
-		color: #333;
-		&:hover{
-			color: #333;
-			text-decoration: none;
+
+.vk_heading_title {
+	&-style {
+		&-plain {
+			@include reset;
 		}
 	}
-	&_icon_outer {
+}
+.vk_heading_subtext {
+	margin-bottom:0;
+}
+
+/*-------------------------------------------*/
+/* CSS
+/*-------------------------------------------*/
+
+@mixin switchVisibility($pc,$tablet,$mobile) {
+  .vk_spacer {
+    .vk_spacer-display-pc {
+      display: $pc;
+    }
+
+    .vk_spacer-display-tablet {
+      display: $tablet;
+    }
+
+    .vk_spacer-display-mobile {
+      display: $mobile;
+    }
+  }
+}
+
+// Small devices (landscape phones, 576px以下)
+@media (max-width: 576px) {
+  @include switchVisibility(none, none, block);
+}
+
+// Medium devices (tablets, 577pxから768px)
+@media (min-width: 577px) and (max-width: 768px) {
+  @include switchVisibility(none, block, none);
+}
+
+// Large devices (desktops, 769px以上)
+@media (min-width: 769px) {
+  @include switchVisibility(block, none, none);
+}
+/*-------------------------------------------*/
+/* CSS
+/*-------------------------------------------*/
+$font_serif:"ＭＳ Ｐ明朝", "MS PMincho","ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", "serif";
+
+.vk_staff {
+	display:block;
+	overflow:hidden;
+	&_text{
+		vertical-align: top;
+		float:left;
+		width: 60%;
+		&_name {
+			text-align: left;
+			box-shadow: none;
+			font-size: 3rem;
+			font-family: $font_serif;
+			line-height: 1.0;
+			margin-bottom: 0.5rem;
+			border: none;
+			padding: 0;
+			background-color: transparent;
+			&:before,
+			&:after {
+				border: none;
+			}
+		}
+
+		&_caption {
+			// font-family: $font_serif;
+			font-size: 14px;
+			display: block;
+			margin: 0 0 0.5rem 4px;
+			letter-spacing: 5px;
+			// color: #008a32;
+		}
+		&_role {
+			font-size: 14px;
+			line-height: 1.6em;
+			// font-family: $font_serif;
+		}
+		&_profileTitle{
+			font-size: 18px;
+			// font-family: $font_serif;
+			padding-top: 0;
+			padding-left: 0;
+			padding-bottom: 2px;
+			margin-bottom: 1.2rem;
+			border-top: none;
+			border-bottom: 1px solid #ccc;
+			&:before,
+			&:after {
+				border: none;
+			}
+		}
+		&_profileText {
+			font-size: 14px;
+		}
+	}
+	&_photo {
+		float:right;
 		display: block;
-		position:relative;
-		margin: 0 auto ;
-		width: 80px;
-		height: 80px;
-		border-radius: 50%;
-	}
-	&_icon {
-		position:absolute;
-		top:50%;
-		left:50%;
-		transform: translateY(-50%) translateX(-50%);
-		font-size: 36px;
-		color: #fff;
-	}
-	&_title{
-		margin-top:0.9em;
-		margin-bottom: 0.6em;
+		vertical-align: top;
 		text-align: center;
-		font-size: 21px;
-		line-height: 1.4em;
-		border:none;
-		padding:0;
-		&::after{
+		width: 30%;
+		button {
+			width:100%;
+		}
+		.image-button{
+			padding: 0;
+			margin:0;
+			display: block;
+		}
+		&-border-default {
+			border: 4px solid #efefef;
+			padding: 1px;
+		}
+		&-border-none {
 			border: none;
 		}
-	}
-	&_image{
-		position: relative;
-		display: block;
-		width: 120px;
-		height:120px;
-		margin: 0 auto;
-		overflow: hidden;
-		border-radius: 50%;
-		text-indent:-9999px;
-	}
-	&_summary{
-		margin-bottom: 0.5em;
-		text-align: center;
-		line-height: 1.8em;
+		&_image {
+			width: 100%;
+			margin: 0;
+			display: block;
+		}
 	}
 }
+
+.vk_staff-layout{
+	&-imageLeft {
+		.vk_staff_text{
+			float:right;
+		}
+		.vk_staff_photo{
+			float:left;
+		}
+	}
+}
+
+// .staff-profile-table {
+// 	margin-top: 2em;
+// 	margin-bottom: 80px;
+// 	border: none;
+// }
+//
+// .staff-profile-table dl {
+// 	display: table;
+// 	width: 100%;
+// }
+//
+// .staff-profile-table dt,
+// .staff-profile-table dd {
+// 	display: table-cell;
+// 	border-bottom: 1px solid #ccc;
+// 	padding-left: 10px;
+// 	font-size: 14px;
+// 	padding-bottom: 4px;
+// }
+//
+// .staff-profile-table dl {
+// 	margin: 0 0 1rem;
+// }
+//
+// .staff-profile-table dt {
+// 	background: none;
+// 	font-weight: lighter;
+// 	border-left-width: 2px;
+// 	border-left-style: solid;
+// 	width: 30%;
+// }
+//
+// .staff-profile-table dd {
+// 	border-left: none;
+// 	width: 70%;
+// }
 
 /*-------------------------------------------*/
 /* Layout
@@ -866,153 +1036,5 @@ $padding-xl:3.5em;
 		}
 	}
 } // .vk_prContent {
-
-/*-------------------------------------------*/
-/* CSS
-/*-------------------------------------------*/
-
-@mixin switchVisibility($pc,$tablet,$mobile) {
-  .vk_spacer {
-    .vk_spacer-display-pc {
-      display: $pc;
-    }
-
-    .vk_spacer-display-tablet {
-      display: $tablet;
-    }
-
-    .vk_spacer-display-mobile {
-      display: $mobile;
-    }
-  }
-}
-
-// Small devices (landscape phones, 576px以下)
-@media (max-width: 576px) {
-  @include switchVisibility(none, none, block);
-}
-
-// Medium devices (tablets, 577pxから768px)
-@media (min-width: 577px) and (max-width: 768px) {
-  @include switchVisibility(none, block, none);
-}
-
-// Large devices (desktops, 769px以上)
-@media (min-width: 769px) {
-  @include switchVisibility(block, none, none);
-}
-/*-------------------------------------------*/
-/* CSS
-/*-------------------------------------------*/
-$font_serif:"ＭＳ Ｐ明朝", "MS PMincho","ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", "serif";
-.vk_staff {
-	display: flex;
-	.vk_staff_text{
-		display: table-cell;
-		vertical-align: top;
-		width: 60%;
-		&_name {
-			text-align: left;
-			box-shadow: none;
-			font-size: 3rem;
-			font-family: $font_serif;
-			line-height: 1.0;
-			margin-bottom: 0.5rem;
-			border: none;
-			padding: 0;
-			background-color: transparent;
-			&:before,
-			&:after {
-				border: none;
-			}
-		}
-
-		&_caption {
-			font-family: $font_serif;
-			font-size: 14px;
-			display: block;
-			margin: 0 0 0.5rem 4px;
-			letter-spacing: 5px;
-			// color: #008a32;
-		}
-		&_role {
-			font-size: 14px;
-			line-height: 1.6em;
-			font-family: $font_serif;
-		}
-		&_profileTitle{
-			font-size: 18px;
-			font-family: $font_serif;
-			padding-top: 0;
-			padding-left: 0;
-			padding-bottom: 2px;
-			margin-bottom: 1.2rem;
-			border-top: none;
-			border-bottom: 1px solid #ccc;
-			&:before,
-			&:after {
-				border: none;
-			}
-		}
-		&_profileText {
-			font-size: 14px;
-		}
-	}
-	.vk_staff_photo {
-		display: table-cell;
-		vertical-align: top;
-		width: 40%;
-		&_image {
-			width: 80%;
-			margin: 0 0 0 auto;
-			display: block;
-			border: 4px solid #efefef;
-		}
-	}
-}
-.vk_staff_layout-reverse {
-	display: flex;
-	flex-direction: row-reverse;
-	.vk_staff_photo_image {
-		margin: 0 auto 0 0;
-	}
-}
-
-// .staff-profile-table {
-// 	margin-top: 2em;
-// 	margin-bottom: 80px;
-// 	border: none;
-// }
-//
-// .staff-profile-table dl {
-// 	display: table;
-// 	width: 100%;
-// }
-//
-// .staff-profile-table dt,
-// .staff-profile-table dd {
-// 	display: table-cell;
-// 	border-bottom: 1px solid #ccc;
-// 	padding-left: 10px;
-// 	font-size: 14px;
-// 	padding-bottom: 4px;
-// }
-//
-// .staff-profile-table dl {
-// 	margin: 0 0 1rem;
-// }
-//
-// .staff-profile-table dt {
-// 	background: none;
-// 	font-weight: lighter;
-// 	border-left-width: 2px;
-// 	border-left-style: solid;
-// 	width: 30%;
-// }
-//
-// .staff-profile-table dd {
-// 	border-left: none;
-// 	width: 70%;
-// }
 
 }

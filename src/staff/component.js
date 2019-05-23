@@ -22,7 +22,7 @@ export class NewComponent extends React.Component {
             vk_staff_positionColor,
             vk_staff_profileTitleColor,
             vk_staff_profileTextColor,
-            vk_staff_imageBorder
+            vk_staff_photoBorder
         } = this.props.attributes;
         let setAttributes = this.props.setAttributes;
         let className = this.props.className;
@@ -31,7 +31,7 @@ export class NewComponent extends React.Component {
 
         if (for_ === 'edit') {
 
-            returnELm = <div className={`${className} vk_staff vk_staff_layout-${vk_staff_layout}`}>
+            returnELm = <div className={`${className} vk_staff vk_staff-layout-${vk_staff_layout}`}>
                 <div className={`vk_staff_text`}>
                     <RichText
                         tagName="h2"
@@ -74,7 +74,7 @@ export class NewComponent extends React.Component {
                         placeholder={__('Profile text', 'vk-blocks')}
                     />
                 </div>
-                <div className={`vk_staff_photo`}>
+                <div className={`vk_staff_photo vk_staff_photo-border-${vk_staff_photoBorder}`}>
                     <MediaUpload
                         onSelect={(value) => setAttributes({vk_staff_photo_image: value.sizes.full.url})}
                         type="image"
@@ -86,7 +86,7 @@ export class NewComponent extends React.Component {
                                 className={vk_staff_photo_image ? 'image-button' : 'button button-large'}
                             >
                                 {!vk_staff_photo_image ? __('Select image', 'vk-blocks') :
-                                    <img className={`vk_staff_photo_image vk_staff_photo_image-border-${vk_staff_imageBorder}`} src={vk_staff_photo_image}
+                                    <img className={`vk_staff_photo_image`} src={vk_staff_photo_image}
                                          alt={__(vk_staff_photo_image_alt, 'vk-blocks')}/>}
                             </Button>
                         )}
@@ -96,7 +96,7 @@ export class NewComponent extends React.Component {
 
         } else if (for_ === 'save') {
 
-            returnELm = <div className={`${className} vk_staff vk_staff_layout-${vk_staff_layout}`}>
+            returnELm = <div className={`${className} vk_staff vk_staff-layout-${vk_staff_layout}`}>
                 <div className={`vk_staff_text`}>
                     <RichText.Content
                         tagName="h2"
@@ -129,8 +129,8 @@ export class NewComponent extends React.Component {
                     />
                 </div>
                 {vk_staff_photo_image ?
-                    <div className={`vk_staff_photo`}>
-                                <img className={`vk_staff_photo_image vk_staff_photo_image-border-${vk_staff_imageBorder}`} src={vk_staff_photo_image} alt={
+                    <div className={`vk_staff_photo vk_staff_photo-border-${vk_staff_photoBorder}`}>
+                                <img className={`vk_staff_photo_image`} src={vk_staff_photo_image} alt={
                                     vk_staff_photo_image_alt ? __(vk_staff_photo_image_alt, 'vk-blocks')
                                         :
                                         ""

@@ -56,7 +56,7 @@ export const schema = {
         type: 'string',
         default: 'inherit',
     },
-    vk_staff_imageBorder: {
+    vk_staff_photoBorder: {
         type: 'string',
         default: 'default',
     }
