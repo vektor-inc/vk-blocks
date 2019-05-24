@@ -5,6 +5,8 @@ import React from "react";
 import {Component} from "./component";
 import {schema} from './schema';
 
+const { lodash } = window;
+const { times } = lodash;
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
 const BlockIcon = 'arrow-down';
@@ -22,9 +24,9 @@ const BlockIcon = 'arrow-down';
  * @return {?WPBlock}          The block, if it has been successfully
  *                             registered; otherwise `undefined`.
  */
-registerBlockType('vk-blocks/tr', {
+registerBlockType('vk-blocks/td', {
     // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-    title: __('Tr', 'vk-blocks'), // Block title.
+    title: __('Td', 'vk-blocks'), // Block title.
     icon: BlockIcon, // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
     category: 'vk-blocks-cat', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
     attributes: schema,
@@ -44,14 +46,11 @@ registerBlockType('vk-blocks/tr', {
      */
     edit({attributes}) {
 
-        return (<Component
-                attributes={attributes}
-                for_={'edit'}/>
-        );
+        return (<td>Hello</td>);
     },
 
     /**
-     * The save function defin className }> which the different attributes should be combined
+     * The save function define className }> which the different attributes should be combined
      * into the final markup, which is then serialized by Gutenberg into post_content.
      *
      * The "save" property must be specified and must be a valid function.
@@ -59,9 +58,7 @@ registerBlockType('vk-blocks/tr', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     save({attributes}) {
-        return (<Component
-                attributes={attributes}
-                for_={'save'}/>);
+        return (<td>Hello</td>);
     },
 
     //Please comment out, when you need to use deprecated.

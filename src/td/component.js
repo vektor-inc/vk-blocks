@@ -29,20 +29,20 @@ export class Component extends React.Component {
          * @returns {*}
          */
         const switchViewEdit = (colNum) => {
-
+            let content = '';
             //エディタとビューの切り替え
             if (for_ === 'edit') {
-                return <tr><InnerBlocks
+                return content = <InnerBlocks
                     template={getColsTemplate(colNum)}
                     templateLock="all"
                     ALLOWED_BLOCKS={ALLOWED_BLOCKS}
-                /></tr>;
+                />
             } else if ('save') {
-                return <tr><InnerBlocks.Content
+                return content = <InnerBlocks.Content
                     template={getColsTemplate(colNum)}
                     templateLock="all"
                     ALLOWED_BLOCKS={ALLOWED_BLOCKS}
-                /></tr>;
+                />
             }
         };
 

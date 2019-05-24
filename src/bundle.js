@@ -1,4 +1,5 @@
 //Bundle JS
+import './td/block.js';
 import './tr/block.js';
 import './tables/block.js';
 import './spacer/block.js';

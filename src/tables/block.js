@@ -5,14 +5,12 @@ import {Component} from "./component";
 import {schema} from './schema';
 import React from "react";
 
-const {withSelect, withDispatch, select, dispatch, subscribe} = wp.data;
-const {compose} = wp.compose;
-
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
 const {RangeControl, PanelBody, BaseControl} = wp.components;
 const {Fragment} = wp.element;
-const {InspectorControls,InnerBlocks} = wp.editor;
+const {InspectorControls} = wp.editor;
+const {select, dispatch} = wp.data;
 const BlockIcon = 'arrow-down';
 
 /**
@@ -49,15 +47,8 @@ registerBlockType('vk-blocks/tables', {
             colNum,
             rowNum
         } = attributes;
+
         const clientId = select('core/block-editor').getSelectedBlockClientId();
-
-        // subscribe(() =>{
-
-            // let child = select('core/editor').getBlocksByClientId(clientId)[0].innerBlocks;
-            // console.log(child);
-            // let child = select('core/editor').getBlocksByClientId(clientId)[0].innerBlocks[0];
-            // dispatch('core/editor').updateBlockAttributes(child.clientId, childAttributes);
-        // });
 
         const updateChildBlockAttributes = (value) => {
 
@@ -97,10 +88,12 @@ registerBlockType('vk-blocks/tables', {
                     </PanelBody>
                 </InspectorControls>
                 <div className={`${className} vk_table`}>
-                    <Component
-                        attributes={attributes}
-                        for_={'edit'}
-                    />
+                    <table>
+                        <Component
+                            attributes={attributes}
+                            for_={'edit'}
+                        />
+                    </table>
                 </div>
             </Fragment>
         );
@@ -118,10 +111,12 @@ registerBlockType('vk-blocks/tables', {
 
         return (
             <div className={`vk_table`}>
-                <Component
-                    attributes={attributes}
-                    for_={'save'}
-                />
+                <table>
+                    <Component
+                        attributes={attributes}
+                        for_={'save'}
+                    />
+                </table>
             </div>
         );
     },

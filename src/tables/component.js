@@ -1,4 +1,5 @@
 import React from 'react';
+
 const { lodash } = window;
 const { times } = lodash;
 const {InnerBlocks} = wp.editor;
@@ -33,13 +34,13 @@ export class Component extends React.Component {
             let content = '';
             //エディタとビューの切り替え
             if (for_ === 'edit') {
-                return content = <InnerBlocks
+                return <InnerBlocks
                     template={getRowsTemplate(rowNum)}
                     templateLock="all"
                     ALLOWED_BLOCKS={ALLOWED_BLOCKS}
                 />
             } else if ('save') {
-                return content = <InnerBlocks.Content
+                return <InnerBlocks.Content
                     template={getRowsTemplate(rowNum)}
                     templateLock="all"
                     ALLOWED_BLOCKS={ALLOWED_BLOCKS}
