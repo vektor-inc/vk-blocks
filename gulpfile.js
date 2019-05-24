@@ -54,7 +54,7 @@ gulp.task('js', function () {
 gulp.task('watch', function () {
     gulp.watch('src/**/*.js', ['js']);
     gulp.watch('editor-css/editor.scss_before', ['sass_editor']);
-    gulp.watch('src/**/*.scss', ['sass','sass_editor']);
+    gulp.watch('src/**/*.scss', ['sass','sass_editor','dist_ex']);
     // gulp.watch('src/**/*.scss', ['sass']);
 });
 
@@ -106,5 +106,5 @@ gulp.task('dist_ex', function() {
             ],
             { base: './inc/vk-blocks/' }
         )
-        .pipe( gulp.dest( '../vk-all-in-one-expansion-unit/inc/vk-blocks' ) ); // distディレクトリに出力
+        .pipe( gulp.dest( '../vk-all-in-one-expansion-unit/inc/vk-blocks/package' ) ); // distディレクトリに出力
 } );
