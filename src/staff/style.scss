@@ -22,43 +22,6 @@ $font_serif:"ＭＳ Ｐ明朝", "MS PMincho","ヒラギノ明朝 Pro W3", "Hirag
 		}
 	}
 }
-.page-template-page-onecolumn,
-.page-template-page-lp,
-.page-template-page-lp-builder {
-	.vk_staff{
-		@media ( min-width: 992px ){
-			&_text{
-				width: 74%;
-				&_name {
-					font-size: 4rem;
-				}
-				&_caption {
-					font-size: 16px;
-					letter-spacing: 0.5rem;
-				}
-				&_role {
-					letter-spacing: 0.5rem;
-				}
-			}
-			&_photo {
-				width: 22%;
-			}
-		}
-		@media ( min-width: 1200px ){
-			&_text{
-				width: 75%;
-				&_name {
-					font-size: 4.5rem;
-				}
-			}
-			&_photo {
-				width: 20%;
-			}
-		}
-	}
-}
-
-
 
 //
 .vk_staff {
@@ -135,6 +98,44 @@ $font_serif:"ＭＳ Ｐ明朝", "MS PMincho","ヒラギノ明朝 Pro W3", "Hirag
 			width: 100%;
 			margin: 0;
 			display: block;
+		}
+	}
+}
+
+
+// Lightning で幅広の１カラムテンプレート時補正
+.page-template-page-onecolumn,
+.page-template-page-lp,
+.page-template-page-lp-builder {
+	.vk_staff{
+		@media ( min-width: 992px ){
+			&_text{
+				width: 74%;
+				&_name {
+					font-size: 4rem;
+				}
+				&_caption {
+					font-size: 16px;
+					letter-spacing: 0.5rem;
+				}
+				&_role {
+					letter-spacing: 0.5rem;
+				}
+			}
+			&_photo {
+				width: 22%;
+			}
+		}
+		@media ( min-width: 1200px ){
+			&_text{
+				width: 75%;
+				&_name {
+					font-size: 4.5rem;
+				}
+			}
+			&_photo {
+				width: 20%;
+			}
 		}
 	}
 }
