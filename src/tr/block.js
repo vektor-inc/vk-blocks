@@ -63,7 +63,7 @@ registerBlockType('vk-blocks/tr', {
         };
 
 
-        return (<tr>Thisis {rowNum}</tr>);
+        return (<tr>Thisis {colNum}</tr>);
         // return (<tr>getParagraph(rowNum)</tr>);
     },
 

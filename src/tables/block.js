@@ -15,8 +15,6 @@ const {Fragment} = wp.element;
 const {InspectorControls,InnerBlocks} = wp.editor;
 const BlockIcon = 'arrow-down';
 
-
-
 /**
  * Register: a Gutenberg Block.
  *
@@ -53,7 +51,6 @@ registerBlockType('vk-blocks/tables', {
         } = attributes;
         const clientId = select('core/block-editor').getSelectedBlockClientId();
 
-
         // subscribe(() =>{
 
             // let child = select('core/editor').getBlocksByClientId(clientId)[0].innerBlocks;
@@ -64,12 +61,17 @@ registerBlockType('vk-blocks/tables', {
 
         const updateChildBlockAttributes = (value) => {
 
-            setAttributes({rowNum: value});
+            setAttributes({colNum: value});
             let childAttributes = {
-                rowNum: value
+                colNum: value
             };
-            let child = select('core/editor').getBlocksByClientId(clientId)[0].innerBlocks[0];
-            dispatch('core/editor').updateBlockAttributes(child.clientId, childAttributes);
+            let children = select('core/editor').getBlocksByClientId(clientId)[0].innerBlocks;
+
+            for (let i =0; i < children.length; i++) {
+                let child = children[i];
+                dispatch('core/editor').updateBlockAttributes(child.clientId, childAttributes);
+            }
+
         };
 
         return (
@@ -81,7 +83,7 @@ registerBlockType('vk-blocks/tables', {
                                 value={colNum}
                                 min={0}
                                 max={10}
-                                onChange={(value) => setAttributes({colNum: value})}
+                                onChange={updateChildBlockAttributes}
                             />
                         </BaseControl>
                         <BaseControl label={__('Row Number', 'vk-blocks')}>
@@ -89,7 +91,7 @@ registerBlockType('vk-blocks/tables', {
                                 value={rowNum}
                                 min={0}
                                 max={10}
-                                onChange={updateChildBlockAttributes}
+                                onChange={(value) => setAttributes({rowNum: value})}
                             />
                         </BaseControl>
                     </PanelBody>
