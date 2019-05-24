@@ -2,7 +2,7 @@ export const schema = {
     vk_staff_text_name: {
         type: 'string',
         source: 'html',
-        selector: 'h2',
+        selector: 'h3',
     },
     vk_staff_text_caption: {
         type: 'string',
@@ -17,7 +17,7 @@ export const schema = {
     vk_staff_text_profileTitle: {
         type: 'string',
         source: 'html',
-        selector: 'h3',
+        selector: 'h4',
     },
     vk_staff_text_profileText: {
         type: 'string',

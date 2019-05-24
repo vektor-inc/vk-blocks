@@ -613,6 +613,67 @@ $color_dark:#343a40;
 }
 
 /*-------------------------------------------*/
+/* .vk_prBlocks
+/*-------------------------------------------*/
+.vk_prBlocks_item {
+	@media screen and (max-width:992px){
+		margin-bottom: 1.5em;
+	}
+}
+.vk_prBlocks_item {
+	&_link {
+		color: #333;
+		&:hover{
+			color: #333;
+			text-decoration: none;
+		}
+	}
+	&_icon_outer {
+		display: block;
+		position:relative;
+		margin: 0 auto ;
+		width: 80px;
+		height: 80px;
+		border-radius: 50%;
+	}
+	&_icon {
+		position:absolute;
+		top:50%;
+		left:50%;
+		transform: translateY(-50%) translateX(-50%);
+		font-size: 36px;
+		color: #fff;
+	}
+	&_title{
+		margin-top:0.9em;
+		margin-bottom: 0.6em;
+		text-align: center;
+		font-size: 21px;
+		line-height: 1.4em;
+		border:none;
+		padding:0;
+		&::after{
+			border: none;
+		}
+	}
+	&_image{
+		position: relative;
+		display: block;
+		width: 120px;
+		height:120px;
+		margin: 0 auto;
+		overflow: hidden;
+		border-radius: 50%;
+		text-indent:-9999px;
+	}
+	&_summary{
+		margin-bottom: 0.5em;
+		text-align: center;
+		line-height: 1.8em;
+	}
+}
+
+/*-------------------------------------------*/
 /* CSS
 /*-------------------------------------------*/
 $media-sm-up : 576px;
@@ -720,67 +781,6 @@ $padding-xl:3.5em;
 // .editor-block-list__block-edit{
 //   margin: 0!important;
 // }
-
-/*-------------------------------------------*/
-/* .vk_prBlocks
-/*-------------------------------------------*/
-.vk_prBlocks_item {
-	@media screen and (max-width:992px){
-		margin-bottom: 1.5em;
-	}
-}
-.vk_prBlocks_item {
-	&_link {
-		color: #333;
-		&:hover{
-			color: #333;
-			text-decoration: none;
-		}
-	}
-	&_icon_outer {
-		display: block;
-		position:relative;
-		margin: 0 auto ;
-		width: 80px;
-		height: 80px;
-		border-radius: 50%;
-	}
-	&_icon {
-		position:absolute;
-		top:50%;
-		left:50%;
-		transform: translateY(-50%) translateX(-50%);
-		font-size: 36px;
-		color: #fff;
-	}
-	&_title{
-		margin-top:0.9em;
-		margin-bottom: 0.6em;
-		text-align: center;
-		font-size: 21px;
-		line-height: 1.4em;
-		border:none;
-		padding:0;
-		&::after{
-			border: none;
-		}
-	}
-	&_image{
-		position: relative;
-		display: block;
-		width: 120px;
-		height:120px;
-		margin: 0 auto;
-		overflow: hidden;
-		border-radius: 50%;
-		text-indent:-9999px;
-	}
-	&_summary{
-		margin-bottom: 0.5em;
-		text-align: center;
-		line-height: 1.8em;
-	}
-}
 
 /*-------------------------------------------*/
 /* Layout
@@ -906,18 +906,73 @@ $padding-xl:3.5em;
 /*-------------------------------------------*/
 $font_serif:"ＭＳ Ｐ明朝", "MS PMincho","ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", "serif";
 
+// Layout
+.vk_staff{
+	&_text{
+		float:left;
+		width: 61.6%;
+	}
+	&_photo {
+		float:right;
+		width: 32%;
+	}
+	&-layout-imageLeft {
+		.vk_staff_text{
+			float:right;
+		}
+		.vk_staff_photo{
+			float:left;
+		}
+	}
+}
+.page-template-page-onecolumn,
+.page-template-page-lp,
+.page-template-page-lp-builder {
+	.vk_staff{
+		@media ( min-width: 992px ){
+			&_text{
+				width: 74%;
+				&_name {
+					font-size: 4rem;
+				}
+				&_caption {
+					font-size: 16px;
+					letter-spacing: 0.5rem;
+				}
+				&_role {
+					letter-spacing: 0.5rem;
+				}
+			}
+			&_photo {
+				width: 22%;
+			}
+		}
+		@media ( min-width: 1200px ){
+			&_text{
+				width: 75%;
+				&_name {
+					font-size: 4.5rem;
+				}
+			}
+			&_photo {
+				width: 20%;
+			}
+		}
+	}
+}
+
+
+
+//
 .vk_staff {
 	display:block;
 	overflow:hidden;
 	&_text{
-		vertical-align: top;
-		float:left;
-		width: 61.6%;
 		&_name {
 			text-align: left;
 			box-shadow: none;
-			font-size: 3rem;
-			font-family: $font_serif;
+			font-size: 3.5rem;
+			// font-family: $font_serif;
 			line-height: 1.0;
 			margin-bottom: 0.5rem;
 			border: none;
@@ -935,7 +990,6 @@ $font_serif:"ＭＳ Ｐ明朝", "MS PMincho","ヒラギノ明朝 Pro W3", "Hirag
 			display: block;
 			margin: 0 0 0.5rem 4px;
 			letter-spacing: 5px;
-			// color: #008a32;
 		}
 		&_role {
 			font-size: 14px;
@@ -951,6 +1005,7 @@ $font_serif:"ＭＳ Ｐ明朝", "MS PMincho","ヒラギノ明朝 Pro W3", "Hirag
 			margin-bottom: 1.2rem;
 			border-top: none;
 			border-bottom: 1px solid #ccc;
+			background: none;
 			&:before,
 			&:after {
 				border: none;
@@ -961,11 +1016,9 @@ $font_serif:"ＭＳ Ｐ明朝", "MS PMincho","ヒラギノ明朝 Pro W3", "Hirag
 		}
 	}
 	&_photo {
-		float:right;
 		display: block;
 		vertical-align: top;
 		text-align: center;
-		width: 32%;
 		button {
 			width:100%;
 		}
@@ -985,17 +1038,6 @@ $font_serif:"ＭＳ Ｐ明朝", "MS PMincho","ヒラギノ明朝 Pro W3", "Hirag
 			width: 100%;
 			margin: 0;
 			display: block;
-		}
-	}
-}
-
-.vk_staff-layout{
-	&-imageLeft {
-		.vk_staff_text{
-			float:right;
-		}
-		.vk_staff_photo{
-			float:left;
 		}
 	}
 }

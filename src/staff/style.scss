@@ -3,18 +3,73 @@
 /*-------------------------------------------*/
 $font_serif:"ＭＳ Ｐ明朝", "MS PMincho","ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", "serif";
 
+// Layout
+.vk_staff{
+	&_text{
+		float:left;
+		width: 61.6%;
+	}
+	&_photo {
+		float:right;
+		width: 32%;
+	}
+	&-layout-imageLeft {
+		.vk_staff_text{
+			float:right;
+		}
+		.vk_staff_photo{
+			float:left;
+		}
+	}
+}
+.page-template-page-onecolumn,
+.page-template-page-lp,
+.page-template-page-lp-builder {
+	.vk_staff{
+		@media ( min-width: 992px ){
+			&_text{
+				width: 74%;
+				&_name {
+					font-size: 4rem;
+				}
+				&_caption {
+					font-size: 16px;
+					letter-spacing: 0.5rem;
+				}
+				&_role {
+					letter-spacing: 0.5rem;
+				}
+			}
+			&_photo {
+				width: 22%;
+			}
+		}
+		@media ( min-width: 1200px ){
+			&_text{
+				width: 75%;
+				&_name {
+					font-size: 4.5rem;
+				}
+			}
+			&_photo {
+				width: 20%;
+			}
+		}
+	}
+}
+
+
+
+//
 .vk_staff {
 	display:block;
 	overflow:hidden;
 	&_text{
-		vertical-align: top;
-		float:left;
-		width: 61.6%;
 		&_name {
 			text-align: left;
 			box-shadow: none;
-			font-size: 3rem;
-			font-family: $font_serif;
+			font-size: 3.5rem;
+			// font-family: $font_serif;
 			line-height: 1.0;
 			margin-bottom: 0.5rem;
 			border: none;
@@ -32,7 +87,6 @@ $font_serif:"ＭＳ Ｐ明朝", "MS PMincho","ヒラギノ明朝 Pro W3", "Hirag
 			display: block;
 			margin: 0 0 0.5rem 4px;
 			letter-spacing: 5px;
-			// color: #008a32;
 		}
 		&_role {
 			font-size: 14px;
@@ -48,6 +102,7 @@ $font_serif:"ＭＳ Ｐ明朝", "MS PMincho","ヒラギノ明朝 Pro W3", "Hirag
 			margin-bottom: 1.2rem;
 			border-top: none;
 			border-bottom: 1px solid #ccc;
+			background: none;
 			&:before,
 			&:after {
 				border: none;
@@ -58,11 +113,9 @@ $font_serif:"ＭＳ Ｐ明朝", "MS PMincho","ヒラギノ明朝 Pro W3", "Hirag
 		}
 	}
 	&_photo {
-		float:right;
 		display: block;
 		vertical-align: top;
 		text-align: center;
-		width: 32%;
 		button {
 			width:100%;
 		}
@@ -82,17 +135,6 @@ $font_serif:"ＭＳ Ｐ明朝", "MS PMincho","ヒラギノ明朝 Pro W3", "Hirag
 			width: 100%;
 			margin: 0;
 			display: block;
-		}
-	}
-}
-
-.vk_staff-layout{
-	&-imageLeft {
-		.vk_staff_text{
-			float:right;
-		}
-		.vk_staff_photo{
-			float:left;
 		}
 	}
 }
