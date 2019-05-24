@@ -285,7 +285,7 @@ msgid "Heading style"
 msgstr ""
 
 #: src/heading/block.js:125
-#: src/staff/block.js:147
+#: src/staff/block.js:105
 msgid "Default"
 msgstr ""
 
@@ -450,7 +450,7 @@ msgid "Border type"
 msgstr ""
 
 #: src/outer/block.js:262
-#: src/staff/block.js:151
+#: src/staff/block.js:109
 msgid "None"
 msgstr ""
 
@@ -642,7 +642,7 @@ msgstr ""
 msgid "Input content."
 msgstr ""
 
-#: src/spacer/block.js:101
+#: src/spacer/block.js:103
 msgid "Mobile"
 msgstr ""
 
@@ -678,41 +678,43 @@ msgstr ""
 msgid "PC"
 msgstr ""
 
-#: src/spacer/block.js:96
+#: src/spacer/block.js:97
 msgid "Tablet"
 msgstr ""
 
-#: src/staff/block.js:100
-msgid "Staff name"
-msgstr ""
-
-#: src/staff/block.js:108
-msgid "Name caption"
+#: src/staff/block.js:114
+msgid "Alt text"
 msgstr ""
 
 #: src/staff/block.js:116
+msgid "Set the alt text for profile image"
+msgstr ""
+
+#: src/staff/block.js:124
+msgid "Color"
+msgstr ""
+
+#: src/staff/block.js:126
+msgid "Staff name"
+msgstr ""
+
+#: src/staff/block.js:134
+msgid "Name caption"
+msgstr ""
+
+#: src/staff/block.js:142
 #: src/staff/component.js:58
 msgid "Role position"
 msgstr ""
 
-#: src/staff/block.js:124
-msgid "Profile Title"
-msgstr ""
-
-#: src/staff/block.js:132
-msgid "Profile Text"
-msgstr ""
-
-#: src/staff/block.js:140
-msgid "Image Border"
-msgstr ""
-
-#: src/staff/block.js:156
-msgid "Alt text"
+#: src/staff/block.js:150
+#: src/staff/component.js:66
+msgid "Profile title"
 msgstr ""
 
 #: src/staff/block.js:158
-msgid "Set the alt text for profile image"
+#: src/staff/component.js:74
+msgid "Profile text"
 msgstr ""
 
 #: src/staff/block.js:54
@@ -728,7 +730,7 @@ msgid "Image left"
 msgstr ""
 
 #: src/staff/block.js:98
-msgid "Color"
+msgid "Image border"
 msgstr ""
 
 #: src/staff/component.js:42
@@ -737,12 +739,4 @@ msgstr ""
 
 #: src/staff/component.js:50
 msgid "Caption"
-msgstr ""
-
-#: src/staff/component.js:66
-msgid "Profile title"
-msgstr ""
-
-#: src/staff/component.js:74
-msgid "Profile text"
 msgstr ""
