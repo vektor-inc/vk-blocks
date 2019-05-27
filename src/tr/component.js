@@ -60,6 +60,8 @@ export class Component extends React.Component {
             return returnElm;
         };
 
+
+
         return (addCol(colNum));
     }
 }

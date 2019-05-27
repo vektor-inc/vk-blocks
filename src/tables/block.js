@@ -50,18 +50,23 @@ registerBlockType('vk-blocks/tables', {
 
         const clientId = select('core/block-editor').getSelectedBlockClientId();
 
-        const updateChildBlockAttributes = (value) => {
+        const updateChildBlockAttributesCol = (value) => {
 
             setAttributes({colNum: value});
             let childAttributes = {
                 colNum: value
             };
             let children = select('core/editor').getBlocksByClientId(clientId)[0].innerBlocks;
-
             for (let i =0; i < children.length; i++) {
                 let child = children[i];
                 dispatch('core/editor').updateBlockAttributes(child.clientId, childAttributes);
             }
+
+        };
+
+        const updateChildBlockAttributesRow = (value) => {
+
+            setAttributes({rowNum: value});
 
         };
 
@@ -74,7 +79,7 @@ registerBlockType('vk-blocks/tables', {
                                 value={colNum}
                                 min={0}
                                 max={10}
-                                onChange={updateChildBlockAttributes}
+                                onChange={updateChildBlockAttributesCol}
                             />
                         </BaseControl>
                         <BaseControl label={__('Row Number', 'vk-blocks')}>
@@ -82,7 +87,7 @@ registerBlockType('vk-blocks/tables', {
                                 value={rowNum}
                                 min={0}
                                 max={10}
-                                onChange={(value) => setAttributes({rowNum: value})}
+                                onChange={updateChildBlockAttributesRow}
                             />
                         </BaseControl>
                     </PanelBody>
