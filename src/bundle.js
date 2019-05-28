@@ -1,4 +1,6 @@
 //Bundle JS
+import './simple-table/block.js';
+import './th/block.js';
 import './td/block.js';
 import './tr/block.js';
 import './tables/block.js';

@@ -1,5 +1,5 @@
 /**
- * Table block type
+ * Th block
  */
 import React from "react";
 import {schema} from './schema';
@@ -24,9 +24,9 @@ const BlockIcon = 'arrow-down';
  * @return {?WPBlock}          The block, if it has been successfully
  *                             registered; otherwise `undefined`.
  */
-registerBlockType('vk-blocks/td', {
+registerBlockType('vk-blocks/th', {
     // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-    title: __('Td', 'vk-blocks'), // Block title.
+    title: __('Th', 'vk-blocks'), // Block title.
     icon: BlockIcon, // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
     category: 'vk-blocks-cat', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
     attributes: schema,
@@ -47,13 +47,13 @@ registerBlockType('vk-blocks/td', {
             content
         } = attributes;
 
-        return (<td><RichText
+        return (<th><RichText
             tagName="div"
-            className={'vk_td_content wp-block-table__cell-content'}
+            className={'vk_th_content wp-block-table__cell-content'}
             onChange={(value) => setAttributes({content: value})}
             value={content}
             // placeholder={__('Please enter content', 'vk-blocks')}
-        /></td>);
+        /></th>);
     },
 
     /**
@@ -68,11 +68,11 @@ registerBlockType('vk-blocks/td', {
         const {
             content
         } = attributes;
-        return (<td><RichText.Content
+        return (<th><RichText.Content
             tagName="div"
-            className={'vk_td_content wp-block-table__cell-content'}
+            className={'vk_th_content wp-block-table__cell-content'}
             value={content}
-        /></td>);
+        /></th>);
     },
 
     //Please comment out, when you need to use deprecated.
