@@ -67,6 +67,14 @@ registerBlockType('vk-blocks/tables', {
         const updateChildBlockAttributesRow = (value) => {
 
             setAttributes({rowNum: value});
+            let childAttributes = {
+                rowNum: value
+            };
+            let children = select('core/editor').getBlocksByClientId(clientId)[0].innerBlocks;
+            for (let i =0; i < children.length; i++) {
+                let child = children[i];
+                dispatch('core/editor').updateBlockAttributes(child.clientId, childAttributes);
+            }
 
         };
 
@@ -92,7 +100,7 @@ registerBlockType('vk-blocks/tables', {
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
-                <div className={`${className} vk_table`}>
+                <div className={`${className} vk_tables vk_tables-edit`}>
                     <table>
                         <Component
                             attributes={attributes}
@@ -115,7 +123,7 @@ registerBlockType('vk-blocks/tables', {
     save({attributes}) {
 
         return (
-            <div className={`vk_table`}>
+            <div className={`vk_tables`}>
                 <table>
                     <Component
                         attributes={attributes}

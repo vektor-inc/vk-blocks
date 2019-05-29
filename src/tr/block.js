@@ -42,7 +42,7 @@ registerBlockType('vk-blocks/tr', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    edit({attributes,clientId}) {
+    edit({attributes,setAttributes,clientId}) {
         const {
             colNum,
             rowNum,
@@ -51,11 +51,17 @@ registerBlockType('vk-blocks/tr', {
 
         const rootClientId = select( 'core/editor' ).getBlockRootClientId( clientId );
         let root = select('core/editor').getBlocksByClientId(rootClientId);
-        dispatch('core/editor').updateBlockAttributes(clientId, {innerTag: root[0].name});
+        let rootName = root[0].name;
+        dispatch('core/editor').updateBlockAttributes(clientId, {innerTag: rootName});
+
+        if(rootName === "vk-blocks/tables"){
+            setAttributes({colNum: root[0].attributes.colNum});
+        }
 
         return (<Component
                 attributes={attributes}
-                for_={'edit'}/>
+                for_={'edit'}
+            />
         );
     },
 
