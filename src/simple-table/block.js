@@ -48,22 +48,6 @@ registerBlockType('vk-blocks/simple-table', {
             rowNum
         } = attributes;
 
-        const clientId = select('core/block-editor').getSelectedBlockClientId();
-
-        const updateChildBlockAttributesCol = (value) => {
-
-            setAttributes({colNum: value});
-            let childAttributes = {
-                colNum: value
-            };
-            let children = select('core/editor').getBlocksByClientId(clientId)[0].innerBlocks;
-            for (let i = 0; i < children.length; i++) {
-                let child = children[i];
-                dispatch('core/editor').updateBlockAttributes(child.clientId, childAttributes);
-            }
-
-        };
-
         const updateChildBlockAttributesRow = (value) => {
 
             setAttributes({rowNum: value});

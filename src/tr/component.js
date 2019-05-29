@@ -10,10 +10,10 @@ export class Component extends React.Component {
 
         const {
             colNum,
+            innerTag
         } = this.props.attributes;
         let for_ = this.props.for_;
         const ALLOWED_BLOCKS = ['vk-blocks/th','vk-blocks/td'];
-        const innerTag = 'th/td';
 
         /**
          * Get Th Block to repeat.
@@ -86,7 +86,7 @@ export class Component extends React.Component {
 
             let returnElm = '';
             switch (innerTag) {
-                case 'th/td':
+                case 'vk-blocks/simple-table':
                     returnElm = templateInnerTrSimpleTable();
                     break;
                 default:

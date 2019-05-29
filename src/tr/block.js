@@ -8,6 +8,8 @@ import {schema} from './schema';
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
 const BlockIcon = 'arrow-down';
+const { select, dispatch } = wp.data;
+
 
 /**
  * Register: a Gutenberg Block.
@@ -40,7 +42,16 @@ registerBlockType('vk-blocks/tr', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    edit({attributes}) {
+    edit({attributes,clientId}) {
+        const {
+            colNum,
+            rowNum,
+            innerTag
+        } = attributes;
+
+        const rootClientId = select( 'core/editor' ).getBlockRootClientId( clientId );
+        let root = select('core/editor').getBlocksByClientId(rootClientId);
+        dispatch('core/editor').updateBlockAttributes(clientId, {innerTag: root[0].name});
 
         return (<Component
                 attributes={attributes}
