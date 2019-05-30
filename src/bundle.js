@@ -3,7 +3,6 @@ import './simple-table/block.js';
 import './th/block.js';
 import './td/block.js';
 import './tr/block.js';
-import './tables/block.js';
 import './spacer/block.js';
 import './outer/block.js';
 import './heading/block.js';
