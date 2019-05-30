@@ -68,14 +68,20 @@ registerBlockType('vk-blocks/simple-table', {
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
-                <div className={`${className} vk_simple-table vk_simple-table-edit wp-block-table `}>
-                    <table>
-                        <Component
-                            attributes={attributes}
-                            for_={'edit'}
-                        />
-                    </table>
-                </div>
+                {
+                    vk_blocks_check.is_pro
+                        ?
+                        <div className={`${className} vk_simple-table vk_simple-table-edit wp-block-table `}>
+                            <table>
+                                <Component
+                                    attributes={attributes}
+                                    for_={'edit'}
+                                />
+                            </table>
+                        </div>
+                        :
+                        <div>{__('This block is only for users who bought Lightning Pro.', 'vk-blocks')}</div>
+                }
             </Fragment>
         );
     },
@@ -89,17 +95,20 @@ registerBlockType('vk-blocks/simple-table', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     save({attributes}) {
+        {
+            if (vk_blocks_check.is_pro) {
 
-        return (
-            <div className={`vk_simple-table vk_simple-table-view wp-block-table`}>
-                <table>
-                    <Component
-                        attributes={attributes}
-                        for_={'save'}
-                    />
-                </table>
-            </div>
-        );
+                return (<div className={`vk_simple-table vk_simple-table-view wp-block-table`}>
+                        <table>
+                            <Component
+                                attributes={attributes}
+                                for_={'save'}
+                            />
+                        </table>
+                    </div>
+                );
+            }
+        }
     },
 
     //Please comment out, when you need to use deprecated.
