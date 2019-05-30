@@ -5,6 +5,7 @@
 import React from "react";
 import {schema} from './schema';
 import TableOfContents from './TableOfContents';
+import {Component} from "../outer/component";
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
@@ -76,10 +77,16 @@ registerBlockType('vk-blocks/table-of-contents', {
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
-                <ServerSideRender
-                    block='vk-blocks/table-of-contents'
-                        attributes={attributes}
-                    />
+                {
+                    vk_blocks_check.is_pro
+                        ?
+                        <ServerSideRender
+                            block='vk-blocks/table-of-contents'
+                            attributes={attributes}
+                        />
+                        :
+                        <div>{__('This block is only for users who bought Lightning Pro.', 'vk-blocks')}</div>
+                }
             </Fragment>
         );
     },
