@@ -12,16 +12,10 @@ class VkBlocksLatestPosts{
 	 */
 	public function render_latest_posts( $attributes ) {
 
-		return "<div>このHTMLはサーバーサイドレンダリングエラーを回避するために挿入されています。開発を始める時はこれを削除して任意のHTMLに変更してください。</div>";
+//		return "<div>このHTMLはサーバーサイドレンダリングエラーを回避するために挿入されています。開発を始める時はこれを削除して任意のHTMLに変更してください。</div>";
 
 		$layout            = $attributes['layout'];
-		$numberPosts       = $attributes['numberPosts'];
-		$isCheckedPostType = json_decode( $attributes['isCheckedPostType'], true );
-		$isCheckedTaxonomy = json_decode( $attributes['isCheckedTaxonomy'], true );
-		$isCheckedTags     = json_decode( $attributes['isCheckedTags'], true );
-
 		$layoutClass = '';
-
 		//プルダウンの値によってデザインのクラスを変更
 		if ( $layout === 'image_1st' ) {
 			$layoutClass = 'image_1st';
@@ -30,7 +24,7 @@ class VkBlocksLatestPosts{
 		}
 
 		global $wp_query;
-		$wp_query = get_loop_query( $attributes );
+		$wp_query = $this->get_loop_query( $attributes );
 		global $post;
 
 		$elm = '';
@@ -41,7 +35,7 @@ class VkBlocksLatestPosts{
 			while ( have_posts() ) {
 				the_post();
 				$elm .= '<li>';
-				$elm .= get_loop_post_view( $post );
+				$elm .= $this->get_loop_post_view( $post );
 				$elm .= '</li>';
 			} // while ( have_posts() ) {
 			$elm .= '</ul>';
@@ -54,12 +48,14 @@ class VkBlocksLatestPosts{
 		return $elm;
 	}
 
+	public function get_loop_query( $attributes ) {
 
-	function get_loop_query( $attributes ) {
+		$isCheckedPostType = json_decode( $attributes['isCheckedPostType'], true );
+		$isCheckedTaxonomy = json_decode( $attributes['isCheckedTaxonomy'], true );
+		$isCheckedTags     = json_decode( $attributes['isCheckedTags'], true );
 
 		// $count      = ( isset( $instance['count'] ) && $instance['count'] ) ? $instance['count'] : 10;
 		$post_type = 'post';
-
 		$args = array(
 			'post_type'      => $post_type,
 			'paged'          => 1,
@@ -93,8 +89,7 @@ class VkBlocksLatestPosts{
 	}
 
 
-
-	function get_loop_post_view( $post ) {
+	public function get_loop_post_view( $post ) {
 		$elm          = '';
 		$elm         .= '<div class="card" id="post-' . get_the_ID() . '">' . "\n";
 		$thumbnail_id = get_post_thumbnail_id( $post->ID );
