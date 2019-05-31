@@ -95,6 +95,8 @@ registerBlockType('vk-blocks/latest-posts', {
             setAttributes: setAttributes
         };
 
+        console.log(isCheckedPostType)
+
         return (
             <Fragment>
                 <InspectorControls>
