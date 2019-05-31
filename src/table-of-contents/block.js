@@ -5,12 +5,12 @@
 import React from "react";
 import {schema} from './schema';
 import TableOfContents from './TableOfContents';
-import {Component} from "../outer/component";
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
 const {ServerSideRender, PanelBody, SelectControl,BaseControl} = wp.components;
 const {Fragment} = wp.element;
+const {subscribe, select, dispatch} = wp.data;
 const {RichText, InspectorControls, MediaUpload, ColorPalette} = wp.editor;
 const BlockIcon = 'arrow-down';
 
@@ -42,15 +42,29 @@ registerBlockType('vk-blocks/table-of-contents', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    edit({attributes, setAttributes, className,}) {
+    edit({attributes, setAttributes, className, clientId}) {
         const {
             style,
         } = attributes;
 
         const toc = new TableOfContents();
-        let source = toc.getHtagsInEditor();
-        let html = toc.returnHtml(source, style, className);
-        setAttributes({renderHtml: html});
+        const render = () =>{
+            let source = toc.getHtagsInEditor();
+            let html = toc.returnHtml(source, style, className);
+            setAttributes({renderHtml: html});
+        };
+        subscribe(() => {
+            const selectedBlock = select("core/block-editor").getSelectedBlock();
+            if (selectedBlock) {
+                let regex = /heading/g;
+                let found = selectedBlock.name.match(regex);
+                if (found) {
+                    render();
+                }
+            }
+        });
+
+        render();
 
         return (
             <Fragment>
