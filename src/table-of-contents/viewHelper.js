@@ -1,22 +1,21 @@
 window.onload = () => {
 
-    let hTags = getDom('entry-content');
+    let hTags = getDom();
     appendIdHtags(hTags,assignIdHref);
 
 };
 
 /**
  * Get hTag's NodeList included in target class's element.
- * @param targetClass
  * @returns {*} NodeListOf<Element> or false
  */
-let getDom = (targetClass) => {
+let getDom = () => {
 
-    let editor = document.getElementsByClassName(targetClass);
-    if (!editor) {
-        return false;
+    let editor = document.getElementsByClassName('vk_table-of-contents');
+    if (editor[0].parentElement) {
+        return editor[0].parentElement.querySelectorAll("h1, h2, h3, h4, h5, h6");
     } else {
-        return editor[0].querySelectorAll("h1, h2, h3, h4, h5, h6");
+        return false;
     }
 };
 
@@ -46,7 +45,6 @@ let appendIdHtags = (hTags, callback) => {
 let assignIdHref = (hTags) => {
 
     let aTags = document.getElementsByClassName('vk_table-of-contents_list_item_link');
-
     for (let i = 0; i < aTags.length; i++) {
 
         aTags[i].attributes[0].nodeValue = '#' + hTags[i].id;
