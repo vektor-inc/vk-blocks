@@ -5,14 +5,14 @@ export const schema = {
     },
     pc: {
         type: 'number',
-        default: 50,
+        default: 40,
     },
     tablet: {
         type: 'number',
-        default: 10,
+        default: 30,
     },
     mobile: {
         type: 'number',
-        default: 10,
+        default: 20,
     },
 };

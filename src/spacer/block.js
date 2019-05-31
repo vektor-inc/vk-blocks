@@ -91,16 +91,19 @@ registerBlockType('vk-blocks/spacer', {
                                 label={__('PC', 'vk-blocks')}
                                 value={pc}
                                 onChange={(value) => setAttributes({pc: value})}
+                                step={0.1}
                             />
                             <RangeControl
                                 label={__('Tablet', 'vk-blocks')}
                                 value={tablet}
                                 onChange={(value) => setAttributes({tablet: value})}
+                                step={0.1}
                             />
                             <RangeControl
                                 label={__('Mobile', 'vk-blocks')}
                                 value={mobile}
                                 onChange={(value) => setAttributes({mobile: value})}
+                                step={0.1}
                             />
                         </BaseControl>
                     </PanelBody>

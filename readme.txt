@@ -3,8 +3,8 @@ Contributors: vektor-inc,kurudrive,naoki0h
 Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 4.6
-Tested up to: 5.1.0
-Stable tag: 0.7.1
+Tested up to: 5.2.1
+Stable tag: 0.8.3
 Requires PHP: 5.6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -17,6 +17,7 @@ This is a plugin that extends Gutenberg's blocks.
 
 [ Blocks ]
 
+* Staff
 * Outer
 * Alert
 * FAQ
@@ -52,6 +53,18 @@ e.g.
 1. VK Blocks examples.
 
 == Changelog ==
+
+= 0.8.3 =
+[Specification change][ Staff ] CSS minor tuning
+
+= 0.8.2 =
+[Specification change][ Staff ] Change H tag and other.
+
+= 0.8.1 =
+[Bug fix] When title margin set that Title align not work.
+
+= 0.8.0 =
+[Add New Block] Staff
 
 = 0.7.1 =
 [Bug fix][ Title ] Part of margin bottom functions was not working.

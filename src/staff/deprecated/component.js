@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class NewComponent extends React.Component {
+export class NewComponent extends React.Component {
 
     render() {
 
@@ -10,11 +10,11 @@ export default class NewComponent extends React.Component {
             insertImage,
             arrowFlag,
         } = this.props.attributes;
-        let className = this.props.className;
+
         let for_ = this.props.for_;
 
         return (
-            <div className={"vk_your-block-slug"}>hello</div>
+            <div className={"vk_staff"}>hello</div>
         );
     }
 }
