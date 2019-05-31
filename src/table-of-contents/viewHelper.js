@@ -5,6 +5,14 @@ window.onload = () => {
 
 };
 
+let isExist = (val) =>{
+    if (typeof val === 'undefined' || val === null ) {
+        return false
+    }else {
+        return true;
+    }
+};
+
 /**
  * Get hTag's NodeList included in target class's element.
  * @returns {*} NodeListOf<Element> or false
@@ -12,10 +20,13 @@ window.onload = () => {
 let getDom = () => {
 
     let editor = document.getElementsByClassName('vk_table-of-contents');
-    if (editor[0].parentElement) {
-        return editor[0].parentElement.querySelectorAll("h1, h2, h3, h4, h5, h6");
-    } else {
-        return false;
+
+    if(isExist(editor[0])){
+        if (editor[0].parentElement) {
+            return editor[0].parentElement.querySelectorAll("h1, h2, h3, h4, h5, h6");
+        } else {
+            return false;
+        }
     }
 };
 
@@ -26,16 +37,19 @@ let getDom = () => {
  */
 let appendIdHtags = (hTags, callback) => {
 
-    for (let i = 0; i < hTags.length; i++) {
+    if(isExist(hTags)){
 
-        let hTag = hTags[i];
+        for (let i = 0; i < hTags.length; i++) {
 
-        if(!hTag.id){
-            hTag.id = "vk-htags-" + i;
+            let hTag = hTags[i];
+
+            if (!hTag.id) {
+                hTag.id = "vk-htags-" + i;
+            }
         }
-    }
 
-    callback(hTags);
+        callback(hTags);
+    }
 };
 
 /**
