@@ -496,6 +496,7 @@ msgid "Border radius"
 msgstr ""
 
 #: src/outer/block.js:334
+#: src/simple-table/block.js:83
 msgid "This block is only for users who bought Lightning Pro."
 msgstr ""
 
@@ -642,6 +643,18 @@ msgstr ""
 msgid "Input content."
 msgstr ""
 
+#: src/simple-table/block.js:31
+msgid "Simple Table"
+msgstr ""
+
+#: src/simple-table/block.js:60
+msgid "Simple Table Setting"
+msgstr ""
+
+#: src/simple-table/block.js:61
+msgid "Row Number"
+msgstr ""
+
 #: src/spacer/block.js:103
 msgid "Mobile"
 msgstr ""
@@ -739,4 +752,16 @@ msgstr ""
 
 #: src/staff/component.js:50
 msgid "Caption"
+msgstr ""
+
+#: src/td/block.js:29
+msgid "Td"
+msgstr ""
+
+#: src/th/block.js:29
+msgid "Th"
+msgstr ""
+
+#: src/tr/block.js:29
+msgid "Tr"
 msgstr ""

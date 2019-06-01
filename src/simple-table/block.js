@@ -71,7 +71,7 @@ registerBlockType('vk-blocks/simple-table', {
                 {
                     vk_blocks_check.is_pro
                         ?
-                        <div className={`${className} vk_simple-table vk_simple-table-edit wp-block-table `}>
+                        <div className={`${className} vk_simpleTable vk_simpleTable-edit wp-block-table `}>
                             <table>
                                 <Component
                                     attributes={attributes}
@@ -98,7 +98,7 @@ registerBlockType('vk-blocks/simple-table', {
         {
             if (vk_blocks_check.is_pro) {
 
-                return (<div className={`vk_simple-table vk_simple-table-view wp-block-table`}>
+                return (<div className={`vk_simpleTable vk_simpleTable-view wp-block-table`}>
                         <table>
                             <Component
                                 attributes={attributes}

@@ -870,6 +870,76 @@ $padding-xl:3.5em;
 /*-------------------------------------------*/
 /* CSS
 /*-------------------------------------------*/
+.vk_simpleTable{
+  th{
+    font-weight: normal!important;
+  }
+}
+.vk_simpleTable-edit{
+  table{
+    .block-editor-block-list__block-edit{
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    tr{
+      .block-editor-block-list__layout{
+        display: flex;
+        //width: 500px!important;
+
+        .block-editor-block-list__block{
+          border: 1px solid;
+          .block-editor-block-list__block-edit{
+            margin: 0;
+          }
+        }
+      }
+    }
+    th,td {
+      border:none;
+      .wp-block-table__cell-content{
+        width:15vw;
+      }
+    }
+  }
+}
+
+/*-------------------------------------------*/
+/* CSS
+/*-------------------------------------------*/
+
+@mixin switchVisibility($pc,$tablet,$mobile) {
+  .vk_spacer {
+    .vk_spacer-display-pc {
+      display: $pc;
+    }
+
+    .vk_spacer-display-tablet {
+      display: $tablet;
+    }
+
+    .vk_spacer-display-mobile {
+      display: $mobile;
+    }
+  }
+}
+
+// Small devices (landscape phones, 576px以下)
+@media (max-width: 576px) {
+  @include switchVisibility(none, none, block);
+}
+
+// Medium devices (tablets, 577pxから768px)
+@media (min-width: 577px) and (max-width: 768px) {
+  @include switchVisibility(none, block, none);
+}
+
+// Large devices (desktops, 769px以上)
+@media (min-width: 769px) {
+  @include switchVisibility(block, none, none);
+}
+/*-------------------------------------------*/
+/* CSS
+/*-------------------------------------------*/
 $font_serif:"ＭＳ Ｐ明朝", "MS PMincho","ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", "serif";
 
 // Layout
@@ -1047,34 +1117,37 @@ $font_serif:"ＭＳ Ｐ明朝", "MS PMincho","ヒラギノ明朝 Pro W3", "Hirag
 /* CSS
 /*-------------------------------------------*/
 
-@mixin switchVisibility($pc,$tablet,$mobile) {
-  .vk_spacer {
-    .vk_spacer-display-pc {
-      display: $pc;
+.vk_simpleTable{
+  th{
+    font-weight: normal!important;
+  }
+}
+.vk_simpleTable-edit{
+  table{
+    .block-editor-block-list__block-edit{
+      margin-top: 0;
+      margin-bottom: 0;
     }
+    tr{
+      .block-editor-block-list__layout{
+        display: flex;
+        //width: 500px!important;
 
-    .vk_spacer-display-tablet {
-      display: $tablet;
+        .block-editor-block-list__block{
+          border: 1px solid;
+          .block-editor-block-list__block-edit{
+            margin: 0;
+          }
+        }
+      }
     }
-
-    .vk_spacer-display-mobile {
-      display: $mobile;
+    th,td {
+      border:none;
+      .wp-block-table__cell-content{
+        width:15vw;
+      }
     }
   }
 }
 
-// Small devices (landscape phones, 576px以下)
-@media (max-width: 576px) {
-  @include switchVisibility(none, none, block);
-}
-
-// Medium devices (tablets, 577pxから768px)
-@media (min-width: 577px) and (max-width: 768px) {
-  @include switchVisibility(none, block, none);
-}
-
-// Large devices (desktops, 769px以上)
-@media (min-width: 769px) {
-  @include switchVisibility(block, none, none);
-}
 }
