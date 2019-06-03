@@ -13,7 +13,7 @@ const {RangeControl, PanelBody, BaseControl, SelectControl} = wp.components;
 const {Fragment} = wp.element;
 const {InspectorControls} = wp.editor;
 const BlockIcon = 'arrow-down';
-const {withSelect} = wp.data;
+const {withSelect, subscribe, select, dispatch} = wp.data;
 const {ServerSideRender} = wp.components;
 
 /**
@@ -63,7 +63,7 @@ registerBlockType('vk-blocks/latest-posts', {
             }
         };
 
-    })(({coreData, className, attributes, setAttributes}) => {
+    })(({coreData, className, attributes, setAttributes, clientId}) => {
 
         const {
             numberPosts,
@@ -95,7 +95,41 @@ registerBlockType('vk-blocks/latest-posts', {
             setAttributes: setAttributes
         };
 
-        console.log(isCheckedPostType)
+
+        subscribe(() => {
+
+            let checkedPostType = select("core/block-editor").getBlockAttributes(clientId);
+            let parsed = JSON.parse(checkedPostType.isCheckedPostType);
+            let parsedLength = Object.keys(parsed).length;
+            let searchTaxonomies = [];
+
+
+            //If checked object is existed.
+            if (0 < parsedLength) {
+
+                Object.keys(parsed).forEach(function(key) {
+                    let val = this[key]; // this は obj
+                    if(val){
+                        searchTaxonomies.push(key);
+                    }
+                }, parsed);
+
+                console.log(searchTaxonomies);
+            }
+
+
+            //
+            //
+            // const selectedBlock = select("core/block-editor").getSelectedBlock();
+            // if (selectedBlock) {
+            //     let regex = /heading/g;
+            //     let found = selectedBlock.name.match(regex);
+            //     if (found) {
+            //         render();
+            //     }
+            // }
+        });
+
 
         return (
             <Fragment>
@@ -136,20 +170,20 @@ registerBlockType('vk-blocks/latest-posts', {
                                 addCheckBox(argsPostTypes)
                             }
                         </BaseControl>
-                        <BaseControl
-                            label={__('Filter by Taxonomy', 'vk-blocks')}
-                        >
-                            {
-                                addCheckBox(argsTaxonomy)
-                            }
-                        </BaseControl>
-                        <BaseControl
-                            label={__('Filter by Tags', 'vk-blocks')}
-                        >
-                            {
-                                addCheckBox(argsTags)
-                            }
-                        </BaseControl>
+                        {/*<BaseControl*/}
+                        {/*label={__('Filter by Taxonomy', 'vk-blocks')}*/}
+                        {/*>*/}
+                        {/*{*/}
+                        {/*addCheckBox(argsTaxonomy)*/}
+                        {/*}*/}
+                        {/*</BaseControl>*/}
+                        {/*<BaseControl*/}
+                        {/*label={__('Filter by Tags', 'vk-blocks')}*/}
+                        {/*>*/}
+                        {/*{*/}
+                        {/*addCheckBox(argsTags)*/}
+                        {/*}*/}
+                        {/*</BaseControl>*/}
                     </PanelBody>
                 </InspectorControls>
                 <div>

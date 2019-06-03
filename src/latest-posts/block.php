@@ -12,7 +12,7 @@ class VkBlocksLatestPosts{
 	 */
 	public function render_latest_posts( $attributes ) {
 
-//		return "<div>このHTMLはサーバーサイドレンダリングエラーを回避するために挿入されています。開発を始める時はこれを削除して任意のHTMLに変更してください。</div>";
+		return "<div>このHTMLはサーバーサイドレンダリングエラーを回避するために挿入されています。開発を始める時はこれを削除して任意のHTMLに変更してください。</div>";
 
 		$layout            = $attributes['layout'];
 		$layoutClass = '';
