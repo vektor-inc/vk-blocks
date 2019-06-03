@@ -102,6 +102,8 @@ registerBlockType('vk-blocks/latest-posts', {
             let parsed = JSON.parse(checkedPostType.isCheckedPostType);
             let parsedLength = Object.keys(parsed).length;
             let searchTaxonomies = [];
+            let searchedTaxonomies = wp.data.select("core").getPostTypes();
+            let resultTaxonomies = [];
 
 
             //If checked object is existed.
@@ -113,21 +115,23 @@ registerBlockType('vk-blocks/latest-posts', {
                         searchTaxonomies.push(key);
                     }
                 }, parsed);
-
-                console.log(searchTaxonomies);
             }
 
+            if (searchTaxonomies) {
+                searchTaxonomies.forEach((key) => {
 
-            //
-            //
-            // const selectedBlock = select("core/block-editor").getSelectedBlock();
-            // if (selectedBlock) {
-            //     let regex = /heading/g;
-            //     let found = selectedBlock.name.match(regex);
-            //     if (found) {
-            //         render();
-            //     }
-            // }
+                    for (let i = 0; searchedTaxonomies.length; i++) {
+
+                        console.log(searchedTaxonomies[i]);
+
+                        // if(key === searchedTaxonomies[i].slug){
+                        //
+                        //     resultTaxonomies.concat(searchedTaxonomies.taxonomies);
+                        // }
+                    }
+                });
+            }
+            console.log(resultTaxonomies);
         });
 
 
