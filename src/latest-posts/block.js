@@ -96,42 +96,42 @@ registerBlockType('vk-blocks/latest-posts', {
         };
 
 
-        subscribe(() => {
+        const geCheckedPostTypeKey = () => {
 
             let checkedPostType = select("core/block-editor").getBlockAttributes(clientId);
-            let parsed = JSON.parse(checkedPostType.isCheckedPostType);
-            let parsedLength = Object.keys(parsed).length;
-            let searchTaxonomies = [];
+            let checkedObj = JSON.parse(checkedPostType.isCheckedPostType);
+            let checkedKey = Object.keys(checkedObj);
+            let checkedValue = Object.values(checkedObj);
             let searchedTaxonomies = wp.data.select("core").getPostTypes();
             let resultTaxonomies = [];
 
+            if (0 < checkedKey.length) {
 
-            //If checked object is existed.
-            if (0 < parsedLength) {
+                searchedTaxonomies.forEach(tax => {
 
-                Object.keys(parsed).forEach(function(key) {
-                    let val = this[key]; // this は obj
-                    if(val){
-                        searchTaxonomies.push(key);
-                    }
-                }, parsed);
-            }
+                    let index = checkedKey.findIndex(item => item === tax.slug);
+                    if (index === -1) {
+                        // ... (合致した要素がなかった場合)
+                    } else {
 
-            if (searchTaxonomies) {
-                searchTaxonomies.forEach((key) => {
+                        let key = checkedKey[index];
+                        let value = checkedValue[index];
 
-                    for (let i = 0; searchedTaxonomies.length; i++) {
+                        if (value && undefined === resultTaxonomies.find(item => item === value)) {
 
-                        console.log(searchedTaxonomies[i]);
-
-                        // if(key === searchedTaxonomies[i].slug){
-                        //
-                        //     resultTaxonomies.concat(searchedTaxonomies.taxonomies);
-                        // }
+                            resultTaxonomies.push(key)
+                        }
                     }
                 });
             }
-            console.log(resultTaxonomies);
+
+            return resultTaxonomies;
+        };
+
+
+        subscribe(() => {
+            let checkedPostTypeKey = geCheckedPostTypeKey();
+
         });
 
 
