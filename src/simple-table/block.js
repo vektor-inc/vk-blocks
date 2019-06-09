@@ -72,7 +72,7 @@ registerBlockType('vk-blocks/simple-table', {
                     vk_blocks_check.is_pro
                         ?
                         <div className={`${className} vk_simpleTable vk_simpleTable-edit wp-block-table `}>
-                            <table>
+                            <table className={'table'}>
                                 <Component
                                     attributes={attributes}
                                     for_={'edit'}

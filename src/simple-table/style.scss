@@ -2,34 +2,59 @@
 /* CSS
 /*-------------------------------------------*/
 .vk_simpleTable{
-  th{
-    font-weight: normal!important;
-  }
+	th,
+	td {
+	}
 }
+// editor class
 .vk_simpleTable-edit{
   table{
-    .block-editor-block-list__block-edit{
-      margin-top: 0;
-      margin-bottom: 0;
-    }
-    tr{
-      .block-editor-block-list__layout{
-        display: flex;
-        //width: 500px!important;
-
-        .block-editor-block-list__block{
-          border: 1px solid;
-          .block-editor-block-list__block-edit{
-            margin: 0;
-          }
-        }
-      }
-    }
-    th,td {
-      border:none;
-      .wp-block-table__cell-content{
-        width:15vw;
-      }
-    }
+		.editor-inner-blocks,
+		.editor-block-list__layout,
+		.editor-block-list__block,
+		.editor-rich-text__editable,
+		.editor-block-list__block-edit{
+			padding:0;
+			margin:0;
+			width:100%;
+		}
+		& > .editor-inner-blocks{
+			margin-top:-1px; // th,td がHTML上ではdivの中になってしまう都合上、線が2pxになるためマイナスオフセット
+		}
+		.editor-block-list__block-edit{
+			height:100%;
+		}
+		.block-editor-block-list__insertion-point{
+			/* 上のセルに被るので選択しにくくなるのでデフォルトのマイナスオフセットを少し下げる */
+			top:-5px;
+		}
+		.editor-block-list__block-edit:before{
+			right:-0px;
+			left:-0px;
+			top:-0px;
+			bottom:-0px;
+			// border:1px solid #ff0000;
+		}
+		.editor-inner-blocks {
+			tr {
+				width:100%;
+				display: block;
+				.editor-block-list__layout {
+					display: flex;
+					.editor-block-list__block {
+					}
+				}
+			}
+			th,
+			td {
+				padding: 0;
+				display: block;
+				width:100%;
+				border:none; // デフォルトでつけてくる線を消す
+				.editor-rich-text__editable{
+					padding: 14px;
+				}
+			}
+		}
   }
 }
