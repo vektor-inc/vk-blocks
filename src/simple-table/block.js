@@ -71,14 +71,14 @@ registerBlockType('vk-blocks/simple-table', {
                 {
                     vk_blocks_check.is_pro
                         ?
-                        <div className={`${className} vk_simpleTable vk_simpleTable-edit wp-block-table `}>
-                            <table className={'table'}>
-                                <Component
-                                    attributes={attributes}
-                                    for_={'edit'}
-                                />
-                            </table>
-                        </div>
+                        <table className={`${className} vk_simpleTable table vk_simpleTable-edit wp-block-table `}>
+												<tbody>
+                            <Component
+                                attributes={attributes}
+                                for_={'edit'}
+                            />
+												</tbody>
+                        </table>
                         :
                         <div>{__('This block is only for users who bought Lightning Pro.', 'vk-blocks')}</div>
                 }
@@ -98,14 +98,14 @@ registerBlockType('vk-blocks/simple-table', {
         {
             if (vk_blocks_check.is_pro) {
 
-                return (<div className={`vk_simpleTable vk_simpleTable-view wp-block-table`}>
-                        <table>
-                            <Component
-                                attributes={attributes}
-                                for_={'save'}
-                            />
+                return (<table className={`vk_simpleTable vk_simpleTable-view wp-block-table`}>
+													<tbody>
+													<Component
+													    attributes={attributes}
+													    for_={'save'}
+													/>
+													</tbody>
                         </table>
-                    </div>
                 );
             }
         }

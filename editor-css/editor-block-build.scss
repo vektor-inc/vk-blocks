@@ -36,6 +36,7 @@ h1:first-child.vk_prBlocks_item_title{
 			max-width:100%;
 		}
 }
+
 @media (min-width: 600px){
 .wp-block-columns {
 	margin-left:-15px;
@@ -722,67 +723,6 @@ $padding-xl:3.5em;
 // }
 
 /*-------------------------------------------*/
-/* .vk_prBlocks
-/*-------------------------------------------*/
-.vk_prBlocks_item {
-	@media screen and (max-width:992px){
-		margin-bottom: 1.5em;
-	}
-}
-.vk_prBlocks_item {
-	&_link {
-		color: #333;
-		&:hover{
-			color: #333;
-			text-decoration: none;
-		}
-	}
-	&_icon_outer {
-		display: block;
-		position:relative;
-		margin: 0 auto ;
-		width: 80px;
-		height: 80px;
-		border-radius: 50%;
-	}
-	&_icon {
-		position:absolute;
-		top:50%;
-		left:50%;
-		transform: translateY(-50%) translateX(-50%);
-		font-size: 36px;
-		color: #fff;
-	}
-	&_title{
-		margin-top:0.9em;
-		margin-bottom: 0.6em;
-		text-align: center;
-		font-size: 21px;
-		line-height: 1.4em;
-		border:none;
-		padding:0;
-		&::after{
-			border: none;
-		}
-	}
-	&_image{
-		position: relative;
-		display: block;
-		width: 120px;
-		height:120px;
-		margin: 0 auto;
-		overflow: hidden;
-		border-radius: 50%;
-		text-indent:-9999px;
-	}
-	&_summary{
-		margin-bottom: 0.5em;
-		text-align: center;
-		line-height: 1.8em;
-	}
-}
-
-/*-------------------------------------------*/
 /* Layout
 /*-------------------------------------------*/
 .vk_prContent {
@@ -870,62 +810,67 @@ $padding-xl:3.5em;
 /*-------------------------------------------*/
 /* CSS
 /*-------------------------------------------*/
-.vk_simpleTable{
-	th,
-	td {
-	}
-}
-// editor class
+// .vk_simpleTable{
+// 	th,
+// 	td {
+// 	}
+// }
+
+/*-------------------------------------------*/
+/* editor class
+/*-------------------------------------------*/
 .vk_simpleTable-edit{
-  table{
-		.editor-inner-blocks,
-		.editor-block-list__layout,
-		.editor-block-list__block,
-		.editor-rich-text__editable,
-		.editor-block-list__block-edit{
-			padding:0;
-			margin:0;
+	.editor-inner-blocks,
+	.editor-block-list__layout,
+	.editor-block-list__block,
+	.editor-rich-text__editable,
+	.editor-block-list__block-edit{
+		padding:0;
+		margin:0;
+		width:100%;
+	}
+	& > .editor-inner-blocks{
+		margin-top:-1px; // th,td がHTML上ではdivの中になってしまう都合上、線が2pxになるためマイナスオフセット
+	}
+	.editor-block-list__block-edit{
+		height:100%;
+	}
+	.block-editor-block-list__insertion-point{
+		/* 上のセルに被るので選択しにくくなるのでデフォルトのマイナスオフセットを少し下げる */
+		top:-5px;
+	}
+	.editor-block-list__block-edit:before{
+		right:-0px;
+		left:-0px;
+		top:-0px;
+		bottom:-0px;
+		// border:1px solid #ff0000;
+	}
+	.editor-inner-blocks {
+		tr {
 			width:100%;
-		}
-		& > .editor-inner-blocks{
-			margin-top:-1px; // th,td がHTML上ではdivの中になってしまう都合上、線が2pxになるためマイナスオフセット
-		}
-		.editor-block-list__block-edit{
-			height:100%;
-		}
-		.block-editor-block-list__insertion-point{
-			/* 上のセルに被るので選択しにくくなるのでデフォルトのマイナスオフセットを少し下げる */
-			top:-5px;
-		}
-		.editor-block-list__block-edit:before{
-			right:-0px;
-			left:-0px;
-			top:-0px;
-			bottom:-0px;
-			// border:1px solid #ff0000;
-		}
-		.editor-inner-blocks {
-			tr {
-				width:100%;
-				display: block;
-				.editor-block-list__layout {
-					display: flex;
-					.editor-block-list__block {
-					}
-				}
-			}
-			th,
-			td {
-				padding: 0;
-				display: block;
-				width:100%;
-				border:none; // デフォルトでつけてくる線を消す
-				.editor-rich-text__editable{
-					padding: 14px;
+			display: block;
+			.editor-block-list__layout {
+				display: flex;
+				.editor-block-list__block {
 				}
 			}
 		}
-  }
+		th,
+		td {
+			padding: 0;
+			display: block;
+			width:100%;
+			border:none; // デフォルトでつけてくる線を消す
+			.editor-rich-text__editable{
+				padding: 14px;
+			}
+		}
+	}
+	// 編集画面のtableは HTML構造がカオスなので補正
+	&.table-striped > tbody > .editor-inner-blocks > .editor-block-list__layout > div:nth-of-type(odd) {
+			background-color: rgba(0, 0, 0, 0.05);
+	}
 }
 
 /*-------------------------------------------*/
@@ -1141,5 +1086,66 @@ $font_serif:"ＭＳ Ｐ明朝", "MS PMincho","ヒラギノ明朝 Pro W3", "Hirag
 /*-------------------------------------------*/
 /* CSS
 /*-------------------------------------------*/
+
+/*-------------------------------------------*/
+/* .vk_prBlocks
+/*-------------------------------------------*/
+.vk_prBlocks_item {
+	@media screen and (max-width:992px){
+		margin-bottom: 1.5em;
+	}
+}
+.vk_prBlocks_item {
+	&_link {
+		color: #333;
+		&:hover{
+			color: #333;
+			text-decoration: none;
+		}
+	}
+	&_icon_outer {
+		display: block;
+		position:relative;
+		margin: 0 auto ;
+		width: 80px;
+		height: 80px;
+		border-radius: 50%;
+	}
+	&_icon {
+		position:absolute;
+		top:50%;
+		left:50%;
+		transform: translateY(-50%) translateX(-50%);
+		font-size: 36px;
+		color: #fff;
+	}
+	&_title{
+		margin-top:0.9em;
+		margin-bottom: 0.6em;
+		text-align: center;
+		font-size: 21px;
+		line-height: 1.4em;
+		border:none;
+		padding:0;
+		&::after{
+			border: none;
+		}
+	}
+	&_image{
+		position: relative;
+		display: block;
+		width: 120px;
+		height:120px;
+		margin: 0 auto;
+		overflow: hidden;
+		border-radius: 50%;
+		text-indent:-9999px;
+	}
+	&_summary{
+		margin-bottom: 0.5em;
+		text-align: center;
+		line-height: 1.8em;
+	}
+}
 
 }
