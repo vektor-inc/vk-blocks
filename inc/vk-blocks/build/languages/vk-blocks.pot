@@ -770,19 +770,19 @@ msgstr ""
 msgid "Caption"
 msgstr ""
 
-#: src/td/block.js:29
+#: src/td/block.js:35
 msgid "Td"
 msgstr ""
 
-#: src/th/block.js:31
+#: src/th/block.js:37
 msgid "Th"
 msgstr ""
 
-#: src/th/block.js:60
+#: src/th/block.js:66
 msgid "Text Overflow Setting"
 msgstr ""
 
-#: src/th/block.js:62
+#: src/th/block.js:68
 msgid "ON"
 msgstr ""
 

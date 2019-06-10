@@ -11,7 +11,13 @@ const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blo
 const {Fragment} = wp.element;
 const {InspectorControls, RichText} = wp.editor;
 const {PanelBody, CheckboxControl} = wp.components;
-const BlockIcon = 'arrow-down';
+const BlockIcon = (
+	<svg xmlns="http://www.w3.org/2000/svg" width="576" height="512" viewBox="0 0 576 512">
+	<path d="M512.4,80.3H63.6c-24.8,0-44.9,20.1-44.9,44.9v262.7c0,24.8,20.1,44.9,44.9,44.9h448.9c24.8,0,44.9-20.1,44.9-44.9V125.1
+		C557.3,100.4,537.2,80.3,512.4,80.3z M512.4,135.1v37h-202v-37H512.4z M310.4,237.1h202V275h-202V237.1z M265.6,285h-202v-57.9h202
+		V285z M265.6,125.1v57h-202v-57H265.6z M63.6,387.9v-58h202v58H63.6z M310.4,377.9v-38h202v38H310.4z"/>
+	</svg>
+);
 
 /**
  * Register: a Gutenberg Block.

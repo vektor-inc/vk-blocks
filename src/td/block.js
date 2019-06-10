@@ -9,7 +9,13 @@ const { times } = lodash;
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
 const {RichText} = wp.editor;
-const BlockIcon = 'arrow-down';
+const BlockIcon = (
+	<svg xmlns="http://www.w3.org/2000/svg" width="576" height="512" viewBox="0 0 576 512">
+	<path d="M63.6,432.7h448.9c24.8,0,44.9-20.1,44.9-44.9V125.1c0-24.8-20.1-44.9-44.9-44.9H63.6c-24.8,0-44.9,20.1-44.9,44.9v262.7
+		C18.7,412.6,38.8,432.7,63.6,432.7z M63.6,377.9v-37h202v37H63.6z M265.6,275.9h-202V238h202V275.9z M310.4,228h202v57.9h-202V228z
+		 M310.4,387.9v-57h202v57H310.4z M512.4,125.1v58h-202v-58H512.4z M265.6,135.1v38h-202v-38H265.6z"/>
+	</svg>
+);
 
 /**
  * Register: a Gutenberg Block.
