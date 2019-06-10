@@ -1,3 +1,8 @@
+
+.vk_block_icon_pro {
+fill:#c00;
+}
+
 .components-base-control__label {
 	 font-weight:bold;
 }
@@ -19,6 +24,7 @@ input[type=range] {
     margin: 1px;
 }
 
+/* editor area *********************************************/
 .edit-post-visual-editor.editor-styles-wrapper{
 
 

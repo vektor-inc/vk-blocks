@@ -11,7 +11,13 @@ const {RangeControl, PanelBody, BaseControl,CheckboxControl} = wp.components;
 const {Fragment} = wp.element;
 const {InspectorControls} = wp.editor;
 const {select, dispatch} = wp.data;
-const BlockIcon = 'arrow-down';
+const BlockIcon = (
+	<svg xmlns="http://www.w3.org/2000/svg" width="576" height="512" viewBox="0 0 576 512">
+	<path class="vk_block_icon_pro" d="M528,67H48C21.5,67,0,88.5,0,115v282c0,26.5,21.5,48,48,48h480c26.5,0,48-21.5,48-48V115
+		C576,88.5,554.5,67,528,67z M528,115v61H312v-61H528z M312,224h216v63H312V224z M264,287H48v-63h216V287z M264,115v61H48v-61H264z
+		 M48,397v-62h216v62H48z M312,397v-62h216v62H312z"/>
+	</svg>
+);
 
 /**
  * Register: a Gutenberg Block.
