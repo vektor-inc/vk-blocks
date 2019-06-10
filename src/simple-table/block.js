@@ -60,7 +60,7 @@ registerBlockType('vk-blocks/simple-table', {
         }
 
         if (layoutInMobile) {
-            className = className + ' vk_simpleTable-col-mobile1';
+            className = className + ' vk_table-col-mobile1';
         }
 
         return (
@@ -75,6 +75,13 @@ registerBlockType('vk-blocks/simple-table', {
                                 onChange={updateChildBlockAttributesRow}
                             />
                         </BaseControl>
+                        <BaseControl label={__('Setting layout in mobile', 'vk-blocks')}>
+                          <CheckboxControl
+                            label={__('Display one column', 'vk-blocks')}
+                            checked={layoutInMobile}
+                            onChange={(checked) => setAttributes({layoutInMobile: checked})}
+                          />
+                        </BaseControl>
                     </PanelBody>
                 </InspectorControls>
                 <InspectorControls>
@@ -88,17 +95,13 @@ registerBlockType('vk-blocks/simple-table', {
                 </InspectorControls>
                 <InspectorControls>
                     <PanelBody title={__('Setting layout in mobile', 'vk-blocks')}>
-                        <CheckboxControl
-                            label={__('Enable one column', 'vk-blocks')}
-                            checked={layoutInMobile}
-                            onChange={(checked) => setAttributes({layoutInMobile: checked})}
-                        />
+
                     </PanelBody>
                 </InspectorControls>
                 {
                     vk_blocks_check.is_pro
                         ?
-                        <table className={`${className} vk_simpleTable table vk_simpleTable-edit wp-block-table `}>
+                        <table className={`${className} vk_table vk_simpleTable table vk_simpleTable-edit wp-block-table `}>
                         <tbody>
                             <Component
                                 attributes={attributes}
@@ -127,14 +130,14 @@ registerBlockType('vk-blocks/simple-table', {
             layoutInMobile
         } = attributes;
 
-        let containerClass = 'vk_simpleTable vk_simpleTable-view wp-block-table';
+        let containerClass = 'vk_table vk_simpleTable vk_simpleTable-view wp-block-table';
 
         if (styleStriped) {
             containerClass = containerClass + ' table-striped';
         }
 
         if (layoutInMobile) {
-            containerClass = containerClass + ' vk_simpleTable-col-mobile1';
+            containerClass = containerClass + ' vk_table-col-mobile1';
         }
 
         {

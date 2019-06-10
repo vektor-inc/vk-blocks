@@ -1,11 +1,26 @@
 /*-------------------------------------------*/
 /* CSS
 /*-------------------------------------------*/
-// .vk_simpleTable{
-// 	th,
-// 	td {
-// 	}
-// }
+
+.vk_table {
+	&-col-mobile1 {
+		@media( max-width: 575.98px){
+			th,
+			td {
+					display: block;
+			}
+			th {
+				background-color: rgba(0, 0, 0, 0.05);
+			}
+			// ストライプ指定の時の背景色をリセット
+			&.table-striped tbody {
+				tr:nth-of-type(odd) {
+					background: inherit;
+				}
+			}
+		} // @media( max-width: 575.98px){
+	} // &-col-mobile1 {
+}
 
 /*-------------------------------------------*/
 /* editor class
@@ -41,6 +56,7 @@
 		tr {
 			width:100%;
 			display: block;
+			border-bottom:1px solid #e5e5e5;
 			.editor-block-list__layout {
 				display: flex;
 				.editor-block-list__block {
@@ -63,6 +79,6 @@
 			background-color: rgba(0, 0, 0, 0.05);
 	}
 	.text-nowrap {
-		white-space: nowrap !important;
+		white-space: nowrap;
 	}
 }
