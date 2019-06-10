@@ -3,5 +3,9 @@ export const schema = {
         type: 'string',
         source: 'html',
         selector: 'div',
+    },
+    textOverflow: {
+        type: 'Boolean',
+        default: false,
     }
 };

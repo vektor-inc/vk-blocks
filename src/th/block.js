@@ -8,7 +8,9 @@ const { lodash } = window;
 const { times } = lodash;
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
-const {RichText} = wp.editor;
+const {Fragment} = wp.element;
+const {InspectorControls, RichText} = wp.editor;
+const {PanelBody, CheckboxControl} = wp.components;
 const BlockIcon = 'arrow-down';
 
 /**
@@ -42,18 +44,37 @@ registerBlockType('vk-blocks/th', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    edit({attributes, setAttributes}) {
+    edit({attributes, setAttributes, className}) {
         const {
-            content
+            content,
+            textOverflow
         } = attributes;
 
-        return (<th><RichText
-            tagName="div"
-            className={'vk_th_content wp-block-table__cell-content'}
-            onChange={(value) => setAttributes({content: value})}
-            value={content}
-            // placeholder={__('Please enter content', 'vk-blocks')}
-        /></th>);
+        className = className + ' vk_th_content wp-block-table__cell-content';
+        if (textOverflow) {
+            className = className + ' vk_table-col-overflow';
+        }
+        return (
+            <Fragment>
+                <InspectorControls>
+                    <PanelBody title={__('Text Overflow Setting', 'vk-blocks')}>
+                        <CheckboxControl
+                            label={__('ON', 'vk-blocks')}
+                            checked={textOverflow}
+                            onChange={(checked) => setAttributes({textOverflow: checked})}
+                        />
+                    </PanelBody>
+                </InspectorControls>
+
+                <th><RichText
+                    tagName="div"
+                    className={className}
+                    onChange={(value) => setAttributes({content: value})}
+                    value={content}
+                    // placeholder={__('Please enter content', 'vk-blocks')}
+                /></th>
+            </Fragment>
+        );
     },
 
     /**
@@ -66,11 +87,19 @@ registerBlockType('vk-blocks/th', {
      */
     save({attributes}) {
         const {
-            content
+            content,
+            textOverflow
         } = attributes;
+
+
+        let containerClass = 'vk_th_content wp-block-table__cell-content';
+        if (textOverflow) {
+            containerClass = containerClass + ' vk_table-col-overflow';
+        }
+
         return (<th><RichText.Content
             tagName="div"
-            className={'vk_th_content wp-block-table__cell-content'}
+            className={containerClass}
             value={content}
         /></th>);
     },
