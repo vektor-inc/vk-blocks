@@ -44,9 +44,9 @@ registerBlockType('vk-blocks/simple-table', {
 
     edit({child, className, attributes, setAttributes}) {
         const {
-            colNum,
             rowNum,
-            styleStriped
+            styleStriped,
+            layoutInMobile
         } = attributes;
 
         const updateChildBlockAttributesRow = (value) => {
@@ -55,9 +55,13 @@ registerBlockType('vk-blocks/simple-table', {
 
         };
 
-				if (styleStriped){
-					className = className + ' table-striped';
-				}
+        if (styleStriped) {
+            className = className + ' table-striped';
+        }
+
+        if (layoutInMobile) {
+            className = className + ' vk_simpleTable-col-mobile1';
+        }
 
         return (
             <Fragment>
@@ -79,6 +83,15 @@ registerBlockType('vk-blocks/simple-table', {
                             label={__('Set the stripe', 'vk-blocks')}
                             checked={styleStriped}
                             onChange={(checked) => setAttributes({styleStriped: checked})}
+                        />
+                    </PanelBody>
+                </InspectorControls>
+                <InspectorControls>
+                    <PanelBody title={__('Setting layout in mobile', 'vk-blocks')}>
+                        <CheckboxControl
+                            label={__('Enable one column', 'vk-blocks')}
+                            checked={layoutInMobile}
+                            onChange={(checked) => setAttributes({layoutInMobile: checked})}
                         />
                     </PanelBody>
                 </InspectorControls>
@@ -109,16 +122,20 @@ registerBlockType('vk-blocks/simple-table', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     save({attributes}) {
+        const {
+            styleStriped,
+            layoutInMobile
+        } = attributes;
 
-			const {
-          styleStriped
-      } = attributes;
+        let containerClass = 'vk_simpleTable vk_simpleTable-view wp-block-table';
 
-			let containerClass = 'vk_simpleTable vk_simpleTable-view wp-block-table';
-			
-			if (styleStriped){
-				containerClass = containerClass + ' table-striped';
-			}
+        if (styleStriped) {
+            containerClass = containerClass + ' table-striped';
+        }
+
+        if (layoutInMobile) {
+            containerClass = containerClass + ' vk_simpleTable-col-mobile1';
+        }
 
         {
             if (vk_blocks_check.is_pro) {

@@ -7,8 +7,12 @@ export const schema = {
         type: 'number',
         default: 1,
     },
-		styleStriped: {
-				type: 'Boolean',
-				default: false,
-		},
+    styleStriped: {
+        type: 'Boolean',
+        default: false,
+    },
+    layoutInMobile: {
+        type: 'Boolean',
+        default: false,
+    },
 };

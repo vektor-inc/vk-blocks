@@ -1,28 +1,58 @@
+@charset "UTF-8";
 /*-------------------------------------------*/
 /* CSS
 /*-------------------------------------------*/
-.vk_simpleTable th {
-  font-weight: normal !important;
+/*-------------------------------------------*/
+/* editor class
+/*-------------------------------------------*/
+.vk_simpleTable-edit .editor-inner-blocks,
+.vk_simpleTable-edit .editor-block-list__layout,
+.vk_simpleTable-edit .editor-block-list__block,
+.vk_simpleTable-edit .editor-rich-text__editable,
+.vk_simpleTable-edit .editor-block-list__block-edit {
+  padding: 0;
+  margin: 0;
+  width: 100%;
 }
-
-.vk_simpleTable-edit table .block-editor-block-list__block-edit {
-  margin-top: 0;
-  margin-bottom: 0;
+.vk_simpleTable-edit > .editor-inner-blocks {
+  margin-top: -1px;
 }
-.vk_simpleTable-edit table tr .block-editor-block-list__layout {
+.vk_simpleTable-edit .editor-block-list__block-edit {
+  height: 100%;
+}
+.vk_simpleTable-edit .block-editor-block-list__insertion-point {
+  /* 上のセルに被るので選択しにくくなるのでデフォルトのマイナスオフセットを少し下げる */
+  top: -5px;
+}
+.vk_simpleTable-edit .editor-block-list__block-edit:before {
+  right: 0px;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+}
+.vk_simpleTable-edit .editor-inner-blocks tr {
+  width: 100%;
+  display: block;
+}
+.vk_simpleTable-edit .editor-inner-blocks tr .editor-block-list__layout {
   display: flex;
 }
-.vk_simpleTable-edit table tr .block-editor-block-list__layout .block-editor-block-list__block {
-  border: 1px solid;
-}
-.vk_simpleTable-edit table tr .block-editor-block-list__layout .block-editor-block-list__block .block-editor-block-list__block-edit {
-  margin: 0;
-}
-.vk_simpleTable-edit table th, .vk_simpleTable-edit table td {
+.vk_simpleTable-edit .editor-inner-blocks th,
+.vk_simpleTable-edit .editor-inner-blocks td {
+  padding: 0;
+  display: block;
+  width: 100%;
   border: none;
 }
-.vk_simpleTable-edit table th .wp-block-table__cell-content, .vk_simpleTable-edit table td .wp-block-table__cell-content {
-  width: 15vw;
+.vk_simpleTable-edit .editor-inner-blocks th .editor-rich-text__editable,
+.vk_simpleTable-edit .editor-inner-blocks td .editor-rich-text__editable {
+  padding: 14px;
+}
+.vk_simpleTable-edit.table-striped > tbody > .editor-inner-blocks > .editor-block-list__layout > div:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.vk_simpleTable-edit .text-nowrap {
+  white-space: nowrap !important;
 }
 
 /*# sourceMappingURL=style.css.map */
