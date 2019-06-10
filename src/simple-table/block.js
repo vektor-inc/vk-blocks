@@ -93,11 +93,6 @@ registerBlockType('vk-blocks/simple-table', {
                         />
                     </PanelBody>
                 </InspectorControls>
-                <InspectorControls>
-                    <PanelBody title={__('Setting layout in mobile', 'vk-blocks')}>
-
-                    </PanelBody>
-                </InspectorControls>
                 {
                     vk_blocks_check.is_pro
                         ?
