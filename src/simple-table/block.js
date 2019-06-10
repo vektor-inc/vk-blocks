@@ -7,7 +7,7 @@ import React from "react";
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
-const {RangeControl, PanelBody, BaseControl} = wp.components;
+const {RangeControl, PanelBody, BaseControl,CheckboxControl} = wp.components;
 const {Fragment} = wp.element;
 const {InspectorControls} = wp.editor;
 const {select, dispatch} = wp.data;
@@ -45,7 +45,8 @@ registerBlockType('vk-blocks/simple-table', {
     edit({child, className, attributes, setAttributes}) {
         const {
             colNum,
-            rowNum
+            rowNum,
+            styleStriped
         } = attributes;
 
         const updateChildBlockAttributesRow = (value) => {
@@ -53,6 +54,10 @@ registerBlockType('vk-blocks/simple-table', {
             setAttributes({rowNum: value});
 
         };
+
+				if (styleStriped){
+					className = className + ' table-striped';
+				}
 
         return (
             <Fragment>
@@ -62,22 +67,31 @@ registerBlockType('vk-blocks/simple-table', {
                             <RangeControl
                                 value={rowNum}
                                 min={0}
-                                max={10}
+                                max={20}
                                 onChange={updateChildBlockAttributesRow}
                             />
                         </BaseControl>
+                    </PanelBody>
+                </InspectorControls>
+                <InspectorControls>
+                    <PanelBody title={__('Styles', 'vk-blocks')}>
+                        <CheckboxControl
+                            label={__('Set the stripe', 'vk-blocks')}
+                            checked={styleStriped}
+                            onChange={(checked) => setAttributes({styleStriped: checked})}
+                        />
                     </PanelBody>
                 </InspectorControls>
                 {
                     vk_blocks_check.is_pro
                         ?
                         <table className={`${className} vk_simpleTable table vk_simpleTable-edit wp-block-table `}>
-												<tbody>
+                        <tbody>
                             <Component
                                 attributes={attributes}
                                 for_={'edit'}
                             />
-												</tbody>
+                        </tbody>
                         </table>
                         :
                         <div>{__('This block is only for users who bought Lightning Pro.', 'vk-blocks')}</div>
@@ -99,12 +113,12 @@ registerBlockType('vk-blocks/simple-table', {
             if (vk_blocks_check.is_pro) {
 
                 return (<table className={`vk_simpleTable vk_simpleTable-view wp-block-table`}>
-													<tbody>
-													<Component
-													    attributes={attributes}
-													    for_={'save'}
-													/>
-													</tbody>
+                          <tbody>
+                          <Component
+                              attributes={attributes}
+                              for_={'save'}
+                          />
+                          </tbody>
                         </table>
                 );
             }

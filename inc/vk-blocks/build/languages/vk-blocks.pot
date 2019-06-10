@@ -496,7 +496,7 @@ msgid "Border radius"
 msgstr ""
 
 #: src/outer/block.js:334
-#: src/simple-table/block.js:83
+#: src/simple-table/block.js:97
 msgid "This block is only for users who bought Lightning Pro."
 msgstr ""
 
@@ -647,12 +647,20 @@ msgstr ""
 msgid "Simple Table"
 msgstr ""
 
-#: src/simple-table/block.js:60
+#: src/simple-table/block.js:65
 msgid "Simple Table Setting"
 msgstr ""
 
-#: src/simple-table/block.js:61
+#: src/simple-table/block.js:66
 msgid "Row Number"
+msgstr ""
+
+#: src/simple-table/block.js:77
+msgid "Styles"
+msgstr ""
+
+#: src/simple-table/block.js:79
+msgid "Set the stripe"
 msgstr ""
 
 #: src/spacer/block.js:103

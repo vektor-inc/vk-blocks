@@ -6,5 +6,9 @@ export const schema = {
     rowNum: {
         type: 'number',
         default: 1,
-    }
+    },
+		styleStriped: {
+				type: 'Boolean',
+				default: false,
+		},
 };
