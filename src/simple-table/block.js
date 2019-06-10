@@ -109,10 +109,21 @@ registerBlockType('vk-blocks/simple-table', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     save({attributes}) {
+
+			const {
+          styleStriped
+      } = attributes;
+
+			let containerClass = 'vk_simpleTable vk_simpleTable-view wp-block-table';
+			
+			if (styleStriped){
+				containerClass = containerClass + ' table-striped';
+			}
+
         {
             if (vk_blocks_check.is_pro) {
 
-                return (<table className={`vk_simpleTable vk_simpleTable-view wp-block-table`}>
+                return (<table className={containerClass}>
                           <tbody>
                           <Component
                               attributes={attributes}
