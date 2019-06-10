@@ -2,6 +2,19 @@
 /*-------------------------------------------*/
 /* CSS
 /*-------------------------------------------*/
+@media (max-width: 575.98px) {
+  .vk_table-col-mobile1 th,
+.vk_table-col-mobile1 td {
+    display: block;
+  }
+  .vk_table-col-mobile1 th {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  .vk_table-col-mobile1.table-striped tbody tr:nth-of-type(odd) {
+    background: inherit;
+  }
+}
+
 /*-------------------------------------------*/
 /* editor class
 /*-------------------------------------------*/
@@ -33,6 +46,7 @@
 .vk_simpleTable-edit .editor-inner-blocks tr {
   width: 100%;
   display: block;
+  border-bottom: 1px solid #e5e5e5;
 }
 .vk_simpleTable-edit .editor-inner-blocks tr .editor-block-list__layout {
   display: flex;
@@ -50,9 +64,6 @@
 }
 .vk_simpleTable-edit.table-striped > tbody > .editor-inner-blocks > .editor-block-list__layout > div:nth-of-type(odd) {
   background-color: rgba(0, 0, 0, 0.05);
-}
-.vk_simpleTable-edit .text-nowrap {
-  white-space: nowrap !important;
 }
 
 /*# sourceMappingURL=style.css.map */
