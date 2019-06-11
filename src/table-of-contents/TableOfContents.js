@@ -60,22 +60,18 @@ class TableOfContents {
             className = className + ' ';
         }
 
-        // let bootstrapUL = ' list-group';
-        // let bootstrapLi = ' list-group-item';
-        let bootstrapUL = '';
-        let bootstrapLi = '';
-        let h = '-h';
+        let listClassName = 'vk_tableOfContents_list_item';
 
         let returnHtml = <div className={className + 'vk_tableOfContents' + style}>
             <div className={'vk_tableOfContents_title'}>{__('Table of Contents', 'vk-blocks')}</div>
-            <ul className={'vk_tableOfContents_list' + bootstrapUL + style}>
+            <ul className={'vk_tableOfContents_list' + style}>
                 {source.map((data) => {
 
-                    let baseClass = 'vk_tableOfContents_list_';
+                    let baseClass = 'vk_tableOfContents_list_item';
 
                     let level = data.tagName.replace( /H/g , '' ) ;
-                    return <li className={baseClass + 'item' + h + level + bootstrapLi}>
-                            <a href="" className={baseClass + 'item_link'}>
+                    return <li className={`${baseClass} ${baseClass}-h-${level}`}>
+                            <a href="" className={`${baseClass}_link`}>
                                 {data.innerText}
                             </a>
                         </li>;

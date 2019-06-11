@@ -771,7 +771,8 @@ msgstr ""
 msgid "Caption"
 msgstr ""
 
-#: src/table-of-contents/TableOfContents.js:70
+#: src/table-of-contents/TableOfContents.js:66
+#: src/table-of-contents/TableOfContents.js:71
 #: src/table-of-contents/block.js:32
 msgid "Table of Contents"
 msgstr ""
