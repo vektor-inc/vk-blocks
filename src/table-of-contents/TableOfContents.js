@@ -60,16 +60,18 @@ class TableOfContents {
             className = className + ' ';
         }
 
-        let bootstrapUL = ' list-group';
-        let bootstrapLi = ' list-group-item';
+        // let bootstrapUL = ' list-group';
+        // let bootstrapLi = ' list-group-item';
+        let bootstrapUL = '';
+        let bootstrapLi = '';
         let h = '-h';
 
-        let returnHtml = <div className={className + 'vk_table-of-contents' + style}>
-            <div className={'vk_table-of-contents_title'}>{__('Table of Contents', 'vk-blocks')}</div>
-            <ul className={'vk_table-of-contents_list' + bootstrapUL + style}>
+        let returnHtml = <div className={className + 'vk_tableOfContents' + style}>
+            <div className={'vk_tableOfContents_title'}>{__('Table of Contents', 'vk-blocks')}</div>
+            <ul className={'vk_tableOfContents_list' + bootstrapUL + style}>
                 {source.map((data, index) => {
 
-                    let baseClass = 'vk_table-of-contents_list_';
+                    let baseClass = 'vk_tableOfContents_list_';
 
                     switch (data.tagName) {
                         case 'H2':

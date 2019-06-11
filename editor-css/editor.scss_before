@@ -1,3 +1,22 @@
+
+.vk_block_icon_pro {
+fill:#c00;
+}
+.editor-block-list-item-vk-blocks-outer:after,
+.editor-block-list-item-vk-blocks-simple-table:after{
+position: absolute;
+top: 0;
+right: 0;
+content: "Pro";
+display: inline-block;
+font-size: 10px;
+line-height: 1;
+color: #fff;
+background-color: #cd3034;
+border-radius: 2px;
+padding: 3px 4px;
+}
+
 .components-base-control__label {
 	 font-weight:bold;
 }
@@ -19,6 +38,7 @@ input[type=range] {
     margin: 1px;
 }
 
+/* editor area *********************************************/
 .edit-post-visual-editor.editor-styles-wrapper{
 
 

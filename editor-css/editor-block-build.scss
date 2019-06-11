@@ -1,3 +1,22 @@
+
+.vk_block_icon_pro {
+fill:#c00;
+}
+.editor-block-list-item-vk-blocks-outer:after,
+.editor-block-list-item-vk-blocks-simple-table:after{
+position: absolute;
+top: 0;
+right: 0;
+content: "Pro";
+display: inline-block;
+font-size: 10px;
+line-height: 1;
+color: #fff;
+background-color: #cd3034;
+border-radius: 2px;
+padding: 3px 4px;
+}
+
 .components-base-control__label {
 	 font-weight:bold;
 }
@@ -19,6 +38,7 @@ input[type=range] {
     margin: 1px;
 }
 
+/* editor area *********************************************/
 .edit-post-visual-editor.editor-styles-wrapper{
 
 
@@ -36,6 +56,7 @@ h1:first-child.vk_prBlocks_item_title{
 			max-width:100%;
 		}
 }
+
 @media (min-width: 600px){
 .wp-block-columns {
 	margin-left:-15px;
@@ -53,6 +74,46 @@ h1:first-child.vk_prBlocks_item_title{
 		margin-right:15px;
 	}
 }
+}
+
+.alert{
+
+  padding: 1em;
+  margin: 1em 0;
+  border-radius: 3px;
+
+  & + &{
+    margin-top: 2em;
+  }
+
+  a{
+    transition: color .3s linear, opacity .3s linear;
+    &:link, &:visited{
+      opacity: .8;
+      text-decoration: underline;
+    }
+    &:hover, &:visited{
+      opacity: 1;
+      text-decoration: none;
+    }
+  }
+
+  @each $var in (
+                  (success, #dff0d8,#3c763d,#d6e9c6),
+                  (info, #d9edf7,#31708f,#bce8f1),
+                  (warning, #fcf8e3,#8a6d3b,#faebcc),
+                  (danger, #f2dede,#a94442,#ebccd1),
+  ){
+    $class-name: nth($var, 1);
+    $color-bg: nth($var, 2);
+    $color: nth($var, 3);
+    $color-border :nth($var, 4);
+    &-#{$class-name}{
+      background-color: $color-bg;
+      color:$color;
+      border-color:$color-border;
+    }
+  }
 }
 
 .vk_balloon {
@@ -320,46 +381,6 @@ h1:first-child.vk_prBlocks_item_title{
 	}
 } // @media only screen and (max-width: 480px) {
 
-.alert{
-
-  padding: 1em;
-  margin: 1em 0;
-  border-radius: 3px;
-
-  & + &{
-    margin-top: 2em;
-  }
-
-  a{
-    transition: color .3s linear, opacity .3s linear;
-    &:link, &:visited{
-      opacity: .8;
-      text-decoration: underline;
-    }
-    &:hover, &:visited{
-      opacity: 1;
-      text-decoration: none;
-    }
-  }
-
-  @each $var in (
-                  (success, #dff0d8,#3c763d,#d6e9c6),
-                  (info, #d9edf7,#31708f,#bce8f1),
-                  (warning, #fcf8e3,#8a6d3b,#faebcc),
-                  (danger, #f2dede,#a94442,#ebccd1),
-  ){
-    $class-name: nth($var, 1);
-    $color-bg: nth($var, 2);
-    $color: nth($var, 3);
-    $color-border :nth($var, 4);
-    &-#{$class-name}{
-      background-color: $color-bg;
-      color:$color;
-      border-color:$color-border;
-    }
-  }
-}
-
 .vk_button{
 	margin: 5px 0;
 	&-color-custom{
@@ -587,64 +608,29 @@ $color_dark:#343a40;
 }
 
 /*-------------------------------------------*/
-/* .vk_prBlocks
+/* CSS
 /*-------------------------------------------*/
-.vk_prBlocks_item {
-	@media screen and (max-width:992px){
-		margin-bottom: 1.5em;
+@mixin reset() {
+	background: none;
+	border:none;
+	border-radius: 0;
+	padding:0;
+	font-weight: normal;
+	box-shadow:none;
+	&:after {
+		border:none;
 	}
 }
-.vk_prBlocks_item {
-	&_link {
-		color: #333;
-		&:hover{
-			color: #333;
-			text-decoration: none;
+
+.vk_heading_title {
+	&-style {
+		&-plain {
+			@include reset;
 		}
 	}
-	&_icon_outer {
-		display: block;
-		position:relative;
-		margin: 0 auto ;
-		width: 80px;
-		height: 80px;
-		border-radius: 50%;
-	}
-	&_icon {
-		position:absolute;
-		top:50%;
-		left:50%;
-		transform: translateY(-50%) translateX(-50%);
-		font-size: 36px;
-		color: #fff;
-	}
-	&_title{
-		margin-top:0.9em;
-		margin-bottom: 0.6em;
-		text-align: center;
-		font-size: 21px;
-		line-height: 1.4em;
-		border:none;
-		padding:0;
-		&::after{
-			border: none;
-		}
-	}
-	&_image{
-		position: relative;
-		display: block;
-		width: 120px;
-		height:120px;
-		margin: 0 auto;
-		overflow: hidden;
-		border-radius: 50%;
-		text-indent:-9999px;
-	}
-	&_summary{
-		margin-bottom: 0.5em;
-		text-align: center;
-		line-height: 1.8em;
-	}
+}
+.vk_heading_subtext {
+	margin-bottom:0;
 }
 
 /*-------------------------------------------*/
@@ -757,89 +743,64 @@ $padding-xl:3.5em;
 // }
 
 /*-------------------------------------------*/
-/* CSS
+/* .vk_prBlocks
 /*-------------------------------------------*/
-@mixin reset() {
-	background: none;
-	border:none;
-	border-radius: 0;
-	padding:0;
-	font-weight: normal;
-	box-shadow:none;
-	&:after {
-		border:none;
+.vk_prBlocks_item {
+	@media screen and (max-width:992px){
+		margin-bottom: 1.5em;
 	}
 }
-
-.vk_heading_title {
-	&-style {
-		&-plain {
-			@include reset;
+.vk_prBlocks_item {
+	&_link {
+		color: #333;
+		&:hover{
+			color: #333;
+			text-decoration: none;
 		}
 	}
-}
-.vk_heading_subtext {
-	margin-bottom:0;
-}
-
-/*-------------------------------------------*/
-/* CSS
-/*-------------------------------------------*/
-
-@mixin switchVisibility($pc,$tablet,$mobile) {
-  .vk_spacer {
-    .vk_spacer-display-pc {
-      display: $pc;
-    }
-
-    .vk_spacer-display-tablet {
-      display: $tablet;
-    }
-
-    .vk_spacer-display-mobile {
-      display: $mobile;
-    }
-  }
-}
-
-// Small devices (landscape phones, 576px以下)
-@media (max-width: 576px) {
-  @include switchVisibility(none, none, block);
-}
-
-// Medium devices (tablets, 577pxから768px)
-@media (min-width: 577px) and (max-width: 768px) {
-  @include switchVisibility(none, block, none);
-}
-
-// Large devices (desktops, 769px以上)
-@media (min-width: 769px) {
-  @include switchVisibility(block, none, none);
-}
-/*-------------------------------------------*/
-/* CSS
-/*-------------------------------------------*/
-$toc-left-margin: 2rem;
-
-.editor-styles-wrapper{
-  ul{
-    list-style: none !important;
-    li.vk_table-of-contents_list_item-h3{
-      margin-left: $toc-left-margin;
-    }
-    li.vk_table-of-contents_list_item-h4{
-      margin-left: $toc-left-margin * 2;
-    }
-    li.vk_table-of-contents_list_item-h5{
-      margin-left: $toc-left-margin * 4;
-    }
-    li.vk_table-of-contents_list_item-h6{
-      margin-left: $toc-left-margin * 6;
-    }
-    ul{
-      list-style: none !important;
-    }
-  }
+	&_icon_outer {
+		display: block;
+		position:relative;
+		margin: 0 auto ;
+		width: 80px;
+		height: 80px;
+		border-radius: 50%;
+	}
+	&_icon {
+		position:absolute;
+		top:50%;
+		left:50%;
+		transform: translateY(-50%) translateX(-50%);
+		font-size: 36px;
+		color: #fff;
+	}
+	&_title{
+		margin-top:0.9em;
+		margin-bottom: 0.6em;
+		text-align: center;
+		font-size: 21px;
+		line-height: 1.4em;
+		border:none;
+		padding:0;
+		&::after{
+			border: none;
+		}
+	}
+	&_image{
+		position: relative;
+		display: block;
+		width: 120px;
+		height:120px;
+		margin: 0 auto;
+		overflow: hidden;
+		border-radius: 50%;
+		text-indent:-9999px;
+	}
+	&_summary{
+		margin-bottom: 0.5em;
+		text-align: center;
+		line-height: 1.8em;
+	}
 }
 
 /*-------------------------------------------*/
@@ -926,6 +887,123 @@ $toc-left-margin: 2rem;
 		}
 	}
 } // .vk_prContent {
+
+/*-------------------------------------------*/
+/* CSS
+/*-------------------------------------------*/
+
+.vk_table {
+	&-col-mobile1 {
+		@media( max-width: 575.98px){
+			th,
+			td {
+					display: block;
+			}
+			th {
+				background-color: rgba(0, 0, 0, 0.05);
+			}
+			// ストライプ指定の時の背景色をリセット
+			&.table-striped tbody {
+				tr:nth-of-type(odd) {
+					background: inherit;
+				}
+			}
+		} // @media( max-width: 575.98px){
+	} // &-col-mobile1 {
+}
+
+/*-------------------------------------------*/
+/* editor class
+/*-------------------------------------------*/
+.vk_simpleTable-edit{
+	.editor-inner-blocks,
+	.editor-block-list__layout,
+	.editor-block-list__block,
+	.editor-rich-text__editable,
+	.editor-block-list__block-edit{
+		padding:0;
+		margin:0;
+		width:100%;
+	}
+	& > .editor-inner-blocks{
+		margin-top:-1px; // th,td がHTML上ではdivの中になってしまう都合上、線が2pxになるためマイナスオフセット
+	}
+	.editor-block-list__block-edit{
+		height:100%;
+	}
+	.block-editor-block-list__insertion-point{
+		/* 上のセルに被るので選択しにくくなるのでデフォルトのマイナスオフセットを少し下げる */
+		top:-5px;
+	}
+	.editor-block-list__block-edit:before{
+		right:-0px;
+		left:-0px;
+		top:-0px;
+		bottom:-0px;
+		// border:1px solid #ff0000;
+	}
+	.editor-inner-blocks {
+		tr {
+			width:100%;
+			display: block;
+			border-bottom:1px solid #e5e5e5;
+			.editor-block-list__layout {
+				display: flex;
+				.editor-block-list__block {
+				}
+			}
+		}
+		th,
+		td {
+			padding: 0;
+			display: block;
+			width:100%;
+			border:none; // デフォルトでつけてくる線を消す
+			.editor-rich-text__editable{
+				padding: 14px;
+			}
+		}
+	}
+	// 編集画面のtableは HTML構造がカオスなので補正
+	&.table-striped > tbody > .editor-inner-blocks > .editor-block-list__layout > div:nth-of-type(odd) {
+			background-color: rgba(0, 0, 0, 0.05);
+	}
+}
+
+/*-------------------------------------------*/
+/* CSS
+/*-------------------------------------------*/
+
+@mixin switchVisibility($pc,$tablet,$mobile) {
+  .vk_spacer {
+    .vk_spacer-display-pc {
+      display: $pc;
+    }
+
+    .vk_spacer-display-tablet {
+      display: $tablet;
+    }
+
+    .vk_spacer-display-mobile {
+      display: $mobile;
+    }
+  }
+}
+
+// Small devices (landscape phones, 576px以下)
+@media (max-width: 576px) {
+  @include switchVisibility(none, none, block);
+}
+
+// Medium devices (tablets, 577pxから768px)
+@media (min-width: 577px) and (max-width: 768px) {
+  @include switchVisibility(none, block, none);
+}
+
+// Large devices (desktops, 769px以上)
+@media (min-width: 769px) {
+  @include switchVisibility(block, none, none);
+}
 /*-------------------------------------------*/
 /* CSS
 /*-------------------------------------------*/
@@ -1105,34 +1183,61 @@ $font_serif:"ＭＳ Ｐ明朝", "MS PMincho","ヒラギノ明朝 Pro W3", "Hirag
 /*-------------------------------------------*/
 /* CSS
 /*-------------------------------------------*/
+$toc-left-margin: 2rem;
 
-@mixin switchVisibility($pc,$tablet,$mobile) {
-  .vk_spacer {
-    .vk_spacer-display-pc {
-      display: $pc;
+.vk_tableOfContents {
+	border:1px solid #ff0000;
+	padding: 4rem;
+	&_title{
+		text-align: center;
+	}
+	li {
+		border-bottom:1px solid #ccc;
+	}
+}
+
+
+
+.editor-styles-wrapper{
+	.vk_tableOfContents {
+		ul {
+			margin-top:0;
+			margin-bottom:0;
+		}
+		.list-group-item{
+			border: none;
+		}
+	}
+  ul{
+    list-style: none !important;
+    li.vk_tableOfContents_list_item-h3{
+      margin-left: $toc-left-margin;
     }
-
-    .vk_spacer-display-tablet {
-      display: $tablet;
+    li.vk_tableOfContents_list_item-h4{
+      margin-left: $toc-left-margin * 2;
     }
-
-    .vk_spacer-display-mobile {
-      display: $mobile;
+    li.vk_tableOfContents_list_item-h5{
+      margin-left: $toc-left-margin * 4;
+    }
+    li.vk_tableOfContents_list_item-h6{
+      margin-left: $toc-left-margin * 6;
+    }
+    ul{
+      list-style: none !important;
     }
   }
 }
 
-// Small devices (landscape phones, 576px以下)
-@media (max-width: 576px) {
-  @include switchVisibility(none, none, block);
+/*-------------------------------------------*/
+/* CSS
+/*-------------------------------------------*/
+.vk_table-col-overflow {
+  white-space: nowrap !important;
 }
+/*# sourceMappingURL=style.scss.map */
 
-// Medium devices (tablets, 577pxから768px)
-@media (min-width: 577px) and (max-width: 768px) {
-  @include switchVisibility(none, block, none);
+/*-------------------------------------------*/
+/* CSS
+/*-------------------------------------------*/
+
 }
-
-// Large devices (desktops, 769px以上)
-@media (min-width: 769px) {
-  @include switchVisibility(block, none, none);
-}}

@@ -3,19 +3,41 @@
 /*-------------------------------------------*/
 $toc-left-margin: 2rem;
 
+.vk_tableOfContents {
+	border:1px solid #ff0000;
+	padding: 4rem;
+	&_title{
+		text-align: center;
+	}
+	li {
+		border-bottom:1px solid #ccc;
+	}
+}
+
+
+
 .editor-styles-wrapper{
+	.vk_tableOfContents {
+		ul {
+			margin-top:0;
+			margin-bottom:0;
+		}
+		.list-group-item{
+			border: none;
+		}
+	}
   ul{
     list-style: none !important;
-    li.vk_table-of-contents_list_item-h3{
+    li.vk_tableOfContents_list_item-h3{
       margin-left: $toc-left-margin;
     }
-    li.vk_table-of-contents_list_item-h4{
+    li.vk_tableOfContents_list_item-h4{
       margin-left: $toc-left-margin * 2;
     }
-    li.vk_table-of-contents_list_item-h5{
+    li.vk_tableOfContents_list_item-h5{
       margin-left: $toc-left-margin * 4;
     }
-    li.vk_table-of-contents_list_item-h6{
+    li.vk_tableOfContents_list_item-h6{
       margin-left: $toc-left-margin * 6;
     }
     ul{
