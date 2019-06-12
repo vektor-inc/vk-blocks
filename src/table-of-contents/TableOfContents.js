@@ -68,7 +68,7 @@ class TableOfContents {
         let h5Count = 0;
         let h6Count = 0;
         const fixZero = (count) => {
-          if ( count == 0 ){
+          if ( count === 0 ){
             return 1;
           } else {
             return count;
@@ -87,7 +87,7 @@ class TableOfContents {
 
                     let preNumber = '';
 
-                    if ( level == 2 ){
+                    if ( level === 2 ){
                       h2Count++;
                       preNumber = h2Count;
 
@@ -98,7 +98,7 @@ class TableOfContents {
                       h6Count = 0;
                     }
 
-                    if ( level == 3 ){
+                    if ( level === 3 ){
                       h3Count++;
                       preNumber = h2Count + countSeparater + h3Count;
 
@@ -108,7 +108,7 @@ class TableOfContents {
                       h6Count = 0;
                     }
 
-                    if ( level == 4 ){
+                    if ( level === 4 ){
                       h4Count++;
                       preNumber = h2Count + countSeparater + fixZero(h3Count) + countSeparater + h4Count;
 
@@ -117,7 +117,7 @@ class TableOfContents {
                       h6Count = 0;
                     }
 
-                    if ( level == 5 ){
+                    if ( level === 5 ){
                       h5Count++;
                       preNumber = h2Count + countSeparater + fixZero(h3Count) + countSeparater + fixZero(h4Count) + countSeparater + h5Count;
 
@@ -125,7 +125,7 @@ class TableOfContents {
                       h6Count = 0;
                     }
 
-                    if ( level == 6 ){
+                    if ( level === 6 ){
                       h6Count++;
                       preNumber = h2Count + countSeparater + fixZero(h3Count) + countSeparater + fixZero(h4Count) + countSeparater + fixZero(h5Count) + countSeparater + h6Count;
 

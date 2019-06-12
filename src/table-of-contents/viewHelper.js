@@ -19,7 +19,9 @@ let isExist = (val) =>{
  */
 let getDom = () => {
 
-    let editor = document.getElementsByClassName('vk_table-of-contents');
+    let editor = document.getElementsByClassName('wp-block-vk-blocks-table-of-contents');
+
+    console.log(editor);
 
     if(isExist(editor[0])){
         if (editor[0].parentElement) {
@@ -58,7 +60,7 @@ let appendIdHtags = (hTags, callback) => {
  */
 let assignIdHref = (hTags) => {
 
-    let aTags = document.getElementsByClassName('vk_table-of-contents_list_item_link');
+    let aTags = document.getElementsByClassName('vk_tableOfContents_list_item_link');
     for (let i = 0; i < aTags.length; i++) {
 
         aTags[i].attributes[0].nodeValue = '#' + hTags[i].id;
