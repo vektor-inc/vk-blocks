@@ -83,7 +83,7 @@ class TableOfContents {
 
                     let baseClass = 'vk_tableOfContents_list_item';
 
-                    let level = data.tagName.replace( /H/g , '' ) ;
+                    let level = Number(data.tagName.replace( /H/g , '' ));
 
                     let preNumber = '';
 
