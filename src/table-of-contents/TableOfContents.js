@@ -55,10 +55,14 @@ class TableOfContents {
     returnHtml(source, style, className) {
 
         if (!className) {
-            className = '';
+            className = 'vk_tableOfContents';
         } else {
-            className = className + ' ';
+            className = className + ' vk_tableOfContents';
         }
+
+				if ( style ){
+					className = className + ' vk_tableOfContents-style-' + style;
+				}
 
         let listClassName = 'vk_tableOfContents_list_item';
         let countSeparater = '.';
@@ -76,9 +80,9 @@ class TableOfContents {
         };
 
 
-        let returnHtml = <div className={className + 'vk_tableOfContents' + style}>
+        let returnHtml = <div className={className}>
             <div className={'vk_tableOfContents_title'}>{__('Table of Contents', 'vk-blocks')}</div>
-            <ul className={'vk_tableOfContents_list' + style}>
+            <ul className={'vk_tableOfContents_list'}>
                 {source.map((data) => {
 
                     let baseClass = 'vk_tableOfContents_list_item';

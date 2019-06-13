@@ -1186,18 +1186,24 @@ $font_serif:"ＭＳ Ｐ明朝", "MS PMincho","ヒラギノ明朝 Pro W3", "Hirag
 $toc-left-margin: 1rem;
 
 .vk_tableOfContents {
-	border:3px solid rgba(0,0,0,0.04);;
-	box-shadow:inset 0px 0px 0px 1px rgba(255,255,255,1);
-	background-color: rgba(0,0,0,0.015);
-	padding: 3rem 4rem;
-	li {
-		margin:0;
+	margin-bottom:4em;
+	&-style-default{
+		border:3px solid rgba(0,0,0,0.04);
+		box-shadow:inset 0px 0px 0px 1px rgba(255,255,255,1);
+		background-color: rgba(0,0,0,0.015);
+		padding: 3rem 4rem;
 	}
 	&_title{
 		text-align: center;
+		font-size: 1.2em;
+		letter-spacing: 0.5em;
+	}
+	li {
+		margin:0;
 	}
 	&_list{
 		padding:0;
+		margin-top:1em;
 		&_item {
 			list-style: none;
 			border-bottom:1px solid #e5e5e5;

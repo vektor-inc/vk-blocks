@@ -272,6 +272,7 @@ msgid "Heading style"
 msgstr "見出しスタイル"
 
 #: src/heading/block.js:125 src/staff/block.js:105
+#: src/table-of-contents/block.js:106
 msgid "Default"
 msgstr "標準"
 
@@ -330,7 +331,7 @@ msgstr "タイトルを入力"
 # %s: heading level e.g: "1", "2", "3"
 #: src/heading/heading-toolbar.js:17
 msgid "Heading %d"
-msgstr ""
+msgstr "見出し %d"
 
 #: src/outer/block.js:107
 msgid "Background Image"
@@ -479,6 +480,7 @@ msgid "Border radius"
 msgstr "枠線のRの大きさ"
 
 #: src/outer/block.js:326 src/simple-table/block.js:114
+#: src/table-of-contents/block.js:125
 msgid "This block is only for users who bought Lightning Pro."
 msgstr "このブロックは Lightning Pro 専用です。"
 
@@ -753,6 +755,19 @@ msgstr "名前"
 #: src/staff/component.js:50
 msgid "Caption"
 msgstr "キャプション"
+
+#: src/table-of-contents/TableOfContents.js:84
+#: src/table-of-contents/block.js:55
+msgid "Table of Contents"
+msgstr "目次"
+
+#: src/table-of-contents/block.js:110
+msgid "No frame"
+msgstr "枠無し"
+
+#: src/table-of-contents/block.js:97
+msgid "Style"
+msgstr "スタイル"
 
 #: src/td/block.js:35
 msgid "Td"

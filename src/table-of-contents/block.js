@@ -95,19 +95,19 @@ registerBlockType('vk-blocks/table-of-contents', {
                     <PanelBody>
                         <BaseControl
                             label={__('Style', 'vk-blocks')}
-                            help={__('When you add heading tags after you insert Table of Contents block, please click this block again. Then this block will generate the preview again.', 'vk-blocks')}
+                            help={``}
                         >
                             <SelectControl
                                 value={style}
                                 onChange={(value) => setAttributes({style: value})}
                                 options={[
                                     {
-                                        value: '',
-                                        label: __('Basic', 'vk-blocks'),
+                                        value: 'default',
+                                        label: __('Default', 'vk-blocks'),
                                     },
                                     {
-                                        value: '-flush',
-                                        label: __('Flush', 'vk-blocks'),
+                                        value: '',
+                                        label: __('No frame', 'vk-blocks'),
                                     }
                                 ]}
                             />

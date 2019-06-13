@@ -286,6 +286,7 @@ msgstr ""
 
 #: src/heading/block.js:125
 #: src/staff/block.js:105
+#: src/table-of-contents/block.js:106
 msgid "Default"
 msgstr ""
 
@@ -771,27 +772,17 @@ msgstr ""
 msgid "Caption"
 msgstr ""
 
-#: src/table-of-contents/TableOfContents.js:80
+#: src/table-of-contents/TableOfContents.js:84
 #: src/table-of-contents/block.js:55
 msgid "Table of Contents"
 msgstr ""
 
-#: src/table-of-contents/block.js:106
-msgid "Basic"
-msgstr ""
-
 #: src/table-of-contents/block.js:110
-msgid "Flush"
+msgid "No frame"
 msgstr ""
 
 #: src/table-of-contents/block.js:97
 msgid "Style"
-msgstr ""
-
-#: src/table-of-contents/block.js:98
-msgid ""
-"When you add heading tags after you insert Table of Contents block, please "
-"click this block again. Then this block will generate the preview again."
 msgstr ""
 
 #: src/td/block.js:35
