@@ -11,7 +11,7 @@ if ( ! function_exists( 'vkblocks_active' ) ) {
 	// Set asset URL.
 	define( 'VK_BLOCKS_URL', plugin_dir_url( __FILE__ ) . 'vk-blocks/' );
 	// Set version number.
-	define( 'VK_BLOCKS_VERSION', '0.8.2' );
+	define( 'VK_BLOCKS_VERSION', '0.9.0' );
 
 	global $vk_blocks_prefix;
 	$vk_blocks_prefix = apply_filters( 'vk_blocks_prefix', 'VK ' );
@@ -40,7 +40,7 @@ if ( ! function_exists( 'vkblocks_active' ) ) {
 	/**
 	 * Boostrapの読み込みを取り消し
 	 */
-	function vkblocks_remove_bootstrap_admin( ) {
+	function vkblocks_remove_bootstrap_admin() {
 		wp_dequeue_style( 'vkblocks-bootstrap' );
 	}
 
@@ -62,23 +62,31 @@ if ( ! function_exists( 'vkblocks_active' ) ) {
 	 */
 	function vkblocks_customize_register( $wp_customize ) {
 
-		$wp_customize->add_setting( 'vkblocks_load_bootstrap', array(
-			'default'           => true,
-			'sanitize_callback' => 'vkblocks_sanitize_checkbox',
-		) );
+		$wp_customize->add_setting(
+			'vkblocks_load_bootstrap', array(
+				'default'           => true,
+				'sanitize_callback' => 'vkblocks_sanitize_checkbox',
+			)
+		);
 
-		$wp_customize->add_section( 'vkblocks_load_bootstrap_section', array(
-			'title'    => __( 'VK Blocks Bootstrap Setting', 'vk-blocks' ),
-			'priority' => 30,
-		) );
+		$wp_customize->add_section(
+			'vkblocks_load_bootstrap_section', array(
+				'title'    => __( 'VK Blocks Bootstrap Setting', 'vk-blocks' ),
+				'priority' => 30,
+			)
+		);
 
-		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'vkblocks_load_bootstrap', array(
-			'label'       => __( 'Loading Bootstrap4', 'vk-blocks' ),
-			'description' => __( 'Check here to load Bootstrap4. If your theme or plugins loading Bootstrap4, uncheck here.', 'vk-blocks' ),
-			'type'        => 'checkbox',
-			'section'     => 'vkblocks_load_bootstrap_section',
-			'settings'    => 'vkblocks_load_bootstrap',
-		) ) );
+		$wp_customize->add_control(
+			new WP_Customize_Color_Control(
+				$wp_customize, 'vkblocks_load_bootstrap', array(
+					'label'       => __( 'Loading Bootstrap4', 'vk-blocks' ),
+					'description' => __( 'Check here to load Bootstrap4. If your theme or plugins loading Bootstrap4, uncheck here.', 'vk-blocks' ),
+					'type'        => 'checkbox',
+					'section'     => 'vkblocks_load_bootstrap_section',
+					'settings'    => 'vkblocks_load_bootstrap',
+				)
+			)
+		);
 	}
 	add_action( 'customize_register', 'vkblocks_customize_register' );
 
