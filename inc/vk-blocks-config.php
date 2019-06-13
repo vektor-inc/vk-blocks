@@ -31,7 +31,6 @@ if ( ! function_exists( 'vkblocks_active' ) ) {
 
 			}
 		} else {
-			wp_enqueue_script('vk-blocks-toc-helper-js', VK_BLOCKS_URL . '../../src/table-of-contents/viewHelper.js', array(), VK_BLOCKS_VERSION, true );
 			wp_register_style( 'vkblocks-bootstrap', plugin_dir_url( __FILE__ ) . '/bootstrap-4.1.3/css/bootstrap.min.css', false, '4.1.3' );
 			wp_enqueue_style( 'vkblocks-bootstrap' );
 		}
