@@ -493,7 +493,7 @@ msgstr ""
 
 #: src/outer/block.js:326
 #: src/simple-table/block.js:114
-#: src/table-of-contents/block.js:104
+#: src/table-of-contents/block.js:125
 msgid "This block is only for users who bought Lightning Pro."
 msgstr ""
 
@@ -772,26 +772,26 @@ msgid "Caption"
 msgstr ""
 
 #: src/table-of-contents/TableOfContents.js:80
-#: src/table-of-contents/block.js:32
+#: src/table-of-contents/block.js:55
 msgid "Table of Contents"
 msgstr ""
 
-#: src/table-of-contents/block.js:74
-msgid "Style"
-msgstr ""
-
-#: src/table-of-contents/block.js:75
-msgid ""
-"When you add heading tags after you insert Table of Contents block, please "
-"click this block again. Then this block will generate the preview again."
-msgstr ""
-
-#: src/table-of-contents/block.js:83
+#: src/table-of-contents/block.js:106
 msgid "Basic"
 msgstr ""
 
-#: src/table-of-contents/block.js:87
+#: src/table-of-contents/block.js:110
 msgid "Flush"
+msgstr ""
+
+#: src/table-of-contents/block.js:97
+msgid "Style"
+msgstr ""
+
+#: src/table-of-contents/block.js:98
+msgid ""
+"When you add heading tags after you insert Table of Contents block, please "
+"click this block again. Then this block will generate the preview again."
 msgstr ""
 
 #: src/td/block.js:35
