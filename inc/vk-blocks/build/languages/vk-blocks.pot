@@ -493,7 +493,6 @@ msgid "Border radius"
 msgstr ""
 
 #: src/outer/block.js:326
-#: src/simple-table/block.js:114
 #: src/table-of-contents/block.js:125
 msgid "This block is only for users who bought Lightning Pro."
 msgstr ""
@@ -645,34 +644,6 @@ msgstr ""
 msgid "Input content."
 msgstr ""
 
-#: src/simple-table/block.js:37
-msgid "Simple Table"
-msgstr ""
-
-#: src/simple-table/block.js:75
-msgid "Simple Table Setting"
-msgstr ""
-
-#: src/simple-table/block.js:76
-msgid "Row Number"
-msgstr ""
-
-#: src/simple-table/block.js:84
-msgid "Setting layout in mobile"
-msgstr ""
-
-#: src/simple-table/block.js:86
-msgid "Display one column"
-msgstr ""
-
-#: src/simple-table/block.js:94
-msgid "Styles"
-msgstr ""
-
-#: src/simple-table/block.js:96
-msgid "Set the stripe"
-msgstr ""
-
 #: src/spacer/block.js:103
 msgid "Mobile"
 msgstr ""
@@ -783,24 +754,4 @@ msgstr ""
 
 #: src/table-of-contents/block.js:97
 msgid "Style"
-msgstr ""
-
-#: src/td/block.js:35
-msgid "Td"
-msgstr ""
-
-#: src/th/block.js:37
-msgid "Th"
-msgstr ""
-
-#: src/th/block.js:66
-msgid "Text Overflow Setting"
-msgstr ""
-
-#: src/th/block.js:68
-msgid "ON"
-msgstr ""
-
-#: src/tr/block.js:29
-msgid "Tr"
 msgstr ""
