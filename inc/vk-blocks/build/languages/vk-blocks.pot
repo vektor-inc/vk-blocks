@@ -493,7 +493,7 @@ msgstr ""
 
 #: src/outer/block.js:326
 #: src/simple-table/block.js:114
-#: src/table-of-contents/block.js:102
+#: src/table-of-contents/block.js:104
 msgid "This block is only for users who bought Lightning Pro."
 msgstr ""
 
