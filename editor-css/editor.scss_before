@@ -3,6 +3,7 @@
 fill:#c00;
 }
 .editor-block-list-item-vk-blocks-outer:after,
+.editor-block-list-item-vk-blocks-table-of-contents:after,
 .editor-block-list-item-vk-blocks-simple-table:after{
 position: absolute;
 top: 0;
