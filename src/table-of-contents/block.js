@@ -117,12 +117,10 @@ registerBlockType('vk-blocks/table-of-contents', {
                 {
                     vk_blocks_check.is_pro
                         ?
-                        <div>
-                            <ServerSideRender
-                                block='vk-blocks/table-of-contents'
-                                attributes={attributes}
-                            />
-                        </div>
+                        <ServerSideRender
+                            block='vk-blocks/table-of-contents'
+                            attributes={attributes}
+                        />
                         :
                         <div>{__('This block is only for users who bought Lightning Pro.', 'vk-blocks')}</div>
                 }
