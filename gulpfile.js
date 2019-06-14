@@ -9,6 +9,8 @@ var autoprefixer = require('gulp-autoprefixer');
 var cleanCss = require('gulp-clean-css');
 // 同期的に処理してくれる（ distで使用している ）
 var runSequence = require('run-sequence');
+// js最小化
+var jsmin = require('gulp-jsmin');
 
 gulp.task('sass', function () {
     return gulp.src(['./src/**/*.scss'])
@@ -49,10 +51,16 @@ gulp.task('js', function () {
         .pipe(gulp.dest('./'));
 });
 
+gulp.task('copy_front_js', function () {
+		return gulp.src([ './src/table-of-contents/viewHelper.js'])
+			.pipe(jsmin())
+			.pipe( gulp.dest( './inc/vk-blocks/build/view/js/' ) );
+});
+
 
 // watch
 gulp.task('watch', function () {
-    gulp.watch('src/**/*.js', ['js','dist_ex']);
+    gulp.watch('src/**/*.js', ['js','dist_ex','copy_front_js']);
     gulp.watch('editor-css/editor.scss_before', ['sass_editor']);
     gulp.watch('src/**/*.scss', ['sass','sass_editor','dist_ex']);
     // gulp.watch('src/**/*.scss', ['sass']);
