@@ -95,16 +95,27 @@ registerBlockType('vk-blocks/latest-posts', {
             setAttributes: setAttributes
         };
 
+        /**
+         * Check array is empty or not. If array is empty return true;
+         * @returns {Boolean}
+         */
         const isArrayEmpty = (array) => {
-            return array !== [];
+            return array === [];
         };
 
-
+        /**
+         * Check value is in the array or not. If the value exists in array, return index;
+         * @returns {Number}
+         */
         const isValueInArray = (array,value) =>{
-            return array.findIndex(item => item === value) !== -1;
+            return array.findIndex(item => item === value);
         };
 
 
+        /**
+         * Get checked post-types in real time. Return the array of checked post-types.
+         * @returns {Array}
+         */
         const geCheckedPostTypes = () => {
 
             let checkedPostType = select("core/block-editor").getBlockAttributes(clientId);
@@ -118,7 +129,8 @@ registerBlockType('vk-blocks/latest-posts', {
 
                 searchedPostTypes.forEach(tax => {
 
-                    let index = checkedKey.findIndex(item => item === tax.slug);
+                    let index = isValueInArray(checkedKey, tax.slug);
+
                     if (index === -1) {
                         // ... (合致した要素がなかった場合)
                     } else {
@@ -126,34 +138,35 @@ registerBlockType('vk-blocks/latest-posts', {
                         let key = checkedKey[index];
                         let value = checkedValue[index];
 
-                        if (value && undefined === resultPostTypes.find(item => item === value)) {
-
+                        if (value) {
                             resultPostTypes.push(key)
                         }
                     }
                 });
             }
-
             return resultPostTypes;
         };
 
+        /**
+         * Get taxonomies of checked post-types in real time. Return array of taxonomies.
+         * @returns {Array}
+         */
         const getTaxonomiesFromPostType = (targetPostTypes) => {
 
             let resultTaxonomies = [];
 
-
-            if (targetPostTypes && isArrayEmpty(targetPostTypes)) {
+            if (targetPostTypes && !isArrayEmpty(targetPostTypes)) {
 
                 targetPostTypes.forEach(tax => {
 
                     let postType = select("core").getPostType(tax);
                     let taxonomies = postType.taxonomies;
 
-                    if (taxonomies && isArrayEmpty(taxonomies)){
+                    if (taxonomies && !isArrayEmpty(taxonomies)) {
 
                         taxonomies.forEach(tax => {
 
-                            let index = resultTaxonomies.findIndex(item => item === tax);
+                            let index = isValueInArray(resultTaxonomies, tax);
                             if (index === -1) {
                                 resultTaxonomies.push(tax);
                             }
@@ -167,8 +180,8 @@ registerBlockType('vk-blocks/latest-posts', {
 
 
         subscribe(() => {
-            let test = geCheckedPostTypes();
-            let test2 = getTaxonomiesFromPostType(test);
+            let checkedPostTypes = geCheckedPostTypes();
+            let TaxonomiesOfCheckedPostTypes = getTaxonomiesFromPostType(checkedPostTypes);
         });
 
 
