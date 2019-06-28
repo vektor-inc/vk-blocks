@@ -15,9 +15,9 @@ export const schema = {
         type: 'string',
         default: '{}'
     },
-    isCheckedTags:{
+    taxonomyOfCheckedPT:{
         type: 'string',
-        default: '{}'
+        default: '[]'
     }
 };
 

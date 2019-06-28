@@ -62,9 +62,9 @@ function vkblocks_blocks_assets() {
 								'type'    => 'string',
 								'default' => '{}',
 							),
-							'isCheckedTags' => array(
+							'taxonomyOfCheckedPT' => array(
 								'type'    => 'string',
-								'default' => '{}',
+								'default' => '[]',
 							)
 						),
 						'style'           => 'vk-blocks-build-css',

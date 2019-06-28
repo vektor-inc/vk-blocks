@@ -70,9 +70,8 @@ registerBlockType('vk-blocks/latest-posts', {
             layout,
             isCheckedPostType,
             isCheckedTaxonomy,
-            isCheckedTags
+            taxonomyOfCheckedPT
         } = attributes;
-
 
         let argsPostTypes = {
             name: 'postTypes',
@@ -83,15 +82,8 @@ registerBlockType('vk-blocks/latest-posts', {
 
         let argsTaxonomy = {
             name: 'taxonomy',
-            data: coreData.taxonomy,
+            data: JSON.parse(taxonomyOfCheckedPT),
             returnArray: JSON.parse(isCheckedTaxonomy),
-            setAttributes: setAttributes
-        };
-
-        let argsTags = {
-            name: 'post_tag',
-            data: coreData.post_tag,
-            returnArray: JSON.parse(isCheckedTags),
             setAttributes: setAttributes
         };
 
@@ -178,12 +170,17 @@ registerBlockType('vk-blocks/latest-posts', {
             return resultTaxonomies;
         };
 
-
         subscribe(() => {
+            let formatArray = [];
             let checkedPostTypes = geCheckedPostTypes();
             let TaxonomiesOfCheckedPostTypes = getTaxonomiesFromPostType(checkedPostTypes);
-        });
 
+            TaxonomiesOfCheckedPostTypes.forEach(tax => {
+                formatArray.push({slug: tax});
+            });
+
+            setAttributes({taxonomyOfCheckedPT: JSON.stringify(formatArray)})
+        });
 
         return (
             <Fragment>
@@ -224,20 +221,13 @@ registerBlockType('vk-blocks/latest-posts', {
                                 addCheckBox(argsPostTypes)
                             }
                         </BaseControl>
-                        {/*<BaseControl*/}
-                        {/*label={__('Filter by Taxonomy', 'vk-blocks')}*/}
-                        {/*>*/}
-                        {/*{*/}
-                        {/*addCheckBox(argsTaxonomy)*/}
-                        {/*}*/}
-                        {/*</BaseControl>*/}
-                        {/*<BaseControl*/}
-                        {/*label={__('Filter by Tags', 'vk-blocks')}*/}
-                        {/*>*/}
-                        {/*{*/}
-                        {/*addCheckBox(argsTags)*/}
-                        {/*}*/}
-                        {/*</BaseControl>*/}
+                        <BaseControl
+                            label={__('Filter by Taxonomy', 'vk-blocks')}
+                        >
+                            {
+                                addCheckBox(argsTaxonomy)
+                            }
+                        </BaseControl>
                     </PanelBody>
                 </InspectorControls>
                 <div>
