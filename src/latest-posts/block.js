@@ -95,19 +95,28 @@ registerBlockType('vk-blocks/latest-posts', {
             setAttributes: setAttributes
         };
 
+        const isArrayEmpty = (array) => {
+            return array !== [];
+        };
 
-        const geCheckedPostTypeKey = () => {
+
+        const isValueInArray = (array,value) =>{
+            return array.findIndex(item => item === value) !== -1;
+        };
+
+
+        const geCheckedPostTypes = () => {
 
             let checkedPostType = select("core/block-editor").getBlockAttributes(clientId);
             let checkedObj = JSON.parse(checkedPostType.isCheckedPostType);
             let checkedKey = Object.keys(checkedObj);
             let checkedValue = Object.values(checkedObj);
-            let searchedTaxonomies = wp.data.select("core").getPostTypes();
-            let resultTaxonomies = [];
+            let searchedPostTypes = select("core").getPostTypes();
+            let resultPostTypes = [];
 
             if (0 < checkedKey.length) {
 
-                searchedTaxonomies.forEach(tax => {
+                searchedPostTypes.forEach(tax => {
 
                     let index = checkedKey.findIndex(item => item === tax.slug);
                     if (index === -1) {
@@ -117,10 +126,38 @@ registerBlockType('vk-blocks/latest-posts', {
                         let key = checkedKey[index];
                         let value = checkedValue[index];
 
-                        if (value && undefined === resultTaxonomies.find(item => item === value)) {
+                        if (value && undefined === resultPostTypes.find(item => item === value)) {
 
-                            resultTaxonomies.push(key)
+                            resultPostTypes.push(key)
                         }
+                    }
+                });
+            }
+
+            return resultPostTypes;
+        };
+
+        const getTaxonomiesFromPostType = (targetPostTypes) => {
+
+            let resultTaxonomies = [];
+
+
+            if (targetPostTypes && isArrayEmpty(targetPostTypes)) {
+
+                targetPostTypes.forEach(tax => {
+
+                    let postType = select("core").getPostType(tax);
+                    let taxonomies = postType.taxonomies;
+
+                    if (taxonomies && isArrayEmpty(taxonomies)){
+
+                        taxonomies.forEach(tax => {
+
+                            let index = resultTaxonomies.findIndex(item => item === tax);
+                            if (index === -1) {
+                                resultTaxonomies.push(tax);
+                            }
+                        });
                     }
                 });
             }
@@ -130,8 +167,8 @@ registerBlockType('vk-blocks/latest-posts', {
 
 
         subscribe(() => {
-            let checkedPostTypeKey = geCheckedPostTypeKey();
-
+            let test = geCheckedPostTypes();
+            let test2 = getTaxonomiesFromPostType(test);
         });
 
 
