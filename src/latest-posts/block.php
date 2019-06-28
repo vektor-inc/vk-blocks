@@ -12,7 +12,10 @@ class VkBlocksLatestPosts{
 	 */
 	public function render_latest_posts( $attributes ) {
 
-		return "<div>このHTMLはサーバーサイドレンダリングエラーを回避するために挿入されています。開発を始める時はこれを削除して任意のHTMLに変更してください。</div>";
+		$layout            = $attributes['layout'];
+		$numberPosts       = $attributes['numberPosts'];
+		$isCheckedPostType = json_decode( $attributes['isCheckedPostType'], true );
+		$isCheckedTaxonomy = json_decode( $attributes['isCheckedTaxonomy'], true );
 
 		$layout            = $attributes['layout'];
 		$layoutClass = '';
@@ -52,7 +55,6 @@ class VkBlocksLatestPosts{
 
 		$isCheckedPostType = json_decode( $attributes['isCheckedPostType'], true );
 		$isCheckedTaxonomy = json_decode( $attributes['isCheckedTaxonomy'], true );
-		$isCheckedTags     = json_decode( $attributes['isCheckedTags'], true );
 
 		// $count      = ( isset( $instance['count'] ) && $instance['count'] ) ? $instance['count'] : 10;
 		$post_type = 'post';
