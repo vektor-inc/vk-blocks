@@ -25,33 +25,21 @@ const renderPostTypes = (checkBoxes, dataSlug, returnArray, setAttributes) => {
         />));
 };
 
-const renderTaxonomy = (checkBoxes, dataSlug, returnArray, setAttributes) => {
+const renderTaxonomy = (taxType, checkBoxes, dataSlug, returnArray, setAttributes) => {
+    
     return (checkBoxes.push(
         <CheckboxControl
             label={dataSlug}
             checked={returnArray[dataSlug]}
             onChange={
                 (value) => {
-                    returnArray[dataSlug] = value;
+                    returnArray[taxType].push([dataSlug,value]);
                     setAttributes({isCheckedTaxonomy: JSON.stringify(returnArray)});
                 }
             }
         />));
 };
 
-const renderTags = (checkBoxes, dataSlug, returnArray, setAttributes) => {
-    return (checkBoxes.push(
-        <CheckboxControl
-            label={dataSlug}
-            checked={returnArray[dataSlug]}
-            onChange={
-                (value) => {
-                    returnArray[dataSlug] = value;
-                    setAttributes({isCheckedTags: JSON.stringify(returnArray)});
-                }
-            }
-        />));
-};
 
 /**
  *
@@ -70,9 +58,9 @@ const addCheckBox = (args) => {
     const setAttributes = args.setAttributes;
     const checkBoxes = [];
 
-    for (let i in data) {
+    for (let type in data) {
 
-        let dataSlug = data[i].slug;
+        let dataSlug = data[type].slug;
 
         switch (name) {
             case 'postTypes':
@@ -80,11 +68,7 @@ const addCheckBox = (args) => {
                 break;
 
             case 'taxonomy':
-                renderTaxonomy(checkBoxes, dataSlug, returnArray, setAttributes);
-                break;
-
-            case 'post_tag':
-                renderTags(checkBoxes, dataSlug, returnArray, setAttributes);
+                data[type].forEach(dataSlug => renderTaxonomy(type, checkBoxes, dataSlug, returnArray, setAttributes));
                 break;
 
             default:

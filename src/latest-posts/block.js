@@ -87,6 +87,9 @@ registerBlockType('vk-blocks/latest-posts', {
             setAttributes: setAttributes
         };
 
+        console.log(isCheckedTaxonomy);
+        console.log(taxonomyOfCheckedPT);
+
         /**
          * Check array is empty or not. If array is empty return true;
          * @returns {Boolean}
@@ -196,13 +199,11 @@ registerBlockType('vk-blocks/latest-posts', {
             TaxonomiesOfCheckedPostTypes.forEach(tax => {
 
                 getTaxonomiesList(formatArray, tax);
-
             });
 
             setAttributes({taxonomyOfCheckedPT: JSON.stringify(formatArray)})
         });
 
-        console.log(taxonomyOfCheckedPT);
 
         return (
             <Fragment>
