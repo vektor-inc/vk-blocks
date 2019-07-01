@@ -18,7 +18,7 @@ class VkBlocksLatestPosts{
 		if ( $layout === 'image_1st' ) {
 			$layoutClass = 'image_1st';
 		} elseif ( $layout === 'image_2st' ) {
-			$layoutClass = 'image_1st';
+			$layoutClass = 'image_2st';
 		}
 
 		global $wp_query;
@@ -46,18 +46,66 @@ class VkBlocksLatestPosts{
 		return $elm;
 	}
 
+	private function isArrayExist( $array ) {
+		if ( ! $array ) {
+			return false;
+		}
+	}
+
+	/**
+	 * Get array of checked posttype as args. Ex, array(post => true, page = false, attachment = true);
+	 * Return array of posttype which value is true. array(post,attachment);
+	 *
+	 * @param $isCheckedPostType
+	 *
+	 * @return array|bool
+	 */
+	public function formatPostTypeToQuery( $isCheckedPostType ) {
+
+		$this::isArrayExist( $isCheckedPostType );
+		$return = [];
+
+		foreach ( $isCheckedPostType as $key => $value ) {
+
+			if ( $value ) {
+				array_push( $return, $key );
+			}
+		}
+
+		return $return;
+	}
+
+	public function formatToTaxonomyQuery( $isCheckedTaxonomy ) {
+
+		$this::isArrayExist( $isCheckedTaxonomy );
+		$return = "";
+
+		foreach ( $isCheckedTaxonomy as $key => $value ) {
+
+			if ( $value ) {
+				$return = + $key . ",";
+			}
+		}
+
+		return $return;
+
+	}
+
 	public function get_loop_query( $attributes ) {
 
 		$isCheckedPostType = json_decode( $attributes['isCheckedPostType'], true );
 		$isCheckedTaxonomy = json_decode( $attributes['isCheckedTaxonomy'], true );
 
+
 		// $count      = ( isset( $instance['count'] ) && $instance['count'] ) ? $instance['count'] : 10;
-		$post_type = 'post';
 		$args = array(
-			'post_type'      => $post_type,
+			'post_type'      => $this::formatPostTypeToQuery( $isCheckedPostType ),
+			'category_name'  => $this::formatToTaxonomyQuery( $isCheckedTaxonomy ),
 			'paged'          => 1,
 			'posts_per_page' => $attributes['numberPosts'],
 		);
+
+//		'category_name=staff,news'
 
 		// if ( $instance['format'] ) {
 		// 	$this->_taxonomy_init( $post_type ); }
