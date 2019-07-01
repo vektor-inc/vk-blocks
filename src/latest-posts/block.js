@@ -152,6 +152,7 @@ registerBlockType('vk-blocks/latest-posts', {
                 targetPostTypes.forEach(tax => {
 
                     let postType = select("core").getPostType(tax);
+
                     let taxonomies = postType.taxonomies;
 
                     if (taxonomies && !isArrayEmpty(taxonomies)) {
@@ -170,17 +171,38 @@ registerBlockType('vk-blocks/latest-posts', {
             return resultTaxonomies;
         };
 
+        /**
+         * Return TaxonomiesList by array{taxonomyName : [slug1,slug2,...]}.
+         * @param result
+         * @param tax
+         */
+        const getTaxonomiesList = (result = {}, tax) => {
+
+            let taxonomiesList = select('core').getEntityRecords('taxonomy', tax);
+            let temp = [];
+            taxonomiesList.forEach(value => {
+
+                temp.push(value.slug);
+            });
+
+            result[tax] = temp;
+        };
+
         subscribe(() => {
-            let formatArray = [];
+            let formatArray = {}
             let checkedPostTypes = geCheckedPostTypes();
             let TaxonomiesOfCheckedPostTypes = getTaxonomiesFromPostType(checkedPostTypes);
 
             TaxonomiesOfCheckedPostTypes.forEach(tax => {
-                formatArray.push({slug: tax});
+
+                getTaxonomiesList(formatArray, tax);
+
             });
 
             setAttributes({taxonomyOfCheckedPT: JSON.stringify(formatArray)})
         });
+
+        console.log(taxonomyOfCheckedPT);
 
         return (
             <Fragment>

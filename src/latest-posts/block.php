@@ -21,24 +21,24 @@ class VkBlocksLatestPosts{
 			$layoutClass = 'image_2st';
 		}
 
-		global $wp_query;
 		$wp_query = $this->get_loop_query( $attributes );
-		global $post;
+		return $wp_query;
 
 		$elm = '';
-
-		if ( have_posts() ) :
-			$elm .= '<div class="vk_latestPosts">';
-			$elm .= '<ul class=' . $layoutClass . '>';
-			while ( have_posts() ) {
-				the_post();
-				$elm .= '<li>';
-				$elm .= $this->get_loop_post_view( $post );
-				$elm .= '</li>';
-			} // while ( have_posts() ) {
-			$elm .= '</ul>';
-			$elm .= '</div>';
-		endif;
+//
+//		if ( $wp_query->have_posts() ) :
+//			$elm .= '<div class="vk_latestPosts">';
+//			$elm .= '<ul class=' . $layoutClass . '>';
+//			while ( $wp_query->have_posts() ) {
+//				$wp_query->the_post();
+//				$elm .= '<li>';
+//				$elm .= '<li>' . get_the_title() . '</li>';
+////				$elm .= $this->get_loop_post_view($wp_query->post);
+//				$elm .= '</li>';
+//			} // while ( have_posts() ) {
+//			$elm .= '</ul>';
+//			$elm .= '</div>';
+//		endif;
 
 		wp_reset_query();
 		wp_reset_postdata();
@@ -105,6 +105,8 @@ class VkBlocksLatestPosts{
 			'posts_per_page' => $attributes['numberPosts'],
 		);
 
+		$result = var_export($args, true);
+
 //		'category_name=staff,news'
 
 		// if ( $instance['format'] ) {
@@ -126,11 +128,13 @@ class VkBlocksLatestPosts{
 		// }
 
 		$wp_query = new WP_Query( $args );
+
+
 		// if ( have_posts() ) :
 		// 	$layout = $instance['format'];
 		// 	Ltg_Media_Post_View::post_loop( $layout, $instance );
 		// endif;
-		return $wp_query;
+		return $result;
 	}
 
 
