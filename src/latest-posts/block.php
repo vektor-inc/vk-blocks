@@ -13,11 +13,6 @@ class VkBlocksLatestPosts{
 	public function render_latest_posts( $attributes ) {
 
 		$layout            = $attributes['layout'];
-		$numberPosts       = $attributes['numberPosts'];
-		$isCheckedPostType = json_decode( $attributes['isCheckedPostType'], true );
-		$isCheckedTaxonomy = json_decode( $attributes['isCheckedTaxonomy'], true );
-
-		$layout            = $attributes['layout'];
 		$layoutClass = '';
 		//プルダウンの値によってデザインのクラスを変更
 		if ( $layout === 'image_1st' ) {
