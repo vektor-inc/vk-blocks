@@ -15,7 +15,7 @@ const renderPostTypes = (checkBoxes, dataSlug, returnArray, setAttributes) => {
     return (checkBoxes.push(
         <CheckboxControl
             label={dataSlug}
-            checked={returnArray[dataSlug]}
+            checked={returnArray.some(item => item === dataSlug)}
             onChange={(value) => {
                     if(value){
                         returnArray.push(dataSlug);
