@@ -3,8 +3,7 @@
  *
  */
 import React from "react";
-import addCheckBox from '../_helper/checkbox';
-import {getTagTaxonomySlugs, getTaxonomySlugs, setUpTaxonomyData} from './taxonomy-utils';
+import addCheckBox from './checkbox';
 import {schema} from './schema.js';
 
 const {__} = wp.i18n; // Import __() from wp.i18n
@@ -47,23 +46,11 @@ registerBlockType('vk-blocks/latest-posts', {
 
     edit: withSelect((select) => {
 
-        let taxonomies = select('core').getTaxonomies();
-
-        let slugs = getTaxonomySlugs(taxonomies);
-        let taxonomyData = setUpTaxonomyData(taxonomies, slugs, select);
-
-        let tagSlugs = getTagTaxonomySlugs(taxonomies);
-        let tagTaxonomyData = setUpTaxonomyData(taxonomies, tagSlugs, select);
-
         return {
-            coreData: {
-                postTypes: select('core').getPostTypes(),
-                taxonomy: taxonomyData,
-                post_tag: tagTaxonomyData,
-            }
+            postTypes: select('core').getPostTypes(),
         };
 
-    })(({coreData, className, attributes, setAttributes, clientId}) => {
+    })(({postTypes, className, attributes, setAttributes, clientId}) => {
 
         const {
             numberPosts,
@@ -75,36 +62,12 @@ registerBlockType('vk-blocks/latest-posts', {
 
         let argsPostTypes = {
             name: 'postTypes',
-            data: coreData.postTypes,
+            data: postTypes,
             returnArray: JSON.parse(isCheckedPostType),
             setAttributes: setAttributes
         };
 
-        let argsTaxonomy = {
-            name: 'taxonomy',
-            data: JSON.parse(taxonomyOfCheckedPT),
-            returnArray: JSON.parse(isCheckedTaxonomy),
-            setAttributes: setAttributes
-        };
-
-        console.log(isCheckedTaxonomy);
-        console.log(taxonomyOfCheckedPT);
-
-        /**
-         * Check array is empty or not. If array is empty return true;
-         * @returns {Boolean}
-         */
-        const isArrayEmpty = (array) => {
-            return array === [];
-        };
-
-        /**
-         * Check value is in the array or not. If the value exists in array, return index;
-         * @returns {Number}
-         */
-        const isValueInArray = (array,value) =>{
-            return array.findIndex(item => item === value);
-        };
+        console.log(isCheckedPostType);
 
 
         /**
@@ -141,6 +104,41 @@ registerBlockType('vk-blocks/latest-posts', {
             }
             return resultPostTypes;
         };
+
+
+
+
+
+
+
+
+
+
+
+
+        let argsTaxonomy = {
+            name: 'taxonomy',
+            data: JSON.parse(taxonomyOfCheckedPT),
+            returnArray: JSON.parse(isCheckedTaxonomy),
+            setAttributes: setAttributes
+        };
+
+        /**
+         * Check array is empty or not. If array is empty return true;
+         * @returns {Boolean}
+         */
+        const isArrayEmpty = (array) => {
+            return array === [];
+        };
+
+        /**
+         * Check value is in the array or not. If the value exists in array, return index;
+         * @returns {Number}
+         */
+        const isValueInArray = (array,value) =>{
+            return array.findIndex(item => item === value);
+        };
+
 
         /**
          * Get taxonomies of checked post-types in real time. Return array of taxonomies.
@@ -204,7 +202,6 @@ registerBlockType('vk-blocks/latest-posts', {
             setAttributes({taxonomyOfCheckedPT: JSON.stringify(formatArray)})
         });
 
-
         return (
             <Fragment>
                 <InspectorControls>
@@ -247,9 +244,11 @@ registerBlockType('vk-blocks/latest-posts', {
                         <BaseControl
                             label={__('Filter by Taxonomy', 'vk-blocks')}
                         >
-                            {
-                                addCheckBox(argsTaxonomy)
-                            }
+                            {(() => {
+                                if (!isArrayEmpty(argsTaxonomy)) {
+                                    addCheckBox(argsTaxonomy)
+                                }
+                            })()}
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>

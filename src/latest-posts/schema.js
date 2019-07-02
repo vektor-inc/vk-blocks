@@ -9,7 +9,7 @@ export const schema = {
     },
     isCheckedPostType:{
         type: 'string',
-        default: '{}'
+        default: '[]'
     },
     isCheckedTaxonomy:{
         type: 'string',
