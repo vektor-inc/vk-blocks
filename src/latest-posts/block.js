@@ -67,11 +67,46 @@ registerBlockType('vk-blocks/latest-posts', {
             setAttributes: setAttributes
         };
 
+        const getTaxonomyFromPostType = (isCheckedPostType) => {
 
-        /**
-         * Get checked post-types in real time. Return the array of checked post-types.
-         * @returns {Array}
-         */
+            let returnTaxonomies = [];
+            if (isCheckedPostType === "[]") {
+                return false;
+            }
+
+            let checkedPostType = JSON.parse(isCheckedPostType);
+
+            checkedPostType.forEach(postType => {
+
+                let pt = select("core").getPostType(postType);
+                let taxonomies = pt.taxonomies;
+
+                returnTaxonomies.forEach(item => {
+                }
+                );
+
+
+                concat(taxonomies);
+
+
+                returnTaxonomies.filter(elm => elm !== dataSlug);
+
+
+                console.log(taxList);
+
+                // const result = taxList.taxonomies.find(tax => tax === a);
+                // returnTaxonomies = item.taxonomies.filter(elm => elm !== dataSlug);
+
+            })
+
+        };
+
+        getTaxonomyFromPostType(isCheckedPostType);
+
+        // /**
+        //  * Get checked post-types in real time. Return the array of checked post-types.
+        //  * @returns {Array}
+        //  */
         // const geCheckedPostTypes = () => {
         //
         //     let checkedPostType = select("core/block-editor").getBlockAttributes(clientId);
@@ -142,33 +177,33 @@ registerBlockType('vk-blocks/latest-posts', {
         //  * Get taxonomies of checked post-types in real time. Return array of taxonomies.
         //  * @returns {Array}
         //  */
-        // const getTaxonomiesFromPostType = (targetPostTypes) => {
-        //
-        //     let resultTaxonomies = [];
-        //
-        //     if (targetPostTypes && !isArrayEmpty(targetPostTypes)) {
-        //
-        //         targetPostTypes.forEach(tax => {
-        //
-        //             let postType = select("core").getPostType(tax);
-        //
-        //             let taxonomies = postType.taxonomies;
-        //
-        //             if (taxonomies && !isArrayEmpty(taxonomies)) {
-        //
-        //                 taxonomies.forEach(tax => {
-        //
-        //                     let index = isValueInArray(resultTaxonomies, tax);
-        //                     if (index === -1) {
-        //                         resultTaxonomies.push(tax);
-        //                     }
-        //                 });
-        //             }
-        //         });
-        //     }
-        //
-        //     return resultTaxonomies;
-        // };
+        const getTaxonomiesFromPostType = (targetPostTypes) => {
+
+            let resultTaxonomies = [];
+
+            if (targetPostTypes && !isArrayEmpty(targetPostTypes)) {
+
+                targetPostTypes.forEach(tax => {
+
+                    let postType = select("core").getPostType(tax);
+
+                    let taxonomies = postType.taxonomies;
+
+                    if (taxonomies && !isArrayEmpty(taxonomies)) {
+
+                        taxonomies.forEach(tax => {
+
+                            let index = isValueInArray(resultTaxonomies, tax);
+                            if (index === -1) {
+                                resultTaxonomies.push(tax);
+                            }
+                        });
+                    }
+                });
+            }
+
+            return resultTaxonomies;
+        };
         //
         // /**
         //  * Return TaxonomiesList by array{taxonomyName : [slug1,slug2,...]}.
