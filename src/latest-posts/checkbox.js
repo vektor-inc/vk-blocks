@@ -5,41 +5,47 @@ const {CheckboxControl} = wp.components;
 
 /**
  *
- * @param checkBoxes
- * @param dataSlug
- * @param returnArray
+ * @param reactDomToRender
+ * @param slug
+ * @param checkedData
  * @param setAttributes
  * @returns {*}
  */
-const renderPostTypes = (checkBoxes, dataSlug, returnArray, setAttributes) => {
-    return (checkBoxes.push(
+const renderPostTypes = (reactDomToRender, slug, checkedData, setAttributes) => {
+
+    if(!Array.isArray(checkedData)){
+        return false
+    }
+
+    if(checkedData)
+    return (reactDomToRender.push(
         <CheckboxControl
-            label={dataSlug}
-            checked={returnArray.some(item => item === dataSlug)}
+            label={slug}
+            checked={checkedData.some(item => item === slug)}
             onChange={(value) => {
-                    if(value){
-                        returnArray.push(dataSlug);
+                if (value) {
+                    checkedData.push(slug);
                     }else {
-                        returnArray = returnArray.filter(elm => elm !== dataSlug);
+                    checkedData = checkedData.filter(elm => elm !== slug);
                     }
-                    setAttributes({isCheckedPostType: JSON.stringify(returnArray)});
+                setAttributes({isCheckedPostType: JSON.stringify(checkedData)});
                 }
             }
         />));
 };
 
-const renderTaxonomy = (checkBoxes, dataSlug, returnArray, setAttributes) => {
-    return (checkBoxes.push(
+const renderTaxonomy = (reactDomToRender, slug, checkedData, setAttributes) => {
+    return (reactDomToRender.push(
         <CheckboxControl
-            label={dataSlug}
-            checked={returnArray.some(item => item === dataSlug)}
+            label={slug}
+            checked={checkedData.some(item => item === slug)}
             onChange={(value) => {
                 if (value) {
-                    returnArray.push(dataSlug);
+                    checkedData.push(slug);
                 } else {
-                    returnArray = returnArray.filter(elm => elm !== dataSlug);
+                    checkedData = checkedData.filter(elm => elm !== slug);
                 }
-                setAttributes({isCheckedPostType: JSON.stringify(returnArray)});
+                setAttributes({isCheckedPostType: JSON.stringify(checkedData)});
             }
             }
         />));
@@ -53,27 +59,29 @@ const renderTaxonomy = (checkBoxes, dataSlug, returnArray, setAttributes) => {
  */
 const addCheckBox = (args) => {
 
-    if (!args.data) {
+    if (!args.originData) {
         return false
     }
 
     const name = args.name;
-    const data = args.data;
-    const returnArray = args.returnArray;
+    const originData = args.originData;
+    const checkedData = args.checkedData;
     const setAttributes = args.setAttributes;
-    const checkBoxes = [];
+    const reactDomToRender = [];
 
-    for (let type in data) {
+    for (let child in originData) {
 
-        let dataSlug = data[type].slug;
+        let slug = originData[child].slug;
+        // console.log(slug);
+        // console.log(checkedData);
 
         switch (name) {
             case 'postTypes':
-                renderPostTypes(checkBoxes, dataSlug, returnArray, setAttributes);
+                renderPostTypes(reactDomToRender, slug, checkedData, setAttributes);
                 break;
 
             case 'taxonomy':
-                renderTaxonomy(checkBoxes, dataSlug, returnArray, setAttributes);
+                renderTaxonomy(reactDomToRender, slug, checkedData, setAttributes);
                 break;
 
             default:
@@ -81,7 +89,7 @@ const addCheckBox = (args) => {
     }
     return (
         <ul>
-            {checkBoxes}
+            {reactDomToRender}
         </ul>
     );
 };

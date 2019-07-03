@@ -45,7 +45,6 @@ registerBlockType('vk-blocks/latest-posts', {
      */
 
     edit: withSelect((select) => {
-
         return {
             postTypes: select('core').getPostTypes(),
         };
@@ -70,15 +69,15 @@ registerBlockType('vk-blocks/latest-posts', {
 
         let argsPostTypes = {
             name: 'postTypes',
-            data: postTypes,
-            returnArray: JSON.parse(isCheckedPostType),
+            originData: postTypes,
+            checkedData: JSON.parse(isCheckedPostType),
             setAttributes: setAttributes
         };
 
         let argsTaxonomy = {
             name: 'taxonomy',
-            data: JSON.parse(isCheckedTaxonomy),
-            returnArray: JSON.parse(isCheckedTaxonomy),
+            originData: JSON.parse(isCheckedTaxonomy),
+            checkedData: JSON.parse(isCheckedTaxonomy),
             setAttributes: setAttributes
         };
 
@@ -149,37 +148,14 @@ registerBlockType('vk-blocks/latest-posts', {
             return returnTerms;
         };
 
-        /**
-         * Get raw terms array.
-         * @param termsList
-         * @returns {any[]|boolean}
-         */
-        const getRawTerms = (termsList) => {
-
-            if (!termsList) {
-                return false;
-            }
-           return Object.values(termsList);
-
-        };
-
         const onChangeIsCheckedTaxonomy = (termsList) => {
             setAttributes({isCheckedTaxonomy: JSON.stringify(termsList)});
-        };
-
-        const onChangeRawTerms = (rawTerms) => {
-            setAttributes({rawTerms: JSON.stringify(rawTerms)});
         };
 
         const init = () => {
             let taxList = getTaxonomyFromPostType(isCheckedPostType);
             let termsList = getTermsFromTaxonomy(taxList);
-            let rawTermsList = getRawTerms(termsList);
             onChangeIsCheckedTaxonomy(termsList);
-            onChangeRawTerms(rawTermsList);
-
-            console.log(termsList);
-            console.log(rawTerms);
         };
 
         init();
@@ -207,7 +183,7 @@ registerBlockType('vk-blocks/latest-posts', {
                             />
                         </BaseControl>
                         <BaseControl
-                            label={__('Number of Posts', 'vk-blocks')}
+                            label={__('Number of Posts', 'vvk-blocks')}
                         >
                             <RangeControl
                                 value={numberPosts}
@@ -226,11 +202,11 @@ registerBlockType('vk-blocks/latest-posts', {
                         <BaseControl
                             label={__('Filter by Taxonomy', 'vk-blocks')}
                         >
-                            {(() => {
-                                if (!isArrayEmpty(argsTaxonomy)) {
-                                    addCheckBox(argsTaxonomy)
-                                }
-                            })()}
+                            {/*{(() => {*/}
+                            {/*    if (!isArrayEmpty(argsTaxonomy) && postTypes !== null) {*/}
+                            {/*        addCheckBox(argsTaxonomy)*/}
+                            {/*    }*/}
+                            {/*})()}*/}
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
