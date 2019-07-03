@@ -35,6 +35,7 @@ const renderPostTypes = (reactDomToRender, slug, checkedData, setAttributes) => 
 };
 
 const renderTaxonomy = (reactDomToRender, slug, checkedData, setAttributes) => {
+
     return (reactDomToRender.push(
         <CheckboxControl
             label={slug}
@@ -78,9 +79,9 @@ const addCheckBox = (args) => {
                 break;
 
             case 'taxonomy':
-                console.log(originData);
+                console.log(originData[i]);
                 console.log(checkedData);
-                // renderTaxonomy(reactDomToRender, i, checkedData, setAttributes);
+                // renderTaxonomy(reactDomToRender, originData[i], checkedData, setAttributes);
                 break;
 
             default:
