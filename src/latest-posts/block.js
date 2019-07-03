@@ -96,7 +96,56 @@ registerBlockType('vk-blocks/latest-posts', {
             return returnTaxonomies;
         };
 
-        getTaxonomyFromPostType(isCheckedPostType);
+        const getTaxonomyTerms = (taxList) => {
+
+            if (!taxList) {
+                return false;
+            }
+
+            let returnTerms = {};
+
+            taxList.forEach(tax => {
+
+                let terms = [];
+                let taxData = select('core').getEntityRecords('taxonomy', tax);
+                let returnTermsKey = Object.keys(returnTerms);
+
+                if (taxData !== null) {
+
+                    if (!returnTermsKey.includes(tax)) {
+
+                        taxData.forEach(term => {
+                            terms.push(term.slug);
+                            returnTerms[term.taxonomy] = terms;
+                        })
+                    } else {
+
+                        delete returnTerms.tax;
+                    }
+                }
+
+            });
+
+            console.log(returnTerms);
+            return returnTerms;
+
+        };
+
+        let taxList = getTaxonomyFromPostType(isCheckedPostType);
+        getTaxonomyTerms(taxList);
+
+        subscribe(() => {
+            let taxList = getTaxonomyFromPostType(isCheckedPostType);
+            getTaxonomyTerms(taxList);
+
+        });
+
+
+
+
+
+
+
 
         // /**
         //  * Get checked post-types in real time. Return the array of checked post-types.
@@ -217,18 +266,6 @@ registerBlockType('vk-blocks/latest-posts', {
         //     result[tax] = temp;
         // };
         //
-        // subscribe(() => {
-        //     let formatArray = {}
-        //     let checkedPostTypes = geCheckedPostTypes();
-        //     let TaxonomiesOfCheckedPostTypes = getTaxonomiesFromPostType(checkedPostTypes);
-        //
-        //     TaxonomiesOfCheckedPostTypes.forEach(tax => {
-        //
-        //         getTaxonomiesList(formatArray, tax);
-        //     });
-        //
-        //     setAttributes({taxonomyOfCheckedPT: JSON.stringify(formatArray)})
-        // });
 
         return (
             <Fragment>
