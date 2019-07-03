@@ -67,6 +67,11 @@ registerBlockType('vk-blocks/latest-posts', {
             setAttributes: setAttributes
         };
 
+        /**
+         * Get Taxonomies of checked postType. Return array of taxonomies.
+         * @param isCheckedPostType
+         * @returns {boolean|*[]}
+         */
         const getTaxonomyFromPostType = (isCheckedPostType) => {
 
             let returnTaxonomies = [];
@@ -81,24 +86,14 @@ registerBlockType('vk-blocks/latest-posts', {
                 let pt = select("core").getPostType(postType);
                 let taxonomies = pt.taxonomies;
 
-                returnTaxonomies.forEach(item => {
-                }
-                );
+                taxonomies.forEach(item =>{
+                    returnTaxonomies.push(item);
+                });
+            });
 
-
-                concat(taxonomies);
-
-
-                returnTaxonomies.filter(elm => elm !== dataSlug);
-
-
-                console.log(taxList);
-
-                // const result = taxList.taxonomies.find(tax => tax === a);
-                // returnTaxonomies = item.taxonomies.filter(elm => elm !== dataSlug);
-
-            })
-
+            //重複を削除
+            returnTaxonomies = returnTaxonomies.filter((x, i, self) => self.indexOf(x) === i);
+            return returnTaxonomies;
         };
 
         getTaxonomyFromPostType(isCheckedPostType);
