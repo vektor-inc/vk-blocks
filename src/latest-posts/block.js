@@ -116,7 +116,7 @@ registerBlockType('vk-blocks/latest-posts', {
          * @param taxList
          * @returns {boolean|{}}
          */
-        const getTaxonomyTerms = (taxList) => {
+        const getTermsFromTaxonomy = (taxList) => {
 
             if (!taxList) {
                 return false;
@@ -149,13 +149,24 @@ registerBlockType('vk-blocks/latest-posts', {
             return returnTerms;
         };
 
-        let taxList = getTaxonomyFromPostType(isCheckedPostType);
-        getTaxonomyTerms(taxList);
+        /**
+         * Get raw terms array.
+         * @param termsList
+         * @returns {any[]|boolean}
+         */
+        const getRawTerms = (termsList) => {
+
+            if (!termsList) {
+                return false;
+            }
+           return Object.values(termsList);
+
+        };
 
         subscribe(() => {
             let taxList = getTaxonomyFromPostType(isCheckedPostType);
-            getTaxonomyTerms(taxList);
-
+            let termsList = getTermsFromTaxonomy(taxList);
+            let rawTerms = getRawTerms(termsList);
         });
 
         return (
