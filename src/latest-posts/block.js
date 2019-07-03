@@ -77,7 +77,7 @@ registerBlockType('vk-blocks/latest-posts', {
 
         let argsTaxonomy = {
             name: 'taxonomy',
-            data: JSON.parse(rawTerms),
+            data: JSON.parse(isCheckedTaxonomy),
             returnArray: JSON.parse(isCheckedTaxonomy),
             setAttributes: setAttributes
         };
@@ -226,11 +226,11 @@ registerBlockType('vk-blocks/latest-posts', {
                         <BaseControl
                             label={__('Filter by Taxonomy', 'vk-blocks')}
                         >
-                            {/*{(() => {*/}
-                            {/*    if (!isArrayEmpty(argsTaxonomy)) {*/}
-                            {/*        addCheckBox(argsTaxonomy)*/}
-                            {/*    }*/}
-                            {/*})()}*/}
+                            {(() => {
+                                if (!isArrayEmpty(argsTaxonomy)) {
+                                    addCheckBox(argsTaxonomy)
+                                }
+                            })()}
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>

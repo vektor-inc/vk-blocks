@@ -62,7 +62,7 @@ function vkblocks_blocks_assets() {
 								'type'    => 'string',
 								'default' => '{}',
 							),
-							'taxonomyOfCheckedPT' => array(
+							'rawTerms' => array(
 								'type'    => 'string',
 								'default' => '[]',
 							)
