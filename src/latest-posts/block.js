@@ -60,10 +60,25 @@ registerBlockType('vk-blocks/latest-posts', {
             taxonomyOfCheckedPT
         } = attributes;
 
+        /**
+         * Check array is empty or not. If array is empty return true;
+         * @returns {Boolean}
+         */
+        const isArrayEmpty = (array) => {
+            return array === [];
+        };
+
         let argsPostTypes = {
             name: 'postTypes',
             data: postTypes,
             returnArray: JSON.parse(isCheckedPostType),
+            setAttributes: setAttributes
+        };
+
+        let argsTaxonomy = {
+            name: 'taxonomy',
+            data: JSON.parse(taxonomyOfCheckedPT),
+            returnArray: JSON.parse(isCheckedTaxonomy),
             setAttributes: setAttributes
         };
 
@@ -96,6 +111,11 @@ registerBlockType('vk-blocks/latest-posts', {
             return returnTaxonomies;
         };
 
+        /**
+         * Get terms of given taxonomies. Return terms as `{taxonomySlug:[terms], ...}` format.
+         * @param taxList
+         * @returns {boolean|{}}
+         */
         const getTaxonomyTerms = (taxList) => {
 
             if (!taxList) {
@@ -126,9 +146,7 @@ registerBlockType('vk-blocks/latest-posts', {
 
             });
 
-            console.log(returnTerms);
             return returnTerms;
-
         };
 
         let taxList = getTaxonomyFromPostType(isCheckedPostType);
@@ -139,133 +157,6 @@ registerBlockType('vk-blocks/latest-posts', {
             getTaxonomyTerms(taxList);
 
         });
-
-
-
-
-
-
-
-
-        // /**
-        //  * Get checked post-types in real time. Return the array of checked post-types.
-        //  * @returns {Array}
-        //  */
-        // const geCheckedPostTypes = () => {
-        //
-        //     let checkedPostType = select("core/block-editor").getBlockAttributes(clientId);
-        //     let checkedObj = JSON.parse(checkedPostType.isCheckedPostType);
-        //     let checkedKey = Object.keys(checkedObj);
-        //     let checkedValue = Object.values(checkedObj);
-        //     let searchedPostTypes = select("core").getPostTypes();
-        //     let resultPostTypes = [];
-        //
-        //     if (0 < checkedKey.length) {
-        //
-        //         searchedPostTypes.forEach(tax => {
-        //
-        //             let index = isValueInArray(checkedKey, tax.slug);
-        //
-        //             if (index === -1) {
-        //                 // ... (合致した要素がなかった場合)
-        //             } else {
-        //
-        //                 let key = checkedKey[index];
-        //                 let value = checkedValue[index];
-        //
-        //                 if (value) {
-        //                     resultPostTypes.push(key)
-        //                 }
-        //             }
-        //         });
-        //     }
-        //     return resultPostTypes;
-        // };
-
-
-
-
-
-
-
-
-
-
-
-
-        let argsTaxonomy = {
-            name: 'taxonomy',
-            data: JSON.parse(taxonomyOfCheckedPT),
-            returnArray: JSON.parse(isCheckedTaxonomy),
-            setAttributes: setAttributes
-        };
-
-        /**
-         * Check array is empty or not. If array is empty return true;
-         * @returns {Boolean}
-         */
-        const isArrayEmpty = (array) => {
-            return array === [];
-        };
-
-        // /**
-        //  * Check value is in the array or not. If the value exists in array, return index;
-        //  * @returns {Number}
-        //  */
-        // const isValueInArray = (array,value) =>{
-        //     return array.findIndex(item => item === value);
-        // };
-        //
-        //
-        // /**
-        //  * Get taxonomies of checked post-types in real time. Return array of taxonomies.
-        //  * @returns {Array}
-        //  */
-        const getTaxonomiesFromPostType = (targetPostTypes) => {
-
-            let resultTaxonomies = [];
-
-            if (targetPostTypes && !isArrayEmpty(targetPostTypes)) {
-
-                targetPostTypes.forEach(tax => {
-
-                    let postType = select("core").getPostType(tax);
-
-                    let taxonomies = postType.taxonomies;
-
-                    if (taxonomies && !isArrayEmpty(taxonomies)) {
-
-                        taxonomies.forEach(tax => {
-
-                            let index = isValueInArray(resultTaxonomies, tax);
-                            if (index === -1) {
-                                resultTaxonomies.push(tax);
-                            }
-                        });
-                    }
-                });
-            }
-
-            return resultTaxonomies;
-        };
-        //
-        // /**
-        //  * Return TaxonomiesList by array{taxonomyName : [slug1,slug2,...]}.
-        //  * @param result
-        //  * @param tax
-        //  */
-        // const getTaxonomiesList = (result = {}, tax) => {
-        //
-        //     let taxonomiesList = select('core').getEntityRecords('taxonomy', tax);
-        //     let temp = [];
-        //     taxonomiesList.forEach(value => {
-        //
-        //         temp.push(value.slug);
-        //     });
-        //
-        //     result[tax] = temp;
-        // };
-        //
 
         return (
             <Fragment>
