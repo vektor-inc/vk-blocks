@@ -58,11 +58,11 @@ function vkblocks_blocks_assets() {
 								'type'    => 'string',
 								'default' => '{}',
 							),
-							'isCheckedTaxonomy' => array(
+							'coreTerms' => array(
 								'type'    => 'string',
 								'default' => '{}',
 							),
-							'rawTerms' => array(
+							'isCheckedTerms' => array(
 								'type'    => 'string',
 								'default' => '[]',
 							)
