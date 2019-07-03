@@ -57,7 +57,7 @@ registerBlockType('vk-blocks/latest-posts', {
             layout,
             isCheckedPostType,
             isCheckedTaxonomy,
-            taxonomyOfCheckedPT
+            rawTerms
         } = attributes;
 
         /**
@@ -77,7 +77,7 @@ registerBlockType('vk-blocks/latest-posts', {
 
         let argsTaxonomy = {
             name: 'taxonomy',
-            data: JSON.parse(taxonomyOfCheckedPT),
+            data: JSON.parse(rawTerms),
             returnArray: JSON.parse(isCheckedTaxonomy),
             setAttributes: setAttributes
         };
@@ -163,11 +163,26 @@ registerBlockType('vk-blocks/latest-posts', {
 
         };
 
-        subscribe(() => {
+        const onChangeIsCheckedTaxonomy = (termsList) => {
+            setAttributes({isCheckedTaxonomy: JSON.stringify(termsList)});
+        };
+
+        const onChangeRawTerms = (rawTerms) => {
+            setAttributes({rawTerms: JSON.stringify(rawTerms)});
+        };
+
+        const init = () => {
             let taxList = getTaxonomyFromPostType(isCheckedPostType);
             let termsList = getTermsFromTaxonomy(taxList);
-            let rawTerms = getRawTerms(termsList);
-        });
+            let rawTermsList = getRawTerms(termsList);
+            onChangeIsCheckedTaxonomy(termsList);
+            onChangeRawTerms(rawTermsList);
+
+            console.log(termsList);
+            console.log(rawTerms);
+        };
+
+        init();
 
         return (
             <Fragment>
@@ -211,11 +226,11 @@ registerBlockType('vk-blocks/latest-posts', {
                         <BaseControl
                             label={__('Filter by Taxonomy', 'vk-blocks')}
                         >
-                            {(() => {
-                                if (!isArrayEmpty(argsTaxonomy)) {
-                                    addCheckBox(argsTaxonomy)
-                                }
-                            })()}
+                            {/*{(() => {*/}
+                            {/*    if (!isArrayEmpty(argsTaxonomy)) {*/}
+                            {/*        addCheckBox(argsTaxonomy)*/}
+                            {/*    }*/}
+                            {/*})()}*/}
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
