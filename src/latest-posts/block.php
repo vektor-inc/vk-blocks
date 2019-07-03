@@ -75,12 +75,12 @@ class VkBlocksLatestPosts{
 		return $return;
 	}
 
-	public function formatToTaxonomyQuery( $isCheckedTaxonomy ) {
+	public function formatToTaxonomyQuery( $coreTerms ) {
 
-		$this::isArrayExist( $isCheckedTaxonomy );
+		$this::isArrayExist( $coreTerms );
 		$return = "";
 
-		foreach ( $isCheckedTaxonomy as $key => $value ) {
+		foreach ( $coreTerms as $key => $value ) {
 
 			if ( $value ) {
 				$return = + $key . ",";
@@ -94,13 +94,13 @@ class VkBlocksLatestPosts{
 	public function get_loop_query( $attributes ) {
 
 		$isCheckedPostType = json_decode( $attributes['isCheckedPostType'], true );
-		$isCheckedTaxonomy = json_decode( $attributes['isCheckedTaxonomy'], true );
+		$coreTerms = json_decode( $attributes['coreTerms'], true );
 
 
 		// $count      = ( isset( $instance['count'] ) && $instance['count'] ) ? $instance['count'] : 10;
 		$args = array(
 			'post_type'      => $this::formatPostTypeToQuery( $isCheckedPostType ),
-			'category_name'  => $this::formatToTaxonomyQuery( $isCheckedTaxonomy ),
+			'category_name'  => $this::formatToTaxonomyQuery( $coreTerms ),
 			'paged'          => 1,
 			'posts_per_page' => $attributes['numberPosts'],
 		);

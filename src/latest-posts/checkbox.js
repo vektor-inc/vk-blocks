@@ -69,19 +69,18 @@ const addCheckBox = (args) => {
     const setAttributes = args.setAttributes;
     const reactDomToRender = [];
 
-    for (let child in originData) {
-
-        let slug = originData[child].slug;
-        // console.log(slug);
-        // console.log(checkedData);
+    //投げるデータによりiは,数字やオブジェクトに変わる。
+    for (let i in originData) {
 
         switch (name) {
             case 'postTypes':
-                renderPostTypes(reactDomToRender, slug, checkedData, setAttributes);
+                renderPostTypes(reactDomToRender, originData[i].slug, checkedData, setAttributes);
                 break;
 
             case 'taxonomy':
-                renderTaxonomy(reactDomToRender, slug, checkedData, setAttributes);
+                console.log(originData);
+                console.log(checkedData);
+                // renderTaxonomy(reactDomToRender, i, checkedData, setAttributes);
                 break;
 
             default:

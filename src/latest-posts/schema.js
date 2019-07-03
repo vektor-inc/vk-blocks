@@ -11,13 +11,13 @@ export const schema = {
         type: 'string',
         default: '[]'
     },
-    isCheckedTaxonomy:{
+    coreTerms:{
         type: 'string',
         default: '{}'
     },
-    rawTerms:{
+    isCheckedTerms:{
         type: 'string',
-        default: '[]'
+        default: '{}'
     }
 };
 

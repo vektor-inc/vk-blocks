@@ -55,8 +55,8 @@ registerBlockType('vk-blocks/latest-posts', {
             numberPosts,
             layout,
             isCheckedPostType,
-            isCheckedTaxonomy,
-            rawTerms
+            coreTerms,
+            isCheckedTerms
         } = attributes;
 
         /**
@@ -76,8 +76,8 @@ registerBlockType('vk-blocks/latest-posts', {
 
         let argsTaxonomy = {
             name: 'taxonomy',
-            originData: JSON.parse(isCheckedTaxonomy),
-            checkedData: JSON.parse(isCheckedTaxonomy),
+            originData: JSON.parse(coreTerms),
+            checkedData: JSON.parse(isCheckedTerms),
             setAttributes: setAttributes
         };
 
@@ -148,14 +148,14 @@ registerBlockType('vk-blocks/latest-posts', {
             return returnTerms;
         };
 
-        const onChangeIsCheckedTaxonomy = (termsList) => {
-            setAttributes({isCheckedTaxonomy: JSON.stringify(termsList)});
+        const onChangeCoreTerms = (termsList) => {
+            setAttributes({coreTerms: JSON.stringify(termsList)});
         };
 
         const init = () => {
             let taxList = getTaxonomyFromPostType(isCheckedPostType);
             let termsList = getTermsFromTaxonomy(taxList);
-            onChangeIsCheckedTaxonomy(termsList);
+            onChangeCoreTerms(termsList);
         };
 
         init();
@@ -202,11 +202,11 @@ registerBlockType('vk-blocks/latest-posts', {
                         <BaseControl
                             label={__('Filter by Taxonomy', 'vk-blocks')}
                         >
-                            {/*{(() => {*/}
-                            {/*    if (!isArrayEmpty(argsTaxonomy) && postTypes !== null) {*/}
-                            {/*        addCheckBox(argsTaxonomy)*/}
-                            {/*    }*/}
-                            {/*})()}*/}
+                            {(() => {
+                                if (!isArrayEmpty(argsTaxonomy) && postTypes !== null) {
+                                    addCheckBox(argsTaxonomy)
+                                }
+                            })()}
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
