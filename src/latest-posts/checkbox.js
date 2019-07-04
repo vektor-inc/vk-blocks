@@ -95,7 +95,6 @@ const renderTaxonomy = (reactDomToRender, tax, slug, checkedData, setAttributes)
                 } else {
                     checkedData[tax] = checkedData[tax].filter(elm => elm !== term);
                 }
-                console.log(checkedData);
                 setAttributes({isCheckedTerms: JSON.stringify(checkedData)});
             }}
         />));

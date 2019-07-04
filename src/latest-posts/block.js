@@ -123,16 +123,11 @@ registerBlockType('vk-blocks/latest-posts', {
                             }
                         </BaseControl>
                         <BaseControl
-                            label={__('Filter by Taxonomy', 'vk-blocks')}
+                            label={__('Filter by Taxonomy Terms', 'vk-blocks')}
                         >
                             {
                                 addCheckBox(argsTaxonomy)
                             }
-                            {/*{(() => {*/}
-                            {/*    if (!isArrayEmpty(argsTaxonomy) && postTypes !== null) {*/}
-                            {/*        addCheckBox(argsTaxonomy)*/}
-                            {/*    }*/}
-                            {/*})()}*/}
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
