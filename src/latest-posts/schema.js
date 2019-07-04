@@ -17,7 +17,7 @@ export const schema = {
     },
     isCheckedTerms:{
         type: 'string',
-        default: '[]'
+        default: '{}'
     }
 };
 

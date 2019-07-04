@@ -81,7 +81,6 @@ registerBlockType('vk-blocks/latest-posts', {
             setAttributes: setAttributes
         };
 
-        console.log(coreTerms);
         console.log(isCheckedTerms);
 
         return (
