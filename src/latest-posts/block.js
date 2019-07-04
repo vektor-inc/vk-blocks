@@ -81,83 +81,8 @@ registerBlockType('vk-blocks/latest-posts', {
             setAttributes: setAttributes
         };
 
-        /**
-         * Get Taxonomies of checked postType. Return array of taxonomies.
-         * @param isCheckedPostType
-         * @returns {boolean|*[]}
-         */
-        const getTaxonomyFromPostType = (isCheckedPostType) => {
-
-            let returnTaxonomies = [];
-            if (isCheckedPostType === "[]") {
-                return false;
-            }
-
-            let checkedPostType = JSON.parse(isCheckedPostType);
-
-            checkedPostType.forEach(postType => {
-
-                let pt = select("core").getPostType(postType);
-                let taxonomies = pt.taxonomies;
-
-                taxonomies.forEach(item =>{
-                    returnTaxonomies.push(item);
-                });
-            });
-
-            //重複を削除
-            returnTaxonomies = returnTaxonomies.filter((x, i, self) => self.indexOf(x) === i);
-            return returnTaxonomies;
-        };
-
-        /**
-         * Get terms of given taxonomies. Return terms as `{taxonomySlug:[terms], ...}` format.
-         * @param taxList
-         * @returns {boolean|{}}
-         */
-        const getTermsFromTaxonomy = (taxList) => {
-
-            if (!taxList) {
-                return false;
-            }
-
-            let returnTerms = [];
-
-            taxList.forEach(tax => {
-
-                let terms = [];
-                let taxData = select('core').getEntityRecords('taxonomy', tax);
-                let returnTermsKey = Object.keys(returnTerms);
-
-                if (taxData !== null) {
-
-                    if (!returnTermsKey.includes(tax)) {
-
-                        taxData.forEach(term => {
-                            terms.push(term.slug);
-                            returnTerms[term.taxonomy] = terms;
-                        })
-                    } else {
-
-                        delete returnTerms.tax;
-                    }
-                }
-            });
-
-            return returnTerms;
-        };
-
-        const onChangeCoreTerms = (termsList) => {
-            setAttributes({coreTerms: JSON.stringify(termsList)});
-        };
-
-        const init = () => {
-            let taxList = getTaxonomyFromPostType(isCheckedPostType);
-            let termsList = getTermsFromTaxonomy(taxList);
-            onChangeCoreTerms(termsList);
-        };
-
-        init();
+        console.log(coreTerms);
+        console.log(isCheckedTerms);
 
         return (
             <Fragment>
@@ -201,11 +126,14 @@ registerBlockType('vk-blocks/latest-posts', {
                         <BaseControl
                             label={__('Filter by Taxonomy', 'vk-blocks')}
                         >
-                            {(() => {
-                                if (!isArrayEmpty(argsTaxonomy) && postTypes !== null) {
-                                    addCheckBox(argsTaxonomy)
-                                }
-                            })()}
+                            {
+                                addCheckBox(argsTaxonomy)
+                            }
+                            {/*{(() => {*/}
+                            {/*    if (!isArrayEmpty(argsTaxonomy) && postTypes !== null) {*/}
+                            {/*        addCheckBox(argsTaxonomy)*/}
+                            {/*    }*/}
+                            {/*})()}*/}
                         </BaseControl>
                     </PanelBody>
                 </InspectorControls>
