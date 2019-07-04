@@ -121,7 +121,7 @@ registerBlockType('vk-blocks/latest-posts', {
                 return false;
             }
 
-            let returnTerms = {};
+            let returnTerms = [];
 
             taxList.forEach(tax => {
 
@@ -142,7 +142,6 @@ registerBlockType('vk-blocks/latest-posts', {
                         delete returnTerms.tax;
                     }
                 }
-
             });
 
             return returnTerms;

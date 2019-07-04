@@ -36,16 +36,20 @@ const renderPostTypes = (reactDomToRender, slug, checkedData, setAttributes) => 
 
 const renderTaxonomy = (reactDomToRender, slug, checkedData, setAttributes) => {
 
+    let term = slug[0];
+    console.log(checkedData);
+
     return (reactDomToRender.push(
         <CheckboxControl
-            label={slug}
-            checked={checkedData.some(item => item === slug)}
+            label={term}
+            checked={checkedData.some(item => item === term)}
             onChange={(value) => {
                 if (value) {
-                    checkedData.push(slug);
+                    checkedData.push(term);
                 } else {
-                    checkedData = checkedData.filter(elm => elm !== slug);
+                    checkedData = checkedData.filter(elm => elm !== term);
                 }
+                console.log(checkedData);
                 setAttributes({isCheckedPostType: JSON.stringify(checkedData)});
             }
             }
@@ -79,9 +83,8 @@ const addCheckBox = (args) => {
                 break;
 
             case 'taxonomy':
-                console.log(originData[i]);
-                console.log(checkedData);
-                // renderTaxonomy(reactDomToRender, originData[i], checkedData, setAttributes);
+                console.log(originData);
+                renderTaxonomy(reactDomToRender, originData[i], checkedData, setAttributes);
                 break;
 
             default:

@@ -13,11 +13,11 @@ export const schema = {
     },
     coreTerms:{
         type: 'string',
-        default: '{}'
+        default: '[]'
     },
     isCheckedTerms:{
         type: 'string',
-        default: '{}'
+        default: '[]'
     }
 };
 
