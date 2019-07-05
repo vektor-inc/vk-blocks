@@ -81,7 +81,83 @@ registerBlockType('vk-blocks/latest-posts', {
             setAttributes: setAttributes
         };
 
-        console.log(isCheckedTerms);
+        subscribe(() => {
+            let blockAttributes = select("core/block-editor").getBlockAttributes(clientId);
+            let newIsCheckedPostType = blockAttributes.isCheckedPostType;
+
+            if (newIsCheckedPostType) {
+                let taxList = getTaxonomyFromPostType(newIsCheckedPostType);
+                let termsList = getTermsFromTaxonomy(taxList);
+                setAttributes({coreTerms: JSON.stringify(termsList)});
+            }
+        });
+
+        /**
+         * Get Taxonomies of checked postType. Return array of taxonomies.
+         * @param isCheckedPostTypeArgs
+         * @returns {boolean|*[]}
+         */
+        const getTaxonomyFromPostType = (isCheckedPostTypeArgs) => {
+
+            if(isArrayEmpty(isCheckedPostTypeArgs)){
+                return false;
+            }
+
+            let isCheckedPostType = JSON.parse(isCheckedPostTypeArgs);
+
+            let returnTaxonomies = [];
+            isCheckedPostType.forEach(postType => {
+
+                let pt = select("core").getPostType(postType);
+                let taxonomies = pt.taxonomies;
+
+                taxonomies.forEach(item => {
+                    returnTaxonomies.push(item);
+                });
+            });
+
+            //重複を削除
+            returnTaxonomies = returnTaxonomies.filter((x, i, self) => self.indexOf(x) === i);
+            return returnTaxonomies;
+        };
+
+        /**
+         * Get terms of given taxonomies. Return terms as `{taxonomySlug:[terms], ...}` format.
+         * @param taxList
+         * @returns {boolean|{}}
+         */
+        const getTermsFromTaxonomy = (taxList) => {
+
+            if (!taxList) {
+                return false;
+            }
+
+            let returnTerms = {};
+
+            taxList.forEach(tax => {
+
+                let terms = [];
+                let taxData = select('core').getEntityRecords('taxonomy', tax);
+                let returnTermsKey = Object.keys(returnTerms);
+
+                if (taxData !== null) {
+
+                    if (!returnTermsKey.includes(tax)) {
+
+                        taxData.forEach(term => {
+                            terms.push(term.slug);
+                            returnTerms[term.taxonomy] = terms;
+                        })
+                    } else {
+
+                        delete returnTerms[tax];
+                    }
+                }
+            });
+
+            return returnTerms;
+        };
+
 
         return (
             <Fragment>

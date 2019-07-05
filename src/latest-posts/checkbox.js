@@ -1,9 +1,5 @@
 'use strict';
-import React from "react";
-
 const {CheckboxControl} = wp.components;
-const {withSelect, subscribe, select, dispatch} = wp.data;
-
 
 /**
  *
@@ -57,7 +53,6 @@ const renderPostTypes = (reactDomToRender, slug, checkedData, setAttributes) => 
     if (!Array.isArray(checkedData)) {
         return false
     }
-
     if (checkedData)
         return (reactDomToRender.push(
             <CheckboxControl
@@ -69,10 +64,7 @@ const renderPostTypes = (reactDomToRender, slug, checkedData, setAttributes) => 
                     } else {
                         checkedData = checkedData.filter(elm => elm !== slug);
                     }
-                    await setAttributes({isCheckedPostType: JSON.stringify(checkedData)});
-                    const taxList = getTaxonomyFromPostType(checkedData);
-                    const termsList = getTermsFromTaxonomy(taxList);
-                    setAttributes({coreTerms: JSON.stringify(termsList)});
+                    setAttributes({isCheckedPostType: JSON.stringify(checkedData)});
                 }}
             />));
 };
@@ -98,64 +90,4 @@ const renderTaxonomy = (reactDomToRender, tax, slug, checkedData, setAttributes)
                 setAttributes({isCheckedTerms: JSON.stringify(checkedData)});
             }}
         />));
-};
-
-/**
- * Get Taxonomies of checked postType. Return array of taxonomies.
- * @param isCheckedPostType
- * @returns {boolean|*[]}
- */
-const getTaxonomyFromPostType = (isCheckedPostType) => {
-
-    let returnTaxonomies = [];
-    isCheckedPostType.forEach(postType => {
-
-        let pt = select("core").getPostType(postType);
-        let taxonomies = pt.taxonomies;
-
-        taxonomies.forEach(item => {
-            returnTaxonomies.push(item);
-        });
-    });
-
-    //重複を削除
-    returnTaxonomies = returnTaxonomies.filter((x, i, self) => self.indexOf(x) === i);
-    return returnTaxonomies;
-};
-
-/**
- * Get terms of given taxonomies. Return terms as `{taxonomySlug:[terms], ...}` format.
- * @param taxList
- * @returns {boolean|{}}
- */
-const getTermsFromTaxonomy = (taxList) => {
-
-    if (!taxList) {
-        return false;
-    }
-
-    let returnTerms = {};
-
-    taxList.forEach(tax => {
-
-        let terms = [];
-        let taxData = select('core').getEntityRecords('taxonomy', tax);
-        let returnTermsKey = Object.keys(returnTerms);
-
-        if (taxData !== null) {
-
-            if (!returnTermsKey.includes(tax)) {
-
-                taxData.forEach(term => {
-                    terms.push(term.slug);
-                    returnTerms[term.taxonomy] = terms;
-                })
-            } else {
-
-                delete returnTerms[tax];
-            }
-        }
-    });
-
-    return returnTerms;
 };
