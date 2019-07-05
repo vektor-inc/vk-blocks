@@ -13,6 +13,7 @@ class VkBlocksLatestPosts{
 	public function render_latest_posts( $attributes ) {
 
 		$layout            = $attributes['layout'];
+
 		$layoutClass = '';
 		//プルダウンの値によってデザインのクラスを変更
 		if ( $layout === 'image_1st' ) {
@@ -22,23 +23,25 @@ class VkBlocksLatestPosts{
 		}
 
 		$wp_query = $this->get_loop_query( $attributes );
-		return $wp_query;
+
+		if ( $wp_query === false ) {
+			return "<div>" . __( "No Post is selected", "vk-blocks" ) . "</div>";
+		}
 
 		$elm = '';
-//
-//		if ( $wp_query->have_posts() ) :
-//			$elm .= '<div class="vk_latestPosts">';
-//			$elm .= '<ul class=' . $layoutClass . '>';
-//			while ( $wp_query->have_posts() ) {
-//				$wp_query->the_post();
-//				$elm .= '<li>';
-//				$elm .= '<li>' . get_the_title() . '</li>';
-////				$elm .= $this->get_loop_post_view($wp_query->post);
-//				$elm .= '</li>';
-//			} // while ( have_posts() ) {
-//			$elm .= '</ul>';
-//			$elm .= '</div>';
-//		endif;
+		if ( $wp_query->have_posts() ) :
+			$elm .= '<div class="vk_latestPosts">';
+			$elm .= '<ul class=' . $layoutClass . '>';
+			while ( $wp_query->have_posts() ) {
+				$wp_query->the_post();
+				$elm .= '<li>';
+				$elm .= '<li>' . get_the_title() . '</li>';
+				$elm .= $this->get_loop_post_view($wp_query->post);
+				$elm .= '</li>';
+			} // while ( have_posts() ) {
+			$elm .= '</ul>';
+			$elm .= '</div>';
+		endif;
 
 		wp_reset_query();
 		wp_reset_postdata();
@@ -52,89 +55,52 @@ class VkBlocksLatestPosts{
 		}
 	}
 
-	/**
-	 * Get array of checked posttype as args. Ex, array(post => true, page = false, attachment = true);
-	 * Return array of posttype which value is true. array(post,attachment);
-	 *
-	 * @param $isCheckedPostType
-	 *
-	 * @return array|bool
-	 */
-	public function formatPostTypeToQuery( $isCheckedPostType ) {
+	private function format_terms( $isCheckedTerms ) {
 
-		$this::isArrayExist( $isCheckedPostType );
-		$return = [];
+		$return             = [];
+		$return['relation'] = 'OR';
 
-		foreach ( $isCheckedPostType as $key => $value ) {
+		foreach ( $isCheckedTerms as $key => $value ) {
 
-			if ( $value ) {
-				array_push( $return, $key );
+			if ( $value !== [] ) {
+
+				$new_array = array(
+					'taxonomy' => $key,
+					'field'    => 'slug',
+					'terms'    => $value,
+				);
+				array_push( $return, $new_array );
 			}
 		}
-
 		return $return;
-	}
-
-	public function formatToTaxonomyQuery( $coreTerms ) {
-
-		$this::isArrayExist( $coreTerms );
-		$return = "";
-
-		foreach ( $coreTerms as $key => $value ) {
-
-			if ( $value ) {
-				$return = + $key . ",";
-			}
-		}
-
-		return $return;
-
 	}
 
 	public function get_loop_query( $attributes ) {
 
 		$isCheckedPostType = json_decode( $attributes['isCheckedPostType'], true );
-		$coreTerms = json_decode( $attributes['coreTerms'], true );
+		$isCheckedTerms    = json_decode( $attributes['$isCheckedTerms'], true );
 
+
+		if ( empty($isCheckedPostType) ) {
+			return false;
+		}
 
 		// $count      = ( isset( $instance['count'] ) && $instance['count'] ) ? $instance['count'] : 10;
+
 		$args = array(
-			'post_type'      => $this::formatPostTypeToQuery( $isCheckedPostType ),
-			'category_name'  => $this::formatToTaxonomyQuery( $coreTerms ),
+			'post_type'      => $isCheckedPostType,
+			'tax_query'      => $this::format_terms( $isCheckedTerms ),
 			'paged'          => 1,
 			'posts_per_page' => $attributes['numberPosts'],
 		);
 
-		$result = var_export($args, true);
-
-//		'category_name=staff,news'
-
-		// if ( $instance['format'] ) {
-		// 	$this->_taxonomy_init( $post_type ); }
-		//
-		// if ( isset( $instance['terms'] ) && $instance['terms'] ) {
-		// 	$taxonomies          = get_taxonomies( array() );
-		// 	$args['tax_query'] = array(
-		// 		'relation' => 'OR',
-		// 	);
-		// 	$terms_array         = explode( ',', $instance['terms'] );
-		// 	foreach ( $taxonomies as $taxonomy ) {
-		// 		$args['tax_query'][] = array(
-		// 			'taxonomy' => $taxonomy,
-		// 			'field'    => 'id',
-		// 			'terms'    => $terms_array,
-		// 		);
-		// 	}
-		// }
-
 		$wp_query = new WP_Query( $args );
-
 
 		// if ( have_posts() ) :
 		// 	$layout = $instance['format'];
 		// 	Ltg_Media_Post_View::post_loop( $layout, $instance );
 		// endif;
-		return $result;
+		return $wp_query;
 	}
 
 
