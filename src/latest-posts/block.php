@@ -36,7 +36,7 @@ class VkBlocksLatestPosts{
 				$wp_query->the_post();
 				$elm .= '<li>';
 				$elm .= '<li>' . get_the_title() . '</li>';
-				$elm .= $this->get_loop_post_view($wp_query->post);
+//				$elm .= $this->get_loop_post_view($wp_query->post);
 				$elm .= '</li>';
 			} // while ( have_posts() ) {
 			$elm .= '</ul>';
