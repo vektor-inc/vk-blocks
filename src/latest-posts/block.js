@@ -2,7 +2,6 @@
  * latest-posts block type
  *
  */
-import React from "react";
 import addCheckBox from './checkbox';
 import {schema} from './schema.js';
 
