@@ -24,6 +24,8 @@ class VkBlocksLatestPosts{
 
 		$wp_query = $this->get_loop_query( $attributes );
 
+//		return var_export($wp_query,true);
+
 		if ( $wp_query === false ) {
 			return "<div>" . __( "No Post is selected", "vk-blocks" ) . "</div>";
 		}
@@ -88,7 +90,7 @@ class VkBlocksLatestPosts{
 		// $count      = ( isset( $instance['count'] ) && $instance['count'] ) ? $instance['count'] : 10;
 
 		$args = array(
-			'post_type'      => $isCheckedPostType,
+//			'post_type'      => $isCheckedPostType,
 			'tax_query'      => $this::format_terms( $isCheckedTerms ),
 			'paged'          => 1,
 			'posts_per_page' => $attributes['numberPosts'],
