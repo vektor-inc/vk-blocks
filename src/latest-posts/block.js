@@ -44,10 +44,10 @@ registerBlockType('vk-blocks/latest-posts', {
      */
 
     edit: withSelect((select) => {
+
         return {
             postTypes: select('core').getPostTypes(),
         };
-
     })(({postTypes, className, attributes, setAttributes, clientId}) => {
 
         const {
@@ -66,9 +66,19 @@ registerBlockType('vk-blocks/latest-posts', {
             return array === [];
         };
 
+        const filterUnusedPostType = (postTypes) => {
+
+            if (!Array.isArray(postTypes)) {
+                return false;
+            }
+            return postTypes.filter(function (item) {
+                return item.slug !== 'wp_block' && item.slug !== 'attachment';
+            });
+        };
+
         let argsPostTypes = {
             name: 'postTypes',
-            originData: postTypes,
+            originData: filterUnusedPostType(postTypes),
             checkedData: JSON.parse(isCheckedPostType),
             setAttributes: setAttributes
         };
@@ -83,10 +93,15 @@ registerBlockType('vk-blocks/latest-posts', {
         subscribe(() => {
             let blockAttributes = select("core/block-editor").getBlockAttributes(clientId);
             let newIsCheckedPostType = blockAttributes.isCheckedPostType;
+
             if (newIsCheckedPostType) {
                 let taxList = getTaxonomyFromPostType(newIsCheckedPostType);
                 let termsList = getTermsFromTaxonomy(taxList);
                 setAttributes({coreTerms: JSON.stringify(termsList)});
+
+                console.log(termsList);
+                console.log(isCheckedTerms);
+                //coreTermsとisCheckedTermsを比較なければ削除
             }
         });
 
