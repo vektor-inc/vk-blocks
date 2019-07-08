@@ -24,8 +24,6 @@ class VkBlocksLatestPosts{
 
 		$wp_query = $this->get_loop_query( $attributes );
 
-//		return var_export($wp_query,true);
-
 		if ( $wp_query === false ) {
 			return "<div>" . __( "No Post is selected", "vk-blocks" ) . "</div>";
 		}
@@ -79,20 +77,31 @@ class VkBlocksLatestPosts{
 
 	public function get_loop_query( $attributes ) {
 
-		$isCheckedPostType = json_decode( $attributes['isCheckedPostType'], true );
-		$isCheckedTerms    = json_decode( $attributes['$isCheckedTerms'], true );
+		$isCheckedTerms = json_decode( $attributes['isCheckedTerms'], true );
 
-
-		if ( empty($isCheckedPostType) ) {
+		if ( empty( $isCheckedTerms ) ) {
 			return false;
+		} else {
+
+			$values = array_values( $isCheckedTerms );
+			$flag   = false;
+			foreach ( $values as $value ) {
+				if ( ! empty( $value ) ) {
+					$flag = true;
+				}
+			}
+
+			if ( ! $flag ) {
+				return false;
+			}
 		}
 
 		// $count      = ( isset( $instance['count'] ) && $instance['count'] ) ? $instance['count'] : 10;
 
 		$args = array(
-//			'post_type'      => $isCheckedPostType,
 			'tax_query'      => $this::format_terms( $isCheckedTerms ),
 			'paged'          => 1,
+			//0で全件取得
 			'posts_per_page' => $attributes['numberPosts'],
 		);
 
