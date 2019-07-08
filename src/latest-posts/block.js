@@ -98,10 +98,6 @@ registerBlockType('vk-blocks/latest-posts', {
                 let taxList = getTaxonomyFromPostType(newIsCheckedPostType);
                 let termsList = getTermsFromTaxonomy(taxList);
                 setAttributes({coreTerms: JSON.stringify(termsList)});
-
-                console.log(termsList);
-                console.log(isCheckedTerms);
-                //coreTermsとisCheckedTermsを比較なければ削除
             }
         });
 
