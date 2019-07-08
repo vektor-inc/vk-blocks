@@ -24,6 +24,8 @@ class VkBlocksLatestPosts{
 
 		$wp_query = $this->get_loop_query( $attributes );
 
+//		return var_export($wp_query,true);
+
 		if ( $wp_query === false ) {
 			return "<div>" . __( "No Post is selected", "vk-blocks" ) . "</div>";
 		}
@@ -95,6 +97,8 @@ class VkBlocksLatestPosts{
 			}
 		}
 
+//		return var_export($isCheckedTerms,true);
+
 		// $count      = ( isset( $instance['count'] ) && $instance['count'] ) ? $instance['count'] : 10;
 
 		$args = array(
@@ -125,7 +129,8 @@ class VkBlocksLatestPosts{
 			$class_no_image = '';
 		} else {
 			// $thumbnail_src  = VK_MEDIA_POSTS_URL . 'images/no-image.png';
-			$thumbnail_src  = 'images/no-image.png';
+
+			$thumbnail_src  = plugin_dir_url( dirname(dirname( __FILE__ ) ). 'vk-blocks.php' ) . 'inc/vk-blocks/images/no-image.png';
 			$class_no_image = ' noimage';
 		}
 		// $elm      .= '<div class="card-img-top' . $class_no_image . '" style="background-image:url(' . $thumbnail_src . ');">' . "\n";
