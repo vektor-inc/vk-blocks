@@ -53,6 +53,7 @@ const renderPostTypes = (reactDomToRender, slug, checkedData, setAttributes) => 
     if (!Array.isArray(checkedData)) {
         return false
     }
+
     if (checkedData)
         return (reactDomToRender.push(
             <CheckboxControl
@@ -71,23 +72,28 @@ const renderPostTypes = (reactDomToRender, slug, checkedData, setAttributes) => 
 
 const renderTaxonomy = (reactDomToRender, tax, slug, checkedData, setAttributes) => {
 
-    let term = slug[0];
-
     if (checkedData[tax] === undefined) {
         checkedData[tax] = [];
     }
 
-    return (reactDomToRender.push(
-        <CheckboxControl
-            label={term}
-            checked={checkedData[tax].some(termItem => termItem === term)}
-            onChange={(value) => {
-                if (value) {
-                    checkedData[tax].push(term);
-                } else {
-                    checkedData[tax] = checkedData[tax].filter(elm => elm !== term);
-                }
-                setAttributes({isCheckedTerms: JSON.stringify(checkedData)});
-            }}
-        />));
+    if(slug){
+        slug.forEach(term => {
+
+            reactDomToRender.push(
+                <CheckboxControl
+                    label={term}
+                    checked={checkedData[tax].some(termItem => termItem === term)}
+                    onChange={(value) => {
+                        if (value) {
+                            checkedData[tax].push(term);
+                        } else {
+                            checkedData[tax] = checkedData[tax].filter(elm => elm !== term);
+                        }
+                        setAttributes({isCheckedTerms: JSON.stringify(checkedData)});
+                    }}
+                />)
+        })
+    }
+
+    return (reactDomToRender);
 };
