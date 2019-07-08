@@ -86,11 +86,13 @@ class VkBlocksLatestPosts{
 		// $count      = ( isset( $instance['count'] ) && $instance['count'] ) ? $instance['count'] : 10;
 
 		$args = array(
-			'post_type' => $isCheckedPostType,
+			'post_type'      => $isCheckedPostType,
 			'tax_query'      => $this::format_terms( $isCheckedTerms ),
 			'paged'          => 1,
 			//0で全件取得
 			'posts_per_page' => $attributes['numberPosts'],
+			'order'          => 'DESC',
+			'orderby'        => 'date'
 		);
 
 		$wp_query = new WP_Query( $args );
