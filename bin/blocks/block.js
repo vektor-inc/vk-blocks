@@ -42,7 +42,7 @@ registerBlockType('vk-blocks/your-block-slug', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    edit({attributes, setAttributes}) {
+    edit({attributes, setAttributes,className}) {
         const {
             heading,
             content,
@@ -66,6 +66,7 @@ registerBlockType('vk-blocks/your-block-slug', {
                     <div>Editor</div>
                     <NewComponent
                         attributes={attributes}
+                        className={className}
                         for_={'edit'}
                     />
                 </div>
@@ -74,20 +75,21 @@ registerBlockType('vk-blocks/your-block-slug', {
     },
 
     /**
-     * The save function defin className }> which the different attributes should be combined
+     * The save function define className }> which the different attributes should be combined
      * into the final markup, which is then serialized by Gutenberg into post_content.
      *
      * The "save" property must be specified and must be a valid function.
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    save({attributes}) {
+    save({attributes,className}) {
 
         return (
             <div className="vk_your-block-slug">
                 <div>Front</div>
                 <NewComponent
                     attributes={attributes}
+                    className={className}
                     for_={'save'}
                 />
             </div>

@@ -10,7 +10,7 @@ export default class NewComponent extends React.Component {
             insertImage,
             arrowFlag,
         } = this.props.attributes;
-
+        let className = this.props.className;
         let for_ = this.props.for_;
 
         return (

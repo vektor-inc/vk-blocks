@@ -1,3 +1,23 @@
+
+.vk_block_icon_pro {
+fill:#c00;
+}
+.editor-block-list-item-vk-blocks-outer:after,
+.editor-block-list-item-vk-blocks-table-of-contents:after,
+.editor-block-list-item-vk-blocks-simple-table:after{
+position: absolute;
+top: 0;
+right: 0;
+content: "Pro";
+display: inline-block;
+font-size: 10px;
+line-height: 1;
+color: #fff;
+background-color: #cd3034;
+border-radius: 2px;
+padding: 3px 4px;
+}
+
 .components-base-control__label {
 	 font-weight:bold;
 }
@@ -19,6 +39,7 @@ input[type=range] {
     margin: 1px;
 }
 
+/* editor area *********************************************/
 .edit-post-visual-editor.editor-styles-wrapper{
 
 
@@ -36,6 +57,7 @@ h1:first-child.vk_prBlocks_item_title{
 			max-width:100%;
 		}
 }
+
 @media (min-width: 600px){
 .wp-block-columns {
 	margin-left:-15px;
@@ -857,4 +879,363 @@ $padding-xl:3.5em;
 // Large devices (desktops, 769px以上)
 @media (min-width: 769px) {
   @include switchVisibility(block, none, none);
-}}
+}
+/*-------------------------------------------*/
+/* CSS
+/*-------------------------------------------*/
+
+.vk_table {
+	&-col-mobile1 {
+		@media( max-width: 575.98px){
+			th,
+			td {
+					display: block;
+			}
+			th {
+				background-color: rgba(0, 0, 0, 0.05);
+			}
+			// ストライプ指定の時の背景色をリセット
+			&.table-striped tbody {
+				tr:nth-of-type(odd) {
+					background: inherit;
+				}
+			}
+		} // @media( max-width: 575.98px){
+	} // &-col-mobile1 {
+}
+
+/*-------------------------------------------*/
+/* editor class
+/*-------------------------------------------*/
+.vk_simpleTable-edit{
+	.editor-inner-blocks,
+	.editor-block-list__layout,
+	.editor-block-list__block,
+	.editor-rich-text__editable,
+	.editor-block-list__block-edit{
+		padding:0;
+		margin:0;
+		width:100%;
+	}
+	& > .editor-inner-blocks{
+		margin-top:-1px; // th,td がHTML上ではdivの中になってしまう都合上、線が2pxになるためマイナスオフセット
+	}
+	.editor-block-list__block-edit{
+		height:100%;
+	}
+	.block-editor-block-list__insertion-point{
+		/* 上のセルに被るので選択しにくくなるのでデフォルトのマイナスオフセットを少し下げる */
+		top:-5px;
+	}
+	.editor-block-list__block-edit:before{
+		right:-0px;
+		left:-0px;
+		top:-0px;
+		bottom:-0px;
+		// border:1px solid #ff0000;
+	}
+	.editor-inner-blocks {
+		tr {
+			width:100%;
+			display: block;
+			border-bottom:1px solid #e5e5e5;
+			.editor-block-list__layout {
+				display: flex;
+				.editor-block-list__block {
+				}
+			}
+		}
+		th,
+		td {
+			padding: 0;
+			display: block;
+			width:100%;
+			border:none; // デフォルトでつけてくる線を消す
+			.editor-rich-text__editable{
+				padding: 14px;
+			}
+		}
+	}
+	// 編集画面のtableは HTML構造がカオスなので補正
+	&.table-striped > tbody > .editor-inner-blocks > .editor-block-list__layout > div:nth-of-type(odd) {
+			background-color: rgba(0, 0, 0, 0.05);
+	}
+}
+
+/*-------------------------------------------*/
+/* CSS
+/*-------------------------------------------*/
+$font_serif:"ＭＳ Ｐ明朝", "MS PMincho","ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", "serif";
+
+// Layout
+.vk_staff{
+	&_text{
+		float:left;
+		width: 61.6%;
+	}
+	&_photo {
+		float:right;
+		width: 32%;
+	}
+	&-layout-imageLeft {
+		.vk_staff_text{
+			float:right;
+		}
+		.vk_staff_photo{
+			float:left;
+		}
+	}
+}
+
+//
+.vk_staff {
+	display:block;
+	overflow:hidden;
+	&_text{
+		&_name {
+			text-align: left;
+			box-shadow: none;
+			font-size: 3.5rem;
+			font-family: $font_serif;
+			line-height: 1.0;
+			margin-bottom: 0.5rem;
+			border: none;
+			padding: 0;
+			background-color: transparent;
+			&:before,
+			&:after {
+				border: none;
+			}
+		}
+
+		&_caption {
+			font-family: $font_serif;
+			font-size: 14px;
+			display: block;
+			margin: 0 0 0.5rem 4px;
+			letter-spacing: 5px;
+		}
+		&_role {
+			font-size: 14px;
+			line-height: 1.6em;
+			font-family: $font_serif;
+		}
+		&_profileTitle{
+			font-size: 18px;
+			font-family: $font_serif;
+			padding-top: 0;
+			padding-left: 0;
+			padding-bottom: 2px;
+			margin-bottom: 1.2rem;
+			border-top: none;
+			border-bottom: 1px solid #ccc;
+			background: none;
+			&:before,
+			&:after {
+				border: none;
+			}
+		}
+		&_profileText {
+			font-size: 14px;
+		}
+	}
+	&_photo {
+		display: block;
+		vertical-align: top;
+		text-align: center;
+		button {
+			width:100%;
+		}
+		.image-button{
+			padding: 0;
+			margin:0;
+			display: block;
+		}
+		&-border-default {
+			border: 4px solid #efefef;
+			padding: 1px;
+		}
+		&-border-none {
+			border: none;
+		}
+		&_image {
+			width: 100%;
+			margin: 0;
+			display: block;
+		}
+	}
+}
+
+
+// Lightning で幅広の１カラムテンプレート時補正
+.page-template-page-onecolumn,
+.page-template-page-lp,
+.page-template-page-lp-builder {
+	.vk_staff{
+		@media ( min-width: 992px ){
+			&_text{
+				width: 74%;
+				&_name {
+					font-size: 4rem;
+				}
+				&_caption {
+					font-size: 16px;
+					letter-spacing: 0.5rem;
+				}
+				&_role {
+					letter-spacing: 0.5rem;
+				}
+			}
+			&_photo {
+				width: 22%;
+			}
+		}
+		@media ( min-width: 1200px ){
+			&_text{
+				width: 75%;
+			}
+			&_photo {
+				width: 20%;
+			}
+		}
+	}
+}
+
+// .staff-profile-table {
+// 	margin-top: 2em;
+// 	margin-bottom: 80px;
+// 	border: none;
+// }
+//
+// .staff-profile-table dl {
+// 	display: table;
+// 	width: 100%;
+// }
+//
+// .staff-profile-table dt,
+// .staff-profile-table dd {
+// 	display: table-cell;
+// 	border-bottom: 1px solid #ccc;
+// 	padding-left: 10px;
+// 	font-size: 14px;
+// 	padding-bottom: 4px;
+// }
+//
+// .staff-profile-table dl {
+// 	margin: 0 0 1rem;
+// }
+//
+// .staff-profile-table dt {
+// 	background: none;
+// 	font-weight: lighter;
+// 	border-left-width: 2px;
+// 	border-left-style: solid;
+// 	width: 30%;
+// }
+//
+// .staff-profile-table dd {
+// 	border-left: none;
+// 	width: 70%;
+// }
+
+/*-------------------------------------------*/
+/* CSS
+/*-------------------------------------------*/
+$toc-left-margin: 1rem;
+
+.vk_tableOfContents {
+	margin-top:3.5em;
+	margin-bottom:3.5em;
+	&-style-default{
+		border:3px solid rgba(0,0,0,0.04);
+		box-shadow:inset 0px 0px 0px 1px rgba(255,255,255,1);
+		background-color: rgba(0,0,0,0.015);
+		padding: 3rem 4rem;
+	}
+	&_title{
+		text-align: center;
+		font-size: 1.2em;
+		letter-spacing: 0.5em;
+	}
+	li {
+		margin:0;
+	}
+	&_list{
+		padding:0;
+		margin-top:1em;
+		&_item {
+			list-style: none;
+			border-bottom:1px solid #e5e5e5;
+			padding:0.8rem 0;
+			&-h-2 {
+				// padding-left:$toc-left-margin;
+			}
+			&-h-3 {
+				padding-left:$toc-left-margin * 1;
+			}
+			&-h-4 {
+				padding-left:$toc-left-margin * 2;
+			}
+			&-h-5 {
+				padding-left:$toc-left-margin * 3;
+			}
+			&-h-6 {
+				padding-left:$toc-left-margin * 4;
+			}
+			&_link{
+				color:#333;
+				border-bottom:1px solid #ccc;
+				&:hover{
+					text-decoration: none;
+					border-bottom: none;
+				}
+			}
+		}
+	}
+}
+
+
+
+.editor-styles-wrapper{
+	// .vk_tableOfContents {
+	// 	ul {
+	// 		margin-top:0;
+	// 		margin-bottom:0;
+	// 	}
+	// 	.list-group-item{
+	// 		border: none;
+	// 	}
+	// }
+  // ul{
+  //   list-style: none !important;
+  //   li.vk_tableOfContents_list_item-h3{
+  //     margin-left: $toc-left-margin;
+  //   }
+  //   li.vk_tableOfContents_list_item-h4{
+  //     margin-left: $toc-left-margin * 2;
+  //   }
+  //   li.vk_tableOfContents_list_item-h5{
+  //     margin-left: $toc-left-margin * 4;
+  //   }
+  //   li.vk_tableOfContents_list_item-h6{
+  //     margin-left: $toc-left-margin * 6;
+  //   }
+  //   ul{
+  //     list-style: none !important;
+  //   }
+  // }
+}
+
+/*-------------------------------------------*/
+/* CSS
+/*-------------------------------------------*/
+.vk_table-col-overflow {
+  white-space: nowrap !important;
+}
+/*# sourceMappingURL=style.scss.map */
+
+/*-------------------------------------------*/
+/* CSS
+/*-------------------------------------------*/
+
+}
