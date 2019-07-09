@@ -91,13 +91,17 @@ registerBlockType('vk-blocks/latest-posts', {
         };
 
         subscribe(() => {
-            let blockAttributes = select("core/block-editor").getBlockAttributes(clientId);
-            let newIsCheckedPostType = blockAttributes.isCheckedPostType;
 
-            if (newIsCheckedPostType) {
-                let taxList = getTaxonomyFromPostType(newIsCheckedPostType);
-                let termsList = getTermsFromTaxonomy(taxList);
-                setAttributes({coreTerms: JSON.stringify(termsList)});
+            let blockAttributes = select("core/block-editor").getBlockAttributes(clientId);
+
+            if (blockAttributes) {
+                let newIsCheckedPostType = blockAttributes.isCheckedPostType;
+
+                if (newIsCheckedPostType) {
+                    let taxList = getTaxonomyFromPostType(newIsCheckedPostType);
+                    let termsList = getTermsFromTaxonomy(taxList);
+                    setAttributes({coreTerms: JSON.stringify(termsList)});
+                }
             }
         });
 
