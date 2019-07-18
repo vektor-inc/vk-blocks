@@ -20,14 +20,24 @@ registerFormatType(name, {
     tagName: 'span',
     className: 'vk_highlighter',
     attributes: {
-        data: 'data-color',
-        class: 'class'
+        style: 'style',
     },
     edit(props) {
         const {value, isActive, onChange} = props;
+        // const onToggle = () => onChange(
+        //     toggleFormat(value, {type: name})
+        // );
+
         const onToggle = () => onChange(
-            toggleFormat(value, {type: name})
+            toggleFormat( value, {
+                type: name,
+                attributes: {
+                    // style: 'text-decoration: underline;',
+                    style: `background: linear-gradient(transparent 60%,rgba(255,253,107,.7) 0);`,
+                },
+            } )
         );
+
 
         // let activeColor;
         // // 設定したカラーパレーットを読み込む
@@ -68,6 +78,11 @@ registerFormatType(name, {
                 {/*        ]}*/}
                 {/*    />*/}
                 {/*</InspectorControls>*/}
+                <RichTextShortcut
+                    type="primary"
+                    character="h"
+                    onUse={ onToggle }
+                />
                 <RichTextToolbarButton
                     icon={BlockIcon}
                     title={__('Highlighter', 'vk-blocks')}
