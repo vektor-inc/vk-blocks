@@ -1,19 +1,13 @@
 /**
  * highlighter block type
- *
  */
-
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerFormatType, toggleFormat, applyFormat, removeFormat, getActiveFormat} = window.wp.richText;
-const {RichTextToolbarButton, RichTextShortcut, InspectorControls, ColorPalette, PanelColorSettings, getColorObjectByColorValue} = wp.editor;
-const {RangeControl, RadioControl, PanelBody, Button, PanelColor, BaseControl} = wp.components;
+const {RichTextToolbarButton, RichTextShortcut, InspectorControls, PanelColorSettings, getColorObjectByColorValue} = wp.editor;
 const {Fragment} = wp.element;
-const {
-    select
-} = wp.data;
 const name = 'vk-blocks/highlighter';
 const BlockIcon = 'arrow-down';
-
+import hex2rgba from "../_helper/hex-to-rgba";
 
 registerFormatType(name, {
     title: __('Highlighter', 'vk-blocks'),
@@ -25,25 +19,36 @@ registerFormatType(name, {
     },
     edit(props) {
         const {value, isActive, onChange} = props;
-        const onToggle = () => onChange(
-            toggleFormat( value, {
-                type: name,
-                attributes: {
-                    // style: 'text-decoration: underline;',
-                    style: `background: linear-gradient(transparent 60%,rgba(255,253,107,.7) 0);`,
-                },
-            } )
-        );
+        const alpha = 0.7;
+        const defaultColor = '#fffd6b';
+        const shortcutType = 'primary';
+        const shortcutChar = "h";
 
         let activeColor;
-        // // 設定したカラーパレーットを読み込む
-        // const colorSet = select('core/editor').getEditorSettings().colors;
-
-        // 使用しているカラーを選択する
         if (isActive) {
             const activeFormat = getActiveFormat(value, name);
             activeColor = activeFormat.attributes.data;
         }
+
+        const setColorIfUndefined = (activeColor) => {
+            if (activeColor === undefined) {
+                activeColor = defaultColor;
+            }
+            return activeColor;
+        };
+
+        const onToggle = (activeColor) => {
+
+            activeColor = setColorIfUndefined(activeColor);
+
+            onChange(toggleFormat(value, {
+                type: name,
+                attributes: {
+                    data: activeColor,
+                    style: `background: linear-gradient(transparent 60%,${hex2rgba(activeColor, alpha)} 0);`,
+                },
+            } ))
+        };
 
         return (
             <Fragment>
@@ -55,17 +60,12 @@ registerFormatType(name, {
                             {
                                 value: activeColor,
                                 onChange: (color) => {
-
-                                    console.log(color);
                                     if (color) {
-                                        // 選択しているカラーを取得
-                                        // const colorObject = getColorObjectByColorValue(colorSet, color);
                                         onChange(applyFormat(value, {
-                                            name,
+                                            type: name,
                                             attributes: {
                                                 data: color,
-                                                // style: `background: linear-gradient(transparent 60%,rgba(255,253,107,.7) 0);`,
-                                                // class: `has-${color.slug}`
+                                                style: `background: linear-gradient(transparent 60%,${hex2rgba(color, 0.7)} 0);`,
                                             }
                                         }));
                                         return
@@ -78,17 +78,17 @@ registerFormatType(name, {
                     />
                 </InspectorControls>
                 <RichTextShortcut
-                    type="primary"
-                    character="h"
-                    onUse={ onToggle }
+                    type={shortcutType}
+                    character={shortcutChar}
+                    onUse={() => onToggle(activeColor)}
                 />
                 <RichTextToolbarButton
                     icon={BlockIcon}
                     title={__('Highlighter', 'vk-blocks')}
-                    onClick={onToggle}
+                    onClick={() => onToggle(activeColor)}
                     isActive={isActive}
-                    shortcutType="primary"
-                    shortcutCharacter="h"
+                    shortcutType={shortcutType}
+                    shortcutCharacter={shortcutChar}
                 />
             </Fragment>
         );
