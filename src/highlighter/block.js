@@ -20,14 +20,11 @@ registerFormatType(name, {
     tagName: 'span',
     className: 'vk_highlighter',
     attributes: {
+        data: 'data-color',
         style: 'style',
     },
     edit(props) {
         const {value, isActive, onChange} = props;
-        // const onToggle = () => onChange(
-        //     toggleFormat(value, {type: name})
-        // );
-
         const onToggle = () => onChange(
             toggleFormat( value, {
                 type: name,
@@ -38,46 +35,48 @@ registerFormatType(name, {
             } )
         );
 
-
-        // let activeColor;
+        let activeColor;
         // // 設定したカラーパレーットを読み込む
         // const colorSet = select('core/editor').getEditorSettings().colors;
-        //
-        // // 使用しているカラーを選択する
-        // if (isActive) {
-        //     const activeFormat = getActiveFormat(value, type);
-        //     activeColor = activeFormat.attributes.data;
-        // }
+
+        // 使用しているカラーを選択する
+        if (isActive) {
+            const activeFormat = getActiveFormat(value, name);
+            activeColor = activeFormat.attributes.data;
+        }
 
         return (
             <Fragment>
-                {/*<InspectorControls>*/}
-                {/*    <PanelColorSettings*/}
-                {/*        title={__('Highlighter', 'vk-blocks')}*/}
-                {/*        initialOpen={false}*/}
-                {/*        colorSettings={[*/}
-                {/*            {*/}
-                {/*                value: activeColor,*/}
-                {/*                onChange: (color) => {*/}
-                {/*                    if (color) {*/}
-                {/*                        // 選択しているカラーを取得*/}
-                {/*                        const colorObject = getColorObjectByColorValue(colorSet, color);*/}
-                {/*                        onChange(applyFormat(value, {*/}
-                {/*                            type: {name},*/}
-                {/*                            attributes: {*/}
-                {/*                                data: color,*/}
-                {/*                                class: `has-${colorObject.slug}`*/}
-                {/*                            }*/}
-                {/*                        }));*/}
-                {/*                        return*/}
-                {/*                    }*/}
-                {/*                    onChange(removeFormat(value, type))*/}
-                {/*                },*/}
-                {/*                label: '選択色'*/}
-                {/*            }*/}
-                {/*        ]}*/}
-                {/*    />*/}
-                {/*</InspectorControls>*/}
+                <InspectorControls>
+                    <PanelColorSettings
+                        title={__('Highlighter', 'vk-blocks')}
+                        initialOpen={true}
+                        colorSettings={[
+                            {
+                                value: activeColor,
+                                onChange: (color) => {
+
+                                    console.log(color);
+                                    if (color) {
+                                        // 選択しているカラーを取得
+                                        // const colorObject = getColorObjectByColorValue(colorSet, color);
+                                        onChange(applyFormat(value, {
+                                            name,
+                                            attributes: {
+                                                data: color,
+                                                // style: `background: linear-gradient(transparent 60%,rgba(255,253,107,.7) 0);`,
+                                                // class: `has-${color.slug}`
+                                            }
+                                        }));
+                                        return
+                                    }
+                                    onChange(removeFormat(value, name))
+                                },
+                                label: __('Selected Color', 'vk-blocks')
+                            }
+                        ]}
+                    />
+                </InspectorControls>
                 <RichTextShortcut
                     type="primary"
                     character="h"
@@ -88,6 +87,8 @@ registerFormatType(name, {
                     title={__('Highlighter', 'vk-blocks')}
                     onClick={onToggle}
                     isActive={isActive}
+                    shortcutType="primary"
+                    shortcutCharacter="h"
                 />
             </Fragment>
         );
