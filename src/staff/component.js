@@ -34,7 +34,7 @@ export class NewComponent extends React.Component {
             returnELm = <div className={`${className} vk_staff vk_staff-layout-${vk_staff_layout}`}>
                 <div className={`vk_staff_text`}>
                     <RichText
-                        tagName="h2"
+                        tagName="h3"
                         className={'vk_staff_text_name'}
                         style={{color: vk_staff_nameColor}}
                         onChange={(value) => setAttributes({vk_staff_text_name: value})}
@@ -58,7 +58,7 @@ export class NewComponent extends React.Component {
                         placeholder={__('Role position', 'vk-blocks')}
                     />
                     <RichText
-                        tagName="h3"
+                        tagName="h4"
                         className={'vk_staff_text_profileTitle'}
                         style={{color: vk_staff_profileTitleColor}}
                         onChange={(value) => setAttributes({vk_staff_text_profileTitle: value})}
@@ -99,7 +99,7 @@ export class NewComponent extends React.Component {
             returnELm = <div className={`${className} vk_staff vk_staff-layout-${vk_staff_layout}`}>
                 <div className={`vk_staff_text`}>
                     <RichText.Content
-                        tagName="h2"
+                        tagName="h3"
                         className={'vk_staff_text_name'}
                         style={{color: vk_staff_nameColor}}
                         value={vk_staff_text_name}/>
@@ -116,7 +116,7 @@ export class NewComponent extends React.Component {
                         value={vk_staff_text_role}
                     />
                     <RichText.Content
-                        tagName="h3"
+                        tagName="h4"
                         className={'vk_staff_text_profileTitle'}
                         style={{color: vk_staff_profileTitleColor}}
                         value={vk_staff_text_profileTitle}

@@ -26,7 +26,8 @@ export class Component extends React.Component {
             tStyle = {
                 color: titleColor,
                 fontSize: titleSize + 'rem',
-                marginBottom: titleMarginBottom + 'rem'
+                marginBottom: titleMarginBottom + 'rem',
+								textAlign: align,
             };
         }else {
             tStyle = {
