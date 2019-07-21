@@ -78,7 +78,7 @@ registerFormatType(name, {
                                     }
                                     onChange(removeFormat(value, name))
                                 },
-                                label: __('Selected Color', 'vk-blocks')
+                                label: __('Highlight Color', 'vk-blocks')
                             }
                         ]}
                     />

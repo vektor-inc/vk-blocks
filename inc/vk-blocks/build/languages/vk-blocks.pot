@@ -348,7 +348,7 @@ msgid "Heading %d"
 msgstr ""
 
 #: src/highlighter/block.js:81
-msgid "Selected Color"
+msgid "Highlight Color"
 msgstr ""
 
 #: src/highlighter/block.js:93
