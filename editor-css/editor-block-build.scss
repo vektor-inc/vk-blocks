@@ -611,6 +611,32 @@ $color_dark:#343a40;
 /*-------------------------------------------*/
 /* CSS
 /*-------------------------------------------*/
+@mixin reset() {
+	background: none;
+	border:none;
+	border-radius: 0;
+	padding:0;
+	font-weight: normal;
+	box-shadow:none;
+	&:after {
+		border:none;
+	}
+}
+
+.vk_heading_title {
+	&-style {
+		&-plain {
+			@include reset;
+		}
+	}
+}
+.vk_heading_subtext {
+	margin-bottom:0;
+}
+
+/*-------------------------------------------*/
+/* CSS
+/*-------------------------------------------*/
 $media-sm-up : 576px;
 $media-md-up : 768px;
 $media-lg-up : 992px;
@@ -1254,31 +1280,5 @@ $toc-left-margin: 1rem;
 /*-------------------------------------------*/
 /* CSS
 /*-------------------------------------------*/
-
-/*-------------------------------------------*/
-/* CSS
-/*-------------------------------------------*/
-@mixin reset() {
-	background: none;
-	border:none;
-	border-radius: 0;
-	padding:0;
-	font-weight: normal;
-	box-shadow:none;
-	&:after {
-		border:none;
-	}
-}
-
-.vk_heading_title {
-	&-style {
-		&-plain {
-			@include reset;
-		}
-	}
-}
-.vk_heading_subtext {
-	margin-bottom:0;
-}
 
 }
