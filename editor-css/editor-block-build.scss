@@ -294,22 +294,21 @@ h1:first-child.vk_prBlocks_item_title{
 ***********************/
 @media only screen and (max-width: 480px) {
   .vk_balloon{
-  	display: flex;
-    align-items: normal;
+    display: block;
     &.vk_balloon-position-left{
       &.vk_balloon-type-serif{
         .vk_balloon_content{
           display: inline-block;
           &::after{
-            top: 10%;
+            top: 0;
             left: 2.9rem;
             width: 0;
             height: 0;
-            border: 15px solid transparent;
+            border: 20px solid transparent;
             border-bottom-color: inherit;
             border-top: 0;
             margin-left: -20px;
-            margin-top: -15px;
+            margin-top: -20px;
           }
         }
       }
@@ -745,6 +744,67 @@ $padding-xl:3.5em;
 // }
 
 /*-------------------------------------------*/
+/* .vk_prBlocks
+/*-------------------------------------------*/
+.vk_prBlocks_item {
+	@media screen and (max-width:992px){
+		margin-bottom: 1.5em;
+	}
+}
+.vk_prBlocks_item {
+	&_link {
+		color: #333;
+		&:hover{
+			color: #333;
+			text-decoration: none;
+		}
+	}
+	&_icon_outer {
+		display: block;
+		position:relative;
+		margin: 0 auto ;
+		width: 80px;
+		height: 80px;
+		border-radius: 50%;
+	}
+	&_icon {
+		position:absolute;
+		top:50%;
+		left:50%;
+		transform: translateY(-50%) translateX(-50%);
+		font-size: 36px;
+		color: #fff;
+	}
+	&_title{
+		margin-top:0.9em;
+		margin-bottom: 0.6em;
+		text-align: center;
+		font-size: 21px;
+		line-height: 1.4em;
+		border:none;
+		padding:0;
+		&::after{
+			border: none;
+		}
+	}
+	&_image{
+		position: relative;
+		display: block;
+		width: 120px;
+		height:120px;
+		margin: 0 auto;
+		overflow: hidden;
+		border-radius: 50%;
+		text-indent:-9999px;
+	}
+	&_summary{
+		margin-bottom: 0.5em;
+		text-align: center;
+		line-height: 1.8em;
+	}
+}
+
+/*-------------------------------------------*/
 /* Layout
 /*-------------------------------------------*/
 .vk_prContent {
@@ -828,67 +888,6 @@ $padding-xl:3.5em;
 		}
 	}
 } // .vk_prContent {
-
-/*-------------------------------------------*/
-/* .vk_prBlocks
-/*-------------------------------------------*/
-.vk_prBlocks_item {
-	@media screen and (max-width:992px){
-		margin-bottom: 1.5em;
-	}
-}
-.vk_prBlocks_item {
-	&_link {
-		color: #333;
-		&:hover{
-			color: #333;
-			text-decoration: none;
-		}
-	}
-	&_icon_outer {
-		display: block;
-		position:relative;
-		margin: 0 auto ;
-		width: 80px;
-		height: 80px;
-		border-radius: 50%;
-	}
-	&_icon {
-		position:absolute;
-		top:50%;
-		left:50%;
-		transform: translateY(-50%) translateX(-50%);
-		font-size: 36px;
-		color: #fff;
-	}
-	&_title{
-		margin-top:0.9em;
-		margin-bottom: 0.6em;
-		text-align: center;
-		font-size: 21px;
-		line-height: 1.4em;
-		border:none;
-		padding:0;
-		&::after{
-			border: none;
-		}
-	}
-	&_image{
-		position: relative;
-		display: block;
-		width: 120px;
-		height:120px;
-		margin: 0 auto;
-		overflow: hidden;
-		border-radius: 50%;
-		text-indent:-9999px;
-	}
-	&_summary{
-		margin-bottom: 0.5em;
-		text-align: center;
-		line-height: 1.8em;
-	}
-}
 
 /*-------------------------------------------*/
 /* CSS
