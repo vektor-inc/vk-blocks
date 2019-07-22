@@ -1,4 +1,5 @@
 //Bundle JS
+import './nested-pages/block.js';
 import './highlighter/block.js';
 
 import './table-of-contents/block.js';
