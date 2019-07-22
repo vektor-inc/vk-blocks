@@ -108,7 +108,8 @@
 			}
 		}
 	}
-}//.vk_balloon-position-left
+}
+
 .vk_balloon-position-right{
 	flex-direction: row-reverse;
 	&.vk_balloon-type-serif{
@@ -145,7 +146,7 @@
 			}
 		}
 	}
-}//.vk_balloon-position-right
+}
 
 
 .vk_balloon {
@@ -195,7 +196,7 @@
 	.vk_balloon_icon{
 		max-width:86px;
 	}
-	
+
 	.vk_balloon{
 		align-items: normal;
 		&.vk_balloon-position-left{
@@ -219,10 +220,10 @@
 				  }
 				}
 			}
-		}//&.vk_balloon-position-left
+		}
 
 		&.vk_balloon-position-right{
-		text-align: right;
+			text-align: right;
 			.vk_balloon_icon{
 				margin-left: 2rem;
 			}

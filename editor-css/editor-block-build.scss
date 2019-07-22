@@ -77,6 +77,46 @@ h1:first-child.vk_prBlocks_item_title{
 }
 }
 
+.alert{
+
+  padding: 1em;
+  margin: 1em 0;
+  border-radius: 3px;
+
+  & + &{
+    margin-top: 2em;
+  }
+
+  a{
+    transition: color .3s linear, opacity .3s linear;
+    &:link, &:visited{
+      opacity: .8;
+      text-decoration: underline;
+    }
+    &:hover, &:visited{
+      opacity: 1;
+      text-decoration: none;
+    }
+  }
+
+  @each $var in (
+                  (success, #dff0d8,#3c763d,#d6e9c6),
+                  (info, #d9edf7,#31708f,#bce8f1),
+                  (warning, #fcf8e3,#8a6d3b,#faebcc),
+                  (danger, #f2dede,#a94442,#ebccd1),
+  ){
+    $class-name: nth($var, 1);
+    $color-bg: nth($var, 2);
+    $color: nth($var, 3);
+    $color-border :nth($var, 4);
+    &-#{$class-name}{
+      background-color: $color-bg;
+      color:$color;
+      border-color:$color-border;
+    }
+  }
+}
+
 .vk_balloon {
   display: flex;
   align-items: center;
@@ -187,7 +227,8 @@ h1:first-child.vk_prBlocks_item_title{
 			}
 		}
 	}
-}//.vk_balloon-position-left
+}
+
 .vk_balloon-position-right{
 	flex-direction: row-reverse;
 	&.vk_balloon-type-serif{
@@ -224,7 +265,7 @@ h1:first-child.vk_prBlocks_item_title{
 			}
 		}
 	}
-}//.vk_balloon-position-right
+}
 
 
 .vk_balloon {
@@ -274,7 +315,7 @@ h1:first-child.vk_prBlocks_item_title{
 	.vk_balloon_icon{
 		max-width:86px;
 	}
-	
+
 	.vk_balloon{
 		align-items: normal;
 		&.vk_balloon-position-left{
@@ -298,10 +339,10 @@ h1:first-child.vk_prBlocks_item_title{
 				  }
 				}
 			}
-		}//&.vk_balloon-position-left
+		}
 
 		&.vk_balloon-position-right{
-		text-align: right;
+			text-align: right;
 			.vk_balloon_icon{
 				margin-left: 2rem;
 			}
@@ -333,6 +374,37 @@ h1:first-child.vk_prBlocks_item_title{
 }
 .vk_faq_content { margin:0px;
   &:before { content:"A ";color:#337ab7;font-family: "" }
+}
+
+//*      .flowBox
+/*-------------------------------------------*/
+.vk_flow-arrow-on:after {
+  content:"";
+  background: url('../images/arrow_bottom.svg') center 50% no-repeat;
+  background-size: 50px 50px;
+  display:block; overflow:hidden;
+  height:50px;
+  width:50px;
+  margin:0 auto;
+}
+.vk_flow-arrow-off  { padding-bottom:0px; margin-bottom:30px; }
+.vk_flow-arrow-off:after {
+  content:"";font-size:0;background-image: none;
+}
+.vk_flow_frame {
+	display: flex;
+	padding:20px 25px; border:3px solid #e5e5e5;margin:0;
+	justify-content: space-between;
+}
+.vk_flow_frame_text  { display:block;overflow:hidden;margin:0;width:100%;box-sizing: border-box; }
+.vk_flow_frame_text_title,
+.vk_flow_frame_text_content { padding-left:0;border:none; }
+.vk_flow_frame_text_title { border-bottom:1px dotted #ccc; margin:0 0 10px;padding:0 0 5px; font-size:1.2em; }
+.vk_flow_frame_text_content { margin-bottom:0px; }
+.vk_flow_frame_image {
+	max-width:150px;
+	margin-left:15px;
+	box-sizing: border-box;
 }
 
 .vk_button{
@@ -511,37 +583,6 @@ $color_dark:#343a40;
 .btn.btn-outline-dark:focus{
 	background: $color_dark;
 	color:#fff;
-}
-
-//*      .flowBox
-/*-------------------------------------------*/
-.vk_flow-arrow-on:after {
-  content:"";
-  background: url('../images/arrow_bottom.svg') center 50% no-repeat;
-  background-size: 50px 50px;
-  display:block; overflow:hidden;
-  height:50px;
-  width:50px;
-  margin:0 auto;
-}
-.vk_flow-arrow-off  { padding-bottom:0px; margin-bottom:30px; }
-.vk_flow-arrow-off:after {
-  content:"";font-size:0;background-image: none;
-}
-.vk_flow_frame {
-	display: flex;
-	padding:20px 25px; border:3px solid #e5e5e5;margin:0;
-	justify-content: space-between;
-}
-.vk_flow_frame_text  { display:block;overflow:hidden;margin:0;width:100%;box-sizing: border-box; }
-.vk_flow_frame_text_title,
-.vk_flow_frame_text_content { padding-left:0;border:none; }
-.vk_flow_frame_text_title { border-bottom:1px dotted #ccc; margin:0 0 10px;padding:0 0 5px; font-size:1.2em; }
-.vk_flow_frame_text_content { margin-bottom:0px; }
-.vk_flow_frame_image {
-	max-width:150px;
-	margin-left:15px;
-	box-sizing: border-box;
 }
 
 /*-------------------------------------------*/
@@ -944,6 +985,94 @@ $padding-xl:3.5em;
 /*-------------------------------------------*/
 /* CSS
 /*-------------------------------------------*/
+$toc-left-margin: 1rem;
+
+.vk_tableOfContents {
+	margin-top:3.5em;
+	margin-bottom:3.5em;
+	&-style-default{
+		border:3px solid rgba(0,0,0,0.04);
+		box-shadow:inset 0px 0px 0px 1px rgba(255,255,255,1);
+		background-color: rgba(0,0,0,0.015);
+		padding: 3rem 4rem;
+	}
+	&_title{
+		text-align: center;
+		font-size: 1.2em;
+		letter-spacing: 0.5em;
+	}
+	li {
+		margin:0;
+	}
+	&_list{
+		padding:0;
+		margin-top:1em;
+		&_item {
+			list-style: none;
+			border-bottom:1px solid #e5e5e5;
+			padding:0.8rem 0;
+			&-h-2 {
+				// padding-left:$toc-left-margin;
+			}
+			&-h-3 {
+				padding-left:$toc-left-margin * 1;
+			}
+			&-h-4 {
+				padding-left:$toc-left-margin * 2;
+			}
+			&-h-5 {
+				padding-left:$toc-left-margin * 3;
+			}
+			&-h-6 {
+				padding-left:$toc-left-margin * 4;
+			}
+			&_link{
+				color:#333;
+				border-bottom:1px solid #ccc;
+				&:hover{
+					text-decoration: none;
+					border-bottom: none;
+				}
+			}
+		}
+	}
+}
+
+
+
+.editor-styles-wrapper{
+	// .vk_tableOfContents {
+	// 	ul {
+	// 		margin-top:0;
+	// 		margin-bottom:0;
+	// 	}
+	// 	.list-group-item{
+	// 		border: none;
+	// 	}
+	// }
+  // ul{
+  //   list-style: none !important;
+  //   li.vk_tableOfContents_list_item-h3{
+  //     margin-left: $toc-left-margin;
+  //   }
+  //   li.vk_tableOfContents_list_item-h4{
+  //     margin-left: $toc-left-margin * 2;
+  //   }
+  //   li.vk_tableOfContents_list_item-h5{
+  //     margin-left: $toc-left-margin * 4;
+  //   }
+  //   li.vk_tableOfContents_list_item-h6{
+  //     margin-left: $toc-left-margin * 6;
+  //   }
+  //   ul{
+  //     list-style: none !important;
+  //   }
+  // }
+}
+
+/*-------------------------------------------*/
+/* CSS
+/*-------------------------------------------*/
 $font_serif:"ＭＳ Ｐ明朝", "MS PMincho","ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", "serif";
 
 // Layout
@@ -1120,94 +1249,6 @@ $font_serif:"ＭＳ Ｐ明朝", "MS PMincho","ヒラギノ明朝 Pro W3", "Hirag
 /*-------------------------------------------*/
 /* CSS
 /*-------------------------------------------*/
-$toc-left-margin: 1rem;
-
-.vk_tableOfContents {
-	margin-top:3.5em;
-	margin-bottom:3.5em;
-	&-style-default{
-		border:3px solid rgba(0,0,0,0.04);
-		box-shadow:inset 0px 0px 0px 1px rgba(255,255,255,1);
-		background-color: rgba(0,0,0,0.015);
-		padding: 3rem 4rem;
-	}
-	&_title{
-		text-align: center;
-		font-size: 1.2em;
-		letter-spacing: 0.5em;
-	}
-	li {
-		margin:0;
-	}
-	&_list{
-		padding:0;
-		margin-top:1em;
-		&_item {
-			list-style: none;
-			border-bottom:1px solid #e5e5e5;
-			padding:0.8rem 0;
-			&-h-2 {
-				// padding-left:$toc-left-margin;
-			}
-			&-h-3 {
-				padding-left:$toc-left-margin * 1;
-			}
-			&-h-4 {
-				padding-left:$toc-left-margin * 2;
-			}
-			&-h-5 {
-				padding-left:$toc-left-margin * 3;
-			}
-			&-h-6 {
-				padding-left:$toc-left-margin * 4;
-			}
-			&_link{
-				color:#333;
-				border-bottom:1px solid #ccc;
-				&:hover{
-					text-decoration: none;
-					border-bottom: none;
-				}
-			}
-		}
-	}
-}
-
-
-
-.editor-styles-wrapper{
-	// .vk_tableOfContents {
-	// 	ul {
-	// 		margin-top:0;
-	// 		margin-bottom:0;
-	// 	}
-	// 	.list-group-item{
-	// 		border: none;
-	// 	}
-	// }
-  // ul{
-  //   list-style: none !important;
-  //   li.vk_tableOfContents_list_item-h3{
-  //     margin-left: $toc-left-margin;
-  //   }
-  //   li.vk_tableOfContents_list_item-h4{
-  //     margin-left: $toc-left-margin * 2;
-  //   }
-  //   li.vk_tableOfContents_list_item-h5{
-  //     margin-left: $toc-left-margin * 4;
-  //   }
-  //   li.vk_tableOfContents_list_item-h6{
-  //     margin-left: $toc-left-margin * 6;
-  //   }
-  //   ul{
-  //     list-style: none !important;
-  //   }
-  // }
-}
-
-/*-------------------------------------------*/
-/* CSS
-/*-------------------------------------------*/
 .vk_table-col-overflow {
   white-space: nowrap !important;
 }
@@ -1216,45 +1257,5 @@ $toc-left-margin: 1rem;
 /*-------------------------------------------*/
 /* CSS
 /*-------------------------------------------*/
-
-.alert{
-
-  padding: 1em;
-  margin: 1em 0;
-  border-radius: 3px;
-
-  & + &{
-    margin-top: 2em;
-  }
-
-  a{
-    transition: color .3s linear, opacity .3s linear;
-    &:link, &:visited{
-      opacity: .8;
-      text-decoration: underline;
-    }
-    &:hover, &:visited{
-      opacity: 1;
-      text-decoration: none;
-    }
-  }
-
-  @each $var in (
-                  (success, #dff0d8,#3c763d,#d6e9c6),
-                  (info, #d9edf7,#31708f,#bce8f1),
-                  (warning, #fcf8e3,#8a6d3b,#faebcc),
-                  (danger, #f2dede,#a94442,#ebccd1),
-  ){
-    $class-name: nth($var, 1);
-    $color-bg: nth($var, 2);
-    $color: nth($var, 3);
-    $color-border :nth($var, 4);
-    &-#{$class-name}{
-      background-color: $color-bg;
-      color:$color;
-      border-color:$color-border;
-    }
-  }
-}
 
 }
