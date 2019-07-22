@@ -2,14 +2,12 @@
  * nested-pages block type
  *
  */
-import NewComponent from "./component";
 import {schema} from './schema';
 import React from "react";
-// import {deprecated} from './deprecated/block';
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
-const {RangeControl, RadioControl, PanelBody, Button, PanelColor, BaseControl} = wp.components;
+const {ServerSideRender,RangeControl, RadioControl, PanelBody, Button, PanelColor, BaseControl} = wp.components;
 const {Fragment} = wp.element;
 const {RichText, InspectorControls, MediaUpload, ColorPalette} = wp.editor;
 const BlockIcon = 'arrow-down';
@@ -44,28 +42,13 @@ registerBlockType('vk-blocks/nested-pages', {
      */
     edit({attributes, setAttributes,className}) {
         const {
-            heading,
-            content,
-            insertImage,
-            arrowFlag,
         } = attributes;
 
         return (
             <Fragment>
-                <InspectorControls>
-                    <PanelBody title={__('Color Setting', 'vk-blocks')}>
-                        <BaseControl label={__('Title Color', 'vk-blocks')}>
-                            <ColorPalette
-                                value={content}
-                                onChange={(value) => setAttributes({content: value})}
-                            />
-                        </BaseControl>
-                    </PanelBody>
-                </InspectorControls>
                 <div className="vk_nested-pages">
                     <ServerSideRender
                         block='vk-blocks/nested-pages'
-                        attributes={attributes}
                     />
                 </div>
             </Fragment>

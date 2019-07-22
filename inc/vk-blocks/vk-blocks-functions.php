@@ -1,4 +1,7 @@
 <?php
+
+require_once( dirname( dirname( dirname( __FILE__ ) ) ) . '/src/nested-pages/block.php' );
+
 function vkblocks_active() {
 	return true;
 }
@@ -64,6 +67,27 @@ function vkblocks_blocks_assets() {
 				if ( ! is_admin() ) {
 					wp_enqueue_script( 'vk-blocks-toc-helper-js', VK_BLOCKS_URL . 'build/viewHelper.js', array(), VK_BLOCKS_VERSION, true );
 				}
+			} else if ( $value === 'nested-pages' ) {
+
+				register_block_type(
+					'vk-blocks/' . $value, array(
+						'style'           => 'vk-blocks-build-css',
+						'editor_style'    => 'vk-blocks-build-editor-css',
+						'editor_script'   => 'vk-blocks-build-js',
+//						'attributes'      => '',
+//							'style'      => [
+//								'type'    => 'string',
+//								'default' => '',
+//							],
+//							'renderHtml' => [
+//								'type'    => 'string',
+//								'default' => '',
+//							],
+//						],
+						'render_callback' => 'vkExUnit_childPageIndex_shortcode',
+					)
+				);
+
 			} else {
 
 				register_block_type(
@@ -73,7 +97,6 @@ function vkblocks_blocks_assets() {
 						'editor_script' => 'vk-blocks-build-js',
 					)
 				);
-
 			}
 		}
 	}
