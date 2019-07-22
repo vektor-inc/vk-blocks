@@ -13,6 +13,7 @@ if ( ! function_exists( 'vkblocks_active' ) ) {
 	// Set version number.
 	define( 'VK_BLOCKS_VERSION', '0.10.0' );
 
+
 	global $vk_blocks_prefix;
 	$vk_blocks_prefix = apply_filters( 'vk_blocks_prefix', 'VK ' );
 
@@ -64,7 +65,7 @@ if ( ! function_exists( 'vkblocks_active' ) ) {
 
 		$wp_customize->add_setting(
 			'vkblocks_load_bootstrap', array(
-				'default'           => true,
+				'default'           => false,
 				'sanitize_callback' => 'vkblocks_sanitize_checkbox',
 			)
 		);
@@ -101,4 +102,12 @@ if ( ! function_exists( 'vkblocks_active' ) ) {
 		add_action( 'admin_enqueue_scripts', 'vkblocks_remove_bootstrap_admin' );
 		add_action( 'wp_enqueue_scripts', 'vkblocks_remove_bootstrap_admin' );
 	}
+
+	function vkblocks_add_setting_link( $links ) {
+		$settings_link = '<a href="' . esc_url( admin_url( '/customize.php' ) ) . '">' . __( 'Setting', 'vk-video-unit' ) . '</a>';
+		array_unshift( $links, $settings_link );
+		return $links;
+	}
+	add_filter( 'plugin_action_links_vk-blocks/vk-blocks.php', 'vkblocks_add_setting_link', 10, 1 );
+
 }
