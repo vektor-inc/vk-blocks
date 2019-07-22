@@ -74,17 +74,16 @@ function vkblocks_blocks_assets() {
 						'style'           => 'vk-blocks-build-css',
 						'editor_style'    => 'vk-blocks-build-editor-css',
 						'editor_script'   => 'vk-blocks-build-js',
-//						'attributes'      => '',
-//							'style'      => [
-//								'type'    => 'string',
-//								'default' => '',
-//							],
-//							'renderHtml' => [
-//								'type'    => 'string',
-//								'default' => '',
-//							],
-//						],
-						'render_callback' => 'vkExUnit_childPageIndex_shortcode',
+						'attributes'      => [
+							'vk_number'      => [
+								'type'    => 'number',
+								'default' => 0,
+							]
+						],
+						'render_callback' => function (){
+//							return "<div>hello2</div>";
+							return vkExUnit_childPageIndex_shortcode();
+						},
 					)
 				);
 

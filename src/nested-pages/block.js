@@ -49,6 +49,7 @@ registerBlockType('vk-blocks/nested-pages', {
                 <div className="vk_nested-pages">
                     <ServerSideRender
                         block='vk-blocks/nested-pages'
+                        attributes={attributes}
                     />
                 </div>
             </Fragment>

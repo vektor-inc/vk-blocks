@@ -49,21 +49,21 @@ function vkExUnit_childPageIndex_shortcode() {
 
     return "<div>hello</div>";
 
-	global $is_pagewidget;
-
-	if ( $is_pagewidget ) {
-
-		global $widget_pageid;
-		$parentId = $widget_pageid;
-
-	} else {
+//	global $is_pagewidget;
+//
+//	if ( $is_pagewidget ) {
+//
+//		global $widget_pageid;d
+//		$parentId = $widget_pageid;
+//
+//	} else {
 
 		global $post;
 		if ( ! is_page() || ! get_post_meta( $post->ID, 'vkExUnit_childPageIndex', true ) ) {
 			return false; }
 		$parentId = $post->ID;
 
-	}
+//	}
 
 	$args      = array(
 		'post_type'      => 'page',
@@ -100,92 +100,3 @@ function vkExUnit_childPageIndex_shortcode() {
 
 	return $childPageList_html;
 }
-
-
-//if ( veu_content_filter_state() == 'content' ) {
-//	add_filter( 'the_content', 'vkExUnit_childPageIndex_contentHook', 7, 1 );
-//} else {
-//	add_action( 'loop_end', 'vkExUnit_chidPageIndex_loopend', 10, 1 );
-//}
-
-
-function vkExUnit_chidPageIndex_loopend( $query ) {
-	if ( ! $query->is_main_query() ) {
-		return;
-	}
-	echo vkExUnit_childPageIndex_shortcode();
-}
-
-/*
-  Print Child Page Box at Page
-/*-------------------------------------------*/
-function vkExUnit_childPageIndex_contentHook( $content ) {
-
-	// 抜粋だったらそのまま返す
-	if ( vkExUnit_is_excerpt() ) {
-		return $content; }
-
-	// ウィジェットだったらそのまま返す
-	global $is_pagewidget;
-	if ( $is_pagewidget ) {
-		return $content; }
-
-	// 固定ページじゅあないか、子ページインデックスを出力する設定でない場合はそのまま返す
-	global $post;
-	if ( ! is_page() || ! get_post_meta( $post->ID, 'vkExUnit_childPageIndex', true ) ) {
-		return $content; }
-
-	$content .= "\n[vkExUnit_childs]";
-
-	return $content;
-}
-
-/*
- admin_metabox_content
-/*-------------------------------------------*/
-//add_action( 'veu_metabox_insert_items', 'veu_child_page_index_admin_metabox_content' );
-//function veu_child_page_index_admin_metabox_content() {
-//	global $post;
-//	// childPageIndex display
-//	$enable = get_post_meta( $post->ID, 'vkExUnit_childPageIndex', true );?>
-<!--	<div>-->
-<!--		<input type="hidden" name="_nonce_vkExUnit__custom_field_childPageIndex" id="_nonce_vkExUnit__custom_field_childPageIndex" value="--><?php //echo wp_create_nonce( plugin_basename( __FILE__ ) ); ?><!--" />-->
-<!--		<label for="vkExUnit_childPageIndex">-->
-<!--			<input type="checkbox" id="vkExUnit_childPageIndex" name="vkExUnit_childPageIndex"--><?php //echo ( $enable ) ? ' checked' : ''; ?><!-- />-->
-<!--			--><?php //_e( 'Display a child page index', 'vk-all-in-one-expansion-unit' ); ?>
-<!--		</label>-->
-<!--	</div>-->
-<!--	--><?php
-//}
-
-/*
- save_custom_field
-/*-------------------------------------------*/
-//add_action( 'save_post', 'veu_child_page_index_save_custom_field' );
-//function veu_child_page_index_save_custom_field( $post_id ) {
-//	$childPageIndex = isset( $_POST['_nonce_vkExUnit__custom_field_childPageIndex'] ) ? htmlspecialchars( $_POST['_nonce_vkExUnit__custom_field_childPageIndex'] ) : null;
-//
-//	if ( ! wp_verify_nonce( $childPageIndex, plugin_basename( __FILE__ ) ) ) {
-//		return $post_id;
-//	}
-//
-//	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-//		return $post_id; }
-//
-//	$data = isset( $_POST['vkExUnit_childPageIndex'] ) ? htmlspecialchars( $_POST['vkExUnit_childPageIndex'] ) : null;
-//
-//	if ( 'page' == $data ) {
-//		if ( ! current_user_can( 'edit_page', $post_id ) ) {
-//			return $post_id; }
-//	}
-//
-//	if ( '' == get_post_meta( $post_id, 'vkExUnit_childPageIndex' ) ) {
-//		add_post_meta( $post_id, 'vkExUnit_childPageIndex', $data, true );
-//	} elseif ( $data != get_post_meta( $post_id, 'vkExUnit_childPageIndex' ) ) {
-//		update_post_meta( $post_id, 'vkExUnit_childPageIndex', $data );
-//	} elseif ( '' == $data ) {
-//		delete_post_meta( $post_id, 'vkExUnit_childPageIndex' );
-//	}
-//
-//	do_action( 'vkExUnit_customField_Page_save_customField' );
-//}
