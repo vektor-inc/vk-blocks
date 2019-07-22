@@ -64,7 +64,7 @@ if ( ! function_exists( 'vkblocks_active' ) ) {
 
 		$wp_customize->add_setting(
 			'vkblocks_load_bootstrap', array(
-				'default'           => true,
+				'default'           => false,
 				'sanitize_callback' => 'vkblocks_sanitize_checkbox',
 			)
 		);
