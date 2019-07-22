@@ -175,9 +175,11 @@
 
 
 @media only screen and (max-width: 480px) {
+	.vk_balloon_content{
+		font-size: .9em;
+	}
 	.vk_balloon-type-serif {
 		.vk_balloon_content{
-			font-size: .9em;
 			&::after {
 				border: 15px solid transparent;
 			}
@@ -185,7 +187,6 @@
 	}
 	.vk_balloon-type-think {
 		.vk_balloon_content{
-			font-size: .9em;
 			&::after {
 				border: 5px solid transparent;
 			}
