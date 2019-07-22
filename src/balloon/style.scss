@@ -172,12 +172,13 @@
 * SmartPhone
 0px - 480px
 ***********************/
-
-
 @media only screen and (max-width: 480px) {
+	.vk_balloon_content{
+		font-size: .9em;
+		display: inline-block;	
+	}
 	.vk_balloon-type-serif {
 		.vk_balloon_content{
-			font-size: .9em;
 			&::after {
 				border: 15px solid transparent;
 			}
@@ -185,77 +186,54 @@
 	}
 	.vk_balloon-type-think {
 		.vk_balloon_content{
-			font-size: .9em;
 			&::after {
 				border: 5px solid transparent;
 			}
 		}
 	}
-
-  .vk_balloon{
-    align-items: normal;
-    &.vk_balloon-position-left{
-      &.vk_balloon-type-serif{
-      	.vk_balloon_icon{
-      		max-width:86px;
-			margin-right: 1.5rem;
-		}//.vk_balloon_icon
-        .vk_balloon_content{
-          display: inline-block;
-          &::after{
-            top: 35px;
-             margin-left: -15px;
-          }
-        }//.vk_balloon_content
-      }//&.vk_balloon-type-serif
-
-      &.vk_balloon-type-think{
-      	.vk_balloon_icon{
-			margin-right: 2rem;
-			max-width: 86px;
-		}
-        .vk_balloon_content{
-          display: inline-block;
-
-          &::before{
-            width: 15px;
-    		height: 15px;
-          }
-        }
-      }
-    }//&.vk_balloon-position-left
-
-
-    &.vk_balloon-position-right{
-      text-align: right;
-
-		&.vk_balloon-type-serif{
+	.vk_balloon_icon{
+		max-width:86px;
+	}
+	.vk_balloon{
+		align-items: normal;
+		&.vk_balloon-position-left{
 			.vk_balloon_icon{
-			  margin-left: auto;
-			  margin-right: 0;
+				margin-right: 2rem;
+			}
+			&.vk_balloon-type-serif{
+				.vk_balloon_content{         
+				  &::after{
+				    top: 35px;
+				    margin-left: -15px;
+				  }
+				}
 			}
 
-			.vk_balloon_content{
-			  display: inline-block;
-			  &::after{
-			    top: 35px;
-				margin-right: -15px;
-			  }
+			&.vk_balloon-type-think{
+				.vk_balloon_content{
+				  &::before{
+				    width: 15px;
+					height: 15px;
+				  }
+				}
 			}
-		}//&.vk_balloon-type-serif
+		}//&.vk_balloon-position-left
 
-		&.vk_balloon-type-think{
+		&.vk_balloon-position-right{
+		text-align: right;
 			.vk_balloon_icon{
-			  margin-left: 2rem;
-			  margin-right: 0;
-			  max-width:86px;
+				margin-left: 2rem;
+			}
+			&.vk_balloon-type-serif{
+				.vk_balloon_content{
+				  &::after{
+				    top: 35px;
+					margin-right: -15px;
+				  }
+				}
 			}
 
-			.vk_balloon_content{
-			  display: inline-block;
-			}
 		}
-    }//&.vk_balloon-position-right
-  }//.vk_balloon
+	}//.vk_balloon
 
 } // @media only screen and (max-width: 480px) {
