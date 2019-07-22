@@ -109,7 +109,7 @@
 			}
 		}
 	}
-}
+}//.vk_balloon-position-left
 .vk_balloon-position-right{
 	flex-direction: row-reverse;
 	&.vk_balloon-type-serif{
@@ -146,7 +146,7 @@
 			}
 		}
 	}
-}
+}//.vk_balloon-position-right
 
 
 .vk_balloon {
@@ -224,9 +224,7 @@
           }
         }
       }
-
     }//&.vk_balloon-position-left
-
 
     &.vk_balloon-position-right{
       text-align: right;
@@ -256,8 +254,11 @@
         .vk_balloon_content{
           display: inline-block;
         }
-      }
-    }
-  }
+      }//&.vk_balloon-type-think
+    }//.vk_balloon-position-right
+  }//.vk_balloon
 
+	.vk_balloon_icon{
+		max-width:96px;
+	}
 } // @media only screen and (max-width: 480px) {
