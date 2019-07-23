@@ -59,7 +59,8 @@ function vkExUnit_childPageIndex_shortcode($currentPageId) {
 
 	if ( empty( $childrens ) ) {
 		wp_reset_query();
-		return false; }
+		return '<div>' . __( 'There is no child page.', 'vk-blocks' ) . '</div>';
+	}
 
 	$childPageList_html = PHP_EOL . '<div class="veu_childPage_list">' . PHP_EOL;
 	foreach ( $childrens as $children ) :
