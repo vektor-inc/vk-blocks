@@ -3,13 +3,10 @@
  *
  */
 import {schema} from './schema';
-import React from "react";
-
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
-const {ServerSideRender,RangeControl, RadioControl, PanelBody, Button, PanelColor, BaseControl} = wp.components;
+const {ServerSideRender} = wp.components;
 const {Fragment} = wp.element;
-const {RichText, InspectorControls, MediaUpload, ColorPalette} = wp.editor;
 const {select} = wp.data;
 const BlockIcon = 'arrow-down';
 
@@ -71,7 +68,4 @@ registerBlockType('vk-blocks/nested-pages', {
     save() {
         return null;
     },
-
-    //Please comment out, when you need to use deprecated.
-    // deprecated:deprecated
 });

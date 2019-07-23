@@ -77,11 +77,11 @@ function vkblocks_blocks_assets() {
 						'attributes'      => [
 							'currentPageId' => [
 								'type'    => 'number',
-								'default' => 0,
+								'default' => -1,
 							]
 						],
 						'render_callback' => function ( $attributes ) {
-							return vkExUnit_childPageIndex_shortcode( $attributes['currentPageId'] );
+							return vkblocks_render_child_page( $attributes['currentPageId'] );
 						},
 					)
 				);
