@@ -42,10 +42,11 @@ function veu_child_page_excerpt( $post ) {
 
 
 /**
- * Adding sho
+ * @param $currentPageId
+ *
  * @return bool|string
  */
-function vkExUnit_childPageIndex_shortcode() {
+function vkExUnit_childPageIndex_shortcode($currentPageId) {
 
 	$my_wp_query = new WP_Query();
 	$all_wp_pages = $my_wp_query->query( array(
@@ -54,7 +55,7 @@ function vkExUnit_childPageIndex_shortcode() {
 	) );
 
     // すべての固定ページから指定されたIDの子ページを探す
-	$childrens = get_page_children( 10, $all_wp_pages );
+	$childrens = get_page_children( $currentPageId, $all_wp_pages );
 
 	if ( empty( $childrens ) ) {
 		wp_reset_query();

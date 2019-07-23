@@ -1,5 +1,5 @@
 export const schema = {
-    vk_number: {
+    currentPageId: {
         type: 'number',
         default: 0,
     }

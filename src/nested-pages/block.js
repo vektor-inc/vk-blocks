@@ -10,6 +10,7 @@ const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blo
 const {ServerSideRender,RangeControl, RadioControl, PanelBody, Button, PanelColor, BaseControl} = wp.components;
 const {Fragment} = wp.element;
 const {RichText, InspectorControls, MediaUpload, ColorPalette} = wp.editor;
+const {select} = wp.data;
 const BlockIcon = 'arrow-down';
 
 /**
@@ -40,9 +41,12 @@ registerBlockType('vk-blocks/nested-pages', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    edit({attributes, setAttributes,className}) {
-        const {
-        } = attributes;
+    edit({attributes, setAttributes, className}) {
+
+        let pageId = select("core/editor").getCurrentPostId();
+        if (pageId) {
+            setAttributes({currentPageId: pageId});
+        }
 
         return (
             <Fragment>

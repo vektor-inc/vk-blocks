@@ -75,14 +75,13 @@ function vkblocks_blocks_assets() {
 						'editor_style'    => 'vk-blocks-build-editor-css',
 						'editor_script'   => 'vk-blocks-build-js',
 						'attributes'      => [
-							'vk_number'      => [
+							'currentPageId' => [
 								'type'    => 'number',
 								'default' => 0,
 							]
 						],
-						'render_callback' => function (){
-//							return "<div>hello2</div>";
-							return vkExUnit_childPageIndex_shortcode();
+						'render_callback' => function ( $attributes ) {
+							return vkExUnit_childPageIndex_shortcode( $attributes['currentPageId'] );
 						},
 					)
 				);
