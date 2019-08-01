@@ -8,6 +8,9 @@
 	padding:0;
 	font-weight: normal;
 	box-shadow:none;
+	&:before {
+		border:none;
+	}
 	&:after {
 		border:none;
 	}
@@ -15,7 +18,9 @@
 
 .vk_heading_title {
 	&-style {
-		&-plain {
+		&-plain,
+		/* Lightning Pro の見出しデザイン変更機能対策 */
+		.mainSection &-plain {
 			@include reset;
 		}
 	}

@@ -1,5 +1,7 @@
 //Bundle JS
+
 import './latest-posts/block.js';
+import './highlighter/block.js';
 import './table-of-contents/block.js';
 // import './simple-table/block.js';
 // import './th/block.js';

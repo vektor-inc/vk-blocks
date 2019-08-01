@@ -76,6 +76,7 @@ h1:first-child.vk_prBlocks_item_title{
 	}
 }
 }
+
 .alert{
 
   padding: 1em;
@@ -153,7 +154,6 @@ h1:first-child.vk_prBlocks_item_title{
 	}
 }
 
-
 /*	type
 /*-------------------------------------------*/
 .vk_balloon-type-serif{
@@ -228,6 +228,7 @@ h1:first-child.vk_prBlocks_item_title{
 		}
 	}
 }
+
 .vk_balloon-position-right{
 	flex-direction: row-reverse;
 	&.vk_balloon-type-serif{
@@ -292,110 +293,145 @@ h1:first-child.vk_prBlocks_item_title{
 0px - 480px
 ***********************/
 @media only screen and (max-width: 480px) {
-  .vk_balloon{
-    display: block;
-    &.vk_balloon-position-left{
-      &.vk_balloon-type-serif{
-        .vk_balloon_content{
-          display: inline-block;
-          &::after{
-            top: 0;
-            left: 2.9rem;
-            width: 0;
-            height: 0;
-            border: 20px solid transparent;
-            border-bottom-color: inherit;
-            border-top: 0;
-            margin-left: -20px;
-            margin-top: -20px;
-          }
-        }
-      }
-
-      &.vk_balloon-type-think{
-        .vk_balloon_content{
-          display: inline-block;
-
-          &::before{
-            left: 36px;
-            top: -8px;
-          }
-
-          &::after{
-            left: 47px;
-            top: -20px;
-          }
-        }
-      }
-    }
-
-    &.vk_balloon-position-right{
-      text-align: right;
-
-      &.vk_balloon-type-serif{
-        .vk_balloon_icon{
-          margin-left: auto;
-          margin-right: 0;
-        }
-
-        .vk_balloon_content{
-          display: inline-block;
-          &::after{
-            top: 0;
-            right: 2.9rem;
-            width: 0;
-            height: 0;
-            border: 20px solid transparent;
-            border-bottom-color: inherit;
-            border-top: 0;
-            margin-left: -20px;
-            margin-top: -20px;
-          }
-        }
-      }
-
-      &.vk_balloon-type-think{
-        .vk_balloon_icon{
-          margin-left: auto;
-          margin-right: 0;
-        }
-
-        .vk_balloon_content{
-          display: inline-block;
-
-          &::before{
-            right: 36px;
-            top: -8px;
-          }
-
-          &::after{
-            right: 47px;
-            top: -20px;
-          }
-        }
-      }
-    }
-  }
-	.vk_balloon_icon{
-		max-width:96px;
+	.vk_balloon_content{
+		font-size: .9em;
+		display: inline-block;	
 	}
+	.vk_balloon-type-serif {
+		.vk_balloon_content{
+			&::after {
+				border: 15px solid transparent;
+			}
+		}
+	}
+	.vk_balloon-type-think {
+		.vk_balloon_content{
+			&::after {
+				border: 5px solid transparent;
+			}
+		}
+	}
+
+	.vk_balloon_icon{
+		max-width:86px;
+	}
+
+	.vk_balloon{
+		align-items: normal;
+		&.vk_balloon-position-left{
+			.vk_balloon_icon{
+				margin-right: 2rem;
+			}
+			&.vk_balloon-type-serif{
+				.vk_balloon_content{         
+				  &::after{
+				    top: 35px;
+				    margin-left: -15px;
+				  }
+				}
+			}
+
+			&.vk_balloon-type-think{
+				.vk_balloon_content{
+				  &::before{
+				    width: 15px;
+					height: 15px;
+				  }
+				}
+			}
+		}
+
+		&.vk_balloon-position-right{
+			text-align: right;
+			.vk_balloon_icon{
+				margin-left: 2rem;
+			}
+			&.vk_balloon-type-serif{
+				.vk_balloon_content{
+				  &::after{
+				    top: 35px;
+					margin-right: -15px;
+				  }
+				}
+			}
+
+		}
+	}//.vk_balloon
 } // @media only screen and (max-width: 480px) {
+
+/*      .qaItem
+/*-------------------------------------------*/
+.vk_faq { display:block; overflow:hidden;border-bottom:1px dotted #ccc; padding:0px 0px 25px; margin:25px 0px; width:100%; position: relative; }
+.vk_faq_title,
+.vk_faq_content {
+	border:none;padding-left: 35px;
+	&:before {
+		position: absolute;left:0;font-size:24px;line-height: 105%;
+	}
+}
+.vk_faq_title { margin-bottom:15px;font-size:18px;font-weight:700;
+  &:before { font-family:"areal";content:"Q ";color:#e50000; }
+}
+.vk_faq_content { margin:0px;
+  &:before { content:"A ";color:#337ab7;font-family: "" }
+}
+
+.vk_button{
+	margin: 5px 0;
+	&-color-custom{
+		a:hover{
+			opacity: 0.8;
+			box-shadow: 0 0 0 0.2rem rgba(171, 184, 195, .25) ;
+		}
+	}
+	&-align{
+		&-left{
+			text-align: left;
+		}
+		&-center{
+			text-align: center;
+		}
+		&-right{
+			text-align: right;
+		}
+		&-block{
+			display: block;
+		}
+	}
+	&_link{
+		&.btn { // .btn指定がないと管理画面で標準の .btn の指定に負ける
+			padding-top: .7em;
+			padding-bottom: .6em;
+		}
+		&_before{ margin-right: 0.7rem; }
+		&_after{ margin-left: 0.7rem; }
+		&_subCaption{
+			display:block; overflow:hidden;
+			margin: 0;
+			font-size: 80%;
+		}
+	}
+	.editor-rich-text{
+		display: inline-block;
+	}
 }
 
 
 /*-------------------------------------------*/
-/* CSS
+/*	Lightnig がまだ Bootstrap4 でないため手動で追加したクラス
+/*	Lighnting が 4 を同梱したら削除して化
 /*-------------------------------------------*/
-@mixin reset() {
-	background: none;
-	border:none;
-	border-radius: 0;
-	padding:0;
-	font-weight: normal;
-	box-shadow:none;
-	&:after {
-		border:none;
-	}
+$color_primary:#007bff;
+$color_secondary:#6c757d;
+$color_success:#28a745;
+$color_info:#17a2b8;
+$color_warning:#ffc107;
+$color_danger:#dc3545;
+$color_light:#f8f9fa;
+$color_dark:#343a40;
+/* .btn がないと標準のBS4の指定に負ける */
+.btn.btn-primary{
+	color:#fff;
 }
 .btn.btn-secondary{
 	color:#fff;
@@ -426,7 +462,7 @@ h1:first-child.vk_prBlocks_item_title{
 .btn.btn-dark:hover{
 	color:#fff;
 }
-} // @media (min-width: 768px){
+
 /* .btn がないと標準のBS4の指定に負ける */
 .btn.btn-outline-primary{
 	color:$color_primary;
@@ -517,22 +553,6 @@ h1:first-child.vk_prBlocks_item_title{
 	background: $color_dark;
 	color:#fff;
 }
-/*      .qaItem
-/*-------------------------------------------*/
-.vk_faq { display:block; overflow:hidden;border-bottom:1px dotted #ccc; padding:0px 0px 25px; margin:25px 0px; width:100%; position: relative; }
-.vk_faq_title,
-.vk_faq_content {
-	border:none;padding-left: 35px;
-	&:before {
-		position: absolute;left:0;font-size:24px;line-height: 105%;
-	}
-}
-.vk_faq_title { margin-bottom:15px;font-size:18px;font-weight:700;
-  &:before { font-family:"areal";content:"Q ";color:#e50000; }
-}
-.vk_faq_content { margin:0px;
-  &:before { content:"A ";color:#337ab7;font-family: "" }
-}
 
 //*      .flowBox
 /*-------------------------------------------*/
@@ -575,6 +595,9 @@ h1:first-child.vk_prBlocks_item_title{
 	padding:0;
 	font-weight: normal;
 	box-shadow:none;
+	&:before {
+		border:none;
+	}
 	&:after {
 		border:none;
 	}
@@ -582,13 +605,25 @@ h1:first-child.vk_prBlocks_item_title{
 
 .vk_heading_title {
 	&-style {
-		&-plain {
+		&-plain,
+		/* Lightning Pro の見出しデザイン変更機能対策 */
+		.mainSection &-plain {
 			@include reset;
 		}
 	}
 }
 .vk_heading_subtext {
 	margin-bottom:0;
+}
+
+/*-------------------------------------------*/
+/* CSS
+/*-------------------------------------------*/
+
+.vk_latestPosts {
+	ul,li {
+		list-style: none;
+	}
 }
 
 /*-------------------------------------------*/
@@ -850,40 +885,6 @@ $padding-xl:3.5em;
 /* CSS
 /*-------------------------------------------*/
 
-@mixin switchVisibility($pc,$tablet,$mobile) {
-  .vk_spacer {
-    .vk_spacer-display-pc {
-      display: $pc;
-    }
-
-    .vk_spacer-display-tablet {
-      display: $tablet;
-    }
-
-    .vk_spacer-display-mobile {
-      display: $mobile;
-    }
-  }
-}
-
-// Small devices (landscape phones, 576px以下)
-@media (max-width: 576px) {
-  @include switchVisibility(none, none, block);
-}
-
-// Medium devices (tablets, 577pxから768px)
-@media (min-width: 577px) and (max-width: 768px) {
-  @include switchVisibility(none, block, none);
-}
-
-// Large devices (desktops, 769px以上)
-@media (min-width: 769px) {
-  @include switchVisibility(block, none, none);
-}
-/*-------------------------------------------*/
-/* CSS
-/*-------------------------------------------*/
-
 .vk_table {
 	&-col-mobile1 {
 		@media( max-width: 575.98px){
@@ -962,6 +963,40 @@ $padding-xl:3.5em;
 	}
 }
 
+/*-------------------------------------------*/
+/* CSS
+/*-------------------------------------------*/
+
+@mixin switchVisibility($pc,$tablet,$mobile) {
+  .vk_spacer {
+    .vk_spacer-display-pc {
+      display: $pc;
+    }
+
+    .vk_spacer-display-tablet {
+      display: $tablet;
+    }
+
+    .vk_spacer-display-mobile {
+      display: $mobile;
+    }
+  }
+}
+
+// Small devices (landscape phones, 576px以下)
+@media (max-width: 576px) {
+  @include switchVisibility(none, none, block);
+}
+
+// Medium devices (tablets, 577pxから768px)
+@media (min-width: 577px) and (max-width: 768px) {
+  @include switchVisibility(none, block, none);
+}
+
+// Large devices (desktops, 769px以上)
+@media (min-width: 769px) {
+  @include switchVisibility(block, none, none);
+}
 /*-------------------------------------------*/
 /* CSS
 /*-------------------------------------------*/

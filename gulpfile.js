@@ -56,13 +56,18 @@ gulp.task('copy_front_js', function () {
 			.pipe(jsmin())
 			.pipe( gulp.dest( './inc/vk-blocks/build/' ) );
 });
-
+gulp.task('copy_front_php', function () {
+		return gulp.src([ './src/latest-posts/latest-posts.php'])
+			.pipe(jsmin())
+			.pipe( gulp.dest( './inc/vk-blocks/view/' ) );
+});
 
 // watch
 gulp.task('watch', function () {
     gulp.watch('src/**/*.js', ['js','dist_ex','copy_front_js']);
     gulp.watch('editor-css/editor.scss_before', ['sass_editor']);
     gulp.watch('src/**/*.scss', ['sass','sass_editor','dist_ex']);
+    gulp.watch('src/**/*.php', ['copy_front_php','dist_ex']);
     // gulp.watch('src/**/*.scss', ['sass']);
 });
 

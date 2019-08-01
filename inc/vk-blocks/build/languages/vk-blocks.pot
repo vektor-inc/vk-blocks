@@ -11,7 +11,6 @@ msgstr ""
 #: src/flow/block.js:112
 #: src/outer/block.js:119
 #: src/pr-blocks/block.js:343
-
 #: src/pr-content/component.js:116
 #: src/pr-content/deprecated/component-deprecated.js:102
 #: src/staff/component.js:88
@@ -22,7 +21,6 @@ msgstr ""
 #: src/flow/block.js:113
 #: src/outer/block.js:121
 #: src/pr-blocks/block.js:345
-
 #: src/pr-content/component.js:120
 #: src/pr-content/deprecated/component-deprecated.js:106
 msgid "Upload image"
@@ -336,30 +334,7 @@ msgstr ""
 msgid "Heading"
 msgstr ""
 
-#: src/latest-posts/block.js:34
-msgid "Latest Posts"
-msgstr ""
-
-#: src/latest-posts/block.js:57
-msgid "Latest Posts Setting"
-msgstr ""
-
-#: src/latest-posts/block.js:60
-msgid "Layout"
-msgstr ""
-
-#: src/latest-posts/block.js:66
-msgid "image_1st"
-msgstr ""
-
-#: src/latest-posts/block.js:70
-msgid "image_2st"
-msgstr ""
-
-#: src/latest-posts/block.js:75
-msgid "Number of Posts"
-
-#: src/heading/component.js:105
+#: src/heading/component.js:106
 msgid "Input sub text…"
 msgstr ""
 
@@ -370,6 +345,47 @@ msgstr ""
 # %s: heading level e.g: "1", "2", "3"
 #: src/heading/heading-toolbar.js:17
 msgid "Heading %d"
+msgstr ""
+
+#: src/highlighter/block.js:81
+msgid "Highlight Color"
+msgstr ""
+
+#: src/highlighter/block.js:93
+msgid "Highlighter"
+msgstr ""
+
+#: src/latest-posts/block.js:178
+msgid "Latest Posts Setting"
+msgstr ""
+
+#: src/latest-posts/block.js:180
+#: src/staff/block.js:82
+msgid "Layout"
+msgstr ""
+
+#: src/latest-posts/block.js:188
+msgid "image_1st"
+msgstr ""
+
+#: src/latest-posts/block.js:192
+msgid "image_2st"
+msgstr ""
+
+#: src/latest-posts/block.js:198
+msgid "Number of Posts"
+msgstr ""
+
+#: src/latest-posts/block.js:208
+msgid "Filter by PostTypes"
+msgstr ""
+
+#: src/latest-posts/block.js:215
+msgid "Filter by Taxonomy Terms"
+msgstr ""
+
+#: src/latest-posts/block.js:32
+msgid "Latest Posts"
 msgstr ""
 
 #: src/outer/block.js:107
@@ -657,7 +673,6 @@ msgstr ""
 
 #: src/pr-content/block.js:99
 msgid "Content Color"
-
 msgstr ""
 
 #: src/pr-content/component.js:136
@@ -747,10 +762,6 @@ msgstr ""
 
 #: src/staff/block.js:54
 msgid "Staff"
-msgstr ""
-
-#: src/staff/block.js:82
-msgid "Layout"
 msgstr ""
 
 #: src/staff/block.js:93
