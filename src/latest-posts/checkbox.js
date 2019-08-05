@@ -23,7 +23,7 @@ const addCheckBox = (args) => {
 
         switch (name) {
             case 'postTypes':
-                renderPostTypes(reactDomToRender, originData[i].slug, checkedData, setAttributes);
+                renderPostTypes(reactDomToRender, originData[i].name, originData[i].slug, checkedData, setAttributes);
                 break;
 
             case 'taxonomy':
@@ -43,12 +43,13 @@ export default addCheckBox;
 /**
  *
  * @param reactDomToRender
+ * @param label
  * @param slug
  * @param checkedData
  * @param setAttributes
  * @returns {*}
  */
-const renderPostTypes = (reactDomToRender, slug, checkedData, setAttributes) => {
+const renderPostTypes = (reactDomToRender, label, slug, checkedData, setAttributes) => {
 
     if (!Array.isArray(checkedData)) {
         return false
@@ -57,7 +58,7 @@ const renderPostTypes = (reactDomToRender, slug, checkedData, setAttributes) => 
     if (checkedData)
         return (reactDomToRender.push(
             <CheckboxControl
-                label={slug}
+                label={label}
                 checked={checkedData.some(item => item === slug)}
                 onChange={async (value) => {
                     if (value) {
@@ -79,15 +80,18 @@ const renderTaxonomy = (reactDomToRender, tax, slug, checkedData, setAttributes)
     if(slug){
         slug.forEach(term => {
 
+            let slug = term[0];
+            let label = term[1];
+
             reactDomToRender.push(
                 <CheckboxControl
-                    label={term}
-                    checked={checkedData[tax].some(termItem => termItem === term)}
+                    label={label}
+                    checked={checkedData[tax].some(termItem => termItem === slug)}
                     onChange={(value) => {
                         if (value) {
-                            checkedData[tax].push(term);
+                            checkedData[tax].push(slug);
                         } else {
-                            checkedData[tax] = checkedData[tax].filter(elm => elm !== term);
+                            checkedData[tax] = checkedData[tax].filter(elm => elm !== slug);
                         }
                         setAttributes({isCheckedTerms: JSON.stringify(checkedData)});
                     }}

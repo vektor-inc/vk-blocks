@@ -158,7 +158,7 @@ registerBlockType('vk-blocks/latest-posts', {
                     if (!returnTermsKey.includes(tax)) {
 
                         taxData.forEach(term => {
-                            terms.push(term.slug);
+                            terms.push([term.slug, term.name]);
                             returnTerms[term.taxonomy] = terms;
                         })
                     } else {
@@ -167,7 +167,6 @@ registerBlockType('vk-blocks/latest-posts', {
                     }
                 }
             });
-
             return returnTerms;
         };
 
