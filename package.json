@@ -11,6 +11,10 @@
     "gulp": "gulp",
     "test": "wp-scripts test-unit-js --config tests/jest.config.json"
   },
+  "browserslist": [
+    "last 2 version",
+    "> 5%"
+  ],
   "author": "",
   "license": "MIT",
   "devDependencies": {
@@ -51,8 +55,5 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-responsive": "^7.0.0"
-  },
-  "browserslist": [
-    "defaults"
-  ]
+  }
 }

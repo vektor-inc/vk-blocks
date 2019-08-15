@@ -25,7 +25,7 @@ gulp.task('sass', function () {
                 './src/scss'
             ]
         }))
-        .pipe($.autoprefixer({browsers: ['last 2 version', '> 5%']}))
+        .pipe($.autoprefixer())
         // .pipe($.sourcemaps.write('./map'))
 
         //bundle css files by gulp-concat
