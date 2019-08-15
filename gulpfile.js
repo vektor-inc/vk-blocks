@@ -67,11 +67,10 @@ gulp.task('watch', function () {
 });
 
 // Build
-gulp.task('build', ['js', 'sass', 'sass_editor']);
+gulp.task('build', gulp.series( gulp.parallel('js', 'sass','sass_editor')));
 
 // Default Tasks
-gulp.task('default', ['watch']);
-
+gulp.task('default', gulp.series('watch'));
 
 // copy dist ////////////////////////////////////////////////
 
