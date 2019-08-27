@@ -30,6 +30,9 @@
 
 		a{
 			color: #464646;
+			@media (max-width: 768px){
+				font-size: 1rem;
+			}
 		}
 
 		time{
@@ -37,3 +40,7 @@
 		}
 	}
 }
+
+
+
+
