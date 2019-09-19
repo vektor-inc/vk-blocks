@@ -8,10 +8,15 @@
 	padding:0;
 	font-weight: normal;
 	box-shadow:none;
+	outline: unset;
+	outline-offset: unset;
+	text-align: unset;
 	&:before {
+		content:none;
 		border:none;
 	}
 	&:after {
+		content:none;
 		border:none;
 	}
 }
