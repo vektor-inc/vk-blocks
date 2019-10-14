@@ -21,34 +21,6 @@ if ( ! function_exists( 'vkblocks_active' ) ) {
 	// ExUnitなど読み込み先によってはあらかじめ読み込んでいるので不要の場合がある
 	require_once( 'font-awesome/font-awesome-config.php' );
 
-
-	// Boostrapの読み込み
-	function vkblocks_load_bootstrap( $hook_suffix ) {
-
-		$vkblocks_load_bootstrap = get_option( 'vkblocks_load_bootstrap', false );
-
-		//カスタマイザーでチェックがあればBoostrapを読み込み
-		if ( ! $vkblocks_load_bootstrap ) {
-			return;
-		}
-
-		// 管理画面
-		if ( is_admin() ) {
-
-			if ( 'post.php' === $hook_suffix || 'post-new.php' === $hook_suffix ) {
-				wp_register_style( 'vkblocks-bootstrap', plugin_dir_url( __FILE__ ) . '/bootstrap-4.1.3/css/bootstrap.min.css', false, '4.1.3' );
-				wp_enqueue_style( 'vkblocks-bootstrap' );
-
-			}
-		} else {
-			wp_register_style( 'vkblocks-bootstrap', plugin_dir_url( __FILE__ ) . '/bootstrap-4.1.3/css/bootstrap.min.css', false, '4.1.3' );
-			wp_enqueue_style( 'vkblocks-bootstrap' );
-		}
-
-	}
-	add_action( 'admin_enqueue_scripts', 'vkblocks_load_bootstrap' );
-	add_action( 'wp_enqueue_scripts', 'vkblocks_load_bootstrap' );
-
 	/**
 	 * カスタマイザー用のチェックボックス
 	 *
