@@ -12,6 +12,8 @@ var runSequence = require('run-sequence');
 // js最小化
 var jsmin = require('gulp-jsmin');
 
+
+// 各ブロックのscssをコンパイルして inc 内にビルド
 gulp.task('sass', function () {
     return gulp.src(['./src/**/*.scss'])
         .pipe($.plumber({
@@ -44,6 +46,8 @@ gulp.task('sass_editor', function (){
 				.pipe(gulp.dest('./inc/vk-blocks/build/'));
 });
 
+// VK Block で使用しているBootstrapのみコンパイル
+// ※ Lightning 以外など必要な時だけビルド
 gulp.task('sass_bootstrap', function (){
     return gulp.src([ './lib/bootstrap/scss/bootstrap.scss'])
 				.pipe(sass())
@@ -51,7 +55,6 @@ gulp.task('sass_bootstrap', function (){
 				.pipe(concat('bootstrap_vk_using.css'))
 				.pipe(gulp.dest('./inc/vk-blocks/build/'));
 });
-
 
 // Transpile and Compile Sass and Bundle it.
 gulp.task('js', function () {
@@ -64,7 +67,6 @@ gulp.task('copy_front_js', function () {
 			.pipe(jsmin())
 			.pipe( gulp.dest( './inc/vk-blocks/build/' ) );
 });
-
 
 // watch
 gulp.task('watch', function () {
