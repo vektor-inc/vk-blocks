@@ -365,22 +365,26 @@ msgid "Layout"
 msgstr ""
 
 #: src/latest-posts/block.js:187
-msgid "image_1st"
+msgid "Card"
 msgstr ""
 
 #: src/latest-posts/block.js:191
+msgid "image_1st"
+msgstr ""
+
+#: src/latest-posts/block.js:195
 msgid "image_2st"
 msgstr ""
 
-#: src/latest-posts/block.js:197
+#: src/latest-posts/block.js:201
 msgid "Number of Posts"
 msgstr ""
 
-#: src/latest-posts/block.js:207
+#: src/latest-posts/block.js:211
 msgid "Filter by PostTypes"
 msgstr ""
 
-#: src/latest-posts/block.js:214
+#: src/latest-posts/block.js:218
 msgid "Filter by Taxonomy Terms"
 msgstr ""
 

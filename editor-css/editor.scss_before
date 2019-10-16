@@ -18,25 +18,30 @@ border-radius: 2px;
 padding: 3px 4px;
 }
 
+/*
+-------------------------------------------
+管理画面右側パネル
+-------------------------------------------
+*/
 .components-base-control__label {
 	 font-weight:bold;
 }
 .components-base-control .components-base-control__help {
 	margin-top:0;
 }
+
 .components-radio-control__option label { margin-bottom:0; }
 .components-checkbox-control__label { margin-bottom:0; }
 .components-color-palette { display:block; overflow:hidden; }
 
-/*スライダーを表示。デフォルトだとbootstrapに非表示にされてしまう*/
+/* スライダーを表示。デフォルトだとbootstrapに非表示にされてしまう */
 input[type=range] {
     margin: 1px;
 }
 
 /* editor area *********************************************/
+
 .edit-post-visual-editor.editor-styles-wrapper{
-
-
 
 /* これがないとGutenberg標準のエディタCSSに負ける */
 h1:first-child.vk_prBlocks_item_title{
@@ -50,4 +55,12 @@ h1:first-child.vk_prBlocks_item_title{
 		.wp-block {
 			max-width:100%;
 		}
+}
+
+/* card */
+/* 編集画面でWP標準styleで.cardに出力されるcssを打ち消し */
+.vk_latestPosts .card {
+padding:0;
+box-shadow:none;
+margin-top:0;
 }

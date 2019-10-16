@@ -70,26 +70,36 @@ gulp.task('copy_front_js', function () {
 
 gulp.task('copy_front_php', function () {
 		return gulp.src([ './src/latest-posts/latest-posts.php'])
-			.pipe(jsmin())
+			// .pipe(jsmin())
 			.pipe( gulp.dest( './inc/vk-blocks/view/' ) );
 });
 
 // watch
 gulp.task('watch', function () {
+		// js build
     gulp.watch('src/**/*.js',
 			gulp.series(
 				gulp.parallel('js', 'dist_ex','copy_front_js')
 			)
 		);
+		// editor before build
 		gulp.watch('editor-css/editor.scss_before',
 			gulp.series('sass_editor')
 		);
+		// bootstrap
 		gulp.watch('./lib/bootstrap/scss/**/**.scss',
 			gulp.series('sass_bootstrap')
 		);
+		// scss build
     gulp.watch('src/**/*.scss',
 			gulp.series(
 				gulp.parallel('sass','sass_editor','dist_ex')
+			)
+		);
+		// php build
+    gulp.watch('./src/latest-posts/latest-posts.php',
+			gulp.series(
+				gulp.parallel('copy_front_php')
 			)
 		);
     // gulp.watch('src/**/*.scss', ['sass']);

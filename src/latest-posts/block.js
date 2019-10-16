@@ -182,6 +182,10 @@ registerBlockType('vk-blocks/latest-posts', {
                                 value={layout}
                                 onChange={(value) => setAttributes({layout: value})}
                                 options={[
+																	{
+																			value: 'card',
+																			label: __('Card', 'vk-blocks'),
+																	},
                                     {
                                         value: 'image_1st',
                                         label: __('image_1st', 'vk-blocks'),

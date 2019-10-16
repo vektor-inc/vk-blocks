@@ -6,4 +6,16 @@
 	ul,li {
 		list-style: none;
 	}
+	.card-deck {
+		display: flex;
+		flex-flow: unset;
+		flex-wrap: wrap;
+		.card {
+			@media (min-width: 576px){
+					width: calc( 33% - 30px );
+					flex: unset;
+					margin-bottom: 30px;
+			}
+		}
+	}
 }
