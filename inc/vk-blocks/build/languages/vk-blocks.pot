@@ -355,32 +355,32 @@ msgstr ""
 msgid "Highlighter"
 msgstr ""
 
-#: src/latest-posts/block.js:178
+#: src/latest-posts/block.js:177
 msgid "Latest Posts Setting"
 msgstr ""
 
-#: src/latest-posts/block.js:180
+#: src/latest-posts/block.js:179
 #: src/staff/block.js:82
 msgid "Layout"
 msgstr ""
 
-#: src/latest-posts/block.js:188
+#: src/latest-posts/block.js:187
 msgid "image_1st"
 msgstr ""
 
-#: src/latest-posts/block.js:192
+#: src/latest-posts/block.js:191
 msgid "image_2st"
 msgstr ""
 
-#: src/latest-posts/block.js:198
+#: src/latest-posts/block.js:197
 msgid "Number of Posts"
 msgstr ""
 
-#: src/latest-posts/block.js:208
+#: src/latest-posts/block.js:207
 msgid "Filter by PostTypes"
 msgstr ""
 
-#: src/latest-posts/block.js:215
+#: src/latest-posts/block.js:214
 msgid "Filter by Taxonomy Terms"
 msgstr ""
 
