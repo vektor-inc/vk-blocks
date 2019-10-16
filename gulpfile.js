@@ -12,6 +12,8 @@ var runSequence = require('run-sequence');
 // js最小化
 var jsmin = require('gulp-jsmin');
 
+
+// 各ブロックのscssをコンパイルして inc 内にビルド
 gulp.task('sass', function () {
     return gulp.src(['./src/**/*.scss'])
         .pipe($.plumber({
@@ -25,7 +27,7 @@ gulp.task('sass', function () {
                 './src/scss'
             ]
         }))
-        .pipe($.autoprefixer({browsers: ['last 2 version', '> 5%']}))
+        .pipe($.autoprefixer())
         // .pipe($.sourcemaps.write('./map'))
 
         //bundle css files by gulp-concat
@@ -35,7 +37,7 @@ gulp.task('sass', function () {
 
 
 gulp.task('sass_editor', function (){
-    return gulp.src([ './editor-css/editor.scss_before',  './src/**/*.scss', './editor-css/editor.scss_after'])
+    return gulp.src([ './editor-css/editor.scss_before', './src/**/*.scss', './editor-css/editor.scss_after'])
 				.pipe(concat('editor-block-build.scss'))
 				.pipe(gulp.dest('./editor-css/'))
 				.pipe(sass())
@@ -44,6 +46,15 @@ gulp.task('sass_editor', function (){
 				.pipe(gulp.dest('./inc/vk-blocks/build/'));
 });
 
+// VK Block で使用しているBootstrapのみコンパイル
+// ※ Lightning 以外など必要な時だけビルド
+gulp.task('sass_bootstrap', function (){
+    return gulp.src([ './lib/bootstrap/scss/bootstrap.scss'])
+				.pipe(sass())
+				.pipe(cleanCss())
+				.pipe(concat('bootstrap_vk_using.css'))
+				.pipe(gulp.dest('./inc/vk-blocks/build/'));
+});
 
 // Transpile and Compile Sass and Bundle it.
 gulp.task('js', function () {
@@ -56,6 +67,7 @@ gulp.task('copy_front_js', function () {
 			.pipe(jsmin())
 			.pipe( gulp.dest( './inc/vk-blocks/build/' ) );
 });
+
 gulp.task('copy_front_php', function () {
 		return gulp.src([ './src/latest-posts/latest-posts.php'])
 			.pipe(jsmin())
@@ -64,19 +76,30 @@ gulp.task('copy_front_php', function () {
 
 // watch
 gulp.task('watch', function () {
-    gulp.watch('src/**/*.js', ['js','dist_ex','copy_front_js']);
-    gulp.watch('editor-css/editor.scss_before', ['sass_editor']);
-    gulp.watch('src/**/*.scss', ['sass','sass_editor','dist_ex']);
-    gulp.watch('src/**/*.php', ['copy_front_php','dist_ex']);
+    gulp.watch('src/**/*.js',
+			gulp.series(
+				gulp.parallel('js', 'dist_ex','copy_front_js')
+			)
+		);
+		gulp.watch('editor-css/editor.scss_before',
+			gulp.series('sass_editor')
+		);
+		gulp.watch('./lib/bootstrap/scss/**/**.scss',
+			gulp.series('sass_bootstrap')
+		);
+    gulp.watch('src/**/*.scss',
+			gulp.series(
+				gulp.parallel('sass','sass_editor','dist_ex')
+			)
+		);
     // gulp.watch('src/**/*.scss', ['sass']);
 });
 
 // Build
-gulp.task('build', ['js', 'sass', 'sass_editor']);
+gulp.task('build', gulp.series( gulp.parallel('js', 'sass','sass_editor')));
 
 // Default Tasks
-gulp.task('default', ['watch']);
-
+gulp.task('default', gulp.series('watch'));
 
 // copy dist ////////////////////////////////////////////////
 

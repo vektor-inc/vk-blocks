@@ -28,12 +28,6 @@ padding: 3px 4px;
 .components-checkbox-control__label { margin-bottom:0; }
 .components-color-palette { display:block; overflow:hidden; }
 
-// これがないと rem 指定してる見出しなどが大きくなりすぎる
-// 見出しがrem指定なのは今後画面サイズによって html の font size を可変にして 見出しサイズも自動可変させるため
-html {
-font-size:10px;
-}
-
 /*スライダーを表示。デフォルトだとbootstrapに非表示にされてしまう*/
 input[type=range] {
     margin: 1px;
@@ -56,25 +50,6 @@ h1:first-child.vk_prBlocks_item_title{
 		.wp-block {
 			max-width:100%;
 		}
-}
-
-@media (min-width: 600px){
-.wp-block-columns {
-	margin-left:-15px;
-	margin-right:-15px;
-}
-.wp-block-column {
-	flex-basis: auto;
-	margin-left:15px;
-	margin-right:15px;
-	width: calc( 50% - 30px ) ;
-	&:not(:first-child),
-	&:not(:last-child),
-	&:nth-child(odd){
-		margin-left:15px;
-		margin-right:15px;
-	}
-}
 }
 
 .alert{
@@ -115,6 +90,50 @@ h1:first-child.vk_prBlocks_item_title{
       border-color:$color-border;
     }
   }
+}
+
+@media (min-width: 600px){
+	.wp-block-columns {
+		margin-left:-15px;
+		margin-right:-15px;
+	}
+	.wp-block-column {
+		flex-basis: auto;
+		margin-left:15px;
+		margin-right:15px;
+		width: calc( 50% - 30px ) ;
+		&:not(:first-child),
+		&:not(:last-child),
+		&:nth-child(odd){
+			margin-left:15px;
+			margin-right:15px;
+		}
+	}
+}
+
+/*-------------------------------------------*/
+/*  「最新の記事」ブロック
+/*-------------------------------------------*/
+.wp-block-latest-posts{
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	li{
+		margin: 0;
+		padding: 1rem 0;
+		border-bottom: 1px dotted #666;
+
+		a{
+			color: #464646;
+			@media (max-width: 768px){
+				font-size: 1rem;
+			}
+		}
+
+		time{
+			color: #d44950;
+		}
+	}
 }
 
 .vk_balloon {
@@ -595,10 +614,15 @@ $color_dark:#343a40;
 	padding:0;
 	font-weight: normal;
 	box-shadow:none;
+	outline: unset;
+	outline-offset: unset;
+	text-align: unset;
 	&:before {
+		content:none;
 		border:none;
 	}
 	&:after {
+		content:none;
 		border:none;
 	}
 }
@@ -1185,7 +1209,11 @@ $toc-left-margin: 1rem;
 		border:3px solid rgba(0,0,0,0.04);
 		box-shadow:inset 0px 0px 0px 1px rgba(255,255,255,1);
 		background-color: rgba(0,0,0,0.015);
-		padding: 3rem 4rem;
+		padding: 2rem;
+		@media (min-width: 769px) {
+			padding: 3rem 4rem;
+		}
+
 	}
 	&_title{
 		text-align: center;

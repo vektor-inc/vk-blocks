@@ -2,9 +2,9 @@
 Contributors: vektor-inc,kurudrive,naoki0h
 Donate link:
 Tags: Gutenberg,FAQ,alert
-Requires at least: 4.6
-Tested up to: 5.2.2
-Stable tag: 0.10.2
+Requires at least: 5.0
+Tested up to: 5.2.3
+Stable tag: 0.11.0
 Requires PHP: 5.6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -53,6 +53,10 @@ e.g.
 1. VK Blocks examples.
 
 == Changelog ==
+
+= 0.11.0 =
+[ CSS tuning ][ Latest posts(core) ]
+[ CSS tuning ][ Table of contents ] Padding tuning 
 
 = 0.10.2 =
 [ Bug fix ] load bootstrap4 logic bug fix
