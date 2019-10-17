@@ -3,16 +3,38 @@
  *
  */
 import addCheckBox from './checkbox';
-import {schema} from './schema.js';
+import {
+    schema
+} from './schema.js';
 
-const {__} = wp.i18n; // Import __() from wp.i18n
-const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
-const {RangeControl, PanelBody, BaseControl, SelectControl} = wp.components;
-const {Fragment} = wp.element;
-const {InspectorControls} = wp.editor;
+const {
+    __
+} = wp.i18n; // Import __() from wp.i18n
+const {
+    registerBlockType
+} = wp.blocks; // Import registerBlockType() from wp.blocks
+const {
+    RangeControl,
+    PanelBody,
+    BaseControl,
+    SelectControl
+} = wp.components;
+const {
+    Fragment
+} = wp.element;
+const {
+    InspectorControls
+} = wp.editor;
 const BlockIcon = 'arrow-down';
-const {withSelect, subscribe, select, dispatch} = wp.data;
-const {ServerSideRender} = wp.components;
+const {
+    withSelect,
+    subscribe,
+    select,
+    dispatch
+} = wp.data;
+const {
+    ServerSideRender
+} = wp.components;
 
 /**
  * Register: a Gutenberg Block.
@@ -48,11 +70,18 @@ registerBlockType('vk-blocks/latest-posts', {
         return {
             postTypes: select('core').getPostTypes(),
         };
-    })(({postTypes, className, attributes, setAttributes, clientId}) => {
+    })(({
+        postTypes,
+        className,
+        attributes,
+        setAttributes,
+        clientId
+    }) => {
 
         const {
             numberPosts,
             layout,
+            // colmunLg,
             isCheckedPostType,
             coreTerms,
             isCheckedTerms
@@ -71,7 +100,7 @@ registerBlockType('vk-blocks/latest-posts', {
             if (!Array.isArray(postTypes)) {
                 return false;
             }
-            return postTypes.filter(function (item) {
+            return postTypes.filter(function(item) {
                 return item.slug !== 'wp_block' && item.slug !== 'attachment';
             });
         };
@@ -100,7 +129,9 @@ registerBlockType('vk-blocks/latest-posts', {
                 if (newIsCheckedPostType) {
                     let taxList = getTaxonomyFromPostType(newIsCheckedPostType);
                     let termsList = getTermsFromTaxonomy(taxList);
-                    setAttributes({coreTerms: JSON.stringify(termsList)});
+                    setAttributes({
+                        coreTerms: JSON.stringify(termsList)
+                    });
                 }
             }
         });
@@ -112,7 +143,7 @@ registerBlockType('vk-blocks/latest-posts', {
          */
         const getTaxonomyFromPostType = (isCheckedPostTypeArgs) => {
 
-            if(isArrayEmpty(isCheckedPostTypeArgs)){
+            if (isArrayEmpty(isCheckedPostTypeArgs)) {
                 return false;
             }
 
@@ -171,65 +202,84 @@ registerBlockType('vk-blocks/latest-posts', {
         };
 
 
-        return (
-            <Fragment>
-                <InspectorControls>
-                    <PanelBody title={__('Latest Posts Setting', 'vk-blocks')}>
-                        <BaseControl
-                            label={__('Layout', 'vk-blocks')}
-                        >
-                            <SelectControl
-                                value={layout}
-                                onChange={(value) => setAttributes({layout: value})}
-                                options={[
-																	{
-																			value: 'card',
-																			label: __('Card', 'vk-blocks'),
-																	},
-                                    {
-                                        value: 'image_1st',
-                                        label: __('image_1st', 'vk-blocks'),
-                                    },
-                                    {
-                                        value: 'image_2st',
-                                        label: __('image_2st', 'vk-blocks'),
-                                    },
-                                ]}
-                            />
-                        </BaseControl>
-                        <BaseControl
-                            label={__('Number of Posts', 'vk-blocks')}
-                        >
-                            <RangeControl
-                                value={numberPosts}
-                                onChange={(value) => setAttributes({numberPosts: value})}
-                                min="1"
-                                max="10"
-                            />
-                        </BaseControl>
-                        <BaseControl
-                            label={__('Filter by PostTypes', 'vk-blocks')}
-                        >
-                            {
-                                addCheckBox(argsPostTypes)
-                            }
-                        </BaseControl>
-                        <BaseControl
-                            label={__('Filter by Taxonomy Terms', 'vk-blocks')}
-                        >
-                            {
-                                addCheckBox(argsTaxonomy)
-                            }
-                        </BaseControl>
-                    </PanelBody>
-                </InspectorControls>
-                <div>
-                    <ServerSideRender
-                        block="vk-blocks/latest-posts"
-                        attributes={attributes}
-                    />
-                </div>
-            </Fragment>
+        return ( <
+            Fragment >
+            <
+            InspectorControls >
+            <
+            PanelBody title = {
+                __('Latest Posts Setting', 'vk-blocks')
+            } >
+            <
+            BaseControl label = {
+                __('Layout', 'vk-blocks')
+            } >
+            <
+            SelectControl value = {
+                layout
+            }
+            onChange = {
+                (value) => setAttributes({
+                    layout: value
+                })
+            }
+            options = {
+                [{
+                        value: 'card',
+                        label: __('Card', 'vk-blocks'),
+                    },
+                    {
+                        value: 'image_1st',
+                        label: __('image_1st', 'vk-blocks'),
+                    },
+                    {
+                        value: 'image_2st',
+                        label: __('image_2st', 'vk-blocks'),
+                    },
+                ]
+            }
+            /> < /
+            BaseControl > <
+            BaseControl label = {
+                __('Number of Posts', 'vk-blocks')
+            } >
+            <
+            RangeControl value = {
+                numberPosts
+            }
+            onChange = {
+                (value) => setAttributes({
+                    numberPosts: value
+                })
+            }
+            min = "1"
+            max = "10" /
+            >
+            <
+            /BaseControl> <
+            BaseControl label = {
+                __('Filter by PostTypes', 'vk-blocks')
+            } > {
+                addCheckBox(argsPostTypes)
+            } <
+            /BaseControl> <
+            BaseControl label = {
+                __('Filter by Taxonomy Terms', 'vk-blocks')
+            } > {
+                addCheckBox(argsTaxonomy)
+            } <
+            /BaseControl> < /
+            PanelBody > <
+            /InspectorControls> <
+            div >
+            <
+            ServerSideRender block = "vk-blocks/latest-posts"
+            attributes = {
+                attributes
+            }
+            /> < /
+            div > <
+            /Fragment>
         )
     }),
 
