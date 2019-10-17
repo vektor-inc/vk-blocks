@@ -198,7 +198,7 @@ registerBlockType('vk-blocks/latest-posts', {
                             />
                         </BaseControl>
                         <BaseControl
-                            label={__('Number of Posts', 'vvk-blocks')}
+                            label={__('Number of Posts', 'vk-blocks')}
                         >
                             <RangeControl
                                 value={numberPosts}
