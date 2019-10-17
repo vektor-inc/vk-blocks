@@ -7,6 +7,7 @@ import {Component} from "./component";
 import {schema} from './schema';
 import {deprecated} from './deprecated/block';
 import toNumber from "../_helper/to-number";
+import hex2rgba from "../_helper/hex-to-rgba";
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
@@ -60,6 +61,7 @@ registerBlockType('vk-blocks/outer', {
     edit({attributes, setAttributes,className}) {
         const {
             bgColor,
+			defaultBgColor,
             bgImage,
             bgPosition,
             outerWidth,
@@ -77,6 +79,18 @@ registerBlockType('vk-blocks/outer', {
 			borderRadius
         } = attributes;
 
+		const setColorIfUndefined = (bgColor) => {
+			if (bgColor === undefined) {
+				bgColor = defaultBgColor;
+			}
+			return bgColor;
+		};
+
+		const setBgColor = (bgColor) => {
+			bgColor = setColorIfUndefined(bgColor);
+			setAttributes({bgColor: bgColor})
+		};
+
         return (
             <Fragment>
                 <InspectorControls>
@@ -87,7 +101,8 @@ registerBlockType('vk-blocks/outer', {
                         >
                             <ColorPalette
                                 value={bgColor}
-                                onChange={(value) => setAttributes({bgColor: value})}
+                                onChange={(value) => setBgColor(value)}
+                                // onChange={(value) => setAttributes({bgColor: value})}
                             />
                         </BaseControl>
                         <BaseControl
