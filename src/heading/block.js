@@ -116,7 +116,10 @@ registerBlockType('vk-blocks/heading', {
                     <HeadingToolbar minLevel={2} maxLevel={5} selectedLevel={level} onChange={setTitleFontSize}/>
                 </BlockControls>
                 <InspectorControls>
-                    <PanelBody title={__('Style Settings', 'vk-blocks')}>
+                    <PanelBody
+                        title={__('Style Settings', 'vk-blocks')}
+                        initialOpen={false}
+                        >
                         <SelectControl
                             label={__('Heading style', 'vk-blocks')}
                             value={titleStyle}
@@ -137,7 +140,10 @@ registerBlockType('vk-blocks/heading', {
                             step={0.1}
                         />
                     </PanelBody>
-                    <PanelBody title={__('Heading Settings', 'vk-blocks')}>
+                    <PanelBody
+                        title={__('Heading Settings', 'vk-blocks')}
+                        initialOpen={false}
+                        >
                         <label>{__('Level', 'vk-blocks')}</label>
                         <HeadingToolbar minLevel={1} maxLevel={7} selectedLevel={level} onChange={setTitleFontSize}/>
                         <p>{__('Text Alignment')}</p>
@@ -172,7 +178,10 @@ registerBlockType('vk-blocks/heading', {
                             onChange={(value) => setAttributes({titleColor: value})}
                         />
                     </PanelBody>
-                    <PanelBody title={__('Sub Text Settings', 'vk-blocks')}>
+                    <PanelBody
+                        title={__('Sub Text Settings', 'vk-blocks')}
+                        initialOpen={false}
+                        >
                         <RadioControl
                             label={__('Position', 'vk-blocks')}
                             selected={subTextFlag}
