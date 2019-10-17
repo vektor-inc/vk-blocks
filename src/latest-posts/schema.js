@@ -3,21 +3,24 @@ export const schema = {
         type: 'string',
         default: 'image_1st',
     },
+    // columnLg: {
+    //   type: 'number',
+    //   default: 3,
+    // },
     numberPosts: {
         type: 'number',
         default: 3,
     },
-    isCheckedPostType:{
+    isCheckedPostType: {
         type: 'string',
         default: '[]'
     },
-    coreTerms:{
+    coreTerms: {
         type: 'string',
         default: '[]'
     },
-    isCheckedTerms:{
+    isCheckedTerms: {
         type: 'string',
         default: '{}'
     }
 };
-
