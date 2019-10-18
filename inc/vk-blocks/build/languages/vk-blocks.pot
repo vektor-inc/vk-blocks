@@ -368,26 +368,26 @@ msgid "Card"
 msgstr ""
 
 #: src/latest-posts/block.js:198
-msgid "Card Horizontal"
+msgid "Media"
 msgstr ""
 
-#: src/latest-posts/block.js:244
+#: src/latest-posts/block.js:248
 msgid "Column"
 msgstr ""
 
-#: src/latest-posts/block.js:254
+#: src/latest-posts/block.js:258
 msgid "Display Post type and term"
 msgstr ""
 
-#: src/latest-posts/block.js:256
+#: src/latest-posts/block.js:260
 msgid "Number of Posts"
 msgstr ""
 
-#: src/latest-posts/block.js:266
+#: src/latest-posts/block.js:270
 msgid "Filter by PostTypes"
 msgstr ""
 
-#: src/latest-posts/block.js:273
+#: src/latest-posts/block.js:277
 msgid "Filter by Taxonomy Terms"
 msgstr ""
 

@@ -194,9 +194,13 @@ registerBlockType('vk-blocks/latest-posts', {
 																		label: __('Card', 'vk-blocks'),
 																	},
 																	{
-																		value: 'card-horizontal',
-																		label: __('Card Horizontal', 'vk-blocks'),
+																		value: 'media',
+																		label: __('Media', 'vk-blocks'),
 																	},
+																	// {
+																	// 	value: 'card-horizontal',
+																	// 	label: __('Card Horizontal', 'vk-blocks'),
+																	// },
                                 ]}
                             />
                         </BaseControl>
