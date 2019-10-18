@@ -53,7 +53,7 @@ registerBlockType('vk-blocks/latest-posts', {
         const {
             numberPosts,
             layout,
-            columnLg,
+            col_lg,
             isCheckedPostType,
             coreTerms,
             isCheckedTerms
@@ -189,6 +189,10 @@ registerBlockType('vk-blocks/latest-posts', {
                                         value: 'card',
                                         label: __('Card', 'vk-blocks'),
                                     },
+																		{
+                                        value: 'card-horizontal',
+                                        label: __('Card Horizontal', 'vk-blocks'),
+                                    },
                                     {
                                         value: 'image_1st',
                                         label: __('image_1st', 'vk-blocks'),
@@ -203,8 +207,8 @@ registerBlockType('vk-blocks/latest-posts', {
                             label={__('Column', 'vk-blocks')}
                         >
                             <RangeControl
-                                value={columnLg}
-                                onChange={(value) => setAttributes({columnLg: value})}
+                                value={col_lg}
+                                onChange={(value) => setAttributes({col_lg: value})}
                                 min="1"
                                 max="10"
                             />

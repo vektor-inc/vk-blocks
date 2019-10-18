@@ -65,50 +65,6 @@ box-shadow:none;
 margin-top:0;
 }
 
-@media (min-width: 600px){
-	.wp-block-columns {
-		margin-left:-15px;
-		margin-right:-15px;
-	}
-	.wp-block-column {
-		flex-basis: auto;
-		margin-left:15px;
-		margin-right:15px;
-		width: calc( 50% - 30px ) ;
-		&:not(:first-child),
-		&:not(:last-child),
-		&:nth-child(odd){
-			margin-left:15px;
-			margin-right:15px;
-		}
-	}
-}
-
-/*-------------------------------------------*/
-/*  「最新の記事」ブロック
-/*-------------------------------------------*/
-.wp-block-latest-posts{
-	margin: 0;
-	padding: 0;
-	list-style-type: none;
-	li{
-		margin: 0;
-		padding: 1rem 0;
-		border-bottom: 1px dotted #666;
-
-		a{
-			color: #464646;
-			@media (max-width: 768px){
-				font-size: 1rem;
-			}
-		}
-
-		time{
-			color: #d44950;
-		}
-	}
-}
-
 .alert{
 
   padding: 1em;
@@ -666,8 +622,10 @@ $color_dark:#343a40;
 		flex-flow: unset;
 		flex-wrap: wrap;
 		.card {
+			padding: 0;
+			box-sizing: border-box;
+			max-width: 100%;
 			@media (min-width: 576px){
-					width: calc( 33% - 30px );
 					flex: unset;
 					margin-bottom: 30px;
 			}
@@ -1328,5 +1286,49 @@ $toc-left-margin: 1rem;
 /*-------------------------------------------*/
 /* CSS
 /*-------------------------------------------*/
+
+@media (min-width: 600px){
+	.wp-block-columns {
+		margin-left:-15px;
+		margin-right:-15px;
+	}
+	.wp-block-column {
+		flex-basis: auto;
+		margin-left:15px;
+		margin-right:15px;
+		width: calc( 50% - 30px ) ;
+		&:not(:first-child),
+		&:not(:last-child),
+		&:nth-child(odd){
+			margin-left:15px;
+			margin-right:15px;
+		}
+	}
+}
+
+/*-------------------------------------------*/
+/*  「最新の記事」ブロック
+/*-------------------------------------------*/
+.wp-block-latest-posts{
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	li{
+		margin: 0;
+		padding: 1rem 0;
+		border-bottom: 1px dotted #666;
+
+		a{
+			color: #464646;
+			@media (max-width: 768px){
+				font-size: 1rem;
+			}
+		}
+
+		time{
+			color: #d44950;
+		}
+	}
+}
 
 }

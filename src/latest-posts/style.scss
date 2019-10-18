@@ -11,8 +11,10 @@
 		flex-flow: unset;
 		flex-wrap: wrap;
 		.card {
+			padding: 0;
+			box-sizing: border-box;
+			max-width: 100%;
 			@media (min-width: 576px){
-					width: calc( 33% - 30px );
 					flex: unset;
 					margin-bottom: 30px;
 			}

@@ -3,13 +3,13 @@ export const schema = {
         type: 'string',
         default: 'image_1st',
     },
-    columnLg: {
+    col_lg: {
         type: 'number',
         default: 3,
     },
     numberPosts: {
         type: 'number',
-        default: 3,
+        default: 12,
     },
     isCheckedPostType: {
         type: 'string',

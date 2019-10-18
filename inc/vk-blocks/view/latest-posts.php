@@ -3,6 +3,28 @@
 
 class VkBlocksLatestPosts {
 
+	private function get_col_converted_size( $input_col = 4 ) {
+		if ( $input_col == 1 ) {
+			$col = 12;
+		} elseif ( $input_col == 2 ) {
+			$col = 6;
+		} elseif ( $input_col == 3 ) {
+			$col = 4;
+		} elseif ( $input_col == 4 ) {
+			$col = 3;
+		}
+		return strval( $col );
+	}
+
+	private function get_col_size_classes( $attributes ) {
+		$col_class = '';
+		if ( ! empty( $attributes['col_lg'] ) ) {
+			// $col_class .= 'vk_posts_col-lg-' . $attributes['col_lg'];
+			$col_class .= 'vk_posts_col-lg-' . self::get_col_converted_size( $attributes['col_lg'] );
+		}
+		return $col_class;
+	}
+
 	/**
 	 * Return html to display latest post list.
 	 *
@@ -13,6 +35,7 @@ class VkBlocksLatestPosts {
 	public function render_latest_posts( $attributes ) {
 
 		$layout = $attributes['layout'];
+		// $col_lg = $attributes['col_ld'];
 
 		$layoutClass = '';
 		//プルダウンの値によってデザインのクラスを変更
@@ -30,7 +53,7 @@ class VkBlocksLatestPosts {
 
 		$elm     = '';
 		$options = array(
-			'layout'       => 'card',
+			'layout'       => $layout,
 			'slug'         => '',
 			'display'      => array(
 				'image'       => true,
@@ -41,7 +64,7 @@ class VkBlocksLatestPosts {
 				'overlay'     => false,
 			),
 			'class'        => array(
-				'outer' => 'vk_latestPosts_card',
+				'outer' => 'vk_latestPosts_card ' . self::get_col_size_classes( $attributes ),
 				'title' => '',
 			),
 			'body_prepend' => '',
@@ -51,6 +74,7 @@ class VkBlocksLatestPosts {
 
 			$elm .= '<div class="vk_latestPosts">';
 			$elm .= '<div class="card-deck vk_latestPosts_card-deck">';
+			// $elm .= '<div class="row">';
 			while ( $wp_query->have_posts() ) {
 				$wp_query->the_post();
 				$args                          = array(
