@@ -53,6 +53,7 @@ registerBlockType('vk-blocks/latest-posts', {
         const {
             numberPosts,
             layout,
+            columnLg,
             isCheckedPostType,
             coreTerms,
             isCheckedTerms
