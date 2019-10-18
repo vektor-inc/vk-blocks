@@ -77,7 +77,7 @@ class VkBlocksLatestPosts {
 
 			$elm .= '<div class="vk_latestPosts">';
 			$elm .= '<div class="card-deck vk_latestPosts_card-deck">';
-			// $elm .= '<div class="row">';
+
 			while ( $wp_query->have_posts() ) {
 				$wp_query->the_post();
 				$args                          = array(
@@ -85,23 +85,8 @@ class VkBlocksLatestPosts {
 				);
 				$options['display']['overlay'] = Vk_term_color::get_single_term_with_color( false, $args );
 				$elm                          .= VK_Component_Posts::get_view( $wp_query->post, $options );
-				// $elm .= $this->get_loop_post_view( $wp_query->post );
-
 			} // while ( have_posts() ) {
 			$elm .= '</div>';
-			$elm .= '</div>';
-		endif;
-
-		if ( $wp_query->have_posts() ) :
-			$elm .= '<div class="vk_latestPosts">';
-			$elm .= '<ul class=' . $layoutClass . '>';
-			while ( $wp_query->have_posts() ) {
-				$wp_query->the_post();
-				$elm .= '<li>';
-				$elm .= $this->get_loop_post_view( $wp_query->post );
-				$elm .= '</li>';
-			} // while ( have_posts() ) {
-			$elm .= '</ul>';
 			$elm .= '</div>';
 		endif;
 

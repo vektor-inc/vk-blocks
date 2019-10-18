@@ -356,12 +356,11 @@ msgid "Highlighter"
 msgstr ""
 
 #: src/latest-posts/block.js:184
-msgid "Latest Posts Setting"
+msgid "Display type and layout"
 msgstr ""
 
 #: src/latest-posts/block.js:186
-#: src/staff/block.js:82
-msgid "Layout"
+msgid "Display type"
 msgstr ""
 
 #: src/latest-posts/block.js:194
@@ -372,27 +371,23 @@ msgstr ""
 msgid "Card Horizontal"
 msgstr ""
 
-#: src/latest-posts/block.js:202
-msgid "image_1st"
-msgstr ""
-
-#: src/latest-posts/block.js:206
-msgid "image_2st"
-msgstr ""
-
-#: src/latest-posts/block.js:212
+#: src/latest-posts/block.js:244
 msgid "Column"
 msgstr ""
 
-#: src/latest-posts/block.js:259
+#: src/latest-posts/block.js:254
+msgid "Display Post type and term"
+msgstr ""
+
+#: src/latest-posts/block.js:256
 msgid "Number of Posts"
 msgstr ""
 
-#: src/latest-posts/block.js:269
+#: src/latest-posts/block.js:266
 msgid "Filter by PostTypes"
 msgstr ""
 
-#: src/latest-posts/block.js:276
+#: src/latest-posts/block.js:273
 msgid "Filter by Taxonomy Terms"
 msgstr ""
 
@@ -774,6 +769,10 @@ msgstr ""
 
 #: src/staff/block.js:54
 msgid "Staff"
+msgstr ""
+
+#: src/staff/block.js:82
+msgid "Layout"
 msgstr ""
 
 #: src/staff/block.js:93

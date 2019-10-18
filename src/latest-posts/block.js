@@ -181,80 +181,77 @@ registerBlockType('vk-blocks/latest-posts', {
         return (
             <Fragment>
                 <InspectorControls>
-                    <PanelBody title={__('Latest Posts Setting', 'vk-blocks')}>
+                    <PanelBody title={__('Display type and layout', 'vk-blocks')}>
                         <BaseControl
-                            label={__('Layout', 'vk-blocks')}
+                            label={__('Display type', 'vk-blocks')}
                         >
                             <SelectControl
                                 value={layout}
                                 onChange={(value) => setAttributes({layout: value})}
                                 options={[
-                                    {
-                                        value: 'card',
-                                        label: __('Card', 'vk-blocks'),
-                                    },
-																		{
-                                        value: 'card-horizontal',
-                                        label: __('Card Horizontal', 'vk-blocks'),
-                                    },
-                                    {
-                                        value: 'image_1st',
-                                        label: __('image_1st', 'vk-blocks'),
-                                    },
-                                    {
-                                        value: 'image_2st',
-                                        label: __('image_2st', 'vk-blocks'),
-                                    },
+																	{
+																		value: 'card',
+																		label: __('Card', 'vk-blocks'),
+																	},
+																	{
+																		value: 'card-horizontal',
+																		label: __('Card Horizontal', 'vk-blocks'),
+																	},
                                 ]}
                             />
                         </BaseControl>
 												<BaseControl
-                            label={__('Column', 'vk-blocks')}
-                        >
-												{
-													/*
-													$sm-min:576px;
-													$md-min:768px;
-													$lg-min:992px;
-													$xl-min:1200px;
-													 */
-												}
-													<h4>min-width : 0px</h4>
+														label={__('Column', 'vk-blocks') + ' ( min-width : 0px )'}
+													>
 													<RangeControl
 														value={col_xs}
 														onChange={(value) => setAttributes({col_xs: value})}
 														min="1"
 														max="4"
 													/>
-													<h4>min-width : 576px</h4>
+												</BaseControl>
+												<BaseControl
+														label={__('Column', 'vk-blocks') + ' ( min-width : 576px )'}
+													>
 													<RangeControl
 														value={col_sm}
 														onChange={(value) => setAttributes({col_sm: value})}
 														min="1"
 														max="4"
 													/>
-													<h4>min-width : 768px</h4>
+												</BaseControl>
+												<BaseControl
+														label={__('Column', 'vk-blocks') + ' ( min-width : 768px )'}
+													>
 													<RangeControl
 														value={col_md}
 														onChange={(value) => setAttributes({col_md: value})}
 														min="1"
 														max="4"
 													/>
-													<h4>min-width : 992px</h4>
+												</BaseControl>
+												<BaseControl
+														label={__('Column', 'vk-blocks') + ' ( min-width : 992px )'}
+													>
 													<RangeControl
 														value={col_lg}
 														onChange={(value) => setAttributes({col_lg: value})}
 														min="1"
 														max="4"
 													/>
-													<h4>min-width : 1200px</h4>
+												</BaseControl>
+												<BaseControl
+														label={__('Column', 'vk-blocks') + ' ( min-width : 1200px )'}
+													>
 													<RangeControl
 														value={col_xl}
 														onChange={(value) => setAttributes({col_xl: value})}
 														min="1"
 														max="4"
 													/>
-                        </BaseControl>
+												</BaseControl>
+											</PanelBody>
+											<PanelBody title={__('Display Post type and term', 'vk-blocks')}>
                         <BaseControl
                             label={__('Number of Posts', 'vk-blocks')}
                         >
