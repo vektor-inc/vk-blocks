@@ -93,14 +93,16 @@ registerBlockType('vk-blocks/latest-posts', {
 
         subscribe(() => {
 
-            let blockAttributes = select("core/block-editor").getBlockAttributes(clientId);
-
+            let blockAttributes = select("core/editor").getBlockAttributes(clientId);
             if (blockAttributes) {
                 let newIsCheckedPostType = blockAttributes.isCheckedPostType;
 
                 if (newIsCheckedPostType) {
                     let taxList = getTaxonomyFromPostType(newIsCheckedPostType);
                     let termsList = getTermsFromTaxonomy(taxList);
+
+                    console.log(termsList);
+
                     setAttributes({coreTerms: JSON.stringify(termsList)});
                 }
             }
@@ -183,10 +185,10 @@ registerBlockType('vk-blocks/latest-posts', {
                                 value={layout}
                                 onChange={(value) => setAttributes({layout: value})}
                                 options={[
-																	{
-																			value: 'card',
-																			label: __('Card', 'vk-blocks'),
-																	},
+                                    {
+                                        value: 'card',
+                                        label: __('Card', 'vk-blocks'),
+                                    },
                                     {
                                         value: 'image_1st',
                                         label: __('image_1st', 'vk-blocks'),
@@ -197,8 +199,7 @@ registerBlockType('vk-blocks/latest-posts', {
                                     },
                                 ]}
                             />
-                        </BaseControl>
-												<BaseControl
+                        </BaseControl> <BaseControl
                             label={__('Column', 'vk-blocks')}
                         >
                             <RangeControl

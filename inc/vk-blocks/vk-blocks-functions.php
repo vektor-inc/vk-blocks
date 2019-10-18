@@ -78,6 +78,10 @@ function vkblocks_blocks_assets() {
 									'type'    => 'string',
 									'default' => 'image_1st',
 								),
+								'columnLg'          => array(
+									'type'    => 'number',
+									'default' => 3,
+								),
 								'numberPosts'       => array(
 									'type'    => 'number',
 									'default' => 3,
