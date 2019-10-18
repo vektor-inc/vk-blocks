@@ -78,13 +78,29 @@ function vkblocks_blocks_assets() {
 									'type'    => 'string',
 									'default' => 'image_1st',
 								),
-								'col_lg'          => array(
+								'col_xs'            => array(
+									'type'    => 'number',
+									'default' => 1,
+								),
+								'col_sm'            => array(
+									'type'    => 'number',
+									'default' => 2,
+								),
+								'col_md'            => array(
 									'type'    => 'number',
 									'default' => 3,
 								),
-								'numberPosts'       => array(
+								'col_lg'            => array(
 									'type'    => 'number',
 									'default' => 3,
+								),
+								'col_xl'            => array(
+									'type'    => 'number',
+									'default' => 4,
+								),
+								'numberPosts'       => array(
+									'type'    => 'number',
+									'default' => 6,
 								),
 								'isCheckedPostType' => array(
 									'type'    => 'string',

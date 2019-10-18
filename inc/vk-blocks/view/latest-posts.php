@@ -17,11 +17,14 @@ class VkBlocksLatestPosts {
 	}
 
 	private function get_col_size_classes( $attributes ) {
-		$col_class = '';
-		if ( ! empty( $attributes['col_lg'] ) ) {
-			// $col_class .= 'vk_posts_col-lg-' . $attributes['col_lg'];
-			$col_class .= 'vk_posts_col-lg-' . self::get_col_converted_size( $attributes['col_lg'] );
+		$col_class_array = array();
+		$sizes           = array( 'xs', 'sm', 'md', 'lg', 'xl' );
+		foreach ( $sizes as $key => $size ) {
+			if ( ! empty( $attributes[ 'col_' . $size ] ) ) {
+				$col_class_array[] = 'vk_posts_col-' . $size . '-' . self::get_col_converted_size( $attributes[ 'col_' . $size ] );
+			}
 		}
+		$col_class = implode( ' ', $col_class_array );
 		return $col_class;
 	}
 

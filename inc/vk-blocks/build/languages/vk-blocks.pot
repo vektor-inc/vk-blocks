@@ -355,44 +355,44 @@ msgstr ""
 msgid "Highlighter"
 msgstr ""
 
-#: src/latest-posts/block.js:180
+#: src/latest-posts/block.js:184
 msgid "Latest Posts Setting"
 msgstr ""
 
-#: src/latest-posts/block.js:182
+#: src/latest-posts/block.js:186
 #: src/staff/block.js:82
 msgid "Layout"
 msgstr ""
 
-#: src/latest-posts/block.js:190
+#: src/latest-posts/block.js:194
 msgid "Card"
 msgstr ""
 
-#: src/latest-posts/block.js:194
+#: src/latest-posts/block.js:198
 msgid "Card Horizontal"
 msgstr ""
 
-#: src/latest-posts/block.js:198
+#: src/latest-posts/block.js:202
 msgid "image_1st"
 msgstr ""
 
-#: src/latest-posts/block.js:202
+#: src/latest-posts/block.js:206
 msgid "image_2st"
 msgstr ""
 
-#: src/latest-posts/block.js:207
+#: src/latest-posts/block.js:212
 msgid "Column"
 msgstr ""
 
-#: src/latest-posts/block.js:217
+#: src/latest-posts/block.js:259
 msgid "Number of Posts"
 msgstr ""
 
-#: src/latest-posts/block.js:227
+#: src/latest-posts/block.js:269
 msgid "Filter by PostTypes"
 msgstr ""
 
-#: src/latest-posts/block.js:234
+#: src/latest-posts/block.js:276
 msgid "Filter by Taxonomy Terms"
 msgstr ""
 
