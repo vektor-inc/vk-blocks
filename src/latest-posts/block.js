@@ -198,6 +198,16 @@ registerBlockType('vk-blocks/latest-posts', {
                                 ]}
                             />
                         </BaseControl>
+												<BaseControl
+                            label={__('Column', 'vk-blocks')}
+                        >
+                            <RangeControl
+                                value={columnLg}
+                                onChange={(value) => setAttributes({columnLg: value})}
+                                min="1"
+                                max="10"
+                            />
+                        </BaseControl>
                         <BaseControl
                             label={__('Number of Posts', 'vk-blocks')}
                         >
