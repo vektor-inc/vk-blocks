@@ -1,7 +1,7 @@
 export const schema = {
     layout: {
         type: 'string',
-        default: 'image_1st',
+        default: 'card',
     },
     col_xs: {
         type: 'number',

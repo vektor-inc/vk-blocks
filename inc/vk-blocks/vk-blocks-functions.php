@@ -76,7 +76,7 @@ function vkblocks_blocks_assets() {
 							'attributes'      => array(
 								'layout'            => array(
 									'type'    => 'string',
-									'default' => 'image_1st',
+									'default' => 'card',
 								),
 								'col_xs'            => array(
 									'type'    => 'number',
