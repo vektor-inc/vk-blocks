@@ -96,7 +96,11 @@ function vkblocks_blocks_assets() {
 								),
 								'col_xl'            => array(
 									'type'    => 'number',
-									'default' => 4,
+									'default' => 3,
+								),
+								'display_excerpt'   => array(
+									'type'    => 'boolean',
+									'default' => false,
 								),
 								'numberPosts'       => array(
 									'type'    => 'number',

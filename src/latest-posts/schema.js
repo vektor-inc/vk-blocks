@@ -21,11 +21,15 @@ export const schema = {
     },
     col_xl: {
         type: 'number',
-        default: 4,
+        default: 3,
+    },
+    display_excerpt: {
+        type: 'boolean',
+        default: false,
     },
     numberPosts: {
         type: 'number',
-        default: 12,
+        default: 6,
     },
     isCheckedPostType: {
         type: 'string',

@@ -1,6 +1,5 @@
 <?php
 
-
 class VkBlocksLatestPosts {
 
 	private function get_col_converted_size( $input_col = 4 ) {
@@ -21,7 +20,7 @@ class VkBlocksLatestPosts {
 		$sizes           = array( 'xs', 'sm', 'md', 'lg', 'xl' );
 		foreach ( $sizes as $key => $size ) {
 			if ( ! empty( $attributes[ 'col_' . $size ] ) ) {
-				$col_class_array[] = 'vk_posts_col-' . $size . '-' . self::get_col_converted_size( $attributes[ 'col_' . $size ] );
+				$col_class_array[] = 'vk_posts-col-' . $size . '-' . self::get_col_converted_size( $attributes[ 'col_' . $size ] );
 			}
 		}
 		$col_class = implode( ' ', $col_class_array );
@@ -38,15 +37,6 @@ class VkBlocksLatestPosts {
 	public function render_latest_posts( $attributes ) {
 
 		$layout = $attributes['layout'];
-		// $col_lg = $attributes['col_ld'];
-
-		$layoutClass = '';
-		//プルダウンの値によってデザインのクラスを変更
-		if ( $layout === 'image_1st' ) {
-			$layoutClass = 'image_1st';
-		} elseif ( $layout === 'image_2st' ) {
-			$layoutClass = 'image_2st';
-		}
 
 		$wp_query = $this->get_loop_query( $attributes );
 
@@ -59,12 +49,13 @@ class VkBlocksLatestPosts {
 			'layout'       => $layout,
 			'slug'         => '',
 			'display'      => array(
-				'image'       => true,
-				'excerpt'     => false,
-				'date'        => true,
-				'link_button' => false,
-				'link_text'   => __( 'Read more', 'lightning' ),
-				'overlay'     => false,
+				'image'             => true,
+				'image_default_url' => VK_BLOCKS_URL . 'images/no-image.png',
+				'excerpt'           => $attributes['display_excerpt'],
+				'date'              => true,
+				'link_button'       => false,
+				'link_text'         => __( 'Read more', 'lightning' ),
+				'overlay'           => false,
 			),
 			'class'        => array(
 				'outer' => 'vk_latestPosts_card ' . self::get_col_size_classes( $attributes ),

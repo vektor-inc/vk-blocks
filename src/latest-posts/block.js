@@ -7,7 +7,7 @@ import {schema} from './schema.js';
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
-const {RangeControl, PanelBody, BaseControl, SelectControl} = wp.components;
+const {RangeControl, PanelBody, BaseControl, SelectControl,CheckboxControl} = wp.components;
 const {Fragment} = wp.element;
 const {InspectorControls} = wp.editor;
 const BlockIcon = 'arrow-down';
@@ -58,6 +58,7 @@ registerBlockType('vk-blocks/latest-posts', {
             col_md,
             col_lg,
             col_xl,
+            display_excerpt,
             isCheckedPostType,
             coreTerms,
             isCheckedTerms
@@ -197,10 +198,10 @@ registerBlockType('vk-blocks/latest-posts', {
 																		value: 'media',
 																		label: __('Media', 'vk-blocks'),
 																	},
-																	// {
-																	// 	value: 'card-horizontal',
-																	// 	label: __('Card Horizontal', 'vk-blocks'),
-																	// },
+																	{
+																		value: 'card-horizontal',
+																		label: __('Card Horizontal', 'vk-blocks'),
+																	},
                                 ]}
                             />
                         </BaseControl>
@@ -281,6 +282,13 @@ registerBlockType('vk-blocks/latest-posts', {
                             }
                         </BaseControl>
                     </PanelBody>
+										<PanelBody title={__('Display item', 'vk-blocks')}>
+											<CheckboxControl
+													label={__('Excerpt', 'vk-blocks')}
+													checked={display_excerpt}
+													onChange={(checked) => setAttributes({display_excerpt: checked})}
+											/>
+										</PanelBody>
                 </InspectorControls>
                 <div>
                     <ServerSideRender
