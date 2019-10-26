@@ -102,6 +102,14 @@ function vkblocks_blocks_assets() {
 									'type'    => 'boolean',
 									'default' => false,
 								),
+								'new_date'          => array(
+									'type'    => 'number',
+									'default' => 7,
+								),
+								'new_text'          => array(
+									'type'    => 'string',
+									'default' => 'New!!',
+								),
 								'numberPosts'       => array(
 									'type'    => 'number',
 									'default' => 6,

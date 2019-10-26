@@ -27,6 +27,14 @@ export const schema = {
         type: 'boolean',
         default: false,
     },
+    new_date: {
+        type: 'number',
+        default: 7,
+    },
+    new_text: {
+        type: 'string',
+        default: 'New!!',
+    },
     numberPosts: {
         type: 'number',
         default: 6,

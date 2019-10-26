@@ -7,7 +7,7 @@ import {schema} from './schema.js';
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
-const {RangeControl, PanelBody, BaseControl, SelectControl,CheckboxControl} = wp.components;
+const {RangeControl, PanelBody, BaseControl,TextControl, SelectControl,CheckboxControl} = wp.components;
 const {Fragment} = wp.element;
 const {InspectorControls} = wp.editor;
 const BlockIcon = 'arrow-down';
@@ -59,6 +59,8 @@ registerBlockType('vk-blocks/latest-posts', {
             col_lg,
             col_xl,
             display_excerpt,
+            new_date,
+            new_text,
             isCheckedPostType,
             coreTerms,
             isCheckedTerms
@@ -287,6 +289,18 @@ registerBlockType('vk-blocks/latest-posts', {
 													label={__('Excerpt', 'vk-blocks')}
 													checked={display_excerpt}
 													onChange={(checked) => setAttributes({display_excerpt: checked})}
+											/>
+											<TextControl
+													label={__('Number of days to display the new post mark', 'vk-blocks')}
+													value={new_date}
+													onChange={(value) => setAttributes({new_date: value})}
+													// placeholder={'Input button text.'}
+											/>
+											<TextControl
+													label={__('New post mark', 'vk-blocks')}
+													value={new_text}
+													onChange={(value) => setAttributes({new_text: value})}
+													// placeholder={'Input button text.'}
 											/>
 										</PanelBody>
                 </InspectorControls>

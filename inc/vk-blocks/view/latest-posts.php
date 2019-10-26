@@ -46,24 +46,28 @@ class VkBlocksLatestPosts {
 
 		$elm     = '';
 		$options = array(
-			'layout'       => $layout,
-			'slug'         => '',
-			'display'      => array(
-				'image'             => true,
-				'image_default_url' => VK_BLOCKS_URL . 'images/no-image.png',
-				'excerpt'           => $attributes['display_excerpt'],
-				'date'              => true,
-				'link_button'       => false,
-				'link_text'         => __( 'Read more', 'lightning' ),
-				'overlay'           => false,
-			),
-			'class'        => array(
-				'outer' => 'vk_latestPosts_card ' . self::get_col_size_classes( $attributes ),
-				'title' => '',
-			),
-			'body_prepend' => '',
-			'body_append'  => '',
+			'layout'            => $layout,
+			'slug'              => '',
+			'image'             => true,
+			'image_default_url' => VK_BLOCKS_URL . 'images/no-image.png',
+			'excerpt'           => $attributes['display_excerpt'],
+			'date'              => true,
+			'btn'               => false,
+			'btn_text'          => __( 'Read more', 'lightning' ),
+			'overlay'           => false,
+			'new'               => false,
+			'new_text'          => $attributes['new_text'],
+			'new_date'          => $attributes['new_date'],
+			'class_outer'       => 'vk_latestPosts_card ' . self::get_col_size_classes( $attributes ),
+			'class_title'       => '',
+			'body_prepend'      => '',
+			'body_append'       => '',
 		);
+
+		if ( $options['new_date'] && $options['new_text'] ) {
+			$options['new'] = true;
+		}
+
 		if ( $wp_query->have_posts() ) :
 
 			$elm .= '<div class="vk_latestPosts">';
@@ -71,11 +75,11 @@ class VkBlocksLatestPosts {
 
 			while ( $wp_query->have_posts() ) {
 				$wp_query->the_post();
-				$args                          = array(
+				$args               = array(
 					'class' => 'card_singleTermLabel',
 				);
-				$options['display']['overlay'] = Vk_term_color::get_single_term_with_color( false, $args );
-				$elm                          .= VK_Component_Posts::get_view( $wp_query->post, $options );
+				$options['overlay'] = Vk_term_color::get_single_term_with_color( false, $args );
+				$elm               .= VK_Component_Posts::get_view( $wp_query->post, $options );
 			} // while ( have_posts() ) {
 			$elm .= '</div>';
 			$elm .= '</div>';
@@ -144,64 +148,64 @@ class VkBlocksLatestPosts {
 	}
 
 
-	public function get_loop_post_view( $post ) {
-
-		$elm          = '';
-		$elm         .= '<div class="card" id="post-' . get_the_ID() . '">' . "\n";
-		$thumbnail_id = get_post_thumbnail_id( $post->ID );
-		if ( $thumbnail_id ) {
-			$thumbnail_src  = wp_get_attachment_image_src( $thumbnail_id, 'large' );
-			$thumbnail_src  = $thumbnail_src[0];
-			$class_no_image = '';
-		} else {
-			// $thumbnail_src  = VK_MEDIA_POSTS_URL . 'images/no-image.png';
-
-			$thumbnail_src  = plugin_dir_url( dirname( dirname( __FILE__ ) ) . 'vk-blocks.php' ) . 'inc/vk-blocks/images/no-image.png';
-			$class_no_image = ' noimage';
-		}
-		// $elm      .= '<div class="card-img-top' . $class_no_image . '" style="background-image:url(' . $thumbnail_src . ');">' . "\n";
-		$attr = array(
-			// 'src'   => $src,  // アイキャッチ画像の URL
-			'class' => 'card-img-top',    // 指定した大きさ
-			// 'alt'   => trim( strip_tags( $attachment->post_excerpt ) ),	// アイキャッチ画像の抜粋
-			// 'title' => trim( strip_tags( $attachment->post_title ) ),	// アイキャッチ画像のタイトル
-		);
-		$thumbnail = get_the_post_thumbnail( $post->ID, 'media_thumbnail', $attr );
-		$elm      .= ( $thumbnail ) ? $thumbnail : '<img class="card-img-top" src="' . $thumbnail_src . '" alt="NO IMAGE" />';
-		$elm      .= '<a href="' . esc_url( get_the_permalink() ) . '">' . "\n";
-
-		// $elm      .= '</div>';
-		// ※アーカイブページの場合はこのメソッドが呼び出される時点で instance に数字が入っているで、ここの数字を変更しても反映されない
-		//      $days  = isset( $instance['new_icon_display'] ) ? $instance['new_icon_display'] : 7; //Newを表示させたい期間の日数
-		$today = date_i18n( 'U' );
-		$entry = get_the_time( 'U' );
-		$kiji  = date( 'U', ( $today - $entry ) ) / 86400;
-		//      if ( $days > $kiji ) {
-		//          $elm .= '<div class="media_post_label_new">NEW</div>';
-		//      }
-
-		$elm       .= '<div class="media_post_text">' . "\n";
-		$elm       .= '<div class="media_post_meta">' . "\n";
-		$elm       .= '<span class="published media_post_date">' . esc_html( get_the_date() ) . '</span>';
-		$taxonomies = get_the_taxonomies();
-		//      if ( $taxonomies ) :
-		//          // get $taxonomy name
-		//          $taxonomy   = key( $taxonomies );
-		//          $terms      = get_the_terms( get_the_ID(), $taxonomy );
-		//          $term_name  = esc_html( $terms[0]->name );
-		//          $term_color = Vk_term_color::get_term_color( $terms[0]->term_id );
-		//          $term_color = ( $term_color ) ? ' style="background-color:' . $term_color . '"' : '';
-		//          $elm       .= '<span class="media_post_term"' . $term_color . '>' . $term_name . '</span>';
-		//      endif;
-		$elm .= '<span class="vcard author"><span class="fn">' . get_the_author() . '</span></span>';
-		$elm .= '</div>' . "\n"; // entry-meta
-		$elm .= '<h4 class="media_post_title">' . esc_html( get_the_title() ) . '</h4>';
-		$elm .= '<p class="media_post_excerpt">' . esc_html( get_the_excerpt() ) . '</p>';
-		$elm .= '</div>';
-		$elm .= '</a>';
-		$elm .= '</div>';
-		return $elm;
-	}
+	// public function get_loop_post_view( $post ) {
+	//
+	// 	$elm          = '';
+	// 	$elm         .= '<div class="card" id="post-' . get_the_ID() . '">' . "\n";
+	// 	$thumbnail_id = get_post_thumbnail_id( $post->ID );
+	// 	if ( $thumbnail_id ) {
+	// 		$thumbnail_src  = wp_get_attachment_image_src( $thumbnail_id, 'large' );
+	// 		$thumbnail_src  = $thumbnail_src[0];
+	// 		$class_no_image = '';
+	// 	} else {
+	// 		// $thumbnail_src  = VK_MEDIA_POSTS_URL . 'images/no-image.png';
+	//
+	// 		$thumbnail_src  = plugin_dir_url( dirname( dirname( __FILE__ ) ) . 'vk-blocks.php' ) . 'inc/vk-blocks/images/no-image.png';
+	// 		$class_no_image = ' noimage';
+	// 	}
+	// 	// $elm      .= '<div class="card-img-top' . $class_no_image . '" style="background-image:url(' . $thumbnail_src . ');">' . "\n";
+	// 	$attr = array(
+	// 		// 'src'   => $src,  // アイキャッチ画像の URL
+	// 		'class' => 'card-img-top',    // 指定した大きさ
+	// 		// 'alt'   => trim( strip_tags( $attachment->post_excerpt ) ),	// アイキャッチ画像の抜粋
+	// 		// 'title' => trim( strip_tags( $attachment->post_title ) ),	// アイキャッチ画像のタイトル
+	// 	);
+	// 	$thumbnail = get_the_post_thumbnail( $post->ID, 'media_thumbnail', $attr );
+	// 	$elm      .= ( $thumbnail ) ? $thumbnail : '<img class="card-img-top" src="' . $thumbnail_src . '" alt="NO IMAGE" />';
+	// 	$elm      .= '<a href="' . esc_url( get_the_permalink() ) . '">' . "\n";
+	//
+	// 	// $elm      .= '</div>';
+	// 	// ※アーカイブページの場合はこのメソッドが呼び出される時点で instance に数字が入っているで、ここの数字を変更しても反映されない
+	// 	//      $days  = isset( $instance['new_icon_display'] ) ? $instance['new_icon_display'] : 7; //Newを表示させたい期間の日数
+	// 	$today = date_i18n( 'U' );
+	// 	$entry = get_the_time( 'U' );
+	// 	$kiji  = date( 'U', ( $today - $entry ) ) / 86400;
+	// 	//      if ( $days > $kiji ) {
+	// 	//          $elm .= '<div class="media_post_label_new">NEW</div>';
+	// 	//      }
+	//
+	// 	$elm       .= '<div class="media_post_text">' . "\n";
+	// 	$elm       .= '<div class="media_post_meta">' . "\n";
+	// 	$elm       .= '<span class="published media_post_date">' . esc_html( get_the_date() ) . '</span>';
+	// 	$taxonomies = get_the_taxonomies();
+	// 	//      if ( $taxonomies ) :
+	// 	//          // get $taxonomy name
+	// 	//          $taxonomy   = key( $taxonomies );
+	// 	//          $terms      = get_the_terms( get_the_ID(), $taxonomy );
+	// 	//          $term_name  = esc_html( $terms[0]->name );
+	// 	//          $term_color = Vk_term_color::get_term_color( $terms[0]->term_id );
+	// 	//          $term_color = ( $term_color ) ? ' style="background-color:' . $term_color . '"' : '';
+	// 	//          $elm       .= '<span class="media_post_term"' . $term_color . '>' . $term_name . '</span>';
+	// 	//      endif;
+	// 	$elm .= '<span class="vcard author"><span class="fn">' . get_the_author() . '</span></span>';
+	// 	$elm .= '</div>' . "\n"; // entry-meta
+	// 	$elm .= '<h4 class="media_post_title">' . esc_html( get_the_title() ) . '</h4>';
+	// 	$elm .= '<p class="media_post_excerpt">' . esc_html( get_the_excerpt() ) . '</p>';
+	// 	$elm .= '</div>';
+	// 	$elm .= '</a>';
+	// 	$elm .= '</div>';
+	// 	return $elm;
+	// }
 }
 
 
