@@ -3,8 +3,8 @@ Contributors: vektor-inc,kurudrive,naoki0h
 Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 5.0
-Tested up to: 5.2.3
-Stable tag: 0.11.0
+Tested up to: 5.3.0
+Stable tag: 0.12.6
 Requires PHP: 5.6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -54,9 +54,12 @@ e.g.
 
 == Changelog ==
 
+= 0.12.6 =
+[ Bugfix ][ column ] WordPress 5.3 column bug fix
+
 = 0.11.0 =
 [ CSS tuning ][ Latest posts(core) ]
-[ CSS tuning ][ Table of contents ] Padding tuning 
+[ CSS tuning ][ Table of contents ] Padding tuning
 
 = 0.10.2 =
 [ Bug fix ] load bootstrap4 logic bug fix
