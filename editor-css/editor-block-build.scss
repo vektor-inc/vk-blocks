@@ -52,6 +52,7 @@ h1:first-child.vk_prBlocks_item_title{
 		}
 }
 
+
 .alert{
 
   padding: 1em;
@@ -90,50 +91,6 @@ h1:first-child.vk_prBlocks_item_title{
       border-color:$color-border;
     }
   }
-}
-
-@media (min-width: 600px){
-	.wp-block-columns {
-		margin-left:-15px;
-		margin-right:-15px;
-	}
-	.wp-block-column {
-		flex-basis: auto;
-		margin-left:15px;
-		margin-right:15px;
-		width: calc( 50% - 30px ) ;
-		&:not(:first-child),
-		&:not(:last-child),
-		&:nth-child(odd){
-			margin-left:15px;
-			margin-right:15px;
-		}
-	}
-}
-
-/*-------------------------------------------*/
-/*  「最新の記事」ブロック
-/*-------------------------------------------*/
-.wp-block-latest-posts{
-	margin: 0;
-	padding: 0;
-	list-style-type: none;
-	li{
-		margin: 0;
-		padding: 1rem 0;
-		border-bottom: 1px dotted #666;
-
-		a{
-			color: #464646;
-			@media (max-width: 768px){
-				font-size: 1rem;
-			}
-		}
-
-		time{
-			color: #d44950;
-		}
-	}
 }
 
 .vk_balloon {
@@ -378,6 +335,23 @@ h1:first-child.vk_prBlocks_item_title{
 	}//.vk_balloon
 } // @media only screen and (max-width: 480px) {
 
+/*      .qaItem
+/*-------------------------------------------*/
+.vk_faq { display:block; overflow:hidden;border-bottom:1px dotted #ccc; padding:0px 0px 25px; margin:25px 0px; width:100%; position: relative; }
+.vk_faq_title,
+.vk_faq_content {
+	border:none;padding-left: 35px;
+	&:before {
+		position: absolute;left:0;font-size:24px;line-height: 105%;
+	}
+}
+.vk_faq_title { margin-bottom:15px;font-size:18px;font-weight:700;
+  &:before { font-family:"areal";content:"Q ";color:#e50000; }
+}
+.vk_faq_content { margin:0px;
+  &:before { content:"A ";color:#337ab7;font-family: "" }
+}
+
 .vk_button{
 	margin: 5px 0;
 	&-color-custom{
@@ -554,23 +528,6 @@ $color_dark:#343a40;
 .btn.btn-outline-dark:focus{
 	background: $color_dark;
 	color:#fff;
-}
-
-/*      .qaItem
-/*-------------------------------------------*/
-.vk_faq { display:block; overflow:hidden;border-bottom:1px dotted #ccc; padding:0px 0px 25px; margin:25px 0px; width:100%; position: relative; }
-.vk_faq_title,
-.vk_faq_content {
-	border:none;padding-left: 35px;
-	&:before {
-		position: absolute;left:0;font-size:24px;line-height: 105%;
-	}
-}
-.vk_faq_title { margin-bottom:15px;font-size:18px;font-weight:700;
-  &:before { font-family:"areal";content:"Q ";color:#e50000; }
-}
-.vk_faq_content { margin:0px;
-  &:before { content:"A ";color:#337ab7;font-family: "" }
 }
 
 //*      .flowBox
