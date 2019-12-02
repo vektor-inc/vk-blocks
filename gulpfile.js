@@ -117,7 +117,7 @@ gulp.task('dist', function() {
             ],
             { base: './' }
         )
-        .pipe( gulp.dest( 'dist/vk-blocks-pro' ) ); // distディレクトリに出力
+        .pipe( gulp.dest( 'dist/vk-blocks' ) ); // distディレクトリに出力
 } );
 
 gulp.task('dist_ex', function() {
