@@ -9,12 +9,11 @@ import HeadingToolbar from './heading-toolbar';
 import {Component} from "./component";
 import {Version0_6_0} from './deprecated/block';
 
-// import YourComponent from "./component.js";
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
 const {RangeControl, PanelBody, RadioControl, SelectControl} = wp.components;
 const {Fragment} = wp.element;
-const {RichText, InspectorControls, ColorPalette, BlockControls, AlignmentToolbar} = wp.editor;
+const {InspectorControls, ColorPalette, BlockControls, AlignmentToolbar} = wp.blockEditor && wp.blockEditor.BlockEdit ? wp.blockEditor : wp.editor;
 const BlockIcon = (
     <svg xmlns="http://www.w3.org/2000/svg" width="576" height="512" viewBox="0 0 576 512">
         <g>
@@ -116,10 +115,7 @@ registerBlockType('vk-blocks/heading', {
                     <HeadingToolbar minLevel={2} maxLevel={5} selectedLevel={level} onChange={setTitleFontSize}/>
                 </BlockControls>
                 <InspectorControls>
-                    <PanelBody
-                        title={__('Style Settings', 'vk-blocks')}
-                        initialOpen={false}
-                        >
+                    <PanelBody title={__('Style Settings', 'vk-blocks')}>
                         <SelectControl
                             label={__('Heading style', 'vk-blocks')}
                             value={titleStyle}
@@ -140,10 +136,7 @@ registerBlockType('vk-blocks/heading', {
                             step={0.1}
                         />
                     </PanelBody>
-                    <PanelBody
-                        title={__('Heading Settings', 'vk-blocks')}
-                        initialOpen={false}
-                        >
+                    <PanelBody title={__('Heading Settings', 'vk-blocks')}>
                         <label>{__('Level', 'vk-blocks')}</label>
                         <HeadingToolbar minLevel={1} maxLevel={7} selectedLevel={level} onChange={setTitleFontSize}/>
                         <p>{__('Text Alignment')}</p>
@@ -178,10 +171,7 @@ registerBlockType('vk-blocks/heading', {
                             onChange={(value) => setAttributes({titleColor: value})}
                         />
                     </PanelBody>
-                    <PanelBody
-                        title={__('Sub Text Settings', 'vk-blocks')}
-                        initialOpen={false}
-                        >
+                    <PanelBody title={__('Sub Text Settings', 'vk-blocks')}>
                         <RadioControl
                             label={__('Position', 'vk-blocks')}
                             selected={subTextFlag}
