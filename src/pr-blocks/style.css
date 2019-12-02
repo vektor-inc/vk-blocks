@@ -25,6 +25,7 @@
   font-size: 36px;
   color: #fff; }
 .vk_prBlocks_item_title {
+  background-color: transparent;
   margin-top: 0.9em;
   margin-bottom: 0.6em;
   text-align: center;
@@ -32,6 +33,8 @@
   line-height: 1.4em;
   border: none;
   padding: 0; }
+  .vk_prBlocks_item_title::before {
+    content: none; }
   .vk_prBlocks_item_title::after {
     border: none; }
 .vk_prBlocks_item_image {

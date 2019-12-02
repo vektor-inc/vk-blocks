@@ -8,24 +8,14 @@
 	padding:0;
 	font-weight: normal;
 	box-shadow:none;
-	outline: unset;
-	outline-offset: unset;
-	text-align: unset;
-	&:before {
-		content:none;
-		border:none;
-	}
 	&:after {
-		content:none;
 		border:none;
 	}
 }
 
 .vk_heading_title {
 	&-style {
-		&-plain,
-		/* Lightning Pro の見出しデザイン変更機能対策 */
-		.mainSection &-plain {
+		&-plain {
 			@include reset;
 		}
 	}
