@@ -70,16 +70,8 @@ gulp.task('js', function () {
 		.pipe(gulp.dest('./'));
 });
 
-gulp.task('copy_front_js', function () {
-	return gulp.src([ './src/table-of-contents/viewHelper.js'])
-		.pipe(jsmin())
-		.pipe( gulp.dest( './inc/vk-blocks/build/' ) );
-});
-
-
 // watch
 gulp.task('watch', function () {
-    gulp.watch('src/**/*.js', gulp.parallel('js','copy_front_js'));
     gulp.watch('editor-css/editor.scss_before', gulp.parallel('sass_editor'));
     gulp.watch('src/**/*.scss', gulp.series('sass','sass_editor'));
     gulp.watch('lib/bootstrap/scss/*.scss', gulp.parallel('sass_bootstrap','sass_editor'));
