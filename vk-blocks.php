@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: VK Blocks
+ * Plugin Name: VK Blocks 
  * Plugin URI: https://github.com/vektor-inc/vk-blocks
  * Description: This is a plugin that extends Gutenberg's blocks.
- * Version: 0.15.2
+ * Version: 0.17.2
  * Author: Vektor,Inc.
  * Author URI: https://vektor-inc.co.jp
  * Text Domain: vk-blocks
@@ -12,57 +12,72 @@
 // Do not load directly.
 defined( 'ABSPATH' ) || die();
 
-require_once( 'inc/vk-blocks-config.php' );
+require_once 'inc/vk-blocks-config.php';
 
 add_action(
-	'plugins_loaded', function () {
+	'plugins_loaded',
+	function () {
 		// Load language files.
 		load_plugin_textdomain( 'vk-blocks', false, 'vk-blocks/inc/vk-blocks/build/languages' );
 	}
 );
 
-// function vkblocks_deactivate_plugin( $plugin_path ) {
-// 	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-// 	if ( is_plugin_active( $plugin_path ) ) {
-// 		$active_plugins = get_option( 'active_plugins' );
-// 		//delete item
-// 		$active_plugins = array_diff( $active_plugins, array( $plugin_path ) );
-// 		//re index
-// 		$active_plugins = array_values( $active_plugins );
-// 		update_option( 'active_plugins', $active_plugins );
-// 	}
-// }
+/*
+-------------------------------------------*/
+/*
+  Helpers ( Plugin only )
+/*-------------------------------------------*/
+if ( ! function_exists( 'vkblocks_deactivate_plugin' ) ) {
+	/**
+	 * Plugin deactive function
+	 *
+	 * @param  [type] $plugin_path [description]
+	 * @return [type]              [description]
+	 */
+	function vkblocks_deactivate_plugin( $plugin_path ) {
+		include_once ABSPATH . 'wp-admin/includes/plugin.php';
+		if ( is_plugin_active( $plugin_path ) ) {
+			$active_plugins = get_option( 'active_plugins' );
+			// delete item
+			$active_plugins = array_diff( $active_plugins, array( $plugin_path ) );
+			// re index
+			$active_plugins = array_values( $active_plugins );
+			update_option( 'active_plugins', $active_plugins );
+		}
+	}
+}
 
-/*-------------------------------------------*/
-/*	Deactive VK Blocks
-/*-------------------------------------------*/
-// add_action( 'init', 'vkblocks_deactive_plugins' );
-// function vkblocks_deactive_plugins() {
-//
-// 	$plugin_base_dir = dirname( __FILE__ );
-//
-// 	if ( strpos( $plugin_base_dir, 'vk-blocks-pro' ) === false ) {
-// 		// Deactive Plugin VK Blocks Pro
-// 		if ( function_exists( 'vkblocks_deactivate_plugin' ) ) {
-// 			vkblocks_deactivate_plugin( 'vk-blocks-pro/vk-blocks.php' );
-// 		}
-// 	} elseif ( strpos( $plugin_base_dir, 'vk-blocks' ) === false ) {
-// 		// Deactive Plugin VK Blocks
-// 		if ( function_exists( 'vkblocks_deactivate_plugin' ) ) {
-// 			vkblocks_deactivate_plugin( 'vk-blocks/vk-blocks.php' );
-// 		}
-// 	}
-//
-// 	// Deactive ExUnit included VK Blocks
-// 	$options = get_option( 'vkExUnit_common_options' );
-// 	if ( ! empty( $options['active_vk-blocks'] ) ) {
-// 		$options['active_vk-blocks'] = false;
-// 		update_option( 'vkExUnit_common_options', $options );
-// 	}
-// }
+/*
+-------------------------------------------*/
+/*
+  Deactive VK Blocks ( Free )
+/*
+-------------------------------------------*/
+/* 関数名入れると無料版の宣言と被ってエラーになるので一時的な回避処理で無名関数を利用 */
+add_action(
+	'init',
+	function() {
+		$plugin_base_dir = dirname( __FILE__ );
+		include_once ABSPATH . 'wp-admin/includes/plugin.php';
+		if ( is_plugin_active( 'vk-blocks-pro/vk-blocks.php' ) ) {
+			// Deactive Plugin VK Blocks ( free )
+			if ( function_exists( 'vkblocks_deactivate_plugin' ) ) {
+				vkblocks_deactivate_plugin( 'vk-blocks/vk-blocks.php' );
+			}
+			// Deactive ExUnit included VK Blocks
+			$options = get_option( 'vkExUnit_common_options' );
+			if ( ! empty( $options['active_vk-blocks'] ) ) {
+				$options['active_vk-blocks'] = false;
+				update_option( 'vkExUnit_common_options', $options );
+			}
+		}
+	}
+);
 
-/*-------------------------------------------*/
-/*	Load updater
+/*
+-------------------------------------------*/
+/*
+  Load updater
 /*-------------------------------------------*/
 $plugin_base_dir = dirname( __FILE__ );
 if ( strpos( $plugin_base_dir, 'vk-blocks-pro' ) !== false ) {

@@ -12,5 +12,5 @@ import './faq/block.js';
 import './flow/block.js';
 import './pr-blocks/block.js';
 import './pr-content/block.js';
+import './heading-style/block.js';
 import './image/block.js';
-
