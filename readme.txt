@@ -57,6 +57,26 @@ e.g.
 
 == Changelog ==
 
+= 0.17.2 =
+[ bug fix ][ Button ] Custom color palette.
+[ bug fix ][ PR Block ] Fixed image alt
+
+= 0.17.1 =
+[ bug fix ][ Button ] Fixed input text bug on Safari
+[ bug fix ][ Baloon / PR Content ] Fixed image alt
+
+= 0.17.0 =
+[ add block ][ child page list block ] * Pro Version Only
+[ add style ][ group block ] border round
+[ add id ][ Responsive spacer ] add specified id by user
+
+= 0.16.4 =
+[ bug fix ][ step block ] font size
+[ bug fix ][ heading style ] add clear :before and :after
+
+= 0.16.3 =
+[ bug fix ] deactive free version function
+
 = 0.16.2 =
 [ bug fix ] function declare 
 
