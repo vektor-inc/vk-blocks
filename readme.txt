@@ -28,9 +28,9 @@ This is a plugin that extends Gutenberg's blocks.
 * PR Content
 * Title（with sub text）
 * Responsive Spacer
-* Post List
-* Step
-* Timeline
+* Post List [ Pro ]
+* Step [ Pro ]
+* Timeline [ Pro ]
 
 [ Editing and correction ]
 
