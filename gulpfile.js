@@ -40,6 +40,7 @@ gulp.task('sass_editor', function (){
 		.pipe(gulp.dest('./editor-css/'))
 		.pipe(sass())
 		.pipe(cleanCss())
+		.pipe($.autoprefixer())
 		.pipe(concat('block-build-editor.css'))
 		.pipe(gulp.dest('./inc/vk-blocks/build/'));
 });
@@ -70,9 +71,16 @@ gulp.task('js', function () {
 		.pipe(gulp.dest('./'));
 });
 
+gulp.task('copy_front_js', function () {
+	return gulp.src([ './src/_pro/table-of-contents/viewHelper.js'])
+		.pipe(jsmin())
+		.pipe( gulp.dest( './inc/vk-blocks/build/' ) );
+});
+
+
 // watch
 gulp.task('watch', function () {
-    gulp.watch('src/**/*.js', gulp.parallel('js'));
+    gulp.watch('src/**/*.js', gulp.parallel('js','copy_front_js'));
     gulp.watch('editor-css/editor.scss_before', gulp.parallel('sass_editor'));
     gulp.watch('src/**/*.scss', gulp.series('sass','sass_editor'));
     gulp.watch('lib/bootstrap/scss/*.scss', gulp.parallel('sass_bootstrap','sass_editor'));
@@ -80,7 +88,7 @@ gulp.task('watch', function () {
 });
 
 // Build
-gulp.task('build', gulp.series('js', 'sass', 'sass_editor'));
+gulp.task('build', gulp.series('copy_front_js', 'js', 'sass', 'sass_editor'));
 
 // Default Tasks
 gulp.task('default', gulp.series('watch'));
@@ -117,7 +125,7 @@ gulp.task('dist', function() {
             ],
             { base: './' }
         )
-        .pipe( gulp.dest( 'dist/vk-blocks' ) ); // distディレクトリに出力
+        .pipe( gulp.dest( 'dist/vk-blocks-pro' ) ); // distディレクトリに出力
 } );
 
 gulp.task('dist_ex', function() {
