@@ -80,13 +80,6 @@ gulp.task("js", function() {
   return webpackStream(webpackProd, webpack).pipe(gulp.dest("./"));
 });
 
-gulp.task("copy_front_js", function() {
-  return gulp
-    .src(["./src/_pro/table-of-contents/viewHelper.js"])
-    .pipe(jsmin())
-    .pipe(gulp.dest("./inc/vk-blocks/build/"));
-});
-
 // watch
 gulp.task('watch', function () {
     gulp.watch('src/**/*.js', gulp.parallel('js'));
@@ -103,7 +96,7 @@ gulp.task(
 );
 
 // Build : Production
-gulp.task("build", gulp.series("copy_front_js", "js", "sass", "sass_editor"));
+gulp.task("build", gulp.series("js", "sass", "sass_editor"));
 
 // Default Tasks
 gulp.task("default", gulp.series("watch"));
@@ -141,7 +134,7 @@ gulp.task("dist", function() {
       { base: "./" }
     )
     .pipe(gulp.dest("../../../../../../updatepro/app/public/wp-content/plugins/vk-blocks-pro"))
-    .pipe(gulp.dest("dist/vk-blocks-pro")); // distディレクトリに出力
+    .pipe(gulp.dest("dist/vk-blocks")); // distディレクトリに出力
 });
 
 gulp.task("dist_ex", function() {
