@@ -92,7 +92,7 @@ gulp.task('watch', function () {
 //Build : Development
 gulp.task(
   "build-dev",
-  gulp.series("copy_front_js", "js-dev", "sass", "sass_editor")
+  gulp.series("js-dev", "sass", "sass_editor")
 );
 
 // Build : Production
