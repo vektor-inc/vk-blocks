@@ -3,7 +3,7 @@
  * Plugin Name: VK Blocks 
  * Plugin URI: https://github.com/vektor-inc/vk-blocks
  * Description: This is a plugin that extends Gutenberg's blocks.
- * Version: 0.17.6
+ * Version: 0.22.0
  * Author: Vektor,Inc.
  * Author URI: https://vektor-inc.co.jp
  * Text Domain: vk-blocks
@@ -22,8 +22,6 @@ add_action(
 	}
 );
 
-/*
--------------------------------------------*/
 /*
   Helpers ( Plugin only )
 /*-------------------------------------------*/
@@ -47,8 +45,6 @@ if ( ! function_exists( 'vkblocks_deactivate_plugin' ) ) {
 	}
 }
 
-/*
--------------------------------------------*/
 /*
   Deactive VK Blocks ( Free )
 /*
