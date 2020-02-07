@@ -58,7 +58,7 @@
     "@wordpress/i18n": "^3.6.1",
     "aphrodite": "^2.4.0",
     "gulp-jsmin": "^0.1.5",
-    "node-sass": "^4.13.1",
+    "node-sass": "^4.13.0",
     "po2json": "^1.0.0-alpha",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
