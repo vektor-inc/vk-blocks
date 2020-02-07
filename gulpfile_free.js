@@ -133,7 +133,7 @@ gulp.task("dist", function() {
       ],
       { base: "./" }
     )
-    .pipe(gulp.dest("../../../../../../updatepro/app/public/wp-content/plugins/vk-blocks-pro"))
+    .pipe(gulp.dest("../../../../../../updatepro/app/public/wp-content/plugins/vk-blocks"))
     .pipe(gulp.dest("dist/vk-blocks")); // distディレクトリに出力
 });
 
