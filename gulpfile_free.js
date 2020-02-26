@@ -34,6 +34,7 @@ gulp.task("sass", function() {
       // .pipe($.autoprefixer({browsers: ['last 2 version', '> 5%']}))
       // .pipe($.sourcemaps.write('./map'))
       //bundle css files by gulp-concat
+      .pipe(cleanCss())
       .pipe(concat("block-build.css"))
       .pipe(gulp.dest("./inc/vk-blocks/build/"))
   );
