@@ -716,3 +716,10 @@ msgstr ""
 #: src/staff/component.js:50
 msgid "Caption"
 msgstr ""
+
+
+msgid "Disabled Blocks module. Because VK-Blocks Plugin running."
+msgstr ""
+
+msgid "Deactivated VK-Blocks Plugin. Because VK-Blocks Pro running."
+msgstr ""

@@ -13,7 +13,7 @@
 defined( 'ABSPATH' ) || die();
 
 if ( is_admin() ) {
-	if ( is_multisite() && is_network_admin() ) {
+	if ( is_network_admin() ) {
 		$network_options = get_site_option( 'active_sitewide_plugins', array() );
 		if (
 			isset( $network_options['vk-blocks/vk-blocks.php'] )
@@ -24,14 +24,26 @@ if ( is_admin() ) {
 
 			add_action( 'network_admin_notices', function(){
 				echo '<div class="updated notice"><p>';
-				echo "Pro版VK-Blocksが起動したため、VK-Blocksを停止しました。";
+				echo __( 'Deactivated VK-Blocks Plugin. Because VK-Blocks Pro running.', 'vk-blocks' );
 				echo '</p></div>';
 			} );
 		}
 	} else {
+		$network_runnning_pro = false;
+		if ( is_multisite() ) {
+			$network_options = get_site_option( 'active_sitewide_plugins', array() );
+			if ( isset( $network_options['vk-blocks-pro/vk-blocks.php'] ) ) {
+				$network_runnning_pro = true;
+			}
+		}
+
 		$options = get_option( 'active_plugins', array() );
-		if ( in_array( 'vk-blocks-pro/vk-blocks.php', $options) ) {
+		if (
+			in_array( 'vk-blocks-pro/vk-blocks.php', $options)
+			|| $network_runnning_pro
+		) {
 			$key = array_search( 'vk-blocks/vk-blocks.php', $options );
+
 			if ( false !== $key ) {
 				$do_blog = true;
 				unset( $options[ $key ] );
@@ -39,7 +51,7 @@ if ( is_admin() ) {
 
 				add_action( 'admin_notices', function(){
 					echo '<div class="updated notice"><p>';
-					echo "Pro版VK-Blocksが起動したため、VK-Blocksを停止しました。";
+					echo __( 'Deactivated VK-Blocks Plugin. Because VK-Blocks Pro running.', 'vk-blocks' );
 					echo '</p></div>';
 				} );
 			}
@@ -52,7 +64,7 @@ if ( is_admin() ) {
 
 			add_action( 'admin_notices', function(){
 				echo '<div class="updated notice"><p>';
-				echo "VK-Blocksと競合するため、VK All in One Expansion UnitのBlock機能を停止しました。";
+				echo __( 'Disabled Blocks module. Because VK-Blocks Plugin running.', 'vk-blocks' );
 				echo '</p></div>';
 			} );
 		}
