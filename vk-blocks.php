@@ -3,7 +3,7 @@
  * Plugin Name: VK Blocks 
  * Plugin URI: https://github.com/vektor-inc/vk-blocks
  * Description: This is a plugin that extends Gutenberg's blocks.
- * Version: 0.22.4
+ * Version: 0.26.2
  * Author: Vektor,Inc.
  * Author URI: https://vektor-inc.co.jp
  * Text Domain: vk-blocks
@@ -12,15 +12,12 @@
 // Do not load directly.
 defined( 'ABSPATH' ) || die();
 
-require_once 'inc/vk-blocks-config.php';
-
-add_action(
-	'plugins_loaded',
-	function () {
-		// Load language files.
-		load_plugin_textdomain( 'vk-blocks', false, 'vk-blocks/inc/vk-blocks/build/languages' );
+if ( ! function_exists( 'vkblocks_get_version' ) ) {
+	function vkblocks_get_version(){
+		$data = get_file_data( __FILE__, array( 'version' => 'Version' ) );
+		return $data['version'];
 	}
-);
+}
 
 /*
   Helpers ( Plugin only )
@@ -47,8 +44,7 @@ if ( ! function_exists( 'vkblocks_deactivate_plugin' ) ) {
 
 /*
   Deactive VK Blocks ( Free )
-/*
--------------------------------------------*/
+/*-------------------------------------------*/
 /* 関数名入れると無料版の宣言と被ってエラーになるので一時的な回避処理で無名関数を利用 */
 add_action(
 	'init',
@@ -67,6 +63,33 @@ add_action(
 				update_option( 'vkExUnit_common_options', $options );
 			}
 		}
+	}
+);
+
+if ( is_admin() && ! is_network_admin() ) {
+	$options = get_option( 'vkExUnit_common_options' );
+	if ( ! empty( $options['active_vk-blocks'] ) ) {
+		$options['active_vk-blocks'] = false;
+		update_option( 'vkExUnit_common_options', $options );
+
+		add_action(
+			'admin_notices',
+			function() {
+				echo '<div class="updated notice"><p>';
+				echo __( 'Disabled Blocks module. Because VK-Blocks Plugin running.', 'vk-blocks' );
+				echo '</p></div>';
+			}
+		);
+	}
+}
+
+require_once 'inc/vk-blocks-config.php';
+
+add_action(
+	'plugins_loaded',
+	function () {
+		// Load language files.
+		load_plugin_textdomain( 'vk-blocks', false, 'vk-blocks/inc/vk-blocks/build/languages' );
 	}
 );
 
