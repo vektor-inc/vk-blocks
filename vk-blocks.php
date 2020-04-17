@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: VK Blocks 
+ * Plugin Name: VK Blocks
  * Plugin URI: https://github.com/vektor-inc/vk-blocks
  * Description: This is a plugin that extends Gutenberg's blocks.
- * Version: 0.26.3
+ * Version: 0.26.4
  * Author: Vektor,Inc.
  * Author URI: https://vektor-inc.co.jp
  * Text Domain: vk-blocks
