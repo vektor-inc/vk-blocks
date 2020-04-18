@@ -4,7 +4,7 @@ Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 5.0
 Tested up to: 5.4.0
-Stable tag: 0.26.4
+Stable tag: 0.26.5
 Requires PHP: 5.6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -58,11 +58,11 @@ e.g.
 
 == Changelog ==
 
-= 0.26.4 =
-[ bug fix ] editor style build bug fix
+= 0.26.5 =
+[ bug fix ][ button ] Change Color bug fix.
 
 = 0.26.3 =
-[ bug fix ][ button ] outline style bug fix
+[ bug fix ][ button ] outline style bug fix.
 
 = 0.26.2 =
 [ bug fix ] Auto stop function bug fix of Both(Free and Pro) used.
