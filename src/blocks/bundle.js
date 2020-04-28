@@ -15,5 +15,5 @@ import "./pr-content/block.js";
 import "./heading-style/block.js";
 import "./image/block.js";
 import "./hidden-extension/";
-// import "../plugin/menu/block.js";
+import "../plugin/menu/block.js";
 import "../translation_dummy.js";
