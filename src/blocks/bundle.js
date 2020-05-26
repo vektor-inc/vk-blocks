@@ -18,4 +18,5 @@ import "../translation_dummy.js";
 
 /*WP5.3 以下では読み込まれない*/
 import "./hidden-extension/";
+import "./border-box/block.js";
 import "../plugin/menu/block.js";
