@@ -49,8 +49,8 @@
 		line-height: 1.4;
 		padding: 0.5em 1.5em 0.4em;
 		font-weight: bold;
-		.svg-inline--fa,
-		.fas {
+		i:first-child,
+		.svg-inline--fa {
 			margin-right: 5px;
 		}
 		.vk_borderBox_title {
@@ -59,12 +59,29 @@
 			font-size: 1em;
 		}
 	}
+
+	.vk_borderBox_title {
+		/* FortやJPNSTYLEなどデフォルトで装飾指定のあるものの対応 */
+		background: none;
+		padding: 0;
+		border: none;
+	}
 	.vk_borderBox_body {
 		padding: 1.5em;
-		background-color: #fff;
 		border-width: 2px;
 		border-style: solid;
-		p {
+		@media (min-width: 992px) {
+			padding: 2.1875em 2em 2em;
+		}
+		h1:first-child, 
+		h2:first-child, 
+		h3:first-child, 
+		h4:first-child, 
+		h5:first-child,
+		h6:first-child {//他のテーマでも対応できるように追加			
+			margin-top: 0;
+		}
+		p:last-child {
 			margin-bottom: 0;
 		}
 	}
@@ -154,7 +171,8 @@
 /* タブ風タイトル　背景色がないパターン */
 .vk_borderBox {
 	&.is-style-vk_borderBox-style-solid-kado-tit-tab,
-	&.is-style-vk_borderBox-style-solid-round-tit-tab {
+	&.is-style-vk_borderBox-style-solid-round-tit-tab,
+	&.is-style-vk_borderBox-style-solid-kado-tit-banner {
 		border: none;
 		background-color: transparent;
 	}
