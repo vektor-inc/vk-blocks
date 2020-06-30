@@ -10,7 +10,7 @@ msgid "Icon"
 msgstr ""
 
 #: src/blocks/_helper/font-awesome-new.js:59
-#: src/blocks/border-box/font-awesome-new.js:62
+#: src/blocks/border-box/font-awesome-new.js:63
 msgid ""
 "If you want to use an icon other than the ones listed above, you can use "
 "any of the icons from Font Awesome's icon list Please select a tag and "
@@ -18,17 +18,17 @@ msgid ""
 msgstr ""
 
 #: src/blocks/_helper/font-awesome-new.js:60
-#: src/blocks/border-box/font-awesome-new.js:63
+#: src/blocks/border-box/font-awesome-new.js:64
 msgid "Ex) <i class=\"fas fa-arrow-circle-right\"></i>"
 msgstr ""
 
 #: src/blocks/_helper/font-awesome-new.js:62
-#: src/blocks/border-box/font-awesome-new.js:65
+#: src/blocks/border-box/font-awesome-new.js:66
 msgid "Font Awesome icon list"
 msgstr ""
 
 #: src/blocks/_helper/font-awesome-new.js:75
-#: src/blocks/border-box/font-awesome-new.js:78
+#: src/blocks/border-box/font-awesome-new.js:79
 msgid "Select Icon"
 msgstr ""
 
