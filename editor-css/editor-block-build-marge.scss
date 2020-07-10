@@ -105,6 +105,8 @@ button.components-button.components-toolbar__control{
 @import "./editor_before_template_inserter";
 // アイコンリストCSS読み込み
 @import "./editor_before_icon_list";
+// 吹き出し画像読み込み
+@import "./editor_balloon_image_list";
 
 // VK Outer 編集パネル
 $color-danger: #dd3333;
@@ -163,6 +165,7 @@ $color-danger: #dd3333;
 // アニメーションブロックの識別用枠線
 .vk_animation {
 	border: 1px dashed #ccc;
+	min-height:3em;
 	// そのままだと編集画面でも消えてしまうので上書き（.wp-block-vk-blocks-animation）がないと負けてしまう
 	&.wp-block-vk-blocks-animation{
 		opacity: 1;
@@ -174,6 +177,7 @@ $color-danger: #dd3333;
 		font-size:10px;
 		background: #eeeeee;
 		padding: .2em .6em;
+		z-index:1000;
 	}
 	&.vk_animation-fade-in{
 		left:0;
@@ -182,21 +186,34 @@ $color-danger: #dd3333;
 		}
 	}
 	&.vk_animation-slide-left{
-		right:0;
-		&:before {
-			content:'Slide left';
+		&.vk_animation-range-short,
+		&.vk_animation-range-normal,
+		&.vk_animation-range-long {
+			right:0;
+			&:before {
+				content:'Slide left';
+			}
 		}
 	}
 	&.vk_animation-slide-right{
-		left:0;
-		&:before {
-			content:'Slide right';
+		&.vk_animation-range-short,
+		&.vk_animation-range-normal,
+		&.vk_animation-range-long {
+			right:0;
+			left:0;
+			&:before {
+				content:'Slide right';
+			}
 		}
 	}
 	&.vk_animation-slide-up{
-		top:0;
-		&:before {
-			content:'Slide up';
+		&.vk_animation-range-short,
+		&.vk_animation-range-normal,
+		&.vk_animation-range-long {
+			top:0;
+			&:before {
+				content:'Slide up';
+			}
 		}
 	}
 }
@@ -1027,36 +1044,51 @@ ol {
 }
 
 .vk_balloon {
-  display: flex;
-  align-items: center;
-	margin-bottom:1em;
-	figure{
-    margin:0;
-  }
+	display: flex;
+	align-items: center;
+	margin-bottom: 1em;
+
+	figure {
+		margin: 0;
+	}
+
 	p {
 		word-break: break-all;
 		background: #f5f5f5;
-		padding:1.1rem 1.4rem;
+		padding: 1.1rem 1.4rem;
 	}
 }
+
 .vk_balloon_icon {
 	flex-basis: 96px;
 	flex-shrink: 0;
 	text-align: center;
 }
+
 .vk_balloon_icon_image {
 	vertical-align: bottom;
 	max-width: 64px;
 }
+
+.vk_balloon-image-rounded {
+	border-radius: 4px;
+}
+
+.vk_balloon-image-circle {
+	border-radius: 50%;
+}
+
 .vk_balloon_icon_name {
 	display: block;
 	text-align: center;
 	font-size: 0.7rem;
-	margin-top:0.2rem;
+	margin-top: 0.2rem;
 }
-.vk_balloon_content{
+
+.vk_balloon_content {
 	position: relative;
 	text-align: left;
+
 	&.editor-rich-text__tinymce[data-is-placeholder-visible=true] {
 		// これがないと未入力時に吹き出しが２重になる
 		position: absolute;
@@ -1196,12 +1228,14 @@ ol {
   100% {transform: translate(0px, 0px) rotateZ(0deg)}
 }
 
+.icon-image-list-note:hover{
+	cursor: pointer;
+}
+
 /*********************
 * SmartPhone
 0px - 480px
 ***********************/
-
-
 @media only screen and (max-width: 480px) {
 	.vk_balloon_content{
 		font-size: .9em;
@@ -1850,23 +1884,108 @@ $color_dark: #343a40;
 	color: #fff;
 }
 
-/*      .qaItem
-/*-------------------------------------------*/
-.vk_faq { display:block; overflow:hidden;border-bottom:1px dotted #ccc; padding:0px 0px 25px; margin:25px 0px; width:100%; position: relative; }
-.vk_faq_title,
-.vk_faq_content {
-	border:none;padding-left: 35px;
-	&:before {
-		position: absolute;left:0;font-size:24px;line-height: 105%;
-	}
+$question-color: #e50000;
+$answer-color: #337ab7;
+
+@mixin question-bgcolor($color:#fff) {
+	background-color: $question-color;
+	color: $color !important;
 }
-.vk_faq_title { margin-bottom:15px;font-size:18px;font-weight:700;
-  &:before { font-family:"areal";content:"Q ";color:#e50000; }
+@mixin answer-bgcolor($color:#fff) {
+	background-color: $answer-color;
+	color: $color !important;
 }
-.vk_faq_content { margin:0px;
-  &:before { content:"A ";color:#337ab7;font-family: "" }
+@mixin question-bordercolor() {
+	border: 1px solid $question-color;
+	color:$question-color;
+}
+@mixin answer-bordercolor() {
+	border: 1px solid $answer-color;
+	color: $answer-color;
 }
 
+/* style
+--------------------------------------------*/
+.is-style-vk_faq{
+	&-normal{
+		.vk_faq_title:before{
+			color: $question-color;
+		}
+		.vk_faq_content:before{
+			color: $answer-color;
+		}
+	}
+	&-bgfill-circle,
+	&-bgfill-square,
+	&-bgfill-rounded{
+		.vk_faq_title:before{
+			@include question-bgcolor;
+		}
+		.vk_faq_content:before{
+			@include answer-bgcolor;
+		}
+	}
+	&-bgfill-circle,
+	&-border-circle{
+		.vk_faq_title:before,
+		.vk_faq_content:before{
+			border-radius: 50%;
+		}
+	}
+	&-bgfill-rounded,
+	&-border-rounded{
+		.vk_faq_title:before,
+		.vk_faq_content:before{
+			border-radius: 4px;
+		}
+	}
+	&-border-circle,
+	&-border-square,
+	&-border-rounded{
+		.vk_faq_title:before{
+			@include question-bordercolor;
+		}
+		.vk_faq_content:before{
+			@include answer-bordercolor;
+		}
+	}
+}
+
+
+/*      .qaItem
+/*-------------------------------------------*/
+.vk_faq { display:block; overflow:hidden;border-bottom:1px dotted #ccc; padding:0px 0px 1em; margin: 0 0 1em 0; width:100%; position: relative; }
+.vk_faq_title,
+.vk_faq_content {
+	border:none;
+	padding: 0.8em 0.8em 0.8em 48px;
+	position: relative;
+	&:before {
+		position: absolute;
+		left:0;
+		top: 0.5em;
+		font-weight: 500;
+		font-size:22px;
+		line-height: 105%;
+		width: 1.5em;
+		height: 1.5em;
+		line-height: 1.5em;
+		text-align: center;		
+		position: absolute;
+		font-family:"areal";
+	}
+}
+.vk_faq_title { margin-bottom:0;font-size:18px;font-weight:700;
+  &:before { content:"Q";color:#e50000; font-weight: 500; }
+}
+.vk_faq_content { margin:0px;
+  &:before { content:"A";color:#337ab7; }
+  p:last-child{
+	margin-bottom:0;
+  }
+}
+//editor画面でずれる
+.editor-styles-wrapper .vk_faq_content .wp-block{ width: auto; }
 //*      .flowBox
 /*-------------------------------------------*/
 .vk_flow-arrow-on:after {
@@ -1903,20 +2022,27 @@ $color_dark: #343a40;
 /*-------------------------------------------*/
 @mixin reset() {
 	background: none;
-	border:none;
+	border: none;
 	border-radius: 0;
-	padding:0;
+	padding: 0;
 	font-weight: normal;
-	box-shadow:none;
+	box-shadow: none;
 	&:after {
-		content:none;
-		border:none;
+		content: none;
+		border: none;
 	}
-	&:before{
-		content:none;
+	&:before {
+		content: none;
 	}
 }
-
+.vk_heading {
+	i:first-child {
+		margin-right: 0.2em;
+	}
+	i:last-child {
+		margin-left: 0.2em;
+	}
+}
 // .vk_heading は指定が強い要素（ Charm ）も消すために必要
 .vk_heading.vk_heading-style-plain {
 	.vk_heading_title {
@@ -1928,7 +2054,7 @@ $color_dark: #343a40;
 }
 
 .vk_heading_subtext {
-	margin-bottom:0;
+	margin-bottom: 0;
 }
 
 //管理画面側の見出しブロックのスタイルのcssになります。
@@ -2605,6 +2731,41 @@ $xl-min: 1200px;
 /* CSS
 /*-------------------------------------------*/
 
+@mixin switchVisibility($pc, $tablet, $mobile) {
+	.vk_spacer {
+		.vk_spacer-display-pc {
+			display: $pc;
+		}
+
+		.vk_spacer-display-tablet {
+			display: $tablet;
+		}
+
+		.vk_spacer-display-mobile {
+			display: $mobile;
+		}
+	}
+}
+
+// Small devices (landscape phones, 576px以下)
+@media (max-width: 576px) {
+	@include switchVisibility(none, none, block);
+}
+
+// Medium devices (tablets, 577pxから768px)
+@media (min-width: 577px) and (max-width: 768px) {
+	@include switchVisibility(none, block, none);
+}
+
+// Large devices (desktops, 769px以上)
+@media (min-width: 769px) {
+	@include switchVisibility(block, none, none);
+}
+
+/*-------------------------------------------*/
+/* CSS
+/*-------------------------------------------*/
+
 .vk_table {
 	&-col-mobile1 {
 		@media( max-width: 575.98px){
@@ -2681,41 +2842,6 @@ $xl-min: 1200px;
 	&.table-striped > tbody > .editor-inner-blocks > .editor-block-list__layout > div:nth-of-type(odd) {
 			background-color: rgba(0, 0, 0, 0.05);
 	}
-}
-
-/*-------------------------------------------*/
-/* CSS
-/*-------------------------------------------*/
-
-@mixin switchVisibility($pc, $tablet, $mobile) {
-	.vk_spacer {
-		.vk_spacer-display-pc {
-			display: $pc;
-		}
-
-		.vk_spacer-display-tablet {
-			display: $tablet;
-		}
-
-		.vk_spacer-display-mobile {
-			display: $mobile;
-		}
-	}
-}
-
-// Small devices (landscape phones, 576px以下)
-@media (max-width: 576px) {
-	@include switchVisibility(none, none, block);
-}
-
-// Medium devices (tablets, 577pxから768px)
-@media (min-width: 577px) and (max-width: 768px) {
-	@include switchVisibility(none, block, none);
-}
-
-// Large devices (desktops, 769px以上)
-@media (min-width: 769px) {
-	@include switchVisibility(block, none, none);
 }
 
 /*-------------------------------------------*/
@@ -2895,13 +3021,13 @@ $font_serif: "ＭＳ Ｐ明朝", "MS PMincho", "ヒラギノ明朝 Pro W3",
 /*-------------------------------------------*/
 /* CSS
 /*-------------------------------------------*/
-
-/*-------------------------------------------*/
-/* CSS
-/*-------------------------------------------*/
 .vk_table-col-overflow {
   white-space: nowrap !important;
 }
 /*# sourceMappingURL=style.scss.map */
+
+/*-------------------------------------------*/
+/* CSS
+/*-------------------------------------------*/
 
 }
