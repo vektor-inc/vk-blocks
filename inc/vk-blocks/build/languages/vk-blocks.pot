@@ -552,14 +552,14 @@ msgid "Heading"
 msgstr ""
 
 #: src/blocks/heading/component.js:109
-#: src/blocks/heading/deprecated/block.js:670
-#: src/blocks/heading/deprecated/component.js:205
+#: src/blocks/heading/deprecated/block.js:390
+#: src/blocks/heading/deprecated/component.js:318
 msgid "Input title…"
 msgstr ""
 
 #: src/blocks/heading/component.js:122
-#: src/blocks/heading/deprecated/block.js:686
-#: src/blocks/heading/deprecated/component.js:221
+#: src/blocks/heading/deprecated/block.js:406
+#: src/blocks/heading/deprecated/component.js:334
 msgid "Input sub text…"
 msgstr ""
 
