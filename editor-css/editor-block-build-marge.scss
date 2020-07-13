@@ -1643,6 +1643,108 @@ ol {
 	}
 }
 
+$question-color: #e50000;
+$answer-color: #337ab7;
+
+@mixin question-bgcolor($color:#fff) {
+	background-color: $question-color;
+	color: $color !important;
+}
+@mixin answer-bgcolor($color:#fff) {
+	background-color: $answer-color;
+	color: $color !important;
+}
+@mixin question-bordercolor() {
+	border: 1px solid $question-color;
+	color:$question-color;
+}
+@mixin answer-bordercolor() {
+	border: 1px solid $answer-color;
+	color: $answer-color;
+}
+
+/* style
+--------------------------------------------*/
+.is-style-vk_faq{
+	&-normal{
+		.vk_faq_title:before{
+			color: $question-color;
+		}
+		.vk_faq_content:before{
+			color: $answer-color;
+		}
+	}
+	&-bgfill-circle,
+	&-bgfill-square,
+	&-bgfill-rounded{
+		.vk_faq_title:before{
+			@include question-bgcolor;
+		}
+		.vk_faq_content:before{
+			@include answer-bgcolor;
+		}
+	}
+	&-bgfill-circle,
+	&-border-circle{
+		.vk_faq_title:before,
+		.vk_faq_content:before{
+			border-radius: 50%;
+		}
+	}
+	&-bgfill-rounded,
+	&-border-rounded{
+		.vk_faq_title:before,
+		.vk_faq_content:before{
+			border-radius: 4px;
+		}
+	}
+	&-border-circle,
+	&-border-square,
+	&-border-rounded{
+		.vk_faq_title:before{
+			@include question-bordercolor;
+		}
+		.vk_faq_content:before{
+			@include answer-bordercolor;
+		}
+	}
+}
+
+
+/*      .qaItem
+/*-------------------------------------------*/
+.vk_faq { display:block; overflow:hidden;border-bottom:1px dotted #ccc; padding:0px 0px 1em; margin: 0 0 1em 0; width:100%; position: relative; }
+.vk_faq_title,
+.vk_faq_content {
+	border:none;
+	padding: 0.8em 0.8em 0.8em 48px;
+	position: relative;
+	&:before {
+		position: absolute;
+		left:0;
+		top: 0.5em;
+		font-weight: 500;
+		font-size:22px;
+		line-height: 105%;
+		width: 1.5em;
+		height: 1.5em;
+		line-height: 1.5em;
+		text-align: center;		
+		position: absolute;
+		font-family:"areal";
+	}
+}
+.vk_faq_title { margin-bottom:0;font-size:18px;font-weight:700;
+  &:before { content:"Q";color:#e50000; font-weight: 500; }
+}
+.vk_faq_content { margin:0px;
+  &:before { content:"A";color:#337ab7; }
+  p:last-child{
+	margin-bottom:0;
+  }
+}
+//editor画面でずれる
+.editor-styles-wrapper .vk_faq_content .wp-block{ width: auto; }
 .vk_button {
 	margin: 5px 0;
 	text-align: center; /* テキストのみの時のセンター揃え */
@@ -1915,108 +2017,46 @@ $color_dark: #343a40;
 	box-sizing: border-box;
 }
 
-$question-color: #e50000;
-$answer-color: #337ab7;
-
-@mixin question-bgcolor($color:#fff) {
-	background-color: $question-color;
-	color: $color !important;
-}
-@mixin answer-bgcolor($color:#fff) {
-	background-color: $answer-color;
-	color: $color !important;
-}
-@mixin question-bordercolor() {
-	border: 1px solid $question-color;
-	color:$question-color;
-}
-@mixin answer-bordercolor() {
-	border: 1px solid $answer-color;
-	color: $answer-color;
-}
-
-/* style
---------------------------------------------*/
-.is-style-vk_faq{
-	&-normal{
-		.vk_faq_title:before{
-			color: $question-color;
-		}
-		.vk_faq_content:before{
-			color: $answer-color;
-		}
-	}
-	&-bgfill-circle,
-	&-bgfill-square,
-	&-bgfill-rounded{
-		.vk_faq_title:before{
-			@include question-bgcolor;
-		}
-		.vk_faq_content:before{
-			@include answer-bgcolor;
-		}
-	}
-	&-bgfill-circle,
-	&-border-circle{
-		.vk_faq_title:before,
-		.vk_faq_content:before{
-			border-radius: 50%;
-		}
-	}
-	&-bgfill-rounded,
-	&-border-rounded{
-		.vk_faq_title:before,
-		.vk_faq_content:before{
-			border-radius: 4px;
-		}
-	}
-	&-border-circle,
-	&-border-square,
-	&-border-rounded{
-		.vk_faq_title:before{
-			@include question-bordercolor;
-		}
-		.vk_faq_content:before{
-			@include answer-bordercolor;
-		}
-	}
-}
-
-
-/*      .qaItem
 /*-------------------------------------------*/
-.vk_faq { display:block; overflow:hidden;border-bottom:1px dotted #ccc; padding:0px 0px 1em; margin: 0 0 1em 0; width:100%; position: relative; }
-.vk_faq_title,
-.vk_faq_content {
-	border:none;
-	padding: 0.8em 0.8em 0.8em 48px;
-	position: relative;
+/* CSS
+/*-------------------------------------------*/
+@mixin reset() {
+	background: none;
+	border: none;
+	border-radius: 0;
+	padding: 0;
+	font-weight: normal;
+	box-shadow: none;
+	&:after {
+		content: none;
+		border: none;
+	}
 	&:before {
-		position: absolute;
-		left:0;
-		top: 0.5em;
-		font-weight: 500;
-		font-size:22px;
-		line-height: 105%;
-		width: 1.5em;
-		height: 1.5em;
-		line-height: 1.5em;
-		text-align: center;		
-		position: absolute;
-		font-family:"areal";
+		content: none;
 	}
 }
-.vk_faq_title { margin-bottom:0;font-size:18px;font-weight:700;
-  &:before { content:"Q";color:#e50000; font-weight: 500; }
+.vk_heading {
+	i:first-child {
+		margin-right: 0.2em;
+	}
+	i:last-child {
+		margin-left: 0.2em;
+	}
 }
-.vk_faq_content { margin:0px;
-  &:before { content:"A";color:#337ab7; }
-  p:last-child{
-	margin-bottom:0;
-  }
+// .vk_heading は指定が強い要素（ Charm ）も消すために必要
+.vk_heading.vk_heading-style-plain {
+	.vk_heading_title {
+		@include reset;
+		&:after {
+			@include reset;
+		}
+	}
 }
-//editor画面でずれる
-.editor-styles-wrapper .vk_faq_content .wp-block{ width: auto; }
+
+.vk_heading_subtext {
+	margin-bottom: 0;
+}
+
 //管理画面側の見出しブロックのスタイルのcssになります。
 //cssを修正する場合はfunctions-color.phpのdynamic_css部分とこちらのscssを修正してください。
 
@@ -2478,46 +2518,6 @@ $color_key: #337ab7;
 		// }
 	} //.is-style-vk-heading
 } //.editor-block-list__block
-
-/*-------------------------------------------*/
-/* CSS
-/*-------------------------------------------*/
-@mixin reset() {
-	background: none;
-	border: none;
-	border-radius: 0;
-	padding: 0;
-	font-weight: normal;
-	box-shadow: none;
-	&:after {
-		content: none;
-		border: none;
-	}
-	&:before {
-		content: none;
-	}
-}
-.vk_heading {
-	i:first-child {
-		margin-right: 0.2em;
-	}
-	i:last-child {
-		margin-left: 0.2em;
-	}
-}
-// .vk_heading は指定が強い要素（ Charm ）も消すために必要
-.vk_heading.vk_heading-style-plain {
-	.vk_heading_title {
-		@include reset;
-		&:after {
-			@include reset;
-		}
-	}
-}
-
-.vk_heading_subtext {
-	margin-bottom: 0;
-}
 
 $xs-max: 575.98px;
 $sm-max: 767.98px;
