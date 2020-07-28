@@ -5,6 +5,7 @@
 .vk_block_icon_pro {
 	fill: #c00;
 }
+.editor-block-list-item-vk-blocks-slider:after,
 .editor-block-list-item-vk-blocks-animation:after,
 .editor-block-list-item-vk-blocks-card:after,
 .editor-block-list-item-vk-blocks-child-page:after,
@@ -136,6 +137,13 @@ $color-danger: #dd3333;
 	}
 }
 
+.vk_slider_item_sidebar_bgImage_button_container img {
+    min-width: 248px;
+}
+
+.mb-2+div.components-toolbar{
+	margin-top: 0!important;
+}
 
 /* editor area *********************************************/
 .edit-post-visual-editor.editor-styles-wrapper{
@@ -145,6 +153,11 @@ $color-danger: #dd3333;
 	-----------------------------------------------*/
 	.vk_outer-width-full.vk_outer-paddingLR-use,
 	.vk_outer-width-full.vk_outer-paddingLR-zero{
+		// コンテンツエリアをはみ出させる
+		.wp-block { max-width:100%; }
+	}
+	.vk_slider_item-width-full.vk_slider_item-paddingLR-use,
+	.vk_slider_item-width-full.vk_slider_item-paddingLR-zero{
 		// コンテンツエリアをはみ出させる
 		.wp-block { max-width:100%; }
 	}
@@ -158,10 +171,40 @@ $color-danger: #dd3333;
 		.wp-block { max-width:100%; }
 	}
 
-// レスポンシブスペーサーの識別用枠線
-.vk_spacer {
-	border: 1px dotted #ccc;
+	.is-sidebar-opened & .vk_slider_item-width-full.vk_slider_item-paddingLR-use,
+	.is-sidebar-opened & .vk_slider_item-width-full.vk_slider_item-paddingLR-zero{
+		// サイドバー表示時に全幅要素がはみ出してサイドバーの下などに入り込むのを防止
+		margin-left: calc( 50% - 50vw + 140px );
+		margin-right: calc( 50% - 50vw + 140px );
+		// コンテンツエリアをはみ出させる
+		.wp-block { max-width:100%; }
+	}
+
+	.is-sidebar-opened & .vk_slider.vk_width-full{
+		// サイドバー表示時に全幅要素がはみ出してサイドバーの下などに入り込むのを防止
+		margin-left: calc( 50% - 50vw + 140px );
+		margin-right: calc( 50% - 50vw + 140px );
+		padding-right:0;
+		padding-left:0;
+		width: calc( 100vw - 280px );
+	}
+
+
+// 編集画面での識別用枠
+.vk_spacer,
+.vk_slider,
+.vk_slider_item,
+.vk_animation {
+	border:1px dotted #ccc;
 }
+
+.vk_slider_item{
+	min-height:3em;
+	.block-editor-inner-blocks{
+		width: 100%;
+	}
+}
+
 // アニメーションブロックの識別用枠線
 .vk_animation {
 	border: 1px dashed #ccc;
@@ -443,9 +486,13 @@ $color-danger: #b52727;
 /*-------------------------------------------*/
 /* .vk_grid-column Layout
 /*-------------------------------------------*/
-.vk_grid-column.row {
+.vk_grid-column .block-editor-inner-blocks .block-editor-block-list__layout {
 	border:none;
+	display: flex;
 	flex-direction: row;
+	flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
 
 	// colの余分な余白の削除など
 	// col内に入れたブロックにまで反映されないように & > 指定
@@ -631,6 +678,49 @@ $color-danger: #b52727;
 	.vk_icon-card_item{
 		margin: 15px auto!important;
 	}
+}
+
+.alert{
+
+  padding: 1em;
+  margin: 1em 0;
+  border-radius: 3px;
+	p {
+		margin-bottom:0;
+	}
+
+  & + &{
+    margin-top: 2em;
+  }
+
+  a{
+    transition: color .3s linear, opacity .3s linear;
+    &:link, &:visited{
+      opacity: .8;
+      text-decoration: underline;
+    }
+    &:hover, &:visited{
+      opacity: 1;
+      text-decoration: none;
+    }
+  }
+
+  @each $var in (
+                  (success, #dff0d8,#3c763d,#d6e9c6),
+                  (info, #d9edf7,#31708f,#bce8f1),
+                  (warning, #fcf8e3,#8a6d3b,#faebcc),
+                  (danger, #f2dede,#a94442,#ebccd1),
+  ){
+    $class-name: nth($var, 1);
+    $color-bg: nth($var, 2);
+    $color: nth($var, 3);
+    $color-border :nth($var, 4);
+    &-#{$class-name}{
+      background-color: $color-bg;
+      color:$color;
+      border-color:$color-border;
+    }
+  }
 }
 
 /*-------------------------------------------*/
@@ -1000,49 +1090,6 @@ ol {
 	text-align: center;
 }
 
-.alert{
-
-  padding: 1em;
-  margin: 1em 0;
-  border-radius: 3px;
-	p {
-		margin-bottom:0;
-	}
-
-  & + &{
-    margin-top: 2em;
-  }
-
-  a{
-    transition: color .3s linear, opacity .3s linear;
-    &:link, &:visited{
-      opacity: .8;
-      text-decoration: underline;
-    }
-    &:hover, &:visited{
-      opacity: 1;
-      text-decoration: none;
-    }
-  }
-
-  @each $var in (
-                  (success, #dff0d8,#3c763d,#d6e9c6),
-                  (info, #d9edf7,#31708f,#bce8f1),
-                  (warning, #fcf8e3,#8a6d3b,#faebcc),
-                  (danger, #f2dede,#a94442,#ebccd1),
-  ){
-    $class-name: nth($var, 1);
-    $color-bg: nth($var, 2);
-    $color: nth($var, 3);
-    $color-border :nth($var, 4);
-    &-#{$class-name}{
-      background-color: $color-bg;
-      color:$color;
-      border-color:$color-border;
-    }
-  }
-}
-
 .vk_balloon {
 	display: flex;
 	align-items: center;
@@ -1087,8 +1134,8 @@ ol {
 
 .vk_balloon_content {
 	position: relative;
+	width:100%;
 	text-align: left;
-
 	&.editor-rich-text__tinymce[data-is-placeholder-visible=true] {
 		// これがないと未入力時に吹き出しが２重になる
 		position: absolute;
@@ -1206,6 +1253,69 @@ ol {
 		}
 	}
 }//.vk_balloon-position-right
+
+.vk_balloon-animation {
+	&-trembling {
+		animation: trembling 0.1s infinite;
+	}
+	@keyframes trembling {
+		0% {
+			transform: rotate(-0.5deg);
+		}
+		50% {
+			transform: rotate(0.5deg);
+		}
+	}
+	&-trembling-x {
+		animation: trembling-x 0.1s infinite;
+	}
+	@keyframes trembling-x {
+		0% {
+			transform: scale(1, 1);
+		}
+		50% {
+			transform: scale(0.99, 0.96);
+		}
+	}
+	&-pounding {
+		animation: pounding 1.5s infinite;
+	}
+	@keyframes pounding {
+		0% {
+			transform: scale(1.05)
+		}
+		5% {
+			transform: scale(1)
+		}
+		95% {
+			transform: scale(1)
+		}
+		100% {
+			transform: scale(1.05)
+		}
+	}
+
+	&-shaking {
+		animation: shaking 0.4s infinite;
+	}
+	@keyframes shaking {
+		0% {
+			transform: translate(1px, 1px);
+		}
+		25% {
+			transform: translate(1px, -1px);
+		}
+		50% {
+			transform: translate(-1px, -1px);
+		}
+		75% {
+			transform: translate(-1px, 1px);
+		}
+		100% {
+			transform: translate(1px, 1px);
+		}
+	}
+}
 
 
 .vk_balloon {
@@ -1364,6 +1474,36 @@ ol {
 	}
 }
 
+// 背景色指定
+.vk_borderBox-background {
+	&-transparent {
+		& .vk_borderBox_body {
+			background-color: transparent;
+		}
+		&.is-style-vk_borderBox-style-solid-kado-tit-onborder.vk_borderBox {
+			background-color: transparent;
+		}
+		&.is-style-vk_borderBox-style-solid-kado-tit-onborder .vk_borderBox_title_container,
+		&.is-style-vk_borderBox-style-solid-kado-tit-inner .vk_borderBox_title_container,
+		&.is-style-vk_borderBox-style-solid-kado-iconFeature .vk_borderBox_title_container {
+			background-color: transparent;
+		}
+	}
+	&-white {
+		& .vk_borderBox_body {
+			background-color: #fff;
+		}
+		&.is-style-vk_borderBox-style-solid-kado-tit-onborder.vk_borderBox {
+			background-color:  #fff;
+		}
+		&.is-style-vk_borderBox-style-solid-kado-tit-onborder .vk_borderBox_title_container,
+		&.is-style-vk_borderBox-style-solid-kado-tit-inner .vk_borderBox_title_container,
+		&.is-style-vk_borderBox-style-solid-kado-iconFeature .vk_borderBox_title_container {
+			background-color: #fff;
+		}
+	}
+}
+
 /*
 共通指定
 --------------------------------------------*/
@@ -1400,12 +1540,12 @@ ol {
 		@media (min-width: 992px) {
 			padding: 2.1875em 2em 2em;
 		}
-		h1:first-child, 
-		h2:first-child, 
-		h3:first-child, 
-		h4:first-child, 
+		h1:first-child,
+		h2:first-child,
+		h3:first-child,
+		h4:first-child,
 		h5:first-child,
-		h6:first-child {//他のテーマでも対応できるように追加			
+		h6:first-child {//他のテーマでも対応できるように追加
 			margin-top: 0;
 		}
 		p:last-child {
@@ -1442,7 +1582,7 @@ ol {
 			padding: 1.5em 1.5em 1em;
 		}
 		.vk_borderBox_body {
-			background-color: transparent;
+			// background-color: transparent;
 			border: none;
 			padding-top: 0;
 		}
@@ -2726,88 +2866,6 @@ $xl-min: 1200px;
 		}
 	}
 } // .vk_prContent {
-
-/*-------------------------------------------*/
-/* CSS
-/*-------------------------------------------*/
-
-.vk_table {
-	&-col-mobile1 {
-		@media( max-width: 575.98px){
-			th,
-			td {
-					display: block;
-			}
-			th {
-				background-color: rgba(0, 0, 0, 0.05);
-			}
-			// ストライプ指定の時の背景色をリセット
-			&.table-striped tbody {
-				tr:nth-of-type(odd) {
-					background: inherit;
-				}
-			}
-		} // @media( max-width: 575.98px){
-	} // &-col-mobile1 {
-}
-
-/*-------------------------------------------*/
-/* editor class
-/*-------------------------------------------*/
-.vk_simpleTable-edit{
-	.editor-inner-blocks,
-	.editor-block-list__layout,
-	.editor-block-list__block,
-	.editor-rich-text__editable,
-	.editor-block-list__block-edit{
-		padding:0;
-		margin:0;
-		width:100%;
-	}
-	& > .editor-inner-blocks{
-		margin-top:-1px; // th,td がHTML上ではdivの中になってしまう都合上、線が2pxになるためマイナスオフセット
-	}
-	.editor-block-list__block-edit{
-		height:100%;
-	}
-	.block-editor-block-list__insertion-point{
-		/* 上のセルに被るので選択しにくくなるのでデフォルトのマイナスオフセットを少し下げる */
-		top:-5px;
-	}
-	.editor-block-list__block-edit:before{
-		right:-0px;
-		left:-0px;
-		top:-0px;
-		bottom:-0px;
-		// border:1px solid #ff0000;
-	}
-	.editor-inner-blocks {
-		tr {
-			width:100%;
-			display: block;
-			border-bottom:1px solid #e5e5e5;
-			.editor-block-list__layout {
-				display: flex;
-				.editor-block-list__block {
-				}
-			}
-		}
-		th,
-		td {
-			padding: 0;
-			display: block;
-			width:100%;
-			border:none; // デフォルトでつけてくる線を消す
-			.editor-rich-text__editable{
-				padding: 14px;
-			}
-		}
-	}
-	// 編集画面のtableは HTML構造がカオスなので補正
-	&.table-striped > tbody > .editor-inner-blocks > .editor-block-list__layout > div:nth-of-type(odd) {
-			background-color: rgba(0, 0, 0, 0.05);
-	}
-}
 
 /*-------------------------------------------*/
 /* CSS
