@@ -107,7 +107,7 @@ button.components-button.components-toolbar__control{
 // アイコンリストCSS読み込み
 @import "./editor_before_icon_list";
 // 吹き出し画像読み込み
-@import "./editor_balloon_image_list";
+@import "./editor_before_balloon";
 
 // VK Outer 編集パネル
 $color-danger: #dd3333;
@@ -680,49 +680,6 @@ $color-danger: #b52727;
 	}
 }
 
-.alert{
-
-  padding: 1em;
-  margin: 1em 0;
-  border-radius: 3px;
-	p {
-		margin-bottom:0;
-	}
-
-  & + &{
-    margin-top: 2em;
-  }
-
-  a{
-    transition: color .3s linear, opacity .3s linear;
-    &:link, &:visited{
-      opacity: .8;
-      text-decoration: underline;
-    }
-    &:hover, &:visited{
-      opacity: 1;
-      text-decoration: none;
-    }
-  }
-
-  @each $var in (
-                  (success, #dff0d8,#3c763d,#d6e9c6),
-                  (info, #d9edf7,#31708f,#bce8f1),
-                  (warning, #fcf8e3,#8a6d3b,#faebcc),
-                  (danger, #f2dede,#a94442,#ebccd1),
-  ){
-    $class-name: nth($var, 1);
-    $color-bg: nth($var, 2);
-    $color: nth($var, 3);
-    $color-border :nth($var, 4);
-    &-#{$class-name}{
-      background-color: $color-bg;
-      color:$color;
-      border-color:$color-border;
-    }
-  }
-}
-
 /*-------------------------------------------*/
 /* リストデザイン
 /*-------------------------------------------*/
@@ -1132,9 +1089,20 @@ ol {
 	margin-top: 0.2rem;
 }
 
-.vk_balloon_content {
-	position: relative;
+// .vk_balloon_content_outer は .vk_balloon_content の外側に 0.38.2 から追加
+// 本来 _outer をつけるような親要素のクラスの方が文字数が多くなる手法はとらないが、
+// 既存のクラス名を変更すると既存サイトではHTML構造がもとのままなので崩れてしまうため例外措置。
+.vk_balloon_content_outer{
 	width:100%;
+}
+.vk_balloon_content {
+	.vk_balloon-position-left & {
+		float:left;
+	}
+	.vk_balloon-position-right & {
+		float:right;
+	}
+	position: relative;
 	text-align: left;
 	&.editor-rich-text__tinymce[data-is-placeholder-visible=true] {
 		// これがないと未入力時に吹き出しが２重になる
@@ -1185,7 +1153,6 @@ ol {
 		.vk_balloon_icon{
 			margin-right: 2rem;
 		}
-
 		.vk_balloon_content{
 			&::after{
 				left: 0;
@@ -1435,6 +1402,49 @@ ol {
 	}
 } // @media only screen and (max-width: 480px) {
 
+.alert{
+
+  padding: 1em;
+  margin: 1em 0;
+  border-radius: 3px;
+	p {
+		margin-bottom:0;
+	}
+
+  & + &{
+    margin-top: 2em;
+  }
+
+  a{
+    transition: color .3s linear, opacity .3s linear;
+    &:link, &:visited{
+      opacity: .8;
+      text-decoration: underline;
+    }
+    &:hover, &:visited{
+      opacity: 1;
+      text-decoration: none;
+    }
+  }
+
+  @each $var in (
+                  (success, #dff0d8,#3c763d,#d6e9c6),
+                  (info, #d9edf7,#31708f,#bce8f1),
+                  (warning, #fcf8e3,#8a6d3b,#faebcc),
+                  (danger, #f2dede,#a94442,#ebccd1),
+  ){
+    $class-name: nth($var, 1);
+    $color-bg: nth($var, 2);
+    $color: nth($var, 3);
+    $color-border :nth($var, 4);
+    &-#{$class-name}{
+      background-color: $color-bg;
+      color:$color;
+      border-color:$color-border;
+    }
+  }
+}
+
 :root {
 	--vk-color-border-red: #dc3545;
 	--vk-color-background-red: #dc3545;
@@ -1600,23 +1610,23 @@ ol {
 				border-radius: 50%;
 				border: solid 2px #fff;
 			}
-		}
-		.svg-inline--fa,
-		.fa,
-		.fab,
-		.fas,
-		.far,
-		.fal,
-		.fad {
-			position: absolute;
-			font-size: 1.3em;
-			margin-right: 0;
-			z-index: 100;
-			top: 0%;
-			left: 2.3em;
-			transform: translate(-50%, -50%);
-			-webkit-transform: translate(-50%, -50%);
-			-ms-transform: translate(-50%, -50%);
+			& > .svg-inline--fa,
+			& > .fa,
+			& > .fab,
+			& > .fas,
+			& > .far,
+			& > .fal,
+			& > .fad {
+				position: absolute;
+				font-size: 1.3em;
+				margin-right: 0;
+				z-index: 100;
+				top: 0%;
+				left: 2.3em;
+				transform: translate(-50%, -50%);
+				-webkit-transform: translate(-50%, -50%);
+				-ms-transform: translate(-50%, -50%);
+			}
 		}
 	}
 	&.is-style-vk_borderBox-style-solid-kado-tit-onborder {
