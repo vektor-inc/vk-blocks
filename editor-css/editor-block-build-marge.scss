@@ -146,7 +146,8 @@ $color-danger: #dd3333;
 }
 
 /* editor area *********************************************/
-.edit-post-visual-editor.editor-styles-wrapper{
+.edit-post-visual-editor.editor-styles-wrapper,
+.components-tab-panel__tab-content{
 
 	/*
 	 アウターが全幅で インナーもコンテンツエリアを突き抜けて広げる処理
@@ -634,41 +635,7 @@ $color-danger: #b52727;
 	opacity: 0.2;
 }
 
-/* .vk_hidden.vk_hidden は2つじゃないと上書きできない  */
-.vk_hidden.vk_hidden {
-	display: block !important;
-	color: var(--blue);
 
-  &.vk_posts{
-	// display block だとカラムがすべて落ちるため posts は flexで上書き
-	display: flex !important;
-  }
-  @media (max-width: $xs-max) {
-    &-xs {
-      display: block !important;
-    }
-  }
-  @media (min-width: $sm-min) and (max-width: $sm-max) {
-    &-sm {
-      display: block !important;
-    }
-  }
-  @media (min-width: $md-min) and (max-width: $md-max) {
-    &-md {
-      display: block !important;
-    }
-  }
-  @media (min-width: $lg-min) and (max-width: $lg-max) {
-    &-lg {
-      display: block !important;
-    }
-  }
-  @media (min-width: $xl-min) {
-    &-xl {
-      display: block !important;
-    }
-  }
-}
 
 .vk_grid-column .block-list-appender{
   width: 100%;
@@ -678,49 +645,6 @@ $color-danger: #b52727;
 	.vk_icon-card_item{
 		margin: 15px auto!important;
 	}
-}
-
-.alert{
-
-  padding: 1em;
-  margin: 1em 0;
-  border-radius: 3px;
-	p {
-		margin-bottom:0;
-	}
-
-  & + &{
-    margin-top: 2em;
-  }
-
-  a{
-    transition: color .3s linear, opacity .3s linear;
-    &:link, &:visited{
-      opacity: .8;
-      text-decoration: underline;
-    }
-    &:hover, &:visited{
-      opacity: 1;
-      text-decoration: none;
-    }
-  }
-
-  @each $var in (
-                  (success, #dff0d8,#3c763d,#d6e9c6),
-                  (info, #d9edf7,#31708f,#bce8f1),
-                  (warning, #fcf8e3,#8a6d3b,#faebcc),
-                  (danger, #f2dede,#a94442,#ebccd1),
-  ){
-    $class-name: nth($var, 1);
-    $color-bg: nth($var, 2);
-    $color: nth($var, 3);
-    $color-border :nth($var, 4);
-    &-#{$class-name}{
-      background-color: $color-bg;
-      color:$color;
-      border-color:$color-border;
-    }
-  }
 }
 
 /*-------------------------------------------*/
@@ -1090,10 +1014,53 @@ ol {
 	text-align: center;
 }
 
+.alert{
+
+  padding: 1em;
+  margin: 1em 0;
+  border-radius: 3px;
+	p {
+		margin-bottom:0;
+	}
+
+  & + &{
+    margin-top: 2em;
+  }
+
+  a{
+    transition: color .3s linear, opacity .3s linear;
+    &:link, &:visited{
+      opacity: .8;
+      text-decoration: underline;
+    }
+    &:hover, &:visited{
+      opacity: 1;
+      text-decoration: none;
+    }
+  }
+
+  @each $var in (
+                  (success, #dff0d8,#3c763d,#d6e9c6),
+                  (info, #d9edf7,#31708f,#bce8f1),
+                  (warning, #fcf8e3,#8a6d3b,#faebcc),
+                  (danger, #f2dede,#a94442,#ebccd1),
+  ){
+    $class-name: nth($var, 1);
+    $color-bg: nth($var, 2);
+    $color: nth($var, 3);
+    $color-border :nth($var, 4);
+    &-#{$class-name}{
+      background-color: $color-bg;
+      color:$color;
+      border-color:$color-border;
+    }
+  }
+}
+
 .vk_balloon {
 	display: flex;
-	align-items: center;
-	margin-bottom: 1em;
+	align-items: normal;
+	margin-bottom: 2.2em;
 
 	figure {
 		margin: 0;
@@ -1101,8 +1068,9 @@ ol {
 
 	p {
 		word-break: break-all;
-		background: #f5f5f5;
-		padding: 1.1rem 1.4rem;
+		&:last-of-type{
+			margin-bottom: 0;
+		}
 	}
 }
 
@@ -1155,6 +1123,11 @@ ol {
 
 /*	type
 /*-------------------------------------------*/
+.vk_balloon_content {
+	background: #f5f5f5;
+	padding: 1.1rem 1.4rem;
+}
+
 .vk_balloon-type-serif{
 	.vk_balloon_content{
 		border-color: #f5f5f5;
@@ -1199,7 +1172,7 @@ ol {
 		.vk_balloon_content{
 			&::after{
 				left: 0;
-				top: 50%;
+				top: 32px;
 				border-right-color: inherit;
 				border-left: 0;
 				margin-top: -20px;
@@ -1236,7 +1209,7 @@ ol {
 		.vk_balloon_content{
 			&::after{
 				right: 0;
-				top: 50%;
+				top: 32px;
 				border-left-color: inherit;
 				border-right: 0;
 				margin-top: -20px;
@@ -1386,7 +1359,7 @@ ol {
         .vk_balloon_content{
           display: inline-block;
           &::after{
-            top: 35px;
+            top: 32px;
              margin-left: -15px;
           }
         }//.vk_balloon_content
@@ -1413,14 +1386,15 @@ ol {
 
 			&.vk_balloon-type-serif{
 				.vk_balloon_icon{
-				  margin-left: auto;
-				  margin-right: 0;
+					max-width: 86px;
+				  	margin-left: 1.5rem;
+				  	margin-right: 0;
 				}
 
 				.vk_balloon_content{
 				  display: inline-block;
 				  &::after{
-				    top: 35px;
+				    top: 32px;
 					margin-right: -15px;
 				  }
 				}
@@ -1444,6 +1418,21 @@ ol {
 		max-width:96px;
 	}
 } // @media only screen and (max-width: 480px) {
+
+
+//editor-styles	
+.editor-styles-wrapper{
+	.vk_balloon{
+		figure, 
+		p.wp-block{
+			width: 100%;
+		 }
+	}
+	.block-editor-block-list__block .block-list-appender{
+		margin: inherit;
+	}
+}
+
 
 :root {
 	--vk-color-border-red: #dc3545;
@@ -1534,6 +1523,7 @@ ol {
 			display: inline;
 			font-weight: bold;
 			font-size: 1em;
+			color: inherit; //これがないと見出しデザイン機能に負ける
 		}
 	}
 
@@ -1865,7 +1855,62 @@ ol {
 			font-size: 80%;
 		}
 	}
+	.vk_button_link-type-text{
+		&:hover{
+			&.btn-outline-primary{color: #007bff;}
+			&.btn-outline-secondary{color: #6c757d;}
+			&.btn-outline-success{color: #28a745;}
+			&.btn-outline-info{color: #17a2b8;}
+			&.btn-outline-warning{color: #ffc107;}
+			&.btn-outline-danger{color: #dc3545;}
+			&.btn-outline-dark{	color: #343a40;}
+		}
+		&.btn-outline-light{ color: #212529; }
+	}
 
+	.editor-styles-wrapper &{ 
+		//.editor-styles-wrapper a:not([href])に負けるので追加
+		a,
+		a:hover{
+			&.btn-primary{ background-color: #007bff; border-color: #007bff; }
+			&.btn-primary,
+			&.btn-secondary,
+			&.btn-success,
+			&.btn-info,
+			&.btn-danger,
+			&.btn-dark {
+				color: #fff;
+			}
+		}
+		a{
+			&.vk_button_link-type-text:hover.btn-outline-primary{
+				color: #007bff;
+			}
+			&.btn-outline-primary{
+				color: #007bff; 
+				border-color: #007bff;
+				&:hover:not(.vk_button_link-type-text){
+					background-color:#007bff;
+				}
+			}
+			&.btn-outline-secondary{color: #6c757d;}
+			&.btn-outline-success{color: #28a745;}
+			&.btn-outline-info{color: #17a2b8;}
+			&.btn-outline-warning{color: #ffc107;}
+			&.btn-outline-danger{color: #dc3545;}
+			&.btn-outline-dark{	color: #343a40;}
+		}
+		a:hover{
+			&.btn-outline-primary,
+			&.btn-outline-secondary,
+			&.btn-outline-success,
+			&.btn-outline-info,
+			&.btn-outline-danger,
+			&.btn-outline-dark{
+				color: #fff;
+			}
+		}
+	}
 	.editor-rich-text {
 		// Font Awesomeアイコンが管理画面側で改行されないために inline-block を指定
 		display: inline-block;
@@ -1877,6 +1922,8 @@ ol {
 		box-shadow: none;
 	}
 }
+
+
 $question-color: #e50000;
 $answer-color: #337ab7;
 
@@ -2929,4 +2976,59 @@ $font_serif: "ＭＳ Ｐ明朝", "MS PMincho", "ヒラギノ明朝 Pro W3",
 // 	width: 70%;
 // }
 
+	/* .vk_hidden.vk_hidden は2つじゃないと上書きできない  */
+.vk_hidden {
+	display: block !important;
+	color: var(--blue);
+
+  &.vk_posts{
+	// display block だとカラムがすべて落ちるため posts は flexで上書き
+	display: flex !important;
+  }
+  @media (max-width: $xs-max) {
+    &-xs {
+	  display: block !important;
+	  &.vk_posts{
+		// display block だとカラムがすべて落ちるため posts は flexで上書き
+		display: flex !important;
+	  }
+    }
+  }
+  @media (min-width: $sm-min) and (max-width: $sm-max) {
+    &-sm {
+	  display: block !important;
+	  &.vk_posts{
+		// display block だとカラムがすべて落ちるため posts は flexで上書き
+		display: flex !important;
+	  }
+    }
+  }
+  @media (min-width: $md-min) and (max-width: $md-max) {
+    &-md {
+	  display: block !important;
+	  &.vk_posts{
+		// display block だとカラムがすべて落ちるため posts は flexで上書き
+		display: flex !important;
+	  }
+    }
+  }
+  @media (min-width: $lg-min) and (max-width: $lg-max) {
+    &-lg {
+	  display: block !important;
+	  &.vk_posts{
+		// display block だとカラムがすべて落ちるため posts は flexで上書き
+		display: flex !important;
+	  }
+    }
+  }
+  @media (min-width: $xl-min) {
+    &-xl {
+	  display: block !important;
+	  &.vk_posts{
+		// display block だとカラムがすべて落ちるため posts は flexで上書き
+		display: flex !important;
+	  }
+    }
+  }
+}
 }

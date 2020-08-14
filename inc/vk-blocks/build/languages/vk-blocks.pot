@@ -228,11 +228,6 @@ msgstr ""
 msgid "Icon Name"
 msgstr ""
 
-#: src/blocks/balloon/block.js:279
-#: src/blocks/button/block.js:303
-msgid "Input text"
-msgstr ""
-
 #: src/blocks/border-box/Body.js:21
 #: src/blocks/border-box/deprecated.js:20
 msgid "Please enter a title."
@@ -423,6 +418,10 @@ msgstr ""
 #: src/blocks/heading/block.js:192
 #: src/blocks/pr-content/block.js:186
 msgid "After text"
+msgstr ""
+
+#: src/blocks/button/block.js:303
+msgid "Input text"
 msgstr ""
 
 #: src/blocks/button/block.js:317
