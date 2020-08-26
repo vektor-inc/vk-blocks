@@ -147,6 +147,7 @@ msgstr ""
 #: src/blocks/balloon/block.js:175
 #: src/blocks/button/block.js:158
 #: src/blocks/faq/block.js:65
+#: src/blocks/faq2/block.js:65
 msgid "Normal"
 msgstr ""
 
@@ -437,31 +438,49 @@ msgid "Please enter a question."
 msgstr ""
 
 #: src/blocks/faq/block.js:46
-msgid "FAQ"
+msgid "Classic FAQ"
 msgstr ""
 
 #: src/blocks/faq/block.js:70
+#: src/blocks/faq2/block.js:70
 msgid "Bgfill Circle"
 msgstr ""
 
 #: src/blocks/faq/block.js:74
+#: src/blocks/faq2/block.js:74
 msgid "Bgfill Square"
 msgstr ""
 
 #: src/blocks/faq/block.js:78
+#: src/blocks/faq2/block.js:78
 msgid "Bgfill Rounded"
 msgstr ""
 
 #: src/blocks/faq/block.js:82
+#: src/blocks/faq2/block.js:82
 msgid "Border Circle"
 msgstr ""
 
 #: src/blocks/faq/block.js:86
+#: src/blocks/faq2/block.js:86
 msgid "Border Square"
 msgstr ""
 
 #: src/blocks/faq/block.js:90
+#: src/blocks/faq2/block.js:90
 msgid "Border Rounded"
+msgstr ""
+
+#: src/blocks/faq2-a/block.js:20
+msgid "FAQ Answer"
+msgstr ""
+
+#: src/blocks/faq2-q/block.js:24
+msgid "FAQ Question"
+msgstr ""
+
+#: src/blocks/faq2/block.js:45
+msgid "New FAQ"
 msgstr ""
 
 #: src/blocks/flow/block.js:17
@@ -626,14 +645,18 @@ msgid "Heading"
 msgstr ""
 
 #: src/blocks/heading/component.js:109
-#: src/blocks/heading/deprecated/block.js:390
+#: src/blocks/heading/deprecated/block.js:415
 #: src/blocks/heading/deprecated/component.js:318
+#: src/blocks/heading/deprecated/component_0_39_5.js:109
+#: src/blocks/heading/deprecated/component_0_40_0.js:109
 msgid "Input title…"
 msgstr ""
 
 #: src/blocks/heading/component.js:122
-#: src/blocks/heading/deprecated/block.js:406
+#: src/blocks/heading/deprecated/block.js:431
 #: src/blocks/heading/deprecated/component.js:334
+#: src/blocks/heading/deprecated/component_0_39_5.js:122
+#: src/blocks/heading/deprecated/component_0_40_0.js:122
 msgid "Input sub text…"
 msgstr ""
 
@@ -982,6 +1005,22 @@ msgstr ""
 
 #: src/plugin/menu/sidebar.js:17
 msgid "VK Blocks Templates"
+msgstr ""
+
+#: src/translation_dummy.js:10
+msgid "CSS Optimize Setting"
+msgstr ""
+
+#: src/translation_dummy.js:11
+msgid "Nothing to do"
+msgstr ""
+
+#: src/translation_dummy.js:12
+msgid "Optimize VK Blocks CSS ( Tree Shaking )"
+msgstr ""
+
+#: src/translation_dummy.js:13
+msgid "Optimize VK Blocks CSS ( Tree Shaking + Preload )"
 msgstr ""
 
 #: src/translation_dummy.js:2
