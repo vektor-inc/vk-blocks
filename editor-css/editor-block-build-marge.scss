@@ -2263,6 +2263,8 @@ $answer-color: #337ab7;
 	border-radius: 0;
 	padding: 0;
 	font-weight: normal;
+	outline: unset;
+	outline-offset: unset;
 	box-shadow: none;
 	&:after {
 		content: none;
@@ -2284,6 +2286,7 @@ $answer-color: #337ab7;
 .vk_heading.vk_heading-style-plain {
 	.vk_heading_title {
 		@include reset;
+		color: unset;
 		&:after {
 			@include reset;
 		}
