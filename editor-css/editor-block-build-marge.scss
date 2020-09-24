@@ -335,11 +335,13 @@ $xs-max: 575.98px;
 $sm-max: 767.98px;
 $md-max: 991.98px;
 $lg-max: 1199.98px;
+$xl-max: 1399.98px;
 
 $sm-min: 576px;
 $md-min: 768px;
 $lg-min: 992px;
 $xl-min: 1200px;
+$xxl-min: 1200px;
 
 $color-danger: #b52727;
 
@@ -532,6 +534,28 @@ $color-danger: #b52727;
 			width: calc(100% - 30px);
 		}
 	}
+	@media (min-width: $xxl-min) {
+		&-col-xxl-2 .editor-block-list__block,
+		&-col-xxl-2 .block-editor-block-list__block {
+			width: calc(16.66% - 30px);
+		}
+		&-col-xxl-3 .editor-block-list__block,
+		&-col-xxl-3 .block-editor-block-list__block {
+			width: calc(25% - 30px);
+		}
+		&-col-xxl-4 .editor-block-list__block,
+		&-col-xxl-4 .block-editor-block-list__block {
+			width: calc(33.3% - 30px);
+		}
+		&-col-xxl-6 .editor-block-list__block,
+		&-col-xxl-6 .block-editor-block-list__block {
+			width: calc(50% - 30px);
+		}
+		&-col-xxl-12 .editor-block-list__block,
+		&-col-xxl-12 .block-editor-block-list__block {
+			width: calc(100% - 30px);
+		}
+	}
 }
 
 /*-------------------------------------------*/
@@ -543,7 +567,11 @@ $color-danger: #b52727;
 	flex-direction: row;
 	flex-wrap: wrap;
     margin-right: -15px;
-    margin-left: -15px;
+	margin-left: -15px;
+
+	.block-list-appender{
+		height: 100px;
+	}
 
 	// colの余分な余白の削除など
 	// col内に入れたブロックにまで反映されないように & > 指定
@@ -668,6 +696,28 @@ $color-danger: #b52727;
 			max-width: var(--vk-width-couter-col-6) ;
 		}
 		& > .col-xl-12 {
+			width: calc(100% - 30px);
+			max-width: var(--vk-width-couter-col-12) ;
+		}
+	}
+	@media (min-width: $xxl-min) {
+		& > .col-xxl-2 {
+			width: calc(16.66% - 30px);
+			max-width: var(--vk-width-couter-col-2) ;
+		}
+		& > .col-xxl-3 {
+			width: calc(25% - 30px);
+			max-width: var(--vk-width-couter-col-3) ;
+		}
+		& > .col-xxl-4 {
+			width: calc(33.3% - 30px);
+			max-width: var(--vk-width-couter-col-4) ;
+		}
+		& > .col-xxl-6 {
+			width: calc(50% - 30px);
+			max-width: var(--vk-width-couter-col-6) ;
+		}
+		& > .col-xxl-12 {
 			width: calc(100% - 30px);
 			max-width: var(--vk-width-couter-col-12) ;
 		}
@@ -1073,6 +1123,36 @@ ol {
 }
 .has-text-align-center {
 	text-align: center;
+}
+
+/*-------------------------------------------*/
+/* col-xxl
+/*-------------------------------------------*/
+$xxl-min: 1400px;
+.col {
+    // Bootstrap4�では xxl サイズがないので独自に追加
+    @media (min-width: $xxl-min) {
+		&-xxl-2 {
+			flex: 0 0 16.66667%;
+			max-width: 16.66667%;
+		}
+		&-xxl-3 {
+			flex: 0 0 25%;
+			max-width: 25%;
+		}
+		&-xxl-4 {
+			flex: 0 0 33.33333%;
+			max-width: 33.33333%;
+		}
+		&-xxl-6 {
+			flex: 0 0 50%;
+			max-width: 50%;
+		}
+		&-xxl-12 {
+			flex: 0 0 100%;
+			max-width: 100%;
+		}
+	}
 }
 
 .alert{
@@ -1593,6 +1673,12 @@ ol {
 		background: none;
 		padding: 0;
 		border: none;
+		&::before {
+			content: none;
+		}
+		&::after {
+			content: none;
+		}
 	}
 	.vk_borderBox_body {
 		padding: 1.5em;
@@ -2105,33 +2191,66 @@ $answer-color: #337ab7;
 	}
 }
 //*      .flowBox
+
 /*-------------------------------------------*/
-.vk_flow-arrow-on:after {
-  content:"";
-  background: url('../images/arrow_bottom.svg') center 50% no-repeat;
-  background-size: 50px 50px;
-  display:block; overflow:hidden;
-  height:50px;
-  width:50px;
-  margin:0 auto;
+.vk_flow-arrow-on::after {
+	content: "";
+	background: var(--vk_flow-arrow) center 50% no-repeat;
+	background-size: 50px 50px;
+	display: block;
+	overflow: hidden;
+	height: 50px;
+	width: 50px;
+	margin: 0 auto;
 }
-.vk_flow-arrow-off  { padding-bottom:0px; margin-bottom:30px; }
-.vk_flow-arrow-off:after {
-  content:"";font-size:0;background-image: none;
+
+.vk_flow-arrow-off {
+	padding-bottom: 0;
+	margin-bottom: 30px;
 }
+
+.vk_flow-arrow-off::after {
+	content: "";
+	font-size: 0;
+	background-image: none;
+}
+
 .vk_flow_frame {
 	display: flex;
-	padding:20px 25px; border:3px solid #e5e5e5;margin:0;
+	padding: 20px 25px;
+	border: 3px solid #e5e5e5;
+	margin: 0;
 	justify-content: space-between;
 }
-.vk_flow_frame_text  { display:block;overflow:hidden;margin:0;width:100%;box-sizing: border-box; }
+
+.vk_flow_frame_text {
+	display: block;
+	overflow: hidden;
+	margin: 0;
+	width: 100%;
+	box-sizing: border-box;
+}
+
 .vk_flow_frame_text_title,
-.vk_flow_frame_text_content { padding-left:0;border:none; }
-.vk_flow_frame_text_title { border-bottom:1px dotted #ccc; margin:0 0 10px;padding:0 0 5px; font-size:1.2em; }
-.vk_flow_frame_text_content { margin-bottom:0px; }
+.vk_flow_frame_text_content {
+	padding-left: 0;
+	border: none;
+}
+
+.vk_flow_frame_text_title {
+	border-bottom: 1px dotted #ccc;
+	margin: 0 0 10px;
+	padding: 0 0 5px;
+	font-size: 1.2em;
+}
+
+.vk_flow_frame_text_content {
+	margin-bottom: 0;
+}
+
 .vk_flow_frame_image {
-	max-width:150px;
-	margin-left:15px;
+	max-width: 150px;
+	margin-left: 15px;
 	box-sizing: border-box;
 }
 
@@ -2144,6 +2263,8 @@ $answer-color: #337ab7;
 	border-radius: 0;
 	padding: 0;
 	font-weight: normal;
+	outline: unset;
+	outline-offset: unset;
 	box-shadow: none;
 	&:after {
 		content: none;
@@ -2165,6 +2286,7 @@ $answer-color: #337ab7;
 .vk_heading.vk_heading-style-plain {
 	.vk_heading_title {
 		@include reset;
+		color: unset;
 		&:after {
 			@include reset;
 		}
@@ -2182,13 +2304,14 @@ $color_key: #337ab7;
 
 @mixin title_unset {
 	position: relative;
-	margin-left: unset;
-	margin-right: unset;
+	margin-left: auto;
+	margin-right: auto;
 	outline: unset;
 	outline-offset: unset;
 	box-shadow: unset;
 	border-radius: unset;
 	overflow: unset;
+	color: inherit;
 }
 
 @mixin title_no_bg {
@@ -2219,7 +2342,6 @@ $color_key: #337ab7;
 
 .is-style-vk-heading {
 	&,
-	.entry-body &,
 	.editor-styles-wrapper & {
 		h3.is-style-vk-heading:after {
 			border-bottom: none !important;
@@ -2500,6 +2622,8 @@ $color_key: #337ab7;
 				border-bottom: 1px solid #333;
 				position: unset;
 				width: unset;
+				border-left: unset;
+    			border-right: unset;
 				border-top: none;
 			}
 
@@ -2641,37 +2765,65 @@ $xs-max: 575.98px;
 $sm-max: 767.98px;
 $md-max: 991.98px;
 $lg-max: 1199.98px;
+$xl-max: 1399.98px;
+
+
 
 $sm-min: 576px;
 $md-min: 768px;
 $lg-min: 992px;
 $xl-min: 1200px;
+$xxl-min: 1400px;
 
 .vk_hidden {
 	display: none !important;
 	color: var(--blue);
+
 	@media (max-width: $xs-max) {
+
 		&-xs {
 			display: none !important;
 		}
 	}
+
 	@media (min-width: $sm-min) and (max-width: $sm-max) {
+
 		&-sm {
 			display: none !important;
 		}
 	}
+
 	@media (min-width: $md-min) and (max-width: $md-max) {
+
 		&-md {
 			display: none !important;
 		}
 	}
+
 	@media (min-width: $lg-min) and (max-width: $lg-max) {
+
 		&-lg {
 			display: none !important;
 		}
 	}
+
 	@media (min-width: $xl-min) {
+
 		&-xl {
+			display: none !important;
+		}
+	}
+
+	@media (min-width: $xl-min) and (max-width: $xl-max) {
+
+		&-xl-v2 {
+			display: none !important;
+		}
+	}
+
+	@media (min-width: $xxl-min) {
+
+		&-xxl {
 			display: none !important;
 		}
 	}
@@ -2735,7 +2887,12 @@ $xl-min: 1200px;
 		font-size: 21px;
 		line-height: 1.4em;
 		border: none;
+		border-radius:unset;
 		padding: 0;
+		outline: unset;
+		outline-offset: unset;
+		box-shadow: unset;
+		color: inherit;
 		&::before {
 			content: none;
 		}
@@ -2800,24 +2957,23 @@ $xl-min: 1200px;
 		&_title {
 			background-color: transparent;
 			font-weight: bold;
-			padding: 0;
-			box-shadow: none;
-			border: none;
 			margin-bottom: 0.8em;
+			outline: unset;
+			outline-offset: unset;
+			box-shadow: unset;
+			border: none;
+			border-radius:unset;
+			padding: 0;
+			color: inherit;
 			@media (max-width: 575.98px) {
 				&:first-child {
 					margin-top: 30px;
 				}
 			}
+			&:before,
 			&:after {
-				content: "";
-				line-height: 0;
-				display: block;
-				overflow: hidden;
-				position: absolute;
-				bottom: -1px;
-				width: 0;
-				border: none;
+				content: none;
+
 			}
 		}
 		&_text {
@@ -2844,6 +3000,53 @@ $xl-min: 1200px;
 		}
 	}
 } // .vk_prContent {
+
+$xs-max: 575.98px;
+$sm-max: 767.98px;
+$md-max: 991.98px;
+$lg-max: 1199.98px;
+$xl-max: 1399.98px;
+
+$sm-min: 576px;
+$md-min: 768px;
+$lg-min: 992px;
+$xl-min: 1200px;
+$xxl-min: 1400px;
+
+.vk_responsive-br{
+	display: none;
+}
+
+@media (max-width: $xs-max) {
+	.vk_responsive-br-xs{
+		display: block;
+	}
+}
+@media (min-width: $sm-min) and (max-width: $sm-max) {
+	.vk_responsive-br-sm{
+		display: block;
+	}
+}
+@media (min-width: $md-min) and (max-width: $md-max) {
+	.vk_responsive-br-md{
+		display: block;
+	}
+}
+@media (min-width: $lg-min) and (max-width: $lg-max) {
+	.vk_responsive-br-lg{
+		display: block;
+	}
+}
+@media (min-width: $xl-min) and (max-width: $xl-max){
+	.vk_responsive-br-xl{
+		display: block;
+	}
+}
+@media (min-width: $xxl-min) {
+	.vk_responsive-br-xxl{
+		display: block;
+	}
+}
 
 /*-------------------------------------------*/
 /* CSS
@@ -3054,7 +3257,8 @@ $font_serif: "ＭＳ Ｐ明朝", "MS PMincho", "ヒラギノ明朝 Pro W3",
 // 	width: 70%;
 // }
 
-	/* .vk_hidden.vk_hidden は2つじゃないと上書きできない  */
+
+/* .vk_hidden.vk_hidden は2つじゃないと上書きできない  */
 .vk_hidden {
 	display: block !important;
 	color: var(--blue);
@@ -3101,6 +3305,15 @@ $font_serif: "ＭＳ Ｐ明朝", "MS PMincho", "ヒラギノ明朝 Pro W3",
   }
   @media (min-width: $xl-min) {
     &-xl {
+	  display: block !important;
+	  &.vk_posts{
+		// display block だとカラムがすべて落ちるため posts は flexで上書き
+		display: flex !important;
+	  }
+    }
+  }
+  @media (min-width: $xxl-min) {
+    &-xxl {
 	  display: block !important;
 	  &.vk_posts{
 		// display block だとカラムがすべて落ちるため posts は flexで上書き
