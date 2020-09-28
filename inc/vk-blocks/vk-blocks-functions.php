@@ -2,6 +2,7 @@
 
 // サーバーサイドレンダリングスクリプトを読み込み。
 require_once dirname( __FILE__ ) . '/view/post-list.php';
+require_once dirname( __FILE__ ) . '/view/responsive-br.php';
 // require_once dirname( __FILE__ ) . '/customize/vk-blocks-customize-config.php';
 
 // VK Blocks の管理画面
@@ -19,29 +20,6 @@ add_action(
 		load_plugin_textdomain( 'vk-blocks', false, $path );
 	}
 );
-
-/*-------------------------------------------*/
-/*	Get Option
-/*-------------------------------------------*/
-function vkblocks_get_options() {
-	$options  = get_option( 'vk_blocks_options' );
-	$defaults = array(
-		'display_wp_block_template' => 'hide',
-		'display_vk_block_template' => 'display',
-	);
-	$options = wp_parse_args( $options, $defaults );
-	return $options;
-}
-function vkblocks_get_selected( $current, $value ) {
-	$selected = '';
-	if ( $current == $value ){
-		$selected = ' selected';
-	}
-	return $selected;
-}
-function vkblocks_the_selected( $current, $value ) {
-	echo vkblocks_get_selected( $current, $value );
-}
 
 /*
 -------------------------------------------*/
@@ -161,7 +139,7 @@ function vkblocks_blocks_assets() {
 
 	if ( defined( 'GUTENBERG_VERSION' ) || version_compare( $wp_version, '5.0', '>=' ) ) {
 
-		$arr = array( 'alert', 'balloon', 'button', 'faq', 'flow', 'pr-blocks', 'pr-content', 'spacer', 'heading', 'staff', 'highlighter', 'list-style', 'group-style', 'border-box', 'faq2', 'faq2-q', 'faq2-a' );// REPLACE-FLAG : このコメントは削除しないで下さい。wp-create-gurten-template.shで削除する基準として左の[//REPLACE-FLAG]を使っています。
+		$arr = array( 'alert', 'balloon', 'button', 'faq', 'flow', 'pr-blocks', 'pr-content', 'spacer', 'heading', 'staff', 'highlighter', 'list-style', 'group-style', 'border-box', 'faq2', 'faq2-q', 'faq2-a', 'responsive-br' );// REPLACE-FLAG : このコメントは削除しないで下さい。wp-create-gurten-template.shで削除する基準として左の[//REPLACE-FLAG]を使っています。
 
 		$common_attributes = array(
 			'vkb_hidden'       => array(
