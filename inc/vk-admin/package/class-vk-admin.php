@@ -26,13 +26,13 @@ if ( ! class_exists( 'Vk_Admin' ) ) {
 		}
 
 		static function admin_common_css() {
-			wp_enqueue_style( 'vk-admin-style', plugin_dir_url( __FILE__ ) . '/css/vk_admin.css', array(), self::$version, 'all' );
+			wp_enqueue_style( 'vk-admin-style', plugin_dir_url( __FILE__ ) . 'css/vk_admin.css', array(), self::$version, 'all' );
 		}
 
 		static function admin_enqueue_scripts() {
 			wp_enqueue_script( 'jquery' );
 			wp_enqueue_media();
-			wp_enqueue_script( 'vk-admin-js', plugin_dir_url( __FILE__ ) . '/js/vk_admin.js', array( 'jquery' ), self::$version );
+			wp_enqueue_script( 'vk-admin-js', plugin_dir_url( __FILE__ ) . 'js/vk_admin.js', array( 'jquery' ), self::$version );
 		}
 
 		// 管理画面用のjsを読み込むページを配列で指定する
@@ -42,6 +42,24 @@ if ( ! class_exists( 'Vk_Admin' ) ) {
 				$hook = 'admin_print_styles-' . $value;
 				add_action( $hook, array( __CLASS__, 'admin_enqueue_scripts' ) );
 			}
+		}
+
+		/**
+		 * Plugin Exists
+		 * 
+		 * @param string $plugin '${plugin_dir}/${plugin_file}.php'.
+		 */
+		public static function plugin_exists( $plugin ) {
+			return file_exists( WP_PLUGIN_DIR . '/' . $plugin );
+		}
+
+		/**
+		 * Theme Exists
+		 * 
+		 * @param string $theme '${theme_dir}/style.css'.
+		 */
+		public static function theme_exists( $theme ) {
+			return file_exists( WP_CONTENT_DIR . '/themes/' . $theme );
 		}
 
 		/*
@@ -72,8 +90,25 @@ if ( ! class_exists( 'Vk_Admin' ) ) {
 
 			$banner .= '<div class="vk-admin-banner-grid">';
 
+			// テーマが Katawara じゃない場合に Katawara のバナーを表示
+			if ( ! self::theme_exists( 'katawara/style.css' ) ) {
+				if ( $lang == 'ja' ) {
+					$banner .= '<a href="https://www.vektor-inc.co.jp/service/wordpress-theme/katawara/?rel=vkadmin" target="_blank" class="admin_banner"><img src="' . $dir_url . 'images/katawara_bnr.jpg" alt="katawara_bnr_ja" /></a>';
+				}
+			}
+
+			// プラグイン VK Block Patterns を有効化していない人にバナーを表示
+			if ( ! self::plugin_exists( 'vk-block-patterns/vk-block-patterns.php' ) ) {
+				if ( $lang == 'ja' ) {
+					$bnr_file_name = 'vk-block-patterns_bnr.jpg';
+				} else {
+					$bnr_file_name = 'vk-block-patterns_bnr.jpg';
+				}
+				$banner .= '<a href="//wordpress.org/plugins/vk-block-patterns/" target="_blank" class="admin_banner"><img src="' . $dir_url . 'images/' . $bnr_file_name . '" alt="VK Block Patterns" /></a>';
+			}
+
 			// プラグイン Link Target Controller を有効化していない人にバナーを表示
-			if ( ! is_plugin_active( 'vk-link-target-controller/vk-link-target-controller.php' ) ) {
+			if ( ! self::plugin_exists( 'vk-link-target-controller/vk-link-target-controller.php' ) ) {
 				if ( $lang == 'ja' ) {
 					$bnr_file_name = 'vk-link-target-controller_bnr.jpg';
 				} else {
@@ -83,7 +118,7 @@ if ( ! class_exists( 'Vk_Admin' ) ) {
 			}
 
 			// プラグイン VK Aost Author Display を有効化していない人にバナーを表示
-			if ( ! is_plugin_active( 'vk-post-author-display/post-author-display.php' ) ) {
+			if ( ! self::plugin_exists( 'vk-post-author-display/post-author-display.php' ) ) {
 				if ( $lang == 'ja' ) {
 					$bnr_file_name = 'post_author_display_bnr_ja.jpg';
 				} else {
@@ -94,7 +129,7 @@ if ( ! class_exists( 'Vk_Admin' ) ) {
 			}
 
 			// プラグイン VK Job Posting Manager を有効化していない人にバナーを表示
-			if ( ! is_plugin_active( 'vk-google-job-posting-manager/vk-google-job-posting-manager.php' ) ) {
+			if ( ! self::plugin_exists( 'vk-google-job-posting-manager/vk-google-job-posting-manager.php' ) ) {
 				if ( $lang == 'ja' ) {
 					$bnr_file_name = 'job_banner-336_280-ja.jpg';
 				} else {
@@ -105,44 +140,39 @@ if ( ! class_exists( 'Vk_Admin' ) ) {
 			}
 
 			// テーマがLightningじゃない場合にLighntingのバナーを表示
-			if ( ! function_exists( 'lightning_get_theme_name' ) ) {
+			if ( !  self::theme_exists( 'lightning/style.css' ) ) {
 				if ( $lang == 'ja' ) {
 					$banner .= '<a href="//lightning.nagoya/ja/" target="_blank" class="admin_banner"><img src="' . $dir_url . 'images/lightning_bnr_ja.jpg" alt="lightning_bnr_ja" /></a>';
 				} else {
 					$banner .= '<a href="//lightning.nagoya/" target="_blank" class="admin_banner"><img src="' . $dir_url . 'images/lightning_bnr_en.jpg" alt="lightning_bnr_en" /></a>';
 				} // if ( $lang == 'ja' ) {
 			} // if ( $theme != 'lightning' ) {
-
-			$theme = get_template();
-			if ( $lang == 'ja' && $theme != 'bill-vektor' && $theme != 'bill-vektor-master' ) {
+			
+			if ( ! self::theme_exists( 'bill-vektor/style.css' ) && ! self::theme_exists( 'bill-vektor-master/style.css' ) && 'ja' === $lang ) {
 				$banner .= '<a href="//billvektor.com" target="_blank" class="admin_banner"><img src="' . $dir_url . 'images/billvektor_banner.png" alt="見積書・請求書管理用WordPressテーマ" /></a>';
 			}
 
-			if (
-				$lang == 'ja' &&
-				$theme != 'Lightning-pro' &&
-				$theme != 'lightning-pro'
-			) {
+			if ( ! self::theme_exists( 'lightning-pro/style.css' ) && 'ja' === $lang ) {
 				$banner .= '<a href="https://lightning.nagoya/ja/expansion/lightning-pro" target="_blank" class="admin_banner"><img src="' . $dir_url . 'images/lightning-pro-bnr.jpg" alt="" /></a>';
 			}
 
-			if ( $lang == 'ja' && ! is_plugin_active( 'lightning-skin-jpnstyle/lightning_skin_jpnstyle.php' ) ) {
+			if ( $lang == 'ja' && ! self::plugin_exists( 'lightning-skin-jpnstyle/lightning_skin_jpnstyle.php' ) ) {
 				$banner .= '<a href="https://lightning.nagoya/ja/expansion/ex_plugin/lightning-jpnstyle/?rel=vkadmin" target="_blank" class="admin_banner"><img src="' . $dir_url . 'images/jpnstyle-bnr.jpg" alt="" /></a>';
 			}
 
-			if ( $lang == 'ja' && ! is_plugin_active( 'lightning-skin-fort/lightning-skin-fort.php' ) ) {
+			if ( $lang == 'ja' && ! self::plugin_exists( 'lightning-skin-fort/lightning-skin-fort.php' ) ) {
 					$banner .= '<a href="https://lightning.nagoya/ja/expansion/ex_plugin/lightning-fort/?rel=vkadmin" target="_blank" class="admin_banner"><img src="' . $dir_url . 'images/fort-bnr.jpg" alt="" /></a>';
 			}
 
-			if ( $lang == 'ja' && ! is_plugin_active( 'lightning-skin-pale/lightning-skin-pale.php' ) ) {
+			if ( $lang == 'ja' && ! self::plugin_exists( 'lightning-skin-pale/lightning-skin-pale.php' ) ) {
 					$banner .= '<a href="https://lightning.nagoya/ja/expansion/ex_plugin/lightning-pale/?rel=vkadmin" target="_blank" class="admin_banner"><img src="' . $dir_url . 'images/pale-bnr.jpg" alt="" /></a>';
 			}
 
-			if ( $lang == 'ja' && ! is_plugin_active( 'lightning-skin-pale/lightning-skin-variety.php' ) ) {
+			if ( $lang == 'ja' && ! self::plugin_exists( 'lightning-skin-variety/lightning_skin_variety.php' ) ) {
 					$banner .= '<a href="https://lightning.nagoya/ja/expansion/ex_plugin/lightning-variety/?rel=vkadmin" target="_blank" class="admin_banner"><img src="' . $dir_url . 'images/variety-bnr.jpg" alt="" /></a>';
 			}
 
-			if ( $lang == 'ja' && ! is_plugin_active( 'vk-all-in-one-expansion-unit/vkExUnit.php' ) ) {
+			if ( $lang == 'ja' && ! self::plugin_exists( 'vk-all-in-one-expansion-unit/vkExUnit.php' ) ) {
 				$banner .= '<a href="https://ex-unit.nagoya/ja/" target="_blank" class="admin_banner"><img src="' . $dir_url . 'images/ExUnit_bnr.png" alt="" /></a>';
 			}
 
@@ -288,7 +318,7 @@ if ( ! class_exists( 'Vk_Admin' ) ) {
 
 					if ( $maxitems == 0 ) {
 						$output .= '<li>';
-						$output .= __( 'Sorry, there is no post', 'vk-post-author-display' );
+						$output .= __( 'Sorry, there is no post', 'vk_admin_textdomain' );
 						$output .= '</li>';
 					} else {
 						foreach ( $rss_items as $item ) {
@@ -321,10 +351,10 @@ if ( ! class_exists( 'Vk_Admin' ) ) {
 			if ( 'ja' == get_locale() ) {
 				$flag = true;
 			}
-			if ( is_plugin_active( 'vk-all-in-one-expansion-unit/vkExUnit.php' ) ) {
+			if ( self::plugin_exists( 'vk-all-in-one-expansion-unit/vkExUnit.php' ) ) {
 				$flag = true;
 			}
-			if ( ! is_plugin_active( 'vk-post-author-display/post-author-display.php' ) ) {
+			if ( ! self::plugin_exists( 'vk-post-author-display/post-author-display.php' ) ) {
 				$flag = true;
 			}
 			$theme = wp_get_theme()->get( 'Template' );
@@ -342,7 +372,7 @@ if ( ! class_exists( 'Vk_Admin' ) ) {
 			if ( self::is_dashboard_active() ) {
 				wp_add_dashboard_widget(
 					'vk_dashboard_widget',
-					__( 'Vektor WordPress Information', 'vk-post-author-display' ),
+					__( 'Vektor WordPress Information', 'vk_admin_textdomain' ),
 					array( __CLASS__, 'dashboard_widget_body' )
 				);
 			}
@@ -384,7 +414,7 @@ if ( ! class_exists( 'Vk_Admin' ) ) {
 				<div class="adminMain <?php echo $get_layout; ?>">
 
 					<?php if ( $get_layout == 'column_3' ) : ?>
-				<div id="adminContent_sub" class="scrTracking">
+				<div id="adminContent_sub" class="scrTracking adminMain_sub">
 					<div class="pageLogo"><?php echo $get_logo_html; ?></div>
 						<?php if ( $get_page_title ) : ?>
 					<h2 class="page_title"><?php echo $get_page_title; ?></h2>
@@ -404,7 +434,7 @@ if ( ! class_exists( 'Vk_Admin' ) ) {
 					<?php endif; ?>
 				<?php endif; ?>
 
-					<div id="adminContent_main">
+					<div id="adminContent_main" class="adminMain_main">
 					<?php call_user_func_array( $the_body_callback, array() ); ?>
 					</div><!-- [ /#adminContent_main ] -->
 

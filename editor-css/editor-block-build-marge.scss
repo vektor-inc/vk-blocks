@@ -5,6 +5,7 @@
 .vk_block_icon_pro {
 	fill: #c00;
 }
+.editor-block-list-item-vk-blocks-slider:after,
 .editor-block-list-item-vk-blocks-animation:after,
 .editor-block-list-item-vk-blocks-card:after,
 .editor-block-list-item-vk-blocks-child-page:after,
@@ -106,7 +107,7 @@ button.components-button.components-toolbar__control{
 // アイコンリストCSS読み込み
 @import "./editor_before_icon_list";
 // 吹き出し画像読み込み
-@import "./editor_balloon_image_list";
+@import "./editor_before_balloon";
 
 // VK Outer 編集パネル
 $color-danger: #dd3333;
@@ -136,15 +137,29 @@ $color-danger: #dd3333;
 	}
 }
 
+.vk_slider_item_sidebar_bgImage_button_container img {
+    min-width: 248px;
+}
+
+.mb-2+div.components-toolbar{
+	margin-top: 0!important;
+}
+
 
 /* editor area *********************************************/
-.edit-post-visual-editor.editor-styles-wrapper{
+.edit-post-visual-editor.editor-styles-wrapper,
+.components-tab-panel__tab-content{
 
 	/*
 	 アウターが全幅で インナーもコンテンツエリアを突き抜けて広げる処理
 	-----------------------------------------------*/
 	.vk_outer-width-full.vk_outer-paddingLR-use,
 	.vk_outer-width-full.vk_outer-paddingLR-zero{
+		// コンテンツエリアをはみ出させる
+		.wp-block { max-width:100%; }
+	}
+	.vk_slider_item-width-full.vk_slider_item-paddingLR-use,
+	.vk_slider_item-width-full.vk_slider_item-paddingLR-zero{
 		// コンテンツエリアをはみ出させる
 		.wp-block { max-width:100%; }
 	}
@@ -158,10 +173,40 @@ $color-danger: #dd3333;
 		.wp-block { max-width:100%; }
 	}
 
-// レスポンシブスペーサーの識別用枠線
-.vk_spacer {
-	border: 1px dotted #ccc;
+	.is-sidebar-opened & .vk_slider_item-width-full.vk_slider_item-paddingLR-use,
+	.is-sidebar-opened & .vk_slider_item-width-full.vk_slider_item-paddingLR-zero{
+		// サイドバー表示時に全幅要素がはみ出してサイドバーの下などに入り込むのを防止
+		margin-left: calc( 50% - 50vw + 140px );
+		margin-right: calc( 50% - 50vw + 140px );
+		// コンテンツエリアをはみ出させる
+		.wp-block { max-width:100%; }
+	}
+
+	.is-sidebar-opened & .vk_slider.vk_width-full{
+		// サイドバー表示時に全幅要素がはみ出してサイドバーの下などに入り込むのを防止
+		margin-left: calc( 50% - 50vw + 140px );
+		margin-right: calc( 50% - 50vw + 140px );
+		padding-right:0;
+		padding-left:0;
+		width: calc( 100vw - 280px );
+	}
+
+
+// 編集画面での識別用枠
+.vk_spacer,
+.vk_slider,
+.vk_slider_item,
+.vk_animation {
+	border:1px dotted #ccc;
 }
+
+.vk_slider_item{
+	min-height:3em;
+	.block-editor-inner-blocks{
+		width: 100%;
+	}
+}
+
 // アニメーションブロックの識別用枠線
 .vk_animation {
 	border: 1px dashed #ccc;
@@ -183,6 +228,55 @@ $color-danger: #dd3333;
 		left:0;
 		&:before {
 			content:'Fade in';
+		}
+	}
+	&.vk_animation-up-down{
+		right:0;
+		left: 0;
+		&:before {
+			content:'Up Down';
+		}
+	}
+	&.vk_animation-left-right{
+		right:0;
+		left: 0;
+		&:before {
+			content:'Left Right';
+		}
+	}
+	&.vk_animation-trembling-x{
+		right:0;
+		left: 0;
+		&:before {
+			content:'Trembring X';
+		}
+	}
+	&.vk_animation-trembling-y{
+		right:0;
+		left: 0;
+		&:before {
+			content:'Trembring Y';
+		}
+	}
+	&.vk_animation-pounding{
+		right:0;
+		left: 0;
+		&:before {
+			content:'Pounding';
+		}
+	}
+	&.vk_animation-shaking{
+		right:0;
+		left: 0;
+		&:before {
+			content:'Shaking';
+		}
+	}
+	&.vk_animation-slow-shaking{
+		right:0;
+		left: 0;
+		&:before {
+			content:'Slow Shaking';
 		}
 	}
 	&.vk_animation-slide-left{
@@ -241,11 +335,13 @@ $xs-max: 575.98px;
 $sm-max: 767.98px;
 $md-max: 991.98px;
 $lg-max: 1199.98px;
+$xl-max: 1399.98px;
 
 $sm-min: 576px;
 $md-min: 768px;
 $lg-min: 992px;
 $xl-min: 1200px;
+$xxl-min: 1200px;
 
 $color-danger: #b52727;
 
@@ -438,14 +534,44 @@ $color-danger: #b52727;
 			width: calc(100% - 30px);
 		}
 	}
+	@media (min-width: $xxl-min) {
+		&-col-xxl-2 .editor-block-list__block,
+		&-col-xxl-2 .block-editor-block-list__block {
+			width: calc(16.66% - 30px);
+		}
+		&-col-xxl-3 .editor-block-list__block,
+		&-col-xxl-3 .block-editor-block-list__block {
+			width: calc(25% - 30px);
+		}
+		&-col-xxl-4 .editor-block-list__block,
+		&-col-xxl-4 .block-editor-block-list__block {
+			width: calc(33.3% - 30px);
+		}
+		&-col-xxl-6 .editor-block-list__block,
+		&-col-xxl-6 .block-editor-block-list__block {
+			width: calc(50% - 30px);
+		}
+		&-col-xxl-12 .editor-block-list__block,
+		&-col-xxl-12 .block-editor-block-list__block {
+			width: calc(100% - 30px);
+		}
+	}
 }
 
 /*-------------------------------------------*/
 /* .vk_grid-column Layout
 /*-------------------------------------------*/
-.vk_grid-column.row {
+.vk_grid-column .block-editor-inner-blocks .block-editor-block-list__layout {
 	border:none;
+	display: flex;
 	flex-direction: row;
+	flex-wrap: wrap;
+    margin-right: -15px;
+	margin-left: -15px;
+
+	.block-list-appender{
+		height: 100px;
+	}
 
 	// colの余分な余白の削除など
 	// col内に入れたブロックにまで反映されないように & > 指定
@@ -574,6 +700,28 @@ $color-danger: #b52727;
 			max-width: var(--vk-width-couter-col-12) ;
 		}
 	}
+	@media (min-width: $xxl-min) {
+		& > .col-xxl-2 {
+			width: calc(16.66% - 30px);
+			max-width: var(--vk-width-couter-col-2) ;
+		}
+		& > .col-xxl-3 {
+			width: calc(25% - 30px);
+			max-width: var(--vk-width-couter-col-3) ;
+		}
+		& > .col-xxl-4 {
+			width: calc(33.3% - 30px);
+			max-width: var(--vk-width-couter-col-4) ;
+		}
+		& > .col-xxl-6 {
+			width: calc(50% - 30px);
+			max-width: var(--vk-width-couter-col-6) ;
+		}
+		& > .col-xxl-12 {
+			width: calc(100% - 30px);
+			max-width: var(--vk-width-couter-col-12) ;
+		}
+	}
 }//.vk_grid-column
 
 /*-------------------------------------------*/
@@ -587,41 +735,7 @@ $color-danger: #b52727;
 	opacity: 0.2;
 }
 
-/* .vk_hidden.vk_hidden は2つじゃないと上書きできない  */
-.vk_hidden.vk_hidden {
-	display: block !important;
-	color: var(--blue);
 
-  &.vk_posts{
-	// display block だとカラムがすべて落ちるため posts は flexで上書き
-	display: flex !important;
-  }
-  @media (max-width: $xs-max) {
-    &-xs {
-      display: block !important;
-    }
-  }
-  @media (min-width: $sm-min) and (max-width: $sm-max) {
-    &-sm {
-      display: block !important;
-    }
-  }
-  @media (min-width: $md-min) and (max-width: $md-max) {
-    &-md {
-      display: block !important;
-    }
-  }
-  @media (min-width: $lg-min) and (max-width: $lg-max) {
-    &-lg {
-      display: block !important;
-    }
-  }
-  @media (min-width: $xl-min) {
-    &-xl {
-      display: block !important;
-    }
-  }
-}
 
 .vk_grid-column .block-list-appender{
   width: 100%;
@@ -630,6 +744,17 @@ $color-danger: #b52727;
 .wp-block-vk-blocks-icon-card{
 	.vk_icon-card_item{
 		margin: 15px auto!important;
+	}
+}
+
+.vk_grid-column {
+	div[data-type="vk-blocks/grid-column-item"]{
+		// これがないとカラムのセルが潰れて中に何もいれられない
+		min-height:30px;
+	}
+	.wp-block-vk-blocks-grid-column-item .block-editor-block-list__layout{
+		// プレースホルダーの文字が枠から左にはみ出す
+		margin-left:0;
 	}
 }
 
@@ -1000,6 +1125,36 @@ ol {
 	text-align: center;
 }
 
+/*-------------------------------------------*/
+/* col-xxl
+/*-------------------------------------------*/
+$xxl-min: 1400px;
+.col {
+    // Bootstrap4�では xxl サイズがないので独自に追加
+    @media (min-width: $xxl-min) {
+		&-xxl-2 {
+			flex: 0 0 16.66667%;
+			max-width: 16.66667%;
+		}
+		&-xxl-3 {
+			flex: 0 0 25%;
+			max-width: 25%;
+		}
+		&-xxl-4 {
+			flex: 0 0 33.33333%;
+			max-width: 33.33333%;
+		}
+		&-xxl-6 {
+			flex: 0 0 50%;
+			max-width: 50%;
+		}
+		&-xxl-12 {
+			flex: 0 0 100%;
+			max-width: 100%;
+		}
+	}
+}
+
 .alert{
 
   padding: 1em;
@@ -1045,8 +1200,8 @@ ol {
 
 .vk_balloon {
 	display: flex;
-	align-items: center;
-	margin-bottom: 1em;
+	align-items: normal;
+	margin-bottom: 2.2em;
 
 	figure {
 		margin: 0;
@@ -1054,8 +1209,9 @@ ol {
 
 	p {
 		word-break: break-all;
-		background: #f5f5f5;
-		padding: 1.1rem 1.4rem;
+		&:last-of-type{
+			margin-bottom: 0;
+		}
 	}
 }
 
@@ -1085,10 +1241,21 @@ ol {
 	margin-top: 0.2rem;
 }
 
+// .vk_balloon_content_outer は .vk_balloon_content の外側に 0.38.2 から追加
+// 本来 _outer をつけるような親要素のクラスの方が文字数が多くなる手法はとらないが、
+// 既存のクラス名を変更すると既存サイトではHTML構造がもとのままなので崩れてしまうため例外措置。
+.vk_balloon_content_outer{
+	width:100%;
+}
 .vk_balloon_content {
+	.vk_balloon-position-left & {
+		float:left;
+	}
+	.vk_balloon-position-right & {
+		float:right;
+	}
 	position: relative;
 	text-align: left;
-
 	&.editor-rich-text__tinymce[data-is-placeholder-visible=true] {
 		// これがないと未入力時に吹き出しが２重になる
 		position: absolute;
@@ -1097,6 +1264,11 @@ ol {
 
 /*	type
 /*-------------------------------------------*/
+.vk_balloon_content {
+	background: #f5f5f5;
+	padding: 1.1rem 1.4rem;
+}
+
 .vk_balloon-type-serif{
 	.vk_balloon_content{
 		border-color: #f5f5f5;
@@ -1138,11 +1310,10 @@ ol {
 		.vk_balloon_icon{
 			margin-right: 2rem;
 		}
-
 		.vk_balloon_content{
 			&::after{
 				left: 0;
-				top: 50%;
+				top: 32px;
 				border-right-color: inherit;
 				border-left: 0;
 				margin-top: -20px;
@@ -1179,7 +1350,7 @@ ol {
 		.vk_balloon_content{
 			&::after{
 				right: 0;
-				top: 50%;
+				top: 32px;
 				border-left-color: inherit;
 				border-right: 0;
 				margin-top: -20px;
@@ -1206,6 +1377,69 @@ ol {
 		}
 	}
 }//.vk_balloon-position-right
+
+.vk_balloon-animation {
+	&-trembling {
+		animation: trembling 0.1s infinite;
+	}
+	@keyframes trembling {
+		0% {
+			transform: rotate(-0.5deg);
+		}
+		50% {
+			transform: rotate(0.5deg);
+		}
+	}
+	&-trembling-x {
+		animation: trembling-x 0.1s infinite;
+	}
+	@keyframes trembling-x {
+		0% {
+			transform: scale(1, 1);
+		}
+		50% {
+			transform: scale(0.99, 0.96);
+		}
+	}
+	&-pounding {
+		animation: pounding 1.5s infinite;
+	}
+	@keyframes pounding {
+		0% {
+			transform: scale(1.05)
+		}
+		5% {
+			transform: scale(1)
+		}
+		95% {
+			transform: scale(1)
+		}
+		100% {
+			transform: scale(1.05)
+		}
+	}
+
+	&-shaking {
+		animation: shaking 0.4s infinite;
+	}
+	@keyframes shaking {
+		0% {
+			transform: translate(1px, 1px);
+		}
+		25% {
+			transform: translate(1px, -1px);
+		}
+		50% {
+			transform: translate(-1px, -1px);
+		}
+		75% {
+			transform: translate(-1px, 1px);
+		}
+		100% {
+			transform: translate(1px, 1px);
+		}
+	}
+}
 
 
 .vk_balloon {
@@ -1266,7 +1500,7 @@ ol {
         .vk_balloon_content{
           display: inline-block;
           &::after{
-            top: 35px;
+            top: 32px;
              margin-left: -15px;
           }
         }//.vk_balloon_content
@@ -1293,14 +1527,15 @@ ol {
 
 			&.vk_balloon-type-serif{
 				.vk_balloon_icon{
-				  margin-left: auto;
-				  margin-right: 0;
+					max-width: 86px;
+				  	margin-left: 1.5rem;
+				  	margin-right: 0;
 				}
 
 				.vk_balloon_content{
 				  display: inline-block;
 				  &::after{
-				    top: 35px;
+				    top: 32px;
 					margin-right: -15px;
 				  }
 				}
@@ -1324,6 +1559,21 @@ ol {
 		max-width:96px;
 	}
 } // @media only screen and (max-width: 480px) {
+
+
+//editor-styles	
+.editor-styles-wrapper{
+	.vk_balloon{
+		figure, 
+		p.wp-block{
+			width: 100%;
+		 }
+	}
+	.block-editor-block-list__block .block-list-appender{
+		margin: inherit;
+	}
+}
+
 
 :root {
 	--vk-color-border-red: #dc3545;
@@ -1364,6 +1614,36 @@ ol {
 	}
 }
 
+// 背景色指定
+.vk_borderBox-background {
+	&-transparent {
+		& .vk_borderBox_body {
+			background-color: transparent;
+		}
+		&.is-style-vk_borderBox-style-solid-kado-tit-onborder.vk_borderBox {
+			background-color: transparent;
+		}
+		&.is-style-vk_borderBox-style-solid-kado-tit-onborder .vk_borderBox_title_container,
+		&.is-style-vk_borderBox-style-solid-kado-tit-inner .vk_borderBox_title_container,
+		&.is-style-vk_borderBox-style-solid-kado-iconFeature .vk_borderBox_title_container {
+			background-color: transparent;
+		}
+	}
+	&-white {
+		& .vk_borderBox_body {
+			background-color: #fff;
+		}
+		&.is-style-vk_borderBox-style-solid-kado-tit-onborder.vk_borderBox {
+			background-color:  #fff;
+		}
+		&.is-style-vk_borderBox-style-solid-kado-tit-onborder .vk_borderBox_title_container,
+		&.is-style-vk_borderBox-style-solid-kado-tit-inner .vk_borderBox_title_container,
+		&.is-style-vk_borderBox-style-solid-kado-iconFeature .vk_borderBox_title_container {
+			background-color: #fff;
+		}
+	}
+}
+
 /*
 共通指定
 --------------------------------------------*/
@@ -1384,6 +1664,7 @@ ol {
 			display: inline;
 			font-weight: bold;
 			font-size: 1em;
+			color: inherit; //これがないと見出しデザイン機能に負ける
 		}
 	}
 
@@ -1392,6 +1673,12 @@ ol {
 		background: none;
 		padding: 0;
 		border: none;
+		&::before {
+			content: none;
+		}
+		&::after {
+			content: none;
+		}
 	}
 	.vk_borderBox_body {
 		padding: 1.5em;
@@ -1400,12 +1687,12 @@ ol {
 		@media (min-width: 992px) {
 			padding: 2.1875em 2em 2em;
 		}
-		h1:first-child, 
-		h2:first-child, 
-		h3:first-child, 
-		h4:first-child, 
+		h1:first-child,
+		h2:first-child,
+		h3:first-child,
+		h4:first-child,
 		h5:first-child,
-		h6:first-child {//他のテーマでも対応できるように追加			
+		h6:first-child {//他のテーマでも対応できるように追加
 			margin-top: 0;
 		}
 		p:last-child {
@@ -1442,7 +1729,7 @@ ol {
 			padding: 1.5em 1.5em 1em;
 		}
 		.vk_borderBox_body {
-			background-color: transparent;
+			// background-color: transparent;
 			border: none;
 			padding-top: 0;
 		}
@@ -1460,23 +1747,23 @@ ol {
 				border-radius: 50%;
 				border: solid 2px #fff;
 			}
-		}
-		.svg-inline--fa,
-		.fa,
-		.fab,
-		.fas,
-		.far,
-		.fal,
-		.fad {
-			position: absolute;
-			font-size: 1.3em;
-			margin-right: 0;
-			z-index: 100;
-			top: 0%;
-			left: 2.3em;
-			transform: translate(-50%, -50%);
-			-webkit-transform: translate(-50%, -50%);
-			-ms-transform: translate(-50%, -50%);
+			& > .svg-inline--fa,
+			& > .fa,
+			& > .fab,
+			& > .fas,
+			& > .far,
+			& > .fal,
+			& > .fad {
+				position: absolute;
+				font-size: 1.3em;
+				margin-right: 0;
+				z-index: 100;
+				top: 0%;
+				left: 2.3em;
+				transform: translate(-50%, -50%);
+				-webkit-transform: translate(-50%, -50%);
+				-ms-transform: translate(-50%, -50%);
+			}
 		}
 	}
 	&.is-style-vk_borderBox-style-solid-kado-tit-onborder {
@@ -1643,6 +1930,147 @@ ol {
 	}
 }
 
+.vk_button {
+	margin: 5px 0;
+	text-align: center; /* テキストのみの時のセンター揃え */
+	&-color-custom {
+		a:hover {
+			opacity: 0.8;
+			box-shadow: 0 0 0 0.2rem rgba(171, 184, 195, 0.25);
+		}
+	}
+
+	&-align {
+		&-left {
+			text-align: left;
+		}
+
+		&-center {
+			text-align: center;
+		}
+
+		&-right {
+			text-align: right;
+		}
+
+		&-block {
+			display: block;
+		}
+		&-wide {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			max-width: 70%;
+			.btn {
+				display: block;
+			}
+		}
+	}
+
+	&_link {
+		min-width: 100px;
+		min-height: 30px;
+
+		&-type-text {
+			box-shadow: none;
+			padding: 0;
+			&:hover {
+				background: none;
+				box-shadow: none;
+			}
+		}
+
+		&.btn {
+			// .btn指定がないと管理画面で標準の .btn の指定に負ける
+			padding-top: 0.7em;
+			padding-bottom: 0.6em;
+			user-select: text;
+		}
+
+		&_before {
+			margin-right: 0.7rem;
+		}
+
+		&_after {
+			margin-left: 0.7rem;
+		}
+
+		&_subCaption {
+			display: block;
+			overflow: hidden;
+			margin: 0;
+			font-size: 80%;
+		}
+	}
+	.vk_button_link-type-text{
+		&:hover{
+			&.btn-outline-primary{color: #007bff;}
+			&.btn-outline-secondary{color: #6c757d;}
+			&.btn-outline-success{color: #28a745;}
+			&.btn-outline-info{color: #17a2b8;}
+			&.btn-outline-warning{color: #ffc107;}
+			&.btn-outline-danger{color: #dc3545;}
+			&.btn-outline-dark{	color: #343a40;}
+		}
+		&.btn-outline-light{ color: #212529; }
+	}
+
+	.editor-styles-wrapper &{ 
+		//.editor-styles-wrapper a:not([href])に負けるので追加
+		a,
+		a:hover{
+			&.btn-primary{ background-color: #007bff; border-color: #007bff; }
+			&.btn-primary,
+			&.btn-secondary,
+			&.btn-success,
+			&.btn-info,
+			&.btn-danger,
+			&.btn-dark {
+				color: #fff;
+			}
+		}
+		a{
+			&.vk_button_link-type-text:hover.btn-outline-primary{
+				color: #007bff;
+			}
+			&.btn-outline-primary{
+				color: #007bff; 
+				border-color: #007bff;
+				&:hover:not(.vk_button_link-type-text){
+					background-color:#007bff;
+				}
+			}
+			&.btn-outline-secondary{color: #6c757d;}
+			&.btn-outline-success{color: #28a745;}
+			&.btn-outline-info{color: #17a2b8;}
+			&.btn-outline-warning{color: #ffc107;}
+			&.btn-outline-danger{color: #dc3545;}
+			&.btn-outline-dark{	color: #343a40;}
+		}
+		a:hover{
+			&.btn-outline-primary,
+			&.btn-outline-secondary,
+			&.btn-outline-success,
+			&.btn-outline-info,
+			&.btn-outline-danger,
+			&.btn-outline-dark{
+				color: #fff;
+			}
+		}
+	}
+	.editor-rich-text {
+		// Font Awesomeアイコンが管理画面側で改行されないために inline-block を指定
+		display: inline-block;
+	}
+}
+
+.vk_button-color-custom {
+	.vk_button_link-type-text:hover {
+		box-shadow: none;
+	}
+}
+
+
 $question-color: #e50000;
 $answer-color: #337ab7;
 
@@ -1736,6 +2164,11 @@ $answer-color: #337ab7;
 }
 .vk_faq_title { margin-bottom:0;font-size:18px;font-weight:700;
   &:before { content:"Q";color:#e50000; font-weight: 500; }
+  	p { line-height: 1.7;
+		&:last-child{
+			margin-bottom:0;
+		}
+	}
 }
 .vk_faq_content { margin:0px;
   &:before { content:"A";color:#337ab7; }
@@ -1743,277 +2176,81 @@ $answer-color: #337ab7;
 	margin-bottom:0;
   }
 }
-//editor画面でずれる
-.editor-styles-wrapper .vk_faq_content .wp-block{ width: auto; }
-.vk_button {
-	margin: 5px 0;
-	text-align: center; /* テキストのみの時のセンター揃え */
-	&-color-custom {
-		a:hover {
-			opacity: 0.8;
-			box-shadow: 0 0 0 0.2rem rgba(171, 184, 195, 0.25);
-		}
-	}
 
-	&-align {
-		&-left {
-			text-align: left;
-		}
-
-		&-center {
-			text-align: center;
-		}
-
-		&-right {
-			text-align: right;
-		}
-
-		&-block {
-			display: block;
-		}
-		&-wide {
-			display: block;
-			margin-left: auto;
-			margin-right: auto;
-			max-width: 70%;
-			.btn {
-				display: block;
+// 編集画面側
+// フロント画面と比べると余白が大きく空くので追加
+.editor-styles-wrapper {
+	.vk_faq{
+		.block-editor-inner-blocks{
+			div.block-editor-block-list__block:not(.is_hovered){  
+				margin-top: 0;
+				margin-bottom: 0;
 			}
+			.wp-block:not(.is_hovered){width: 100%;}
 		}
 	}
-
-	&_link {
-		min-width: 100px;
-		min-height: 30px;
-
-		&-type-text {
-			box-shadow: none;
-			padding: 0;
-			&:hover {
-				background: none;
-				box-shadow: none;
-			}
-		}
-
-		&.btn {
-			// .btn指定がないと管理画面で標準の .btn の指定に負ける
-			padding-top: 0.7em;
-			padding-bottom: 0.6em;
-			user-select: text;
-		}
-
-		&_before {
-			margin-right: 0.7rem;
-		}
-
-		&_after {
-			margin-left: 0.7rem;
-		}
-
-		&_subCaption {
-			display: block;
-			overflow: hidden;
-			margin: 0;
-			font-size: 80%;
-		}
-	}
-
-	.editor-rich-text {
-		// Font Awesomeアイコンが管理画面側で改行されないために inline-block を指定
-		display: inline-block;
-	}
 }
-
-.vk_button-color-custom {
-	.vk_button_link-type-text:hover {
-		box-shadow: none;
-	}
-}
-
-/*-------------------------------------------*/
-/*	Lightnig がまだ Bootstrap4 でないため手動で追加したクラス
-/*	Lighnting が 4 を同梱したら削除して化
-/*-------------------------------------------*/
-$color_primary: #007bff;
-$color_secondary: #6c757d;
-$color_success: #28a745;
-$color_info: #17a2b8;
-$color_warning: #ffc107;
-$color_danger: #dc3545;
-$color_light: #f8f9fa;
-$color_dark: #343a40;
-/* .btn がないと標準のBS4の指定に負ける */
-.btn.btn-primary {
-	color: #fff;
-}
-
-.btn.btn-secondary {
-	color: #fff;
-	background-color: $color_secondary;
-}
-
-.btn.btn-success {
-	color: #fff;
-}
-
-.btn.btn-info {
-	color: #fff;
-}
-
-.btn.btn-warning {
-	color: #fff;
-}
-
-.btn.btn-danger {
-	color: #fff;
-}
-
-.btn.btn-light {
-	background-color: $color_light;
-}
-
-.btn.btn-dark {
-	color: #fff;
-	background-color: $color_dark;
-}
-
-.btn.btn-secondary:hover,
-.btn.btn-dark:hover {
-	color: #fff;
-}
-
-/* .btn がないと標準のBS4の指定に負ける */
-.btn.btn-outline-primary {
-	color: $color_primary;
-	border: 1px solid $color_primary;
-	background: none;
-	box-shadow: none;
-}
-
-.btn.btn-outline-secondary {
-	color: $color_secondary;
-	border: 1px solid $color_secondary;
-	background: none;
-	box-shadow: none;
-}
-
-.btn.btn-outline-success {
-	color: $color_success;
-	border: 1px solid $color_success;
-	background: none;
-	box-shadow: none;
-}
-
-.btn.btn-outline-info {
-	color: $color_info;
-	border: 1px solid $color_info;
-	background: none;
-	box-shadow: none;
-}
-
-.btn.btn-outline-warning {
-	color: $color_warning;
-	border: 1px solid $color_warning;
-	background: none;
-	box-shadow: none;
-}
-
-.btn.btn-outline-danger {
-	color: $color_danger;
-	border: 1px solid $color_danger;
-	background: none;
-	box-shadow: none;
-}
-
-.btn.btn-outline-light {
-	border: 1px solid $color_light;
-	background: none;
-	box-shadow: none;
-}
-
-.btn.btn-outline-dark {
-	color: $color_dark;
-	border: 1px solid $color_dark;
-	background: none;
-	box-shadow: none;
-}
-
-.btn.btn-outline-primary:hover,
-.btn.btn-outline-primary:focus {
-	background: $color_primary;
-	color: #fff;
-}
-
-.btn.btn-outline-secondary:hover,
-.btn.btn-outline-secondary:focus {
-	background: $color_secondary;
-	color: #fff;
-}
-
-.btn.btn-outline-success:hover,
-.btn.btn-outline-success:focus {
-	background: $color_success;
-	color: #fff;
-}
-
-.btn.btn-outline-info:hover,
-.btn.btn-outline-info:focus {
-	background: $color_info;
-	color: #fff;
-}
-
-.btn.btn-outline-warning:hover,
-.btn.btn-outline-warning:focus {
-	background: $color_warning;
-	color: #fff;
-}
-
-.btn.btn-outline-danger:hover,
-.btn.btn-outline-danger:focus {
-	background: $color_danger;
-	color: #fff;
-}
-
-.btn.btn-outline-light:hover,
-.btn.btn-outline-light:focus {
-	background: $color_light;
-	color: #fff;
-}
-
-.btn.btn-outline-dark:hover,
-.btn.btn-outline-dark:focus {
-	background: $color_dark;
-	color: #fff;
-}
-
 //*      .flowBox
+
 /*-------------------------------------------*/
-.vk_flow-arrow-on:after {
-  content:"";
-  background: url('../images/arrow_bottom.svg') center 50% no-repeat;
-  background-size: 50px 50px;
-  display:block; overflow:hidden;
-  height:50px;
-  width:50px;
-  margin:0 auto;
+.vk_flow-arrow-on::after {
+	content: "";
+	background: var(--vk_flow-arrow) center 50% no-repeat;
+	background-size: 50px 50px;
+	display: block;
+	overflow: hidden;
+	height: 50px;
+	width: 50px;
+	margin: 0 auto;
 }
-.vk_flow-arrow-off  { padding-bottom:0px; margin-bottom:30px; }
-.vk_flow-arrow-off:after {
-  content:"";font-size:0;background-image: none;
+
+.vk_flow-arrow-off {
+	padding-bottom: 0;
+	margin-bottom: 30px;
 }
+
+.vk_flow-arrow-off::after {
+	content: "";
+	font-size: 0;
+	background-image: none;
+}
+
 .vk_flow_frame {
 	display: flex;
-	padding:20px 25px; border:3px solid #e5e5e5;margin:0;
+	padding: 20px 25px;
+	border: 3px solid #e5e5e5;
+	margin: 0;
 	justify-content: space-between;
 }
-.vk_flow_frame_text  { display:block;overflow:hidden;margin:0;width:100%;box-sizing: border-box; }
+
+.vk_flow_frame_text {
+	display: block;
+	overflow: hidden;
+	margin: 0;
+	width: 100%;
+	box-sizing: border-box;
+}
+
 .vk_flow_frame_text_title,
-.vk_flow_frame_text_content { padding-left:0;border:none; }
-.vk_flow_frame_text_title { border-bottom:1px dotted #ccc; margin:0 0 10px;padding:0 0 5px; font-size:1.2em; }
-.vk_flow_frame_text_content { margin-bottom:0px; }
+.vk_flow_frame_text_content {
+	padding-left: 0;
+	border: none;
+}
+
+.vk_flow_frame_text_title {
+	border-bottom: 1px dotted #ccc;
+	margin: 0 0 10px;
+	padding: 0 0 5px;
+	font-size: 1.2em;
+}
+
+.vk_flow_frame_text_content {
+	margin-bottom: 0;
+}
+
 .vk_flow_frame_image {
-	max-width:150px;
-	margin-left:15px;
+	max-width: 150px;
+	margin-left: 15px;
 	box-sizing: border-box;
 }
 
@@ -2026,6 +2263,8 @@ $color_dark: #343a40;
 	border-radius: 0;
 	padding: 0;
 	font-weight: normal;
+	outline: unset;
+	outline-offset: unset;
 	box-shadow: none;
 	&:after {
 		content: none;
@@ -2047,6 +2286,7 @@ $color_dark: #343a40;
 .vk_heading.vk_heading-style-plain {
 	.vk_heading_title {
 		@include reset;
+		color: unset;
 		&:after {
 			@include reset;
 		}
@@ -2064,13 +2304,14 @@ $color_key: #337ab7;
 
 @mixin title_unset {
 	position: relative;
-	margin-left: unset;
-	margin-right: unset;
+	margin-left: auto;
+	margin-right: auto;
 	outline: unset;
 	outline-offset: unset;
 	box-shadow: unset;
 	border-radius: unset;
 	overflow: unset;
+	color: inherit;
 }
 
 @mixin title_no_bg {
@@ -2101,7 +2342,6 @@ $color_key: #337ab7;
 
 .is-style-vk-heading {
 	&,
-	.entry-body &,
 	.editor-styles-wrapper & {
 		h3.is-style-vk-heading:after {
 			border-bottom: none !important;
@@ -2382,6 +2622,8 @@ $color_key: #337ab7;
 				border-bottom: 1px solid #333;
 				position: unset;
 				width: unset;
+				border-left: unset;
+    			border-right: unset;
 				border-top: none;
 			}
 
@@ -2523,37 +2765,65 @@ $xs-max: 575.98px;
 $sm-max: 767.98px;
 $md-max: 991.98px;
 $lg-max: 1199.98px;
+$xl-max: 1399.98px;
+
+
 
 $sm-min: 576px;
 $md-min: 768px;
 $lg-min: 992px;
 $xl-min: 1200px;
+$xxl-min: 1400px;
 
 .vk_hidden {
 	display: none !important;
 	color: var(--blue);
+
 	@media (max-width: $xs-max) {
+
 		&-xs {
 			display: none !important;
 		}
 	}
+
 	@media (min-width: $sm-min) and (max-width: $sm-max) {
+
 		&-sm {
 			display: none !important;
 		}
 	}
+
 	@media (min-width: $md-min) and (max-width: $md-max) {
+
 		&-md {
 			display: none !important;
 		}
 	}
+
 	@media (min-width: $lg-min) and (max-width: $lg-max) {
+
 		&-lg {
 			display: none !important;
 		}
 	}
+
 	@media (min-width: $xl-min) {
+
 		&-xl {
+			display: none !important;
+		}
+	}
+
+	@media (min-width: $xl-min) and (max-width: $xl-max) {
+
+		&-xl-v2 {
+			display: none !important;
+		}
+	}
+
+	@media (min-width: $xxl-min) {
+
+		&-xxl {
 			display: none !important;
 		}
 	}
@@ -2617,7 +2887,12 @@ $xl-min: 1200px;
 		font-size: 21px;
 		line-height: 1.4em;
 		border: none;
+		border-radius:unset;
 		padding: 0;
+		outline: unset;
+		outline-offset: unset;
+		box-shadow: unset;
+		color: inherit;
 		&::before {
 			content: none;
 		}
@@ -2682,24 +2957,23 @@ $xl-min: 1200px;
 		&_title {
 			background-color: transparent;
 			font-weight: bold;
-			padding: 0;
-			box-shadow: none;
-			border: none;
 			margin-bottom: 0.8em;
+			outline: unset;
+			outline-offset: unset;
+			box-shadow: unset;
+			border: none;
+			border-radius:unset;
+			padding: 0;
+			color: inherit;
 			@media (max-width: 575.98px) {
 				&:first-child {
 					margin-top: 30px;
 				}
 			}
+			&:before,
 			&:after {
-				content: "";
-				line-height: 0;
-				display: block;
-				overflow: hidden;
-				position: absolute;
-				bottom: -1px;
-				width: 0;
-				border: none;
+				content: none;
+
 			}
 		}
 		&_text {
@@ -2727,86 +3001,86 @@ $xl-min: 1200px;
 	}
 } // .vk_prContent {
 
+$xs-max: 575.98px;
+$sm-max: 767.98px;
+$md-max: 991.98px;
+$lg-max: 1199.98px;
+$xl-max: 1399.98px;
+
+$sm-min: 576px;
+$md-min: 768px;
+$lg-min: 992px;
+$xl-min: 1200px;
+$xxl-min: 1400px;
+
+.vk_responsive-br{
+	display: none;
+}
+
+@media (max-width: $xs-max) {
+	.vk_responsive-br-xs{
+		display: block;
+	}
+}
+@media (min-width: $sm-min) and (max-width: $sm-max) {
+	.vk_responsive-br-sm{
+		display: block;
+	}
+}
+@media (min-width: $md-min) and (max-width: $md-max) {
+	.vk_responsive-br-md{
+		display: block;
+	}
+}
+@media (min-width: $lg-min) and (max-width: $lg-max) {
+	.vk_responsive-br-lg{
+		display: block;
+	}
+}
+@media (min-width: $xl-min) and (max-width: $xl-max){
+	.vk_responsive-br-xl{
+		display: block;
+	}
+}
+@media (min-width: $xxl-min) {
+	.vk_responsive-br-xxl{
+		display: block;
+	}
+}
+
 /*-------------------------------------------*/
 /* CSS
 /*-------------------------------------------*/
 
-.vk_table {
-	&-col-mobile1 {
-		@media( max-width: 575.98px){
-			th,
-			td {
-					display: block;
-			}
-			th {
-				background-color: rgba(0, 0, 0, 0.05);
-			}
-			// ストライプ指定の時の背景色をリセット
-			&.table-striped tbody {
-				tr:nth-of-type(odd) {
-					background: inherit;
-				}
-			}
-		} // @media( max-width: 575.98px){
-	} // &-col-mobile1 {
+@mixin switchVisibility($pc, $tablet, $mobile) {
+	.vk_spacer {
+		.vk_spacer-display-pc {
+			display: $pc;
+		}
+
+		.vk_spacer-display-tablet {
+			display: $tablet;
+		}
+
+		.vk_spacer-display-mobile {
+			display: $mobile;
+		}
+	}
 }
 
-/*-------------------------------------------*/
-/* editor class
-/*-------------------------------------------*/
-.vk_simpleTable-edit{
-	.editor-inner-blocks,
-	.editor-block-list__layout,
-	.editor-block-list__block,
-	.editor-rich-text__editable,
-	.editor-block-list__block-edit{
-		padding:0;
-		margin:0;
-		width:100%;
-	}
-	& > .editor-inner-blocks{
-		margin-top:-1px; // th,td がHTML上ではdivの中になってしまう都合上、線が2pxになるためマイナスオフセット
-	}
-	.editor-block-list__block-edit{
-		height:100%;
-	}
-	.block-editor-block-list__insertion-point{
-		/* 上のセルに被るので選択しにくくなるのでデフォルトのマイナスオフセットを少し下げる */
-		top:-5px;
-	}
-	.editor-block-list__block-edit:before{
-		right:-0px;
-		left:-0px;
-		top:-0px;
-		bottom:-0px;
-		// border:1px solid #ff0000;
-	}
-	.editor-inner-blocks {
-		tr {
-			width:100%;
-			display: block;
-			border-bottom:1px solid #e5e5e5;
-			.editor-block-list__layout {
-				display: flex;
-				.editor-block-list__block {
-				}
-			}
-		}
-		th,
-		td {
-			padding: 0;
-			display: block;
-			width:100%;
-			border:none; // デフォルトでつけてくる線を消す
-			.editor-rich-text__editable{
-				padding: 14px;
-			}
-		}
-	}
-	// 編集画面のtableは HTML構造がカオスなので補正
-	&.table-striped > tbody > .editor-inner-blocks > .editor-block-list__layout > div:nth-of-type(odd) {
-			background-color: rgba(0, 0, 0, 0.05);
-	}
+// Small devices (landscape phones, 576px以下)
+@media (max-width: 576px) {
+	@include switchVisibility(none, none, block);
+}
+
+// Medium devices (tablets, 577pxから768px)
+@media (min-width: 577px) and (max-width: 768px) {
+	@include switchVisibility(none, block, none);
+}
+
+// Large devices (desktops, 769px以上)
+@media (min-width: 769px) {
+	@include switchVisibility(block, none, none);
 }
 
 /*-------------------------------------------*/
@@ -2983,51 +3257,69 @@ $font_serif: "ＭＳ Ｐ明朝", "MS PMincho", "ヒラギノ明朝 Pro W3",
 // 	width: 70%;
 // }
 
-/*-------------------------------------------*/
-/* CSS
-/*-------------------------------------------*/
 
-@mixin switchVisibility($pc, $tablet, $mobile) {
-	.vk_spacer {
-		.vk_spacer-display-pc {
-			display: $pc;
-		}
+/* .vk_hidden.vk_hidden は2つじゃないと上書きできない  */
+.vk_hidden {
+	display: block !important;
+	color: var(--blue);
 
-		.vk_spacer-display-tablet {
-			display: $tablet;
-		}
-
-		.vk_spacer-display-mobile {
-			display: $mobile;
-		}
-	}
+  &.vk_posts{
+	// display block だとカラムがすべて落ちるため posts は flexで上書き
+	display: flex !important;
+  }
+  @media (max-width: $xs-max) {
+    &-xs {
+	  display: block !important;
+	  &.vk_posts{
+		// display block だとカラムがすべて落ちるため posts は flexで上書き
+		display: flex !important;
+	  }
+    }
+  }
+  @media (min-width: $sm-min) and (max-width: $sm-max) {
+    &-sm {
+	  display: block !important;
+	  &.vk_posts{
+		// display block だとカラムがすべて落ちるため posts は flexで上書き
+		display: flex !important;
+	  }
+    }
+  }
+  @media (min-width: $md-min) and (max-width: $md-max) {
+    &-md {
+	  display: block !important;
+	  &.vk_posts{
+		// display block だとカラムがすべて落ちるため posts は flexで上書き
+		display: flex !important;
+	  }
+    }
+  }
+  @media (min-width: $lg-min) and (max-width: $lg-max) {
+    &-lg {
+	  display: block !important;
+	  &.vk_posts{
+		// display block だとカラムがすべて落ちるため posts は flexで上書き
+		display: flex !important;
+	  }
+    }
+  }
+  @media (min-width: $xl-min) {
+    &-xl {
+	  display: block !important;
+	  &.vk_posts{
+		// display block だとカラムがすべて落ちるため posts は flexで上書き
+		display: flex !important;
+	  }
+    }
+  }
+  @media (min-width: $xxl-min) {
+    &-xxl {
+	  display: block !important;
+	  &.vk_posts{
+		// display block だとカラムがすべて落ちるため posts は flexで上書き
+		display: flex !important;
+	  }
+    }
+  }
 }
-
-// Small devices (landscape phones, 576px以下)
-@media (max-width: 576px) {
-	@include switchVisibility(none, none, block);
-}
-
-// Medium devices (tablets, 577pxから768px)
-@media (min-width: 577px) and (max-width: 768px) {
-	@include switchVisibility(none, block, none);
-}
-
-// Large devices (desktops, 769px以上)
-@media (min-width: 769px) {
-	@include switchVisibility(block, none, none);
-}
-
-/*-------------------------------------------*/
-/* CSS
-/*-------------------------------------------*/
-.vk_table-col-overflow {
-  white-space: nowrap !important;
-}
-/*# sourceMappingURL=style.scss.map */
-
-/*-------------------------------------------*/
-/* CSS
-/*-------------------------------------------*/
-
 }

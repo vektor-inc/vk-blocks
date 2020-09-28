@@ -2,6 +2,7 @@
 
 // サーバーサイドレンダリングスクリプトを読み込み。
 require_once dirname( __FILE__ ) . '/view/post-list.php';
+require_once dirname( __FILE__ ) . '/view/responsive-br.php';
 // require_once dirname( __FILE__ ) . '/customize/vk-blocks-customize-config.php';
 
 // VK Blocks の管理画面
@@ -19,6 +20,31 @@ add_action(
 		load_plugin_textdomain( 'vk-blocks', false, $path );
 	}
 );
+
+/*
+-------------------------------------------*/
+/*
+  Get Option
+/*-------------------------------------------*/
+function vkblocks_get_options() {
+	$options  = get_option( 'vk_blocks_options' );
+	$defaults = array(
+		'display_wp_block_template' => 'hide',
+		'display_vk_block_template' => 'display',
+	);
+	$options  = wp_parse_args( $options, $defaults );
+	return $options;
+}
+function vkblocks_get_selected( $current, $value ) {
+	$selected = '';
+	if ( $current == $value ) {
+		$selected = ' selected';
+	}
+	return $selected;
+}
+function vkblocks_the_selected( $current, $value ) {
+	echo vkblocks_get_selected( $current, $value );
+}
 
 /*
  Load css
@@ -113,30 +139,38 @@ function vkblocks_blocks_assets() {
 
 	if ( defined( 'GUTENBERG_VERSION' ) || version_compare( $wp_version, '5.0', '>=' ) ) {
 
-		$arr = array( 'alert', 'balloon', 'button', 'faq', 'flow', 'pr-blocks', 'pr-content', 'spacer', 'heading', 'staff', 'highlighter', 'list-style', 'group-style','column-responsive','column-responsive-item','border-box' );// REPLACE-FLAG : このコメントは削除しないで下さい。wp-create-gurten-template.shで削除する基準として左の[//REPLACE-FLAG]を使っています。
+		$arr = array( 'alert', 'balloon', 'button', 'faq', 'flow', 'pr-blocks', 'pr-content', 'spacer', 'heading', 'staff', 'highlighter', 'list-style', 'group-style', 'border-box', 'faq2', 'faq2-q', 'faq2-a', 'responsive-br' );// REPLACE-FLAG : このコメントは削除しないで下さい。wp-create-gurten-template.shで削除する基準として左の[//REPLACE-FLAG]を使っています。
 
 		$common_attributes = array(
-			'vkb_hidden'    => array(
+			'vkb_hidden'       => array(
 				'type'    => 'boolean',
 				'default' => false,
 			),
-			'vkb_hidden_xl' => array(
+			'vkb_hidden_xxl'   => array(
 				'type'    => 'boolean',
 				'default' => false,
 			),
-			'vkb_hidden_lg' => array(
+			'vkb_hidden_xl_v2' => array(
 				'type'    => 'boolean',
 				'default' => false,
 			),
-			'vkb_hidden_md' => array(
+			'vkb_hidden_xl'    => array(
 				'type'    => 'boolean',
 				'default' => false,
 			),
-			'vkb_hidden_sm' => array(
+			'vkb_hidden_lg'    => array(
 				'type'    => 'boolean',
 				'default' => false,
 			),
-			'vkb_hidden_xs' => array(
+			'vkb_hidden_md'    => array(
+				'type'    => 'boolean',
+				'default' => false,
+			),
+			'vkb_hidden_sm'    => array(
+				'type'    => 'boolean',
+				'default' => false,
+			),
+			'vkb_hidden_xs'    => array(
 				'type'    => 'boolean',
 				'default' => false,
 			),
@@ -181,6 +215,7 @@ function vkblocks_blocks_assets() {
 								return '<div><div class="vk_tableOfContents_title">' . __( 'Table of Contents', 'vk-blocks' ) . '</div></div>';
 							}
 						},
+						'supports'        => array(),
 					)
 				);
 			} elseif ( $value == 'post-list' ) {
@@ -209,6 +244,10 @@ function vkblocks_blocks_assets() {
 										'default' => 3,
 									),
 									'col_lg'            => array(
+										'type'    => 'number',
+										'default' => 3,
+									),
+									'col_xxl'           => array(
 										'type'    => 'number',
 										'default' => 3,
 									),
@@ -295,6 +334,7 @@ function vkblocks_blocks_assets() {
 							'editor_style'    => 'vk-blocks-build-editor-css',
 							'editor_script'   => 'vk-blocks-build-js',
 							'render_callback' => 'vk_blocks_render_post_list',
+							'supports'        => array(),
 						)
 					); // register_block_type(
 			} elseif ( $value == 'child-page' ) {
@@ -305,7 +345,7 @@ function vkblocks_blocks_assets() {
 						'attributes'      => array_merge(
 							array(
 								'selectId'          => array(
-									'type' => 'number',
+									'type'    => 'number',
 									'default' => -1,
 								),
 								'name'              => array(
@@ -333,6 +373,10 @@ function vkblocks_blocks_assets() {
 									'default' => 2,
 								),
 								'col_xl'            => array(
+									'type'    => 'number',
+									'default' => 2,
+								),
+								'col_xxl'           => array(
 									'type'    => 'number',
 									'default' => 2,
 								),
@@ -406,6 +450,7 @@ function vkblocks_blocks_assets() {
 						'editor_style'    => 'vk-blocks-build-editor-css',
 						'editor_script'   => 'vk-blocks-build-js',
 						'render_callback' => 'vk_blocks_render_post_list',
+						'supports'        => array(),
 					)
 				); // register_block_type(
 			} else {
@@ -422,6 +467,19 @@ function vkblocks_blocks_assets() {
 			} // if ( $value === 'table-of-contents' ) {
 		} // foreach ( $arr as $value ) {
 	} // if ( defined( 'GUTENBERG_VERSION' ) || version_compare( $wp_version, '5.0', '>=' ) ) {
+
+	$dynamic_css = '
+		:root {
+			--vk_flow-arrow: url(' . VK_BLOCKS_URL . 'images/arrow_bottom.svg);
+		}
+	';
+	// delete before after space
+	$dynamic_css = trim( $dynamic_css );
+	// convert tab and br to space
+	$dynamic_css = preg_replace( '/[\n\r\t]/', '', $dynamic_css );
+	// Change multiple spaces to single space
+	$dynamic_css = preg_replace( '/\s(?=\s)/', '', $dynamic_css );
+	wp_add_inline_style( 'vk-blocks-build-css', $dynamic_css );
 } // function vkblocks_blocks_assets() {
 add_action( 'init', 'vkblocks_blocks_assets' );
 
@@ -466,4 +524,17 @@ if ( ! function_exists( 'vkblocks_set_wp_version' ) ) {
 		'</script>';
 	}
 	add_action( 'admin_head', 'vkblocks_set_wp_version', 10, 0 );
+}
+
+if ( function_exists( 'vkblocks_get_version' ) ) {
+
+	function vkblocks_set_vkbpro_version() {
+		$vkbpro_version = vkblocks_get_version();
+		if ( $vkbpro_version ) {
+			echo '<script>',
+			'var vkbproVersion = "' . $vkbpro_version . '";',
+			'</script>';
+		}
+	}
+	add_action( 'admin_head', 'vkblocks_set_vkbpro_version', 10, 0 );
 }

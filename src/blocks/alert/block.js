@@ -4,6 +4,7 @@
  */
 import { deprecated } from './deprecated';
 import { vkbBlockEditor } from "./../_helper/depModules";
+import { content } from "./../_helper/example-data"
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
@@ -31,6 +32,12 @@ registerBlockType('vk-blocks/alert', {
 			selector: 'p',
 		}
 	},
+	example: {
+		attributes: {
+			style: 'info',
+			content
+		},
+	},
 
 	edit({ attributes, setAttributes, className }) {
 		const {
@@ -45,24 +52,24 @@ registerBlockType('vk-blocks/alert', {
 		return (
 			<Fragment>
 				<InspectorControls>
-					<PanelBody title={__("Style Settings", "vk-blocks")}>
+					<PanelBody title={ __("Style Settings", "vk-blocks") }>
 						<SelectControl
-							value={style}
-							onChange={value => setAttributes({ style: value })}
-							options={[
+							value={ style }
+							onChange={ value => setAttributes({ style: value }) }
+							options={ [
 								{ label: __("Success", "vk-blocks"), value: "success" },
 								{ label: __("Info", "vk-blocks"), value: "info" },
 								{ label: __("Warning", "vk-blocks"), value: "warning" },
 								{ label: __("Danger", "vk-blocks"), value: "danger" },
-							]}
+							] }
 						/>
 					</PanelBody>
 				</InspectorControls>
-				<div className={`${className} alert alert-${style}`}>
+				<div className={ `${className} alert alert-${style}` }>
 					<RichText
 						tagName="p"
-						onChange={onChangeContent}
-						value={content}
+						onChange={ onChangeContent }
+						value={ content }
 					/>
 				</div>
 			</Fragment>
@@ -75,12 +82,12 @@ registerBlockType('vk-blocks/alert', {
 			content
 		} = attributes;
 		return (
-			<div className={`${className} alert alert-${style}`}>
+			<div className={ `${className} alert alert-${style}` }>
 				<RichText.Content
-					tagName={'p'}
-					value={content} />
+					tagName={ 'p' }
+					value={ content } />
 			</div>
 		);
 	},
-	deprecated: deprecated,
+	deprecated,
 });

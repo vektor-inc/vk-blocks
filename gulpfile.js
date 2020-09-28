@@ -16,7 +16,10 @@ const jsmin = require("gulp-jsmin");
 gulp.task('text-domain', function (done) {
 	gulp.src(['./inc/term-color/package/*'])
 	  .pipe(replace(', \'vk_term_color_textdomain\'', ', \'vk-blocks\''))
-	  .pipe(gulp.dest('./inc/term-color/package/'));
+    .pipe(gulp.dest('./inc/term-color/package/'));
+  gulp.src(['./inc/vk-components/package/*'])
+  .pipe(replace(', \'vk_components_textdomain\'', ', \'vk-blocks\''))
+  .pipe(gulp.dest('./inc/vk-components/package/'));
 	done();
   });
 
@@ -61,6 +64,20 @@ gulp.task("sass_editor", function() {
     .pipe(gulp.dest("./inc/vk-blocks/build/"));
 });
 
+gulp.task("dist_swiper_js", function() {
+  return gulp
+    .src(["./lib/swiper/swiper.min.js"])
+    .pipe(concat("swiper.min.js"))
+    .pipe(gulp.dest("./inc/vk-blocks/build/"));
+});
+
+gulp.task("dist_swiper_css", function() {
+  return gulp
+    .src(["./lib/swiper/swiper.min.css"])
+    .pipe(concat("swiper.min.css"))
+    .pipe(gulp.dest("./inc/vk-blocks/build/"));
+});
+
 // VK Block で使用しているBootstrapのみコンパイル
 // ※ Lightning 以外のテーマで利用の際に読込
 gulp.task("sass_bootstrap", function() {
@@ -97,7 +114,7 @@ gulp.task("watch", function() {
   gulp.watch("src/**/*.js", gulp.parallel("js"));
 //   gulp.watch("src/**/*.js", gulp.parallel("js-dev"));
   gulp.watch("editor-css/_editor_before.scss", gulp.parallel("sass_editor"));
-  gulp.watch("editor-css/*.scss", gulp.parallel("sass_editor"));
+  // gulp.watch("editor-css/*.scss", gulp.parallel("sass_editor"));
   gulp.watch("src/**/*.scss", gulp.series("sass", "sass_editor"));
   gulp.watch(
     "lib/bootstrap/scss/*.scss",
@@ -106,14 +123,14 @@ gulp.task("watch", function() {
   gulp.watch(
     "inc/vk-components/**/*.scss",
     gulp.parallel("sass_vk_components", "sass_editor")
-  );
+	);
 });
 
 //Build : Development
-gulp.task("build-dev", gulp.series("js-dev", "sass", "sass_editor"));
+gulp.task("build-dev", gulp.series("js-dev", "sass", "sass_editor","sass_bootstrap","sass_vk_components", "dist_swiper_js", "dist_swiper_css"));
 
 // Build : Production
-gulp.task("build", gulp.series("js", "sass", "sass_editor"));
+gulp.task("build", gulp.series("js", "sass", "sass_editor","sass_bootstrap","sass_vk_components", "dist_swiper_js", "dist_swiper_css"));
 
 // Default Tasks
 gulp.task("default", gulp.series("watch"));
@@ -170,11 +187,6 @@ gulp.task("dist", function() {
         "!./node_modules/**"
       ],
       { base: "./" }
-    )
-    .pipe(
-      gulp.dest(
-        "../../../../../../updatepro/app/public/wp-content/plugins/vk-blocks-pro"
-      )
     )
     .pipe(gulp.dest("dist/vk-blocks-pro")); // distディレクトリに出力
 });

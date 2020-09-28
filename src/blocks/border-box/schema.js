@@ -1,4 +1,6 @@
+const { __ } = wp.i18n;
 import { faSchema } from "./font-awesome-new";
+import { title, iconUser, content } from "../_helper/example-data"
 
 export const originalSchema = {
 	heading: {
@@ -9,11 +11,32 @@ export const originalSchema = {
 	color: {
 		type: 'string',
 		default: 'red',
+	},
+	bgColor: {
+		type: 'string',
+		default: 'transparent'
 	}
+
 };
 
-let mergeSchema = () => {
+const mergeSchema = () => {
 	return Object.assign(originalSchema, faSchema);
 };
 
 export const schema = mergeSchema();
+
+export const example  = {
+    attributes: {
+        heading: title,
+		color: "red",
+		faIcon: iconUser,
+	},
+	innerBlocks: [
+		{
+			name: 'core/paragraph',
+			attributes: {
+				content,
+			},
+		},
+	],
+}
