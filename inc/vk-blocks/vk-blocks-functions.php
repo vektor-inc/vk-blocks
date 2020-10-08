@@ -30,8 +30,8 @@ function vkblocks_get_options() {
 	$options  = get_option( 'vk_blocks_options' );
 	$defaults = array(
 		'display_wp_block_template' => 'hide',
-		'display_vk_block_template' => 'display',
 	);
+	$defaults = array_merge( $defaults, apply_filters( 'vk_blocks_default_options', array() ) );
 	$options  = wp_parse_args( $options, $defaults );
 	return $options;
 }
@@ -126,18 +126,15 @@ function vkblocks_blocks_assets() {
 		wp_set_script_translations( 'vk-blocks-build-js', 'vk-blocks', plugin_dir_path( __FILE__ ) . 'build/languages' );
 	}
 
-	$theme = wp_get_theme();
-	if ( $theme->exists() ) {
-		// 親テーマのテンプレートを取得
-		// 親テーマが lightning-pro か テーマ名が Lightning Pro の時
-		if ( $theme->get( 'Template' ) == 'lightning-pro' || $theme->get( 'Name' ) == 'Lightning Pro' ) {
-			wp_localize_script( 'vk-blocks-build-js', 'vk_blocks_check', array( 'is_pro' => true ) );
-		} else {
-			wp_localize_script( 'vk-blocks-build-js', 'vk_blocks_check', array( 'is_pro' => false ) );
-		}
-	} // if ( $theme->exists() ) {
+	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+	if ( is_plugin_active( 'vk-blocks-pro/vk-blocks.php' ) ) {
+		wp_localize_script( 'vk-blocks-build-js', 'vk_blocks_check', array( 'is_pro' => true ) );
+	} else {
+		wp_localize_script( 'vk-blocks-build-js', 'vk_blocks_check', array( 'is_pro' => false ) );
+	}
 
 	if ( defined( 'GUTENBERG_VERSION' ) || version_compare( $wp_version, '5.0', '>=' ) ) {
+
 
 		$arr = array( 'alert', 'balloon', 'button', 'faq', 'flow', 'pr-blocks', 'pr-content', 'spacer', 'heading', 'staff', 'highlighter', 'list-style', 'group-style', 'border-box', 'faq2', 'faq2-q', 'faq2-a', 'responsive-br' );// REPLACE-FLAG : このコメントは削除しないで下さい。wp-create-gurten-template.shで削除する基準として左の[//REPLACE-FLAG]を使っています。
 
@@ -310,6 +307,10 @@ function vkblocks_blocks_assets() {
 									'isCheckedTerms'    => array(
 										'type'    => 'string',
 										'default' => '[]',
+									),
+									'order'           => array(
+										'type'    => 'string',
+										'default' => 'DESC',
 									),
 									'orderby'           => array(
 										'type'    => 'string',
