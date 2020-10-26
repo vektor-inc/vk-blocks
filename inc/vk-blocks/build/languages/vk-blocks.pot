@@ -99,111 +99,112 @@ msgstr ""
 msgid "Danger"
 msgstr ""
 
-#: src/blocks/balloon/block.js:130
+#: src/blocks/balloon/block.js:131
 msgid "Balloon setting"
 msgstr ""
 
-#: src/blocks/balloon/block.js:132
+#: src/blocks/balloon/block.js:133
 #: src/blocks/heading/block.js:201
 msgid "Position"
 msgstr ""
 
-#: src/blocks/balloon/block.js:133
+#: src/blocks/balloon/block.js:134
 msgid "Please specify the layout of the balloon."
 msgstr ""
 
-#: src/blocks/balloon/block.js:141
+#: src/blocks/balloon/block.js:142
 #: src/blocks/button/block.js:189
 #: src/blocks/pr-content/block.js:204
 msgid "Left"
 msgstr ""
 
-#: src/blocks/balloon/block.js:149
+#: src/blocks/balloon/block.js:150
 #: src/blocks/button/block.js:205
 #: src/blocks/pr-content/block.js:203
 msgid "Right"
 msgstr ""
 
-#: src/blocks/balloon/block.js:153
+#: src/blocks/balloon/block.js:154
 msgid "Type"
 msgstr ""
 
-#: src/blocks/balloon/block.js:154
+#: src/blocks/balloon/block.js:155
 msgid "Please select the type of balloon."
 msgstr ""
 
-#: src/blocks/balloon/block.js:162
+#: src/blocks/balloon/block.js:163
 msgid "Serif"
 msgstr ""
 
-#: src/blocks/balloon/block.js:170
+#: src/blocks/balloon/block.js:171
 msgid "Thinking"
 msgstr ""
 
-#: src/blocks/balloon/block.js:174
+#: src/blocks/balloon/block.js:175
 msgid "Image Style"
 msgstr ""
 
-#: src/blocks/balloon/block.js:182
+#: src/blocks/balloon/block.js:183
 #: src/blocks/button/block.js:169
-#: src/blocks/faq/block.js:65
-#: src/blocks/faq2/block.js:65
+#: src/blocks/faq/block.js:67
+#: src/blocks/faq2/block.js:57
 msgid "Normal"
 msgstr ""
 
-#: src/blocks/balloon/block.js:190
+#: src/blocks/balloon/block.js:191
 msgid "Rounded"
 msgstr ""
 
-#: src/blocks/balloon/block.js:198
+#: src/blocks/balloon/block.js:199
 msgid "Circle"
 msgstr ""
 
-#: src/blocks/balloon/block.js:201
+#: src/blocks/balloon/block.js:202
 msgid "Background color of speech balloon"
 msgstr ""
 
-#: src/blocks/balloon/block.js:207
+#: src/blocks/balloon/block.js:208
 msgid "Default Icon Setting"
 msgstr ""
 
-#: src/blocks/balloon/block.js:211
+#: src/blocks/balloon/block.js:212
 msgid "You can register default icons from Settings > VK Blocks in Admin."
 msgstr ""
 
-#: src/blocks/balloon/block.js:213
+#: src/blocks/balloon/block.js:214
 msgid "Animation setting"
 msgstr ""
 
-#: src/blocks/balloon/block.js:214
+#: src/blocks/balloon/block.js:215
 msgid "Please select the type of animation."
 msgstr ""
 
-#: src/blocks/balloon/block.js:221
+#: src/blocks/balloon/block.js:222
 #: src/blocks/staff/block.js:89
 msgid "None"
 msgstr ""
 
-#: src/blocks/balloon/block.js:225
+#: src/blocks/balloon/block.js:226
 msgid "Trembling"
 msgstr ""
 
-#: src/blocks/balloon/block.js:229
+#: src/blocks/balloon/block.js:230
 msgid "Trembling X"
 msgstr ""
 
-#: src/blocks/balloon/block.js:233
+#: src/blocks/balloon/block.js:234
 msgid "Pounding"
 msgstr ""
 
-#: src/blocks/balloon/block.js:237
+#: src/blocks/balloon/block.js:238
 msgid "Shaking"
 msgstr ""
 
-#: src/blocks/balloon/block.js:258
+#: src/blocks/balloon/block.js:259
 #: src/blocks/flow/block.js:105
-#: src/blocks/pr-blocks/block.js:168
+#: src/blocks/pr-blocks/block.js:169
 #: src/blocks/pr-content/component.js:157
+#: src/blocks/pr-content/deprecated/0.43.0/component.js:157
 #: src/blocks/pr-content/deprecated/component-deprecated.js:102
 #: src/blocks/pr-content/deprecated/component-no-boder-color.js:116
 #: src/blocks/pr-content/deprecated/componentV1.js:185
@@ -211,21 +212,22 @@ msgstr ""
 msgid "Select image"
 msgstr ""
 
-#: src/blocks/balloon/block.js:26
-msgid "Ballon"
-msgstr ""
-
-#: src/blocks/balloon/block.js:263
+#: src/blocks/balloon/block.js:264
 #: src/blocks/flow/block.js:106
-#: src/blocks/pr-blocks/block.js:164
+#: src/blocks/pr-blocks/block.js:165
 #: src/blocks/pr-content/component.js:164
+#: src/blocks/pr-content/deprecated/0.43.0/component.js:164
 #: src/blocks/pr-content/deprecated/component-deprecated.js:106
 #: src/blocks/pr-content/deprecated/component-no-boder-color.js:120
 #: src/blocks/pr-content/deprecated/componentV1.js:192
 msgid "Upload image"
 msgstr ""
 
-#: src/blocks/balloon/block.js:274
+#: src/blocks/balloon/block.js:27
+msgid "Ballon"
+msgstr ""
+
+#: src/blocks/balloon/block.js:275
 msgid "Icon Name"
 msgstr ""
 
@@ -323,7 +325,7 @@ msgid "Button URL"
 msgstr ""
 
 #: src/blocks/button/block.js:148
-#: src/blocks/pr-blocks/block.js:313
+#: src/blocks/pr-blocks/block.js:314
 #: src/blocks/pr-content/block.js:140
 msgid "Open link new tab."
 msgstr ""
@@ -361,12 +363,12 @@ msgid "Button Style:"
 msgstr ""
 
 #: src/blocks/button/block.js:233
-#: src/blocks/pr-blocks/block.js:340
+#: src/blocks/pr-blocks/block.js:341
 msgid "Solid color"
 msgstr ""
 
 #: src/blocks/button/block.js:241
-#: src/blocks/pr-blocks/block.js:341
+#: src/blocks/pr-blocks/block.js:342
 msgid "No background"
 msgstr ""
 
@@ -433,41 +435,58 @@ msgstr ""
 msgid "Button"
 msgstr ""
 
-#: src/blocks/faq/block.js:120
+#: src/blocks/faq/block.js:112
+#: src/blocks/faq2/block.js:116
+msgid ""
+"If you want to be collapsing this block, you can set it at Setting > VK "
+"Blocks"
+msgstr ""
+
+#: src/blocks/faq/block.js:114
+#: src/blocks/faq2/block.js:118
+msgid "You can be collapsing this block at VK Blocks Pro"
+msgstr ""
+
+#: src/blocks/faq/block.js:124
+#: src/blocks/faq2/block.js:124
+msgid "Accordion Setting"
+msgstr ""
+
+#: src/blocks/faq/block.js:134
 msgid "Please enter a question."
 msgstr ""
 
-#: src/blocks/faq/block.js:46
+#: src/blocks/faq/block.js:48
 msgid "Classic FAQ"
 msgstr ""
 
-#: src/blocks/faq/block.js:70
-#: src/blocks/faq2/block.js:70
+#: src/blocks/faq/block.js:72
+#: src/blocks/faq2/block.js:62
 msgid "Bgfill Circle"
 msgstr ""
 
-#: src/blocks/faq/block.js:74
-#: src/blocks/faq2/block.js:74
+#: src/blocks/faq/block.js:76
+#: src/blocks/faq2/block.js:66
 msgid "Bgfill Square"
 msgstr ""
 
-#: src/blocks/faq/block.js:78
-#: src/blocks/faq2/block.js:78
+#: src/blocks/faq/block.js:80
+#: src/blocks/faq2/block.js:70
 msgid "Bgfill Rounded"
 msgstr ""
 
-#: src/blocks/faq/block.js:82
-#: src/blocks/faq2/block.js:82
+#: src/blocks/faq/block.js:84
+#: src/blocks/faq2/block.js:74
 msgid "Border Circle"
 msgstr ""
 
-#: src/blocks/faq/block.js:86
-#: src/blocks/faq2/block.js:86
+#: src/blocks/faq/block.js:88
+#: src/blocks/faq2/block.js:78
 msgid "Border Square"
 msgstr ""
 
-#: src/blocks/faq/block.js:90
-#: src/blocks/faq2/block.js:90
+#: src/blocks/faq/block.js:92
+#: src/blocks/faq2/block.js:82
 msgid "Border Rounded"
 msgstr ""
 
@@ -479,7 +498,7 @@ msgstr ""
 msgid "FAQ Question"
 msgstr ""
 
-#: src/blocks/faq2/block.js:45
+#: src/blocks/faq2/block.js:47
 msgid "New FAQ"
 msgstr ""
 
@@ -528,6 +547,7 @@ msgid "Border Top Bottom"
 msgstr ""
 
 #: src/blocks/group-style/block.js:123
+#: src/blocks/image/block.js:22
 msgid "Shadow"
 msgstr ""
 
@@ -728,6 +748,30 @@ msgstr ""
 msgid "Photo frame"
 msgstr ""
 
+#: src/blocks/image/block.js:14
+msgid "Photo frame Tilt Right"
+msgstr ""
+
+#: src/blocks/image/block.js:18
+msgid "Photo frame Tilt Left"
+msgstr ""
+
+#: src/blocks/image/block.js:26
+msgid "Wave01"
+msgstr ""
+
+#: src/blocks/image/block.js:30
+msgid "Wave02"
+msgstr ""
+
+#: src/blocks/image/block.js:34
+msgid "Wave03"
+msgstr ""
+
+#: src/blocks/image/block.js:38
+msgid "Wave04"
+msgstr ""
+
 #: src/blocks/image/block.js:6
 msgid "Border"
 msgstr ""
@@ -780,59 +824,59 @@ msgstr ""
 msgid "List Icon Color"
 msgstr ""
 
-#: src/blocks/pr-blocks/block.js:100
+#: src/blocks/pr-blocks/block.js:101
 msgid "PR Blocks"
 msgstr ""
 
-#: src/blocks/pr-blocks/block.js:179
+#: src/blocks/pr-blocks/block.js:180
 msgid "PR Block1 Setting"
 msgstr ""
 
-#: src/blocks/pr-blocks/block.js:194
+#: src/blocks/pr-blocks/block.js:195
 msgid "Icon 1"
 msgstr ""
 
-#: src/blocks/pr-blocks/block.js:224
+#: src/blocks/pr-blocks/block.js:225
 msgid "When you have an image. Image is displayed with priority"
 msgstr ""
 
-#: src/blocks/pr-blocks/block.js:226
+#: src/blocks/pr-blocks/block.js:227
 msgid "PR Image 1"
 msgstr ""
 
-#: src/blocks/pr-blocks/block.js:242
+#: src/blocks/pr-blocks/block.js:243
 msgid "PR Block2 Setting"
 msgstr ""
 
-#: src/blocks/pr-blocks/block.js:257
+#: src/blocks/pr-blocks/block.js:258
 msgid "Icon 2"
 msgstr ""
 
-#: src/blocks/pr-blocks/block.js:288
+#: src/blocks/pr-blocks/block.js:289
 msgid "PR Image 2"
 msgstr ""
 
-#: src/blocks/pr-blocks/block.js:304
+#: src/blocks/pr-blocks/block.js:305
 msgid "PR Block3 Setting"
 msgstr ""
 
-#: src/blocks/pr-blocks/block.js:306
+#: src/blocks/pr-blocks/block.js:307
 msgid "Link URL:"
 msgstr ""
 
-#: src/blocks/pr-blocks/block.js:319
+#: src/blocks/pr-blocks/block.js:320
 msgid "Icon 3"
 msgstr ""
 
-#: src/blocks/pr-blocks/block.js:337
+#: src/blocks/pr-blocks/block.js:338
 msgid "Icon Background:"
 msgstr ""
 
-#: src/blocks/pr-blocks/block.js:348
+#: src/blocks/pr-blocks/block.js:349
 msgid "When you have an image. Image is displayed with priority."
 msgstr ""
 
-#: src/blocks/pr-blocks/block.js:350
+#: src/blocks/pr-blocks/block.js:351
 msgid "PR Image 3"
 msgstr ""
 
@@ -900,14 +944,16 @@ msgstr ""
 msgid "Color Setting"
 msgstr ""
 
-#: src/blocks/pr-content/component.js:200
+#: src/blocks/pr-content/component.js:198
+#: src/blocks/pr-content/deprecated/0.43.0/component.js:200
 #: src/blocks/pr-content/deprecated/component-deprecated.js:122
 #: src/blocks/pr-content/deprecated/component-no-boder-color.js:136
 #: src/blocks/pr-content/deprecated/componentV1.js:228
 msgid "Input title."
 msgstr ""
 
-#: src/blocks/pr-content/component.js:208
+#: src/blocks/pr-content/component.js:206
+#: src/blocks/pr-content/deprecated/0.43.0/component.js:208
 #: src/blocks/pr-content/deprecated/component-deprecated.js:130
 #: src/blocks/pr-content/deprecated/component-no-boder-color.js:144
 #: src/blocks/pr-content/deprecated/componentV1.js:236
@@ -918,11 +964,23 @@ msgstr ""
 msgid "Responsive BR "
 msgstr ""
 
-#: src/blocks/spacer/block.js:28
+#: src/blocks/spacer/advanced-spacer-control.js:15
+msgid "height"
+msgstr ""
+
+#: src/blocks/spacer/advanced-spacer-control.js:19
+msgid "margin-top"
+msgstr ""
+
+#: src/blocks/spacer/advanced-spacer-control.js:9
+msgid "Space Type"
+msgstr ""
+
+#: src/blocks/spacer/block.js:29
 msgid "Responsive Spacer"
 msgstr ""
 
-#: src/blocks/spacer/block.js:46
+#: src/blocks/spacer/block.js:48
 msgid "Height for each device."
 msgstr ""
 
@@ -1039,6 +1097,18 @@ msgstr ""
 
 #: src/translation_dummy.js:15
 msgid "Optimize VK Blocks CSS ( Tree Shaking + Preload )"
+msgstr ""
+
+#: src/translation_dummy.js:16
+msgid "Disable accordion"
+msgstr ""
+
+#: src/translation_dummy.js:17
+msgid "Enable accordion and default open"
+msgstr ""
+
+#: src/translation_dummy.js:18
+msgid "Enable accordion and default close"
 msgstr ""
 
 #: src/translation_dummy.js:2
