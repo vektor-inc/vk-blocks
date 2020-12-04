@@ -25,14 +25,16 @@ if ( ! class_exists( 'VK_Component_Posts' ) ) {
 				'display_image'              => true,
 				'display_image_overlay_term' => true,
 				'display_excerpt'            => false,
+				'display_author'             => false,
 				'display_date'               => true,
 				'display_new'                => true,
+				'display_taxonomies'         => false,
 				'display_btn'                => false,
 				'image_default_url'          => false,
 				'overlay'                    => false,
-				'btn_text'                   => __( 'Read more', 'vk-blocks' ),
+				'btn_text'                   => __( 'Read more', 'vk_components_textdomain' ),
 				'btn_align'                  => 'text-right',
-				'new_text'                   => __( 'New!!', 'vk-blocks' ),
+				'new_text'                   => __( 'New!!', 'vk_components_textdomain' ),
 				'new_date'                   => 7,
 				'textlink'                   => true,
 				'class_outer'                => '',
@@ -180,6 +182,8 @@ if ( ! class_exists( 'VK_Component_Posts' ) ) {
 			// Add layout Class
 			if ( $options['layout'] == 'card-horizontal' ) {
 				$class_outer = 'card card-post card-horizontal';
+			} elseif ( $options['layout'] == 'card-noborder' ) {
+				$class_outer = 'card card-noborder';
 			} elseif ( $options['layout'] == 'media' ) {
 				$class_outer = 'media';
 			} elseif ( $options['layout'] == 'postListText' ) {
@@ -282,7 +286,7 @@ if ( ! class_exists( 'VK_Component_Posts' ) ) {
 			// $attr = wp_parse_args( $attr, $default );
 
 			$layout_type = $options['layout'];
-			if ( $layout_type == 'card-horizontal' ) {
+			if ( $layout_type == 'card-horizontal' || $layout_type == 'card-noborder' ) {
 				$layout_type = 'card';
 			}
 
@@ -304,7 +308,7 @@ if ( ! class_exists( 'VK_Component_Posts' ) ) {
 
 			if ( $options['display_new'] ) {
 				$today = date_i18n( 'U' );
-				$entry = get_the_time( 'U' );
+				$entry = get_the_time( 'U', $post );
 				$kiji  = date( 'U', ( $today - $entry ) ) / 86400;
 				if ( $options['new_date'] > $kiji ) {
 					$html .= '<span class="vk_post_title_new">' . $options['new_text'] . '</span>';
@@ -327,6 +331,52 @@ if ( ! class_exists( 'VK_Component_Posts' ) ) {
 				$html .= '<p class="vk_post_excerpt ' . $layout_type . '-text">';
 				$html .= wp_kses_post( get_the_excerpt( $post->ID ) );
 				$html .= '</p>';
+			}
+
+			if ( $options['display_author'] ) {
+				$author = get_the_author();
+				if ( $author ) {
+					$html .= '<p class="vcard vk_post_author" itemprop="author">';
+
+					// VK Post Author Display の画像を取得
+					$profile_image_id = get_the_author_meta( 'user_profile_image' );
+					$html .= '<span class="vk_post_author_image">';
+					if ( $profile_image_id ) {
+						$profile_image_src = wp_get_attachment_image_src( $profile_image_id, 'thumbnail' );
+						$html      .= '<img class="vk_post_author_image" src="' . $profile_image_src[0] . '" alt="' . esc_attr( $author ) . '" />';
+					} else {
+						$html .= get_avatar( get_the_author_meta( 'email' ), 100 );
+					}
+					$html .= '</span>';
+
+					$html .= '<span class="fn vk_post_author_name" itemprop="name">';
+					$html .= esc_html( $author );
+					$html .= '</span></p>';
+				} // if author
+			}
+
+			if ( $options['display_taxonomies'] ) {
+				$args          = array(
+					'template'      => '<dt class="vk_post_taxonomy_title"><span class="vk_post_taxonomy_title_inner">%s</span></dt><dd class="vk_post_taxonomy_terms">%l</dd>',
+					'term_template' => '<a href="%1$s">%2$s</a>',
+				);
+				$taxonomies	= get_the_taxonomies( $post->ID, $args );
+				$exclusion	= array( 'product_type' );
+				// このフィルター名は投稿詳細でも使っているので注意
+				$exclusion	= apply_filters( 'vk_get_display_taxonomies_exclusion', $exclusion );
+
+				if ( is_array( $exclusion ) ){
+					foreach ( $exclusion as $key => $value ){
+						unset( $taxonomies[$value] );
+					}
+				}
+				if ( $taxonomies ) {
+					$html .= '<div class="vk_post_taxonomies">';
+					foreach ( $taxonomies as $key => $value ) {
+						$html .= '<dl class="vk_post_taxonomy vk_post_taxonomy-' . $key . '">' . $value . '</dl>';
+					} // foreach
+					$html .= '</div>';
+				} // if ($taxonomies)
 			}
 
 			if ( $options['display_btn'] ) {
@@ -371,19 +421,19 @@ if ( ! class_exists( 'VK_Component_Posts' ) ) {
 
 			$patterns = array(
 				'card'            => array(
-					'label'             => __( 'Card', 'vk-blocks' ),
+					'label'             => __( 'Card', 'vk_components_textdomain' ),
 					'class_posts_outer' => '',
 				),
 				'card-horizontal' => array(
-					'label'             => __( 'Card Horizontal', 'vk-blocks' ),
+					'label'             => __( 'Card Horizontal', 'vk_components_textdomain' ),
 					'class_posts_outer' => '',
 				),
 				'media'           => array(
-					'label'             => __( 'Media', 'vk-blocks' ),
+					'label'             => __( 'Media', 'vk_components_textdomain' ),
 					'class_posts_outer' => 'media-outer',
 				),
 				'postListText'    => array(
-					'label'             => _x( 'Text 1 Column', 'post list type', 'vk-blocks' ),
+					'label'             => _x( 'Text 1 Column', 'post list type', 'vk_components_textdomain' ),
 					'class_posts_outer' => 'postListText-outer',
 				),
 			);
