@@ -1,3 +1,11 @@
+:root {
+	--vk-margin-elem:2rem;
+}
+
+.text-nowrap {
+	white-space: nowrap;
+}
+
 /*-------------------------------------------*/
 /* リストデザイン
 /*-------------------------------------------*/
@@ -33,6 +41,7 @@ $colorPalette: (
 	vk-has-very-light-gray-color: #eee,
 	vk-has-cyan-bluish-gray-color: #abb8c3,
 	vk-has-very-dark-gray-color: #313131,
+	vk-has-white-color: #ffffff
 );
 
 ul,
@@ -67,13 +76,13 @@ ol {
 		li {
 			position: relative;
 			list-style: none;
-
+			padding-left: .5em;
 			&:before {
 				position: absolute;
 				left: 0;
 				counter-increment: number;
 				content: counter(number);
-				margin-left: -2.4em;
+				margin-left: -1.8em;
 				background: #222;
 				color: #fff;
 				text-indent: 0;
@@ -96,7 +105,7 @@ ol {
 		li {
 			position: relative;
 			list-style: none;
-
+			padding-left: .5em;
 			&:before {
 				position: absolute;
 				left: -0.3em;
@@ -211,7 +220,10 @@ ol {
 
 @mixin pad-mag {
 	padding: 1.8em;
-	margin: 1.2em 0;
+	margin-top:1.2em; // IE fall back
+	margin-bottom:1.2em; // IE fall back
+	margin-top: var( --vk-margin-elem );
+	margin-bottom: var( --vk-margin-elem );
 }
 @mixin inner-item-pad-mag {
 	h2,
@@ -260,7 +272,7 @@ ol {
 				@include inner-item-pad-mag;
 			}
 			&-stitch {
-				margin: 1em 0;
+				margin: 1em auto;
 				padding: 0.5em;
 				border-radius: 8px;
 				@include inner-item-pad-mag;
@@ -344,6 +356,17 @@ ol {
 	}
 } //.wp-block-group
 
+
+/*-------------------------------------------*/
+/* Group Block
+/*-------------------------------------------*/
+.editor-styles-wrapper .wp-block-group {
+	// これがないとコアに勝手にwidthが左右1em余白をあけられる
+	.wp-block{
+		width:auto;
+	}
+}
+
 /*-------------------------------------------*/
 /* YouTube
 /*-------------------------------------------*/
@@ -366,11 +389,18 @@ ol {
 }
 
 /*-------------------------------------------*/
+/* ソーシャルアイコン
+/*-------------------------------------------*/
+.wp-block-social-links{
+	flex-wrap: wrap;
+}
+
+/*-------------------------------------------*/
 /* col-xxl
 /*-------------------------------------------*/
 $xxl-min: 1400px;
 .col {
-    // Bootstrap4�では xxl サイズがないので独自に追加
+    // Bootstrap4 では xxl サイズがないので独自に追加
     @media (min-width: $xxl-min) {
 		&-xxl-2 {
 			flex: 0 0 16.66667%;
