@@ -1,10 +1,10 @@
 .alert{
 
-  padding: 1em;
-  margin: 1em 0;
+	padding: 1em;
+  margin: 1em auto;
   border-radius: 3px;
 	p {
-		margin-bottom:0;
+		margin:0;
 	}
 
   & + &{

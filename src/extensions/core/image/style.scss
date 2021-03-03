@@ -1,0 +1,195 @@
+$border_radius: .5rem;
+$border_primary: 1px solid #e5e5e5;
+
+@mixin photoFrame {
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+    zoom: 1;
+    width: fit-content;
+    &.alignleft{
+        margin: 0 1em .5em 0;
+    }
+    &.alignright{
+        margin: 0 0 .5em 1em;
+    }
+    &.alignwide{ //幅広の場合はunsetでfit-contentを打ち消し
+        width:auto;
+    }
+    figcaption {
+       display: block;
+       margin: 8px 0 0;
+    }
+}
+@mixin photoFrame-tilt-right { 
+    transform: rotate(-2deg);
+    -moz-transform: rotate(-2deg);
+    -webkit-transform: rotate(-2deg);
+}
+@mixin photoFrame-tilt-left {   
+    transform: rotate(2deg);
+    -moz-transform: rotate(2deg);
+    -webkit-transform: rotate(2deg);
+}
+
+@mixin mask{
+    mask-repeat: no-repeat;
+    mask-position: 50% 50%;
+    mask-size: contain;
+}
+
+@mixin shadow {
+    box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+    width: fit-content;
+    figcaption{
+        display: block;
+    }
+    &.alignwide{ //幅広の場合はunsetでfit-contentを打ち消し
+        width: unset;
+    }
+}
+
+//左寄せ、右寄せが未指定の場合はfigureに.is-style-vk-image のクラス名が付く
+figure{
+    &.is-style-vk-image {
+        &-rounded {
+            img {
+                border-radius: $border_radius;
+            }
+        }
+        &-border {
+            img {
+                border: $border_primary;
+            }
+        }
+
+        &-photoFrame{
+            @include photoFrame;
+
+        }
+
+        &-photoFrame-tilt-right{
+            @include photoFrame;
+            @include photoFrame-tilt-right;
+        }
+
+        &-photoFrame-tilt-left{
+            @include photoFrame;
+            @include photoFrame-tilt-left;
+        }
+
+        &-shadow{
+            @include shadow;
+        }
+
+        &-wave01 {
+            img{
+                mask-image: var(--vk_image-mask-wave01);
+                @include mask;
+            }
+        }
+
+        &-wave02{
+            img{
+                mask-image: var(--vk_image-mask-wave02);
+                @include mask;
+            }
+        }
+
+        &-wave03{
+            img{
+                mask-image: var(--vk_image-mask-wave03);
+                @include mask;
+            }
+        }
+        &-wave04{
+            img{
+                mask-image: var(--vk_image-mask-wave04);
+                @include mask;
+            }
+        }
+
+    }
+}
+
+//左寄せ、右寄せを指定した場合はdivのほうに.is-style-vk-image のクラス名が付くので、以下を追加する必要がある
+.wp-block-image{
+    &.is-style-vk-image {
+        &-rounded figure{
+            &.alignleft, &.alignright, &.aligncenter{
+                img {
+                    border-radius: $border_radius;
+                }
+            }
+        }
+        &-border figure{
+            &.alignleft, &.alignright, &.aligncenter{
+                img {
+                    border: $border_primary;
+                }
+            }
+        }
+        &-photoFrame figure{
+            &.alignleft, &.alignright, &.aligncenter{
+                @include photoFrame;
+            }
+        }
+
+        &-photoFrame-tilt-right, &-photoFrame-tilt-right figure{
+            &.alignleft, &.alignright, &.aligncenter{
+                @include photoFrame;
+                @include photoFrame-tilt-right;
+            }
+        }
+
+        &-photoFrame-tilt-left, &-photoFrame-tilt-left figure{
+            &.alignleft, &.alignright, &.aligncenter{
+                @include photoFrame;
+                @include photoFrame-tilt-left;
+            }
+        }
+
+        &-shadow figure{
+            &.alignleft, &.alignright, &.aligncenter{
+                @include shadow;
+
+            }
+        }
+
+        &-wave01 figure{
+            &.alignleft, &.alignright, &.aligncenter{
+                img{
+                    mask-image: var(--vk_image-mask-wave01);
+                    @include mask;
+                }
+            }
+        }
+
+        &-wave02 figure{
+            &.alignleft, &.alignright, &.aligncenter{
+                img{
+                    mask-image: var(--vk_image-mask-wave02);
+                    @include mask;
+                }
+            }
+        }
+
+        &-wave03 figure{
+            &.alignleft, &.alignright, &.aligncenter{
+                img{
+                    mask-image: var(--vk_image-mask-wave03);
+                    @include mask;
+                }
+            }
+        }
+
+        &-wave04 figure{
+            &.alignleft, &.alignright, &.aligncenter{
+                img{
+                    mask-image: var(--vk_image-mask-wave04);
+                    @include mask;
+                }
+            }
+        }
+    }
+}

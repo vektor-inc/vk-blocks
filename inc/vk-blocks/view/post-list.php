@@ -10,30 +10,14 @@ class VkBlocksPostList {
 	 *
 	 * @return string
 	 */
-	public function render_post_list( $attributes ) {
-
-		if ( isset( $attributes['name'] ) ) {
-
-			$name = esc_html( $attributes['name'] );
-			if ( $name === 'vk-blocks/child-page' ) {
-				$wp_query     = $this->get_loop_query_child( $attributes );
-				$options_loop = array( 'class_loop_outer' => 'vk_childPage' );
-
-			} elseif ( $name === 'vk-blocks/post-list' ) {
-				$wp_query     = $this->get_loop_query( $attributes );
-				$options_loop = array( 'class_loop_outer' => 'vk_postList' );
-			}
-		} else {
-			$wp_query     = $this->get_loop_query( $attributes );
-			$options_loop = array( 'class_loop_outer' => '' );
-		}
+	public static function render_post_list( $attributes, $wp_query, $options_loop ) {
 
 		if ( ! empty($attributes['className'] ) ){
 			$options_loop['class_loop_outer'] .= ' '.$attributes['className'];
 		}
 
 		if ( ! isset( $wp_query ) || $wp_query === false || $wp_query === 'false' || $wp_query->posts === array() ) {
-			return $this->renderNoPost();
+			return self::renderNoPost();
 		}
 
 		$options = array(
@@ -42,8 +26,10 @@ class VkBlocksPostList {
 			'display_image'              => esc_html( $attributes['display_image'] ),
 			'display_image_overlay_term' => esc_html( $attributes['display_image_overlay_term'] ),
 			'display_excerpt'            => esc_html( $attributes['display_excerpt'] ),
+			'display_author'             => esc_html( $attributes['display_author'] ),
 			'display_date'               => esc_html( $attributes['display_date'] ),
 			'display_new'                => esc_html( $attributes['display_new'] ),
+			'display_taxonomies'         => esc_html( $attributes['display_taxonomies'] ),
 			'display_btn'                => esc_html( $attributes['display_btn'] ),
 			'image_default_url'          => VK_BLOCKS_URL . 'images/no-image.png',
 			'overlay'                    => false,
@@ -85,7 +71,7 @@ class VkBlocksPostList {
 		return true;
 	}
 
-	private function format_terms( $isCheckedTerms ) {
+	private static function format_terms( $isCheckedTerms ) {
 
 		$return             = array();
 		$return['relation'] = 'OR';
@@ -104,7 +90,7 @@ class VkBlocksPostList {
 		return $return;
 	}
 
-	public function get_loop_query( $attributes ) {
+	public static function get_loop_query( $attributes ) {
 
 		$isCheckedPostType = json_decode( $attributes['isCheckedPostType'], true );
 
@@ -125,11 +111,11 @@ class VkBlocksPostList {
 
 		$args = array(
 			'post_type'      => $isCheckedPostType,
-			'tax_query'      => $this::format_terms( $isCheckedTerms ),
+			'tax_query'      => self::format_terms( $isCheckedTerms ),
 			'paged'          => 1,
 			// 0で全件取得
 			'posts_per_page' => intval( $attributes['numberPosts'] ),
-			'order'          => 'DESC',
+			'order'          => $attributes['order'],
 			'orderby'        => $attributes['orderby'],
 			'offset'         => $offset,
 			'post__not_in'   => $post__not_in,
@@ -137,7 +123,7 @@ class VkBlocksPostList {
 		return new WP_Query( $args );
 	}
 
-	public function get_loop_query_child( $attributes ) {
+	public static function get_loop_query_child( $attributes ) {
 
 
 
@@ -174,24 +160,8 @@ class VkBlocksPostList {
 		}
 	}
 
-	public function renderNoPost() {
+	public static function renderNoPost() {
 		return '<div class="alert alert-warning text-center">' . __( 'No Post is selected', 'vk-blocks' ) . '</div>';
 	}
-
-}
-
-/**
- * Gutenberg Callback function.
- *
- * @param $name
- * @param $attributes
- *
- * @return string
- */
-function vk_blocks_render_post_list( $attributes ) {
-
-	$PostList = new VkBlocksPostList();
-
-	return $PostList->render_post_list( $attributes );
 
 }

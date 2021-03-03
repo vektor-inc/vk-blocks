@@ -1,35 +1,39 @@
-const { CheckboxControl } = wp.components;
-const { useState } = wp.element;
-import { destructiveDeleteFromArray } from "../../utils/delete-from-array";
+import { CheckboxControl } from '@wordpress/components';
+import { useState } from '@wordpress/element';
+import { destructiveDeleteFromArray } from '@vkblocks/utils/delete-from-array';
 
-export const AdvancedCheckboxControl = props => {
+const advancedSetAttributes = (schema, saveData, setAttributes) => {
+	setAttributes({ [schema]: JSON.stringify(saveData) });
+};
+
+export const AdvancedCheckboxControl = (props) => {
 	const { schema, rawData, checkedData, setAttributes } = props;
+	const [checkedState, setCheckedState] = useState(checkedData);
 
 	if (!rawData || !checkedData) return false;
 
-	const [checkedState, setCheckedState] = useState(checkedData);
-
-	const advancedSetAttributes = (schema, saveData) => {
-		setAttributes({ [schema]: JSON.stringify(saveData) });
-	};
-
-	const checkBoxComponents = rawData.map(data => {
+	const checkBoxComponents = rawData.map((data) => {
 		return (
 			<CheckboxControl
-				key={ data.slug }
-				label={ data.label }
-				checked={ checkedState.some(item => item === data.slug) }
-				onChange={ value => {
+				key={data.slug}
+				label={data.label}
+				checked={checkedState.some((item) => item === data.slug)}
+				onChange={(value) => {
 					if (value) {
 						checkedState.push(data.slug);
 					} else {
 						destructiveDeleteFromArray(checkedState, data.slug);
 					}
 					setCheckedState(checkedState);
-					advancedSetAttributes.bind(null, schema, checkedState)();
-				} }
+					advancedSetAttributes.bind(
+						null,
+						schema,
+						checkedState,
+						setAttributes
+					)();
+				}}
 			/>
 		);
 	});
-	return <ul>{ checkBoxComponents }</ul>;
+	return <ul>{checkBoxComponents}</ul>;
 };

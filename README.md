@@ -2,50 +2,89 @@
 
 This is a plugin that extends Gutenberg's blocks.
 
-## How to Build
+## 前提
+- Docker
+- WP-CLI（ローカルにインストール）
+- NodeJS、NPM
 
+## 依存関係のインストール
 ```
-npm install --save-dev
-npm run build
-```
-## Work
-
-通常作業時は
-
-```
-gulp watch
+npm install
 ```
 
-か
-
+## 開発環境の立ち上げ
 ```
+npm start
+```
+
+## ビルド
+```
+// 本番環境用
+npm build
+
+// 開発用（開発者ツールのconsoleでログが追いやすくなる）
+npm run build:dev
+
+// リリース用（石川専用：gulp dist して zip に圧縮してそのzipファイルをvwsのパッケージディレクトリに移動している）
+bin/dist_kuru.sh
+```
+
+## Watch
+```
+// CSSの変更のみ監視
 npm run watch
 ```
 
-で動かす。
-ただし、翻訳作業をする時は事前に `npm run build` をした方が無難
-
-## Translate Only
+## 翻訳
 
 ```
-npm run build
+// .pot ファイル生成、.po ファイルから翻訳用JSONを生成
+npm run translate
 ```
 
-翻訳は PoEdit などを使って po ファイルを開いて編集するが、
+翻訳は PoEdit などを使って `.po` ファイルを開いて編集するが、
 新たに翻訳箇所が追加された場合はメニューから「potファイルから更新」を選んで更新する
 
-## CSS name rule
 
+## デプロイ
+
+1. 以下のファイルのバージョンを、公開するバージョンで置き換える。
+    - `vk-blocks.php`の `Version: 0.0.0`
+    - `readme.txt`の `Stable tag: 0.0.0`
+
+1. `readem.txt`の`== Changelog ==`に、修正内容を追加。
+1. 1,2の修正後、コミットメッセージ `[change Version] 1.1.1` でコミット & プッシュ。
+1. 全ての変更を `master`にマージ。
+1. `master`ブランチをローカルにプルし、`git tag 1.1.1` 、`git push origin 1.1.1` 
+
+これで自動で、VWSにPro版が、WordPress.orgに無料版がアップロードされます。
+
+- 注 : `0.0.0`は前のバージョン番号、`1.1.1`は公開するバージョン番号。
+
+
+
+## CSS 命名規則
+
+### プリフィックスの後は - にする
 ```
-[ prefix ]_[ block name ]_[section name]
-[ prefix ]_[ block name ]_[section name]_[sub section name]
-[ prefix ]_[ block name ]-[Attribute name]-[Attribute property]
+[ prefix ]_[ ブロック名 ]
 ```
 
-## リリースビルド（石川専用）
-
-gulp dist して zip に圧縮してそのzipファイルをvwsのパッケージディレクトリに移動している
-
+### 各div要素は _ で連結する。一つのdivのクラス名は現状キャメルケース
 ```
-bin/dist_kuru.sh
+[ prefix ]_[ ブロック名 ]_[ divのクラス名 ]
+[ prefix ]_[ ブロック名 ]_[ divのクラス名 ]_[ 子のdivのクラス名 ]
 ```
+
+### 属性の前はハイフンにする
+```
+[ prefix ]_[ ブロック名 ]-[ 属性名 ]-[ 属性値 ]
+[ prefix ]_[ ブロック名 ]_[ 子のdivのクラス名 ]-[ 属性名 ]-[ 属性値 ]
+```
+
+ちなみに 線の あり/なし など
+「属性値なしで -border とかだけでいいんちゃう？」
+と思うケースがあるが、今後も属性値の拡張がありえない場合、たとえば
+線でも あり/なし だけではなく 直線/点線/二重線 など拡張が想定される可能性がありそうな場合は
+-border-solid としておき -border-dotted -border-wave とする事ができるようにしておく。
+何がなんでも あり/なし 以外以外発生しないというケースの場合は -border-true あるいは例外的に -border など属性名だけでも可
