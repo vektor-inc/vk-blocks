@@ -15,3 +15,5 @@ webpack.common.js
 webpack.dev.js
 webpack.prod.js
 example.png
+node_modules
+dist
