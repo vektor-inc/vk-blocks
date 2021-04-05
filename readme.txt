@@ -2,9 +2,9 @@
 Contributors: vektor-inc,kurudrive,naoki0h,nc30,una9,kaorock72,rickaddison7634,mimitips
 Donate link:
 Tags: Gutenberg,FAQ,alert
-Requires at least: 5.6
-Tested up to: 5.6.1
-Stable tag: 1.0.16
+Requires at least: 5.7
+Tested up to: 5.7
+Stable tag: 1.2.0
 Requires PHP: 5.6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -62,6 +62,13 @@ e.g.
 1. VK Blocks examples.
 
 == Changelog ==
+
+= 1.2.0 =
+* [ Specification Change ] Cope with swiper load tree shaking (improvement of load speed)
+* [ Bug fix ] toolbar icon display
+
+= 1.1.0 =
+* [ Specification Change ][ Slider Block ] Display multiple images on one slide.
 
 = 1.0.16 =
 [ Specification Change ] Update VK-Admin Library

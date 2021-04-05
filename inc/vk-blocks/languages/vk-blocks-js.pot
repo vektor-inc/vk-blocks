@@ -953,12 +953,12 @@ msgstr ""
 msgid "Highlight Color"
 msgstr ""
 
-#: src/extensions/common/nowrap/index.js:11
+#: src/extensions/common/nowrap/index.js:21
 msgid "No wrap"
 msgstr ""
 
-#: src/extensions/common/nowrap/index.js:21
-msgid "Nowrap"
+#: src/extensions/common/responsive-br/index.js:41
+msgid "Responsive BR"
 msgstr ""
 
 #: src/extensions/common/responsive-br/index.js:45
