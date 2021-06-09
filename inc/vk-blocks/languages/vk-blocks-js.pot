@@ -973,12 +973,8 @@ msgid ""
 "the next, hide for the that group block."
 msgstr ""
 
-#: src/extensions/common/highlighter/index.js:116
+#: src/extensions/common/highlighter/index.js:139
 msgid "Highlighter"
-msgstr ""
-
-#: src/extensions/common/highlighter/index.js:98
-msgid "Highlight Color"
 msgstr ""
 
 #: src/extensions/common/inline-font-size/index.js:101
