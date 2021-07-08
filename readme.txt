@@ -27,7 +27,7 @@ This is a plugin that extends Gutenberg's blocks.
 * PR Blocks
 * PR Content
 * Border box
-* Title（with sub text）
+* Title (with sub text)
 * Responsive Spacer
 * Page Content
 * Post List [ Pro ]
@@ -114,7 +114,7 @@ e.g.
 [ Specification Change ] Stop exclude CSS Var by Tree shaking
 
 = 1.4.0 =
-[ Improvement ][ title ] Convert to VK Blocks Title from core title block 
+[ Improvement ][ title ] Convert to VK Blocks Title from core title block
 [ Improvement ][ Select Post List Item ]setting from toolbar and enable search URL
 [ Bug fix ][ translate ] in Select Post List Item
 [ Bug fix ][ New FAQ ] Fix multiple select
@@ -374,10 +374,10 @@ Version change only
 [ Add function ] Responsive BR
 
 = 0.44.13 =
-[ digigin bug fix ] vk_heading plain css adjustment 
+[ digigin bug fix ] vk_heading plain css adjustment
 
 = 0.44.12 =
-[ digigin bug fix ] Block heading css adjustment 
+[ digigin bug fix ] Block heading css adjustment
 
 = 0.44.11 =
 version only
@@ -396,21 +396,21 @@ version only
 
 = 0.44.6 =
 [ bug fix ][ block pattern(Pro) ] Fix block pattern
-[ bug fix ] Stop ExUnit VK Blocks 
+[ bug fix ] Stop ExUnit VK Blocks
 [ bug fix ][ border box ] Cope with lightning pro headding design ( balloon )
 
 = 0.44.5 =
-[ digigin bug fix ] Block heading Digigin text align tuning 
+[ digigin bug fix ] Block heading Digigin text align tuning
 
 = 0.44.4 =
 version only
 
 = 0.44.3 =
  [ Specification change ] abolish Preload
- [ digigin bug fix ] Block heading Digigin font color tuning 
+ [ digigin bug fix ] Block heading Digigin font color tuning
 
 = 0.44.2 =
-[ digigin bug fix ] Block heading Digigin tuning 
+[ digigin bug fix ] Block heading Digigin tuning
 
 = 0.44.1 =
 [ Desigin tuning ] Tag change
@@ -418,7 +418,7 @@ version only
 = 0.44.0
 [ Specification Change ] Re Cope with xxl size
 [ bug fix ][ Card(Pro) ] fix critical error on card and recover to 0.43.0
-[ bug fix ][ Child Page(Pro) ] fix use in vk page widget 
+[ bug fix ][ Child Page(Pro) ] fix use in vk page widget
 [ bug fix ][ Grid Column(Pro) ] New column drug bug fix
 
 = 0.43.4(0.42.1) =
@@ -518,7 +518,7 @@ Add translate
 [ BugFix] PHP error
 
 = 0.37.1 =
-[ BugFix][ Title ] Setted text elesed 
+[ BugFix][ Title ] Setted text elesed
 
 = 0.37.0 =
 [ Add function ][ Balloon ] Fixed the problem that the entered text disappears
@@ -554,7 +554,7 @@ build only
 [ Specification Change ][ Border Box ] Padding tuning ( Wide screen )
 
 = 0.34.0 =
-[ Add block ][ Animation(Pro) ] 
+[ Add block ][ Animation(Pro) ]
 [ Add function ] Add fontawesome icon selector to Border box block
 
 = 0.33.3 =
@@ -894,7 +894,7 @@ build only
 [Add Function][ Outer ] Add link id setting
 
 = 0.5.2 =
-[Bug fix][ outer ] Lightning Pro theme（No child） no work bug fix
+[Bug fix][ outer ] Lightning Pro theme (No child) no work bug fix
 
 = 0.5.1 =
 [Bug fix][ outer ] Child theme no work bug fix
