@@ -2021,7 +2021,7 @@ msgstr "VK Blocks Pro を公開しました!"
 #. translators: 1: opening a tag, 2: closing a tag
 #: dist/vk-blocks-pro/inc/admin-notices.php:31 inc/admin-notices.php:31
 msgid "Thank you for using VK Blocks. We've released VK Blocks Pro. It has more custom blocks to build web site more easily. If you are interested in VK Blocks Pro, Please read %1$s this post %2$s for more details."
-msgstr "いつもVK Blocksをご利用いただきありがとうございます。この度、VK Blocks Proをリリースしました。より簡単にWebサイトを構築するためのカスタムブロックが追加されています。VK Blocks Proに興味がある方は、この記事%1$sを読んでみてください。詳しくは%2$s"
+msgstr "いつもVK Blocksをご利用いただきありがとうございます。この度、VK Blocks Proをリリースしました。より簡単にWebサイトを構築するためのカスタムブロックが追加されています。VK Blocks Proに興味がある方は、詳しくは%1$sこの記事%2$sを読んでみてください。"
 
 #: dist/vk-blocks-pro/inc/admin-notices.php:35
 #: dist/vk-blocks-pro/inc/admin-notices.php:41 inc/admin-notices.php:35
