@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the VK Blocks Pro plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: VK Blocks Pro 1.16.1\n"
+"Project-Id-Version: VK Blocks Pro 1.16.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/vk-blocks-pro\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-10-13T05:33:03+00:00\n"
+"POT-Creation-Date: 2021-10-19T09:02:36+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0-alpha-3f4c34b\n"
 "X-Domain: vk-blocks\n"
@@ -70,7 +70,7 @@ msgstr ""
 #: src/blocks/_pro/outer/edit.js:303
 #: src/blocks/_pro/slider/edit.js:193
 #: src/blocks/balloon/edit.js:276
-#: src/blocks/button/edit.js:95
+#: src/blocks/button/edit.js:163
 #: src/blocks/faq/index.js:27
 #: src/blocks/faq2/index.js:22
 #: src/extensions/common/inline-font-size/index.js:56
@@ -241,7 +241,7 @@ msgid "Image"
 msgstr ""
 
 #: src/blocks/_pro/card/edit.js:156
-#: src/blocks/button/index.js:18
+#: src/blocks/button/index.js:23
 #: src/components/display-items-control/index.js:78
 msgid "Button"
 msgstr ""
@@ -272,7 +272,7 @@ msgstr ""
 
 #: src/blocks/_pro/card/index.js:25
 #: src/components/column-layout-control/index.js:26
-#: inc/vk-components/package/class-vk-component-posts.php:670
+#: inc/vk-components/package/class-vk-component-posts.php:671
 msgid "Card"
 msgstr ""
 
@@ -415,7 +415,7 @@ msgid "Input Content"
 msgstr ""
 
 #: src/blocks/_pro/icon-card-item/edit.js:100
-#: src/blocks/button/edit.js:70
+#: src/blocks/button/edit.js:138
 #: src/blocks/icon/edit.js:249
 #: src/blocks/pr-blocks/edit.js:271
 #: src/blocks/pr-content/edit.js:130
@@ -425,7 +425,7 @@ msgstr ""
 #: src/blocks/_pro/icon-card-item/edit.js:108
 #: src/blocks/_pro/step-item/edit.js:57
 #: src/blocks/border-box/edit.js:122
-#: src/blocks/button/edit.js:258
+#: src/blocks/button/edit.js:330
 #: src/blocks/icon/edit.js:237
 #: src/blocks/pr-content/edit.js:196
 msgid "Icon ( Font Awesome )"
@@ -437,7 +437,7 @@ msgid "Icon Background:"
 msgstr ""
 
 #: src/blocks/_pro/icon-card-item/edit.js:130
-#: src/blocks/button/edit.js:173
+#: src/blocks/button/edit.js:241
 #: src/blocks/icon-outer/edit.js:204
 #: src/blocks/icon/edit.js:192
 #: src/blocks/pr-blocks/edit.js:299
@@ -445,7 +445,7 @@ msgid "Solid color"
 msgstr ""
 
 #: src/blocks/_pro/icon-card-item/edit.js:134
-#: src/blocks/button/edit.js:181
+#: src/blocks/button/edit.js:249
 #: src/blocks/pr-blocks/edit.js:303
 msgid "No background"
 msgstr ""
@@ -908,7 +908,7 @@ msgid "Hide"
 msgstr ""
 
 #: src/blocks/_pro/slider/edit.js:370
-#: src/blocks/button/edit.js:129
+#: src/blocks/button/edit.js:197
 #: src/components/display-items-control/index.js:125
 msgid "Center"
 msgstr ""
@@ -1024,28 +1024,28 @@ msgid "Style Settings"
 msgstr ""
 
 #: src/blocks/alert/edit.js:25
-#: src/blocks/button/edit.js:212
+#: src/blocks/button/edit.js:280
 #: src/blocks/pr-content/edit.js:164
 #: src/extensions/core/group/style.js:138
 msgid "Success"
 msgstr ""
 
 #: src/blocks/alert/edit.js:28
-#: src/blocks/button/edit.js:216
+#: src/blocks/button/edit.js:284
 #: src/blocks/pr-content/edit.js:167
 #: src/extensions/core/group/style.js:134
 msgid "Info"
 msgstr ""
 
 #: src/blocks/alert/edit.js:30
-#: src/blocks/button/edit.js:220
+#: src/blocks/button/edit.js:288
 #: src/blocks/pr-content/edit.js:169
 #: src/extensions/core/group/style.js:142
 msgid "Warning"
 msgstr ""
 
 #: src/blocks/alert/edit.js:34
-#: src/blocks/button/edit.js:224
+#: src/blocks/button/edit.js:292
 #: src/blocks/pr-content/edit.js:173
 #: src/extensions/core/group/style.js:146
 msgid "Danger"
@@ -1095,14 +1095,14 @@ msgid "Please specify the layout of the balloon."
 msgstr ""
 
 #: src/blocks/balloon/edit.js:219
-#: src/blocks/button/edit.js:119
+#: src/blocks/button/edit.js:187
 #: src/blocks/pr-content/edit.js:233
 #: src/components/display-items-control/index.js:121
 msgid "Left"
 msgstr ""
 
 #: src/blocks/balloon/edit.js:231
-#: src/blocks/button/edit.js:139
+#: src/blocks/button/edit.js:207
 #: src/blocks/pr-content/edit.js:232
 #: src/components/display-items-control/index.js:129
 msgid "Right"
@@ -1264,106 +1264,106 @@ msgstr ""
 msgid "Solid Angle iconFeature"
 msgstr ""
 
-#: src/blocks/button/edit.js:103
+#: src/blocks/button/edit.js:118
+msgid "Button setting"
+msgstr ""
+
+#: src/blocks/button/edit.js:120
+msgid "Sub Caption"
+msgstr ""
+
+#: src/blocks/button/edit.js:129
+msgid "Button URL"
+msgstr ""
+
+#: src/blocks/button/edit.js:146
+msgid "Button Size:"
+msgstr ""
+
+#: src/blocks/button/edit.js:155
+#: src/blocks/spacer/edit.js:105
+#: inc/vk-blocks/vk-blocks-functions.php:30
+msgid "Large"
+msgstr ""
+
+#: src/blocks/button/edit.js:171
 #: src/blocks/spacer/edit.js:85
 #: src/extensions/common/inline-font-size/index.js:51
 #: inc/vk-blocks/vk-blocks-functions.php:22
 msgid "Small"
 msgstr ""
 
-#: src/blocks/button/edit.js:108
+#: src/blocks/button/edit.js:176
 msgid "Button Position:"
 msgstr ""
 
-#: src/blocks/button/edit.js:149
+#: src/blocks/button/edit.js:217
 msgid "Wide"
 msgstr ""
 
-#: src/blocks/button/edit.js:159
+#: src/blocks/button/edit.js:227
 msgid "Block"
 msgstr ""
 
-#: src/blocks/button/edit.js:164
+#: src/blocks/button/edit.js:232
 msgid "Button Style:"
 msgstr ""
 
-#: src/blocks/button/edit.js:189
+#: src/blocks/button/edit.js:257
 msgid "Text only"
 msgstr ""
 
-#: src/blocks/button/edit.js:193
+#: src/blocks/button/edit.js:261
 msgid "If you select \"No background\", that you need to select a Custom Color."
 msgstr ""
 
-#: src/blocks/button/edit.js:200
+#: src/blocks/button/edit.js:268
 #: src/blocks/pr-content/edit.js:152
 msgid "Default Color:"
 msgstr ""
 
-#: src/blocks/button/edit.js:204
+#: src/blocks/button/edit.js:272
 #: src/blocks/pr-content/edit.js:156
 msgid "Primary"
 msgstr ""
 
-#: src/blocks/button/edit.js:208
+#: src/blocks/button/edit.js:276
 #: src/blocks/pr-content/edit.js:160
 msgid "Secondary"
 msgstr ""
 
-#: src/blocks/button/edit.js:228
+#: src/blocks/button/edit.js:296
 #: src/blocks/pr-content/edit.js:176
 msgid "Light"
 msgstr ""
 
-#: src/blocks/button/edit.js:232
+#: src/blocks/button/edit.js:300
 #: src/blocks/pr-content/edit.js:177
 msgid "Dark"
 msgstr ""
 
-#: src/blocks/button/edit.js:242
+#: src/blocks/button/edit.js:314
 msgid "Custom Color"
 msgstr ""
 
-#: src/blocks/button/edit.js:243
+#: src/blocks/button/edit.js:315
 msgid "This custom color overrides the default color. If you want to use the default color, click the clear button."
 msgstr ""
 
-#: src/blocks/button/edit.js:262
+#: src/blocks/button/edit.js:334
 #: src/blocks/heading/edit.js:303
 #: src/blocks/pr-content/edit.js:200
 msgid "Before text"
 msgstr ""
 
-#: src/blocks/button/edit.js:271
+#: src/blocks/button/edit.js:343
 #: src/blocks/heading/edit.js:312
 #: src/blocks/pr-content/edit.js:212
 msgid "After text"
 msgstr ""
 
-#: src/blocks/button/edit.js:299
+#: src/blocks/button/edit.js:371
 msgid "Input text"
-msgstr ""
-
-#: src/blocks/button/edit.js:50
-msgid "Button setting"
-msgstr ""
-
-#: src/blocks/button/edit.js:52
-msgid "Sub Caption"
-msgstr ""
-
-#: src/blocks/button/edit.js:61
-msgid "Button URL"
-msgstr ""
-
-#: src/blocks/button/edit.js:78
-msgid "Button Size:"
-msgstr ""
-
-#: src/blocks/button/edit.js:87
-#: src/blocks/spacer/edit.js:105
-#: inc/vk-blocks/vk-blocks-functions.php:30
-msgid "Large"
 msgstr ""
 
 #: src/blocks/faq/edit.js:14
@@ -1730,6 +1730,10 @@ msgstr ""
 msgid "Custom"
 msgstr ""
 
+#: src/blocks/spacer/edit.js:119
+msgid "You can change each common margin size from Setting > VK Blocks"
+msgstr ""
+
 #: src/blocks/spacer/edit.js:56
 msgid "Height for each device."
 msgstr ""
@@ -1833,7 +1837,7 @@ msgid "Card (Horizontal)"
 msgstr ""
 
 #: src/components/column-layout-control/index.js:42
-#: inc/vk-components/package/class-vk-component-posts.php:682
+#: inc/vk-components/package/class-vk-component-posts.php:687
 msgid "Media"
 msgstr ""
 
@@ -2489,19 +2493,31 @@ msgstr ""
 msgid "New!!"
 msgstr ""
 
+#: inc/vk-components/package/class-vk-component-posts.php:238
+msgid "Posts navigation"
+msgstr ""
+
+#: inc/vk-components/package/class-vk-component-posts.php:239
+msgid "Posts"
+msgstr ""
+
 #: inc/vk-components/package/class-vk-component-posts.php:241
 msgid "Page"
 msgstr ""
 
-#: inc/vk-components/package/class-vk-component-posts.php:674
+#: inc/vk-components/package/class-vk-component-posts.php:675
 msgid "Card Noborder"
 msgstr ""
 
-#: inc/vk-components/package/class-vk-component-posts.php:678
+#: inc/vk-components/package/class-vk-component-posts.php:679
+msgid "Card Intext"
+msgstr ""
+
+#: inc/vk-components/package/class-vk-component-posts.php:683
 msgid "Card Horizontal"
 msgstr ""
 
-#: inc/vk-components/package/class-vk-component-posts.php:686
+#: inc/vk-components/package/class-vk-component-posts.php:691
 msgctxt "post list type"
 msgid "Text 1 Column"
 msgstr ""

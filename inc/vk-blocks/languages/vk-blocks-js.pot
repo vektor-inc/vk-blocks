@@ -9,28 +9,28 @@ msgid "Style Settings"
 msgstr ""
 
 #: src/blocks/alert/edit.js:25
-#: src/blocks/button/edit.js:212
+#: src/blocks/button/edit.js:280
 #: src/blocks/pr-content/edit.js:164
 #: src/extensions/core/group/style.js:138
 msgid "Success"
 msgstr ""
 
 #: src/blocks/alert/edit.js:28
-#: src/blocks/button/edit.js:216
+#: src/blocks/button/edit.js:284
 #: src/blocks/pr-content/edit.js:167
 #: src/extensions/core/group/style.js:134
 msgid "Info"
 msgstr ""
 
 #: src/blocks/alert/edit.js:30
-#: src/blocks/button/edit.js:220
+#: src/blocks/button/edit.js:288
 #: src/blocks/pr-content/edit.js:169
 #: src/extensions/core/group/style.js:142
 msgid "Warning"
 msgstr ""
 
 #: src/blocks/alert/edit.js:34
-#: src/blocks/button/edit.js:224
+#: src/blocks/button/edit.js:292
 #: src/blocks/pr-content/edit.js:173
 #: src/extensions/core/group/style.js:146
 msgid "Danger"
@@ -80,13 +80,13 @@ msgid "Please specify the layout of the balloon."
 msgstr ""
 
 #: src/blocks/balloon/edit.js:219
-#: src/blocks/button/edit.js:119
+#: src/blocks/button/edit.js:187
 #: src/blocks/pr-content/edit.js:233
 msgid "Left"
 msgstr ""
 
 #: src/blocks/balloon/edit.js:231
-#: src/blocks/button/edit.js:139
+#: src/blocks/button/edit.js:207
 #: src/blocks/pr-content/edit.js:232
 msgid "Right"
 msgstr ""
@@ -112,7 +112,7 @@ msgid "Image Style"
 msgstr ""
 
 #: src/blocks/balloon/edit.js:276
-#: src/blocks/button/edit.js:95
+#: src/blocks/button/edit.js:163
 #: src/blocks/faq/index.js:27
 #: src/blocks/faq2/index.js:22
 #: src/extensions/common/inline-font-size/index.js:56
@@ -232,7 +232,7 @@ msgid "Icon"
 msgstr ""
 
 #: src/blocks/border-box/edit.js:122
-#: src/blocks/button/edit.js:258
+#: src/blocks/button/edit.js:330
 #: src/blocks/icon/edit.js:237
 #: src/blocks/pr-content/edit.js:196
 msgid "Icon ( Font Awesome )"
@@ -315,132 +315,132 @@ msgstr ""
 msgid "Solid Angle iconFeature"
 msgstr ""
 
-#: src/blocks/button/edit.js:103
-#: src/blocks/spacer/edit.js:85
-#: src/extensions/common/inline-font-size/index.js:51
-msgid "Small"
-msgstr ""
-
-#: src/blocks/button/edit.js:108
-msgid "Button Position:"
-msgstr ""
-
-#: src/blocks/button/edit.js:129
-msgid "Center"
-msgstr ""
-
-#: src/blocks/button/edit.js:149
-msgid "Wide"
-msgstr ""
-
-#: src/blocks/button/edit.js:159
-msgid "Block"
-msgstr ""
-
-#: src/blocks/button/edit.js:164
-msgid "Button Style:"
-msgstr ""
-
-#: src/blocks/button/edit.js:173
-#: src/blocks/icon-outer/edit.js:204
-#: src/blocks/icon/edit.js:192
-#: src/blocks/pr-blocks/edit.js:299
-msgid "Solid color"
-msgstr ""
-
-#: src/blocks/button/edit.js:181
-#: src/blocks/pr-blocks/edit.js:303
-msgid "No background"
-msgstr ""
-
-#: src/blocks/button/edit.js:189
-msgid "Text only"
-msgstr ""
-
-#: src/blocks/button/edit.js:193
-msgid "If you select \"No background\", that you need to select a Custom Color."
-msgstr ""
-
-#: src/blocks/button/edit.js:200
-#: src/blocks/pr-content/edit.js:152
-msgid "Default Color:"
-msgstr ""
-
-#: src/blocks/button/edit.js:204
-#: src/blocks/pr-content/edit.js:156
-msgid "Primary"
-msgstr ""
-
-#: src/blocks/button/edit.js:208
-#: src/blocks/pr-content/edit.js:160
-msgid "Secondary"
-msgstr ""
-
-#: src/blocks/button/edit.js:228
-#: src/blocks/pr-content/edit.js:176
-msgid "Light"
-msgstr ""
-
-#: src/blocks/button/edit.js:232
-#: src/blocks/pr-content/edit.js:177
-msgid "Dark"
-msgstr ""
-
-#: src/blocks/button/edit.js:242
-msgid "Custom Color"
-msgstr ""
-
-#: src/blocks/button/edit.js:243
-msgid ""
-"This custom color overrides the default color. If you want to use the "
-"default color, click the clear button."
-msgstr ""
-
-#: src/blocks/button/edit.js:262
-#: src/blocks/heading/edit.js:303
-#: src/blocks/pr-content/edit.js:200
-msgid "Before text"
-msgstr ""
-
-#: src/blocks/button/edit.js:271
-#: src/blocks/heading/edit.js:312
-#: src/blocks/pr-content/edit.js:212
-msgid "After text"
-msgstr ""
-
-#: src/blocks/button/edit.js:299
-msgid "Input text"
-msgstr ""
-
-#: src/blocks/button/edit.js:50
+#: src/blocks/button/edit.js:118
 msgid "Button setting"
 msgstr ""
 
-#: src/blocks/button/edit.js:52
+#: src/blocks/button/edit.js:120
 msgid "Sub Caption"
 msgstr ""
 
-#: src/blocks/button/edit.js:61
+#: src/blocks/button/edit.js:129
 msgid "Button URL"
 msgstr ""
 
-#: src/blocks/button/edit.js:70
+#: src/blocks/button/edit.js:138
 #: src/blocks/icon/edit.js:249
 #: src/blocks/pr-blocks/edit.js:271
 #: src/blocks/pr-content/edit.js:130
 msgid "Open link new tab."
 msgstr ""
 
-#: src/blocks/button/edit.js:78
+#: src/blocks/button/edit.js:146
 msgid "Button Size:"
 msgstr ""
 
-#: src/blocks/button/edit.js:87
+#: src/blocks/button/edit.js:155
 #: src/blocks/spacer/edit.js:105
 msgid "Large"
 msgstr ""
 
-#: src/blocks/button/index.js:18
+#: src/blocks/button/edit.js:171
+#: src/blocks/spacer/edit.js:85
+#: src/extensions/common/inline-font-size/index.js:51
+msgid "Small"
+msgstr ""
+
+#: src/blocks/button/edit.js:176
+msgid "Button Position:"
+msgstr ""
+
+#: src/blocks/button/edit.js:197
+msgid "Center"
+msgstr ""
+
+#: src/blocks/button/edit.js:217
+msgid "Wide"
+msgstr ""
+
+#: src/blocks/button/edit.js:227
+msgid "Block"
+msgstr ""
+
+#: src/blocks/button/edit.js:232
+msgid "Button Style:"
+msgstr ""
+
+#: src/blocks/button/edit.js:241
+#: src/blocks/icon-outer/edit.js:204
+#: src/blocks/icon/edit.js:192
+#: src/blocks/pr-blocks/edit.js:299
+msgid "Solid color"
+msgstr ""
+
+#: src/blocks/button/edit.js:249
+#: src/blocks/pr-blocks/edit.js:303
+msgid "No background"
+msgstr ""
+
+#: src/blocks/button/edit.js:257
+msgid "Text only"
+msgstr ""
+
+#: src/blocks/button/edit.js:261
+msgid "If you select \"No background\", that you need to select a Custom Color."
+msgstr ""
+
+#: src/blocks/button/edit.js:268
+#: src/blocks/pr-content/edit.js:152
+msgid "Default Color:"
+msgstr ""
+
+#: src/blocks/button/edit.js:272
+#: src/blocks/pr-content/edit.js:156
+msgid "Primary"
+msgstr ""
+
+#: src/blocks/button/edit.js:276
+#: src/blocks/pr-content/edit.js:160
+msgid "Secondary"
+msgstr ""
+
+#: src/blocks/button/edit.js:296
+#: src/blocks/pr-content/edit.js:176
+msgid "Light"
+msgstr ""
+
+#: src/blocks/button/edit.js:300
+#: src/blocks/pr-content/edit.js:177
+msgid "Dark"
+msgstr ""
+
+#: src/blocks/button/edit.js:314
+msgid "Custom Color"
+msgstr ""
+
+#: src/blocks/button/edit.js:315
+msgid ""
+"This custom color overrides the default color. If you want to use the "
+"default color, click the clear button."
+msgstr ""
+
+#: src/blocks/button/edit.js:334
+#: src/blocks/heading/edit.js:303
+#: src/blocks/pr-content/edit.js:200
+msgid "Before text"
+msgstr ""
+
+#: src/blocks/button/edit.js:343
+#: src/blocks/heading/edit.js:312
+#: src/blocks/pr-content/edit.js:212
+msgid "After text"
+msgstr ""
+
+#: src/blocks/button/edit.js:371
+msgid "Input text"
+msgstr ""
+
+#: src/blocks/button/index.js:23
 msgid "Button"
 msgstr ""
 
