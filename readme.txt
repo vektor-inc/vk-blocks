@@ -3,7 +3,7 @@ Contributors: vektor-inc,kurudrive,naoki0h,nc30,una9,kaorock72,rickaddison7634,m
 Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 5.7
-Tested up to: 5.8.1
+Tested up to: 5.8.2
 Stable tag: 1.19.1
 Requires PHP: 7.0
 License: GPLv2 or later
@@ -62,6 +62,23 @@ e.g.
 1. VK Blocks examples.
 
 == Changelog ==
+
+= 1.20.3 =
+[ Bug fix ][ Post Media Layout ] Cope with not vektor theme 
+[ Bug fix ][ PR Blocks ] cope with custom color palette
+[ Bug fix ][ Step(Pro) ] cope with custom color palette
+[ Bug fix ][ Icon Card(Pro) ] cope with custom color palette
+[ Other ] Change TGM & Plugin Update Checker load from composer
+
+= 1.20.2 =
+[ Bug fix ] Color palette manager in case of other theme
+
+= 1.20.1 =
+[ Bug fix ] Fix -wp5.7 error
+
+= 1.20.0 =
+[ Other ][ All ] Refactoring all blocks.
+[ Bug fix ] Color palette manager in case of other theme
 
 = 1.19.1 =
 [ Bug fix ][ Button ] Fix bootstrap color crash

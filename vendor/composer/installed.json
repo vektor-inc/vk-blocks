@@ -1,21 +1,89 @@
 {
     "packages": [
         {
-            "name": "vektor-inc/vk-color-palette-manager",
-            "version": "0.0.11",
-            "version_normalized": "0.0.11.0",
+            "name": "tgmpa/tgm-plugin-activation",
+            "version": "dev-develop",
+            "version_normalized": "dev-develop",
             "source": {
                 "type": "git",
-                "url": "https://github.com/vektor-inc/vk-color-palette-manager.git",
-                "reference": "53f20d1074f93e5fb4ced25ececed15961a478d2"
+                "url": "https://github.com/TGMPA/TGM-Plugin-Activation.git",
+                "reference": "2d34264f4fdcfcc60261d490ff2e689f0c33730c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vektor-inc/vk-color-palette-manager/zipball/53f20d1074f93e5fb4ced25ececed15961a478d2",
-                "reference": "53f20d1074f93e5fb4ced25ececed15961a478d2",
+                "url": "https://api.github.com/repos/TGMPA/TGM-Plugin-Activation/zipball/2d34264f4fdcfcc60261d490ff2e689f0c33730c",
+                "reference": "2d34264f4fdcfcc60261d490ff2e689f0c33730c",
                 "shasum": ""
             },
-            "time": "2021-10-19T01:26:10+00:00",
+            "require": {
+                "php": ">=5.2"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.6",
+                "phpcompatibility/phpcompatibility-wp": "^2.0",
+                "wp-coding-standards/wpcs": "^2.0"
+            },
+            "time": "2020-01-22T04:31:23+00:00",
+            "default-branch": true,
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "class-tgm-plugin-activation.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Thomas Griffin",
+                    "homepage": "http://thomasgriffinmedia.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Gary Jones",
+                    "homepage": "https://github.com/GaryJones",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Juliette Reinders Folmer",
+                    "homepage": "https://github.com/jrfnl",
+                    "role": "Developer"
+                }
+            ],
+            "description": "TGM Plugin Activation is a PHP library that allows you to easily require or recommend plugins for your WordPress themes (and plugins).",
+            "homepage": "http://tgmpluginactivation.com",
+            "keywords": [
+                "activation",
+                "library",
+                "plugins",
+                "theme",
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https://github.com/TGMPA/TGM-Plugin-Activation/issues",
+                "source": "https://github.com/TGMPA/TGM-Plugin-Activation"
+            },
+            "install-path": "../tgmpa/tgm-plugin-activation"
+        },
+        {
+            "name": "vektor-inc/vk-color-palette-manager",
+            "version": "0.0.15",
+            "version_normalized": "0.0.15.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vektor-inc/vk-color-palette-manager.git",
+                "reference": "699b1d6f99272631bb9978e1cd5bad04ac99e520"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vektor-inc/vk-color-palette-manager/zipball/699b1d6f99272631bb9978e1cd5bad04ac99e520",
+                "reference": "699b1d6f99272631bb9978e1cd5bad04ac99e520",
+                "shasum": ""
+            },
+            "time": "2021-12-02T17:00:03+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -36,9 +104,62 @@
             "description": "Manage color palette for Gutenberg",
             "support": {
                 "issues": "https://github.com/vektor-inc/vk-color-palette-manager/issues",
-                "source": "https://github.com/vektor-inc/vk-color-palette-manager/tree/0.0.11"
+                "source": "https://github.com/vektor-inc/vk-color-palette-manager/tree/0.0.15"
             },
             "install-path": "../vektor-inc/vk-color-palette-manager"
+        },
+        {
+            "name": "yahnis-elsts/plugin-update-checker",
+            "version": "v4.11",
+            "version_normalized": "4.11.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/YahnisElsts/plugin-update-checker.git",
+                "reference": "3155f2d3f1ca5e7ed3f25b256f020e370515af43"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/YahnisElsts/plugin-update-checker/zipball/3155f2d3f1ca5e7ed3f25b256f020e370515af43",
+                "reference": "3155f2d3f1ca5e7ed3f25b256f020e370515af43",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=5.2.0"
+            },
+            "time": "2021-03-15T16:07:52+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "load-v4p11.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Yahnis Elsts",
+                    "email": "whiteshadow@w-shadow.com",
+                    "homepage": "http://w-shadow.com/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A custom update checker for WordPress plugins and themes. Useful if you can't host your plugin in the official WP repository but still want it to support automatic updates.",
+            "homepage": "https://github.com/YahnisElsts/plugin-update-checker/",
+            "keywords": [
+                "automatic updates",
+                "plugin updates",
+                "theme updates",
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https://github.com/YahnisElsts/plugin-update-checker/issues",
+                "source": "https://github.com/YahnisElsts/plugin-update-checker/tree/v4.11"
+            },
+            "install-path": "../yahnis-elsts/plugin-update-checker"
         }
     ],
     "dev": false,
