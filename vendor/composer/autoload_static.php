@@ -27,6 +27,7 @@ class ComposerStaticInit5f016ebe9ad4f63b89009723b937c878
         ),
         'V' => 
         array (
+            'VektorInc\\VK_Font_Awesome_Versions\\' => 35,
             'VektorInc\\VK_Color_Palette_Manager\\' => 35,
             'VariableAnalysis\\' => 17,
         ),
@@ -57,6 +58,10 @@ class ComposerStaticInit5f016ebe9ad4f63b89009723b937c878
         'Webmozart\\Assert\\' => 
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
+        ),
+        'VektorInc\\VK_Font_Awesome_Versions\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/vektor-inc/font-awesome-versions/src',
         ),
         'VektorInc\\VK_Color_Palette_Manager\\' => 
         array (

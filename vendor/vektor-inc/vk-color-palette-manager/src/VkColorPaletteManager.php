@@ -5,7 +5,7 @@
  * @package vektor-inc/vk-color-palette-manager
  * @license GPL-2.0+
  *
- * @version 0.0.15
+ * @version 0.1.0
  */
 
 namespace VektorInc\VK_Color_Palette_Manager;
@@ -116,13 +116,19 @@ class VkColorPaletteManager {
 	public static function additional_color_palette( $editor_settings, $block_editor_context ) {
 		$add_color = self::add_color_array();
 		if ( ! empty( $add_color ) ) {
-			if ( ! empty( $editor_settings['__experimentalFeatures']['color']['palette']['core'] ) ) {
+			if ( ! empty( $editor_settings['__experimentalFeatures']['color']['palette']['default'] ) ) {
+				$editor_settings['__experimentalFeatures']['color']['palette']['default'] = array_merge(
+					$editor_settings['__experimentalFeatures']['color']['palette']['default'],
+					$add_color
+				);
+			} elseif ( ! empty( $editor_settings['__experimentalFeatures']['color']['palette']['core'] ) ) {
 				$editor_settings['__experimentalFeatures']['color']['palette']['core'] = array_merge(
 					$editor_settings['__experimentalFeatures']['color']['palette']['core'],
 					$add_color
 				);
 			} else {
-				$editor_settings['__experimentalFeatures']['color']['palette']['core'] = $add_color;
+				$editor_settings['__experimentalFeatures']['color']['palette']['default'] = $add_color;
+				$editor_settings['__experimentalFeatures']['color']['palette']['core']    = $add_color;
 			}
 			$editor_settings['colors'] = array_merge(
 				$editor_settings['colors'],
