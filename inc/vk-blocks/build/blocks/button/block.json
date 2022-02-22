@@ -1,0 +1,63 @@
+{
+	"apiVersion": 2,
+	"name": "vk-blocks/button",
+	"title": "Button",
+	"category": "vk-blocks-cat",
+	"attributes": {
+		"content": {
+			"type": "string",
+			"source": "html",
+			"selector": "span"
+		},
+		"subCaption": {
+			"type": "string"
+		},
+		"buttonUrl": {
+			"type": "string"
+		},
+		"buttonTarget": {
+			"type": "Boolean",
+			"default": false
+		},
+		"buttonSize": {
+			"type": "string",
+			"default": "md"
+		},
+		"buttonType": {
+			"type": "string",
+			"default": "0"
+		},
+		"buttonColor": {
+			"type": "string",
+			"default": "primary"
+		},
+		"buttonTextColorCustom": {
+			"type": "string"
+		},
+		"buttonColorCustom": {
+			"type": "string"
+		},
+		"buttonAlign": {
+			"type": "string",
+			"default": "left"
+		},
+		"fontAwesomeIconBefore": {
+			"type": "string"
+		},
+		"fontAwesomeIconAfter": {
+			"type": "string"
+		},
+		"clientId": {
+			"type": "string"
+		},
+		"blockId": {
+			"type": "string"
+		}
+	},
+	"description": "A button link that can display icons before and after.",
+	"textdomain": "vk-blocks",
+	"supports": {
+		"className": true,
+		"anchor": true
+	}
+}

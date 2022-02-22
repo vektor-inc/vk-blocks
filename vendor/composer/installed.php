@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'bc51eba5ba0e65d9a50b80f59739261e97d4b993',
+        'reference' => '43571c122cc53bb475e64616c1338e8d567dda17',
         'name' => 'vektor/vk-blocks-pro',
         'dev' => true,
     ),
@@ -385,12 +385,12 @@
             'dev_requirement' => false,
         ),
         'vektor-inc/vk-color-palette-manager' => array(
-            'pretty_version' => '0.1.0',
-            'version' => '0.1.0.0',
+            'pretty_version' => '0.3.0',
+            'version' => '0.3.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../vektor-inc/vk-color-palette-manager',
             'aliases' => array(),
-            'reference' => '1dd6ebdbd1bdfc2ea1968036919a6f1000e98a5e',
+            'reference' => '9a311154182fbbfa24a4f5a2930a6bcf8545ad4f',
             'dev_requirement' => false,
         ),
         'vektor/vk-blocks-pro' => array(
@@ -399,7 +399,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'bc51eba5ba0e65d9a50b80f59739261e97d4b993',
+            'reference' => '43571c122cc53bb475e64616c1338e8d567dda17',
             'dev_requirement' => false,
         ),
         'webmozart/assert' => array(
