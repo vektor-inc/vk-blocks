@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '6ff287d6c89da94c08fb5cb0e4a3fb4c9a886f39',
+        'reference' => 'c126b80c5469c79354688c4777663f53497a8f7b',
         'name' => 'vektor/vk-blocks-pro',
         'dev' => true,
     ),
@@ -399,7 +399,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '6ff287d6c89da94c08fb5cb0e4a3fb4c9a886f39',
+            'reference' => 'c126b80c5469c79354688c4777663f53497a8f7b',
             'dev_requirement' => false,
         ),
         'webmozart/assert' => array(
