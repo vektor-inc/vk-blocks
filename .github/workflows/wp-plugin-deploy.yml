@@ -35,7 +35,7 @@ jobs:
     - name: Build
       run: npm run build:free
     - name: Make Distribution
-      run: composer install --optimize-autoloader --no-dev
+      run: composer install --no-dev
     - name: WordPress Plugin Deploy
       uses: 10up/action-wordpress-plugin-deploy@develop
       env:
