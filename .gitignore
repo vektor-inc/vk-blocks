@@ -1,5 +1,4 @@
 /*.html
 node_modules/
-vendor/
 dist/
 inc/vk-blocks/build/*.js.map

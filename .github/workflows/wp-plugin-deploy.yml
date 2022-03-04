@@ -9,36 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [14.x]
     steps:
     - uses: actions/checkout@v2
-    - name: Read .node-version
-      run: echo "##[set-output name=NODEVERSION;]$(cat .node-version)"
-      id: nodenv
-    - name: Setup Node.js (.node-version)
-      uses: actions/setup-node@v1
-      with:
-          node-version: '${{ steps.nodenv.outputs.NODEVERSION }}'
-    - name: Setup PHP 7.4
-      uses: shivammathur/setup-php@v2
-      with:
-          php-version: 7.4
-    - name: install npm scripts
-      run: npm install
-    - name: Install Composer Packages
-      run: composer install
-    - name: Install WP-CLI
-      run: |
-          curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-          chmod +x wp-cli.phar
-          mv wp-cli.phar /usr/local/bin/wp
-    - name: Build
-      run: npm run build:free
-    - name: Make Distribution
-      run: composer install --no-dev
-    - name: WordPress Plugin Deploy
-      uses: 10up/action-wordpress-plugin-deploy@develop
-      env:
-        SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
-        SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
-        SLUG: vk-blocks
+#    - name: WordPress Plugin Deploy
+#      uses: 10up/action-wordpress-plugin-deploy@develop
+#      env:
+#        SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+#        SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+#        SLUG: vk-blocks
