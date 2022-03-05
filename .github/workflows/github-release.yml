@@ -8,6 +8,56 @@ env:
   plugin_name: vk-blocks
 
 jobs:
+
+  # PHPUnit test
+
+  php_unit:
+    name: php unittest
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: [7.4]
+    services:
+      mysql:
+        image: mysql:5.7
+        ports:
+          - 3306
+        env:
+          MYSQL_ROOT_PASSWORD: wordpress
+          MYSQL_DATABASE: wordpress
+          MYSQL_USER: wordpress
+          MYSQL_PASSWORD: wordpress
+    steps:
+    - uses: actions/checkout@v2
+    - name: Cache multiple paths
+      uses: actions/cache@v2
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php${{ matrix.php }}-${{ hashFiles('**/composer.lock') }}
+    - name: Setup PHP ${{ matrix.php }}
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php }}
+    - name: Setup Node 14.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
+    - name: install npm scripts
+      run: npm install
+    - name: install Composer Package
+      run: composer install
+    - name: Install WP-CLI
+      run: |
+        curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+        chmod +x wp-cli.phar
+        mv wp-cli.phar /usr/local/bin/wp
+    - name: Build
+      run: npm run build
+    - name: Run Environment
+      run: npx wp-env start
+    - name: Run Environment
+      run: npm run phpunit
+
   release:
     name: New release
     runs-on: ubuntu-latest
@@ -28,8 +78,6 @@ jobs:
 
     # npm build や composer install は vk-blocks-pro の deploy-free.sh で実行された状態で
     # この vk-blocks にコミットされているので、ここで実行する必要はない
-
-    # PHPUnit 
 
     - name: Dist
       run : | 
