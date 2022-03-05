@@ -35,6 +35,7 @@ jobs:
       run : | 
         npx gulp dist:free
         cd dist/ && zip -r ${{ env.plugin_name }}.zip ${{ env.plugin_name }}/
+        echo "---------"
         test -e dist/${{ env.plugin_name }}.zip
     - name: Upload release asset
       uses: actions/upload-release-asset@v1
