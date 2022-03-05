@@ -7,4 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'VektorInc\\VK_Color_Palette_Manager\\VkColorPaletteManager' => $vendorDir . '/vektor-inc/vk-color-palette-manager/src/VkColorPaletteManager.php',
+    'VektorInc\\VK_Font_Awesome_Versions\\VkFontAwesomeVersions' => $vendorDir . '/vektor-inc/font-awesome-versions/src/VkFontAwesomeVersions.php',
 );
