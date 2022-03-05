@@ -7,8 +7,9 @@ on:
 env:
   plugin_name: vk-blocks
 
-release:
-    name: Release to GitHub
+jobs:
+  release:
+    name: New release
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
