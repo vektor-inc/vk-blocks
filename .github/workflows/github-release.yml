@@ -26,12 +26,10 @@ jobs:
       with:
         node-version: "${{ steps.nodenv.outputs.NODEVERSION }}"
 
-    - name: Build
-      run: |
-        npm install
-        npm run build:free
+    # npm build や composer install は vk-blocks-pro の deploy-free.sh で実行された状態で
+    # この vk-blocks にコミットされているので、ここで実行する必要はない
 
-# PHPUnit 
+    # PHPUnit 
 
     - name: Dist
       run : | 
