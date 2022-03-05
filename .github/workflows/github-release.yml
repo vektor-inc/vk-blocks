@@ -33,6 +33,7 @@ jobs:
 
     - name: Dist
       run : | 
+        npm install
         npx gulp dist:free
         cd dist/ && zip -r ${{ env.plugin_name }}.zip ${{ env.plugin_name }}/
     - run : test -e dist/${{ env.plugin_name }}.zip
