@@ -38,8 +38,9 @@ jobs:
         npx gulp dist:free
         cd dist/ && zip -r ${{ env.plugin_name }}.zip ${{ env.plugin_name }}/
     - run : test -e dist/${{ env.plugin_name }}.zip
-    - name: Upload release asset
-      uses: actions/upload-release-asset@v1
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
