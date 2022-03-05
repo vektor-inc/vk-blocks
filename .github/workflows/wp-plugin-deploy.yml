@@ -1,8 +1,8 @@
 name: Deploy to WordPress.org
 on:
   push:
-    tags:
-    - "*"
+    branches:
+      - trunk
 # .org で配信しているデータと同じ状態をGitHubに保持するために、
 # Pro のリポジトリのワークフロー（内のシェルスクリプト）で無料版をビルド・コミットし、
 # 無料版では配信するだけにしている

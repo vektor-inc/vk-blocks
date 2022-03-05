@@ -5,7 +5,7 @@ on:
     - "*"
 
 env:
-  plugin_name: vk-all-in-one-expansion-unit
+  plugin_name: vk-blocks
 
 jobs:
   tag:
