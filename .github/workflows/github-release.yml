@@ -9,10 +9,10 @@ env:
 
 jobs:
 
-  # PHPUnit test
+  # PHPUnit test #################################### 
 
   php_unit:
-    name: php unittest
+    name: PHPUnit Test
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -51,15 +51,15 @@ jobs:
         curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
         chmod +x wp-cli.phar
         mv wp-cli.phar /usr/local/bin/wp
-    - name: Build
-      run: npm run build
     - name: Run Environment
       run: npx wp-env start
     - name: Run Environment
-      run: npm run phpunit
+      run: npm run phpunit:free
+
+  # GitHub Release #################################### 
 
   release:
-    name: New release
+    name: GitHub Release
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
