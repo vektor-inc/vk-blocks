@@ -92,12 +92,23 @@ jobs:
         npm install
         npx gulp dist:free
 
-    - name: Deploy test server
+    - name: Deploy test server [ single ]
       uses: burnett01/rsync-deployments@4.1
       with:
         switches: -avzr
         path: /dist/vk-blocks/
-        remote_path: /home/vs4/www/vk-blocks/wp-content/plugins/vk-blocks/
+        remote_path: /home/vs4/www/test/vk-blocks/wp-content/plugins/vk-blocks/
+        remote_host: ${{ secrets.DEPLOY_HOST_VS4 }}
+        remote_port: ${{ secrets.DEPLOY_PORT_VS4 }}
+        remote_user: ${{ secrets.DEPLOY_USER_VS4 }}
+        remote_key: ${{ secrets.DEPLOY_KEY_VS4 }}
+
+    - name: Deploy test server [ Lightning ]
+      uses: burnett01/rsync-deployments@4.1
+      with:
+        switches: -avzr
+        path: /dist/vk-blocks/
+        remote_path: /home/vs4/www/test/lightning-g3/wp-content/plugins/vk-blocks/
         remote_host: ${{ secrets.DEPLOY_HOST_VS4 }}
         remote_port: ${{ secrets.DEPLOY_PORT_VS4 }}
         remote_user: ${{ secrets.DEPLOY_USER_VS4 }}
