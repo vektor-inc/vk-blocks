@@ -8,8 +8,66 @@ env:
   plugin_name: vk-blocks
 
 jobs:
+
+  # PHPUnit test #################################### 
+
+  php_unit:
+    name: PHPUnit Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: [7.4]
+    services:
+      mysql:
+        image: mysql:5.7
+        ports:
+          - 3306
+        env:
+          MYSQL_ROOT_PASSWORD: wordpress
+          MYSQL_DATABASE: wordpress
+          MYSQL_USER: wordpress
+          MYSQL_PASSWORD: wordpress
+    steps:
+    - uses: actions/checkout@v2
+    - name: Cache multiple paths
+      uses: actions/cache@v2
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php${{ matrix.php }}-${{ hashFiles('**/composer.lock') }}
+    - name: Setup PHP ${{ matrix.php }}
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php }}
+
+    # get the node version from the .node-version file
+    - name: Read .node-version
+      run: echo "##[set-output name=NODEVERSION;]$(cat .node-version)"
+      id: nodenv
+
+    # setup node based on the version from the .node-version file, fetched in the previous step
+    - name: Setup Node.js (.node-version)
+      uses: actions/setup-node@v1
+      with:
+        node-version: "${{ steps.nodenv.outputs.NODEVERSION }}"
+        
+    - name: install npm scripts
+      run: npm install
+    - name: install Composer Package
+      run: composer install
+    - name: Install WP-CLI
+      run: |
+        curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+        chmod +x wp-cli.phar
+        mv wp-cli.phar /usr/local/bin/wp
+    - name: Run Environment
+      run: npx wp-env start
+    - name: Run Environment
+      run: npm run phpunit:free
+
+  # Deploy Test Server and Create GitHub Release #################################### 
+
   release:
-    name: New release
+    name: Deploy Test Server and Create GitHub Release
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
@@ -27,16 +85,40 @@ jobs:
         node-version: "${{ steps.nodenv.outputs.NODEVERSION }}"
 
     # npm build や composer install は vk-blocks-pro の deploy-free.sh で実行された状態で
-    # この vk-blocks にコミットされているので、ここで実行する必要はない
+    # この vk-blocks にコミット済なので、ここで実行する必要はない
 
-    # PHPUnit 
-
-    - name: Dist
+    - name: Create Dist
       run : | 
         npm install
         npx gulp dist:free
-        cd dist/ && zip -r ${{ env.plugin_name }}.zip ${{ env.plugin_name }}/
+
+    - name: Deploy test server [ Single ]
+      uses: burnett01/rsync-deployments@4.1
+      with:
+        switches: -avzr
+        path: /dist/vk-blocks/
+        remote_path: /home/vs4/www/test/vk-blocks/wp-content/plugins/vk-blocks/
+        remote_host: ${{ secrets.DEPLOY_HOST_VS4 }}
+        remote_port: ${{ secrets.DEPLOY_PORT_VS4 }}
+        remote_user: ${{ secrets.DEPLOY_USER_VS4 }}
+        remote_key: ${{ secrets.DEPLOY_KEY_VS4 }}
+
+    - name: Deploy test server [ Lightning ]
+      uses: burnett01/rsync-deployments@4.1
+      with:
+        switches: -avzr
+        path: /dist/vk-blocks/
+        remote_path: /home/vs4/www/test/lightning-g3/wp-content/plugins/vk-blocks/
+        remote_host: ${{ secrets.DEPLOY_HOST_VS4 }}
+        remote_port: ${{ secrets.DEPLOY_PORT_VS4 }}
+        remote_user: ${{ secrets.DEPLOY_USER_VS4 }}
+        remote_key: ${{ secrets.DEPLOY_KEY_VS4 }}
+
+    - name: Create Dist zip file
+      run : cd dist/ && zip -r ${{ env.plugin_name }}.zip ${{ env.plugin_name }}/
+
     - run : test -e dist/${{ env.plugin_name }}.zip
+
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
@@ -47,6 +129,7 @@ jobs:
         release_name: Release ${{ github.ref }}
         draft: false
         prerelease: false
+
     - name: Upload Release Asset
       id: upload-release-asset
       uses: actions/upload-release-asset@v1.0.1
