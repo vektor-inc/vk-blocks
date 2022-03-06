@@ -92,7 +92,7 @@ jobs:
         npm install
         npx gulp dist:free
 
-    - name: Deploy test server [ single ]
+    - name: Deploy test server [ Single ]
       uses: burnett01/rsync-deployments@4.1
       with:
         switches: -avzr
