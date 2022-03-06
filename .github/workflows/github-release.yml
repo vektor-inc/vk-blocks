@@ -103,9 +103,8 @@ jobs:
     #     remote_user: ${{ secrets.DEPLOY_USER_VS4 }}
     #     remote_key: ${{ secrets.DEPLOY_KEY_VS4 }}
 
-     - name: Create Dist zip file
-        run : | 
-        cd dist/ && zip -r ${{ env.plugin_name }}.zip ${{ env.plugin_name }}/
+    - name: Create Dist zip file
+      run : cd dist/ && zip -r ${{ env.plugin_name }}.zip ${{ env.plugin_name }}/
 
     - run : test -e dist/${{ env.plugin_name }}.zip
 
