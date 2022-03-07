@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '90e8bc4530dac1efb4f096cd61360a6203b4f87e',
+        'reference' => '44d1dd32921205da5ed0970cd6582389e16e7118',
         'name' => 'vektor/vk-blocks-pro',
         'dev' => false,
     ),
@@ -45,7 +45,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '90e8bc4530dac1efb4f096cd61360a6203b4f87e',
+            'reference' => '44d1dd32921205da5ed0970cd6582389e16e7118',
             'dev_requirement' => false,
         ),
         'yahnis-elsts/plugin-update-checker' => array(
