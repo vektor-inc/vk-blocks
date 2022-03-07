@@ -1,11 +1,6 @@
 .git/
 .github/
 .husky/
-.wordpress-org/
-dist/
-editor-css/
-lib/
-node_modules/
 .distignore
 .editorconfig
 .eslintignore
@@ -22,5 +17,9 @@ package-lock.json
 package.json
 README.md
 webpack.config.js
-test
-src
+./test/
+./src/
+./dist/
+./editor-css/
+./lib/
+./node_modules/
