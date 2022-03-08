@@ -17,9 +17,9 @@ package-lock.json
 package.json
 README.md
 webpack.config.js
-./test/
-./src/
-./dist/
-./editor-css/
-./lib/
-./node_modules/
+test/
+src/
+dist/
+editor-css/
+lib/
+node_modules/
