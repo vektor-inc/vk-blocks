@@ -1015,6 +1015,42 @@ msgstr ""
 msgid "Extra big"
 msgstr ""
 
+#: src/extensions/common/margin-extension/index.js:193
+msgid "Margin the block"
+msgstr ""
+
+#: src/extensions/common/margin-extension/index.js:23
+msgid "Top lg"
+msgstr ""
+
+#: src/extensions/common/margin-extension/index.js:28
+msgid "Top md"
+msgstr ""
+
+#: src/extensions/common/margin-extension/index.js:33
+msgid "Top sm"
+msgstr ""
+
+#: src/extensions/common/margin-extension/index.js:38
+msgid "Top 0"
+msgstr ""
+
+#: src/extensions/common/margin-extension/index.js:46
+msgid "Bottom 0"
+msgstr ""
+
+#: src/extensions/common/margin-extension/index.js:51
+msgid "Bottom sm"
+msgstr ""
+
+#: src/extensions/common/margin-extension/index.js:56
+msgid "Bottom md"
+msgstr ""
+
+#: src/extensions/common/margin-extension/index.js:61
+msgid "Bottom lg"
+msgstr ""
+
 #: src/extensions/common/nowrap/index.js:21
 msgid "No wrap"
 msgstr ""

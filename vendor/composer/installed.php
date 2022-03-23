@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'd63527eef1aa79a407835ed7cacd55a111c318d2',
+        'reference' => '0266da2718b6832cc9c7d569d29cdbe92491e854',
         'name' => 'vektor/vk-blocks-pro',
         'dev' => false,
     ),
@@ -22,12 +22,12 @@
             'dev_requirement' => false,
         ),
         'vektor-inc/font-awesome-versions' => array(
-            'pretty_version' => '0.1.1',
-            'version' => '0.1.1.0',
+            'pretty_version' => '0.2.0',
+            'version' => '0.2.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../vektor-inc/font-awesome-versions',
             'aliases' => array(),
-            'reference' => '9c9d8ec2ec21d078079db277b9185403cdec8564',
+            'reference' => '8c3e6f9f7083c5862c0138e263c9699a58b0a670',
             'dev_requirement' => false,
         ),
         'vektor-inc/vk-breadcrumb' => array(
@@ -63,7 +63,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'd63527eef1aa79a407835ed7cacd55a111c318d2',
+            'reference' => '0266da2718b6832cc9c7d569d29cdbe92491e854',
             'dev_requirement' => false,
         ),
         'yahnis-elsts/plugin-update-checker' => array(
