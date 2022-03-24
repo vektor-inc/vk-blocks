@@ -1015,39 +1015,39 @@ msgstr ""
 msgid "Extra big"
 msgstr ""
 
-#: src/extensions/common/margin-extension/index.js:193
+#: src/extensions/common/margin-extension/index.js:166
 msgid "Margin the block"
 msgstr ""
 
-#: src/extensions/common/margin-extension/index.js:23
+#: src/extensions/common/margin-extension/index.js:24
 msgid "Top lg"
 msgstr ""
 
-#: src/extensions/common/margin-extension/index.js:28
+#: src/extensions/common/margin-extension/index.js:29
 msgid "Top md"
 msgstr ""
 
-#: src/extensions/common/margin-extension/index.js:33
+#: src/extensions/common/margin-extension/index.js:34
 msgid "Top sm"
 msgstr ""
 
-#: src/extensions/common/margin-extension/index.js:38
+#: src/extensions/common/margin-extension/index.js:39
 msgid "Top 0"
 msgstr ""
 
-#: src/extensions/common/margin-extension/index.js:46
+#: src/extensions/common/margin-extension/index.js:47
 msgid "Bottom 0"
 msgstr ""
 
-#: src/extensions/common/margin-extension/index.js:51
+#: src/extensions/common/margin-extension/index.js:52
 msgid "Bottom sm"
 msgstr ""
 
-#: src/extensions/common/margin-extension/index.js:56
+#: src/extensions/common/margin-extension/index.js:57
 msgid "Bottom md"
 msgstr ""
 
-#: src/extensions/common/margin-extension/index.js:61
+#: src/extensions/common/margin-extension/index.js:62
 msgid "Bottom lg"
 msgstr ""
 
