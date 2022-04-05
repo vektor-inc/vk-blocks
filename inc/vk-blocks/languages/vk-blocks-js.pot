@@ -1043,39 +1043,39 @@ msgstr ""
 msgid "Extra big"
 msgstr ""
 
-#: src/extensions/common/margin-extension/index.js:168
+#: src/extensions/common/margin-extension/index.js:194
 msgid "Margin the block"
 msgstr ""
 
-#: src/extensions/common/margin-extension/index.js:24
+#: src/extensions/common/margin-extension/index.js:25
 msgid "Top lg"
 msgstr ""
 
-#: src/extensions/common/margin-extension/index.js:29
+#: src/extensions/common/margin-extension/index.js:30
 msgid "Top md"
 msgstr ""
 
-#: src/extensions/common/margin-extension/index.js:34
+#: src/extensions/common/margin-extension/index.js:35
 msgid "Top sm"
 msgstr ""
 
-#: src/extensions/common/margin-extension/index.js:39
+#: src/extensions/common/margin-extension/index.js:40
 msgid "Top 0"
 msgstr ""
 
-#: src/extensions/common/margin-extension/index.js:47
+#: src/extensions/common/margin-extension/index.js:48
 msgid "Bottom 0"
 msgstr ""
 
-#: src/extensions/common/margin-extension/index.js:52
+#: src/extensions/common/margin-extension/index.js:53
 msgid "Bottom sm"
 msgstr ""
 
-#: src/extensions/common/margin-extension/index.js:57
+#: src/extensions/common/margin-extension/index.js:58
 msgid "Bottom md"
 msgstr ""
 
-#: src/extensions/common/margin-extension/index.js:62
+#: src/extensions/common/margin-extension/index.js:63
 msgid "Bottom lg"
 msgstr ""
 
@@ -1285,7 +1285,7 @@ msgstr ""
 #: src/utils/font-awesome-new.js:255
 msgid ""
 "When you click save button, the window will be reloaded and this setting "
-"will be applied"
+"will be applied."
 msgstr ""
 
 #: src/utils/font-awesome-new.js:265
