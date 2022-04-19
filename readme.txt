@@ -63,11 +63,17 @@ e.g.
 
 == Changelog ==
 
+= 1.31.0 =
+[ Add Function ][ GridColCard(Pro) ] Add link URL in toolbar and sidebar.
+[ Add function ] [ Breadcrumb(Pro) ] Add support fontSize and spacing.
+[ Improvement ][ margin extension ] Changed to add common margin class names to additional CSS classes.
+[ Bug fix ][ Accordion(Pro) ] Fix do not intend margin bottom 0 added to p tag.
+
 = 1.30.0 =
 [ Add Function ][ Border Box ] Add body align control in toolbar.
-[ Update ][ Button ] Move url interface to block toolbar.
-[ Update ][ Button outer(Pro) ] Add button width option.
+[ Add Function ][ Button outer(Pro) ] Add button width option.
 [ Update ][ Font Awesome ] Add version chenge setting on block-editor screen.
+[ Specification Change ][ Button ] Move url interface to block toolbar.
 [ Specification Change ] Change default --vk-margin-md size 2rem -> 2.4rem
 [ Specification Change ][ icon ] fix icon margin bottom
 

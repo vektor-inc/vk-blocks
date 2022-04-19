@@ -5,7 +5,7 @@
  * @package vektor-inc/vk-breadcrumb
  * @license GPL-2.0+
  *
- * @version 0.1.0
+ * @version 0.2.2
  */
 
 namespace VektorInc\VK_Breadcrumb;
@@ -358,11 +358,12 @@ class VkBreadcrumb {
 
 		if ( ! $options ) {
 			$options = array(
-				'id_outer'        => 'breadcrumb',
-				'class_outer'     => 'breadcrumb',
-				'class_inner'     => 'container',
-				'class_list'      => 'breadcrumb-list',
-				'class_list_item' => 'breadcrumb-list__item',
+				'id_outer'           => 'breadcrumb',
+				'class_outer'        => 'breadcrumb',
+				'wrapper_attributes' => '',
+				'class_inner'        => 'container',
+				'class_list'         => 'breadcrumb-list',
+				'class_list_item'    => 'breadcrumb-list__item',
 			);
 		}
 
@@ -377,8 +378,12 @@ class VkBreadcrumb {
 		$microdata_li_a      = ' itemprop="item"';
 		$microdata_li_a_span = ' itemprop="name"';
 
-		$breadcrumb_html  = '<!-- [ #' . esc_attr( $options['class_outer'] ) . ' ] -->';
-		$breadcrumb_html .= '<div id="' . esc_attr( $options['id_outer'] ) . '" class="' . esc_attr( $options['class_outer'] ) . '">';
+		$breadcrumb_html = '<!-- [ #' . esc_attr( $options['class_outer'] ) . ' ] -->';
+		if ( ! empty( $options['wrapper_attributes'] ) ) {
+			$breadcrumb_html .= '<div id="' . esc_attr( $options['id_outer'] ) . '" ' . $options['wrapper_attributes'] . '>';
+		} else {
+			$breadcrumb_html .= '<div id="' . esc_attr( $options['id_outer'] ) . '" class="' . $options['class_outer'] . '">';
+		}
 		$breadcrumb_html .= '<div class="' . esc_attr( $options['class_inner'] ) . '">';
 		$breadcrumb_html .= '<ol class="' . esc_attr( $options['class_list'] ) . '" itemscope itemtype="https://schema.org/BreadcrumbList">';
 
@@ -424,10 +429,9 @@ class VkBreadcrumb {
 		}
 
 			$breadcrumb_html .= '</ol>';
-			$breadcrumb_html .= '</div>
-			</div>
-			<!-- [ /#' . esc_attr( $options['class_outer'] ) . ' ] -->
-			';
+			$breadcrumb_html .= '</div>';
+			$breadcrumb_html .= '</div>';
+			$breadcrumb_html .= '<!-- [ /#' . esc_attr( $options['class_outer'] ) . ' ] -->';
 			$breadcrumb_html  = apply_filters( 'vk_breadcrumb_html', $breadcrumb_html );
 			return $breadcrumb_html;
 

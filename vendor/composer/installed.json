@@ -70,23 +70,27 @@
         },
         {
             "name": "vektor-inc/font-awesome-versions",
-            "version": "0.2.0",
-            "version_normalized": "0.2.0.0",
+            "version": "0.4.0",
+            "version_normalized": "0.4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vektor-inc/font-awesome-versions.git",
-                "reference": "8c3e6f9f7083c5862c0138e263c9699a58b0a670"
+                "reference": "16b3f9fdf71cee93dafc01b56f190a463158bd30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vektor-inc/font-awesome-versions/zipball/8c3e6f9f7083c5862c0138e263c9699a58b0a670",
-                "reference": "8c3e6f9f7083c5862c0138e263c9699a58b0a670",
+                "url": "https://api.github.com/repos/vektor-inc/font-awesome-versions/zipball/16b3f9fdf71cee93dafc01b56f190a463158bd30",
+                "reference": "16b3f9fdf71cee93dafc01b56f190a463158bd30",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.6.0"
             },
-            "time": "2022-03-21T15:19:34+00:00",
+            "require-dev": {
+                "wp-phpunit/wp-phpunit": "^5.4",
+                "yoast/phpunit-polyfills": "^1.0"
+            },
+            "time": "2022-04-18T06:21:29+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -107,29 +111,33 @@
             "description": "Font Awesome",
             "support": {
                 "issues": "https://github.com/vektor-inc/font-awesome-versions/issues",
-                "source": "https://github.com/vektor-inc/font-awesome-versions/tree/0.2.0"
+                "source": "https://github.com/vektor-inc/font-awesome-versions/tree/0.4.0"
             },
             "install-path": "../vektor-inc/font-awesome-versions"
         },
         {
             "name": "vektor-inc/vk-breadcrumb",
-            "version": "0.1.0",
-            "version_normalized": "0.1.0.0",
+            "version": "0.2.2",
+            "version_normalized": "0.2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vektor-inc/vk-breadcrumb.git",
-                "reference": "6ba01e7f2ceaec7f5a59ac89e7aa7da1034c08eb"
+                "reference": "c3c9f09522b2d5688e31dac235a925731bf70d46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vektor-inc/vk-breadcrumb/zipball/6ba01e7f2ceaec7f5a59ac89e7aa7da1034c08eb",
-                "reference": "6ba01e7f2ceaec7f5a59ac89e7aa7da1034c08eb",
+                "url": "https://api.github.com/repos/vektor-inc/vk-breadcrumb/zipball/c3c9f09522b2d5688e31dac235a925731bf70d46",
+                "reference": "c3c9f09522b2d5688e31dac235a925731bf70d46",
                 "shasum": ""
             },
             "require": {
                 "vektor-inc/vk-helpers": "^0.0.2"
             },
-            "time": "2022-03-03T05:43:11+00:00",
+            "require-dev": {
+                "wp-phpunit/wp-phpunit": "^5.4",
+                "yoast/phpunit-polyfills": "^1.0"
+            },
+            "time": "2022-04-19T07:08:07+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -150,7 +158,7 @@
             "description": "WordPress Bread Crumb Class",
             "support": {
                 "issues": "https://github.com/vektor-inc/vk-breadcrumb/issues",
-                "source": "https://github.com/vektor-inc/vk-breadcrumb/tree/0.1.0"
+                "source": "https://github.com/vektor-inc/vk-breadcrumb/tree/0.2.2"
             },
             "install-path": "../vektor-inc/vk-breadcrumb"
         },
