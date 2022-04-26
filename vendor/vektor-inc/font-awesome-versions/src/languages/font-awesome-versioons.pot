@@ -31,7 +31,7 @@ msgid "An older version of Font Awesome is selected. This version will be remove
 msgstr ""
 
 #: src/VkFontAwesomeVersions.php:348
-msgid "Plesee change the version of FontAwesome on the Appearance > Customize screen."
+msgid "Please change the version of FontAwesome on the Appearance > Customize screen."
 msgstr ""
 
 #: src/VkFontAwesomeVersions.php:349

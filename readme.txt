@@ -1,10 +1,10 @@
 === VK Blocks ===
-Contributors: vektor-inc,kurudrive,naoki0h,nc30,shimotomoki,kaorock72,rickaddison7634,mimitips,mthaichi,shimotomoki,sysbird
+Contributors: vektor-inc,kurudrive,naoki0h,nc30,una9,kaorock72,rickaddison7634,mimitips,mthaichi,shimotomoki,sysbird
 Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 5.8
-Tested up to: 5.9.3
-Stable tag: 1.31.0.1
+Tested up to: 5.9.2
+Stable tag: 1.31.0.0
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -62,6 +62,14 @@ e.g.
 1. VK Blocks examples.
 
 == Changelog ==
+
+= 1.32.0 =
+[ Add Function ][ GridColCard ( Pro ) ] add column min-width setting for tablet and pc.
+[ Add Function ][ Button outer(Pro) ] Add button width option for mobile or tablet.
+[ Improvement ][ margin extension ] Enable margin settings in Grid column(Pro).
+[ Bug Fix ] Fix FAQ option array error for free.
+[ Bug Fix ] Fix load Font Awesome Files on WordPress.com
+[ Bugfix ][ Button ] Fix icon inner classes.
 
 = 1.31.0 =
 [ Add Function ][ GridColCard(Pro) ] Add link URL in toolbar and sidebar.

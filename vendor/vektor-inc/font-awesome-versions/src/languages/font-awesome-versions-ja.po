@@ -40,7 +40,7 @@ msgstr ""
 
 #: src/VkFontAwesomeVersions.php:348
 msgid ""
-"Plesee change the version of FontAwesome on the Appearance > Customize "
+"Please change the version of FontAwesome on the Appearance > Customize "
 "screen."
 msgstr "外観＞カスタマイズ画面で、FontAwesomeのバージョンを変更してください。"
 

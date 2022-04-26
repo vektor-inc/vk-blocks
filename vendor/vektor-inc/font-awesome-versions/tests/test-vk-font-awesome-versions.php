@@ -40,13 +40,26 @@ class VkFontAwesomeVersionsTest extends WP_UnitTestCase {
 			),
 		);
 
-		foreach ( $tests as $key => $value ){
+		foreach ( $tests as $key => $value ) {
 			update_option( 'vk_font_awesome_version', $value['option_fa_version'] );
-			if ( ! empty( $value['additional_class'] ) ){
+			if ( ! empty( $value['additional_class'] ) ) {
 				$return = VkFontAwesomeVersions::get_icon_tag( $value['saved_value'], $value['additional_class'] );
 			} else {
 				$return = VkFontAwesomeVersions::get_icon_tag( $value['saved_value'] );
 			}
+			$this->assertEquals( $value['correct'], $return );
+		}
+	}
+
+	function test_get_directory_uri() {
+		$tests = array(
+			array(
+				'path'    => '/var/www/html/wp-content/themes/lightning-pro/vendor/vektor-inc/font-awesome-versions/src',
+				'correct' => site_url( '/' ) . 'wp-content/themes/lightning-pro/vendor/vektor-inc/font-awesome-versions/src/',
+			),
+		);
+		foreach ( $tests as $key => $value ) {
+			$return = VkFontAwesomeVersions::get_directory_uri( $value['path'] );
 			$this->assertEquals( $value['correct'], $return );
 		}
 	}

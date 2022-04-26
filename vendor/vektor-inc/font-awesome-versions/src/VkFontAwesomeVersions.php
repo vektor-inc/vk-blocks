@@ -5,7 +5,7 @@
  * @package vektor-inc/font-awesome-versions
  * @license GPL-2.0+
  *
- * @version 0.4.0
+ * @version 0.4.1
  */
 
 namespace VektorInc\VK_Font_Awesome_Versions;
@@ -77,11 +77,25 @@ class VkFontAwesomeVersions {
 	 * Undocumented function
 	 *
 	 * @since 0.3.0
+	 * @param string $path : PHPUnit テスト用
 	 * @return string $uri
 	 */
-	public static function get_directory_uri() {
-		$path = wp_normalize_path( dirname( __FILE__ ) );
-		$uri  = str_replace( wp_normalize_path( ABSPATH ), site_url() . '/', $path ) . '/';
+	public static function get_directory_uri( $path = '' ) {
+
+		$uri = '';
+
+		if ( ! $path ) {
+			// このファイルのパス.
+			$path = wp_normalize_path( dirname( __FILE__ ) );
+		}
+
+		// ファイルのパスの wp-content より前の部分を site_url() に置換する
+		// ABSPATH の部分を site_url() に置換したいところだが、ABSPATHは WordPress.com で /wordpress/core/5.9.3/ のような返し方をされて、一般的なサーバーのパスとは異なるので、置換などには使用しない.
+		preg_match( '/(.*)(wp-content.*)/', $path, $matches, PREG_OFFSET_CAPTURE );
+		if ( ! empty( $matches[2][0] ) ) {
+			$uri = site_url( '/' ) . $matches[2][0] . '/';
+		}
+
 		return $uri;
 	}
 
@@ -373,7 +387,7 @@ class VkFontAwesomeVersions {
 		if ( '4.7' === $current_option ) {
 			$old_notice .= '<div class="error">';
 			$old_notice .= '<p>' . __( 'An older version of Font Awesome is selected. This version will be removed by August 2022.', 'font-awesome-versions' ) . '</p>';
-			$old_notice .= '<p>' . __( 'Plesee change the version of FontAwesome on the Appearance > Customize screen.', 'font-awesome-versions' ) . '</p>';
+			$old_notice .= '<p>' . __( 'Please change the version of FontAwesome on the Appearance > Customize screen.', 'font-awesome-versions' ) . '</p>';
 			$old_notice .= '<p>' . __( '* It is necessary to reset the icon font in the place where Font Awesome is used.', 'font-awesome-versions' ) . '</p>';
 			$old_notice .= '</div>';
 		}
