@@ -3,8 +3,8 @@
  * Plugin Name: VK Blocks 
  * Plugin URI: https://github.com/vektor-inc/vk-blocks
  * Description: This is a plugin that extends Gutenberg's blocks.
- * Version: 1.33.0.0
- * Stable tag: 1.33.0.0
+ * Version: 1.33.1.0
+ * Stable tag: 1.33.1.0
  * Requires at least: 5.8
  * Author: Vektor,Inc.
  * Author URI: https://vektor-inc.co.jp
@@ -262,7 +262,10 @@ function vk_blocks_the_update_messsage( $update_checker ) {
  */
 function vk_blocks_get_license_check_query_arg( $query_args ) {
 	$options = get_option( 'vk_blocks_options' );
-	$license = esc_html( $options['vk_blocks_pro_license_key'] );
+	$license = '';
+	if ( ! empty( $options['vk_blocks_pro_license_key'] ) ) {
+		$license = esc_html( $options['vk_blocks_pro_license_key'] );
+	}
 
 	if ( ! empty( $license ) ) {
 		$query_args['vk-blocks-pro-license-key'] = $license;
