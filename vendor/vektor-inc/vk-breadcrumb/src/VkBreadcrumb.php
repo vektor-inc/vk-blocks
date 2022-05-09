@@ -5,7 +5,7 @@
  * @package vektor-inc/vk-breadcrumb
  * @license GPL-2.0+
  *
- * @version 0.2.2
+ * @version 0.2.3
  */
 
 namespace VektorInc\VK_Breadcrumb;
@@ -105,7 +105,7 @@ class VkBreadcrumb {
 				'icon'  => '',
 			);
 
-		} elseif ( is_page() ) {
+		} elseif ( is_page() && ! is_front_page() ) {
 			$post = $wp_query->get_queried_object();
 			// 第一階層.
 			if ( 0 === $post->post_parent ) {

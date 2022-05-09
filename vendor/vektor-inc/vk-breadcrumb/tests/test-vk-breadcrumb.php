@@ -189,8 +189,27 @@ class VkBreadcrumbTest extends WP_UnitTestCase {
 				),
 			),
 
+			// トップページに固定ページ
+			// トップページに指定した固定ページ名
+			array(
+				'target_url' => home_url(),
+				'options'    => array(
+					'page_on_front'  => $front_page_id,
+					'show_on_front'  => 'page',
+					'page_for_posts' => $home_page_id,
+				),
+				'correct'    => array(
+					array(
+						'name'  => 'front_page',
+						'id'    => '',
+						'url'   => home_url(),
+						'class' => 'breadcrumb-list__item--home',
+						'icon'  => 'fas fa-fw fa-home',
+					),
+				),
+			),
 			// 固定ページ
-			// HOME > 固定ページ名
+			// HOME > 固定ページ名.
 			array(
 				'target_url' => get_permalink( $parent_page_id ),
 				'correct'    => array(
@@ -212,7 +231,7 @@ class VkBreadcrumbTest extends WP_UnitTestCase {
 			),
 
 			// トップページに固定ページ / 投稿トップに特定の固定ページ指定 / 固定ページ
-			// トップに指定した固定ページ名 > 固定ページ名
+			// トップページに固定ページ > 固定ページ名
 			array(
 				'options'    => array(
 					'page_on_front'  => $front_page_id,
@@ -663,10 +682,12 @@ class VkBreadcrumbTest extends WP_UnitTestCase {
 			$return = VkBreadcrumb::get_array();
 
 			global $wp_query;
-			print '<pre style="text-align:left">';print_r($wp_query->query);print '</pre>';
+			print '<pre style="text-align:left">';
+			print_r( $wp_query->query );
+			print '</pre>';
 
 			print PHP_EOL;
-			print $value['target_url']. PHP_EOL;
+			print $value['target_url'] . PHP_EOL;
 			print 'return------------------------------------' . PHP_EOL;
 			var_dump( $return ) . PHP_EOL;
 			print 'correct------------------------------------' . PHP_EOL;
