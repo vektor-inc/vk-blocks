@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '3c6d1848b7978f3c0569d828d5715ce2988e5324',
+        'reference' => '1cba3611cc83ebeb5c62b2f03074fea1071e0ace',
         'name' => 'vektor/vk-blocks-pro',
         'dev' => false,
     ),
@@ -58,12 +58,12 @@
             'dev_requirement' => false,
         ),
         'vektor-inc/vk-term-color' => array(
-            'pretty_version' => '0.3.0',
-            'version' => '0.3.0.0',
+            'pretty_version' => '0.4.0',
+            'version' => '0.4.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../vektor-inc/vk-term-color',
             'aliases' => array(),
-            'reference' => '72b7f8c4864c145f63d85aac2446efdaae552d46',
+            'reference' => 'e5a0946f0dfe5ce19988ed42914df494259f7aa5',
             'dev_requirement' => false,
         ),
         'vektor/vk-blocks-pro' => array(
@@ -72,7 +72,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '3c6d1848b7978f3c0569d828d5715ce2988e5324',
+            'reference' => '1cba3611cc83ebeb5c62b2f03074fea1071e0ace',
             'dev_requirement' => false,
         ),
         'yahnis-elsts/plugin-update-checker' => array(

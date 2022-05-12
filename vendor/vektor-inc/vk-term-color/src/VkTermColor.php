@@ -5,7 +5,7 @@
  * @package vektor-inc/vk-term-color
  * @license GPL-2.0+
  *
- * @version 0.3.0
+ * @version 0.4.0
  */
 
 namespace VektorInc\VK_Term_Color;
@@ -378,6 +378,7 @@ class VkTermColor {
 		$args         = wp_parse_args( $args, $args_default );
 
 		// タクソノミー指定がない場合に自動検出.
+		$taxonomy = '';
 		if ( empty( $args['taxonomy'] ) ) {
 			$taxonomies = get_the_taxonomies();
 			if ( $taxonomies ) {
@@ -386,6 +387,11 @@ class VkTermColor {
 			}
 		} else {
 			$taxonomy = $args['taxonomy'];
+		}
+
+		// タクソノミーが設定されていない場合何も表示しない.
+		if ( ! $taxonomy ) {
+			return;
 		}
 
 		$terms = get_the_terms( $post->ID, $taxonomy );
