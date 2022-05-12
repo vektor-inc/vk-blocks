@@ -11,4 +11,5 @@ return array(
     'VektorInc\\VK_Color_Palette_Manager\\VkColorPaletteManager' => $vendorDir . '/vektor-inc/vk-color-palette-manager/src/VkColorPaletteManager.php',
     'VektorInc\\VK_Font_Awesome_Versions\\VkFontAwesomeVersions' => $vendorDir . '/vektor-inc/font-awesome-versions/src/VkFontAwesomeVersions.php',
     'VektorInc\\VK_Helpers\\VkHelpers' => $vendorDir . '/vektor-inc/vk-helpers/src/VkHelpers.php',
+    'VektorInc\\VK_Term_Color\\VkTermColor' => $vendorDir . '/vektor-inc/vk-term-color/src/VkTermColor.php',
 );

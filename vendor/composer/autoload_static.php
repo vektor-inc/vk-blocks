@@ -14,6 +14,7 @@ class ComposerStaticInit736023d6e47018e1820cce677b7c4f9b
     public static $prefixLengthsPsr4 = array (
         'V' => 
         array (
+            'VektorInc\\VK_Term_Color\\' => 24,
             'VektorInc\\VK_Helpers\\' => 21,
             'VektorInc\\VK_Font_Awesome_Versions\\' => 35,
             'VektorInc\\VK_Color_Palette_Manager\\' => 35,
@@ -22,6 +23,10 @@ class ComposerStaticInit736023d6e47018e1820cce677b7c4f9b
     );
 
     public static $prefixDirsPsr4 = array (
+        'VektorInc\\VK_Term_Color\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/vektor-inc/vk-term-color/src',
+        ),
         'VektorInc\\VK_Helpers\\' => 
         array (
             0 => __DIR__ . '/..' . '/vektor-inc/vk-helpers/src',
@@ -46,6 +51,7 @@ class ComposerStaticInit736023d6e47018e1820cce677b7c4f9b
         'VektorInc\\VK_Color_Palette_Manager\\VkColorPaletteManager' => __DIR__ . '/..' . '/vektor-inc/vk-color-palette-manager/src/VkColorPaletteManager.php',
         'VektorInc\\VK_Font_Awesome_Versions\\VkFontAwesomeVersions' => __DIR__ . '/..' . '/vektor-inc/font-awesome-versions/src/VkFontAwesomeVersions.php',
         'VektorInc\\VK_Helpers\\VkHelpers' => __DIR__ . '/..' . '/vektor-inc/vk-helpers/src/VkHelpers.php',
+        'VektorInc\\VK_Term_Color\\VkTermColor' => __DIR__ . '/..' . '/vektor-inc/vk-term-color/src/VkTermColor.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
