@@ -1,8 +1,7 @@
 /*
 コア側のブロックcssを上書き用のファイルです
 --------------------------------------------*/
-
-.edit-post-visual-editor {
+.editor-styles-wrapper { //サイトエディター
 	//ソーシャルアイコン
 	.vk_card_item .block-editor-inner-blocks .block-editor-block-list__layout,//これがないとカード内のインナーブロックで効かない
 	.wp-block-social-links{
@@ -10,15 +9,6 @@
 			width: auto;
 			margin: 0 8px .8em 0;
 		}
-	}
-	//他テーマ（Twenty Twenty）上書き用
-	.editor-styles-wrapper .wp-block-image figcaption{
-		display: block;
-	}
-	//他テーマ（Twenty Twenty）上書き用
-	.editor-styles-wrapper ul li,
-	.editor-styles-wrapper ol li{
-		margin:calc( var(--vk-size-text) * 0.8 ) 0;
 	}
 
 	.vk-blocks-format-popover {
@@ -33,6 +23,15 @@
 			border-radius: 2px;
 		}
 	}
+		//他テーマ（Twenty Twenty）上書き用
+		.wp-block-image figcaption{
+			display: block;
+		}
+		//他テーマ（Twenty Twenty）上書き用
+		ul li,
+		ol li{
+			margin:calc( var(--vk-size-text) * 0.8 ) 0;
+		}
 }
 
 
@@ -163,6 +162,8 @@ button.image-button:not(.button-delete) {
 @import "./editor_before_faq";
 // breadcrumb
 @import "./editor_before_breadcrumb";
+// slider
+@import "./editor_before_slider";
 
 // VK Outer 編集パネル
 $color-danger: #dd3333;
@@ -202,7 +203,8 @@ $color-danger: #dd3333;
 
 
 /* editor area *********************************************/
-.edit-post-visual-editor,
+.editor-styles-wrapper, //サイトエディター用に追加
+// .edit-post-visual-editor,
 .components-tab-panel__tab-content{
 
 	.vk_width-full div[data-type="vk-blocks/slider-item"]{
