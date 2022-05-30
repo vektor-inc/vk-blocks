@@ -2,3 +2,4 @@
 node_modules/
 dist/
 inc/vk-blocks/build/*.js.map
+.wp-env.override.json
