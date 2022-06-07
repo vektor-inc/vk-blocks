@@ -21,5 +21,6 @@ webpack.config.js
 test/
 dist/
 editor-css/
+options-css/
 lib/
 node_modules/
