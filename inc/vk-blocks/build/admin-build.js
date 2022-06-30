@@ -1,0 +1,1 @@
+!function(){var e=document.getElementById("vk-blocks-pro-license-key");e.addEventListener("blur",(function(){e.value=e.value.trim()}))}();
