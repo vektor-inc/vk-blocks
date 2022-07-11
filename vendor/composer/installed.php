@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '250d50e38c1f317128d429f050167358bada952a',
+        'reference' => 'e100b4b3b58d378ab1c5a47f20b2d751219718a0',
         'name' => 'vektor/vk-blocks-pro',
         'dev' => false,
     ),
@@ -31,12 +31,12 @@
             'dev_requirement' => false,
         ),
         'vektor-inc/vk-breadcrumb' => array(
-            'pretty_version' => '0.2.3',
-            'version' => '0.2.3.0',
+            'pretty_version' => '0.2.4',
+            'version' => '0.2.4.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../vektor-inc/vk-breadcrumb',
             'aliases' => array(),
-            'reference' => '6f78f52656f12d8eeaf25155f1c26218ea970c9e',
+            'reference' => 'fbe1fb42d502ba24ae100e640e72b6091fac7c20',
             'dev_requirement' => false,
         ),
         'vektor-inc/vk-color-palette-manager' => array(
@@ -72,7 +72,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '250d50e38c1f317128d429f050167358bada952a',
+            'reference' => 'e100b4b3b58d378ab1c5a47f20b2d751219718a0',
             'dev_requirement' => false,
         ),
         'yahnis-elsts/plugin-update-checker' => array(

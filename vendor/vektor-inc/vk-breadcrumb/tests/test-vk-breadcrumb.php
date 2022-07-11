@@ -667,6 +667,29 @@ class VkBreadcrumbTest extends WP_UnitTestCase {
 					),
 				),
 			),
+
+			// カテゴリーとキーワードでの絞り込み検索
+			// HOME > "test"の検索結果 .
+			array(
+				'target_url' => home_url() . '/?category_name=child_category&s=test',
+				'correct'    => array(
+					array(
+						'name'  => __( 'HOME', 'lightning' ),
+						'id'    => '',
+						'url'   => home_url(),
+						'class' => 'breadcrumb-list__item--home',
+						'icon'  => 'fas fa-fw fa-home',
+					),
+					array(
+						'name'  => 'Search Results for : test',
+						'id'    => '',
+						'url'   => '',
+						'class' => '',
+						'icon'  => '',
+					),
+				),
+			),
+
 		);
 
 		foreach ( $test_array as $value ) {
