@@ -24,4 +24,4 @@ editor-css/
 options-css/
 lib/
 node_modules/
-src/
+./src/
