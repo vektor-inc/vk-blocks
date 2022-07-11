@@ -5,7 +5,7 @@
  * @package vektor-inc/vk-breadcrumb
  * @license GPL-2.0+
  *
- * @version 0.2.3
+ * @version 0.2.4
  */
 
 namespace VektorInc\VK_Breadcrumb;
@@ -89,8 +89,8 @@ class VkBreadcrumb {
 				'icon'  => '',
 			);
 
-			// For filter search term & keywords or term & no keyword.
 		} elseif ( is_search() ) {
+			// For filter search term & keywords or term & no keyword.
 			if ( get_search_query() ) {
 				// translators: search keyword .
 				$name = sprintf( __( 'Search Results for : %s', 'lightning' ), get_search_query() );
@@ -160,7 +160,11 @@ class VkBreadcrumb {
 			}
 		}
 
-		if ( is_date() ) {
+		/*****************************************************
+		 * Under 3 hierarchy
+		 */
+
+		if ( is_date() && ! is_search() ) {
 			$breadcrumb_array[] = array(
 				'name'  => get_the_archive_title(),
 				'id'    => '',
@@ -169,7 +173,7 @@ class VkBreadcrumb {
 				'icon'  => '',
 			);
 
-		} elseif ( is_tag() ) {
+		} elseif ( is_tag() && ! is_search() ) {
 			$breadcrumb_array[] = array(
 				'name'  => single_tag_title( '', false ),
 				'id'    => '',
@@ -178,7 +182,7 @@ class VkBreadcrumb {
 				'icon'  => '',
 			);
 
-		} elseif ( is_category() ) {
+		} elseif ( is_category() && ! is_search() ) {
 
 			/*****************************************
 			 *  Category
@@ -210,7 +214,7 @@ class VkBreadcrumb {
 				'icon'  => '',
 			);
 
-		} elseif ( is_tax() ) {
+		} elseif ( is_tax() && ! is_search() ) {
 
 			/*****************************************
 			 * Term
