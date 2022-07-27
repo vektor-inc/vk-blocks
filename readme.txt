@@ -4,7 +4,7 @@ Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 5.8
 Tested up to: 6.0.0
-Stable tag: 1.39.2.1
+Stable tag: 1.37.0.0
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -64,9 +64,19 @@ e.g.
 
 == Changelog ==
 
+= 1.40.0 =
+[ Improvement ][ hidden extension ] Changed to add common hidden class names to additional CSS classes.
+[ Add Block ][ Page list from ancestors ]
+[ Add Function ][ Button ] Enable inline font size and add icon size option.
+[ Specification Change ] Change the style of the options page to Gutenberg components.
+[ Bug Fix ] fix editor style in Inline font size and Highlighter.
+[ Bug Fix ] Fixed a bug that CSS for edit screen is not loaded in iframe.
+[ Bug Fix ][ Breadcrumb ] Fix duplicate Additional CSS classes.
+
 = 1.39.2 =
 [ Bug Fix ][ Breadcrumb ] Fix in case of filter search result category & keyword
 [ Bug Fix ][ Table style ] Delete border left and right specified vk-table-border-top-bottom 
+[ Specification Change ][ icon ] enable float value at icon size and margin
 
 = 1.39.1 =
 [ Bug Fix ][ Grid Column Card ] fix bug when aspect retio is empty.
