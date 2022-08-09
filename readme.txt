@@ -64,6 +64,11 @@ e.g.
 
 == Changelog ==
 
+= 1.41.0 =
+[ Add Function ][ Balloon ] Add width option.
+[ Bug Fix ][ Outer (Pro) ] Fixed the border color of the Outer block within the Outer block was not attached.
+[ Specification Change ][ Breadcrumb(Pro) ] Hidden front page breadcrumb.
+
 = 1.40.1 =
 [ Specification Change ][Step(Pro)/Timeline(Pro)] Change lineStyle ui.
 [ Bug Fix ][ hidden extension ] fix hidden extension class when Screen size xl.
