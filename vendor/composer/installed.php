@@ -3,7 +3,7 @@
         'name' => 'vektor/vk-blocks-pro',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'd490f1ac2ce0d53cdc73e3683abc4a6e3c54cd04',
+        'reference' => 'f03c2e0682d25e6c89f887c401d712dbc8059efa',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -69,7 +69,7 @@
         'vektor/vk-blocks-pro' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'd490f1ac2ce0d53cdc73e3683abc4a6e3c54cd04',
+            'reference' => 'f03c2e0682d25e6c89f887c401d712dbc8059efa',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
