@@ -64,6 +64,10 @@ e.g.
 
 == Changelog ==
 
+= 1.42.0 =
+[ Specification Change ] Update VK Component Posts ( Can use input tag on filter  )
+[ Improvement ] Delete vk_blocks_get_options() function and change to VK_Blocks_Options::get_options().
+
 = 1.41.2 =
 [ Improvement ][ Page list from ancestor ] Fix behavior site editor.
 [ Other ] Add PHPUnit test on Several PHP and WordPress versions
