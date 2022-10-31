@@ -1207,7 +1207,7 @@ msgid ""
 "the next, hide for the that group block."
 msgstr ""
 
-#: src/extensions/common/highlighter/index.js:148
+#: src/extensions/common/highlighter/index.js:157
 msgid "Highlighter"
 msgstr ""
 

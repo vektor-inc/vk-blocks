@@ -5,7 +5,7 @@
  * @package vektor-inc/vk-color-palette-manager
  * @license GPL-2.0+
  *
- * @version 0.3.0
+ * @version 0.4.0
  */
 
 namespace VektorInc\VK_Color_Palette_Manager;
@@ -23,11 +23,28 @@ class VkColorPaletteManager {
 	 */
 	public function __construct() {
 		add_action( 'customize_register', array( __CLASS__, 'customize_register' ) );
-		add_filter( 'block_editor_settings_all', array( __CLASS__, 'additional_color_palette' ), 10, 2 );
+		if ( self::is_lager_than_wp('6.1') ) {
+			add_filter( 'wp_theme_json_data_default', array( __CLASS__, 'filter_theme_json_theme' ) );
+		} else {
+			// Cope with before WP6.1.
+			add_filter( 'block_editor_settings_all', array( __CLASS__, 'additional_color_palette' ), 10, 2 );
+			// 11 指定が無いと先に読み込んでしまって効かない
+			add_action( 'enqueue_block_editor_assets', array( __CLASS__, 'add_color_palette_css_to_editor' ), 11 );
+		}
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'add_color_palette_css' ), 11 );
-		// 11 指定が無いと先に読み込んでしまって効かない
-		add_action( 'enqueue_block_editor_assets', array( __CLASS__, 'add_color_palette_css_to_editor' ), 11 );
 		load_textdomain( 'vk-color-palette-manager', dirname( __FILE__ ) . '/languages/vk-color-palette-manager-' . get_locale() . '.mo' );
+	}
+
+	/**
+	 *  Is Larger than WP
+	 *
+	 * @param string $target_version Target version.
+	 */
+	public static function is_lager_than_wp( $target_version ){
+		global $wp_version;
+		// バージョンにハイフンを含んでいる場合（ RC / beta 版の場合）ハイフンより前の数値だけに変換
+		$_wp_version = strpos( $wp_version, '-' ) !== false ? strstr( $wp_version, '-', true ) : $wp_version;
+		return version_compare( $_wp_version, $target_version, '>=' );
 	}
 
 	/**
@@ -84,6 +101,29 @@ class VkColorPaletteManager {
 				)
 			);
 		}
+	}
+
+	/**
+	 * Filter 'wp_theme_json_data_default'
+	 *
+	 * @param object $theme_json : theme_json object.
+	 */
+	public static function filter_theme_json_theme( $theme_json ){
+		$get_data  = $theme_json->get_data();
+		$add_color = self::add_color_array();
+		$add_data  = array_merge(
+			$get_data["settings"]["color"]["palette"]["default"],
+			$add_color
+		);
+		$new_data = array(
+			'version'  => 2,
+			'settings' => array(
+				'color' => array(
+					'palette' => $add_data,
+				),
+			),
+		);
+		return $theme_json->update_with( $new_data );
 	}
 
 	/**
@@ -151,11 +191,16 @@ class VkColorPaletteManager {
 		foreach ( $colors as $key => $color ) {
 			if ( ! empty( $color['color'] ) ) {
 				// 色はこのクラスでだけの利用なら直接指定でも良いが、他のクラス名で応用できるように一旦css変数に格納している.
-				$dynamic_css .= ':root{ --' . $color['slug'] . ':' . $color['color'] . '}';
-				// .has- だけだと負けるので :root は迂闊に消さないように注意
-				$dynamic_css .= ':root .has-' . $color['slug'] . '-color { color:var(--' . $color['slug'] . '); }';
-				$dynamic_css .= ':root .has-' . $color['slug'] . '-background-color { background-color:var(--' . $color['slug'] . '); }';
-				$dynamic_css .= ':root .has-' . $color['slug'] . '-border-color { border-color:var(--' . $color['slug'] . '); }';
+				// 6.1より画像ブロックなどでインラインでstyle="border-top-color:var(--wp--preset--color--$slug);"が入るため変数名をコアに合わせる.
+				$dynamic_css .= ':root{ --wp--preset--color--' . $color['slug'] . ':' . $color['color'] . '}';
+				// 古いCSS変数名のフォールバック.
+				$dynamic_css .= '/* --' . $color['slug'] . ' is deprecated. */';
+				$dynamic_css .= ':root{ --' . $color['slug'] . ': var(--wp--preset--color--' . $color['slug'] . ');}';
+				if ( ! self::is_lager_than_wp( '6.1' ) ) {
+					$dynamic_css .= '.has-' . $color['slug'] . '-color { color:var(--wp--preset--color--' . $color['slug'] . ') !important; }';
+					$dynamic_css .= '.has-' . $color['slug'] . '-background-color { background-color:var(--wp--preset--color--' . $color['slug'] . ') !important; }';
+					$dynamic_css .= '.has-' . $color['slug'] . '-border-color { border-color:var(--wp--preset--color--' . $color['slug'] . ') !important; }';
+				}
 			}
 		}
 

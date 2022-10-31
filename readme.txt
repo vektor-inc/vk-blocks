@@ -64,6 +64,11 @@ e.g.
 
 == Changelog ==
 
+= 1.45.0 =
+[ Specification Change ] Color palette manager use wp_theme_json_data_default filter.
+[ Bug fix ][ Button ] Delete non intentional underline.
+[ Other ] color palette manager added warning that --vk-color-custom-${number} is deprecated and replaced with --wp--preset--color--vk-color-custom-${number}.
+
 = 1.44.0 =
 [ Add Function ][ Post List ( Pro ) ] Add post filter taxonomy relation
 [ Add Function ][ Button ] Add Button Effect option in Solid color button.

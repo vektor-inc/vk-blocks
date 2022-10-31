@@ -164,20 +164,20 @@
         },
         {
             "name": "vektor-inc/vk-color-palette-manager",
-            "version": "0.3.0",
-            "version_normalized": "0.3.0.0",
+            "version": "0.4.0",
+            "version_normalized": "0.4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vektor-inc/vk-color-palette-manager.git",
-                "reference": "9a311154182fbbfa24a4f5a2930a6bcf8545ad4f"
+                "reference": "4e724558415bf93b65ebe9f8891b9483aa3882b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vektor-inc/vk-color-palette-manager/zipball/9a311154182fbbfa24a4f5a2930a6bcf8545ad4f",
-                "reference": "9a311154182fbbfa24a4f5a2930a6bcf8545ad4f",
+                "url": "https://api.github.com/repos/vektor-inc/vk-color-palette-manager/zipball/4e724558415bf93b65ebe9f8891b9483aa3882b7",
+                "reference": "4e724558415bf93b65ebe9f8891b9483aa3882b7",
                 "shasum": ""
             },
-            "time": "2022-02-18T01:03:48+00:00",
+            "time": "2022-10-28T05:51:31+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -198,7 +198,7 @@
             "description": "Manage color palette for Gutenberg",
             "support": {
                 "issues": "https://github.com/vektor-inc/vk-color-palette-manager/issues",
-                "source": "https://github.com/vektor-inc/vk-color-palette-manager/tree/0.3.0"
+                "source": "https://github.com/vektor-inc/vk-color-palette-manager/tree/0.4.0"
             },
             "install-path": "../vektor-inc/vk-color-palette-manager"
         },
