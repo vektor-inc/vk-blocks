@@ -55,6 +55,14 @@ msgstr ""
 msgid "image"
 msgstr ""
 
+#: src/admin/custom-css.js:20
+msgid "Custom CSS Setting"
+msgstr ""
+
+#: src/admin/custom-css.js:24
+msgid "Show Custom CSS flag in editor"
+msgstr ""
+
 #: src/admin/license.js:21
 msgid "Enter a valid Lightning G3 Pro Pack or Lightning Pro license key."
 msgstr ""
@@ -795,13 +803,13 @@ msgstr ""
 
 #: src/blocks/heading/edit.js:264
 #: src/blocks/staff/edit.js:173
-#: src/extensions/core/heading/style.js:30
-#: src/extensions/core/list/style.js:156
+#: src/extensions/core/heading/style.js:11
+#: src/extensions/core/list/style.js:152
 msgid "Default"
 msgstr ""
 
 #: src/blocks/heading/edit.js:268
-#: src/extensions/core/heading/style.js:35
+#: src/extensions/core/heading/style.js:16
 msgid "Plain"
 msgstr ""
 
@@ -1207,7 +1215,7 @@ msgid ""
 "the next, hide for the that group block."
 msgstr ""
 
-#: src/extensions/common/highlighter/index.js:157
+#: src/extensions/common/highlighter/index.js:136
 msgid "Highlighter"
 msgstr ""
 
@@ -1325,36 +1333,36 @@ msgstr ""
 msgid "Shadow"
 msgstr ""
 
-#: src/extensions/core/heading/style.js:103
-msgid "Both ends"
-msgstr ""
-
-#: src/extensions/core/heading/style.js:123
+#: src/extensions/core/heading/style.js:104
 msgid "Brackets black"
 msgstr ""
 
-#: src/extensions/core/heading/style.js:51
+#: src/extensions/core/heading/style.js:32
 msgid "Background fill lightgray"
 msgstr ""
 
-#: src/extensions/core/heading/style.js:67
+#: src/extensions/core/heading/style.js:48
 msgid "Double border top and bottom black"
 msgstr ""
 
-#: src/extensions/core/heading/style.js:75
+#: src/extensions/core/heading/style.js:56
 msgid "Double border bottom black"
 msgstr ""
 
-#: src/extensions/core/heading/style.js:83
+#: src/extensions/core/heading/style.js:64
 msgid "Solid border top and bottom black"
 msgstr ""
 
-#: src/extensions/core/heading/style.js:91
+#: src/extensions/core/heading/style.js:72
 msgid "Solid border bottom black"
 msgstr ""
 
-#: src/extensions/core/heading/style.js:99
+#: src/extensions/core/heading/style.js:80
 msgid "Dotted border bottom black"
+msgstr ""
+
+#: src/extensions/core/heading/style.js:84
+msgid "Both ends"
 msgstr ""
 
 #: src/extensions/core/image/style.js:11
@@ -1389,51 +1397,51 @@ msgstr ""
 msgid "Wave04"
 msgstr ""
 
-#: src/extensions/core/list/style.js:161
+#: src/extensions/core/list/style.js:157
 msgid "Arrow"
 msgstr ""
 
-#: src/extensions/core/list/style.js:165
+#: src/extensions/core/list/style.js:161
 msgid "Triangle"
 msgstr ""
 
-#: src/extensions/core/list/style.js:169
+#: src/extensions/core/list/style.js:165
 msgid "Check"
 msgstr ""
 
-#: src/extensions/core/list/style.js:173
+#: src/extensions/core/list/style.js:169
 msgid "Check Square"
 msgstr ""
 
-#: src/extensions/core/list/style.js:177
+#: src/extensions/core/list/style.js:173
 msgid "Check Circle"
 msgstr ""
 
-#: src/extensions/core/list/style.js:181
+#: src/extensions/core/list/style.js:177
 msgid "Handpoint"
 msgstr ""
 
-#: src/extensions/core/list/style.js:185
+#: src/extensions/core/list/style.js:181
 msgid "Pencil"
 msgstr ""
 
-#: src/extensions/core/list/style.js:189
+#: src/extensions/core/list/style.js:185
 msgid "Smile"
 msgstr ""
 
-#: src/extensions/core/list/style.js:193
+#: src/extensions/core/list/style.js:189
 msgid "Frown"
 msgstr ""
 
-#: src/extensions/core/list/style.js:197
+#: src/extensions/core/list/style.js:193
 msgid "Numbered Circle"
 msgstr ""
 
-#: src/extensions/core/list/style.js:201
+#: src/extensions/core/list/style.js:197
 msgid "Numbered Square"
 msgstr ""
 
-#: src/extensions/core/list/style.js:89
+#: src/extensions/core/list/style.js:85
 msgid "List Icon Color"
 msgstr ""
 
