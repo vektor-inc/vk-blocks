@@ -4,7 +4,7 @@ Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 5.9
 Tested up to: 6.1.0
-Stable tag: 1.46.0.1
+Stable tag: 1.46.0.0
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -63,6 +63,8 @@ e.g.
 
 
 == Changelog ==
+
+[ Bug fix ][ Button ] Fixed a bug where the default color was not hit in all themes except Lightning.
 
 = 1.46.0 =
 [ Add Function ][ Custom CSS (Pro) ] Add custom css extension in inspector controls.
