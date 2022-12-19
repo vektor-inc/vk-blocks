@@ -4,7 +4,7 @@ Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 5.9
 Tested up to: 6.1.0
-Stable tag: 1.47.1.0
+Stable tag: 1.47.0.1
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -63,6 +63,12 @@ e.g.
 
 
 == Changelog ==
+
+= 1.48.0 =
+[ Add Function ][ Admin screen ] Added block manager function.
+[ Add Function ][ Custom Format Setting (Pro) ] Add Custom Format Setting extension in admin.
+[ Bug fix ][ Custom CSS (Pro) ] Fixed bug in not replacing all selector strings.
+[ Specification Change ][ Animation(Pro) ] add setting option Animation only the first view.
 
 = 1.47.1 =
 [ Bug fix ][ Slider ] Stick out background image on setting panel of site editor

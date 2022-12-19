@@ -8,6 +8,7 @@ msgid "Select"
 msgstr ""
 
 #: src/admin/balloon/index.js:232
+#: src/admin/custom-format/delete-item-button.js:74
 msgid "Delete"
 msgstr ""
 
@@ -55,12 +56,161 @@ msgstr ""
 msgid "image"
 msgstr ""
 
+#: src/admin/block-manager/index.js:51
+msgid "Block Manager Setting"
+msgstr ""
+
 #: src/admin/custom-css.js:20
 msgid "Custom CSS Setting"
 msgstr ""
 
 #: src/admin/custom-css.js:24
 msgid "Show Custom CSS flag in editor"
+msgstr ""
+
+#: src/admin/custom-format/add-item.js:107
+msgid "Add Custom Format"
+msgstr ""
+
+#: src/admin/custom-format/add-item.js:114
+msgid "CSS class/unique ID (Required/Unchangeable)"
+msgstr ""
+
+#: src/admin/custom-format/add-item.js:118
+msgid "(e.g.) vk-format-1"
+msgstr ""
+
+#: src/admin/custom-format/add-item.js:133
+msgid "Toolbar title (Changeable)"
+msgstr ""
+
+#: src/admin/custom-format/add-item.js:149
+#: src/admin/custom-format/delete-item-button.js:63
+msgid "Cancel"
+msgstr ""
+
+#: src/admin/custom-format/add-item.js:161
+msgid "Add"
+msgstr ""
+
+#: src/admin/custom-format/add-item.js:70
+msgid "Please enter a string"
+msgstr ""
+
+#: src/admin/custom-format/add-item.js:74
+msgid ""
+"Must begin with an alphabetic character and only alphanumeric characters "
+"and hyphens may be used."
+msgstr ""
+
+#: src/admin/custom-format/add-item.js:81
+msgid "Class name is required"
+msgstr ""
+
+#: src/admin/custom-format/add-item.js:87
+msgid "Already registered"
+msgstr ""
+
+#: src/admin/custom-format/delete-item-button.js:31
+#: src/admin/custom-format/index.js:69
+msgid "Custom Format"
+msgstr ""
+
+#: src/admin/custom-format/delete-item-button.js:46
+#. Would you like to delete %s
+msgid "Would you like to delete %s?"
+msgstr ""
+
+#: src/admin/custom-format/delete-item-button.js:54
+msgid "If the saved content has this format, the style will be unstyled."
+msgstr ""
+
+#: src/admin/custom-format/index.js:108
+msgid "Format Setting"
+msgstr ""
+
+#: src/admin/custom-format/index.js:117
+msgid "Bold"
+msgstr ""
+
+#: src/admin/custom-format/index.js:131
+msgid "Italic"
+msgstr ""
+
+#: src/admin/custom-format/index.js:148
+msgid "Strikethrough"
+msgstr ""
+
+#: src/admin/custom-format/index.js:165
+msgid "Nowrap"
+msgstr ""
+
+#: src/admin/custom-format/index.js:197
+#: src/blocks/border-box/edit.js:204
+#: src/blocks/button/edit.js:665
+#: src/blocks/icon/edit.js:289
+#: src/blocks/staff/edit.js:199
+msgid "Color"
+msgstr ""
+
+#: src/admin/custom-format/index.js:202
+#: src/blocks/button/edit.js:736
+#: src/blocks/heading/edit.js:324
+msgid "Text Color"
+msgstr ""
+
+#: src/admin/custom-format/index.js:233
+#: src/blocks/border-box/edit.js:216
+#: src/blocks/button/edit.js:719
+msgid "Background Color"
+msgstr ""
+
+#: src/admin/custom-format/index.js:264
+msgid "Highlighter Color"
+msgstr ""
+
+#: src/admin/custom-format/index.js:272
+msgid "Activate Highlighter"
+msgstr ""
+
+#: src/admin/custom-format/index.js:312
+msgid "Custom CSS"
+msgstr ""
+
+#: src/admin/custom-format/index.js:317
+msgid "CSS class"
+msgstr ""
+
+#: src/admin/custom-format/index.js:344
+#. If selector is specified, it will be replaced by a unique CSS class (<code>.%s</code>); CSS selectors other than selector may affect the entire page.
+msgid ""
+"If selector is specified, it will be replaced by a unique CSS class "
+"(<code>.%s</code>); CSS selectors other than selector may affect the entire "
+"page."
+msgstr ""
+
+#: src/admin/custom-format/index.js:355
+msgid "Example:"
+msgstr ""
+
+#: src/admin/custom-format/index.js:50
+msgid "Custom Format Setting"
+msgstr ""
+
+#: src/admin/custom-format/index.js:53
+msgid "You can apply commonly used formatting on the block toolbar."
+msgstr ""
+
+#: src/admin/custom-format/index.js:76
+msgid "Toolbar title"
+msgstr ""
+
+#: src/admin/custom-format/index.js:93
+msgid "※ Required If no title is entered, it will not appear on the toolbar."
+msgstr ""
+
+#: src/admin/custom-format/preview.js:99
+msgid "Preview Text"
 msgstr ""
 
 #: src/admin/license.js:21
@@ -476,21 +626,9 @@ msgid ""
 "instead of margin."
 msgstr ""
 
-#: src/blocks/border-box/edit.js:204
-#: src/blocks/button/edit.js:665
-#: src/blocks/icon/edit.js:289
-#: src/blocks/staff/edit.js:199
-msgid "Color"
-msgstr ""
-
 #: src/blocks/border-box/edit.js:207
 #: src/extensions/core/group/style.js:47
 msgid "Border Color"
-msgstr ""
-
-#: src/blocks/border-box/edit.js:216
-#: src/blocks/button/edit.js:719
-msgid "Background Color"
 msgstr ""
 
 #: src/blocks/border-box/edit.js:226
@@ -676,11 +814,6 @@ msgstr ""
 msgid ""
 "This color palette overrides the default color. If you want to use the "
 "default color, click the clear button."
-msgstr ""
-
-#: src/blocks/button/edit.js:736
-#: src/blocks/heading/edit.js:324
-msgid "Text Color"
 msgstr ""
 
 #: src/blocks/button/edit.js:754
@@ -1317,6 +1450,10 @@ msgstr ""
 
 #: src/components/advanced-unit-control/index.js:12
 msgid "Unit Type"
+msgstr ""
+
+#: src/components/code-mirror-css/index.js:38
+msgid "Note : Contains double-byte spaces; CSS may not work."
 msgstr ""
 
 #: src/extensions/common/hidden-extension/index.js:189
