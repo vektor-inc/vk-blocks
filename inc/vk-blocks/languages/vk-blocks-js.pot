@@ -717,7 +717,7 @@ msgid "Button Position:"
 msgstr ""
 
 #: src/blocks/button/edit.js:354
-#: src/blocks/slider/edit.js:378
+#: src/blocks/slider/edit.js:388
 msgid "Center"
 msgstr ""
 
@@ -942,7 +942,7 @@ msgid "Heading style"
 msgstr ""
 
 #: src/blocks/heading/edit.js:264
-#: src/blocks/slider/edit.js:353
+#: src/blocks/slider/edit.js:363
 #: src/blocks/staff/edit.js:173
 #: src/extensions/core/heading/style.js:11
 #: src/extensions/core/list/style.js:152
@@ -983,7 +983,7 @@ msgid "Display"
 msgstr ""
 
 #: src/blocks/heading/edit.js:374
-#: src/blocks/slider/edit.js:374
+#: src/blocks/slider/edit.js:384
 msgid "Hide"
 msgstr ""
 
@@ -1327,23 +1327,23 @@ msgstr ""
 msgid "Display Time"
 msgstr ""
 
-#: src/blocks/slider/edit.js:328
+#: src/blocks/slider/edit.js:333
 msgid "Change Speed"
 msgstr ""
 
-#: src/blocks/slider/edit.js:342
+#: src/blocks/slider/edit.js:352
 msgid "Pagination Type"
 msgstr ""
 
-#: src/blocks/slider/edit.js:357
+#: src/blocks/slider/edit.js:367
 msgid "Number of slides"
 msgstr ""
 
-#: src/blocks/slider/edit.js:367
+#: src/blocks/slider/edit.js:377
 msgid "Navigation Position"
 msgstr ""
 
-#: src/blocks/slider/edit.js:382
+#: src/blocks/slider/edit.js:392
 msgid "Bottom on Mobile device"
 msgstr ""
 

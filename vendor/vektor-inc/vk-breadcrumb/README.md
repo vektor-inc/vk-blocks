@@ -37,6 +37,9 @@ npm run phpunit
 
 ## Change log
 
+0.2.5
+[ Other ] Update VK Helpers 0.0.2 -> 0.0.3
+
 0.2.4
 [ Bug fix ] Fix filter search behabier
 

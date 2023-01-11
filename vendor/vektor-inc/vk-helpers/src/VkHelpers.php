@@ -5,7 +5,7 @@
  * @package vektor-inc/vk-helpers
  * @license GPL-2.0+
  *
- * @version 0.0.2
+ * @version 0.0.3
  */
 
 namespace VektorInc\VK_Helpers;
@@ -59,6 +59,15 @@ class VkHelpers {
 	}
 
 
+	/**
+	 * Get post type info
+	 *
+	 * @return array{
+	 *   slug: string,
+	 *   name: string,
+	 *   url: string
+	 * } $post_type_info
+	 */
 	public static function get_post_type_info() {
 		// Check use post top page.
 		$post_top_info = self::get_post_top_info();
@@ -69,7 +78,9 @@ class VkHelpers {
 		// When WooCommerce taxonomy archive page , get_post_type() is does not work properly.
 
 		global $wp_query;
-		if ( is_page() ) {
+		// is_page() は編集画面で正しく動作しない（まぁ正しく動作しなくてもいいんですけど...）のと、
+		// 固定ページはタクソノミーアーカイブなども基本存在しないので get_post_type() を使用する.
+		if ( 'page' === get_post_type() ) {
 			$post_type_info['slug'] = 'page';
 		} elseif ( ! empty( $wp_query->query_vars['post_type'] ) ) {
 
