@@ -1,0 +1,73 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-12-27 03:13+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.2\n"
+"X-Domain: css-optimize\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: VkCssOptimize.php:76
+msgid "CSS Optimize ( Speed up ) Settings"
+msgstr ""
+
+#: VkCssOptimize.php:93
+msgid "Tree shaking"
+msgstr ""
+
+#: VkCssOptimize.php:113
+msgid "Tree shaking activation settings"
+msgstr ""
+
+#: VkCssOptimize.php:117
+msgid "Output only the main CSS of the page inline"
+msgstr ""
+
+#: VkCssOptimize.php:119 VkCssOptimize.php:183
+msgid "Nothing to do"
+msgstr ""
+
+#: VkCssOptimize.php:120
+msgid "Active Tree shaking (Recomend)"
+msgstr ""
+
+#: VkCssOptimize.php:137
+msgid "Exclude class of Tree shaking"
+msgstr ""
+
+#: VkCssOptimize.php:141
+msgid "If you choose \"Active Tree shaking\" that delete the useless css.If you using active css class that please fill in class name. Ex) btn-active,slide-active,scrolled"
+msgstr ""
+
+#: VkCssOptimize.php:157
+msgid "Preload CSS"
+msgstr ""
+
+#: VkCssOptimize.php:177
+msgid "Preload CSS activation settings"
+msgstr ""
+
+#: VkCssOptimize.php:180
+msgid "Preload css except for critical css"
+msgstr ""
+
+#: VkCssOptimize.php:184
+msgid "Active Preload CSS (Recomend)"
+msgstr ""
+
+#: VkCssOptimize.php:201
+msgid "Exclude class of Preload CSS"
+msgstr ""
+
+#: VkCssOptimize.php:205
+msgid "If you choose \"Active Preload CSS\" that css load timing was changed.If you have any do not want to preload css file that please fill in handle(id) name. Ex) pluginname_a-style,pluginname_b-css"
+msgstr ""

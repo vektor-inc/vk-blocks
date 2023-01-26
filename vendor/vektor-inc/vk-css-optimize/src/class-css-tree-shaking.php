@@ -1,9 +1,4 @@
 <?php
-/*
-The original of this file is located at:
-https://github.com/vektor-inc/vektor-wp-libraries
-If you want to change this file, please change the original file.
-*/
 /**
  * CSS Simple Tree Shaking
  *
@@ -16,7 +11,9 @@ If you want to change this file, please change the original file.
  * License: GPLv2
  *
  */
-namespace celtislab\v2_1;
+
+ // namesupace は変更しないと celtislab のプラグインなどと干渉して誤動作する可能性があるため変更.
+namespace VektorInc\VK_CSS_Optimize;
 
 defined( 'ABSPATH' ) || exit;
 
