@@ -4,16 +4,14 @@
  *
  * Description: CSS tree shaking minify library
  *
- * Version: 2.1.0
+ * Version: 2.2.0
  * Author: enomoto@celtislab
- * Modefied: Vektor:Inc.
  * Author URI: https://celtislab.net/
  * License: GPLv2
  *
  */
-
  // namesupace は変更しないと celtislab のプラグインなどと干渉して誤動作する可能性があるため変更.
-namespace VektorInc\VK_CSS_Optimize;
+ namespace VektorInc\VK_CSS_Optimize;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -155,7 +153,7 @@ class CSS_tree_shaking {
                     $_s = $s;
                     foreach (array(':not',':where',':is',':has') as $psd) {
                         if(strpos($_s, $psd) !== false){
-                            $_s = preg_replace("/$psd\(.+?\)/", '', $_s );
+                            $_s = preg_replace("&$psd\(.+?\)&", '', $_s );
                         }
                     }
                     foreach (array('id','class','tag') as $item) {
@@ -175,7 +173,8 @@ class CSS_tree_shaking {
                                     }
                                 }
                                 if($delfg){
-                                    $sel = preg_replace( '/(' . preg_quote($s) . ')(,|$)/u', '$2', $sel, 1 );
+                                    //$s 内に data-type core/xxxx があると / のマッチでエラーとなるのでデリミタを / から & へ変更
+                                    $sel = preg_replace( '&(' . preg_quote($s) . ')(,|$)&u', '$2', $sel, 1 );
                                     $_s  = '';
                                     break;
                                 }
@@ -199,7 +198,7 @@ class CSS_tree_shaking {
                                 }
                                 //属性セレクタにマッチしなければ削除　
                                 if ( ($ret = strpos(self::$cmplist[ $attr . '_str' ], $str )) === false){
-                                    $sel = preg_replace( '/(' . preg_quote($s) . ')(,|$)/u', '$2', $sel, 1 );
+                                    $sel = preg_replace( '&(' . preg_quote($s) . ')(,|$)&u', '$2', $sel, 1 );
                                     $_s  = '';
                                     break;
                                 }
@@ -235,7 +234,7 @@ class CSS_tree_shaking {
             }
         }
         //url() 定義時は文字列中に ; が含まれている場合あり
-        $pattern = '/(\-\-[\w\-]+?):.*?(url\([^\)]+?\).*?)?([;\}])/u';
+        $pattern = '!(\-\-[\w\-]+?):.*?(url\([^\)]+?\).*?)?([;\}])!u';
         $css = preg_replace_callback( $pattern, function($match) use(&$varlist) {
             $vdef = $match[0];
             $var  = trim($match[1]);

@@ -64,6 +64,9 @@ e.g.
 
 == Changelog ==
 
+= 1.50.１ =
+[ Other ] CSS Optimize ( Tree Shaking ) Library update
+
 = 1.50.0 =
 [ Add Function ][ Slider ] Add Slider per view Setting for Mobile, Tablet, PC.
 
