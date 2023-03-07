@@ -35,6 +35,11 @@
 	}
 }
 
+.vk-block-editor-url-input-wrapper {
+	display: flex;
+	margin-bottom: 8px;
+}
+
 @import "_variables";
 @import "../lib/bootstrap/scss/bootstrap-sidepanel.scss";
 
