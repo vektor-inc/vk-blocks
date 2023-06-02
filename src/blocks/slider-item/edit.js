@@ -117,7 +117,10 @@ export default function SliderItemEdit(props) {
 				>
 					<BaseControl>
 						<RadioControl
-							label={__('Padding (Left and Right)', 'vk-blocks')}
+							label={__(
+								'Padding (Left and Right)',
+								'vk-blocks'
+							)}
 							selected={padding_left_and_right}
 							className={'vk-radioControl'}
 							options={[
@@ -176,7 +179,11 @@ export default function SliderItemEdit(props) {
 							'vk-blocks'
 						)}
 					>
-						<AdvancedColorPalette schema={'bgColor'} {...props} />
+						<AdvancedColorPalette
+							enableAlpha={false}
+							schema={'bgColor'}
+							{...props}
+						/>
 					</BaseControl>
 					<BaseControl
 						label={__('Opacity Setting', 'vk-blocks')}

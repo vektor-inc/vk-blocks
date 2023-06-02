@@ -5,13 +5,13 @@
  * @package vektor-inc/vk-swiper
  * @license GPL-2.0+
  *
- * @version 0.1.0
+ * @version 0.3.1
  */
 
 namespace VektorInc\VK_Swiper;
 
 // Set version number.
-const SWIPER_VERSION = '9.2.3';
+const SWIPER_VERSION = '9.3.2';
 
 /**
  * VK Swiper
@@ -26,11 +26,32 @@ class VkSwiper {
 	}
 
 	/**
+	 * Change Path to URL
+	 * 
+	 * @param string File Path.
+	 */
+	public static function get_directory_uri( $path ) {
+
+		$uri = '';
+
+		// PATH を正規化
+		$path = wp_normalize_path( $path );
+
+		// ファイルのパスの wp-content より前の部分を site_url() に置換する
+		// ABSPATH の部分を site_url() に置換したいところだが、ABSPATHは WordPress.com で /wordpress/core/5.9.3/ のような返し方をされて、一般的なサーバーのパスとは異なるので、置換などには使用しない.
+		preg_match( '/(.*)(wp-content.*)/', $path, $matches, PREG_OFFSET_CAPTURE );
+		if ( ! empty( $matches[2][0] ) ) {
+			$uri = site_url( '/' ) . $matches[2][0] . '/';
+		}
+
+		return $uri;
+	}
+
+	/**
 	 * Load Swiper
 	 */
 	public static function register_swiper() {
-		$current_path = dirname( __FILE__ );
-		$current_url  = str_replace( ABSPATH, site_url('/'), $current_path );
+		$current_url  = self::get_directory_uri( dirname( __FILE__ ) );
 		wp_register_style( 'vk-swiper-style', $current_url . '/assets/css/swiper-bundle.min.css', array(), SWIPER_VERSION );
 		wp_register_script( 'vk-swiper-script', $current_url . '/assets/js/swiper-bundle.min.js', array(), SWIPER_VERSION, true );
 	}

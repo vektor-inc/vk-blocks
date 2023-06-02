@@ -25,7 +25,10 @@ export default function AlertEdit({ attributes, setAttributes }) {
 								label: __('Success', 'vk-blocks'),
 								value: 'success',
 							},
-							{ label: __('Info', 'vk-blocks'), value: 'info' },
+							{
+								label: __('Info', 'vk-blocks'),
+								value: 'info',
+							},
 							{
 								label: __('Warning', 'vk-blocks'),
 								value: 'warning',

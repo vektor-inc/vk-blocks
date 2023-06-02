@@ -141,8 +141,14 @@ export default function PrcontentEdit({ attributes, setAttributes, clientId }) {
 						<RadioControl
 							selected={buttonType}
 							options={[
-								{ label: __('Solid', 'vk-blocks'), value: '0' },
-								{ label: __('Ghost', 'vk-blocks'), value: '1' },
+								{
+									label: __('Solid', 'vk-blocks'),
+									value: '0',
+								},
+								{
+									label: __('Ghost', 'vk-blocks'),
+									value: '1',
+								},
 							]}
 							onChange={(value) =>
 								setAttributes({ buttonType: value })
@@ -165,7 +171,10 @@ export default function PrcontentEdit({ attributes, setAttributes, clientId }) {
 								label: __('Success', 'vk-blocks'),
 								value: 'success',
 							},
-							{ label: __('Info', 'vk-blocks'), value: 'info' },
+							{
+								label: __('Info', 'vk-blocks'),
+								value: 'info',
+							},
 							{
 								label: __('Warning', 'vk-blocks'),
 								value: 'warning',
@@ -174,8 +183,14 @@ export default function PrcontentEdit({ attributes, setAttributes, clientId }) {
 								label: __('Danger', 'vk-blocks'),
 								value: 'danger',
 							},
-							{ label: __('Light', 'vk-blocks'), value: 'light' },
-							{ label: __('Dark', 'vk-blocks'), value: 'dark' },
+							{
+								label: __('Light', 'vk-blocks'),
+								value: 'light',
+							},
+							{
+								label: __('Dark', 'vk-blocks'),
+								value: 'dark',
+							},
 						]}
 						onChange={(value) =>
 							setAttributes({ buttonColor: value })
@@ -233,8 +248,14 @@ export default function PrcontentEdit({ attributes, setAttributes, clientId }) {
 						label={__('Layout Type', 'vk-blocks')}
 						selected={layout}
 						options={[
-							{ label: __('Right', 'vk-blocks'), value: 'right' },
-							{ label: __('Left', 'vk-blocks'), value: 'left' },
+							{
+								label: __('Right', 'vk-blocks'),
+								value: 'right',
+							},
+							{
+								label: __('Left', 'vk-blocks'),
+								value: 'left',
+							},
 						]}
 						onChange={(value) => setAttributes({ layout: value })}
 					/>

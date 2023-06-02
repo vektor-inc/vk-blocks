@@ -30,7 +30,10 @@ export default function PostListEdit(props) {
 					title={__('Ancestor Page List Setting', 'vk-blocks')}
 				>
 					<ToggleControl
-						label={__('Display Ancestor Page Title', 'vk-blocks')}
+						label={__(
+							'Display Ancestor Page Title',
+							'vk-blocks'
+						)}
 						checked={ancestorTitleDisplay}
 						onChange={(checked) =>
 							setAttributes({ ancestorTitleDisplay: checked })

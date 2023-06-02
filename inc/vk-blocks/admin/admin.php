@@ -131,7 +131,7 @@ function vk_blocks_options_enqueue_scripts( $hook_suffix ) {
 		$asset['version'],
 		true
 	);
-	wp_set_script_translations( 'vk-blocks-admin-js', 'vk-blocks', VK_BLOCKS_DIR_PATH . 'inc/vk-blocks/languages' );
+	wp_set_script_translations( 'vk-blocks-admin-js', 'vk-blocks', VK_BLOCKS_DIR_PATH . 'languages' );
 
 	$block_categories = get_block_categories( get_post() );
 	wp_add_inline_script(

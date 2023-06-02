@@ -331,7 +331,9 @@ export default function HeaddingEdit(props) {
 					</BaseControl>
 				</PanelBody>
 				<PanelBody
-					title={__('Icon', 'vk-blocks') + ' ( ' + iconFamily + ' )'}
+					title={
+						__('Icon', 'vk-blocks') + ' ( ' + iconFamily + ' )'
+					}
 				>
 					<BaseControl
 						label={__('Before text', 'vk-blocks')}

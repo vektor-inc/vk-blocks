@@ -3,7 +3,7 @@
  * Plugin Name: VK Blocks 
  * Plugin URI: https://github.com/vektor-inc/vk-blocks
  * Description: This is a plugin that extends Block Editor.
- * Version: 1.56.0.1
+ * Version: 1.57.0.0
  * Stable tag: 1.56.0.1
  * Requires at least: 6.0
  * Author: Vektor,Inc.
@@ -67,7 +67,7 @@ if ( ! function_exists( 'vk_blocks_deactivate_plugin' ) ) {
  * プロ版での読み込みかどうかの判定は strpos を使っているが、
  * strpos は"合致している"にも関わらず返り値は"0"を返してしまうため !== false で処理している.
  */
-if ( strpos( plugin_dir_path( __FILE__ ), 'vk-blocks-pro' ) !== false ) {
+if ( strpos( plugin_dir_path( __FILE__ ), 'vk-blocks' ) !== false ) {
 	include_once ABSPATH . 'wp-admin/includes/plugin.php';
 
 	if ( is_plugin_active( 'vk-blocks-pro/vk-blocks.php' ) ) {
@@ -123,7 +123,7 @@ if ( ! function_exists( 'vk_blocks_is_pro' ) ) {
 		$return = false;
 		// 注意 : strpos() は合致した開始位置を返すので、最初に合致すると、
 		// "合致している"にも関わらず返り値は"0"を返してしまうため !== false で処理している.
-		if ( strpos( plugin_dir_path( __FILE__ ), 'vk-blocks-pro' ) !== false ) {
+		if ( strpos( plugin_dir_path( __FILE__ ), 'vk-blocks' ) !== false ) {
 			$return = true;
 		}
 		return $return;
@@ -155,6 +155,16 @@ require_once plugin_dir_path( __FILE__ ) . 'inc/vk-blocks-config.php';
 
 if ( function_exists( 'vk_blocks_is_pro' ) && vk_blocks_is_pro() ) {
 
+	// 翻訳を実行
+	add_action(
+		'plugins_loaded',
+		function () {
+			// Load language files.
+			$path = dirname( plugin_basename( __FILE__ ) ) . '/languages';
+			load_plugin_textdomain( 'vk-blocks', false, $path );
+		}
+	);
+
 	// 本来 Pro 版でしか読み込まないが、1.36.0.0 は間違って読み込んでしまっており
 	// 無料版 1.36.0 を有効化していると previously declared になるため ! function_exists() を通した上で宣言している.
 	if ( ! function_exists( 'vk_blocks_update_checker' ) ) {
@@ -171,7 +181,7 @@ if ( function_exists( 'vk_blocks_is_pro' ) && vk_blocks_is_pro() ) {
 			$update_checker = YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker(
 				'https://vws.vektor-inc.co.jp/updates/?action=get_metadata&slug=vk-blocks-pro',
 				__FILE__, // この処理を他の場所に移動するとここを変更しないといけなくなるので注意.
-				'vk-blocks-pro'
+				'vk-blocks'
 			);
 
 			$update_checker->addQueryArgFilter( 'vk_blocks_get_license_check_query_arg' );
@@ -203,6 +213,8 @@ if ( function_exists( 'vk_blocks_is_pro' ) && vk_blocks_is_pro() ) {
 	}
 
 	add_action( 'after_setup_theme', 'vk_blocks_update_checker' );
+
+
 
 	if ( ! function_exists( 'vk_blocks_the_update_messsage' ) ) {
 		/**

@@ -11,7 +11,7 @@
 function vk_blocks_admin_notice_pro() {
 	$plugin_base_dir = dirname( __FILE__ );
 	$lang            = ( get_locale() === 'ja' ) ? 'ja' : 'en';
-	if ( strpos( $plugin_base_dir, 'vk-blocks-pro' ) !== false ) {
+	if ( strpos( $plugin_base_dir, 'vk-blocks' ) !== false ) {
 		return;
 	}
 

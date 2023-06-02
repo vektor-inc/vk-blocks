@@ -221,6 +221,34 @@ export default function SliderEdit(props) {
 		slidesPerViewPCAlert = slidesPerViewAlert;
 	}
 
+	// ループに関するアラート
+	const sloderPerViewLoopAlert = (
+		<div className="alert alert-danger font-size-11px offset-mt-18px">
+			{__(
+				'If you want to loop slides, the number of placed slide items must be at least twice as large as the number of items to display per view.',
+				'vk-blocks'
+			)}
+		</div>
+	);
+
+	// モバイル
+	let slidesPerViewMobileLoopAlert = '';
+	if (!!loop && innerBlocks.length / slidesPerViewMobile < 2) {
+		slidesPerViewMobileLoopAlert = sloderPerViewLoopAlert;
+	}
+
+	// タブレット
+	let slidesPerViewTabletLoopAlert = '';
+	if (!!loop && innerBlocks.length / slidesPerViewTablet < 2) {
+		slidesPerViewTabletLoopAlert = sloderPerViewLoopAlert;
+	}
+
+	// PC
+	let slidesPerViewPCLoopAlert = '';
+	if (!!loop && innerBlocks.length / slidesPerViewPC < 2) {
+		slidesPerViewPCLoopAlert = sloderPerViewLoopAlert;
+	}
+
 	// 幅のクラス名変更
 	let alignClass = '';
 	if ('full' === width) {
@@ -299,6 +327,7 @@ export default function SliderEdit(props) {
 						step={slidesPerGroup === 'slides-per-view' ? 1 : 0.1}
 					/>
 					{slidesPerViewPCAlert}
+					{slidesPerViewPCLoopAlert}
 					<TextControl
 						type={'number'}
 						label={__('Tablet', 'vk-blocks')}
@@ -327,6 +356,7 @@ export default function SliderEdit(props) {
 						step={slidesPerGroup === 'slides-per-view' ? 1 : 0.1}
 					/>
 					{slidesPerViewTabletAlert}
+					{slidesPerViewTabletLoopAlert}
 					<TextControl
 						type={'number'}
 						label={__('Mobile', 'vk-blocks')}
@@ -355,6 +385,7 @@ export default function SliderEdit(props) {
 						step={slidesPerGroup === 'slides-per-view' ? 1 : 0.1}
 					/>
 					{slidesPerViewMobileAlert}
+					{slidesPerViewMobileLoopAlert}
 				</BaseControl>
 				<BaseControl
 					label={__(
@@ -388,7 +419,10 @@ export default function SliderEdit(props) {
 				</BaseControl>
 				<BaseControl id={`vk_slider-slidesPerGroup`}>
 					<ToggleControl
-						label={__('Centering the active slide', 'vk-blocks')}
+						label={__(
+							'Centering the active slide',
+							'vk-blocks'
+						)}
 						className={'mb-1'}
 						checked={centeredSlides} //eslint-disable-line camelcase
 						onChange={(checked) =>
@@ -446,7 +480,10 @@ export default function SliderEdit(props) {
 				/>
 			</BlockControls>
 			<InspectorControls>
-				<PanelBody title={__('Width', 'vk-blocks')} initialOpen={true}>
+				<PanelBody
+					title={__('Width', 'vk-blocks')}
+					initialOpen={true}
+				>
 					<BaseControl id={`vk_slider-width`}>
 						<ButtonGroup>
 							<Button
@@ -474,7 +511,10 @@ export default function SliderEdit(props) {
 				>
 					<AdvancedUnitControl {...props} />
 					<BaseControl
-						label={__('Slide Height for each device.', 'vk-blocks')}
+						label={__(
+							'Slide Height for each device.',
+							'vk-blocks'
+						)}
 						id={`vk_slider-SlideHeight`}
 					>
 						<RangeControl
@@ -664,7 +704,10 @@ export default function SliderEdit(props) {
 									value: 'bullets',
 								},
 								{
-									label: __('Number of slides', 'vk-blocks'),
+									label: __(
+										'Number of slides',
+										'vk-blocks'
+									),
 									value: 'fraction',
 								},
 							]}

@@ -66,7 +66,10 @@ export default function AdminCustomFormat() {
 								/>
 								<div className="custom_format_item_control">
 									<PanelBody
-										title={__('Custom Format', 'vk-blocks')}
+										title={__(
+											'Custom Format',
+											'vk-blocks'
+										)}
 									>
 										<BaseControl id="custom-format">
 											<TextControl
@@ -114,7 +117,10 @@ export default function AdminCustomFormat() {
 										<BaseControl id="format-setting">
 											<CheckboxControl
 												name={`vk_blocks_options[custom_format_lists][${index}][font_weight_bold]`}
-												label={__('Bold', 'vk-blocks')}
+												label={__(
+													'Bold',
+													'vk-blocks'
+												)}
 												checked={
 													textStyleListObj.font_weight_bold
 												}
@@ -309,12 +315,19 @@ export default function AdminCustomFormat() {
 										</BaseControl>
 									</PanelBody>
 									<PanelBody
-										title={__('Custom CSS', 'vk-blocks')}
+										title={__(
+											'Custom CSS',
+											'vk-blocks'
+										)}
 										initialOpen={false}
 									>
 										<BaseControl id="class-name-setting">
 											<span>
-												{__('CSS class', 'vk-blocks')}:
+												{__(
+													'CSS class',
+													'vk-blocks'
+												)}
+												:
 												<code>
 													.
 													{
@@ -352,7 +365,12 @@ export default function AdminCustomFormat() {
 													}
 												)}
 											</p>
-											<p>{__('Example:', 'vk-blocks')}</p>
+											<p>
+												{__(
+													'Example:',
+													'vk-blocks'
+												)}
+											</p>
 											<pre
 												className="vk-custom-css-sample-code"
 												style={{
