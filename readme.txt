@@ -65,6 +65,10 @@ e.g.
 
 == Changelog ==
 
+= 1.57.0.4 =
+[ Bug Fix ][ Free Version ] Fix display non intentional Licencekey alert message and update become don't work.
+( Please delete once VK Blocks 1.57.0.1 and reinstall 1.57.0.4 later )
+
 = 1.57.0 =
 [ Add Function ] Allow alpha value in some blocks.
 [ Add Function ][ Dynamic Text Block (Pro) ] Added an option to show/hide the title when an ancestor page is selected and the ancestor page is display.
