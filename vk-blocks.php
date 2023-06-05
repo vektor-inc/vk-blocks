@@ -4,7 +4,7 @@
  * Plugin URI: https://github.com/vektor-inc/vk-blocks
  * Description: This is a plugin that extends Block Editor.
  * Version: 1.57.1.1
- * Stable tag: 1.57.1.1
+ * Stable tag: 1.57.0.5
  * Requires at least: 6.0
  * Author: Vektor,Inc.
  * Author URI: https://vektor-inc.co.jp
