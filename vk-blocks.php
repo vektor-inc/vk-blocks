@@ -3,7 +3,7 @@
  * Plugin Name: VK Blocks 
  * Plugin URI: https://github.com/vektor-inc/vk-blocks
  * Description: This is a plugin that extends Block Editor.
- * Version: 1.57.0.5
+ * Version: 1.57.1.0
  * Stable tag: 1.57.0.5
  * Requires at least: 6.0
  * Author: Vektor,Inc.
@@ -123,7 +123,7 @@ if ( ! function_exists( 'vk_blocks_is_pro' ) ) {
 		$return = false;
 		// 注意 : strpos() は合致した開始位置を返すので、最初に合致すると、
 		// "合致している"にも関わらず返り値は"0"を返してしまうため !== false で処理している.
-		if ( strpos( plugin_dir_path( __FILE__ ), 'vk-blocks-pro' ) !== false ) {
+		if ( strpos( plugin_dir_path( __FILE__ ), 'vk-blocks' ) !== false ) {
 			$return = true;
 		}
 		return $return;
