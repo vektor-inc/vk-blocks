@@ -1,6 +1,7 @@
 /*.html
 node_modules/
 dist/
-inc/vk-blocks/build/*.js.map
+inc/vk-blocks/build/
 .wp-env.override.json
 vendor/
+build/
