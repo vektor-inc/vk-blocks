@@ -40,15 +40,6 @@ module.exports = {
 						babelrc: false, // babelrcを反映させない
 						configFile: false, // babel.config.jsonを反映させない
 						presets: [ "@wordpress/default" ],
-						// @wordpress の pot ファイル生成ライブラリ使って vk-blocks の post ファイルを生成する
-						plugins: [
-							[
-								"@wordpress/babel-plugin-makepot",
-								{
-									"output": "languages/vk-blocks-pro-js.pot"
-								}
-							]
-						],
 					}
 				}
 			}
