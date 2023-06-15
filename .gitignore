@@ -5,3 +5,4 @@ inc/vk-blocks/build/
 .wp-env.override.json
 vendor/
 build/
+temp/

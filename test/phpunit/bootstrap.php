@@ -40,7 +40,7 @@ define( 'GUTENBERG_LOAD_VENDOR_SCRIPTS', false );
  */
 function _manually_load_plugin() {
 	// ./temp/themes/ から読み込む
-	register_theme_directory( dirname( __DIR__ ) . '/temp/themes/' );
+	register_theme_directory( dirname( dirname( __DIR__ ) ) . '/temp/themes/' );
 	search_theme_directories();
 	// Lightning 有効化（インストールは wp-env.json で行っている）
 	switch_theme( 'lightning' );
