@@ -146,7 +146,7 @@ export default function PrBlocksEdit(props) {
 						/>
 					</BaseControl>
 					<BaseControl
-						// label={ __('PR Image 1', 'vk-blocks') }
+						// label={ __( 'PR Image 1', 'vk-blocks' ) }
 						help={__(
 							'When you have an image. Image is displayed with priority',
 							'vk-blocks'
@@ -221,7 +221,7 @@ export default function PrBlocksEdit(props) {
 						/>
 					</BaseControl>
 					<BaseControl
-						// label={ __('PR Image 2', 'vk-blocks') }
+						// label={ __( 'PR Image 2', 'vk-blocks' ) }
 						help={__(
 							'When you have an image. Image is displayed with priority.',
 							'vk-blocks'
@@ -296,7 +296,7 @@ export default function PrBlocksEdit(props) {
 						/>
 					</BaseControl>
 					<BaseControl
-						// label={ __('PR Image 3', 'vk-blocks') }
+						// label={ __( 'PR Image 3', 'vk-blocks' ) }
 						help={__(
 							'When you have an image. Image is displayed with priority.',
 							'vk-blocks'

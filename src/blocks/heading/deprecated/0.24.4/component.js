@@ -58,7 +58,7 @@ export class NoAnchor extends Component {
 					onChange={(value) => setAttributes({ title: value })}
 					style={tStyle}
 					className={`vk_heading_title vk_heading_title-style-${titleStyle}`}
-					placeholder={__('Input title…', 'vk-blocks')}
+					placeholder={__( 'Input title…', 'vk-blocks' )}
 				/>
 				{
 					// サブテキスト
@@ -77,10 +77,7 @@ export class NoAnchor extends Component {
 										textAlign: align,
 									}}
 									className={`vk_heading_subtext vk_heading_subtext-style-${titleStyle}`}
-									placeholder={__(
-										'Input sub text…',
-										'vk-blocks'
-									)}
+									placeholder={__( 'Input sub text…', 'vk-blocks' )}
 								/>
 							);
 						}

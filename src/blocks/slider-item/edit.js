@@ -117,10 +117,7 @@ export default function SliderItemEdit(props) {
 				>
 					<BaseControl>
 						<RadioControl
-							label={__(
-								'Padding (Left and Right)',
-								'vk-blocks'
-							)}
+							label={__('Padding (Left and Right)', 'vk-blocks')}
 							selected={padding_left_and_right}
 							className={'vk-radioControl'}
 							options={[

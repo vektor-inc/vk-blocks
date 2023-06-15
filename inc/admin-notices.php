@@ -11,7 +11,7 @@
 function vk_blocks_admin_notice_pro() {
 	$plugin_base_dir = dirname( __FILE__ );
 	$lang            = ( get_locale() === 'ja' ) ? 'ja' : 'en';
-	if ( strpos( $plugin_base_dir, 'vk-blocks' ) !== false ) {
+	if ( strpos( $plugin_base_dir, 'vk-blocks-pro' ) !== false ) {
 		return;
 	}
 
@@ -32,10 +32,7 @@ function vk_blocks_admin_notice_pro() {
 				<?php
 					printf(
 						/* translators: 1: opening a tag, 2: closing a tag */
-						esc_html__(
-							'Thank you for using VK Blocks. We\'ve released VK Blocks Pro. It has more custom blocks to build web site more easily. If you are interested in VK Blocks Pro, Please read %1$s this post %2$s for more details.',
-							'vk-blocks'
-						),
+						esc_html__( 'Thank you for using VK Blocks. We\'ve released VK Blocks Pro. It has more custom blocks to build web site more easily. If you are interested in VK Blocks Pro, Please read %1$s this post %2$s for more details.', 'vk-blocks' ),
 						'<a href="' . esc_url( __( 'https://www.vektor-inc.co.jp/service/wordpress-plugins/vk-blocks/', 'vk-blocks' ) ) . '">',
 						'</a>'
 					)

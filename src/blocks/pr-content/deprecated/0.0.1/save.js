@@ -89,17 +89,14 @@ export class PRContent extends Component {
 									}
 								>
 									{!Image ? (
-										__('Select image', 'vk-blocks')
+										__( 'Select image', 'vk-blocks' )
 									) : (
 										<img
 											className={
 												'vk_prContent_colImg_image'
 											}
 											src={Image}
-											alt={__(
-												'Upload image',
-												'vk-blocks'
-											)}
+											alt={__( 'Upload image', 'vk-blocks' )}
 											style={{
 												border: `1px solid ${ImageBorderColor}`,
 											}}
@@ -109,12 +106,12 @@ export class PRContent extends Component {
 							)}
 						/>
 					) : !Image ? (
-						__('Select image', 'vk-blocks')
+						__( 'Select image', 'vk-blocks' )
 					) : (
 						<img
 							className={'vk_prContent_colImg_image'}
 							src={Image}
-							alt={__('Upload image', 'vk-blocks')}
+							alt={__( 'Upload image', 'vk-blocks' )}
 							style={{ border: `1px solid ${ImageBorderColor}` }}
 						/>
 					)}
@@ -131,10 +128,7 @@ export class PRContent extends Component {
 											setAttributes({ title: value })
 										}
 										value={title}
-										placeholder={__(
-											'Input title.',
-											'vk-blocks'
-										)}
+										placeholder={__( 'Input title.', 'vk-blocks' )}
 										style={{ color: titleColor }}
 									/>
 									<RichText
@@ -144,10 +138,7 @@ export class PRContent extends Component {
 											setAttributes({ content: value })
 										}
 										value={content}
-										placeholder={__(
-											'Input content.',
-											'vk-blocks'
-										)}
+										placeholder={__( 'Input content.', 'vk-blocks' )}
 										style={{ color: contentColor }}
 									/>
 								</>

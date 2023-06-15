@@ -1,10 +1,10 @@
 <?php
 /**
- * Plugin Name: VK Blocks 
+ * Plugin Name: VK Blocks
  * Plugin URI: https://github.com/vektor-inc/vk-blocks
  * Description: This is a plugin that extends Block Editor.
- * Version: 1.57.1.2
- * Stable tag: 1.57.1.2
+ * Version: 1.57.1.0
+ * Stable tag: 1.57.0.5
  * Requires at least: 6.0
  * Author: Vektor,Inc.
  * Author URI: https://vektor-inc.co.jp
@@ -67,7 +67,7 @@ if ( ! function_exists( 'vk_blocks_deactivate_plugin' ) ) {
  * プロ版での読み込みかどうかの判定は strpos を使っているが、
  * strpos は"合致している"にも関わらず返り値は"0"を返してしまうため !== false で処理している.
  */
-if ( strpos( plugin_dir_path( __FILE__ ), 'vk-blocks' ) !== false ) {
+if ( strpos( plugin_dir_path( __FILE__ ), 'vk-blocks-pro' ) !== false ) {
 	include_once ABSPATH . 'wp-admin/includes/plugin.php';
 
 	if ( is_plugin_active( 'vk-blocks-pro/vk-blocks.php' ) ) {
@@ -161,7 +161,7 @@ if ( function_exists( 'vk_blocks_is_pro' ) && vk_blocks_is_pro() ) {
 		function () {
 			// Load language files.
 			$path = dirname( plugin_basename( __FILE__ ) ) . '/languages';
-			load_plugin_textdomain( 'vk-blocks', false, $path );
+			load_plugin_textdomain( 'vk-blocks-pro', false, $path );
 		}
 	);
 
@@ -181,7 +181,7 @@ if ( function_exists( 'vk_blocks_is_pro' ) && vk_blocks_is_pro() ) {
 			$update_checker = YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker(
 				'https://vws.vektor-inc.co.jp/updates/?action=get_metadata&slug=vk-blocks-pro',
 				__FILE__, // この処理を他の場所に移動するとここを変更しないといけなくなるので注意.
-				'vk-blocks'
+				'vk-blocks-pro'
 			);
 
 			$update_checker->addQueryArgFilter( 'vk_blocks_get_license_check_query_arg' );
@@ -243,10 +243,7 @@ if ( function_exists( 'vk_blocks_is_pro' ) && vk_blocks_is_pro() ) {
 
 				// ライセンスが切れている あるいは 無効な場合.
 				// アップデートは存在するがURLが帰ってこなかった場合.
-				$notice_title = __(
-					'The VK Blocks Pro license is invalid.',
-					'vk-blocks'
-				);
+				$notice_title = __( 'The VK Blocks Pro license is invalid.', 'vk-blocks' );
 			}
 
 			if ( empty( $notice_title ) ) {
@@ -267,10 +264,7 @@ if ( function_exists( 'vk_blocks_is_pro' ) && vk_blocks_is_pro() ) {
 			$alert_html  = '';
 			$alert_html .= '<div class="error">';
 			$alert_html .= '<h4>VK Blocks Pro : ' . $notice_title . '</h4>';
-			$alert_html .= '<p>' . __(
-				'Please enter a valid license key for any of the following products on the settings screen.',
-				'vk-blocks'
-			) . '</p>';
+			$alert_html .= '<p>' . __( 'Please enter a valid license key for any of the following products on the settings screen.', 'vk-blocks' ) . '</p>';
 			$alert_html .= '<ul>';
 			$alert_html .= '<li><a href="https://vws.vektor-inc.co.jp/product/vektor-passport-1y/?rel=vk-blocks-pro-alert" target="_blank">Vektor Passport</a></li>';
 			$alert_html .= '<li><a href="https://vws.vektor-inc.co.jp/product/lightning-g3-pro-pack/?rel=vk-blocks-pro-alert" target="_blank">Lightning G3 Pro Pack</a></li>';

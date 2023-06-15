@@ -30,10 +30,8 @@ registerFormatType(`vk-blocks/responsive-br`, {
 								controls={breakPoints.map((breakPoint) => {
 									return {
 										title:
-											__(
-												`Responsive BR `,
-												'vk-blocks'
-											) + `( ${breakPoint} )`,
+											__(`Responsive BR `, 'vk-blocks') +
+											`( ${breakPoint} )`,
 										icon: <Icon />,
 										onClick: () => {
 											insertBR(

@@ -235,10 +235,7 @@ export default function ButtonEdit(props) {
 									label={
 										buttonUrl !== '' && isOpen
 											? __('Unlink')
-											: __(
-													'Input Link URL',
-													'vk-blocks'
-											  )
+											: __('Input Link URL', 'vk-blocks')
 									}
 									onClick={setLink}
 								/>
@@ -661,9 +658,7 @@ export default function ButtonEdit(props) {
 						</>
 					)}
 
-					<h4 className={`mt-0 mb-2`}>
-						{__('Color', 'vk-blocks')}
-					</h4>
+					<h4 className={`mt-0 mb-2`}>{__('Color', 'vk-blocks')}</h4>
 					<SelectControl
 						label={__('Default Color (Bootstrap)', 'vk-blocks')}
 						value={buttonColor}

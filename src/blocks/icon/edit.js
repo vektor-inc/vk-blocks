@@ -266,10 +266,7 @@ export default function IconEdit(props) {
 				<PanelBody title={__('Icon Setting', 'vk-blocks')}>
 					<BaseControl
 						label={
-							__('Icon', 'vk-blocks') +
-							' ( ' +
-							iconFamily +
-							' )'
+							__('Icon', 'vk-blocks') + ' ( ' + iconFamily + ' )'
 						}
 						id={`vk_icon-font`}
 					>

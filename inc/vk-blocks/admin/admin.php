@@ -83,6 +83,7 @@ function vk_blocks_setting_page() {
 	$get_menu_html .= apply_filters( 'vk_blocks_pro_menu', '' );
 	$get_menu_html .= '<li><a href="#block-manager-setting">' . __( 'Block Manager Setting', 'vk-blocks' ) . '</a></li>';
 	$get_menu_html .= '<li><a href="#block-style-manager-setting">' . __( 'Block Style Manager Setting', 'vk-blocks' ) . '</a></li>';
+	$get_menu_html .= '<li><a href="#import-export-tool">' . __( 'Import Export Tool', 'vk-blocks' ) . '</a></li>';
 
 	VkAdmin::admin_page_frame( $get_page_title, 'vk_blocks_setting', $get_logo_html, $get_menu_html );
 }
@@ -131,7 +132,7 @@ function vk_blocks_options_enqueue_scripts( $hook_suffix ) {
 		$asset['version'],
 		true
 	);
-	wp_set_script_translations( 'vk-blocks-admin-js', 'vk-blocks', VK_BLOCKS_DIR_PATH . 'languages' );
+	wp_set_script_translations( 'vk-blocks-admin-js', 'vk-blocks' );
 
 	$block_categories = get_block_categories( get_post() );
 	wp_add_inline_script(
