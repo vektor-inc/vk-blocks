@@ -57,7 +57,7 @@ jobs:
             - name: Install Themes
               run: bash bin/install-theme.sh
             - name: Build
-              run: npm run build
+              run: npm run build:free
             - name: Start Environment
               run: npx wp-env start && sudo chmod -R 777 ~/wp-env
             - name: Run PHP Unit Test
@@ -84,7 +84,7 @@ jobs:
             - name: Install Composer Packages
               run: composer install --optimize-autoloader --prefer-dist --no-dev
             - name: Build
-              run: npm run build
+              run: npm run build:free
             - name: Make Distribution
               run: bash bin/deploy.sh
             - name: WordPress Plugin Deploy

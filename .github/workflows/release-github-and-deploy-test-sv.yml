@@ -83,14 +83,16 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: "${{ steps.nodenv.outputs.NODEVERSION }}"
-
-    # npm build や composer install は vk-blocks-pro の deploy-free.sh で実行された状態で
-    # この vk-blocks にコミット済なので、ここで実行する必要はない
-
-    - name: Create Dist
-      run : | 
-        npm install
-        npx gulp dist:free
+    
+    # リリースするものをビルドする
+    - name: Install NPM Scripts
+      run: npm install
+    - name: Install Composer Packages
+      run: composer install --optimize-autoloader --prefer-dist --no-dev
+    - name: Build
+      run: npm run build:free
+    - name: Make Distribution
+      run: bash bin/deploy-test.sh   
 
     - name: Deploy test server [ Single ]
       uses: burnett01/rsync-deployments@4.1
