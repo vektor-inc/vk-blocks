@@ -92,11 +92,6 @@ jobs:
               with:
                 node-version: "${{ steps.nodenv.outputs.NODEVERSION }}"
             
-            - name: Setup Node.js (.node-version)
-              uses: actions/setup-node@v3
-              with:
-                  node-version: '${{ steps.nodenv.outputs.NODEVERSION }}'
-            
             - name: Install NPM Scripts
               run: npm install
             
