@@ -58,8 +58,6 @@ jobs:
               run: bash bin/install-theme.sh
             - name: Build
               run: npm run build:free
-            - name: Start Environment
-              run: npx wp-env start && sudo chmod -R 777 ~/wp-env
             - name: Run PHP Unit Test
               run: npm run phpunit:free
     deploy:
