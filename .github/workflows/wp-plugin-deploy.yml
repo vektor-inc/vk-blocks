@@ -26,7 +26,7 @@ jobs:
         steps:
             - uses: actions/checkout@v3
             - name: Read .node-version
-              run: echo "{NODEVERSION}={$(cat .node-version)}" >> $GITHUB_OUTPUT
+              run: echo "##[set-output name=NODEVERSION;]$(cat .node-version)"
               id: nodenv
             - name: Setup Node.js (.node-version)
               uses: actions/setup-node@v3
