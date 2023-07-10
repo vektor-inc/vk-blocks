@@ -9,6 +9,7 @@
 	"description": "Question area where you can freely add blocks.",
 	"textdomain": "vk-blocks",
 	"supports": {
+		"html": false,
 		"anchor": true,
 		"className": true,
 		"reusable": false

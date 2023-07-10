@@ -58,6 +58,7 @@
 	},
 	"textdomain": "vk-blocks",
 	"supports": {
+		"html": false,
 		"className": true
 	}
 }
