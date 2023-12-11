@@ -102,6 +102,13 @@ e.g.
 
 == Changelog ==
 
+= 1.65.0 =
+[ Add Function ][ Grid Column Card (Pro) ] Enabled gradient specification for background colors.
+[ Bug fix ][ Grid Column Card (Pro) ] Fixed that Grid Column Card Item Body block vertical align not work
+
+= 1.64.2 =
+[ Bug fix ][ Custom Format (Pro) ] Fixed Toolbar Icon Size Issue in WordPress 6.4
+
 = 1.64.1 =
 [ Specification Change ] Update Swiper 11.0.1
 [ Bug fix ][ Toolbar ] Fixed Toolbar Icon Size Issue in WordPress 6.4
