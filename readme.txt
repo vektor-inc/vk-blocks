@@ -23,7 +23,7 @@ This is a plugin that extends Gutenberg's blocks.
 * Classic FAQ
 * New FAQ
 * Flow
-* Heading（with sub text）
+* Heading (not recommended)
 * Icon
 * Icon Outer
 * Page Content
@@ -102,6 +102,12 @@ e.g.
 1. VK Blocks examples.
 
 == Changelog ==
+
+= 1.68.0 =
+[ Add Function ][ Dynamic Text (Pro) ] Add feature to display logged-in username.
+[ Specification Change ][ Hidden extension ] Add VK Icon
+[ Specification Change ][ Outer ( Pro ) ] Allowed decimal points in 'Container Inner Side Space Setting'.
+[ Specification Change ][ Headding ] Marked as Not Recommended
 
 = 1.67.0 =
 [ Add Block ][ Category Badge (Pro) ] Creates badges displaying linked categories or terms for posts, with flexible design customization.
