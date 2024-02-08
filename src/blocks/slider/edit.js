@@ -19,6 +19,9 @@ import {
 	SelectControl,
 	RangeControl,
 	ToggleControl,
+	ToolbarGroup,
+	ToolbarDropdownMenu,
+	Dashicon,
 } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
 import { isParentReusableBlock } from '@vkblocks/utils/is-parent-reusable-block';
@@ -26,6 +29,7 @@ import { isParentReusableBlock } from '@vkblocks/utils/is-parent-reusable-block'
 export default function SliderEdit(props) {
 	const { attributes, setAttributes, clientId } = props;
 	const {
+		editorMode,
 		pc,
 		tablet,
 		mobile,
@@ -136,6 +140,11 @@ export default function SliderEdit(props) {
 		// 1.49 以前では navigationPosition が定義されていないので互換設定を追加
 		if (navigationPosition === undefined) {
 			setAttributes({ navigationPosition: 'mobile-bottom' });
+		}
+
+		// 1.67 以前では editorMode が定義されていないので互換設定を追加
+		if (editorMode === undefined) {
+			setAttributes({ editorMode: 'default' });
 		}
 	}, [clientId]);
 
@@ -288,6 +297,7 @@ export default function SliderEdit(props) {
 
 	// JS に渡す値の構造体
 	const sliderData = {
+		editorMode,
 		autoPlay,
 		autoPlayStop,
 		autoPlayDelay,
@@ -491,7 +501,7 @@ export default function SliderEdit(props) {
 	}
 
 	const blockProps = useBlockProps({
-		className: `swiper swiper-container vk_slider vk_slider_${clientId}${alignClass}`,
+		className: `vk_slider vk_swiper vk_slider_editorMode--${editorMode} vk_slider_${clientId}${alignClass}`,
 	});
 
 	return (
@@ -504,8 +514,80 @@ export default function SliderEdit(props) {
 					}
 					controls={['full']}
 				/>
+				<ToolbarGroup>
+					<ToolbarDropdownMenu
+						icon={
+							editorMode === 'default' ? (
+								<Dashicon icon="edit" />
+							) : (
+								<Dashicon icon="visibility" />
+							)
+						}
+						label={__('Change Slide Editor Mode', 'vk-blocks')}
+						controls={[
+							{
+								title: __(
+									'Edit ( Stacked Layout ) Mode',
+									'vk-blocks'
+								),
+								icon: <Dashicon icon="edit" />,
+								isActive: editorMode === 'default',
+								onClick: () =>
+									setAttributes({ editorMode: 'default' }),
+							},
+							{
+								title: __(
+									'Preview ( Slide ) Mode',
+									'vk-blocks'
+								),
+								icon: <Dashicon icon="visibility" />,
+								isActive: editorMode === 'slide',
+								onClick: () =>
+									setAttributes({ editorMode: 'slide' }),
+							},
+						]}
+					/>
+				</ToolbarGroup>
 			</BlockControls>
 			<InspectorControls>
+				<PanelBody
+					title={__('Editor Setting', 'vk-blocks')}
+					initialOpen={true}
+				>
+					<BaseControl
+						label={__('Editor Mode', 'vk-blocks')}
+						id={`vk_slider-effect`}
+					>
+						<ButtonGroup>
+							<Button
+								isSmall={true}
+								variant={
+									editorMode === 'default'
+										? 'primary'
+										: 'secondary'
+								}
+								onClick={() =>
+									setAttributes({ editorMode: 'default' })
+								}
+							>
+								{__('Edit ( Stacked Layout )', 'vk-blocks')}
+							</Button>
+							<Button
+								isSmall={true}
+								variant={
+									editorMode === 'slide'
+										? 'primary'
+										: 'secondary'
+								}
+								onClick={() =>
+									setAttributes({ editorMode: 'slide' })
+								}
+							>
+								{__('Preview ( Slide )', 'vk-blocks')}
+							</Button>
+						</ButtonGroup>
+					</BaseControl>
+				</PanelBody>
 				<PanelBody title={__('Width', 'vk-blocks')} initialOpen={true}>
 					<BaseControl id={`vk_slider-width`}>
 						<ButtonGroup>
@@ -765,7 +847,7 @@ export default function SliderEdit(props) {
 				{multiItemSetting}
 			</InspectorControls>
 			<div {...blockProps} data-vkb-slider={JSON.stringify(sliderData)}>
-				<div className={`swiper-wrapper`}>
+				<div className={`vk_slider_wrapper`}>
 					<div>
 						<InnerBlocks
 							//編集画面の追加タグ用に2回目のClassを挿入
