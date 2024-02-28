@@ -258,7 +258,10 @@ export default function SliderItemEdit(props) {
 			<div {...blockProps}>
 				{GetBgImage}
 				<div className={containerClass}>
-					<InnerBlocks />
+					<InnerBlocks
+						templateLock={false}
+						template={[['core/paragraph']]}
+					/>
 				</div>
 			</div>
 		</>

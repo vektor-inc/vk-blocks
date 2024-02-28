@@ -103,6 +103,11 @@ e.g.
 
 == Changelog ==
 
+[ Bug Fix ][ Inline Font Size ] Applies only Font Size has a numeric value.
+[ Bug Fix ][ GridColCard (Pro) ] Fixed a bug where vertical alignment settings for card blocks did not apply in the editing screen.
+[ Bug Fix ][ Slider ] Corresponding Slider Mode to Site Editor / Widget Editor.
+[ Bug Fix ][ Slider ] Fixed a bug where placing heading blocks and similar elements directly in slides made them uneditable.
+
 = 1.69.0 =
 [ Add function ][ Slider ] Add Slider Mode on Editor.
 [ Add Function ][ Post List (Pro) ] Add paged lock setting.
