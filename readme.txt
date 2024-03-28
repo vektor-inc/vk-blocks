@@ -103,6 +103,10 @@ e.g.
 
 == Changelog ==
 
+= 1.70.0 =
+[ Specification Change ] core/social-link, core/site-logo, core/site-title and core/site-tagline correspond to margin-extension
+[ Add function ][ Breadcrumb ] Add the ability to input breadcrumb separators.
+
 = 1.69.1 =
 [ Bug Fix ][ Inline Font Size ] Applies only Font Size has a numeric value.
 [ Bug Fix ][ GridColCard (Pro) ] Fixed a bug where vertical alignment settings for card blocks did not apply in the editing screen.
