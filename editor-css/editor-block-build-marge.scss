@@ -20,6 +20,14 @@
 		ol li{
 			margin:calc( var(--vk-size-text) * 0.8 ) 0;
 		}
+	
+	//グループブロック
+	.wp-block-group {
+		&.is-style-vk-group-stitch:before {
+			width: calc(100% - 1.25em);
+			height: calc(100% - 1.25em);
+		}
+	}
 }
 
 .vk-blocks-format-popover {
@@ -75,7 +83,8 @@
 	.editor-block-list-item-vk-blocks-simple-table:after,
 	.editor-block-list-item-vk-blocks-grid-column:after,
 	.editor-block-list-item-vk-blocks-gridcolcard:after,
-	.editor-block-list-item-vk-blocks-icon-card:after {
+	.editor-block-list-item-vk-blocks-icon-card:after,
+	.editor-block-list-item-vk-blocks-fixed-display:after {
 		position: absolute;
 		top: 0;
 		right: 0;
@@ -259,7 +268,8 @@ $color-danger: #dd3333;
 .vk_spacer,
 .vk_slider,
 .vk_slider_item,
-.vk_animation {
+.vk_animation,
+.vk_fixed-display {
 	border:1px dotted #ccc;
 }
 

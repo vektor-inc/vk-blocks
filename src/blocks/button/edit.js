@@ -207,6 +207,17 @@ export default function ButtonEdit(props) {
 		className: containerClass,
 	});
 
+	let inlineStyle = {};
+	if (
+		buttonTextColorCustom !== undefined &&
+		isHexColor(buttonTextColorCustom)
+	) {
+		inlineStyle = {
+			// 編集画面対策
+			color: `${buttonTextColorCustom}`,
+		};
+	}
+
 	return (
 		<>
 			<BlockControls>
@@ -805,6 +816,7 @@ export default function ButtonEdit(props) {
 					lbIconSizeBefore={iconSizeBefore}
 					lbIconSizeAfter={iconSizeAfter}
 					lbsubCaption={subCaption}
+					inlineStyle={inlineStyle}
 					lbRichtext={
 						<RichText
 							tagName={'span'}
@@ -830,7 +842,7 @@ export default function ButtonEdit(props) {
 								'vk-blocks/nowrap',
 								'vk-blocks/inline-font-size',
 							]}
-							isSelected={true}
+							inlineStyle={inlineStyle}
 						/>
 					}
 				/>
