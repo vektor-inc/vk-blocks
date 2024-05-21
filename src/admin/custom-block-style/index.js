@@ -76,9 +76,7 @@ function AdminCustomBlockStyle({
 				<h3 id="custom-block-style-setting">
 					{__('Custom Block Style Setting', 'vk-blocks')}
 				</h3>
-				<p>
-					{__('Block style settings can be registered.', 'vk-blocks')}
-				</p>
+				<p>{__('You can register block styles.', 'vk-blocks')}</p>
 				{Object.keys(vkBlocksOption.custom_block_style_lists).map(
 					(key, index, array) => {
 						const blockStyleListObj =
