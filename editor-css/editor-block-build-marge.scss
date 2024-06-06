@@ -18,7 +18,7 @@
 		//他テーマ（Twenty Twenty）上書き用
 		ul li,
 		ol li{
-			margin:calc( var(--vk-size-text) * 0.8 ) 0;
+			margin:calc( 1rem * 0.8 ) 0;
 		}
 	
 	//グループブロック
@@ -324,6 +324,9 @@ div[data-type="vk-blocks/page-content"].is-selected{
 
 // アニメーションブロックの識別用枠線
 @import "./editor_before_animation";
+
+// 固定表示ブロックの識別用枠線
+@import "./editor_before_fixed-display";
 
 @import "./editor_before_tab";
 
