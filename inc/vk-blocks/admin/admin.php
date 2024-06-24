@@ -106,6 +106,7 @@ function vk_blocks_setting_page() {
 	if ( vk_blocks_is_license_setting() ) {
 		$get_menu_html .= '<li><a href="#license-setting">' . __( 'License Key', 'vk-blocks' ) . '</a></li>';
 	}
+	$get_menu_html .= '<li><a href="#block-category-position-setting">' . __( 'Block Category Position Setting', 'vk-blocks' ) . '</a></li>';
 	$get_menu_html .= '<li><a href="#balloon-setting">' . __( 'Balloon Block Setting', 'vk-blocks' ) . '</a></li>';
 	if ( vk_blocks_is_pro() ) {
 		$get_menu_html .= '<li><a href="#custom-format-setting">' . __( 'Custom Format Setting', 'vk-blocks' ) . '</a></li>';
