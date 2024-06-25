@@ -105,7 +105,9 @@ e.g.
 
 == Changelog ==
 
+= 1.76.2 =
 [ Specification Change ] Change Font Awesome Version to 6.5.2
+[ Bug fix ] Fix load font awesome files
 
 = 1.76.1 =
 [ Bug fix ][ Fixed Display (Pro) ] Add css for position and alignment.
