@@ -121,10 +121,10 @@ export default function VariationForm(props) {
 									? [
 											...(variation.scope || []),
 											scopeOption.name,
-										]
+									  ]
 									: variation.scope.filter(
 											(item) => item !== scopeOption.name
-										);
+									  );
 								setVariation({ ...variation, scope: newScope });
 							}}
 						/>
