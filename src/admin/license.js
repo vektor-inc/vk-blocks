@@ -33,6 +33,7 @@ export default function AdminLicense() {
 				<TextControl
 					id="vk-blocks-pro-license-key"
 					label={__('License key', 'vk-blocks')}
+					type={'password'}
 					className="admin-text-control"
 					name="vk_blocks_options[vk_blocks_pro_license_key]"
 					value={

@@ -57,22 +57,37 @@ export default function SliderItemEdit(props) {
 		}
 	}, [clientId]);
 
-	//classPaddingLRのクラス切り替え
+	// classPaddingLRのクラス切り替え
 	let classPaddingLR = '';
-	if (padding_left_and_right === '0') {
-		classPaddingLR = ` ${prefix}-paddingLR-none`;
+	let paddingValue = '';
+
+	if (padding_left_and_right === '0' || !padding_left_and_right) {
+		classPaddingLR = ` is-layout-constrained`;
+		paddingValue = '0';
 	} else if (padding_left_and_right === '1') {
 		classPaddingLR = ` ${prefix}-paddingLR-use`;
+		paddingValue = '4em';
 	} else if (padding_left_and_right === '2') {
-		// Fit to content area width
 		classPaddingLR = ` ${prefix}-paddingLR-zero`;
+		paddingValue = '0';
 	}
 
+	// コアの余白システムに値を適用
+	useEffect(() => {
+		setAttributes({
+			style: {
+				spacing: {
+					padding: {
+						left: paddingValue,
+						right: paddingValue,
+					},
+				},
+			},
+		});
+	}, [paddingValue]);
+
 	let containerClass = '';
-	if (
-		classPaddingLR === ` ${prefix}-paddingLR-none` ||
-		classPaddingLR === ''
-	) {
+	if (classPaddingLR === ` is-layout-constrained` || classPaddingLR === '') {
 		containerClass = `${prefix}_container container`;
 	} else {
 		containerClass = `${prefix}_container`;
@@ -129,41 +144,6 @@ export default function SliderItemEdit(props) {
 					title={__('Layout Setting', 'vk-blocks')}
 					initialOpen={true}
 				>
-					<BaseControl>
-						<RadioControl
-							label={__('Padding (Left and Right)', 'vk-blocks')}
-							selected={padding_left_and_right}
-							className={'vk-radioControl'}
-							options={[
-								{
-									label: __(
-										'Fit to the Container area',
-										'vk-blocks'
-									),
-									value: '0',
-								},
-								{
-									label: __(
-										'Add padding to the Slider area',
-										'vk-blocks'
-									),
-									value: '1',
-								},
-								{
-									label: __(
-										'Remove padding from the Slider area',
-										'vk-blocks'
-									),
-									value: '2',
-								},
-							]}
-							onChange={(value) =>
-								setAttributes({
-									padding_left_and_right: value,
-								})
-							}
-						/>
-					</BaseControl>
 					<BaseControl
 						label={__('Vertical align', 'vk-blocks')}
 						id={`vk_sliderItem-verticalAlign`}
