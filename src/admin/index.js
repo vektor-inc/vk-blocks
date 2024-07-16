@@ -36,55 +36,55 @@ import { SaveButton } from '@vkblocks/admin/save-button';
 export const AdminContext = createContext();
 
 export default function VKBlocksAdmin() {
-	const [ vkBlocksOption, setVkBlocksOption ] = useState();
-	const [ reloadFlag, setReloadFlag ] = useState( false );
-	const [ isChanged, setIsChanged ] = useState( false );
+	const [vkBlocksOption, setVkBlocksOption] = useState();
+	const [reloadFlag, setReloadFlag] = useState(false);
+	const [isChanged, setIsChanged] = useState(false);
 
-	const storeOptions = useSelect( ( select ) => {
-		const { getOptions } = select( STORE_NAME );
+	const storeOptions = useSelect((select) => {
+		const { getOptions } = select(STORE_NAME);
 		return getOptions().vkBlocksOption;
-	}, [] );
+	}, []);
 
-	useEffect( () => {
-		setVkBlocksOption( storeOptions );
-	}, [ storeOptions ] );
+	useEffect(() => {
+		setVkBlocksOption(storeOptions);
+	}, [storeOptions]);
 
-	const optionChanged = ( value ) => {
-		setVkBlocksOption( value );
-		setIsChanged( true );
+	const optionChanged = (value) => {
+		setVkBlocksOption(value);
+		setIsChanged(true);
 	};
 
 	return (
 		<>
-			{ /* AdminContext.Providerで各コンポーネントにvalueを渡す */ }
+			{/* AdminContext.Providerで各コンポーネントにvalueを渡す */}
 			<AdminContext.Provider
-				value={ {
+				value={{
 					vkBlocksOption: vkBlocksOption ?? vkBlocksObject.options,
 					setVkBlocksOption: optionChanged,
 					reloadFlag,
 					setReloadFlag,
-				} }
+				}}
 			>
-				{ vkBlocksObject.isLicenseSetting && <AdminLicense /> }
+				{vkBlocksObject.isLicenseSetting && <AdminLicense />}
 				<AdminBlockCategoryPosition />
 				<AdminBalloon />
-				{ vkBlocksObject.isPro && <AdminCustomFormat /> }
-				{ vkBlocksObject.isPro && <AdminCustomBlockStyle /> }
+				{vkBlocksObject.isPro && <AdminCustomFormat />}
+				{vkBlocksObject.isPro && <AdminCustomBlockStyle />}
 				<AdminMargin />
 				<AdminLoadSeparate />
-				{ vkBlocksObject.isPro && <AdminNewFaq /> }
-				{ vkBlocksObject.isPro && <AdminBreadcrumb /> }
-				{ vkBlocksObject.isPro && <AdminCustomCss /> }
+				{vkBlocksObject.isPro && <AdminNewFaq />}
+				{vkBlocksObject.isPro && <AdminBreadcrumb />}
+				{vkBlocksObject.isPro && <AdminCustomCss />}
 				<BlockManager />
 				<BlockStyleManager />
 				<SaveButton
-					classOption={ 'sticky' }
-					isChanged={ isChanged }
-					setIsChanged={ setIsChanged }
+					classOption={'sticky'}
+					isChanged={isChanged}
+					setIsChanged={setIsChanged}
 				/>
 				<AdminImportExport
-					isChanged={ isChanged }
-					setIsChanged={ setIsChanged }
+					isChanged={isChanged}
+					setIsChanged={setIsChanged}
 				/>
 			</AdminContext.Provider>
 		</>
@@ -93,10 +93,10 @@ export default function VKBlocksAdmin() {
 
 // NOTE: ReactDOM.renderが非推奨になったのでフォールバック WP6.1以下をサポートしなくなったら削除すること #1574
 const existsCreateRoot = typeof createRoot === 'function';
-if ( existsCreateRoot ) {
-	const container = document.getElementById( 'vk-blocks-admin' );
-	const root = createRoot( container );
-	root.render( <VKBlocksAdmin /> );
+if (existsCreateRoot) {
+	const container = document.getElementById('vk-blocks-admin');
+	const root = createRoot(container);
+	root.render(<VKBlocksAdmin />);
 } else {
-	render( <VKBlocksAdmin />, document.getElementById( 'vk-blocks-admin' ) );
+	render(<VKBlocksAdmin />, document.getElementById('vk-blocks-admin'));
 }

@@ -6,11 +6,11 @@ import { CheckboxControl } from '@wordpress/components';
 
 /*globals vkBlocksObject */
 
-function BlockTypesChecklist( { blockTypes, value, onItemChange } ) {
+function BlockTypesChecklist({ blockTypes, value, onItemChange }) {
 	// blockJsonのtitleがあったらblockTypesのtitleがあれば
-	const getBlockTitle = ( name, blockTypeTitle ) => {
+	const getBlockTitle = (name, blockTypeTitle) => {
 		const blockJsonList = vkBlocksObject.blockJsonLists.find(
-			( item ) => item.name === name
+			(item) => item.name === name
 		);
 		return blockJsonList && blockJsonList.title
 			? blockJsonList.title
@@ -19,29 +19,26 @@ function BlockTypesChecklist( { blockTypes, value, onItemChange } ) {
 
 	return (
 		<ul className="block-manager__checklist">
-			{ blockTypes.map( ( blockType ) => (
+			{blockTypes.map((blockType) => (
 				<li
-					key={ blockType.name }
+					key={blockType.name}
 					className="block-manager__checklist-item"
 				>
 					<CheckboxControl
 						__nextHasNoMarginBottom
 						label={
 							<>
-								{ getBlockTitle(
-									blockType.name,
-									blockType.title
-								) }
-								<BlockIcon icon={ blockType.icon } />
+								{getBlockTitle(blockType.name, blockType.title)}
+								<BlockIcon icon={blockType.icon} />
 							</>
 						}
-						checked={ value.includes( blockType.name ) }
-						onChange={ ( ...args ) =>
-							onItemChange( blockType.name, ...args )
+						checked={value.includes(blockType.name)}
+						onChange={(...args) =>
+							onItemChange(blockType.name, ...args)
 						}
 					/>
 				</li>
-			) ) }
+			))}
 		</ul>
 	);
 }

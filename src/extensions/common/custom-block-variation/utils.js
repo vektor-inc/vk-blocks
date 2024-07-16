@@ -8,7 +8,7 @@ import { ExternalLink } from '@wordpress/components';
 export const SCOPE_OPTIONS = [
 	{
 		name: 'inserter',
-		label: __( 'Inserter', 'vk-blocks' ),
+		label: __('Inserter', 'vk-blocks'),
 		help: createInterpolateElement(
 			__(
 				'Displayed on the inserter. <Link>Learn more about inserters</Link>.',
@@ -17,10 +17,10 @@ export const SCOPE_OPTIONS = [
 			{
 				Link: (
 					<ExternalLink
-						href={ __(
+						href={__(
 							'https://wordpress.org/documentation/article/adding-a-new-block/#what-is-the-inserter',
 							'vk-blocks'
-						) }
+						)}
 					/>
 				),
 			}
@@ -28,12 +28,12 @@ export const SCOPE_OPTIONS = [
 	},
 	{
 		name: 'block',
-		label: __( 'Block', 'vk-blocks' ),
-		help: __( 'It will appear in the variation picker.', 'vk-blocks' ),
+		label: __('Block', 'vk-blocks'),
+		help: __('It will appear in the variation picker.', 'vk-blocks'),
 	},
 	{
 		name: 'transform',
-		label: __( 'Transform', 'vk-blocks' ),
-		help: __( 'Displayed in block variation transformation.', 'vk-blocks' ),
+		label: __('Transform', 'vk-blocks'),
+		help: __('Displayed in block variation transformation.', 'vk-blocks'),
 	},
 ];

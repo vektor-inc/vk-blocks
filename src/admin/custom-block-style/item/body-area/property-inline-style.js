@@ -10,26 +10,22 @@ import { transformStyles } from '@wordpress/block-editor';
  */
 import { CodeMirrorCss } from '@vkblocks/components/code-mirror-css';
 
-export const PropertyInlineStyle = ( {
-	index,
-	onChange,
-	blockStyleListObj,
-} ) => {
+export const PropertyInlineStyle = ({ index, onChange, blockStyleListObj }) => {
 	return (
 		<div className="custom_block_style_item_property_inline_style">
 			<div>
-				{ __( 'CSS class', 'vk-blocks' ) }:
-				<code>.is-style-{ blockStyleListObj.property_name }</code>
+				{__('CSS class', 'vk-blocks')}:
+				<code>.is-style-{blockStyleListObj.property_name}</code>
 			</div>
 			<CodeMirrorCss
 				className="vk-codemirror-options"
-				value={ blockStyleListObj.property_inline_style ?? '' }
-				onChange={ ( value ) => {
-					onChange( 'property_inline_style', value, index );
+				value={blockStyleListObj.property_inline_style ?? ''}
+				onChange={(value) => {
+					onChange('property_inline_style', value, index);
 
 					// .editor-styles-wrapperをwrapしてproperty_transform_inline_styleに保存する
-					const [ transformed ] = transformStyles(
-						[ { css: value } ],
+					const [transformed] = transformStyles(
+						[{ css: value }],
 						'.editor-styles-wrapper'
 					);
 					onChange(
@@ -37,10 +33,10 @@ export const PropertyInlineStyle = ( {
 						transformed,
 						index
 					);
-				} }
+				}}
 			/>
 			<p>
-				{ createInterpolateElement(
+				{createInterpolateElement(
 					sprintf(
 						/* translators: If selector is specified, it is replaced by CSS class (is-style-%1$s); CSS selectors other than selector and is-style-%2$s may affect the entire page. */
 						__(
@@ -53,7 +49,7 @@ export const PropertyInlineStyle = ( {
 					{
 						code: <code />,
 					}
-				) }
+				)}
 			</p>
 		</div>
 	);

@@ -8,14 +8,14 @@ import { getColorObjectByAttributeValues } from '@wordpress/block-editor';
  */
 import { vkColorPalette } from '@vkblocks/admin/utils/settings';
 
-export const colorSlugToColorCode = ( color ) => {
+export const colorSlugToColorCode = (color) => {
 	let colorCode;
-	if ( color ) {
+	if (color) {
 		const ColorValue = getColorObjectByAttributeValues(
 			vkColorPalette,
 			color
 		);
-		if ( ColorValue.color !== undefined ) {
+		if (ColorValue.color !== undefined) {
 			colorCode = ColorValue.color;
 		} else {
 			colorCode = color;

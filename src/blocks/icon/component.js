@@ -19,9 +19,9 @@ export class VKBIcon extends Component {
 
 		// outer & align
 		let outerClass = 'vk_icon_frame';
-		if ( iconAlign === 'center' ) {
+		if (iconAlign === 'center') {
 			outerClass += ' text-center';
-		} else if ( iconAlign === 'right' ) {
+		} else if (iconAlign === 'right') {
 			outerClass += ' text-right';
 		}
 
@@ -29,7 +29,7 @@ export class VKBIcon extends Component {
 		let borderClass = 'vk_icon_border';
 		let borderStyle = {};
 
-		if ( iconType === '0' ) {
+		if (iconType === '0') {
 			// Solid color
 			if (
 				iconColor !== 'undefined' &&
@@ -39,14 +39,14 @@ export class VKBIcon extends Component {
 				// Solid color
 				borderClass += ` has-background`;
 
-				if ( isHexColor( iconColor ) ) {
+				if (isHexColor(iconColor)) {
 					// custom color
 					borderStyle = {
-						backgroundColor: `${ iconColor }`,
+						backgroundColor: `${iconColor}`,
 					};
 				} else {
 					// palette color
-					borderClass += ` has-${ iconColor }-background-color`;
+					borderClass += ` has-${iconColor}-background-color`;
 				}
 			}
 		} else {
@@ -57,18 +57,18 @@ export class VKBIcon extends Component {
 			) {
 				borderClass += ` has-text-color`;
 
-				if ( isHexColor( iconColor ) ) {
+				if (isHexColor(iconColor)) {
 					// custom color
 					borderStyle = {
-						color: `${ iconColor }`,
+						color: `${iconColor}`,
 					};
 				} else {
 					// palette color
-					borderClass += ` has-${ iconColor }-color`;
+					borderClass += ` has-${iconColor}-color`;
 				}
 			}
 
-			if ( iconType === '1' ) {
+			if (iconType === '1') {
 				// Icon & Frame
 				outerClass += ' is-style-outline';
 			} else {
@@ -79,7 +79,7 @@ export class VKBIcon extends Component {
 
 		// margin
 		if (
-			! (
+			!(
 				iconSize === 36 &&
 				iconSizeUnit === 'px' &&
 				iconMargin === 22 &&
@@ -88,28 +88,28 @@ export class VKBIcon extends Component {
 		) {
 			borderStyle.width =
 				'calc(' +
-				( iconSize + iconSizeUnit ) +
+				(iconSize + iconSizeUnit) +
 				' + ' +
-				( iconMargin * 2 + iconMarginUnit ) +
+				(iconMargin * 2 + iconMarginUnit) +
 				')';
 			borderStyle.height = borderStyle.width;
 		}
 
 		// border radius
-		if ( iconRadius !== 50 ) {
+		if (iconRadius !== 50) {
 			borderStyle.borderRadius = iconRadius + `%`;
 		}
 
 		// icon font
 		let faIconTag = '';
-		if ( fontAwesomeIcon ) {
-			fontAwesomeIcon = fontAwesomeIcon.replace( / fas/g, 'fas' );
+		if (fontAwesomeIcon) {
+			fontAwesomeIcon = fontAwesomeIcon.replace(/ fas/g, 'fas');
 
 			// font size
 			let fontStyle = ``;
 			let fontClass = ` vk_icon_font `;
-			if ( ! ( iconSize === 36 && iconSizeUnit === 'px' ) ) {
-				fontStyle = ` font-size:${ iconSize }${ iconSizeUnit };`;
+			if (!(iconSize === 36 && iconSizeUnit === 'px')) {
+				fontStyle = ` font-size:${iconSize}${iconSizeUnit};`;
 			}
 
 			// icon color
@@ -118,45 +118,44 @@ export class VKBIcon extends Component {
 				iconFontColor !== null &&
 				iconFontColor !== undefined
 			) {
-				if ( isHexColor( iconFontColor ) ) {
+				if (isHexColor(iconFontColor)) {
 					// custom color
-					fontStyle += ` color:${ iconFontColor };`;
+					fontStyle += ` color:${iconFontColor};`;
 				} else {
 					// palette color
-					fontClass += ` has-text-color has-${ iconFontColor }-color `;
+					fontClass += ` has-text-color has-${iconFontColor}-color `;
 				}
 			}
 
 			// add class and inline css
-			const faIconFragment = fontAwesomeIcon.split( ' ' );
-			faIconFragment[ 0 ] =
-				faIconFragment[ 0 ] + ` style="${ fontStyle };"`;
-			faIconFragment[ 1 ] = ' ' + faIconFragment[ 1 ] + fontClass;
-			faIconTag = faIconFragment.join( '' );
+			const faIconFragment = fontAwesomeIcon.split(' ');
+			faIconFragment[0] = faIconFragment[0] + ` style="${fontStyle};"`;
+			faIconFragment[1] = ' ' + faIconFragment[1] + fontClass;
+			faIconTag = faIconFragment.join('');
 		}
 
 		const blockContent = (
 			<>
-				<div className={ borderClass } style={ borderStyle }>
-					{ parse( faIconTag ) }
+				<div className={borderClass} style={borderStyle}>
+					{parse(faIconTag)}
 				</div>
 			</>
 		);
 
 		let blockContentWrapper = '';
-		if ( iconUrl !== null && iconUrl !== undefined && iconUrl !== '' ) {
+		if (iconUrl !== null && iconUrl !== undefined && iconUrl !== '') {
 			blockContentWrapper = (
 				/*
 				 target=_blankで指定すると、WordPressが自動でnoopener noreferrerを付与する。
 				 ブロックでもrelを付与しないとブロックが壊れる。
 				 */
 				<a
-					href={ iconUrl }
+					href={iconUrl}
 					className="vk_icon_link"
-					target={ iconTarget && '_blank' }
-					rel={ iconTarget && 'noopener noreferrer' }
+					target={iconTarget && '_blank'}
+					rel={iconTarget && 'noopener noreferrer'}
 				>
-					{ blockContent }
+					{blockContent}
 				</a>
 			);
 		} else {
@@ -165,7 +164,7 @@ export class VKBIcon extends Component {
 
 		return (
 			<>
-				<div className={ outerClass }>{ blockContentWrapper }</div>
+				<div className={outerClass}>{blockContentWrapper}</div>
 			</>
 		);
 	}

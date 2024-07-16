@@ -19,6 +19,6 @@ export const vkBlocksCategoryIcon = () => {
 		</svg>
 	);
 
-	updateCategory( 'vk-blocks-cat', { icon: blockCategoryIcon } );
-	updateCategory( 'vk-blocks-cat-layout', { icon: blockCategoryIcon } );
+	updateCategory('vk-blocks-cat', { icon: blockCategoryIcon });
+	updateCategory('vk-blocks-cat-layout', { icon: blockCategoryIcon });
 };

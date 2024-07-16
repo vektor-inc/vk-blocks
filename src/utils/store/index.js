@@ -9,12 +9,12 @@ import apiFetch from '@wordpress/api-fetch';
  */
 import { STORE_NAME, API_PATH } from './constants';
 
-export const updateOptions = ( options ) => {
-	apiFetch( {
+export const updateOptions = (options) => {
+	apiFetch({
 		path: API_PATH,
 		method: 'POST',
 		data: options,
-	} );
+	});
 };
 
 const DEFAULT_STATE = {
@@ -29,14 +29,14 @@ const DEFAULT_STATE = {
  * @type {Object}
  */
 const actions = {
-	setOptions( options ) {
+	setOptions(options) {
 		return {
 			type: 'SET_OPTIONS',
 			options,
 		};
 	},
 
-	fetchFromAPI( path ) {
+	fetchFromAPI(path) {
 		return {
 			type: 'FETCH_FROM_API',
 			path,
@@ -44,9 +44,9 @@ const actions = {
 	},
 };
 
-const store = createReduxStore( STORE_NAME, {
-	reducer( state = DEFAULT_STATE, action ) {
-		switch ( action.type ) {
+const store = createReduxStore(STORE_NAME, {
+	reducer(state = DEFAULT_STATE, action) {
+		switch (action.type) {
 			case 'SET_OPTIONS':
 				return {
 					...state,
@@ -60,24 +60,24 @@ const store = createReduxStore( STORE_NAME, {
 	actions,
 
 	selectors: {
-		getOptions( state ) {
+		getOptions(state) {
 			const { options } = state;
 			return options;
 		},
 	},
 
 	controls: {
-		FETCH_FROM_API( action ) {
-			return apiFetch( { path: action.path } );
+		FETCH_FROM_API(action) {
+			return apiFetch({ path: action.path });
 		},
 	},
 
 	resolvers: {
 		*getOptions() {
-			const options = yield actions.fetchFromAPI( API_PATH );
-			return actions.setOptions( options );
+			const options = yield actions.fetchFromAPI(API_PATH);
+			return actions.setOptions(options);
 		},
 	},
-} );
+});
 
-register( store );
+register(store);

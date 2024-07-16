@@ -25,7 +25,7 @@ import parse from 'html-react-parser';
 import { AdvancedColorPalette } from '@vkblocks/components/advanced-color-palette';
 import { isHexColor } from '@vkblocks/utils/is-hex-color';
 
-export default function BorderBoxEdit( props ) {
+export default function BorderBoxEdit(props) {
 	const { attributes, setAttributes } = props;
 	const {
 		heading,
@@ -39,44 +39,40 @@ export default function BorderBoxEdit( props ) {
 	// eslint-disable-next-line no-undef
 	const iconFamily = vkFontAwesome.iconFamily;
 	const inner = (
-		<InnerBlocks
-			templateLock={ false }
-			template={ [ [ 'core/paragraph' ] ] }
-		/>
+		<InnerBlocks templateLock={false} template={[['core/paragraph']]} />
 	);
 	const title = (
 		<RichText
-			tagName={ headingTag }
+			tagName={headingTag}
 			identifier="heading"
-			className={ 'vk_borderBox_title' }
-			onChange={ ( value ) => setAttributes( { heading: value } ) }
-			value={ heading }
-			placeholder={ __( 'Please enter a title.', 'vk-blocks' ) }
+			className={'vk_borderBox_title'}
+			onChange={(value) => setAttributes({ heading: value })}
+			value={heading}
+			placeholder={__('Please enter a title.', 'vk-blocks')}
 		/>
 	);
 
 	// カラーパレットに対応
-	const wrapperClasses = classnames( 'vk_borderBox', {
-		[ `vk_borderBox-color-${ color }` ]: !! color,
-		[ `vk_borderBox-background-${ bgColor }` ]: !! bgColor,
-		[ `has-text-color` ]: !! borderColor,
-		[ `has-${ borderColor }-color` ]:
-			!! borderColor && ! isHexColor( borderColor ),
-	} );
+	const wrapperClasses = classnames('vk_borderBox', {
+		[`vk_borderBox-color-${color}`]: !!color,
+		[`vk_borderBox-background-${bgColor}`]: !!bgColor,
+		[`has-text-color`]: !!borderColor,
+		[`has-${borderColor}-color`]: !!borderColor && !isHexColor(borderColor),
+	});
 	let wrapperStyle = {};
-	if ( borderColor !== undefined && isHexColor( borderColor ) ) {
+	if (borderColor !== undefined && isHexColor(borderColor)) {
 		// custom color
 		wrapperStyle = {
-			color: `${ borderColor }`,
+			color: `${borderColor}`,
 		};
 	}
-	const blockProps = useBlockProps( {
-		className: classnames( wrapperClasses ),
+	const blockProps = useBlockProps({
+		className: classnames(wrapperClasses),
 		style: wrapperStyle,
-	} );
+	});
 
 	//Defaultクラスを設定
-	if ( -1 === blockProps.className.indexOf( 'is-style-' ) ) {
+	if (-1 === blockProps.className.indexOf('is-style-')) {
 		blockProps.className +=
 			' is-style-vk_borderBox-style-solid-kado-tit-tab';
 	}
@@ -90,31 +86,31 @@ export default function BorderBoxEdit( props ) {
 		black: '#222222',
 	};
 
-	if ( color ) {
+	if (color) {
 		// 旧カラーで color が指定されている場合
 		// hexカラーに置き換え
-		setAttributes( { borderColor: pre_colors[ color ] } );
-		setAttributes( { color: '' } );
+		setAttributes({ borderColor: pre_colors[color] });
+		setAttributes({ color: '' });
 	} else if (
 		attributes.className &&
-		attributes.className.match( /vk_borderBox-color-\w*/ )
+		attributes.className.match(/vk_borderBox-color-\w*/)
 	) {
 		// 旧カラーで color がない場合(旧Default対応)
 		// className から vk_borderBox-color- を削除
 		// 文字列を空白文字を区切りとして配列化
-		const palletClasses = attributes.className.split( ' ' );
+		const palletClasses = attributes.className.split(' ');
 
 		// preColorClass の値の要素を取り除き、空白文字を区切りとして join（結合）
-		const palletClass = palletClasses.filter( ( className ) => {
-			return ! className.match( /vk_borderBox-color-\w*/ );
-		} );
+		const palletClass = palletClasses.filter((className) => {
+			return !className.match(/vk_borderBox-color-\w*/);
+		});
 
-		setAttributes( {
-			className: classnames( palletClass ),
-		} );
+		setAttributes({
+			className: classnames(palletClass),
+		});
 
 		// hexカラー(赤)に置き換え
-		setAttributes( { borderColor: pre_colors.red } );
+		setAttributes({ borderColor: pre_colors.red });
 	}
 
 	//枠パターン
@@ -138,20 +134,16 @@ export default function BorderBoxEdit( props ) {
 	}
 
 	// title背景
-	const titleClasses = classnames( 'vk_borderBox_title_container', {
-		[ `has-background` ]: isFill_title && !! borderColor,
-		[ `has-${ borderColor }-background-color` ]:
-			isFill_title && !! borderColor && ! isHexColor( borderColor ),
-	} );
+	const titleClasses = classnames('vk_borderBox_title_container', {
+		[`has-background`]: isFill_title && !!borderColor,
+		[`has-${borderColor}-background-color`]:
+			isFill_title && !!borderColor && !isHexColor(borderColor),
+	});
 	let titleStyle = {};
-	if (
-		isFill_title &&
-		borderColor !== undefined &&
-		isHexColor( borderColor )
-	) {
+	if (isFill_title && borderColor !== undefined && isHexColor(borderColor)) {
 		// custom color
 		titleStyle = {
-			backgroundColor: `${ borderColor }`,
+			backgroundColor: `${borderColor}`,
 		};
 	}
 
@@ -162,148 +154,137 @@ export default function BorderBoxEdit( props ) {
 			blockProps.className.indexOf(
 				'vk_borderBox-style-solid-kado-iconFeature'
 			) &&
-		! color
+		!color
 	) {
 		// 直線 ピン角 アイコン
 		let iconStyle = ``;
-		const iconClasses = classnames( 'vk_borderBox_icon_border', {
-			[ `has-background` ]: !! borderColor,
-			[ `has-${ borderColor }-background-color` ]:
-				!! borderColor && ! isHexColor( borderColor ),
-		} );
+		const iconClasses = classnames('vk_borderBox_icon_border', {
+			[`has-background`]: !!borderColor,
+			[`has-${borderColor}-background-color`]:
+				!!borderColor && !isHexColor(borderColor),
+		});
 
-		if ( borderColor !== undefined && isHexColor( borderColor ) ) {
+		if (borderColor !== undefined && isHexColor(borderColor)) {
 			// custom color
-			iconStyle = `background-color: ${ borderColor };`;
+			iconStyle = `background-color: ${borderColor};`;
 		}
 
 		// iタグ必須
-		icon = `<div class="${ classnames(
+		icon = `<div class="${classnames(
 			iconClasses
-		) }" style="${ iconStyle }">${ faIcon }</div>`;
-	} else if ( faIcon.indexOf( '<i class="' ) === -1 ) {
+		)}" style="${iconStyle}">${faIcon}</div>`;
+	} else if (faIcon.indexOf('<i class="') === -1) {
 		//iタグでdeprecatedが効かなかったので追加。
 		// アイコンなし
-		icon = `<i class="${ faIcon }"></i>`;
+		icon = `<i class="${faIcon}"></i>`;
 	} else {
 		// アイコンあり
 		icon = faIcon;
 	}
 
-	const bodyClasses = classnames( 'vk_borderBox_body', {
-		[ `vk_borderBox_body-align-${ bodyAlign }` ]: !! bodyAlign,
-	} );
+	const bodyClasses = classnames('vk_borderBox_body', {
+		[`vk_borderBox_body-align-${bodyAlign}`]: !!bodyAlign,
+	});
 
 	return (
 		<>
 			<BlockControls group="block">
 				<BlockAlignmentControl
-					value={ bodyAlign }
-					onChange={ ( value ) =>
-						setAttributes( { bodyAlign: value } )
-					}
-					controls={ [ 'left', 'center', 'right' ] }
+					value={bodyAlign}
+					onChange={(value) => setAttributes({ bodyAlign: value })}
+					controls={['left', 'center', 'right']}
 				/>
 			</BlockControls>
 			<InspectorControls>
 				<PanelBody
-					title={ __( 'Margin', 'vk-blocks' ) }
-					initialOpen={ false }
+					title={__('Margin', 'vk-blocks')}
+					initialOpen={false}
 				>
 					<BaseControl>
 						<p>
-							{ __(
+							{__(
 								'The margin-top of the first element and the margin-bottom of the last element in the border block will be automatically set to 0.If you want to add margins at the beginning and end, use a spacer block to specify height instead of margin.',
 								'vk-blocks'
-							) }
+							)}
 						</p>
 					</BaseControl>
 				</PanelBody>
 				<PanelBody
-					title={ __( 'HTML element of the title', 'vk-blocks' ) }
-					initialOpen={ false }
+					title={__('HTML element of the title', 'vk-blocks')}
+					initialOpen={false}
 				>
 					<BaseControl>
 						<SelectControl
-							label={ __(
-								'HTML element of the title',
-								'vk-blocks'
-							) }
-							value={ headingTag }
-							options={ [
+							label={__('HTML element of the title', 'vk-blocks')}
+							value={headingTag}
+							options={[
 								{ label: 'H3', value: 'h3' },
 								{ label: 'H4', value: 'h4' },
 								{ label: 'H5', value: 'h5' },
 								{ label: 'H6', value: 'h6' },
 								{ label: 'p', value: 'p' },
-							] }
-							onChange={ ( value ) =>
-								setAttributes( { headingTag: value } )
+							]}
+							onChange={(value) =>
+								setAttributes({ headingTag: value })
 							}
 						/>
 					</BaseControl>
 				</PanelBody>
-				<PanelBody title={ __( 'Color', 'vk-blocks' ) }>
+				<PanelBody title={__('Color', 'vk-blocks')}>
 					<BaseControl
 						id="border-color"
-						label={ __( 'Border Color', 'vk-blocks' ) }
+						label={__('Border Color', 'vk-blocks')}
 					>
 						<AdvancedColorPalette
-							schema={ 'borderColor' }
-							{ ...props }
+							schema={'borderColor'}
+							{...props}
 						/>
 					</BaseControl>
 					<BaseControl
 						id="background-color"
-						label={ __( 'Background Color', 'vk-blocks' ) }
+						label={__('Background Color', 'vk-blocks')}
 					>
 						<SelectControl
-							value={ bgColor }
-							onChange={ ( value ) =>
-								setAttributes( { bgColor: value } )
+							value={bgColor}
+							onChange={(value) =>
+								setAttributes({ bgColor: value })
 							}
-							options={ [
+							options={[
 								{
 									value: 'transparent',
-									label: __( 'Transparent', 'vk-blocks' ),
+									label: __('Transparent', 'vk-blocks'),
 								},
 								{
 									value: 'white',
-									label: __( 'White', 'vk-blocks' ),
+									label: __('White', 'vk-blocks'),
 								},
-							] }
+							]}
 						/>
 					</BaseControl>
 				</PanelBody>
-				<PanelBody title={ __( 'Icon', 'vk-blocks' ) }>
+				<PanelBody title={__('Icon', 'vk-blocks')}>
 					<BaseControl
 						id="dot-fa"
 						label={
-							__( 'Icon', 'vk-blocks' ) +
-							' ( ' +
-							iconFamily +
-							' )'
+							__('Icon', 'vk-blocks') + ' ( ' + iconFamily + ' )'
 						}
 					>
 						<FontAwesome
-							attributeName={ 'faIcon' }
-							{ ...{
+							attributeName={'faIcon'}
+							{...{
 								attributes,
 								setAttributes,
-							} }
+							}}
 						/>
 					</BaseControl>
 				</PanelBody>
 			</InspectorControls>
-			<div { ...blockProps }>
-				<div
-					className={ classnames( titleClasses ) }
-					style={ titleStyle }
-				>
-					{ parse( icon ) }
-					{ title }
+			<div {...blockProps}>
+				<div className={classnames(titleClasses)} style={titleStyle}>
+					{parse(icon)}
+					{title}
 				</div>
-				<div className={ bodyClasses }>{ inner }</div>
+				<div className={bodyClasses}>{inner}</div>
 			</div>
 		</>
 	);

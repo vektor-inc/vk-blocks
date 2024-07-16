@@ -19,49 +19,49 @@ import AdvancedSpacerControl from './advanced-spacer-control';
 import Spacers from './spacers';
 import { useEffect } from '@wordpress/element';
 
-export default function SpacerEdit( {
+export default function SpacerEdit({
 	attributes,
 	setAttributes,
 	className,
 	clientId,
 	anchor,
-} ) {
+}) {
 	const { spaceType, unit, pc, tablet, mobile, spaceSize } = attributes;
 
 	let containerClass = `vk_spacer`;
-	if ( 'custom' !== spaceSize ) {
-		containerClass += ` vk_spacer-type-${ spaceType }`;
+	if ('custom' !== spaceSize) {
+		containerClass += ` vk_spacer-type-${spaceType}`;
 	}
 
-	useEffect( () => {
-		if ( spaceSize === undefined ) {
-			setAttributes( { spaceSize: 'custom' } );
+	useEffect(() => {
+		if (spaceSize === undefined) {
+			setAttributes({ spaceSize: 'custom' });
 		}
-	}, [ clientId ] );
+	}, [clientId]);
 
-	const blockProps = useBlockProps( {
+	const blockProps = useBlockProps({
 		className: containerClass,
 		id: anchor,
-	} );
+	});
 
 	const numberSetting =
 		spaceSize === 'custom' ? (
 			<>
 				<AdvancedUnitControl
-					attributes={ attributes }
-					setAttributes={ setAttributes }
-					className={ className }
+					attributes={attributes}
+					setAttributes={setAttributes}
+					className={className}
 				/>
 				<BaseControl
-					label={ __( 'Height for each device.', 'vk-blocks' ) }
-					id={ `vk_spacer-viewPort-${ clientId }` }
+					label={__('Height for each device.', 'vk-blocks')}
+					id={`vk_spacer-viewPort-${clientId}`}
 				>
 					<AdvancedViewportControl
-						attributes={ attributes }
-						setAttributes={ setAttributes }
-						className={ className }
-						initial={ { iPc: 40, iTablet: 30, iMobile: 20 } }
-						id={ `vk_spacer-viewPort-${ clientId }` }
+						attributes={attributes}
+						setAttributes={setAttributes}
+						className={className}
+						initial={{ iPc: 40, iTablet: 30, iMobile: 20 }}
+						id={`vk_spacer-viewPort-${clientId}`}
 					/>
 				</BaseControl>
 			</>
@@ -72,120 +72,112 @@ export default function SpacerEdit( {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Spacer Settings', 'vk-blocks' ) }>
+				<PanelBody title={__('Spacer Settings', 'vk-blocks')}>
 					<ButtonGroup className="mb-3">
 						<Button
 							isSmall
-							isPrimary={ spaceSize === 'xxs' }
-							isSecondary={ spaceSize !== 'xxs' }
-							onClick={ () =>
-								setAttributes( { spaceSize: 'xxs' } )
-							}
-							style={ { padding: '0px 7px' } }
+							isPrimary={spaceSize === 'xxs'}
+							isSecondary={spaceSize !== 'xxs'}
+							onClick={() => setAttributes({ spaceSize: 'xxs' })}
+							style={{ padding: '0px 7px' }}
 						>
-							{ __( 'XXS', 'vk-blocks' ) }
+							{__('XXS', 'vk-blocks')}
 						</Button>
 						<Button
 							isSmall
-							isPrimary={ spaceSize === 'xs' }
-							isSecondary={ spaceSize !== 'xs' }
-							onClick={ () =>
-								setAttributes( { spaceSize: 'xs' } )
-							}
-							style={ { padding: '0px 7px' } }
+							isPrimary={spaceSize === 'xs'}
+							isSecondary={spaceSize !== 'xs'}
+							onClick={() => setAttributes({ spaceSize: 'xs' })}
+							style={{ padding: '0px 7px' }}
 						>
-							{ __( 'XS', 'vk-blocks' ) }
+							{__('XS', 'vk-blocks')}
 						</Button>
 						<Button
 							isSmall
-							isPrimary={ spaceSize === 'small' }
-							isSecondary={ spaceSize !== 'small' }
-							onClick={ () =>
-								setAttributes( { spaceSize: 'small' } )
+							isPrimary={spaceSize === 'small'}
+							isSecondary={spaceSize !== 'small'}
+							onClick={() =>
+								setAttributes({ spaceSize: 'small' })
 							}
-							style={ { padding: '0px 7px' } }
+							style={{ padding: '0px 7px' }}
 						>
-							{ __( 'S', 'vk-blocks' ) }
+							{__('S', 'vk-blocks')}
 						</Button>
 						<Button
 							isSmall
-							isPrimary={ spaceSize === 'medium' }
-							isSecondary={ spaceSize !== 'medium' }
-							onClick={ () =>
-								setAttributes( { spaceSize: 'medium' } )
+							isPrimary={spaceSize === 'medium'}
+							isSecondary={spaceSize !== 'medium'}
+							onClick={() =>
+								setAttributes({ spaceSize: 'medium' })
 							}
-							style={ { padding: '0px 7px' } }
+							style={{ padding: '0px 7px' }}
 						>
-							{ __( 'M', 'vk-blocks' ) }
+							{__('M', 'vk-blocks')}
 						</Button>
 						<Button
 							isSmall
-							isPrimary={ spaceSize === 'large' }
-							isSecondary={ spaceSize !== 'large' }
-							onClick={ () =>
-								setAttributes( { spaceSize: 'large' } )
+							isPrimary={spaceSize === 'large'}
+							isSecondary={spaceSize !== 'large'}
+							onClick={() =>
+								setAttributes({ spaceSize: 'large' })
 							}
-							style={ { padding: '0px 7px' } }
+							style={{ padding: '0px 7px' }}
 						>
-							{ __( 'L', 'vk-blocks' ) }
+							{__('L', 'vk-blocks')}
 						</Button>
 						<Button
 							isSmall
-							isPrimary={ spaceSize === 'xl' }
-							isSecondary={ spaceSize !== 'xl' }
-							onClick={ () =>
-								setAttributes( { spaceSize: 'xl' } )
-							}
-							style={ { padding: '0px 7px' } }
+							isPrimary={spaceSize === 'xl'}
+							isSecondary={spaceSize !== 'xl'}
+							onClick={() => setAttributes({ spaceSize: 'xl' })}
+							style={{ padding: '0px 7px' }}
 						>
-							{ __( 'XL', 'vk-blocks' ) }
+							{__('XL', 'vk-blocks')}
 						</Button>
 						<Button
 							isSmall
-							isPrimary={ spaceSize === 'xxl' }
-							isSecondary={ spaceSize !== 'xxl' }
-							onClick={ () =>
-								setAttributes( { spaceSize: 'xxl' } )
-							}
-							style={ { padding: '0px 7px' } }
+							isPrimary={spaceSize === 'xxl'}
+							isSecondary={spaceSize !== 'xxl'}
+							onClick={() => setAttributes({ spaceSize: 'xxl' })}
+							style={{ padding: '0px 7px' }}
 						>
-							{ __( 'XXL', 'vk-blocks' ) }
+							{__('XXL', 'vk-blocks')}
 						</Button>
 						<Button
 							isSmall
-							isPrimary={ spaceSize === 'custom' }
-							isSecondary={ spaceSize !== 'custom' }
-							onClick={ () =>
-								setAttributes( { spaceSize: 'custom' } )
+							isPrimary={spaceSize === 'custom'}
+							isSecondary={spaceSize !== 'custom'}
+							onClick={() =>
+								setAttributes({ spaceSize: 'custom' })
 							}
-							style={ { padding: '0px 7px' } }
+							style={{ padding: '0px 7px' }}
 						>
-							{ __( 'Custom', 'vk-blocks' ) }
+							{__('Custom', 'vk-blocks')}
 						</Button>
 					</ButtonGroup>
 					<p>
-						{ __(
+						{__(
 							'You can change each common margin size from Setting > VK Blocks',
 							'vk-blocks'
-						) }
+						)}
 					</p>
 					<AdvancedSpacerControl
-						attributes={ attributes }
-						setAttributes={ setAttributes }
-						className={ className }
+						attributes={attributes}
+						setAttributes={setAttributes}
+						className={className}
 					/>
-					{ numberSetting }
+					{numberSetting}
 				</PanelBody>
 			</InspectorControls>
 
-			<div { ...blockProps }>
+			<div {...blockProps}>
 				<Spacers
-					spaceSize={ spaceSize }
-					type={ spaceType }
-					pcSize={ pc }
-					tabletSize={ tablet }
-					mobileSize={ mobile }
-					unit={ unit }
+					spaceSize={spaceSize}
+					type={spaceType}
+					pcSize={pc}
+					tabletSize={tablet}
+					mobileSize={mobile}
+					unit={unit}
 				/>
 			</div>
 		</>

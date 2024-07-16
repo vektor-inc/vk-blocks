@@ -18,24 +18,24 @@ const BALLOON_DEFAULT_OBJ = {
 };
 
 export const AddButton = () => {
-	const { vkBlocksOption, setVkBlocksOption } = useContext( AdminContext );
+	const { vkBlocksOption, setVkBlocksOption } = useContext(AdminContext);
 	const addItem = () => {
-		vkBlocksOption.balloon_meta_lists.push( {
+		vkBlocksOption.balloon_meta_lists.push({
 			...BALLOON_DEFAULT_OBJ,
-		} );
-		setVkBlocksOption( { ...vkBlocksOption } );
+		});
+		setVkBlocksOption({ ...vkBlocksOption });
 	};
 
 	return (
 		<div className="balloon_image_lists_item_add">
 			<Button
 				className="add-item-button"
-				icon={ plusCircle }
-				iconSize={ 18 }
+				icon={plusCircle}
+				iconSize={18}
 				variant="secondary"
-				onClick={ addItem }
+				onClick={addItem}
 			>
-				{ __( 'Added balloon image setting', 'vk-blocks' ) }
+				{__('Added balloon image setting', 'vk-blocks')}
 			</Button>
 		</div>
 	);

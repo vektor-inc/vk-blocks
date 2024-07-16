@@ -18,19 +18,19 @@ import { useSelect, useDispatch } from '@wordpress/data';
 import { API_PATH, STORE_NAME } from '@vkblocks/utils/store/constants';
 import { AdminContext } from '@vkblocks/admin/index';
 
-export const SaveButton = ( props ) => {
-	const { vkBlocksOption, reloadFlag } = useContext( AdminContext );
+export const SaveButton = (props) => {
+	const { vkBlocksOption, reloadFlag } = useContext(AdminContext);
 	const { classOption, isChanged, setIsChanged } = props;
-	const [ isLoading, setIsLoading ] = useState( false );
-	const [ isSaveSuccess, setIsSaveSuccess ] = useState( '' );
-	const storeOptions = useSelect( ( select ) => {
-		const { getOptions } = select( STORE_NAME );
+	const [isLoading, setIsLoading] = useState(false);
+	const [isSaveSuccess, setIsSaveSuccess] = useState('');
+	const storeOptions = useSelect((select) => {
+		const { getOptions } = select(STORE_NAME);
 		return getOptions();
-	}, [] );
-	const { setOptions } = useDispatch( STORE_NAME );
+	}, []);
+	const { setOptions } = useDispatch(STORE_NAME);
 
 	const onClickUpdate = () => {
-		setIsLoading( true );
+		setIsLoading(true);
 
 		const newObj = {
 			...storeOptions,
@@ -38,57 +38,55 @@ export const SaveButton = ( props ) => {
 				...vkBlocksOption,
 			},
 		};
-		setOptions( newObj );
+		setOptions(newObj);
 
-		apiFetch( {
+		apiFetch({
 			path: API_PATH,
 			method: 'POST',
 			data: {
 				vkBlocksOption,
 			},
-		} ).then( ( /*response, status*/ ) => {
-			setTimeout( () => {
+		}).then((/*response, status*/) => {
+			setTimeout(() => {
 				// console.log(response);
 				// console.log(status);
-				setIsLoading( false );
-				setIsSaveSuccess( true );
-				setIsChanged( false );
-			}, 600 );
-			if ( reloadFlag === true ) {
+				setIsLoading(false);
+				setIsSaveSuccess(true);
+				setIsChanged(false);
+			}, 600);
+			if (reloadFlag === true) {
 				// eslint-disable-next-line no-undef
 				location.reload();
 			}
-		} );
+		});
 	};
 
 	// snackbar更新する
-	useEffect( () => {
-		if ( isSaveSuccess ) {
-			setTimeout( () => {
+	useEffect(() => {
+		if (isSaveSuccess) {
+			setTimeout(() => {
 				setIsSaveSuccess();
-			}, 3000 );
+			}, 3000);
 		}
-	}, [ isSaveSuccess ] );
+	}, [isSaveSuccess]);
 
 	return (
 		<>
-			<div className={ classNames( 'submit', classOption ) }>
+			<div className={classNames('submit', classOption)}>
 				<Button
 					className="update-button"
 					isPrimary
-					onClick={ onClickUpdate }
-					isBusy={ isLoading }
-					disabled={ ! isChanged }
+					onClick={onClickUpdate}
+					isBusy={isLoading}
+					disabled={!isChanged}
 				>
-					{ __( 'Save setting', 'vk-blocks' ) }
+					{__('Save setting', 'vk-blocks')}
 				</Button>
-				{ isSaveSuccess && (
+				{isSaveSuccess && (
 					<div>
-						<Snackbar>
-							{ __( 'Save Success', 'vk-blocks' ) }{ ' ' }
-						</Snackbar>
+						<Snackbar>{__('Save Success', 'vk-blocks')} </Snackbar>
 					</div>
-				) }
+				)}
 			</div>
 		</>
 	);

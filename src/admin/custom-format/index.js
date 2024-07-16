@@ -26,61 +26,58 @@ import { DeleteItemButton } from '@vkblocks/admin/custom-format/delete-item-butt
 import { CodeMirrorCss } from '@vkblocks/components/code-mirror-css';
 
 /*globals vkBlocksObject */
-const FONT_SIZES = [ ...vkBlocksObject.fontSizes ];
+const FONT_SIZES = [...vkBlocksObject.fontSizes];
 
 export default function AdminCustomFormat() {
-	const { vkBlocksOption, setVkBlocksOption } = useContext( AdminContext );
+	const { vkBlocksOption, setVkBlocksOption } = useContext(AdminContext);
 
-	const onChange = ( key, value, index ) => {
+	const onChange = (key, value, index) => {
 		const newItems = vkBlocksOption.custom_format_lists;
-		newItems[ index ] = {
-			...vkBlocksOption.custom_format_lists[ index ],
-			[ key ]: value,
+		newItems[index] = {
+			...vkBlocksOption.custom_format_lists[index],
+			[key]: value,
 		};
-		setVkBlocksOption( {
+		setVkBlocksOption({
 			...vkBlocksOption,
-			custom_format_lists: [ ...newItems ],
-		} );
+			custom_format_lists: [...newItems],
+		});
 	};
 
 	return (
 		<>
 			<section>
 				<h3 id="custom-format-setting">
-					{ __( 'Custom Format Setting', 'vk-blocks' ) }
+					{__('Custom Format Setting', 'vk-blocks')}
 				</h3>
 				<p>
-					{ __(
+					{__(
 						'You can apply commonly used formatting on the block toolbar.',
 						'vk-blocks'
-					) }
+					)}
 				</p>
-				{ Object.keys( vkBlocksOption.custom_format_lists ).map(
-					( key, index ) => {
+				{Object.keys(vkBlocksOption.custom_format_lists).map(
+					(key, index) => {
 						const textStyleListObj =
-							vkBlocksOption.custom_format_lists[ key ];
+							vkBlocksOption.custom_format_lists[key];
 						return (
-							<div className="custom_format_item" key={ index }>
+							<div className="custom_format_item" key={index}>
 								<TextStylePreview
-									textStyleListObj={ textStyleListObj }
+									textStyleListObj={textStyleListObj}
 								/>
 								<div className="custom_format_item_control">
 									<PanelBody
-										title={ __(
-											'Custom Format',
-											'vk-blocks'
-										) }
+										title={__('Custom Format', 'vk-blocks')}
 									>
 										<BaseControl id="custom-format">
 											<TextControl
 												className="custom_format_item_name"
-												name={ `vk_blocks_options[custom_format_lists][${ index }][title]` }
-												id={ `vk_blocks_custom_format_${ index }_title` }
-												label={ __(
+												name={`vk_blocks_options[custom_format_lists][${index}][title]`}
+												id={`vk_blocks_custom_format_${index}_title`}
+												label={__(
 													'Toolbar title',
 													'vk-blocks'
-												) }
-												onChange={ ( value ) =>
+												)}
+												onChange={(value) =>
 													onChange(
 														'title',
 														value,
@@ -91,16 +88,16 @@ export default function AdminCustomFormat() {
 													textStyleListObj.title ?? ''
 												}
 											/>
-											{ ! textStyleListObj.title && (
+											{!textStyleListObj.title && (
 												<p className="custom_format_item_name_warning">
-													{ __(
+													{__(
 														'※ Required If no title is entered, it will not appear on the toolbar.',
 														'vk-blocks'
-													) }
+													)}
 												</p>
-											) }
+											)}
 											<DeleteItemButton
-												index={ index }
+												index={index}
 												textStyleListObj={
 													textStyleListObj
 												}
@@ -108,23 +105,20 @@ export default function AdminCustomFormat() {
 										</BaseControl>
 									</PanelBody>
 									<PanelBody
-										title={ __(
+										title={__(
 											'Format Setting',
 											'vk-blocks'
-										) }
-										initialOpen={ false }
+										)}
+										initialOpen={false}
 									>
 										<BaseControl id="format-setting">
 											<CheckboxControl
-												name={ `vk_blocks_options[custom_format_lists][${ index }][font_weight_bold]` }
-												label={ __(
-													'Bold',
-													'vk-blocks'
-												) }
+												name={`vk_blocks_options[custom_format_lists][${index}][font_weight_bold]`}
+												label={__('Bold', 'vk-blocks')}
 												checked={
 													textStyleListObj.font_weight_bold
 												}
-												onChange={ ( value ) =>
+												onChange={(value) =>
 													onChange(
 														'font_weight_bold',
 														value,
@@ -133,15 +127,15 @@ export default function AdminCustomFormat() {
 												}
 											/>
 											<CheckboxControl
-												name={ `vk_blocks_options[custom_format_lists][${ index }][font_italic]` }
-												label={ __(
+												name={`vk_blocks_options[custom_format_lists][${index}][font_italic]`}
+												label={__(
 													'Italic',
 													'vk-blocks'
-												) }
+												)}
 												checked={
 													textStyleListObj.font_italic
 												}
-												onChange={ ( value ) =>
+												onChange={(value) =>
 													onChange(
 														'font_italic',
 														value,
@@ -150,15 +144,15 @@ export default function AdminCustomFormat() {
 												}
 											/>
 											<CheckboxControl
-												name={ `vk_blocks_options[custom_format_lists][${ index }][font_strikethrough]` }
-												label={ __(
+												name={`vk_blocks_options[custom_format_lists][${index}][font_strikethrough]`}
+												label={__(
 													'Strikethrough',
 													'vk-blocks'
-												) }
+												)}
 												checked={
 													textStyleListObj.font_strikethrough
 												}
-												onChange={ ( value ) =>
+												onChange={(value) =>
 													onChange(
 														'font_strikethrough',
 														value,
@@ -167,15 +161,15 @@ export default function AdminCustomFormat() {
 												}
 											/>
 											<CheckboxControl
-												name={ `vk_blocks_options[custom_format_lists][${ index }][nowrap]` }
-												label={ __(
+												name={`vk_blocks_options[custom_format_lists][${index}][nowrap]`}
+												label={__(
 													'Nowrap',
 													'vk-blocks'
-												) }
+												)}
 												checked={
 													textStyleListObj.nowrap
 												}
-												onChange={ ( value ) =>
+												onChange={(value) =>
 													onChange(
 														'nowrap',
 														value,
@@ -185,8 +179,8 @@ export default function AdminCustomFormat() {
 											/>
 											<FontSizePicker
 												__nextHasNoMarginBottom
-												fontSizes={ FONT_SIZES }
-												onChange={ ( value ) =>
+												fontSizes={FONT_SIZES}
+												onChange={(value) =>
 													onChange(
 														'font_size',
 														value,
@@ -200,23 +194,23 @@ export default function AdminCustomFormat() {
 										</BaseControl>
 									</PanelBody>
 									<PanelBody
-										title={ __( 'Color', 'vk-blocks' ) }
-										initialOpen={ false }
+										title={__('Color', 'vk-blocks')}
+										initialOpen={false}
 									>
 										<BaseControl
 											id="text-color"
-											label={ __(
+											label={__(
 												'Text Color',
 												'vk-blocks'
-											) }
+											)}
 										>
 											<ColorPalette
 												clearable
-												colors={ vkColorPalette }
-												value={ colorSlugToColorCode(
+												colors={vkColorPalette}
+												value={colorSlugToColorCode(
 													textStyleListObj.color
-												) }
-												onChange={ ( value ) => {
+												)}
+												onChange={(value) => {
 													const ColorValue =
 														getColorObjectByColorValue(
 															vkColorPalette,
@@ -231,23 +225,23 @@ export default function AdminCustomFormat() {
 														newValue,
 														index
 													);
-												} }
+												}}
 											/>
 										</BaseControl>
 										<BaseControl
 											id="background-color"
-											label={ __(
+											label={__(
 												'Background Color',
 												'vk-blocks'
-											) }
+											)}
 										>
 											<ColorPalette
 												clearable
-												colors={ vkColorPalette }
-												value={ colorSlugToColorCode(
+												colors={vkColorPalette}
+												value={colorSlugToColorCode(
 													textStyleListObj.background_color
-												) }
-												onChange={ ( value ) => {
+												)}
+												onChange={(value) => {
 													const ColorValue =
 														getColorObjectByColorValue(
 															vkColorPalette,
@@ -262,27 +256,27 @@ export default function AdminCustomFormat() {
 														newValue,
 														index
 													);
-												} }
+												}}
 											/>
 										</BaseControl>
 										<BaseControl
 											id="highlighter"
-											label={ __(
+											label={__(
 												'Highlighter Color',
 												'vk-blocks'
-											) }
+											)}
 										>
 											<ToggleControl
-												name={ `vk_blocks_options[custom_format_lists][${ index }][is_active_highlighter]` }
-												id={ `vk_blocks_custom_format_lists_${ index }_is_active_highlighter` }
-												label={ __(
+												name={`vk_blocks_options[custom_format_lists][${index}][is_active_highlighter]`}
+												id={`vk_blocks_custom_format_lists_${index}_is_active_highlighter`}
+												label={__(
 													'Activate Highlighter',
 													'vk-blocks'
-												) }
+												)}
 												checked={
 													textStyleListObj.is_active_highlighter
 												}
-												onChange={ ( value ) =>
+												onChange={(value) =>
 													onChange(
 														'is_active_highlighter',
 														value,
@@ -290,10 +284,10 @@ export default function AdminCustomFormat() {
 													)
 												}
 											/>
-											{ textStyleListObj.is_active_highlighter && (
+											{textStyleListObj.is_active_highlighter && (
 												<ColorPalette
-													colors={ vkColorPalette }
-													onChange={ ( value ) => {
+													colors={vkColorPalette}
+													onChange={(value) => {
 														// clearボタンを押した時
 														if (
 															value === undefined
@@ -306,28 +300,21 @@ export default function AdminCustomFormat() {
 															value,
 															index
 														);
-													} }
+													}}
 													value={
 														textStyleListObj.highlighter
 													}
 												/>
-											) }
+											)}
 										</BaseControl>
 									</PanelBody>
 									<PanelBody
-										title={ __(
-											'Custom CSS',
-											'vk-blocks'
-										) }
-										initialOpen={ false }
+										title={__('Custom CSS', 'vk-blocks')}
+										initialOpen={false}
 									>
 										<BaseControl id="class-name-setting">
 											<span>
-												{ __(
-													'CSS class',
-													'vk-blocks'
-												) }
-												:
+												{__('CSS class', 'vk-blocks')}:
 												<code>
 													.
 													{
@@ -342,7 +329,7 @@ export default function AdminCustomFormat() {
 														? textStyleListObj.custom_css
 														: ''
 												}
-												onChange={ ( value ) =>
+												onChange={(value) =>
 													onChange(
 														'custom_css',
 														value,
@@ -351,7 +338,7 @@ export default function AdminCustomFormat() {
 												}
 											/>
 											<p>
-												{ createInterpolateElement(
+												{createInterpolateElement(
 													sprintf(
 														/* translators: If selector is specified, it will be replaced by a unique CSS class (<code>.%s</code>); CSS selectors other than selector may affect the entire page. */
 														__(
@@ -363,22 +350,17 @@ export default function AdminCustomFormat() {
 													{
 														code: <code />,
 													}
-												) }
+												)}
 											</p>
-											<p>
-												{ __(
-													'Example:',
-													'vk-blocks'
-												) }
-											</p>
+											<p>{__('Example:', 'vk-blocks')}</p>
 											<pre
 												className="vk-custom-css-sample-code"
-												style={ {
+												style={{
 													whiteSpace: 'pre-wrap',
 													padding: '16px',
 													display: 'block',
 													background: '#f5f5f5',
-												} }
+												}}
 											>
 												{
 													'selector {\n    background: #f5f5f5;\n}'
@@ -390,7 +372,7 @@ export default function AdminCustomFormat() {
 							</div>
 						);
 					}
-				) }
+				)}
 				<AddItemButton />
 			</section>
 		</>

@@ -15,45 +15,45 @@ import { Popover } from '@wordpress/components';
  */
 import { highlighColor as settings, highlighterOnApply } from './index';
 
-export function getActiveColors( value, name ) {
-	const activeColorFormat = getActiveFormat( value, name );
+export function getActiveColors(value, name) {
+	const activeColorFormat = getActiveFormat(value, name);
 
-	if ( ! activeColorFormat ) {
+	if (!activeColorFormat) {
 		return undefined;
 	}
 
 	return activeColorFormat.attributes.data;
 }
 
-function ColorPicker( { name, value, onChange, setIsAddingColor } ) {
-	const onColorChange = ( color ) => {
-		if ( color ) {
+function ColorPicker({ name, value, onChange, setIsAddingColor }) {
+	const onColorChange = (color) => {
+		if (color) {
 			// select color on palette
-			highlighterOnApply( {
+			highlighterOnApply({
 				color,
 				value,
 				onChange,
-			} );
+			});
 		} else {
 			// clear palette
-			onChange( removeFormat( value, name ) );
-			setIsAddingColor( false );
+			onChange(removeFormat(value, name));
+			setIsAddingColor(false);
 		}
 	};
 
-	const activeColor = getActiveColors( value, name );
+	const activeColor = getActiveColors(value, name);
 
-	return <ColorPalette value={ activeColor } onChange={ onColorChange } />;
+	return <ColorPalette value={activeColor} onChange={onColorChange} />;
 }
 
-export default function InlineColorUI( {
+export default function InlineColorUI({
 	name,
 	value,
 	onChange,
 	onClose,
 	contentRef,
 	setIsAddingColor,
-} ) {
+}) {
 	/*
 		As you change the text color by typing a HEX value into a field,
 		the return value of document.getSelection jumps to the field you're editing,
@@ -68,19 +68,19 @@ export default function InlineColorUI( {
 	const useAnchorObj = existsUseAnchor
 		? { editableContentElement: contentRef.current, value, settings }
 		: { ref: contentRef, value };
-	const popoverAnchor = useCachedTruthy( _useAnchor( useAnchorObj ) );
+	const popoverAnchor = useCachedTruthy(_useAnchor(useAnchorObj));
 
 	return (
 		<Popover
-			onClose={ onClose }
+			onClose={onClose}
 			className="vk-blocks-format-popover components-inline-color-popover"
-			anchor={ popoverAnchor }
+			anchor={popoverAnchor}
 		>
 			<ColorPicker
-				name={ name }
-				value={ value }
-				onChange={ onChange }
-				setIsAddingColor={ setIsAddingColor }
+				name={name}
+				value={value}
+				onChange={onChange}
+				setIsAddingColor={setIsAddingColor}
 			/>
 		</Popover>
 	);

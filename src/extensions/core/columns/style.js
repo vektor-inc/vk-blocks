@@ -14,13 +14,13 @@ import classnames from 'classnames';
  */
 import { ReactComponent as IconSVG } from './icon.svg';
 
-const isValidBlockType = ( name ) => {
-	const validBlockTypes = [ 'core/columns' ];
-	return validBlockTypes.includes( name );
+const isValidBlockType = (name) => {
+	const validBlockTypes = ['core/columns'];
+	return validBlockTypes.includes(name);
 };
 
-export const addAttribute = ( settings ) => {
-	if ( isValidBlockType( settings.name ) ) {
+export const addAttribute = (settings) => {
+	if (isValidBlockType(settings.name)) {
 		settings.attributes = {
 			...settings.attributes,
 			reverse: {
@@ -30,15 +30,11 @@ export const addAttribute = ( settings ) => {
 	}
 	return settings;
 };
-addFilter(
-	'blocks.registerBlockType',
-	'vk-blocks/columns-style',
-	addAttribute
-);
+addFilter('blocks.registerBlockType', 'vk-blocks/columns-style', addAttribute);
 
-export const addBlockControl = createHigherOrderComponent( ( BlockEdit ) => {
-	return ( props ) => {
-		if ( isValidBlockType( props.name ) && props.isSelected ) {
+export const addBlockControl = createHigherOrderComponent((BlockEdit) => {
+	return (props) => {
+		if (isValidBlockType(props.name) && props.isSelected) {
 			const { attributes, setAttributes } = props;
 			const { reverse, className } = attributes;
 
@@ -48,7 +44,7 @@ export const addBlockControl = createHigherOrderComponent( ( BlockEdit ) => {
 				height: '24px',
 			};
 
-			if ( reverse ) {
+			if (reverse) {
 				iconStyle = {
 					...iconStyle,
 					color: '#fff',
@@ -58,29 +54,27 @@ export const addBlockControl = createHigherOrderComponent( ( BlockEdit ) => {
 
 			return (
 				<>
-					<BlockEdit { ...props } />
+					<BlockEdit {...props} />
 					<InspectorControls>
 						<PanelBody
-							title={ __( 'Column Direction', 'vk-blocks' ) }
-							icon={
-								<Icon icon={ IconSVG } style={ iconStyle } />
-							}
-							initialOpen={ false }
+							title={__('Column Direction', 'vk-blocks')}
+							icon={<Icon icon={IconSVG} style={iconStyle} />}
+							initialOpen={false}
 						>
 							<ToggleControl
-								label={ __( 'Reverse', 'vk-blocks' ) }
-								checked={ reverse }
-								onChange={ ( checked ) => {
+								label={__('Reverse', 'vk-blocks')}
+								checked={reverse}
+								onChange={(checked) => {
 									// 既存のクラス名
 									const existClass = className
-										? className.split( ' ' )
+										? className.split(' ')
 										: [];
 									let newClassNameArray = [];
-									if ( existClass ) {
+									if (existClass) {
 										// いったん削除
 										newClassNameArray = existClass.filter(
-											( item ) => {
-												return ! item.match(
+											(item) => {
+												return !item.match(
 													/is-vk-row-reverse/
 												);
 											}
@@ -98,11 +92,11 @@ export const addBlockControl = createHigherOrderComponent( ( BlockEdit ) => {
 										rereverseClass
 									);
 
-									setAttributes( {
+									setAttributes({
 										className: newClassNameArray,
 										reverse: checked,
-									} );
-								} }
+									});
+								}}
 							/>
 						</PanelBody>
 					</InspectorControls>
@@ -110,7 +104,7 @@ export const addBlockControl = createHigherOrderComponent( ( BlockEdit ) => {
 			);
 		}
 
-		return <BlockEdit { ...props } />;
+		return <BlockEdit {...props} />;
 	};
-}, 'addMyCustomBlockControls' );
-addFilter( 'editor.BlockEdit', 'vk-blocks/columns-style', addBlockControl );
+}, 'addMyCustomBlockControls');
+addFilter('editor.BlockEdit', 'vk-blocks/columns-style', addBlockControl);

@@ -22,47 +22,47 @@ import { AdminContext } from '@vkblocks/admin/index';
 import { importOptions, readFile } from './import';
 import { OPTION_DEFAULT_SETTINGS } from './index';
 
-export default function ImportForm( props ) {
+export default function ImportForm(props) {
 	const { setIsChanged } = props;
-	const { vkBlocksOption, setVkBlocksOption } = useContext( AdminContext );
-	const [ isModalOpen, setIsModalOpen ] = useState( false );
-	const [ isImportSuccess, setIsImportSuccess ] = useState( false );
-	const [ error, setError ] = useState( null );
-	const [ file, setFile ] = useState( null );
-	const [ uploadedVkBlocksOptions, setUploadedVkBlocksOptions ] =
-		useState( null );
-	const [ importSettings, setImportSettings ] = useState(
+	const { vkBlocksOption, setVkBlocksOption } = useContext(AdminContext);
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [isImportSuccess, setIsImportSuccess] = useState(false);
+	const [error, setError] = useState(null);
+	const [file, setFile] = useState(null);
+	const [uploadedVkBlocksOptions, setUploadedVkBlocksOptions] =
+		useState(null);
+	const [importSettings, setImportSettings] = useState(
 		OPTION_DEFAULT_SETTINGS
 	);
 
 	const openModal = () => {
-		readFile( file )
-			.then( ( uploadedOption ) => {
-				setUploadedVkBlocksOptions( uploadedOption.vkBlocksOptions );
-				setIsModalOpen( true );
-			} )
-			.catch( ( errors ) => {
+		readFile(file)
+			.then((uploadedOption) => {
+				setUploadedVkBlocksOptions(uploadedOption.vkBlocksOptions);
+				setIsModalOpen(true);
+			})
+			.catch((errors) => {
 				let uiMessage;
-				switch ( errors.message ) {
+				switch (errors.message) {
 					case 'Invalid JSON file':
-						uiMessage = __( 'Invalid JSON file', 'vk-blocks' );
+						uiMessage = __('Invalid JSON file', 'vk-blocks');
 						break;
 					default:
-						uiMessage = __( 'Unknown error', 'vk-blocks' );
+						uiMessage = __('Unknown error', 'vk-blocks');
 				}
-				setError( uiMessage );
-			} );
+				setError(uiMessage);
+			});
 	};
 
 	const closeModal = () => {
-		setUploadedVkBlocksOptions( null );
-		setImportSettings( OPTION_DEFAULT_SETTINGS );
-		setIsModalOpen( false );
+		setUploadedVkBlocksOptions(null);
+		setImportSettings(OPTION_DEFAULT_SETTINGS);
+		setIsModalOpen(false);
 	};
 
-	const onChangeFile = ( event ) => {
-		setFile( event.target.files[ 0 ] );
-		setError( null );
+	const onChangeFile = (event) => {
+		setFile(event.target.files[0]);
+		setError(null);
 	};
 
 	const getUpdateVkBlocksOptions = (
@@ -78,34 +78,34 @@ export default function ImportForm( props ) {
 			comparisonKey
 		) => {
 			const uniqueOptions = uploadedOptions.filter(
-				( newOption ) =>
-					! currentOptions.some( ( existingOption ) =>
+				(newOption) =>
+					!currentOptions.some((existingOption) =>
 						comparisonKey
-							? newOption[ comparisonKey ] ===
-							  existingOption[ comparisonKey ]
+							? newOption[comparisonKey] ===
+								existingOption[comparisonKey]
 							: newOption === existingOption
 					)
 			);
-			currentOptions.push( ...uniqueOptions );
+			currentOptions.push(...uniqueOptions);
 		};
 
-		_importSettings.forEach( ( { options, isImport, isShow = true } ) => {
+		_importSettings.forEach(({ options, isImport, isShow = true }) => {
 			options.forEach(
-				( { name, associativeArray, importMethod, uniqKey }, id ) => {
-					if ( ! isImport || ! isShow ) {
-						delete _uploadedVkBlocksOptions[ name ];
+				({ name, associativeArray, importMethod, uniqKey }, id) => {
+					if (!isImport || !isShow) {
+						delete _uploadedVkBlocksOptions[name];
 						return;
 					}
 
-					const currentOptions = updateVkBlocksOptions[ name ];
-					const uploadedOptions = _uploadedVkBlocksOptions[ name ];
+					const currentOptions = updateVkBlocksOptions[name];
+					const uploadedOptions = _uploadedVkBlocksOptions[name];
 
-					if ( importMethod === 'add' && currentOptions ) {
+					if (importMethod === 'add' && currentOptions) {
 						const comparisonKey =
 							uniqKey && associativeArray ? uniqKey : null;
 						if (
-							'associativeArray' in options[ id ] ||
-							'indexedArray' in options[ id ]
+							'associativeArray' in options[id] ||
+							'indexedArray' in options[id]
 						) {
 							addUniqueOptions(
 								currentOptions,
@@ -113,21 +113,21 @@ export default function ImportForm( props ) {
 								comparisonKey
 							);
 						} else {
-							currentOptions.push( ...uploadedOptions );
+							currentOptions.push(...uploadedOptions);
 						}
-						updateVkBlocksOptions[ name ] = currentOptions;
+						updateVkBlocksOptions[name] = currentOptions;
 					} else {
-						updateVkBlocksOptions[ name ] = uploadedOptions;
+						updateVkBlocksOptions[name] = uploadedOptions;
 					}
 				}
 			);
-		} );
+		});
 		return updateVkBlocksOptions;
 	};
 
-	const onSubmit = ( event ) => {
+	const onSubmit = (event) => {
 		event.preventDefault();
-		if ( ! uploadedVkBlocksOptions ) {
+		if (!uploadedVkBlocksOptions) {
 			return;
 		}
 		// アップデートするオプション値updateOptionを作る
@@ -136,138 +136,137 @@ export default function ImportForm( props ) {
 			vkBlocksOption,
 			importSettings
 		);
-		importOptions( updateVkBlocksOptions )
-			.then( ( importResponse ) => {
+		importOptions(updateVkBlocksOptions)
+			.then((importResponse) => {
 				closeModal();
-				setIsImportSuccess( true );
-				setFile( null );
-				setVkBlocksOption( {
+				setIsImportSuccess(true);
+				setFile(null);
+				setVkBlocksOption({
 					...vkBlocksOption,
 					...importResponse.updateOption,
-				} );
-				setIsChanged( false );
-			} )
-			.catch( ( errors ) => {
+				});
+				setIsChanged(false);
+			})
+			.catch((errors) => {
 				let uiMessage;
-				switch ( errors.message ) {
+				switch (errors.message) {
 					case 'Invalid JSON file':
-						uiMessage = __( 'Invalid JSON file', 'vk-blocks' );
+						uiMessage = __('Invalid JSON file', 'vk-blocks');
 						break;
 					default:
-						uiMessage = __( 'Unknown error', 'vk-blocks' );
+						uiMessage = __('Unknown error', 'vk-blocks');
 				}
-				setError( uiMessage );
-			} );
+				setError(uiMessage);
+			});
 	};
 
-	useEffect( () => {
-		if ( isImportSuccess ) {
-			setTimeout( () => {
-				setIsImportSuccess( false );
-			}, 3000 );
+	useEffect(() => {
+		if (isImportSuccess) {
+			setTimeout(() => {
+				setIsImportSuccess(false);
+			}, 3000);
 		}
-	}, [ isImportSuccess ] );
+	}, [isImportSuccess]);
 
 	// uploadedOptionからインポートするオプションが存在するか確認
-	useEffect( () => {
-		if ( uploadedVkBlocksOptions ) {
-			const copyObj = JSON.parse( JSON.stringify( importSettings ) );
-			Object.keys( OPTION_DEFAULT_SETTINGS ).forEach( ( key, index ) => {
-				const { options } = importSettings[ key ];
+	useEffect(() => {
+		if (uploadedVkBlocksOptions) {
+			const copyObj = JSON.parse(JSON.stringify(importSettings));
+			Object.keys(OPTION_DEFAULT_SETTINGS).forEach((key, index) => {
+				const { options } = importSettings[key];
 				const isFind = options.find(
-					( option ) =>
+					(option) =>
 						uploadedVkBlocksOptions &&
 						option.name in uploadedVkBlocksOptions
 				);
-				if ( ! isFind ) {
-					copyObj[ index ].isImport = false;
-					setImportSettings( copyObj );
+				if (!isFind) {
+					copyObj[index].isImport = false;
+					setImportSettings(copyObj);
 				}
-			} );
+			});
 		}
-	}, [ uploadedVkBlocksOptions ] );
+	}, [uploadedVkBlocksOptions]);
 
 	const onDismissError = () => {
-		setError( null );
+		setError(null);
 	};
 
 	return (
 		<div>
-			<h4>{ __( 'Import', 'vk-blocks' ) }</h4>
-			{ error && (
-				<Notice status="error" onRemove={ () => onDismissError() }>
-					{ error }
+			<h4>{__('Import', 'vk-blocks')}</h4>
+			{error && (
+				<Notice status="error" onRemove={() => onDismissError()}>
+					{error}
 				</Notice>
-			) }
+			)}
 			<div>
 				<input
 					type="file"
 					accept="application/json"
-					onChange={ onChangeFile }
+					onChange={onChangeFile}
 				/>
 			</div>
 			<div className="submit">
 				<Button
-					onClick={ openModal }
+					onClick={openModal}
 					variant="primary"
-					icon={ upload }
-					disabled={ ! file ? true : false }
+					icon={upload}
+					disabled={!file ? true : false}
 				>
-					{ __( 'Import', 'vk-blocks' ) }
+					{__('Import', 'vk-blocks')}
 				</Button>
 			</div>
-			{ isModalOpen && (
+			{isModalOpen && (
 				<Modal
-					title={ __( 'Import data confirmation', 'vk-blocks' ) }
-					onRequestClose={ closeModal }
-					isDismissible={ false }
+					title={__('Import data confirmation', 'vk-blocks')}
+					onRequestClose={closeModal}
+					isDismissible={false}
 					className="import_export_add_modal"
-					isFullScreen={ true }
+					isFullScreen={true}
 				>
-					{ ! importSettings.some(
-						( list ) => list.isImport === true
-					) && <p>{ __( 'No import data', 'vk-blocks' ) }</p> }
-					{ OPTION_DEFAULT_SETTINGS.map(
-						( { groupTitle, options, isShow = true }, index ) => {
+					{!importSettings.some((list) => list.isImport === true) && (
+						<p>{__('No import data', 'vk-blocks')}</p>
+					)}
+					{OPTION_DEFAULT_SETTINGS.map(
+						({ groupTitle, options, isShow = true }, index) => {
 							const isFind = options.find(
-								( option ) =>
+								(option) =>
 									uploadedVkBlocksOptions &&
 									option.name in uploadedVkBlocksOptions
 							);
-							const checked = importSettings[ index ].isImport;
-							const handleToggle = ( value ) => {
+							const checked = importSettings[index].isImport;
+							const handleToggle = (value) => {
 								const copyObj = JSON.parse(
-									JSON.stringify( importSettings )
+									JSON.stringify(importSettings)
 								);
-								copyObj[ index ].isImport = value;
-								setImportSettings( copyObj );
+								copyObj[index].isImport = value;
+								setImportSettings(copyObj);
 							};
-							const onChangeIsOverride = ( value, id ) => {
+							const onChangeIsOverride = (value, id) => {
 								const copyObj = JSON.parse(
-									JSON.stringify( importSettings )
+									JSON.stringify(importSettings)
 								);
-								copyObj[ index ].options[ id ].importMethod =
-									value;
-								setImportSettings( copyObj );
+								copyObj[index].options[id].importMethod = value;
+								setImportSettings(copyObj);
 							};
 							return (
 								isShow &&
 								isFind && (
 									<div
-										key={ index }
+										key={index}
 										className="import_export_section"
 									>
 										<CheckboxControl
-											key={ index }
-											label={ sprintf(
+											key={index}
+											label={sprintf(
 												// translators: Import %s
-												__( 'Import %s', 'vk-blocks' ),
+												__('Import %s', 'vk-blocks'),
 												groupTitle
-											) }
-											checked={ checked }
-											onChange={ handleToggle }
+											)}
+											checked={checked}
+											onChange={handleToggle}
 										/>
-										{ options.map(
+										{options.map(
 											(
 												{
 													name,
@@ -281,23 +280,23 @@ export default function ImportForm( props ) {
 												uniqKey &&
 												importMethod && (
 													<div
-														key={ id }
+														key={id}
 														className="import_export_detail_area"
 													>
 														<RadioControl
-															label={ __(
+															label={__(
 																'Import method',
 																'vk-blocks'
-															) }
-															onChange={ (
+															)}
+															onChange={(
 																value
 															) => {
 																onChangeIsOverride(
 																	value,
 																	id
 																);
-															} }
-															options={ [
+															}}
+															options={[
 																{
 																	label: __(
 																		'Add',
@@ -312,196 +311,184 @@ export default function ImportForm( props ) {
 																	),
 																	value: 'override',
 																},
-															] }
+															]}
 															selected={
 																importSettings[
 																	index
-																].options[ id ]
+																].options[id]
 																	.importMethod
 															}
 														/>
-														{ importSettings[
-															index
-														].options[ id ]
+														{importSettings[index]
+															.options[id]
 															.importMethod ===
 															'add' &&
 															'associativeArray' in
-																options[ id ] &&
+																options[id] &&
 															vkBlocksOption[
 																name
-															].some(
-																( preKey ) =>
-																	uploadedVkBlocksOptions[
-																		name
-																	].some(
-																		(
-																			uploadKey
-																		) =>
+															].some((preKey) =>
+																uploadedVkBlocksOptions[
+																	name
+																].some(
+																	(
+																		uploadKey
+																	) =>
+																		uploadKey[
+																			associativeArray
+																		] ===
+																		preKey[
+																			associativeArray
+																		]
+																)
+															) && (
+																<p>
+																	{__(
+																		'The following data will not be imported because the identifiers are covered.',
+																		'vk-blocks'
+																	)}
+																</p>
+															)}
+														{importSettings[index]
+															.options[id]
+															.importMethod ===
+															'add' &&
+															'associativeArray' in
+																options[id] &&
+															vkBlocksOption[
+																name
+															].map((preKey) => {
+																return uploadedVkBlocksOptions[
+																	name
+																].map(
+																	(
+																		uploadKey,
+																		uploadId
+																	) => {
+																		return (
 																			uploadKey[
-																				associativeArray
+																				uniqKey
 																			] ===
-																			preKey[
-																				associativeArray
-																			]
-																	)
-															) && (
-																<p>
-																	{ __(
-																		'The following data will not be imported because the identifiers are covered.',
-																		'vk-blocks'
-																	) }
-																</p>
-															) }
-														{ importSettings[
-															index
-														].options[ id ]
-															.importMethod ===
-															'add' &&
-															'associativeArray' in
-																options[ id ] &&
-															vkBlocksOption[
-																name
-															].map(
-																( preKey ) => {
-																	return uploadedVkBlocksOptions[
-																		name
-																	].map(
-																		(
-																			uploadKey,
-																			uploadId
-																		) => {
-																			return (
-																				uploadKey[
+																				preKey[
 																					uniqKey
-																				] ===
-																					preKey[
-																						uniqKey
-																					] && (
-																					<div
-																						key={
-																							uploadId
-																						}
-																					>
-																						{
-																							uploadKey[
-																								uniqKey
-																							]
-																						}
-																					</div>
-																				)
-																			);
-																		}
-																	);
-																}
-															) }
-														{ importSettings[
-															index
-														].options[ id ]
+																				] && (
+																				<div
+																					key={
+																						uploadId
+																					}
+																				>
+																					{
+																						uploadKey[
+																							uniqKey
+																						]
+																					}
+																				</div>
+																			)
+																		);
+																	}
+																);
+															})}
+														{importSettings[index]
+															.options[id]
 															.importMethod ===
 															'add' &&
 															'indexedArray' in
-																options[ id ] &&
+																options[id] &&
 															vkBlocksOption[
 																name
-															].some(
-																( preKey ) =>
-																	uploadedVkBlocksOptions[
-																		name
-																	].some(
-																		(
-																			uploadKey
-																		) =>
-																			uploadKey ===
-																			preKey
-																	)
+															].some((preKey) =>
+																uploadedVkBlocksOptions[
+																	name
+																].some(
+																	(
+																		uploadKey
+																	) =>
+																		uploadKey ===
+																		preKey
+																)
 															) && (
 																<p>
-																	{ __(
+																	{__(
 																		'The following data will not be imported because the identifiers are covered.',
 																		'vk-blocks'
-																	) }
+																	)}
 																</p>
-															) }
-														{ importSettings[
-															index
-														].options[ id ]
+															)}
+														{importSettings[index]
+															.options[id]
 															.importMethod ===
 															'add' &&
 															'indexedArray' in
-																options[ id ] &&
+																options[id] &&
 															vkBlocksOption[
 																name
-															].map(
-																( preKey ) => {
-																	return uploadedVkBlocksOptions[
-																		name
-																	].map(
-																		(
-																			uploadKey,
-																			uploadId
-																		) => {
-																			return (
-																				uploadKey ===
-																					preKey && (
-																					<div
-																						key={
-																							uploadId
-																						}
-																					>
-																						{
-																							uploadKey
-																						}
-																					</div>
-																				)
-																			);
-																		}
-																	);
-																}
-															) }
+															].map((preKey) => {
+																return uploadedVkBlocksOptions[
+																	name
+																].map(
+																	(
+																		uploadKey,
+																		uploadId
+																	) => {
+																		return (
+																			uploadKey ===
+																				preKey && (
+																				<div
+																					key={
+																						uploadId
+																					}
+																				>
+																					{
+																						uploadKey
+																					}
+																				</div>
+																			)
+																		);
+																	}
+																);
+															})}
 													</div>
 												)
-										) }
+										)}
 									</div>
 								)
 							);
 						}
-					) }
+					)}
 					<div className="import_export_add_modal_button_area">
 						<Flex justify="flex-end">
 							<FlexItem>
 								<Button
 									variant="secondary"
-									onClick={ closeModal }
+									onClick={closeModal}
 								>
-									{ __( 'Cancel', 'vk-blocks' ) }
+									{__('Cancel', 'vk-blocks')}
 								</Button>
 							</FlexItem>
 							<FlexItem>
 								<Button
-									onClick={ ( event ) => {
-										onSubmit( event );
-									} }
+									onClick={(event) => {
+										onSubmit(event);
+									}}
 									variant="primary"
 									disabled={
-										! importSettings.some(
-											( list ) => !! list.isImport
+										!importSettings.some(
+											(list) => !!list.isImport
 										)
 									}
 								>
-									{ __( 'Import', 'vk-blocks' ) }
+									{__('Import', 'vk-blocks')}
 								</Button>
 							</FlexItem>
 						</Flex>
 					</div>
 				</Modal>
-			) }
-			{ isImportSuccess && (
+			)}
+			{isImportSuccess && (
 				<div>
-					<Snackbar>
-						{ __( 'Import Success', 'vk-blocks' ) }{ ' ' }
-					</Snackbar>
+					<Snackbar>{__('Import Success', 'vk-blocks')} </Snackbar>
 				</div>
-			) }
+			)}
 		</div>
 	);
 }

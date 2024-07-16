@@ -20,51 +20,46 @@ import { inlineFontSize as settings } from './index';
 
 const fontSizes = [
 	{
-		name: __( 'Small', 'vk-blocks' ),
+		name: __('Small', 'vk-blocks'),
 		slug: 'small',
 		size: '12px',
 	},
 	{
-		name: __( 'Normal', 'vk-blocks' ),
+		name: __('Normal', 'vk-blocks'),
 		slug: 'normal',
 		size: '16px',
 	},
 	{
-		name: __( 'Big', 'vk-blocks' ),
+		name: __('Big', 'vk-blocks'),
 		slug: 'big',
 		size: '18px',
 	},
 	{
-		name: __( 'Extra big', 'vk-blocks' ),
+		name: __('Extra big', 'vk-blocks'),
 		slug: 'extra-big',
 		size: '21px',
 	},
 ];
 
-function parseFontSize( fontSize = '' ) {
-	return fontSize.replace( 'font-size:', '' );
+function parseFontSize(fontSize = '') {
+	return fontSize.replace('font-size:', '');
 }
 
-export function getActiveInlineFontSize( value, name ) {
-	const activeInlineFontSizeFormat = getActiveFormat( value, name );
+export function getActiveInlineFontSize(value, name) {
+	const activeInlineFontSizeFormat = getActiveFormat(value, name);
 
-	if ( ! activeInlineFontSizeFormat ) {
+	if (!activeInlineFontSizeFormat) {
 		return undefined;
 	}
 
-	if ( activeInlineFontSizeFormat.attributes.data !== undefined ) {
+	if (activeInlineFontSizeFormat.attributes.data !== undefined) {
 		return activeInlineFontSizeFormat.attributes.data;
 	}
 
-	return parseFontSize( activeInlineFontSizeFormat.attributes.style );
+	return parseFontSize(activeInlineFontSizeFormat.attributes.style);
 }
 
-function InlineFontSizePicker( {
-	name,
-	value,
-	onChange,
-	setIsSettingFontSize,
-} ) {
+function InlineFontSizePicker({ name, value, onChange, setIsSettingFontSize }) {
 	const pickerStyle = {
 		width: '200px',
 	};
@@ -74,81 +69,81 @@ function InlineFontSizePicker( {
 		height: '30px',
 	};
 
-	const onInlineFontSizeChange = ( newFontSize ) => {
-		if ( ! newFontSize ) {
+	const onInlineFontSizeChange = (newFontSize) => {
+		if (!newFontSize) {
 			// reset font size
-			onChange( removeFormat( value, name ) );
-		} else if ( newFontSize.match( /\d/ ) ) {
+			onChange(removeFormat(value, name));
+		} else if (newFontSize.match(/\d/)) {
 			// Applies only Font Size has a numeric value.
 			onChange(
-				applyFormat( value, {
+				applyFormat(value, {
 					type: name,
 					attributes: {
-						data: `${ newFontSize }`,
-						style: `font-size: ${ newFontSize };`,
+						data: `${newFontSize}`,
+						style: `font-size: ${newFontSize};`,
 					},
-				} )
+				})
 			);
 		}
 	};
 
-	const activeFontSize = getActiveInlineFontSize( value, name );
+	const activeFontSize = getActiveInlineFontSize(value, name);
 
 	return (
-		<div style={ pickerStyle }>
+		<div style={pickerStyle}>
 			<FontSizePicker
 				__nextHasNoMarginBottom
-				fontSizes={ fontSizes }
-				value={ activeFontSize }
-				onChange={ onInlineFontSizeChange }
+				fontSizes={fontSizes}
+				value={activeFontSize}
+				onChange={onInlineFontSizeChange}
 			/>
 			<Button
-				onClick={ () => {
-					setIsSettingFontSize( false );
-				} }
+				onClick={() => {
+					setIsSettingFontSize(false);
+				}}
 				isSmall
 				variant="secondary"
-				style={ buttonStyle }
+				style={buttonStyle}
 			>
-				{ __( 'Apply', 'vk-blocks' ) }
+				{__('Apply', 'vk-blocks')}
 			</Button>
 		</div>
 	);
 }
 
-export default function InlineFontSizeUI( {
+export default function InlineFontSizeUI({
 	name,
 	value,
 	onChange,
 	onClose,
 	contentRef,
 	setIsSettingFontSize,
-} ) {
+}) {
 	// NOTE: useAnchorRefが非推奨になったのでフォールバック WP6.0以下をサポートしなくなったら削除すること #1456
 	const existsUseAnchor = typeof useAnchor === 'function';
 	const _useAnchor = existsUseAnchor ? useAnchor : useAnchorRef;
 	const useAnchorObj = existsUseAnchor
 		? { editableContentElement: contentRef.current, value, settings }
 		: { ref: contentRef, value };
-	const popoverAnchor = useCachedTruthy( _useAnchor( useAnchorObj ) );
+	const popoverAnchor = useCachedTruthy(_useAnchor(useAnchorObj));
 
-	const rect = useMemo( () => popoverAnchor.getBoundingClientRect(), [] );
-	if ( !! popoverAnchor?.ownerDocument ) {
+	const rect = useMemo(() => popoverAnchor.getBoundingClientRect(), []);
+	if (!!popoverAnchor?.ownerDocument) {
 		popoverAnchor.getBoundingClientRect = () => rect;
 	}
 
 	return (
 		<Popover
-			onClose={ onClose }
+			onClose={onClose}
 			className="vk-blocks-format-popover components-inline-color-popover"
-			anchor={ existsUseAnchor ? popoverAnchor : undefined }
-			anchorRef={ existsUseAnchor ? undefined : popoverAnchor }
+			anchor={existsUseAnchor ? popoverAnchor : undefined}
+			anchorRef={existsUseAnchor ? undefined : popoverAnchor}
 		>
 			<InlineFontSizePicker
-				name={ name }
-				value={ value }
-				onChange={ onChange }
-				setIsSettingFontSize={ setIsSettingFontSize }
+				name={name}
+				value={value}
+				onChange={onChange}
+				setIsSettingFontSize={setIsSettingFontSize}
 			/>
 		</Popover>
 	);

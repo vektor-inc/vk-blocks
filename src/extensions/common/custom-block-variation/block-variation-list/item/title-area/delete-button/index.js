@@ -8,45 +8,41 @@ import {
 	__experimentalConfirmDialog as ConfirmDialog,
 } from '@wordpress/components';
 
-export const DeleteButton = ( {
-	index,
-	variationState,
-	setVariationState,
-} ) => {
-	const [ isModalOpen, setIsModalOpen ] = useState( false );
+export const DeleteButton = ({ index, variationState, setVariationState }) => {
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
-	const openModal = () => setIsModalOpen( true );
-	const closeModal = () => setIsModalOpen( false );
+	const openModal = () => setIsModalOpen(true);
+	const closeModal = () => setIsModalOpen(false);
 
 	const deleteItem = () => {
-		variationState.splice( index, 1 );
-		setVariationState( [ ...variationState ] );
+		variationState.splice(index, 1);
+		setVariationState([...variationState]);
 	};
 	return (
 		<div className="custom_block_variation_item_delete_button">
 			<Button
 				className="delete-item-button"
 				isDestructive
-				onClick={ openModal }
+				onClick={openModal}
 			>
-				{ __( 'Delete', 'vk-blocks' ) }
+				{__('Delete', 'vk-blocks')}
 			</Button>
 			<ConfirmDialog
-				isOpen={ isModalOpen }
-				cancelButtonText={ __( 'Cancel' ) }
-				confirmButtonText={ __( 'Delete', 'vk-blocks' ) }
-				onConfirm={ () => {
+				isOpen={isModalOpen}
+				cancelButtonText={__('Cancel')}
+				confirmButtonText={__('Delete', 'vk-blocks')}
+				onConfirm={() => {
 					deleteItem();
 					closeModal();
-				} }
-				onCancel={ () => {
+				}}
+				onCancel={() => {
 					closeModal();
-				} }
+				}}
 			>
-				{ __(
+				{__(
 					'Are you sure you want to delete this variation?',
 					'vk-blocks'
-				) }
+				)}
 			</ConfirmDialog>
 		</div>
 	);

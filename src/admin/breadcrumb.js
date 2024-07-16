@@ -4,33 +4,33 @@ import { __ } from '@wordpress/i18n';
 import { AdminContext } from '@vkblocks/admin/index';
 
 export default function AdminBreadcrumb() {
-	const { vkBlocksOption, setVkBlocksOption } = useContext( AdminContext );
+	const { vkBlocksOption, setVkBlocksOption } = useContext(AdminContext);
 
-	const [ separatorPrev, setSeparatorPrev ] = useState(
+	const [separatorPrev, setSeparatorPrev] = useState(
 		vkBlocksOption.vk_blocks_pro_breadcrumb_separator || '/'
 	);
 
-	useEffect( () => {
+	useEffect(() => {
 		// vkBlocksOption.vk_blocks_pro_breadcrumb_separator の値を監視して、変更があれば setSeparatorPrev にセット
 		setSeparatorPrev(
 			vkBlocksOption.vk_blocks_pro_breadcrumb_separator || '/'
 		);
-	}, [ vkBlocksOption.vk_blocks_pro_breadcrumb_separator ] );
+	}, [vkBlocksOption.vk_blocks_pro_breadcrumb_separator]);
 
 	return (
 		<>
 			<section className="breadcrumb">
 				<h3 id="breadcrumb-setting">
-					{ __( 'Breadcrumb Setting', 'vk-blocks' ) }
+					{__('Breadcrumb Setting', 'vk-blocks')}
 				</h3>
-				<h4>{ __( 'Separator Setting', 'vk-blocks' ) }</h4>
+				<h4>{__('Separator Setting', 'vk-blocks')}</h4>
 				<p>
-					{ __(
+					{__(
 						'Please input the text you want to use as the separator.',
 						'vk-blocks'
-					) }
-					<span style={ { marginLeft: '1em' } }>
-						{ __( 'Ex: / , > , ≫', 'vk-blocks' ) }
+					)}
+					<span style={{ marginLeft: '1em' }}>
+						{__('Ex: / , > , ≫', 'vk-blocks')}
 					</span>
 				</p>
 				<div className="flex-col">
@@ -39,22 +39,22 @@ export default function AdminBreadcrumb() {
 						className="separator_input"
 						name="vk_blocks_options[breadcrumb_separator_design]"
 						value={
-							! vkBlocksOption.vk_blocks_pro_breadcrumb_separator
+							!vkBlocksOption.vk_blocks_pro_breadcrumb_separator
 								? ''
 								: vkBlocksOption.vk_blocks_pro_breadcrumb_separator
 						}
-						onChange={ ( newValue ) => {
+						onChange={(newValue) => {
 							newValue = newValue.trim();
-							setVkBlocksOption( {
+							setVkBlocksOption({
 								...vkBlocksOption,
 								vk_blocks_pro_breadcrumb_separator: newValue,
-							} );
-						} }
+							});
+						}}
 					/>
 					<div className="preview_area">
-						{ __( 'HOME', 'vk-blocks' ) } { separatorPrev }{ ' ' }
-						{ __( 'Parent page', 'vk-blocks' ) } { separatorPrev }{ ' ' }
-						{ __( 'Child page', 'vk-blocks' ) }
+						{__('HOME', 'vk-blocks')} {separatorPrev}{' '}
+						{__('Parent page', 'vk-blocks')} {separatorPrev}{' '}
+						{__('Child page', 'vk-blocks')}
 					</div>
 				</div>
 			</section>

@@ -5,6 +5,6 @@
  *
  * @return {string} The text content with any html removed.
  */
-export const stripHTML = ( html ) => {
-	return html.replace( /(<([^>]+)>)/gi, '' );
+export const stripHTML = (html) => {
+	return html.replace(/(<([^>]+)>)/gi, '');
 };
