@@ -27,21 +27,21 @@ import { ReactComponent as IconSVG } from './icon.svg';
 
 // Check the keyword including str or not
 // eslint-disable-next-line camelcase
-export const in_string = (str, keyword) => {
+export const in_string = ( str, keyword ) => {
 	// If keyword was included that return ( true or false )
-	return str.indexOf(keyword) !== -1;
+	return str.indexOf( keyword ) !== -1;
 };
 
 // The checking block is hidden function target or not
 // eslint-disable-next-line camelcase
-export const is_hidden = (blockName) => {
+export const is_hidden = ( blockName ) => {
 	// Target of hidden function active
-	const allowed = ['core', 'vk-blocks'];
+	const allowed = [ 'core', 'vk-blocks' ];
 	// name には allowed の項目が一つずつ入る
 	// 判断中のブロック名の中にname( core or vk-blocks )がある（ undefinedじゃない ）場合
 	// true を返す
 	let hiddenReturn =
-		allowed.find((name) => in_string(blockName, name)) !== undefined;
+		allowed.find( ( name ) => in_string( blockName, name ) ) !== undefined;
 
 	const excludes = [
 		'vk-blocks/card-item',
@@ -49,10 +49,11 @@ export const is_hidden = (blockName) => {
 		'vk-blocks/select-post-list-item',
 	];
 	const excludeBlock =
-		excludes.find((excludeName) => in_string(blockName, excludeName)) !==
-		undefined;
+		excludes.find( ( excludeName ) =>
+			in_string( blockName, excludeName )
+		) !== undefined;
 
-	if (excludeBlock) {
+	if ( excludeBlock ) {
 		hiddenReturn = false;
 	}
 
@@ -62,7 +63,7 @@ export const is_hidden = (blockName) => {
 		'customClassName',
 		true
 	);
-	if (!hasCustomClassName) {
+	if ( ! hasCustomClassName ) {
 		hiddenReturn = false;
 	}
 	return hiddenReturn;
@@ -88,13 +89,13 @@ const mayUsedDynamicBlock = [
 addFilter(
 	'editor.BlockEdit',
 	'vk-blocks/hidden-extension',
-	createHigherOrderComponent((BlockEdit) => {
-		return (props) => {
-			if (is_hidden(props.name)) {
+	createHigherOrderComponent( ( BlockEdit ) => {
+		return ( props ) => {
+			if ( is_hidden( props.name ) ) {
 				//xxl用、deprecated追加
 				if (
 					props.attributes.vkb_hidden_xl &&
-					!props.attributes.vkb_hidden_xxl
+					! props.attributes.vkb_hidden_xxl
 				) {
 					props.attributes.vkb_hidden_xxl = true;
 					props.attributes.vkb_hidden_xl_v2 = true;
@@ -118,8 +119,8 @@ addFilter(
 				 * 非表示用のattributeが使用されていたらclassNameに入れ,過去のattributeをundefinedにする
 				 * dynamic block以外はコアの仕様で追加 CSS クラスに自動的に追加される
 				 */
-				useEffect(() => {
-					if (mayUsedDynamicBlock.includes(name)) {
+				useEffect( () => {
+					if ( mayUsedDynamicBlock.includes( name ) ) {
 						if (
 							vkb_hidden ||
 							vkb_hidden_xxl ||
@@ -130,18 +131,18 @@ addFilter(
 							vkb_hidden_sm ||
 							vkb_hidden_xs
 						) {
-							setAttributes({
-								className: classnames({
-									[className]: className,
-									[`vk_hidden`]: vkb_hidden,
-									[`vk_hidden-xxl`]: vkb_hidden_xxl,
-									[`vk_hidden-xl-v2`]: vkb_hidden_xl_v2,
-									[`vk_hidden-xl`]: vkb_hidden_xl,
-									[`vk_hidden-lg`]: vkb_hidden_lg,
-									[`vk_hidden-md`]: vkb_hidden_md,
-									[`vk_hidden-sm`]: vkb_hidden_sm,
-									[`vk_hidden-xs`]: vkb_hidden_xs,
-								}),
+							setAttributes( {
+								className: classnames( {
+									[ className ]: className,
+									[ `vk_hidden` ]: vkb_hidden,
+									[ `vk_hidden-xxl` ]: vkb_hidden_xxl,
+									[ `vk_hidden-xl-v2` ]: vkb_hidden_xl_v2,
+									[ `vk_hidden-xl` ]: vkb_hidden_xl,
+									[ `vk_hidden-lg` ]: vkb_hidden_lg,
+									[ `vk_hidden-md` ]: vkb_hidden_md,
+									[ `vk_hidden-sm` ]: vkb_hidden_sm,
+									[ `vk_hidden-xs` ]: vkb_hidden_xs,
+								} ),
 								vkb_hidden: undefined,
 								vkb_hidden_xxl: undefined,
 								vkb_hidden_xl_v2: undefined,
@@ -150,47 +151,47 @@ addFilter(
 								vkb_hidden_md: undefined,
 								vkb_hidden_sm: undefined,
 								vkb_hidden_xs: undefined,
-							});
+							} );
 						}
 					}
 					// vk_hidden-xl_v2をvk_hidden-xl-v2にする
-					if (/vk_hidden-xl_v2/.test(className)) {
-						setAttributes({
+					if ( /vk_hidden-xl_v2/.test( className ) ) {
+						setAttributes( {
 							className: className.replace(
 								/vk_hidden-xl_v2/,
 								'vk_hidden-xl-v2'
 							),
-						});
+						} );
 					}
-				}, []);
+				}, [] );
 
 				// 追加CSSクラスを半角文字列で分けて配列化
-				const nowClassArray = className ? className.split(' ') : [];
+				const nowClassArray = className ? className.split( ' ' ) : [];
 
 				// アクティブなクラスかどうか
-				const isActiveClass = (targetClass) => {
+				const isActiveClass = ( targetClass ) => {
 					const activeClassArray = [];
-					nowClassArray.forEach((item) => {
-						if (item === targetClass) {
-							activeClassArray.push(targetClass);
+					nowClassArray.forEach( ( item ) => {
+						if ( item === targetClass ) {
+							activeClassArray.push( targetClass );
 						}
-					});
-					return activeClassArray[0] === targetClass ? true : false;
+					} );
+					return activeClassArray[ 0 ] === targetClass ? true : false;
 				};
 
 				// classNameをセット
-				const setNewClass = (checked, targetClass) => {
-					if (checked) {
-						nowClassArray.push(targetClass);
+				const setNewClass = ( checked, targetClass ) => {
+					if ( checked ) {
+						nowClassArray.push( targetClass );
 					} else {
-						const clickIndex = nowClassArray.indexOf(targetClass);
-						nowClassArray.splice(clickIndex, 1);
+						const clickIndex = nowClassArray.indexOf( targetClass );
+						nowClassArray.splice( clickIndex, 1 );
 					}
-					setAttributes({
+					setAttributes( {
 						className: emptyStringToUndefined(
-							nowClassArray.join(' ')
+							nowClassArray.join( ' ' )
 						),
-					});
+					} );
 				};
 				// アイコンのスタイル
 				let iconStyle = {
@@ -199,14 +200,14 @@ addFilter(
 				};
 
 				if (
-					isActiveClass('vk_hidden') ||
-					isActiveClass('vk_hidden-xxl') ||
-					isActiveClass('vk_hidden-xl-v2') ||
-					isActiveClass('vk_hidden-xl') ||
-					isActiveClass('vk_hidden-lg') ||
-					isActiveClass('vk_hidden-md') ||
-					isActiveClass('vk_hidden-sm') ||
-					isActiveClass('vk_hidden-xs')
+					isActiveClass( 'vk_hidden' ) ||
+					isActiveClass( 'vk_hidden-xxl' ) ||
+					isActiveClass( 'vk_hidden-xl-v2' ) ||
+					isActiveClass( 'vk_hidden-xl' ) ||
+					isActiveClass( 'vk_hidden-lg' ) ||
+					isActiveClass( 'vk_hidden-md' ) ||
+					isActiveClass( 'vk_hidden-sm' ) ||
+					isActiveClass( 'vk_hidden-xs' )
 				) {
 					iconStyle = {
 						...iconStyle,
@@ -217,121 +218,136 @@ addFilter(
 
 				return (
 					<>
-						<BlockEdit {...props} />
+						<BlockEdit { ...props } />
 						<InspectorControls>
 							<PanelBody
-								title={__('Hidden Settings', 'vk-blocks')}
-								icon={<Icon icon={IconSVG} style={iconStyle} />}
-								initialOpen={false}
+								title={ __( 'Hidden Settings', 'vk-blocks' ) }
+								icon={
+									<Icon
+										icon={ IconSVG }
+										style={ iconStyle }
+									/>
+								}
+								initialOpen={ false }
 							>
 								<BaseControl
-									label={__(
+									label={ __(
 										'Hidden at screen size',
 										'vk-blocks'
-									)}
-									id={`vk_hiddenControl-hiddenScreenSize`}
+									) }
+									id={ `vk_hiddenControl-hiddenScreenSize` }
 								>
 									<p>
-										{__(
+										{ __(
 											"Note : This function is display hidden only. Actually Block is output to HTML. Please don't use you must not visible item. Don't use it for blocks you really don't want to display.",
 											'vk-blocks'
-										)}
+										) }
 									</p>
 									<ToggleControl
-										label={__(
+										label={ __(
 											'Hidden ( Screen size : all )',
 											'vk-blocks'
-										)}
-										checked={isActiveClass('vk_hidden')}
-										onChange={(checked) => {
-											setNewClass(checked, 'vk_hidden');
-										}}
+										) }
+										checked={ isActiveClass( 'vk_hidden' ) }
+										onChange={ ( checked ) => {
+											setNewClass( checked, 'vk_hidden' );
+										} }
 									/>
 									<ToggleControl
-										label={__(
+										label={ __(
 											'Hidden ( Screen size : xs )',
 											'vk-blocks'
-										)}
-										checked={isActiveClass('vk_hidden-xs')}
-										onChange={(checked) => {
+										) }
+										checked={ isActiveClass(
+											'vk_hidden-xs'
+										) }
+										onChange={ ( checked ) => {
 											setNewClass(
 												checked,
 												'vk_hidden-xs'
 											);
-										}}
+										} }
 									/>
 									<ToggleControl
-										label={__(
+										label={ __(
 											'Hidden ( Screen size : sm )',
 											'vk-blocks'
-										)}
-										checked={isActiveClass('vk_hidden-sm')}
-										onChange={(checked) => {
+										) }
+										checked={ isActiveClass(
+											'vk_hidden-sm'
+										) }
+										onChange={ ( checked ) => {
 											setNewClass(
 												checked,
 												'vk_hidden-sm'
 											);
-										}}
+										} }
 									/>
 									<ToggleControl
-										label={__(
+										label={ __(
 											'Hidden ( Screen size : md )',
 											'vk-blocks'
-										)}
-										checked={isActiveClass('vk_hidden-md')}
-										onChange={(checked) => {
+										) }
+										checked={ isActiveClass(
+											'vk_hidden-md'
+										) }
+										onChange={ ( checked ) => {
 											setNewClass(
 												checked,
 												'vk_hidden-md'
 											);
-										}}
+										} }
 									/>
 									<ToggleControl
-										label={__(
+										label={ __(
 											'Hidden ( Screen size : lg )',
 											'vk-blocks'
-										)}
-										checked={isActiveClass('vk_hidden-lg')}
-										onChange={(checked) => {
+										) }
+										checked={ isActiveClass(
+											'vk_hidden-lg'
+										) }
+										onChange={ ( checked ) => {
 											setNewClass(
 												checked,
 												'vk_hidden-lg'
 											);
-										}}
+										} }
 									/>
 									<ToggleControl
-										label={__(
+										label={ __(
 											'Hidden ( Screen size : xl )',
 											'vk-blocks'
-										)}
-										checked={isActiveClass(
+										) }
+										checked={ isActiveClass(
 											'vk_hidden-xl-v2'
-										)}
-										onChange={(checked) => {
+										) }
+										onChange={ ( checked ) => {
 											setNewClass(
 												checked,
 												'vk_hidden-xl-v2'
 											);
-										}}
+										} }
 									/>
 									<ToggleControl
-										label={__(
+										label={ __(
 											'Hidden ( Screen size : xxl )',
 											'vk-blocks'
-										)}
-										checked={isActiveClass('vk_hidden-xxl')}
-										onChange={(checked) => {
+										) }
+										checked={ isActiveClass(
+											'vk_hidden-xxl'
+										) }
+										onChange={ ( checked ) => {
 											setNewClass(
 												checked,
 												'vk_hidden-xxl'
 											);
-										}}
+										} }
 									/>
 									<p>
-										{__(
+										{ __(
 											'If you want to hide multiple blocks, that first you set to group block and the next, hide for the that group block.',
 											'vk-blocks'
-										)}
+										) }
 									</p>
 								</BaseControl>
 							</PanelBody>
@@ -340,9 +356,9 @@ addFilter(
 				);
 			}
 			// IF not hidden function target block that return original BlockEdit
-			return <BlockEdit {...props} />;
+			return <BlockEdit { ...props } />;
 		};
-	}, 'addHiddenSection')
+	}, 'addHiddenSection' )
 );
 
 /* Filter of editor.BlockListBlock
@@ -350,29 +366,32 @@ addFilter(
 addFilter(
 	'editor.BlockListBlock',
 	'vk-blocks/hidden-extension',
-	createHigherOrderComponent((BlockListBlock) => {
-		return (props) => {
+	createHigherOrderComponent( ( BlockListBlock ) => {
+		return ( props ) => {
 			const { attributes } = props;
 			const { className } = attributes;
 
 			// 追加CSSクラスを半角文字列で分けて配列化
-			const nowClassArray = className ? className.split(' ') : [];
+			const nowClassArray = className ? className.split( ' ' ) : [];
 
 			// Add hidden common class
-			const hiddenSomething = /vk_hidden/.test(nowClassArray)
+			const hiddenSomething = /vk_hidden/.test( nowClassArray )
 				? 'vk_edit_hidden_warning'
 				: '';
 
 			// Add hidden all class
 			const hiddenClassName =
-				nowClassArray.indexOf('vk_hidden') !== -1
+				nowClassArray.indexOf( 'vk_hidden' ) !== -1
 					? hiddenSomething + ' vk_edit_hidden_all'
 					: hiddenSomething;
 
 			// Add default class too.
-			const attachedClass = classnames(hiddenClassName, props.className);
+			const attachedClass = classnames(
+				hiddenClassName,
+				props.className
+			);
 
-			return <BlockListBlock {...props} className={attachedClass} />;
+			return <BlockListBlock { ...props } className={ attachedClass } />;
 		};
-	}, 'addHiddenWarning')
+	}, 'addHiddenWarning' )
 );

@@ -6,34 +6,34 @@ import {
 import { BaseControl, PanelBody, SelectControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
-export default function FAQ2Edit(props) {
+export default function FAQ2Edit( props ) {
 	const { attributes, setAttributes } = props;
 	const { showContent } = attributes;
-	const blockProps = useBlockProps({
+	const blockProps = useBlockProps( {
 		className: 'vk_faq',
-	});
+	} );
 
-	const ALLOWED_BLOCKS = ['vk-blocks/faq2-q', 'vk-blocks/faq2-a'];
+	const ALLOWED_BLOCKS = [ 'vk-blocks/faq2-q', 'vk-blocks/faq2-a' ];
 
-	const TEMPLATE = [['vk-blocks/faq2-q'], ['vk-blocks/faq2-a']];
+	const TEMPLATE = [ [ 'vk-blocks/faq2-q' ], [ 'vk-blocks/faq2-a' ] ];
 
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={__('Accordion Setting', 'vk-blocks')}>
-					{/* eslint-disable-next-line no-undef */}
-					{vk_blocks_check.is_pro ? (
+				<PanelBody title={ __( 'Accordion Setting', 'vk-blocks' ) }>
+					{ /* eslint-disable-next-line no-undef */ }
+					{ vk_blocks_check.is_pro ? (
 						<BaseControl>
 							<SelectControl
 								__nextHasNoMarginBottom
 								name="vk_blocks_options[new_faq_accordion]"
-								value={showContent}
-								onChange={(value) => {
-									setAttributes({
+								value={ showContent }
+								onChange={ ( value ) => {
+									setAttributes( {
 										showContent: value,
-									});
-								}}
-								options={[
+									} );
+								} }
+								options={ [
 									{
 										label: __(
 											'Use common settings',
@@ -62,31 +62,31 @@ export default function FAQ2Edit(props) {
 										),
 										value: 'close',
 									},
-								]}
+								] }
 							/>
 							<p>
-								{__(
+								{ __(
 									'* You can change each common accordion settings from Setting > VK Blocks.',
 									'vk-blocks'
-								)}
+								) }
 							</p>
 						</BaseControl>
 					) : (
 						<p>
-							{__(
+							{ __(
 								'You can be collapsing this block at VK Blocks Pro',
 								'vk-blocks'
-							)}
+							) }
 						</p>
-					)}
+					) }
 				</PanelBody>
 			</InspectorControls>
-			<div {...blockProps}>
+			<div { ...blockProps }>
 				<div className="vk_faq-header"></div>
 				<dl className="vk_faq-body">
 					<InnerBlocks
-						allowedBlocks={ALLOWED_BLOCKS}
-						template={TEMPLATE}
+						allowedBlocks={ ALLOWED_BLOCKS }
+						template={ TEMPLATE }
 						templateLock="all"
 					/>
 				</dl>

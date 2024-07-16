@@ -11,31 +11,33 @@ import { useContext } from '@wordpress/element';
 import { AdminContext } from '@vkblocks/admin/index';
 
 export default function AdminNewFaq() {
-	const { vkBlocksOption, setVkBlocksOption } = useContext(AdminContext);
+	const { vkBlocksOption, setVkBlocksOption } = useContext( AdminContext );
 
 	return (
 		<>
 			<section>
-				<h3 id="faq-setting">{__('FAQ Block Setting', 'vk-blocks')}</h3>
+				<h3 id="faq-setting">
+					{ __( 'FAQ Block Setting', 'vk-blocks' ) }
+				</h3>
 				<p>
-					{__(
+					{ __(
 						'Please specify a common accordion setting to be used in the FAQ block.',
 						'vk-blocks'
-					)}
+					) }
 				</p>
 				<SelectControl
 					name="vk_blocks_options[new_faq_accordion]"
 					className="vk_admin_selectControl"
-					value={vkBlocksOption.new_faq_accordion}
-					onChange={(newValue) => {
-						setVkBlocksOption({
+					value={ vkBlocksOption.new_faq_accordion }
+					onChange={ ( newValue ) => {
+						setVkBlocksOption( {
 							...vkBlocksOption,
 							new_faq_accordion: newValue,
-						});
-					}}
-					options={[
+						} );
+					} }
+					options={ [
 						{
-							label: __('Disable accordion', 'vk-blocks'),
+							label: __( 'Disable accordion', 'vk-blocks' ),
 							value: 'disable',
 						},
 						{
@@ -52,7 +54,7 @@ export default function AdminNewFaq() {
 							),
 							value: 'close',
 						},
-					]}
+					] }
 				/>
 			</section>
 		</>

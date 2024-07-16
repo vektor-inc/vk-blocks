@@ -15,13 +15,13 @@ import { default as InlineFontSizeUI, getActiveInlineFontSize } from './inline';
 
 const name = 'vk-blocks/inline-font-size';
 
-function FontSizeEdit({
+function FontSizeEdit( {
 	value,
 	onChange,
 	isActive,
 	activeAttributes,
 	contentRef,
-}) {
+} ) {
 	const shortcutType = 'primary';
 	const shortcutChar = 'h';
 
@@ -29,60 +29,60 @@ function FontSizeEdit({
 		width: '24px',
 		height: '24px',
 	};
-	const [isSettingFontSize, setIsSettingFontSize] = useState(false);
+	const [ isSettingFontSize, setIsSettingFontSize ] = useState( false );
 
 	const enableIsAddingFontSize = useCallback(
-		() => setIsSettingFontSize(true),
-		[setIsSettingFontSize]
+		() => setIsSettingFontSize( true ),
+		[ setIsSettingFontSize ]
 	);
 	const disableIsAddingFontSize = useCallback(
-		() => setIsSettingFontSize(false),
-		[setIsSettingFontSize]
+		() => setIsSettingFontSize( false ),
+		[ setIsSettingFontSize ]
 	);
 
-	const activeInlineFontSize = getActiveInlineFontSize(value, name);
+	const activeInlineFontSize = getActiveInlineFontSize( value, name );
 
-	const hasFontSizeToChoose = !!!value.length || !activeInlineFontSize;
-	if (!hasFontSizeToChoose && !isActive) {
+	const hasFontSizeToChoose = !!! value.length || ! activeInlineFontSize;
+	if ( ! hasFontSizeToChoose && ! isActive ) {
 		return null;
 	}
 
 	return (
 		<>
 			<RichTextToolbarButton
-				title={__('Inline Font Size', 'vk-blocks')}
+				title={ __( 'Inline Font Size', 'vk-blocks' ) }
 				onClick={
 					hasFontSizeToChoose
 						? enableIsAddingFontSize
-						: () => onChange(removeFormat(value, name))
+						: () => onChange( removeFormat( value, name ) )
 				}
-				shortcutType={shortcutType}
-				shortcutCharacter={shortcutChar}
+				shortcutType={ shortcutType }
+				shortcutCharacter={ shortcutChar }
 				className="format-library-text-color-button"
-				isActive={isActive}
+				isActive={ isActive }
 				icon={
 					<>
-						<Icon icon={IconSVG} style={iconStyle} />
+						<Icon icon={ IconSVG } style={ iconStyle } />
 					</>
 				}
 			/>
-			{isSettingFontSize && (
+			{ isSettingFontSize && (
 				<InlineFontSizeUI
-					name={name}
-					onClose={disableIsAddingFontSize}
-					activeAttributes={activeAttributes}
-					value={value}
-					onChange={onChange}
-					contentRef={contentRef}
-					setIsSettingFontSize={setIsSettingFontSize}
+					name={ name }
+					onClose={ disableIsAddingFontSize }
+					activeAttributes={ activeAttributes }
+					value={ value }
+					onChange={ onChange }
+					contentRef={ contentRef }
+					setIsSettingFontSize={ setIsSettingFontSize }
 				/>
-			)}
+			) }
 		</>
 	);
 }
 
 export const inlineFontSize = {
-	title: __('Inline font size', 'vk-blocks'),
+	title: __( 'Inline font size', 'vk-blocks' ),
 	tagName: 'span',
 	className: 'vk_inline-font-size',
 	attributes: {
@@ -92,4 +92,4 @@ export const inlineFontSize = {
 	edit: FontSizeEdit,
 };
 
-registerFormatType(name, inlineFontSize);
+registerFormatType( name, inlineFontSize );

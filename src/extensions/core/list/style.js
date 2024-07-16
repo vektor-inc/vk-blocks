@@ -23,9 +23,9 @@ import { colorSlugToColorCode } from '@vkblocks/utils/color-slug-to-color-code';
  */
 import { compareVersions } from 'compare-versions';
 
-const isValidBlockType = (name) => {
-	const validBlockTypes = ['core/list'];
-	return validBlockTypes.includes(name);
+const isValidBlockType = ( name ) => {
+	const validBlockTypes = [ 'core/list' ];
+	return validBlockTypes.includes( name );
 };
 
 // WP6.2以上か NOTE: WP6.1以下をサポートしなくなったら削除すること
@@ -33,7 +33,7 @@ const isLagerThanWp62 = () => {
 	if (
 		window.wpVersion !== undefined &&
 		window.wpVersion !== null &&
-		compareVersions(window.wpVersion, '6.2') < 0
+		compareVersions( window.wpVersion, '6.2' ) < 0
 	) {
 		return false;
 	}
@@ -41,12 +41,12 @@ const isLagerThanWp62 = () => {
 };
 
 // サポートしているクラス名かどうか
-const isVKColorPaletteManager = (colorSet) => {
+const isVKColorPaletteManager = ( colorSet ) => {
 	// 設定されているカラーパレットのスラッグ配列
 	const colorSetSlugArray = [];
-	colorSet.forEach((item) => {
-		colorSetSlugArray.push(item.slug);
-	});
+	colorSet.forEach( ( item ) => {
+		colorSetSlugArray.push( item.slug );
+	} );
 
 	const supportColorSlugArray = [
 		'black',
@@ -63,7 +63,7 @@ const isVKColorPaletteManager = (colorSet) => {
 	];
 	if (
 		supportColorSlugArray.every(
-			(element) => colorSetSlugArray.indexOf(element) !== -1
+			( element ) => colorSetSlugArray.indexOf( element ) !== -1
 		)
 	) {
 		return true;
@@ -71,8 +71,8 @@ const isVKColorPaletteManager = (colorSet) => {
 	return false;
 };
 
-export const addAttribute = (settings) => {
-	if (isValidBlockType(settings.name)) {
+export const addAttribute = ( settings ) => {
+	if ( isValidBlockType( settings.name ) ) {
 		settings.attributes = {
 			...settings.attributes,
 			color: {
@@ -82,37 +82,37 @@ export const addAttribute = (settings) => {
 	}
 	return settings;
 };
-addFilter('blocks.registerBlockType', 'vk-blocks/list-style', addAttribute);
+addFilter( 'blocks.registerBlockType', 'vk-blocks/list-style', addAttribute );
 
 export const addBlockControl = createHigherOrderComponent(
-	(BlockEdit) => (props) => {
+	( BlockEdit ) => ( props ) => {
 		const { name, attributes, setAttributes } = props;
 		const { color, className } = attributes;
-		if (!isValidBlockType(name)) {
-			return <BlockEdit {...props} />;
+		if ( ! isValidBlockType( name ) ) {
+			return <BlockEdit { ...props } />;
 		}
 
-		const colorSet = select('core/block-editor').getSettings().colors;
+		const colorSet = select( 'core/block-editor' ).getSettings().colors;
 
 		// 6.2未満かつサポートしているクラス名以外のカラーパレットの時
-		if (!isLagerThanWp62() && !isVKColorPaletteManager(colorSet)) {
-			return <BlockEdit {...props} />;
+		if ( ! isLagerThanWp62() && ! isVKColorPaletteManager( colorSet ) ) {
+			return <BlockEdit { ...props } />;
 		}
 
 		return (
 			<>
-				<BlockEdit {...props} />
+				<BlockEdit { ...props } />
 				<InspectorControls>
 					<PanelBody
-						title={__('List Icon Color', 'vk-blocks')}
-						initialOpen={false}
+						title={ __( 'List Icon Color', 'vk-blocks' ) }
+						initialOpen={ false }
 					>
 						<ColorPalette
-							value={colorSlugToColorCode(color)}
+							value={ colorSlugToColorCode( color ) }
 							disableCustomColors={
 								isLagerThanWp62() ? false : true
 							}
-							onChange={(newColor) => {
+							onChange={ ( newColor ) => {
 								// 色コードを colorSet から探して色データを取得
 								const ColorValue = getColorObjectByColorValue(
 									colorSet,
@@ -121,7 +121,7 @@ export const addBlockControl = createHigherOrderComponent(
 
 								// 現在のクラス名を配列化
 								const nowClassArray =
-									className && className.split(' ');
+									className && className.split( ' ' );
 
 								// 新しいクラス名の配列
 								let newClassNameArray = nowClassArray
@@ -129,10 +129,10 @@ export const addBlockControl = createHigherOrderComponent(
 									: [];
 
 								// 互換処理:設定されていたクラス名vk-has-〇〇-colorを削除する
-								if (nowClassArray) {
+								if ( nowClassArray ) {
 									newClassNameArray = nowClassArray.filter(
-										(item) => {
-											return !item.match(
+										( item ) => {
+											return ! item.match(
 												/vk-has-(.*)-color/
 											);
 										}
@@ -140,26 +140,26 @@ export const addBlockControl = createHigherOrderComponent(
 								}
 
 								// 6.2未満の場合
-								if (!isLagerThanWp62()) {
+								if ( ! isLagerThanWp62() ) {
 									// newColorがあれば新しいクラス名を追加する
-									if (newColor !== undefined) {
+									if ( newColor !== undefined ) {
 										// コアのテキストカラーと被らないようにvk-has-〇〇-colorを追加する
 										newClassNameArray.push(
-											`vk-has-${ColorValue.slug}-color`
+											`vk-has-${ ColorValue.slug }-color`
 										);
 									}
 								}
 
 								const newClassName =
-									newClassNameArray.join(' ');
+									newClassNameArray.join( ' ' );
 
-								setAttributes({
+								setAttributes( {
 									className: newClassName,
 									color: ColorValue?.slug
 										? ColorValue?.slug
 										: newColor,
-								});
-							}}
+								} );
+							} }
 						/>
 					</PanelBody>
 				</InspectorControls>
@@ -168,70 +168,70 @@ export const addBlockControl = createHigherOrderComponent(
 	},
 	'addMyCustomBlockControls'
 );
-addFilter('editor.BlockEdit', 'vk-blocks/list-style', addBlockControl);
+addFilter( 'editor.BlockEdit', 'vk-blocks/list-style', addBlockControl );
 
 /**
  * Override the default block element to include elements styles.
  */
 const withElementsStyles = createHigherOrderComponent(
-	(BlockListBlock) => (props) => {
+	( BlockListBlock ) => ( props ) => {
 		const { name, attributes, clientId } = props;
 		const { color, className } = attributes;
-		if (!isValidBlockType(name)) {
-			return <BlockListBlock {...props} />;
+		if ( ! isValidBlockType( name ) ) {
+			return <BlockListBlock { ...props } />;
 		}
 
-		const nowClassArray = className ? className.split(' ') : [];
+		const nowClassArray = className ? className.split( ' ' ) : [];
 
 		// 以前の形式 vk-has-(.*)-colorで保存されている場合
-		const hasDeprecatedClassName = nowClassArray.find((item) =>
-			item.match(/vk-has-(.*)-color/)
+		const hasDeprecatedClassName = nowClassArray.find( ( item ) =>
+			item.match( /vk-has-(.*)-color/ )
 		);
-		if (hasDeprecatedClassName) {
-			return <BlockListBlock {...props} />;
+		if ( hasDeprecatedClassName ) {
+			return <BlockListBlock { ...props } />;
 		}
 
 		// 6.2未満の場合
-		if (!isLagerThanWp62()) {
-			return <BlockListBlock {...props} />;
+		if ( ! isLagerThanWp62() ) {
+			return <BlockListBlock { ...props } />;
 		}
 
-		if (!color) {
-			return <BlockListBlock {...props} />;
+		if ( ! color ) {
+			return <BlockListBlock { ...props } />;
 		}
 
-		const colorSet = select('core/block-editor').getSettings().colors;
-		const ColorValue = getColorObjectByAttributeValues(colorSet, color);
+		const colorSet = select( 'core/block-editor' ).getSettings().colors;
+		const ColorValue = getColorObjectByAttributeValues( colorSet, color );
 		let colorValue;
-		if (ColorValue.slug !== undefined) {
-			colorValue = `var(--wp--preset--color--${ColorValue.slug})`;
+		if ( ColorValue.slug !== undefined ) {
+			colorValue = `var(--wp--preset--color--${ ColorValue.slug })`;
 		} else {
 			colorValue = color;
 		}
 
-		const bgStyle = nowClassArray.find((item) =>
-			item.match(/is-style-vk-numbered-(circle|square)-mark/)
+		const bgStyle = nowClassArray.find( ( item ) =>
+			item.match( /is-style-vk-numbered-(circle|square)-mark/ )
 		);
 		let cssTag = '';
-		if (bgStyle) {
-			cssTag = `#block-${clientId} li::before {
+		if ( bgStyle ) {
+			cssTag = `#block-${ clientId } li::before {
 				color: #fff;
-				background-color: ${colorValue};
+				background-color: ${ colorValue };
 			}`;
 		} else {
-			cssTag = `#block-${clientId} li::marker, #block-${clientId} li::before {
-				color: ${colorValue};
+			cssTag = `#block-${ clientId } li::marker, #block-${ clientId } li::before {
+				color: ${ colorValue };
 			}`;
 		}
 
 		return (
 			<>
-				{(() => {
-					if (cssTag) {
-						return <style>{cssTag}</style>;
+				{ ( () => {
+					if ( cssTag ) {
+						return <style>{ cssTag }</style>;
 					}
-				})()}
-				<BlockListBlock {...props} />
+				} )() }
+				<BlockListBlock { ...props } />
 			</>
 		);
 	}

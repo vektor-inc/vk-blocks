@@ -27,15 +27,15 @@ export class VKBButton extends Component {
 		aClass = `vk_button_link`;
 
 		// 塗り
-		if (buttonType === '0' || buttonType === null) {
+		if ( buttonType === '0' || buttonType === null ) {
 			// 規定カラーの場合
-			if (buttonColor !== 'custom' && buttonColorCustom === undefined) {
-				aClass += ` btn has-background has-vk-color-${buttonColor}-background-color`;
+			if ( buttonColor !== 'custom' && buttonColorCustom === undefined ) {
+				aClass += ` btn has-background has-vk-color-${ buttonColor }-background-color`;
 			} else {
 				aClass += ` btn has-background`;
 				// カスタムパレットカラーの場合
-				if (!isHexColor(buttonColorCustom)) {
-					aClass += ` has-${buttonColorCustom}-background-color`;
+				if ( ! isHexColor( buttonColorCustom ) ) {
+					aClass += ` has-${ buttonColorCustom }-background-color`;
 				}
 			}
 
@@ -46,32 +46,32 @@ export class VKBButton extends Component {
 			) {
 				aClass += ` btn has-text-color`;
 				// カスタムパレットカラーの場合
-				if (!isHexColor(buttonTextColorCustom)) {
-					aClass += ` has-${buttonTextColorCustom}-color`;
+				if ( ! isHexColor( buttonTextColorCustom ) ) {
+					aClass += ` has-${ buttonTextColorCustom }-color`;
 				}
 			}
 			// 塗りなし
-		} else if (buttonType === '1') {
+		} else if ( buttonType === '1' ) {
 			// 規定カラーの場合
-			if (buttonColor !== 'custom' && buttonColorCustom === undefined) {
-				aClass += ` btn has-text-color is-style-outline has-vk-color-${buttonColor}-color`;
+			if ( buttonColor !== 'custom' && buttonColorCustom === undefined ) {
+				aClass += ` btn has-text-color is-style-outline has-vk-color-${ buttonColor }-color`;
 			} else {
 				aClass += ` btn has-text-color is-style-outline`;
 				// カスタムパレットカラーの場合
-				if (!isHexColor(buttonColorCustom)) {
-					aClass += ` has-${buttonColorCustom}-color`;
+				if ( ! isHexColor( buttonColorCustom ) ) {
+					aClass += ` has-${ buttonColorCustom }-color`;
 				}
 			}
 			// テキストのみ
-		} else if (buttonType === '2') {
+		} else if ( buttonType === '2' ) {
 			// 規定カラーの場合
-			if (buttonColor !== 'custom' && buttonColorCustom === undefined) {
-				aClass += ` has-text-color vk_button_link-type-text has-vk-color-${buttonColor}-color`;
+			if ( buttonColor !== 'custom' && buttonColorCustom === undefined ) {
+				aClass += ` has-text-color vk_button_link-type-text has-vk-color-${ buttonColor }-color`;
 			} else {
 				aClass += ` has-text-color vk_button_link-type-text`;
 				// カスタムパレットカラーの場合
-				if (!isHexColor(buttonColorCustom)) {
-					aClass += ` has-${buttonColorCustom}-color`;
+				if ( ! isHexColor( buttonColorCustom ) ) {
+					aClass += ` has-${ buttonColorCustom }-color`;
 				}
 			}
 		}
@@ -90,65 +90,67 @@ export class VKBButton extends Component {
 		}
 		*/
 
-		aClass = `${aClass} btn-${buttonSize}`;
+		aClass = `${ aClass } btn-${ buttonSize }`;
 
-		if (buttonAlign === 'block') {
-			aClass = `${aClass} btn-block`;
+		if ( buttonAlign === 'block' ) {
+			aClass = `${ aClass } btn-block`;
 		}
 
 		//過去バージョンをリカバリーした時にiconを正常に表示する
-		if (fontAwesomeIconBefore && !fontAwesomeIconBefore.match(/<i/)) {
-			fontAwesomeIconBefore = `<i class="${fontAwesomeIconBefore}"></i>`;
+		if ( fontAwesomeIconBefore && ! fontAwesomeIconBefore.match( /<i/ ) ) {
+			fontAwesomeIconBefore = `<i class="${ fontAwesomeIconBefore }"></i>`;
 		}
-		if (fontAwesomeIconAfter && !fontAwesomeIconAfter.match(/<i/)) {
-			fontAwesomeIconAfter = `<i class="${fontAwesomeIconAfter}"></i>`;
+		if ( fontAwesomeIconAfter && ! fontAwesomeIconAfter.match( /<i/ ) ) {
+			fontAwesomeIconAfter = `<i class="${ fontAwesomeIconAfter }"></i>`;
 		}
 
-		if (fontAwesomeIconBefore) {
+		if ( fontAwesomeIconBefore ) {
 			let fontAwesomeIconBeforeClassName =
-				fontAwesomeIconBefore.match(/class="(.*?)"/)[1];
+				fontAwesomeIconBefore.match( /class="(.*?)"/ )[ 1 ];
 			fontAwesomeIconBeforeClassName += ` vk_button_link_before`;
 			const styleBefore = iconSizeBefore
-				? ` style='font-size: ${iconSizeBefore}'`
+				? ` style='font-size: ${ iconSizeBefore }'`
 				: '';
-			iconBefore = `<i class="${fontAwesomeIconBeforeClassName}"${styleBefore}></i>`;
+			iconBefore = `<i class="${ fontAwesomeIconBeforeClassName }"${ styleBefore }></i>`;
 		}
-		if (fontAwesomeIconAfter) {
+		if ( fontAwesomeIconAfter ) {
 			let fontAwesomeIconAfterClassName =
-				fontAwesomeIconAfter.match(/class="(.*?)"/)[1];
+				fontAwesomeIconAfter.match( /class="(.*?)"/ )[ 1 ];
 			fontAwesomeIconAfterClassName += ` vk_button_link_after`;
 			const styleAfter = iconSizeAfter
-				? ` style='font-size: ${iconSizeAfter}'`
+				? ` style='font-size: ${ iconSizeAfter }'`
 				: '';
-			iconAfter = `<i class="${fontAwesomeIconAfterClassName}"${styleAfter}></i>`;
+			iconAfter = `<i class="${ fontAwesomeIconAfterClassName }"${ styleAfter }></i>`;
 		}
 
 		// inlineStyleからborderRadiusを含む新しいスタイルオブジェクトを構築
 		const btnInlineStyle = { ...inlineStyle };
-		if (borderRadius) {
+		if ( borderRadius ) {
 			btnInlineStyle.borderRadius = borderRadius;
 		}
 
 		return (
 			/* eslint react/jsx-no-target-blank: 0 */
 			<a
-				href={buttonUrl}
-				style={btnInlineStyle}
-				className={aClass}
-				role={'button'}
-				aria-pressed={true}
-				target={buttonTarget ? '_blank' : null}
-				rel={'noopener'}
+				href={ buttonUrl }
+				style={ btnInlineStyle }
+				className={ aClass }
+				role={ 'button' }
+				aria-pressed={ true }
+				target={ buttonTarget ? '_blank' : null }
+				rel={ 'noopener' }
 			>
-				<div className={'vk_button_link_caption'}>
-					{parse(iconBefore)}
-					{richText}
-					{parse(iconAfter)}
+				<div className={ 'vk_button_link_caption' }>
+					{ parse( iconBefore ) }
+					{ richText }
+					{ parse( iconAfter ) }
 				</div>
-				{/*サブキャプションが入力された時のみ表示*/}
-				{subCaption && (
-					<p className={'vk_button_link_subCaption'}>{subCaption}</p>
-				)}
+				{ /*サブキャプションが入力された時のみ表示*/ }
+				{ subCaption && (
+					<p className={ 'vk_button_link_subCaption' }>
+						{ subCaption }
+					</p>
+				) }
 			</a>
 		);
 	}

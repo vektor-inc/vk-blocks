@@ -11,23 +11,23 @@ import { BlockIcon } from '@wordpress/block-editor';
 import { MoverButton } from './mover-button';
 import { DeleteButton } from './delete-button';
 
-export const TitleArea = ({
+export const TitleArea = ( {
 	activeBlockType,
 	index,
 	blockStyleListObj,
 	openNameLists,
 	setOpenNameLists,
 	array,
-}) => {
-	const editButtonClick = (clickedName) => {
-		const openNames = [...openNameLists];
-		if (openNames.includes(clickedName)) {
-			const spliceIndex = openNames.indexOf(clickedName);
-			openNames.splice(spliceIndex, 1);
-			setOpenNameLists(openNames);
+} ) => {
+	const editButtonClick = ( clickedName ) => {
+		const openNames = [ ...openNameLists ];
+		if ( openNames.includes( clickedName ) ) {
+			const spliceIndex = openNames.indexOf( clickedName );
+			openNames.splice( spliceIndex, 1 );
+			setOpenNameLists( openNames );
 		} else {
-			openNames.push(clickedName);
-			setOpenNameLists(openNames);
+			openNames.push( clickedName );
+			setOpenNameLists( openNames );
 		}
 	};
 
@@ -36,18 +36,18 @@ export const TitleArea = ({
 			<Flex>
 				<FlexItem>
 					<Flex>
-						{activeBlockType && (
+						{ activeBlockType && (
 							<FlexItem>
-								<BlockIcon icon={activeBlockType.icon} />
+								<BlockIcon icon={ activeBlockType.icon } />
 							</FlexItem>
-						)}
-						{array.length > 1 && (
+						) }
+						{ array.length > 1 && (
 							<FlexItem>
-								<MoverButton index={index} />
+								<MoverButton index={ index } />
 							</FlexItem>
-						)}
+						) }
 						<FlexItem className="custom_block_style_title-area-label">
-							{blockStyleListObj.property_label}
+							{ blockStyleListObj.property_label }
 						</FlexItem>
 					</Flex>
 				</FlexItem>
@@ -57,19 +57,19 @@ export const TitleArea = ({
 							<Button
 								className="edit-item-button"
 								variant="secondary"
-								onClick={() =>
+								onClick={ () =>
 									editButtonClick(
 										blockStyleListObj.property_name
 									)
 								}
 							>
-								{__('Edit', 'vk-blocks')}
+								{ __( 'Edit', 'vk-blocks' ) }
 							</Button>
 						</FlexItem>
 						<FlexItem>
 							<DeleteButton
-								index={index}
-								blockStyleListObj={blockStyleListObj}
+								index={ index }
+								blockStyleListObj={ blockStyleListObj }
 							/>
 						</FlexItem>
 					</Flex>

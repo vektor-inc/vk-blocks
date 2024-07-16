@@ -19,7 +19,7 @@ import { useSelect } from '@wordpress/data';
 import VariationName from './variation-name';
 import { SCOPE_OPTIONS } from '../../utils';
 
-export default function VariationForm(props) {
+export default function VariationForm( props ) {
 	const {
 		variation,
 		setVariation,
@@ -28,151 +28,161 @@ export default function VariationForm(props) {
 		setCanSave,
 		isVariationList = false,
 	} = props;
-	const { _getBlockVariations, _getCategories } = useSelect((select) => {
-		const { getBlockVariations, getCategories } = select(blocksStore);
+	const { _getBlockVariations, _getCategories } = useSelect( ( select ) => {
+		const { getBlockVariations, getCategories } = select( blocksStore );
 		// vk-blocks-cat-deprecated は非表示
 		const categories = getCategories().filter(
-			(item) => item.slug !== 'vk-blocks-cat-deprecated'
+			( item ) => item.slug !== 'vk-blocks-cat-deprecated'
 		);
 		return {
-			_getBlockVariations: getBlockVariations(blockName),
+			_getBlockVariations: getBlockVariations( blockName ),
 			_getCategories: categories,
 		};
-	}, []);
+	}, [] );
 
-	const support = getBlockSupport(blockName, 'vkBlocksBlockVariation');
+	const support = getBlockSupport( blockName, 'vkBlocksBlockVariation' );
 
 	return (
 		<>
 			<VStack spacing="3">
 				<p>
-					{__(
+					{ __(
 						'You can register the current block settings as block variations.',
 						'vk-blocks'
-					)}
+					) }
 					<ExternalLink
-						href={__(
+						href={ __(
 							'https://developer.wordpress.org/block-editor/reference-guides/block-api/block-variations/',
 							'vk-blocks'
-						)}
+						) }
 						target="_blank"
 						rel="noreferrer"
 					>
-						{__('Learn more about block variations', 'vk-blocks')}
+						{ __(
+							'Learn more about block variations',
+							'vk-blocks'
+						) }
 					</ExternalLink>
 				</p>
-				{!isVariationList && (
+				{ ! isVariationList && (
 					<VariationName
-						blockName={blockName}
-						canSave={canSave}
-						setCanSave={setCanSave}
-						getBlockVariations={_getBlockVariations}
-						variation={variation}
-						setVariation={setVariation}
+						blockName={ blockName }
+						canSave={ canSave }
+						setCanSave={ setCanSave }
+						getBlockVariations={ _getBlockVariations }
+						variation={ variation }
+						setVariation={ setVariation }
 					/>
-				)}
+				) }
 				<div>
-					<h4>{__('Title (required)', 'vk-blocks')}</h4>
+					<h4>{ __( 'Title (required)', 'vk-blocks' ) }</h4>
 					<TextControl
 						__nextHasNoMarginBottom
-						value={variation.title}
-						onChange={(value) => {
-							setVariation({ ...variation, title: value });
-						}}
-						placeholder={__('My variations', 'vk-blocks')}
+						value={ variation.title }
+						onChange={ ( value ) => {
+							setVariation( { ...variation, title: value } );
+						} }
+						placeholder={ __( 'My variations', 'vk-blocks' ) }
 					/>
-					{!variation.title && (
+					{ ! variation.title && (
 						<p className="block-variation-error-text">
-							{__('title is required', 'vk-blocks')}
+							{ __( 'title is required', 'vk-blocks' ) }
 						</p>
-					)}
+					) }
 				</div>
 				<div>
-					<h4>{__('Description', 'vk-blocks')}</h4>
+					<h4>{ __( 'Description', 'vk-blocks' ) }</h4>
 					<TextControl
 						__nextHasNoMarginBottom
-						value={variation.description}
-						onChange={(value) => {
-							setVariation({ ...variation, description: value });
-						}}
+						value={ variation.description }
+						onChange={ ( value ) => {
+							setVariation( {
+								...variation,
+								description: value,
+							} );
+						} }
 					/>
 				</div>
 				<div>
-					<h4>{__('Scope (required)', 'vk-blocks')}</h4>
-					<p style={{ marginTop: '0' }}>
-						{__(
+					<h4>{ __( 'Scope (required)', 'vk-blocks' ) }</h4>
+					<p style={ { marginTop: '0' } }>
+						{ __(
 							'You can set where registered variations are displayed. You can call it from the displayed location.',
 							'vk-blocks'
-						)}
+						) }
 					</p>
-					{SCOPE_OPTIONS.filter((scopeOption) =>
-						support.scope.includes(scopeOption.name)
-					).map((scopeOption) => (
+					{ SCOPE_OPTIONS.filter( ( scopeOption ) =>
+						support.scope.includes( scopeOption.name )
+					).map( ( scopeOption ) => (
 						<CheckboxControl
-							key={scopeOption.name}
+							key={ scopeOption.name }
 							__nextHasNoMarginBottom
-							checked={variation.scope?.includes(
+							checked={ variation.scope?.includes(
 								scopeOption.name
-							)}
-							help={scopeOption.help}
-							label={scopeOption.label}
-							onChange={(isChecked) => {
+							) }
+							help={ scopeOption.help }
+							label={ scopeOption.label }
+							onChange={ ( isChecked ) => {
 								const newScope = isChecked
 									? [
-											...(variation.scope || []),
+											...( variation.scope || [] ),
 											scopeOption.name,
-										]
+									  ]
 									: variation.scope.filter(
-											(item) => item !== scopeOption.name
-										);
-								setVariation({ ...variation, scope: newScope });
-							}}
+											( item ) =>
+												item !== scopeOption.name
+									  );
+								setVariation( {
+									...variation,
+									scope: newScope,
+								} );
+							} }
 						/>
-					))}
-					{variation.scope.length === 0 && (
+					) ) }
+					{ variation.scope.length === 0 && (
 						<p className="block-variation-error-text">
-							{__('scope is required', 'vk-blocks')}
+							{ __( 'scope is required', 'vk-blocks' ) }
 						</p>
-					)}
+					) }
 				</div>
-				{variation.scope.includes('inserter') && (
+				{ variation.scope.includes( 'inserter' ) && (
 					<div>
-						<h4>{__('Category')}</h4>
+						<h4>{ __( 'Category' ) }</h4>
 						<div className="block-variation-category-list">
-							{_getCategories.map((blockCategory) => (
+							{ _getCategories.map( ( blockCategory ) => (
 								<RadioControl
-									key={blockCategory.slug}
-									selected={variation.category}
-									options={[
+									key={ blockCategory.slug }
+									selected={ variation.category }
+									options={ [
 										{
 											label: blockCategory.title,
 											value: blockCategory.slug,
 										},
-									]}
-									onChange={(value) => {
-										setVariation({
+									] }
+									onChange={ ( value ) => {
+										setVariation( {
 											...variation,
 											category: value,
-										});
-									}}
+										} );
+									} }
 								/>
-							))}
+							) ) }
 						</div>
 					</div>
-				)}
+				) }
 				<div>
-					<h4>{__('Icon', 'vk-blocks')}</h4>
+					<h4>{ __( 'Icon', 'vk-blocks' ) }</h4>
 					<TextControl
 						__nextHasNoMarginBottom
-						value={variation.icon}
-						onChange={(value) => {
-							setVariation({ ...variation, icon: value });
-						}}
+						value={ variation.icon }
+						onChange={ ( value ) => {
+							setVariation( { ...variation, icon: value } );
+						} }
 						placeholder="embed-generic"
-						help={__(
+						help={ __(
 							'For the icon name, please enter alphanumeric characters without "dashicons-". Example: embed-generic',
 							'vk-blocks'
-						)}
+						) }
 					/>
 					<div>
 						<ExternalLink
@@ -180,18 +190,18 @@ export default function VariationForm(props) {
 							target="_blank"
 							rel="noreferrer"
 						>
-							{__('Dashicons list', 'vk-blocks')}
+							{ __( 'Dashicons list', 'vk-blocks' ) }
 						</ExternalLink>
 					</div>
 				</div>
 				<div>
-					<h4>{__('Keyword', 'vk-blocks')}</h4>
+					<h4>{ __( 'Keyword', 'vk-blocks' ) }</h4>
 					<FormTokenField
-						label={__('Add keyword', 'vk-blocks')}
-						value={variation.keywords || []}
-						onChange={(value) => {
-							setVariation({ ...variation, keywords: value });
-						}}
+						label={ __( 'Add keyword', 'vk-blocks' ) }
+						value={ variation.keywords || [] }
+						onChange={ ( value ) => {
+							setVariation( { ...variation, keywords: value } );
+						} }
 					/>
 				</div>
 			</VStack>

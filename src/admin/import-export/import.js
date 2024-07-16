@@ -14,13 +14,13 @@ import { API_PATH } from '@vkblocks/utils/store/constants';
  *
  * @param {File} file File.
  */
-export async function readFile(file) {
-	const fileContent = await readTextFile(file);
+export async function readFile( file ) {
+	const fileContent = await readTextFile( file );
 	let uploadedOption;
 	try {
-		uploadedOption = JSON.parse(fileContent);
-	} catch (e) {
-		throw new Error('Invalid JSON file');
+		uploadedOption = JSON.parse( fileContent );
+	} catch ( e ) {
+		throw new Error( 'Invalid JSON file' );
 	}
 	return uploadedOption;
 }
@@ -30,14 +30,14 @@ export async function readFile(file) {
  *
  * @param {Object} updateOption
  */
-export async function importOptions(updateOption) {
-	const response = await apiFetch({
+export async function importOptions( updateOption ) {
+	const response = await apiFetch( {
 		path: API_PATH,
 		method: 'POST',
 		data: {
 			vkBlocksOption: updateOption,
 		},
-	});
+	} );
 	return {
 		response,
 		updateOption,

@@ -8,65 +8,65 @@ import {
 	__experimentalConfirmDialog as ConfirmDialog,
 } from '@wordpress/components';
 
-export default function PatternExplorerSidebar(props) {
+export default function PatternExplorerSidebar( props ) {
 	const { selectedCategory, onClickCategory, hasUpdates, setHasUpdates } =
 		props;
 	const patternCategories = [
 		{
 			name: 'create',
-			label: __('Create', 'vk-blocks'),
+			label: __( 'Create', 'vk-blocks' ),
 		},
 		{
 			name: 'registered',
-			label: __('Registered', 'vk-blocks'),
+			label: __( 'Registered', 'vk-blocks' ),
 		},
 	];
 	const baseClassName = 'block-editor-block-patterns-explorer__sidebar';
 
-	const [confirmModal, setConfirmModal] = useState({
+	const [ confirmModal, setConfirmModal ] = useState( {
 		open: false,
-	});
+	} );
 
 	return (
 		<div className="block-editor-block-patterns-explorer__sidebar">
-			<div className={`${baseClassName}__categories-list`}>
-				{patternCategories.map(({ name, label }) => {
+			<div className={ `${ baseClassName }__categories-list` }>
+				{ patternCategories.map( ( { name, label } ) => {
 					return (
 						<Button
-							key={name}
-							label={label}
-							className={`${baseClassName}__categories-list__item`}
-							isPressed={selectedCategory === name}
-							onClick={() => {
-								if (hasUpdates) {
-									setConfirmModal({ open: true, name });
+							key={ name }
+							label={ label }
+							className={ `${ baseClassName }__categories-list__item` }
+							isPressed={ selectedCategory === name }
+							onClick={ () => {
+								if ( hasUpdates ) {
+									setConfirmModal( { open: true, name } );
 								} else {
-									onClickCategory(name);
+									onClickCategory( name );
 								}
-							}}
+							} }
 						>
-							{label}
+							{ label }
 						</Button>
 					);
-				})}
+				} ) }
 			</div>
 			<ConfirmDialog
-				isOpen={confirmModal.open}
-				cancelButtonText={__('Cancel')}
-				confirmButtonText={__('Continue', 'vk-blocks')}
-				onConfirm={() => {
-					if (confirmModal.name) {
-						onClickCategory(confirmModal.name);
+				isOpen={ confirmModal.open }
+				cancelButtonText={ __( 'Cancel' ) }
+				confirmButtonText={ __( 'Continue', 'vk-blocks' ) }
+				onConfirm={ () => {
+					if ( confirmModal.name ) {
+						onClickCategory( confirmModal.name );
 					}
-					setConfirmModal({ open: false });
-					setHasUpdates(false);
-				}}
-				onCancel={() => setConfirmModal({ open: false })}
+					setConfirmModal( { open: false } );
+					setHasUpdates( false );
+				} }
+				onCancel={ () => setConfirmModal( { open: false } ) }
 			>
-				{__(
+				{ __(
 					'There are unsaved changes. Do you want to continue ?',
 					'vk-blocks'
-				)}
+				) }
 			</ConfirmDialog>
 		</div>
 	);

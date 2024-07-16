@@ -29,7 +29,7 @@ import LinkToolbar from '@vkblocks/components/link-toolbar';
 
 const prefix = 'vk_slider_item';
 
-export default function SliderItemEdit(props) {
+export default function SliderItemEdit( props ) {
 	const { attributes, setAttributes, clientId } = props;
 	const {
 		verticalAlignment,
@@ -45,36 +45,36 @@ export default function SliderItemEdit(props) {
 		blockId,
 	} = attributes;
 
-	useEffect(() => {
-		if (attributes.clientId !== undefined) {
-			setAttributes({ clientId: undefined });
+	useEffect( () => {
+		if ( attributes.clientId !== undefined ) {
+			setAttributes( { clientId: undefined } );
 		}
 		if (
 			blockId === undefined ||
-			isParentReusableBlock(clientId) === false
+			isParentReusableBlock( clientId ) === false
 		) {
-			setAttributes({ blockId: clientId });
+			setAttributes( { blockId: clientId } );
 		}
-	}, [clientId]);
+	}, [ clientId ] );
 
 	// classPaddingLRのクラス切り替え
 	let classPaddingLR = '';
 	let paddingValue = '';
 
-	if (padding_left_and_right === '0' || !padding_left_and_right) {
+	if ( padding_left_and_right === '0' || ! padding_left_and_right ) {
 		classPaddingLR = ` is-layout-constrained`;
 		paddingValue = '0';
-	} else if (padding_left_and_right === '1') {
-		classPaddingLR = ` ${prefix}-paddingLR-use`;
+	} else if ( padding_left_and_right === '1' ) {
+		classPaddingLR = ` ${ prefix }-paddingLR-use`;
 		paddingValue = '4em';
-	} else if (padding_left_and_right === '2') {
-		classPaddingLR = ` ${prefix}-paddingLR-zero`;
+	} else if ( padding_left_and_right === '2' ) {
+		classPaddingLR = ` ${ prefix }-paddingLR-zero`;
 		paddingValue = '0';
 	}
 
 	// コアの余白システムに値を適用
-	useEffect(() => {
-		setAttributes({
+	useEffect( () => {
+		setAttributes( {
 			style: {
 				spacing: {
 					padding: {
@@ -83,138 +83,147 @@ export default function SliderItemEdit(props) {
 					},
 				},
 			},
-		});
-	}, [paddingValue]);
+		} );
+	}, [ paddingValue ] );
 
 	let containerClass = '';
-	if (classPaddingLR === ` is-layout-constrained` || classPaddingLR === '') {
-		containerClass = `${prefix}_container container`;
+	if (
+		classPaddingLR === ` is-layout-constrained` ||
+		classPaddingLR === ''
+	) {
+		containerClass = `${ prefix }_container container`;
 	} else {
-		containerClass = `${prefix}_container`;
+		containerClass = `${ prefix }_container`;
 	}
 
 	const opacityClass = opacity && opacity * 10;
-	const bgAreaClasses = classnames('vk_slider_item-background-area', {
-		[`has-background`]: bgColor !== undefined,
-		[`has-${bgColor}-background-color`]:
-			bgColor !== undefined && !isHexColor(bgColor),
-		[`has-background-dim`]: opacity !== undefined,
-		[`has-background-dim-${opacityClass}`]: opacityClass !== undefined,
-	});
+	const bgAreaClasses = classnames( 'vk_slider_item-background-area', {
+		[ `has-background` ]: bgColor !== undefined,
+		[ `has-${ bgColor }-background-color` ]:
+			bgColor !== undefined && ! isHexColor( bgColor ),
+		[ `has-background-dim` ]: opacity !== undefined,
+		[ `has-background-dim-${ opacityClass }` ]: opacityClass !== undefined,
+	} );
 
 	const bgAreaStyles = {
-		backgroundColor: isHexColor(bgColor) ? bgColor : undefined,
+		backgroundColor: isHexColor( bgColor ) ? bgColor : undefined,
 	};
 
 	const GetBgImage = (
 		<>
-			{(bgImage || bgImageTablet || bgImageMobile) && (
-				<GenerateBgImage prefix={prefix} blockId={blockId} {...props} />
-			)}
-			<div className={bgAreaClasses} style={bgAreaStyles}></div>
+			{ ( bgImage || bgImageTablet || bgImageMobile ) && (
+				<GenerateBgImage
+					prefix={ prefix }
+					blockId={ blockId }
+					{ ...props }
+				/>
+			) }
+			<div className={ bgAreaClasses } style={ bgAreaStyles }></div>
 		</>
 	);
 
-	const blockProps = useBlockProps({
-		className: `vk_slider_item vk_valign-${verticalAlignment} ${prefix}-${blockId} ${classPaddingLR} ${prefix}-paddingVertical-none swiper-slide`,
-	});
+	const blockProps = useBlockProps( {
+		className: `vk_slider_item vk_valign-${ verticalAlignment } ${ prefix }-${ blockId } ${ classPaddingLR } ${ prefix }-paddingVertical-none swiper-slide`,
+	} );
 
 	return (
 		<>
 			<BlockControls>
 				<BlockVerticalAlignmentToolbar
-					onChange={(alignment) =>
-						setAttributes({ verticalAlignment: alignment })
+					onChange={ ( alignment ) =>
+						setAttributes( { verticalAlignment: alignment } )
 					}
-					value={verticalAlignment}
+					value={ verticalAlignment }
 				/>
 				<ToolbarGroup>
 					<LinkToolbar
-						linkUrl={linkUrl}
-						setLinkUrl={(url) => setAttributes({ linkUrl: url })}
-						linkTarget={linkTarget}
-						setLinkTarget={(target) =>
-							setAttributes({ linkTarget: target })
+						linkUrl={ linkUrl }
+						setLinkUrl={ ( url ) =>
+							setAttributes( { linkUrl: url } )
+						}
+						linkTarget={ linkTarget }
+						setLinkTarget={ ( target ) =>
+							setAttributes( { linkTarget: target } )
 						}
 					/>
 				</ToolbarGroup>
 			</BlockControls>
 			<InspectorControls>
 				<PanelBody
-					title={__('Layout Setting', 'vk-blocks')}
-					initialOpen={true}
+					title={ __( 'Layout Setting', 'vk-blocks' ) }
+					initialOpen={ true }
 				>
 					<BaseControl
-						label={__('Vertical align', 'vk-blocks')}
-						id={`vk_sliderItem-verticalAlign`}
+						label={ __( 'Vertical align', 'vk-blocks' ) }
+						id={ `vk_sliderItem-verticalAlign` }
 					>
 						<BlockVerticalAlignmentToolbar
-							onChange={(alignment) =>
-								setAttributes({
+							onChange={ ( alignment ) =>
+								setAttributes( {
 									verticalAlignment: alignment,
-								})
+								} )
 							}
-							value={verticalAlignment}
+							value={ verticalAlignment }
 						/>
 					</BaseControl>
 				</PanelBody>
 				<PanelBody
-					title={__('Background Setting', 'vk-blocks')}
-					initialOpen={false}
+					title={ __( 'Background Setting', 'vk-blocks' ) }
+					initialOpen={ false }
 				>
 					<BaseControl
-						label={__('Color Setting', 'vk-blocks')}
-						id={`vk_sliderItem-colorSetting`}
-						help={__(
+						label={ __( 'Color Setting', 'vk-blocks' ) }
+						id={ `vk_sliderItem-colorSetting` }
+						help={ __(
 							'Color will overcome background image. If you want to display image, set opacity 0.',
 							'vk-blocks'
-						)}
+						) }
 					>
 						<AdvancedColorPalette
-							enableAlpha={false}
-							schema={'bgColor'}
-							{...props}
+							enableAlpha={ false }
+							schema={ 'bgColor' }
+							{ ...props }
 						/>
 					</BaseControl>
 					<BaseControl
-						label={__('Opacity Setting', 'vk-blocks')}
-						id={`vk_sliderItem-opacitySetting`}
+						label={ __( 'Opacity Setting', 'vk-blocks' ) }
+						id={ `vk_sliderItem-opacitySetting` }
 					>
 						<RangeControl
-							value={opacity}
-							onChange={(value) => {
-								setAttributes({ opacity: value });
-							}}
-							min={0}
-							max={1}
-							step={0.1}
+							value={ opacity }
+							onChange={ ( value ) => {
+								setAttributes( { opacity: value } );
+							} }
+							min={ 0 }
+							max={ 1 }
+							step={ 0.1 }
 						/>
 					</BaseControl>
 					<BaseControl
-						label={__('Background Image Size', 'vk-blocks')}
-						id={`vk_sliderItem-backgroundImageSize`}
+						label={ __( 'Background Image Size', 'vk-blocks' ) }
+						id={ `vk_sliderItem-backgroundImageSize` }
 					>
 						<RadioControl
-							selected={bgSize}
-							options={[
+							selected={ bgSize }
+							options={ [
 								{
-									label: __('cover', 'vk-blocks'),
+									label: __( 'cover', 'vk-blocks' ),
 									value: 'cover',
 								},
 								{
-									label: __('repeat', 'vk-blocks'),
+									label: __( 'repeat', 'vk-blocks' ),
 									value: 'repeat',
 								},
-							]}
-							onChange={(value) =>
-								setAttributes({ bgSize: value })
+							] }
+							onChange={ ( value ) =>
+								setAttributes( { bgSize: value } )
 							}
 						/>
 					</BaseControl>
 					<BaseControl
-						label={__('Background Image PC', 'vk-blocks')}
-						id={`vk_sliderItem-backgroundImagePC`}
-						className={'vk_slider_item_sidebar_bgImage'}
+						label={ __( 'Background Image PC', 'vk-blocks' ) }
+						id={ `vk_sliderItem-backgroundImagePC` }
+						className={ 'vk_slider_item_sidebar_bgImage' }
 					>
 						<div
 							className={
@@ -222,39 +231,39 @@ export default function SliderItemEdit(props) {
 							}
 						>
 							<AdvancedMediaUpload
-								schema={'bgImage'}
-								{...props}
+								schema={ 'bgImage' }
+								{ ...props }
 							/>
 						</div>
 					</BaseControl>
 					<BaseControl
-						label={__('Background Image Tablet', 'vk-blocks')}
-						className={'vk_slider_item_sidebar_bgImage'}
-						id={`vk_sliderItem-backgroundImageTablet`}
+						label={ __( 'Background Image Tablet', 'vk-blocks' ) }
+						className={ 'vk_slider_item_sidebar_bgImage' }
+						id={ `vk_sliderItem-backgroundImageTablet` }
 					>
 						<AdvancedMediaUpload
-							schema={'bgImageTablet'}
-							{...props}
+							schema={ 'bgImageTablet' }
+							{ ...props }
 						/>
 					</BaseControl>
 					<BaseControl
-						label={__('Background Image Mobile', 'vk-blocks')}
-						className={'vk_slider_item_sidebar_bgImage'}
-						id={`vk_sliderItem-backgroundImageMobile`}
+						label={ __( 'Background Image Mobile', 'vk-blocks' ) }
+						className={ 'vk_slider_item_sidebar_bgImage' }
+						id={ `vk_sliderItem-backgroundImageMobile` }
 					>
 						<AdvancedMediaUpload
-							schema={'bgImageMobile'}
-							{...props}
+							schema={ 'bgImageMobile' }
+							{ ...props }
 						/>
 					</BaseControl>
 				</PanelBody>
 			</InspectorControls>
-			<div {...blockProps}>
-				{GetBgImage}
-				<div className={containerClass}>
+			<div { ...blockProps }>
+				{ GetBgImage }
+				<div className={ containerClass }>
 					<InnerBlocks
-						templateLock={false}
-						template={[['core/paragraph']]}
+						templateLock={ false }
+						template={ [ [ 'core/paragraph' ] ] }
 					/>
 				</div>
 			</div>

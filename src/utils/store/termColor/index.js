@@ -6,17 +6,17 @@ import apiFetch from '@wordpress/api-fetch';
 
 const DEFAULT_STATE = {};
 
-const store = createReduxStore('vk-blocks/term-color', {
-	reducer(state = DEFAULT_STATE, action) {
-		switch (action.type) {
+const store = createReduxStore( 'vk-blocks/term-color', {
+	reducer( state = DEFAULT_STATE, action ) {
+		switch ( action.type ) {
 			case 'SET_TERM_COLOR':
 				const currentTaxonomyState =
-					state[action.postId]?.[action.taxonomy] || {};
+					state[ action.postId ]?.[ action.taxonomy ] || {};
 				return {
 					...state,
-					[action.postId]: {
-						...(state[action.postId] || {}),
-						[action.taxonomy]: {
+					[ action.postId ]: {
+						...( state[ action.postId ] || {} ),
+						[ action.taxonomy ]: {
 							value: action.value,
 							isLoading:
 								currentTaxonomyState.isLoading !== undefined
@@ -27,12 +27,12 @@ const store = createReduxStore('vk-blocks/term-color', {
 				};
 			case 'SET_IS_LOADING':
 				const currentTaxonomyStateForLoading =
-					state[action.postId]?.[action.taxonomy] || {};
+					state[ action.postId ]?.[ action.taxonomy ] || {};
 				return {
 					...state,
-					[action.postId]: {
-						...(state[action.postId] || {}),
-						[action.taxonomy]: {
+					[ action.postId ]: {
+						...( state[ action.postId ] || {} ),
+						[ action.taxonomy ]: {
 							...currentTaxonomyStateForLoading,
 							isLoading: action.isLoading,
 						},
@@ -52,7 +52,7 @@ const store = createReduxStore('vk-blocks/term-color', {
 		 * @param {string} payload.value    The color value to set for the term.
 		 * @return {Object} Action object.
 		 */
-		setTermColor(payload) {
+		setTermColor( payload ) {
 			return {
 				type: 'SET_TERM_COLOR',
 				...payload,
@@ -68,7 +68,7 @@ const store = createReduxStore('vk-blocks/term-color', {
 		 * @param {boolean} payload.isLoading The loading state to set for the term (true or false).
 		 * @return {Object} Action object.
 		 */
-		setIsLoading(payload) {
+		setIsLoading( payload ) {
 			return {
 				type: 'SET_IS_LOADING',
 				...payload,
@@ -86,16 +86,16 @@ const store = createReduxStore('vk-blocks/term-color', {
 		 * @param {string} [taxonomy='__VK_TAXONOMY_AUTO__'] Optional taxonomy name.
 		 * @return {Object} Term color value and loading state. Returns null and true if data is unavailable.
 		 */
-		getTermColorInfo(state, postId, taxonomy = '__VK_TAXONOMY_AUTO__') {
-			const postInfo = state[postId];
-			if (!postInfo || !postInfo[taxonomy]?.value) {
+		getTermColorInfo( state, postId, taxonomy = '__VK_TAXONOMY_AUTO__' ) {
+			const postInfo = state[ postId ];
+			if ( ! postInfo || ! postInfo[ taxonomy ]?.value ) {
 				return {
 					value: null,
 					isLoading: true,
 				};
 			}
 
-			return postInfo[taxonomy];
+			return postInfo[ taxonomy ];
 		},
 	},
 
@@ -109,38 +109,38 @@ const store = createReduxStore('vk-blocks/term-color', {
 		 * @return {Function} Thunk action for updating store with term color information and loading state.
 		 */
 
-		getTermColorInfo(postId, taxonomy = '__VK_TAXONOMY_AUTO__') {
-			return async ({ dispatch }) => {
+		getTermColorInfo( postId, taxonomy = '__VK_TAXONOMY_AUTO__' ) {
+			return async ( { dispatch } ) => {
 				const fetchData = { post_id: postId };
 
-				if ('__VK_TAXONOMY_AUTO__' !== taxonomy) {
+				if ( '__VK_TAXONOMY_AUTO__' !== taxonomy ) {
 					fetchData.taxonomy = taxonomy;
 				}
-				dispatch.setIsLoading({
+				dispatch.setIsLoading( {
 					postId,
 					taxonomy,
 					isLoading: true,
-				});
-				const termColorInfo = await apiFetch({
+				} );
+				const termColorInfo = await apiFetch( {
 					path: 'vk-blocks/v1/get_post_single_term_info',
 					method: 'POST',
 					data: fetchData,
-				});
+				} );
 
 				const payload = {
 					postId,
 					taxonomy,
 					value: termColorInfo,
 				};
-				dispatch.setTermColor(payload);
-				dispatch.setIsLoading({
+				dispatch.setTermColor( payload );
+				dispatch.setIsLoading( {
 					postId,
 					taxonomy,
 					isLoading: false,
-				});
+				} );
 			};
 		},
 	},
-});
+} );
 
-register(store);
+register( store );

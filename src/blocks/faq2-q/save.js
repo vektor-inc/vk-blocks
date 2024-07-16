@@ -4,10 +4,10 @@ import { __ } from '@wordpress/i18n';
 export default function save() {
 	return (
 		<dt
-			{...useBlockProps.save({
+			{ ...useBlockProps.save( {
 				className: `vk_faq_title`,
-				'aria-label': __('Question', 'vk-blocks'),
-			})}
+				'aria-label': __( 'Question', 'vk-blocks' ),
+			} ) }
 		>
 			<InnerBlocks.Content />
 		</dt>

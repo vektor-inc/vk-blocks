@@ -11,29 +11,29 @@ import { useContext } from '@wordpress/element';
 import { AdminContext } from '@vkblocks/admin/index';
 
 export default function AdminBalloon() {
-	const { vkBlocksOption, setVkBlocksOption } = useContext(AdminContext);
+	const { vkBlocksOption, setVkBlocksOption } = useContext( AdminContext );
 
 	return (
 		<>
 			<section>
 				<h3 id="block-category-position-setting">
-					{__('Block Category Position Setting', 'vk-blocks')}
+					{ __( 'Block Category Position Setting', 'vk-blocks' ) }
 				</h3>
 				<SelectControl
 					id="block-category-position-selector"
 					className="vk_admin_selectControl"
 					name="vk_blocks_options[block_category_position]"
 					value={
-						!!vkBlocksOption.block_category_position &&
+						!! vkBlocksOption.block_category_position &&
 						vkBlocksOption.block_category_position
 					}
-					onChange={(newValue) => {
-						setVkBlocksOption({
+					onChange={ ( newValue ) => {
+						setVkBlocksOption( {
 							...vkBlocksOption,
 							block_category_position: newValue,
-						});
-					}}
-					options={[
+						} );
+					} }
+					options={ [
 						{
 							label: __(
 								'Above the WordPress default blocks',
@@ -48,7 +48,7 @@ export default function AdminBalloon() {
 							),
 							value: 'under-core-blocks',
 						},
-					]}
+					] }
 				/>
 			</section>
 		</>

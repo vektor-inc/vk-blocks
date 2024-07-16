@@ -10,34 +10,34 @@ import { URLInput } from '@wordpress/block-editor';
 import { __, sprintf } from '@wordpress/i18n';
 import { link, linkOff, keyboardReturn, globe, copy } from '@wordpress/icons';
 
-const LinkPreview = ({
+const LinkPreview = ( {
 	linkUrl,
 	linkTitle,
 	icon,
 	linkTarget,
 	onRemove,
 	onCopy,
-}) => {
+} ) => {
 	const displayURL =
-		linkUrl.startsWith('http://') || linkUrl.startsWith('https://')
+		linkUrl.startsWith( 'http://' ) || linkUrl.startsWith( 'https://' )
 			? linkUrl
 			: 'http://' + linkUrl;
 
 	return (
 		<div
-			aria-label={__('Currently selected', 'vk-blocks')}
+			aria-label={ __( 'Currently selected', 'vk-blocks' ) }
 			className="block-editor-link-control__search-item is-current is-rich is-preview"
 		>
 			<div className="block-editor-link-control__search-item-top">
 				<span className="block-editor-link-control__search-item-header">
 					<span className="block-editor-link-control__search-item-icon is-image">
-						{icon}
+						{ icon }
 					</span>
 					<span className="block-editor-link-control__search-item-details">
 						<a
 							className="components-external-link block-editor-link-control__search-item-title"
-							href={displayURL}
-							target={linkTarget}
+							href={ displayURL }
+							target={ linkTarget }
 							rel="noopener noreferrer"
 						>
 							<span
@@ -45,7 +45,7 @@ const LinkPreview = ({
 								data-wp-component="Truncate"
 								className="components-truncate af-dc---cacbf-19ok06l e19lxcc00"
 							>
-								{linkTitle}
+								{ linkTitle }
 							</span>
 						</a>
 						<span className="block-editor-link-control__search-item-info">
@@ -54,34 +54,37 @@ const LinkPreview = ({
 								data-wp-component="Truncate"
 								className="components-truncate af-dc---cacbf-19ok06l e19lxcc00"
 							>
-								{linkUrl}
+								{ linkUrl }
 							</span>
 						</span>
 					</span>
 				</span>
-				<Tooltip text={__('Deleting Link', 'vk-blocks')}>
+				<Tooltip text={ __( 'Deleting Link', 'vk-blocks' ) }>
 					<button
 						type="button"
 						className="components-button is-compact has-icon"
-						aria-label={__('Deleting Link', 'vk-blocks')}
-						onClick={onRemove}
+						aria-label={ __( 'Deleting Link', 'vk-blocks' ) }
+						onClick={ onRemove }
 					>
-						<span style={{ width: '24px', height: '24px' }}>
-							{linkOff}
+						<span style={ { width: '24px', height: '24px' } }>
+							{ linkOff }
 						</span>
 					</button>
 				</Tooltip>
 				<Tooltip
-					text={sprintf(__('Copy link: %s', 'vk-blocks'), linkUrl)}
+					text={ sprintf(
+						__( 'Copy link: %s', 'vk-blocks' ),
+						linkUrl
+					) }
 				>
 					<button
 						type="button"
 						className="components-button is-compact has-icon"
-						aria-label={__('Copy link', 'vk-blocks')}
-						onClick={() => onCopy(linkUrl)}
+						aria-label={ __( 'Copy link', 'vk-blocks' ) }
+						onClick={ () => onCopy( linkUrl ) }
 					>
-						<span style={{ width: '24px', height: '24px' }}>
-							{copy}
+						<span style={ { width: '24px', height: '24px' } }>
+							{ copy }
 						</span>
 					</button>
 				</Tooltip>
@@ -90,115 +93,117 @@ const LinkPreview = ({
 	);
 };
 
-const LinkToolbar = ({ linkUrl, setLinkUrl, linkTarget, setLinkTarget }) => {
-	const [isOpen, setIsOpen] = useState(false);
-	const [linkTitle, setLinkTitle] = useState('');
-	const [icon, setIcon] = useState(null);
-	const [isSnackbarVisible, setSnackbarVisible] = useState(false);
-	const [isSubmitDisabled, setSubmitDisabled] = useState(true);
-	const [ariaMessage, setAriaMessage] = useState('');
+const LinkToolbar = ( { linkUrl, setLinkUrl, linkTarget, setLinkTarget } ) => {
+	const [ isOpen, setIsOpen ] = useState( false );
+	const [ linkTitle, setLinkTitle ] = useState( '' );
+	const [ icon, setIcon ] = useState( null );
+	const [ isSnackbarVisible, setSnackbarVisible ] = useState( false );
+	const [ isSubmitDisabled, setSubmitDisabled ] = useState( true );
+	const [ ariaMessage, setAriaMessage ] = useState( '' );
 
-	useEffect(() => {
-		if (linkUrl) {
-			const formattedUrl = formatUrl(linkUrl);
+	useEffect( () => {
+		if ( linkUrl ) {
+			const formattedUrl = formatUrl( linkUrl );
 			const isExternalLink =
-				!formattedUrl.startsWith(window.location.origin) &&
-				!formattedUrl.startsWith('#');
+				! formattedUrl.startsWith( window.location.origin ) &&
+				! formattedUrl.startsWith( '#' );
 
-			const fetchTitle = function (url) {
-				if (url.startsWith('#')) {
-					return Promise.resolve(url); // アンカーリンクの場合はそのまま返す
+			const fetchTitle = function ( url ) {
+				if ( url.startsWith( '#' ) ) {
+					return Promise.resolve( url ); // アンカーリンクの場合はそのまま返す
 				}
-				return fetch(url, { method: 'GET' })
-					.then((response) => response.text())
-					.then((text) => {
-						const titleMatch = text.match(/<title>(.*?)<\/title>/i);
-						return titleMatch ? titleMatch[1] : url;
-					})
-					.catch(() => {
+				return fetch( url, { method: 'GET' } )
+					.then( ( response ) => response.text() )
+					.then( ( text ) => {
+						const titleMatch = text.match(
+							/<title>(.*?)<\/title>/i
+						);
+						return titleMatch ? titleMatch[ 1 ] : url;
+					} )
+					.catch( () => {
 						return url;
-					});
+					} );
 			};
 
-			fetchTitle(formattedUrl).then((title) => {
-				setLinkTitle(title);
-			});
+			fetchTitle( formattedUrl ).then( ( title ) => {
+				setLinkTitle( title );
+			} );
 
-			if (isExternalLink) {
-				setIcon(globe);
-			} else if (formattedUrl.startsWith('#')) {
-				setIcon(globe);
+			if ( isExternalLink ) {
+				setIcon( globe );
+			} else if ( formattedUrl.startsWith( '#' ) ) {
+				setIcon( globe );
 			} else {
 				try {
-					const domain = new URL(formattedUrl).origin;
-					const faviconUrl = `${domain}/favicon.ico`;
+					const domain = new URL( formattedUrl ).origin;
+					const faviconUrl = `${ domain }/favicon.ico`;
 					setIcon(
 						<img
-							src={faviconUrl}
+							src={ faviconUrl }
 							alt=""
-							style={{ width: '16px', height: '16px' }}
+							style={ { width: '16px', height: '16px' } }
 						/>
 					);
 				} catch {
-					setIcon(link); // URLが無効な場合はリンクアイコンを使用
+					setIcon( link ); // URLが無効な場合はリンクアイコンを使用
 				}
 			}
 		}
-	}, [linkUrl]);
+	}, [ linkUrl ] );
 
-	useEffect(() => {
-		setSubmitDisabled(!linkUrl || linkUrl.trim() === '');
-	}, [linkUrl]);
+	useEffect( () => {
+		setSubmitDisabled( ! linkUrl || linkUrl.trim() === '' );
+	}, [ linkUrl ] );
 
 	const handleToggle = () => {
-		if (!isOpen) {
-			setIsOpen(true);
-		} else if (linkUrl === '') {
-			setIsOpen(false);
+		if ( ! isOpen ) {
+			setIsOpen( true );
+		} else if ( linkUrl === '' ) {
+			setIsOpen( false );
 		}
 	};
 
 	const handleRemove = () => {
-		setLinkUrl('');
-		setLinkTarget('');
-		setIsOpen(false);
+		setLinkUrl( '' );
+		setLinkTarget( '' );
+		setIsOpen( false );
 	};
 
-	const handleCopy = function (url) {
-		const formattedUrl = url.startsWith('#') ? url : formatUrl(url);
-		if (typeof window !== 'undefined' && window.navigator.clipboard) {
+	const handleCopy = function ( url ) {
+		const formattedUrl = url.startsWith( '#' ) ? url : formatUrl( url );
+		if ( typeof window !== 'undefined' && window.navigator.clipboard ) {
 			window.navigator.clipboard
-				.writeText(formattedUrl)
-				.then(() => {
+				.writeText( formattedUrl )
+				.then( () => {
 					setAriaMessage(
-						__('Link copied to clipboard.', 'vk-blocks')
+						__( 'Link copied to clipboard.', 'vk-blocks' )
 					);
-					setSnackbarVisible(true);
-					setTimeout(() => setSnackbarVisible(false), 3000);
-				})
-				.catch(() => {
+					setSnackbarVisible( true );
+					setTimeout( () => setSnackbarVisible( false ), 3000 );
+				} )
+				.catch( () => {
 					// console.error('Failed to copy: ', error);
-				});
+				} );
 		} else {
 			// Clipboard API がサポートされていない場合のフォールバック
-			const textArea = document.createElement('textarea');
+			const textArea = document.createElement( 'textarea' );
 			textArea.value = formattedUrl;
-			document.body.appendChild(textArea);
+			document.body.appendChild( textArea );
 			textArea.focus();
 			textArea.select();
-			document.execCommand('copy');
-			document.body.removeChild(textArea);
-			setAriaMessage(__('Link copied to clipboard.', 'vk-blocks'));
-			setSnackbarVisible(true);
-			setTimeout(() => setSnackbarVisible(false), 3000);
+			document.execCommand( 'copy' );
+			document.body.removeChild( textArea );
+			setAriaMessage( __( 'Link copied to clipboard.', 'vk-blocks' ) );
+			setSnackbarVisible( true );
+			setTimeout( () => setSnackbarVisible( false ), 3000 );
 		}
 	};
 
-	const formatUrl = (url) => {
+	const formatUrl = ( url ) => {
 		if (
-			url.startsWith('http://') ||
-			url.startsWith('https://') ||
-			url.startsWith('#') ||
+			url.startsWith( 'http://' ) ||
+			url.startsWith( 'https://' ) ||
+			url.startsWith( '#' ) ||
 			url === ''
 		) {
 			return url;
@@ -207,82 +212,87 @@ const LinkToolbar = ({ linkUrl, setLinkUrl, linkTarget, setLinkTarget }) => {
 	};
 
 	const handleSubmit = () => {
-		if (linkUrl) {
-			setLinkUrl(formatUrl(linkUrl));
+		if ( linkUrl ) {
+			setLinkUrl( formatUrl( linkUrl ) );
 		}
 	};
 
 	return (
 		<>
 			<Dropdown
-				popoverProps={{ placement: 'bottom-start' }}
-				renderToggle={({ isOpen, onToggle }) => {
+				popoverProps={ { placement: 'bottom-start' } }
+				renderToggle={ ( { isOpen, onToggle } ) => {
 					const setLink = () => {
 						handleToggle();
 						onToggle();
 					};
 					return (
 						<ToolbarButton
-							aria-expanded={isOpen}
-							icon={isOpen ? linkOff : link}
-							isActive={!!linkUrl}
+							aria-expanded={ isOpen }
+							icon={ isOpen ? linkOff : link }
+							isActive={ !! linkUrl }
 							label={
 								isOpen
-									? __('Unlink', 'vk-blocks')
-									: __('Input Link URL', 'vk-blocks')
+									? __( 'Unlink', 'vk-blocks' )
+									: __( 'Input Link URL', 'vk-blocks' )
 							}
-							onClick={setLink}
-							className={linkUrl ? 'is-pressed' : ''}
+							onClick={ setLink }
+							className={ linkUrl ? 'is-pressed' : '' }
 						/>
 					);
-				}}
-				renderContent={({ onClose }) => (
+				} }
+				renderContent={ ( { onClose } ) => (
 					<div>
-						{linkUrl && (
+						{ linkUrl && (
 							<LinkPreview
-								linkUrl={formatUrl(linkUrl)}
-								linkTitle={linkTitle}
-								icon={icon}
-								linkTarget={linkTarget}
-								onRemove={handleRemove}
-								onCopy={handleCopy}
+								linkUrl={ formatUrl( linkUrl ) }
+								linkTitle={ linkTitle }
+								icon={ icon }
+								linkTarget={ linkTarget }
+								onRemove={ handleRemove }
+								onCopy={ handleCopy }
 							/>
-						)}
+						) }
 						<form
-							onSubmit={(e) => {
+							onSubmit={ ( e ) => {
 								e.preventDefault();
 								handleSubmit();
 								onClose();
-							}}
+							} }
 						>
 							<div className="vk-block-editor-url-input-wrapper">
 								<URLInput
 									__nextHasNoMarginBottom
-									value={linkUrl}
-									onChange={(value) => setLinkUrl(value)}
+									value={ linkUrl }
+									onChange={ ( value ) =>
+										setLinkUrl( value )
+									}
 								/>
 								<Button
-									icon={keyboardReturn}
-									label={__('Submit', 'vk-blocks')}
+									icon={ keyboardReturn }
+									label={ __( 'Submit', 'vk-blocks' ) }
 									type="submit"
-									disabled={isSubmitDisabled}
+									disabled={ isSubmitDisabled }
 								/>
 							</div>
 							<CheckboxControl
-								label={__('Open link new tab.', 'vk-blocks')}
-								checked={linkTarget === '_blank'}
-								onChange={(checked) =>
-									setLinkTarget(checked ? '_blank' : '')
+								label={ __(
+									'Open link new tab.',
+									'vk-blocks'
+								) }
+								checked={ linkTarget === '_blank' }
+								onChange={ ( checked ) =>
+									setLinkTarget( checked ? '_blank' : '' )
 								}
 							/>
 						</form>
 					</div>
-				)}
+				) }
 			/>
-			{isSnackbarVisible && (
+			{ isSnackbarVisible && (
 				<div
 					aria-live="polite"
-					style={{
+					style={ {
 						position: 'fixed',
 						bottom: '-3.5rem',
 						right: '0',
@@ -293,14 +303,14 @@ const LinkToolbar = ({ linkUrl, setLinkUrl, linkTarget, setLinkTarget }) => {
 						borderRadius: '4px',
 						fontSize: '12px',
 						lineHeight: '1.2',
-					}}
+					} }
 				>
-					{__('Link copied to clipboard.', 'vk-blocks')}
+					{ __( 'Link copied to clipboard.', 'vk-blocks' ) }
 				</div>
-			)}
+			) }
 			<div
 				aria-live="polite"
-				style={{
+				style={ {
 					position: 'absolute',
 					width: '1px',
 					height: '1px',
@@ -309,9 +319,9 @@ const LinkToolbar = ({ linkUrl, setLinkUrl, linkTarget, setLinkTarget }) => {
 					overflow: 'hidden',
 					clip: 'rect(0,0,0,0)',
 					border: '0',
-				}}
+				} }
 			>
-				{ariaMessage}
+				{ ariaMessage }
 			</div>
 		</>
 	);

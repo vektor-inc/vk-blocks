@@ -11,30 +11,30 @@ import { __ } from '@wordpress/i18n';
 import PatternExplorerSidebar from './sidebar';
 import PatternList from './patterns-list';
 
-function VariationExplorerModal(props) {
+function VariationExplorerModal( props ) {
 	const { onModalClose } = props;
-	const [selectedCategory, setSelectedCategory] = useState('create');
-	const [hasUpdates, setHasUpdates] = useState(false);
+	const [ selectedCategory, setSelectedCategory ] = useState( 'create' );
+	const [ hasUpdates, setHasUpdates ] = useState( false );
 	return (
 		<Modal
-			title={__('Variation settings', 'vk-blocks')}
-			onRequestClose={onModalClose}
+			title={ __( 'Variation settings', 'vk-blocks' ) }
+			onRequestClose={ onModalClose }
 			className="custom_block_variation_modal"
 			isFullScreen
-			shouldCloseOnClickOutside={false}
+			shouldCloseOnClickOutside={ false }
 		>
 			<div className="block-editor-block-patterns-explorer">
 				<PatternExplorerSidebar
-					selectedCategory={selectedCategory}
-					onClickCategory={setSelectedCategory}
-					hasUpdates={hasUpdates}
-					setHasUpdates={setHasUpdates}
+					selectedCategory={ selectedCategory }
+					onClickCategory={ setSelectedCategory }
+					hasUpdates={ hasUpdates }
+					setHasUpdates={ setHasUpdates }
 				/>
 				<PatternList
-					selectedCategory={selectedCategory}
-					hasUpdates={hasUpdates}
-					setHasUpdates={setHasUpdates}
-					{...props}
+					selectedCategory={ selectedCategory }
+					hasUpdates={ hasUpdates }
+					setHasUpdates={ setHasUpdates }
+					{ ...props }
 				/>
 			</div>
 		</Modal>

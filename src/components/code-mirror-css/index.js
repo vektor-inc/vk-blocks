@@ -20,7 +20,7 @@ import { EditorView } from '@codemirror/view';
  */
 import { stripHTML } from '@vkblocks/utils/strip-html';
 
-export const CodeMirrorCss = (props) => {
+export const CodeMirrorCss = ( props ) => {
 	const {
 		id = 'vk-custom-css-code-mirror',
 		className,
@@ -34,14 +34,14 @@ export const CodeMirrorCss = (props) => {
 			resize: 'vertical',
 			overflow: 'hidden',
 		},
-		onBlur = (event) => {
-			if (!event?.target?.textContent) {
-				setCSSError(null);
+		onBlur = ( event ) => {
+			if ( ! event?.target?.textContent ) {
+				setCSSError( null );
 				return;
 			}
 
-			const [transformed] = transformStyles(
-				[{ css: event.target.textContent }],
+			const [ transformed ] = transformStyles(
+				[ { css: event.target.textContent } ],
 				'.editor-styles-wrapper'
 			);
 
@@ -50,41 +50,41 @@ export const CodeMirrorCss = (props) => {
 					? __(
 							'There is an error with your CSS structure.',
 							'vk-blocks'
-						)
+					  )
 					: null
 			);
 		},
 	} = props;
-	const [cssError, setCSSError] = useState(null);
-	const wrapperRef = useRef(null);
-	const [isInitialLoad, setIsInitialLoad] = useState(true);
+	const [ cssError, setCSSError ] = useState( null );
+	const wrapperRef = useRef( null );
+	const [ isInitialLoad, setIsInitialLoad ] = useState( true );
 
 	// リサイズ検知して高さを動的に調整
-	useEffect(() => {
-		if (wrapperRef.current) {
-			const observer = new ResizeObserver(() => {
-				if (isInitialLoad) {
+	useEffect( () => {
+		if ( wrapperRef.current ) {
+			const observer = new ResizeObserver( () => {
+				if ( isInitialLoad ) {
 					wrapperRef.current.style.setProperty(
 						'height',
 						'auto',
 						'important'
 					);
-					setIsInitialLoad(false);
+					setIsInitialLoad( false );
 				}
-			});
-			observer.observe(wrapperRef.current);
+			} );
+			observer.observe( wrapperRef.current );
 			return () => observer.disconnect();
 		}
-	}, [isInitialLoad]);
+	}, [ isInitialLoad ] );
 
 	// gutterの高さ検知して動的に調整
-	useEffect(() => {
-		if (wrapperRef.current) {
-			const gutters = wrapperRef.current.querySelector('.cm-gutters');
-			if (gutters) {
-				const observer = new ResizeObserver(() => {
+	useEffect( () => {
+		if ( wrapperRef.current ) {
+			const gutters = wrapperRef.current.querySelector( '.cm-gutters' );
+			if ( gutters ) {
+				const observer = new ResizeObserver( () => {
 					const guttersHeight = gutters.offsetHeight;
-					if (guttersHeight < 200) {
+					if ( guttersHeight < 200 ) {
 						gutters.style.setProperty(
 							'minHeight',
 							'200px',
@@ -93,14 +93,14 @@ export const CodeMirrorCss = (props) => {
 					} else {
 						gutters.style.minHeight = '';
 					}
-				});
-				observer.observe(gutters);
+				} );
+				observer.observe( gutters );
 				return () => observer.disconnect();
 			}
 		}
-	}, [value]);
+	}, [ value ] );
 
-	const customStyleExtension = EditorView.theme({
+	const customStyleExtension = EditorView.theme( {
 		'.cm-editor': {
 			minHeight: '200px',
 			height: '100%',
@@ -111,70 +111,70 @@ export const CodeMirrorCss = (props) => {
 			minHeight: '200px',
 			overflow: 'auto',
 		},
-	});
+	} );
 
 	return (
 		<div
 			className="vk_custom-css-editor-wrapper"
-			style={{ position: 'relative' }}
+			style={ { position: 'relative' } }
 		>
 			<CodeMirror
-				id={id}
-				className={classnames(`vk_custom-css-editor`, className)}
+				id={ id }
+				className={ classnames( `vk_custom-css-editor`, className ) }
 				height="100%" // 内部のエディタをラッパーの高さに合わせる
 				// https://uiwjs.github.io/react-codemirror/#/extensions/color
-				extensions={[
+				extensions={ [
 					css(),
 					EditorView.lineWrapping,
 					customStyleExtension,
-				]}
-				value={value}
-				onChange={(newValue) => {
-					onChange(stripHTML(newValue));
+				] }
+				value={ value }
+				onChange={ ( newValue ) => {
+					onChange( stripHTML( newValue ) );
 
-					const [transformed] = transformStyles(
-						[{ css: newValue }],
+					const [ transformed ] = transformStyles(
+						[ { css: newValue } ],
 						'.editor-styles-wrapper'
 					);
-					if (transformed) {
-						setCSSError(null);
+					if ( transformed ) {
+						setCSSError( null );
 					}
-				}}
-				style={{
+				} }
+				style={ {
 					...style,
 					height: '200px',
 					minHeight: '200px',
 					resize: 'vertical',
-				}}
-				onBlur={(event) => {
-					onBlur(event);
-				}}
+				} }
+				onBlur={ ( event ) => {
+					onBlur( event );
+				} }
 			/>
-			{cssError && (
-				<Tooltip text={cssError}>
+			{ cssError && (
+				<Tooltip text={ cssError }>
 					<div
-						style={{
+						style={ {
 							position: 'absolute',
 							bottom: '0px',
 							right: '5px',
-						}}
+						} }
 					>
-						<Icon icon={info} style={{ fill: '#cc1818' }} />
+						<Icon icon={ info } style={ { fill: '#cc1818' } } />
 					</div>
 				</Tooltip>
-			)}
-			{(() => {
-				if (value && value.indexOf('　') !== -1) {
+			) }
+			{ ( () => {
+				if ( value && value.indexOf( '　' ) !== -1 ) {
 					return (
 						<p>
-							{__(
+							{ __(
 								'Note : Contains double-byte spaces; CSS may not work.',
 								'vk-blocks'
-							)}
+							) }
 						</p>
 					);
 				}
-			})()}
+			} )() }
 		</div>
 	);
 };

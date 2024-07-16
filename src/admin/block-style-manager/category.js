@@ -16,38 +16,38 @@ import { useInstanceId } from '@wordpress/compose';
 import BlockStyleChecklist from './checklist';
 import { AdminContext } from '@vkblocks/admin/index';
 
-export default function BlockStyleManagerCategory({
+export default function BlockStyleManagerCategory( {
 	blockName,
 	blockTitle,
 	blockStyleTypes,
-}) {
-	const instanceId = useInstanceId(BlockStyleManagerCategory);
-	const { vkBlocksOption, setVkBlocksOption } = useContext(AdminContext);
+} ) {
+	const instanceId = useInstanceId( BlockStyleManagerCategory );
+	const { vkBlocksOption, setVkBlocksOption } = useContext( AdminContext );
 	const defaultAllowedBlockStyleTypes = true;
 	const hiddenBlockTypes = vkBlocksOption.disable_block_style_lists;
-	const filteredBlockStyleTypes = useMemo(() => {
-		if (defaultAllowedBlockStyleTypes === true) {
+	const filteredBlockStyleTypes = useMemo( () => {
+		if ( defaultAllowedBlockStyleTypes === true ) {
 			return blockStyleTypes;
 		}
-		return blockStyleTypes.filter(({ name }) => {
+		return blockStyleTypes.filter( ( { name } ) => {
 			const hiddenBlockStyleLists =
 				vkBlocksOption.disable_block_style_lists.find(
-					(item) => item.block_name === blockName
+					( item ) => item.block_name === blockName
 				);
-			return !hiddenBlockStyleLists.includes(name);
-		});
-	}, [defaultAllowedBlockStyleTypes, blockStyleTypes]);
+			return ! hiddenBlockStyleLists.includes( name );
+		} );
+	}, [ defaultAllowedBlockStyleTypes, blockStyleTypes ] );
 
-	const showBlockStyles = (blockStyles) => {
+	const showBlockStyles = ( blockStyles ) => {
 		const targetBlockStyles = vkBlocksOption.disable_block_style_lists.find(
-			(item) => item.block_name === blockName
+			( item ) => item.block_name === blockName
 		);
 		const existingBlockStyleNames = targetBlockStyles?.property_name ?? [];
 		const mergedBlockNames = existingBlockStyleNames.filter(
-			(type) =>
-				!(
-					Array.isArray(blockStyles) ? blockStyles : [blockStyles]
-				).includes(type)
+			( type ) =>
+				! (
+					Array.isArray( blockStyles ) ? blockStyles : [ blockStyles ]
+				).includes( type )
 		);
 
 		// 対象のオプション値がない時
@@ -55,86 +55,88 @@ export default function BlockStyleManagerCategory({
 			existingBlockStyleNames.length === 0 &&
 			targetBlockStyles === undefined
 		) {
-			vkBlocksOption.disable_block_style_lists.push({
+			vkBlocksOption.disable_block_style_lists.push( {
 				block_name: blockName,
-				property_name: [...mergedBlockNames],
-			});
+				property_name: [ ...mergedBlockNames ],
+			} );
 		}
 		// vkBlocksOptionのproperty_nameを上書きする
-		vkBlocksOption.disable_block_style_lists.forEach((item) => {
-			if (item.block_name === blockName) {
-				item.property_name = [...mergedBlockNames];
+		vkBlocksOption.disable_block_style_lists.forEach( ( item ) => {
+			if ( item.block_name === blockName ) {
+				item.property_name = [ ...mergedBlockNames ];
 			}
-		});
+		} );
 
-		setVkBlocksOption({ ...vkBlocksOption });
+		setVkBlocksOption( { ...vkBlocksOption } );
 	};
 
-	const hideBlockStyles = (blockStyles) => {
+	const hideBlockStyles = ( blockStyles ) => {
 		const targetBlockStyles = vkBlocksOption.disable_block_style_lists.find(
-			(item) => item.block_name === blockName
+			( item ) => item.block_name === blockName
 		);
 		const existingBlockStyleNames = targetBlockStyles?.property_name ?? [];
-		const mergedBlockNames = new Set([
+		const mergedBlockNames = new Set( [
 			...existingBlockStyleNames,
-			...(Array.isArray(blockStyles) ? blockStyles : [blockStyles]),
-		]);
+			...( Array.isArray( blockStyles ) ? blockStyles : [ blockStyles ] ),
+		] );
 
 		// 対象のオプション値がない時
 		if (
 			existingBlockStyleNames.length === 0 &&
 			targetBlockStyles === undefined
 		) {
-			vkBlocksOption.disable_block_style_lists.push({
+			vkBlocksOption.disable_block_style_lists.push( {
 				block_name: blockName,
-				property_name: [...mergedBlockNames],
-			});
+				property_name: [ ...mergedBlockNames ],
+			} );
 		}
 		// vkBlocksOptionのproperty_nameを上書きする
-		vkBlocksOption.disable_block_style_lists.forEach((item) => {
-			if (item.block_name === blockName) {
-				item.property_name = [...mergedBlockNames];
+		vkBlocksOption.disable_block_style_lists.forEach( ( item ) => {
+			if ( item.block_name === blockName ) {
+				item.property_name = [ ...mergedBlockNames ];
 			}
-		});
+		} );
 
-		setVkBlocksOption({ ...vkBlocksOption });
+		setVkBlocksOption( { ...vkBlocksOption } );
 	};
 
 	const toggleVisible = useCallback(
-		(blockStyleName, nextIsChecked) => {
-			if (nextIsChecked) {
-				showBlockStyles(blockStyleName);
+		( blockStyleName, nextIsChecked ) => {
+			if ( nextIsChecked ) {
+				showBlockStyles( blockStyleName );
 			} else {
-				hideBlockStyles(blockStyleName);
+				hideBlockStyles( blockStyleName );
 			}
 		},
-		[showBlockStyles, hideBlockStyles]
+		[ showBlockStyles, hideBlockStyles ]
 	);
 	const toggleAllVisible = useCallback(
-		(nextIsChecked) => {
+		( nextIsChecked ) => {
 			const blockStyles = blockStyleTypes.map(
-				(blockType) => blockType.name
+				( blockType ) => blockType.name
 			);
-			if (nextIsChecked) {
-				showBlockStyles(blockStyles);
+			if ( nextIsChecked ) {
+				showBlockStyles( blockStyles );
 			} else {
-				hideBlockStyles(blockStyles);
+				hideBlockStyles( blockStyles );
 			}
 		},
-		[blockStyleTypes, showBlockStyles, hideBlockStyles]
+		[ blockStyleTypes, showBlockStyles, hideBlockStyles ]
 	);
 
-	if (!filteredBlockStyleTypes.length) {
+	if ( ! filteredBlockStyleTypes.length ) {
 		return null;
 	}
 
 	// checkするブロック名配列を作る
 	const hiddenBlockStyleLists = hiddenBlockTypes.find(
-		(item) => item.block_name === blockName
+		( item ) => item.block_name === blockName
 	);
 	const checkedBlockStyles = filteredBlockStyleTypes
-		.map((blockType) => blockType.name)
-		.filter((type) => !hiddenBlockStyleLists?.property_name.includes(type));
+		.map( ( blockType ) => blockType.name )
+		.filter(
+			( type ) => ! hiddenBlockStyleLists?.property_name.includes( type )
+		);
 
 	const titleId = 'block-manager__category-title-' + instanceId;
 
@@ -142,9 +144,9 @@ export default function BlockStyleManagerCategory({
 		checkedBlockStyles.length === filteredBlockStyleTypes.length;
 
 	let ariaChecked;
-	if (isAllChecked) {
+	if ( isAllChecked ) {
 		ariaChecked = 'true';
-	} else if (checkedBlockStyles.length > 0) {
+	} else if ( checkedBlockStyles.length > 0 ) {
 		ariaChecked = 'mixed';
 	} else {
 		ariaChecked = 'false';
@@ -153,25 +155,25 @@ export default function BlockStyleManagerCategory({
 	return (
 		<div
 			role="group"
-			aria-labelledby={titleId}
-			className={classnames(
+			aria-labelledby={ titleId }
+			className={ classnames(
 				'block-manager__category',
 				'blockManagerList'
-			)}
+			) }
 		>
 			<CheckboxControl
 				__nextHasNoMarginBottom
-				checked={isAllChecked}
-				onChange={toggleAllVisible}
+				checked={ isAllChecked }
+				onChange={ toggleAllVisible }
 				className="block-manager__category-title"
-				aria-checked={ariaChecked}
-				label={<span id={titleId}>{blockTitle}</span>}
+				aria-checked={ ariaChecked }
+				label={ <span id={ titleId }>{ blockTitle }</span> }
 			/>
 			<BlockStyleChecklist
-				blockStyleTypes={filteredBlockStyleTypes}
-				value={checkedBlockStyles}
-				onItemChange={toggleVisible}
-				blockName={blockName}
+				blockStyleTypes={ filteredBlockStyleTypes }
+				value={ checkedBlockStyles }
+				onItemChange={ toggleVisible }
+				blockName={ blockName }
 			/>
 		</div>
 	);

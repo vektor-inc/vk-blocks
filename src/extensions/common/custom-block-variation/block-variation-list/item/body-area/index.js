@@ -18,137 +18,138 @@ import { useSelect } from '@wordpress/data';
  */
 import { SCOPE_OPTIONS } from '../../../utils';
 
-export const BodyArea = ({
+export const BodyArea = ( {
 	index,
 	blockName,
 	variationState,
 	setVariationState,
-}) => {
-	const { _getCategories } = useSelect((select) => {
-		const { getCategories } = select(blocksStore);
+} ) => {
+	const { _getCategories } = useSelect( ( select ) => {
+		const { getCategories } = select( blocksStore );
 		// vk-blocks-cat-deprecated は非表示
 		const categories = getCategories().filter(
-			(item) => item.slug !== 'vk-blocks-cat-deprecated'
+			( item ) => item.slug !== 'vk-blocks-cat-deprecated'
 		);
 		return {
 			_getCategories: categories,
 		};
-	}, []);
-	const support = getBlockSupport(blockName, 'vkBlocksBlockVariation');
+	}, [] );
+	const support = getBlockSupport( blockName, 'vkBlocksBlockVariation' );
 
-	const onChange = (key, value) => {
+	const onChange = ( key, value ) => {
 		const newItems = variationState;
-		newItems[index] = {
-			...variationState[index],
-			[key]: value,
+		newItems[ index ] = {
+			...variationState[ index ],
+			[ key ]: value,
 		};
-		setVariationState([...newItems]);
+		setVariationState( [ ...newItems ] );
 	};
 
 	return (
 		<VStack
 			spacing="3"
-			style={{
+			style={ {
 				padding: '20px',
 				borderTop: '1px solid #ccc',
-			}}
+			} }
 		>
 			<div>
-				<h4>{__('Title (required)', 'vk-blocks')}</h4>
+				<h4>{ __( 'Title (required)', 'vk-blocks' ) }</h4>
 				<TextControl
 					__nextHasNoMarginBottom
-					value={variationState[index].title}
-					onChange={(value) => onChange('title', value)}
-					placeholder={__('My variations', 'vk-blocks')}
+					value={ variationState[ index ].title }
+					onChange={ ( value ) => onChange( 'title', value ) }
+					placeholder={ __( 'My variations', 'vk-blocks' ) }
 				/>
-				{!variationState[index].title && (
+				{ ! variationState[ index ].title && (
 					<p
 						className="block-variation-error-text"
-						style={{ marginTop: '0', color: '#c00' }}
+						style={ { marginTop: '0', color: '#c00' } }
 					>
-						{__('title is required', 'vk-blocks')}
+						{ __( 'title is required', 'vk-blocks' ) }
 					</p>
-				)}
+				) }
 			</div>
 			<div>
-				<h4>{__('Description', 'vk-blocks')}</h4>
+				<h4>{ __( 'Description', 'vk-blocks' ) }</h4>
 				<TextControl
 					__nextHasNoMarginBottom
-					value={variationState[index].description}
-					onChange={(value) => onChange('description', value)}
+					value={ variationState[ index ].description }
+					onChange={ ( value ) => onChange( 'description', value ) }
 				/>
 			</div>
 			<div>
-				<h4>{__('Scope (required)', 'vk-blocks')}</h4>
-				<p style={{ marginTop: '0' }}>
-					{__(
+				<h4>{ __( 'Scope (required)', 'vk-blocks' ) }</h4>
+				<p style={ { marginTop: '0' } }>
+					{ __(
 						'You can set where registered variations are displayed. You can call it from the displayed location.',
 						'vk-blocks'
-					)}
+					) }
 				</p>
-				{SCOPE_OPTIONS.filter((scopeOption) =>
-					support.scope.includes(scopeOption.name)
-				).map((scopeOption) => (
+				{ SCOPE_OPTIONS.filter( ( scopeOption ) =>
+					support.scope.includes( scopeOption.name )
+				).map( ( scopeOption ) => (
 					<CheckboxControl
-						key={scopeOption.name}
+						key={ scopeOption.name }
 						__nextHasNoMarginBottom
-						checked={variationState[index].scope?.includes(
+						checked={ variationState[ index ].scope?.includes(
 							scopeOption.name
-						)}
-						help={scopeOption.help}
-						label={scopeOption.label}
-						onChange={(isChecked) => {
+						) }
+						help={ scopeOption.help }
+						label={ scopeOption.label }
+						onChange={ ( isChecked ) => {
 							const newScope = isChecked
 								? [
-										...(variationState[index].scope || []),
+										...( variationState[ index ].scope ||
+											[] ),
 										scopeOption.name,
-									]
-								: variationState[index].scope.filter(
-										(item) => item !== scopeOption.name
-									);
-							onChange('scope', newScope);
-						}}
+								  ]
+								: variationState[ index ].scope.filter(
+										( item ) => item !== scopeOption.name
+								  );
+							onChange( 'scope', newScope );
+						} }
 					/>
-				))}
-				{variationState[index].scope.length === 0 && (
+				) ) }
+				{ variationState[ index ].scope.length === 0 && (
 					<p className="block-variation-error-text">
-						{__('scope is required', 'vk-blocks')}
+						{ __( 'scope is required', 'vk-blocks' ) }
 					</p>
-				)}
+				) }
 			</div>
-			{variationState[index].scope.includes('inserter') && (
+			{ variationState[ index ].scope.includes( 'inserter' ) && (
 				<div>
-					<h4>{__('Category')}</h4>
+					<h4>{ __( 'Category' ) }</h4>
 					<div className="block-variation-category-list">
-						{_getCategories.map((blockCategory) => (
+						{ _getCategories.map( ( blockCategory ) => (
 							<RadioControl
-								key={blockCategory.slug}
-								selected={variationState[index].category}
-								options={[
+								key={ blockCategory.slug }
+								selected={ variationState[ index ].category }
+								options={ [
 									{
 										label: blockCategory.title,
 										value: blockCategory.slug,
 									},
-								]}
-								onChange={(value) =>
-									onChange('category', value)
+								] }
+								onChange={ ( value ) =>
+									onChange( 'category', value )
 								}
 							/>
-						))}
+						) ) }
 					</div>
 				</div>
-			)}
+			) }
 			<div>
-				<h4>{__('Icon', 'vk-blocks')}</h4>
+				<h4>{ __( 'Icon', 'vk-blocks' ) }</h4>
 				<TextControl
 					__nextHasNoMarginBottom
-					value={variationState[index].icon}
-					onChange={(value) => onChange('icon', value)}
+					value={ variationState[ index ].icon }
+					onChange={ ( value ) => onChange( 'icon', value ) }
 					placeholder="embed-generic"
-					help={__(
+					help={ __(
 						'For the icon name, please enter alphanumeric characters without "dashicons-". Example: embed-generic',
 						'vk-blocks'
-					)}
+					) }
 				/>
 				<div>
 					<ExternalLink
@@ -156,16 +157,16 @@ export const BodyArea = ({
 						target="_blank"
 						rel="noreferrer"
 					>
-						{__('Dashicons list', 'vk-blocks')}
+						{ __( 'Dashicons list', 'vk-blocks' ) }
 					</ExternalLink>
 				</div>
 			</div>
 			<div>
-				<h4>{__('Keyword', 'vk-blocks')}</h4>
+				<h4>{ __( 'Keyword', 'vk-blocks' ) }</h4>
 				<FormTokenField
-					label={__('Add keyword', 'vk-blocks')}
-					value={variationState[index].keywords || []}
-					onChange={(value) => onChange('keywords', value)}
+					label={ __( 'Add keyword', 'vk-blocks' ) }
+					value={ variationState[ index ].keywords || [] }
+					onChange={ ( value ) => onChange( 'keywords', value ) }
 				/>
 			</div>
 		</VStack>

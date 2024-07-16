@@ -4,7 +4,7 @@
 import { TitleArea } from './title-area';
 import { BodyArea } from './body-area';
 
-export const Item = ({
+export const Item = ( {
 	activeBlockType,
 	index,
 	onChange,
@@ -12,27 +12,27 @@ export const Item = ({
 	openNameLists,
 	setOpenNameLists,
 	array,
-}) => {
-	const isOpen = openNameLists.includes(blockStyleListObj.property_name);
+} ) => {
+	const isOpen = openNameLists.includes( blockStyleListObj.property_name );
 
 	return (
 		<div className="custom_block_style_item">
 			<TitleArea
-				activeBlockType={activeBlockType}
-				index={index}
-				blockStyleListObj={blockStyleListObj}
-				openNameLists={openNameLists}
-				setOpenNameLists={setOpenNameLists}
-				array={array}
+				activeBlockType={ activeBlockType }
+				index={ index }
+				blockStyleListObj={ blockStyleListObj }
+				openNameLists={ openNameLists }
+				setOpenNameLists={ setOpenNameLists }
+				array={ array }
 			/>
-			{isOpen && (
+			{ isOpen && (
 				<BodyArea
-					activeBlockType={activeBlockType}
-					index={index}
-					onChange={onChange}
-					blockStyleListObj={blockStyleListObj}
+					activeBlockType={ activeBlockType }
+					index={ index }
+					onChange={ onChange }
+					blockStyleListObj={ blockStyleListObj }
 				/>
-			)}
+			) }
 		</div>
 	);
 };

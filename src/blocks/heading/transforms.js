@@ -4,23 +4,23 @@ const transforms = {
 	from: [
 		{
 			type: 'block',
-			blocks: ['core/heading'],
-			transform: (attributes) => {
+			blocks: [ 'core/heading' ],
+			transform: ( attributes ) => {
 				const { content } = attributes;
 
 				const transformAttributes = {
 					title: content,
 				};
 
-				return createBlock('vk-blocks/heading', transformAttributes);
+				return createBlock( 'vk-blocks/heading', transformAttributes );
 			},
 		},
 	],
 	to: [
 		{
 			type: 'block',
-			blocks: ['core/heading'],
-			transform: (attributes) => {
+			blocks: [ 'core/heading' ],
+			transform: ( attributes ) => {
 				const {
 					title,
 					level,
@@ -37,24 +37,24 @@ const transforms = {
 				} = attributes;
 
 				let headingMarginBottom;
-				if (subTextFlag === 'on' && !!titleMarginBottom) {
+				if ( subTextFlag === 'on' && !! titleMarginBottom ) {
 					headingMarginBottom = titleMarginBottom + 'rem';
-				} else if (subTextFlag === 'off' && !!outerMarginBottom) {
+				} else if ( subTextFlag === 'off' && !! outerMarginBottom ) {
 					headingMarginBottom = outerMarginBottom + 'rem';
 				}
 
 				let headingFontSize;
-				if (!!titleSize) {
+				if ( !! titleSize ) {
 					headingFontSize = titleSize + 'rem';
 				}
 
 				let paragraphMarginBottom;
-				if (subTextFlag === 'on' && !!outerMarginBottom) {
+				if ( subTextFlag === 'on' && !! outerMarginBottom ) {
 					paragraphMarginBottom = outerMarginBottom + 'rem';
 				}
 
 				let paragraphFontSize;
-				if (!!subTextSize) {
+				if ( !! subTextSize ) {
 					paragraphFontSize = subTextSize + 'rem';
 				}
 
@@ -97,9 +97,9 @@ const transforms = {
 				const blockContent = [];
 
 				blockContent.push(
-					createBlock('core/heading', transformHeadingAttributes)
+					createBlock( 'core/heading', transformHeadingAttributes )
 				);
-				if (subTextFlag === 'on') {
+				if ( subTextFlag === 'on' ) {
 					blockContent.push(
 						createBlock(
 							'core/paragraph',

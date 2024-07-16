@@ -10,68 +10,68 @@ import { colorSlugToColorCode } from '@vkblocks/admin/utils/color-slug-to-color-
 import hex2rgba from '@vkblocks/utils/hex-to-rgba';
 /*globals vkBlocksObject */
 
-export const TextStylePreview = (props) => {
+export const TextStylePreview = ( props ) => {
 	const { textStyleListObj } = props;
 
 	const generateCustomFormatCss = () => {
 		let declarations = '';
-		if (textStyleListObj.font_weight_bold) {
+		if ( textStyleListObj.font_weight_bold ) {
 			declarations += `font-weight:bold;`;
 		}
-		if (textStyleListObj.font_italic) {
+		if ( textStyleListObj.font_italic ) {
 			declarations += `font-style:italic;`;
 		}
-		if (textStyleListObj.font_strikethrough) {
+		if ( textStyleListObj.font_strikethrough ) {
 			declarations += `text-decoration:line-through;`;
 		}
-		if (textStyleListObj.nowrap) {
+		if ( textStyleListObj.nowrap ) {
 			declarations += `white-space:nowrap;`;
 		}
-		if (!!textStyleListObj.font_size) {
-			declarations += `font-size: ${textStyleListObj.font_size};`;
+		if ( !! textStyleListObj.font_size ) {
+			declarations += `font-size: ${ textStyleListObj.font_size };`;
 		}
-		if (!!textStyleListObj.color) {
-			declarations += `color: ${colorSlugToColorCode(
+		if ( !! textStyleListObj.color ) {
+			declarations += `color: ${ colorSlugToColorCode(
 				textStyleListObj.color
-			)};`;
+			) };`;
 		}
 
-		const highlighterColor = !!textStyleListObj.highlighter
+		const highlighterColor = !! textStyleListObj.highlighter
 			? textStyleListObj.highlighter
 			: vkBlocksObject.highlighterColor;
 		if (
 			textStyleListObj.is_active_highlighter &&
-			!!textStyleListObj.background_color
+			!! textStyleListObj.background_color
 		) {
 			// background_colorとhighlighter両方
-			declarations += `background: linear-gradient(${colorSlugToColorCode(
+			declarations += `background: linear-gradient(${ colorSlugToColorCode(
 				textStyleListObj.background_color
-			)} 60%,${hex2rgba(highlighterColor, 0.7)} 0)`;
+			) } 60%,${ hex2rgba( highlighterColor, 0.7 ) } 0)`;
 		} else if (
-			!textStyleListObj.is_active_highlighter &&
-			!!textStyleListObj.background_color
+			! textStyleListObj.is_active_highlighter &&
+			!! textStyleListObj.background_color
 		) {
 			// background_colorのみ
-			declarations += `background: ${colorSlugToColorCode(
+			declarations += `background: ${ colorSlugToColorCode(
 				textStyleListObj.background_color
-			)}`;
+			) }`;
 		} else if (
 			textStyleListObj.is_active_highlighter &&
-			!!!textStyleListObj.background_color
+			!!! textStyleListObj.background_color
 		) {
 			// highlighterのみ
-			declarations += `background: linear-gradient(transparent 60%,${hex2rgba(
+			declarations += `background: linear-gradient(transparent 60%,${ hex2rgba(
 				highlighterColor,
 				0.7
-			)} 0)`;
+			) } 0)`;
 		}
 
 		let dynamic_css = '';
-		if (declarations) {
-			dynamic_css += `.${textStyleListObj.class_name} { ${declarations} }`;
+		if ( declarations ) {
+			dynamic_css += `.${ textStyleListObj.class_name } { ${ declarations } }`;
 		}
 
-		if (textStyleListObj.custom_css) {
+		if ( textStyleListObj.custom_css ) {
 			// selectorをクラスに変換する
 			dynamic_css += textStyleListObj.custom_css.replace(
 				/selector/g,
@@ -89,14 +89,14 @@ export const TextStylePreview = (props) => {
 					textStyleListObj.title ? 'active-custom-format' : null
 				}
 			>
-				{(() => {
-					const cssTag = generateCustomFormatCss(textStyleListObj);
-					if (cssTag) {
-						return <style>{cssTag}</style>;
+				{ ( () => {
+					const cssTag = generateCustomFormatCss( textStyleListObj );
+					if ( cssTag ) {
+						return <style>{ cssTag }</style>;
 					}
-				})()}
-				<span className={textStyleListObj.class_name}>
-					{__('Preview Text', 'vk-blocks')}
+				} )() }
+				<span className={ textStyleListObj.class_name }>
+					{ __( 'Preview Text', 'vk-blocks' ) }
 				</span>
 			</p>
 		</div>

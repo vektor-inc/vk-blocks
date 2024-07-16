@@ -10,76 +10,76 @@ import { Button, Modal, Flex, FlexItem } from '@wordpress/components';
  */
 import { AdminContext } from '@vkblocks/admin/index';
 
-export const DeleteButton = (props) => {
-	const { vkBlocksOption, setVkBlocksOption } = useContext(AdminContext);
+export const DeleteButton = ( props ) => {
+	const { vkBlocksOption, setVkBlocksOption } = useContext( AdminContext );
 	const { index, blockStyleListObj } = props;
 
-	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [ isModalOpen, setIsModalOpen ] = useState( false );
 
-	const openModal = () => setIsModalOpen(true);
-	const closeModal = () => setIsModalOpen(false);
+	const openModal = () => setIsModalOpen( true );
+	const closeModal = () => setIsModalOpen( false );
 
 	const deleteItem = () => {
-		vkBlocksOption.custom_block_style_lists.splice(index, 1);
-		setVkBlocksOption({
+		vkBlocksOption.custom_block_style_lists.splice( index, 1 );
+		setVkBlocksOption( {
 			...vkBlocksOption,
-		});
+		} );
 	};
 
-	const textStyleTitle = !!blockStyleListObj.property_label
+	const textStyleTitle = !! blockStyleListObj.property_label
 		? blockStyleListObj.property_label
-		: __('Custom Block Style Setting', 'vk-blocks');
+		: __( 'Custom Block Style Setting', 'vk-blocks' );
 
 	return (
 		<div className="custom_block_style_item_delete_button">
 			<Button
 				className="delete-item-button"
 				isDestructive
-				onClick={openModal}
+				onClick={ openModal }
 			>
-				{__('Delete', 'vk-blocks')}
+				{ __( 'Delete', 'vk-blocks' ) }
 			</Button>
-			{isModalOpen && (
+			{ isModalOpen && (
 				<Modal
-					title={sprintf(
+					title={ sprintf(
 						// translators: Would you like to delete %s
-						__('Would you like to delete %s?', 'vk-blocks'),
+						__( 'Would you like to delete %s?', 'vk-blocks' ),
 						textStyleTitle
-					)}
-					onRequestClose={closeModal}
-					isDismissible={false}
+					) }
+					onRequestClose={ closeModal }
+					isDismissible={ false }
 				>
 					<div className="custom_block_style_delete_modal">
 						<p>
-							{__(
+							{ __(
 								'If this Block Style is used for saved content, the style may change.',
 								'vk-blocks'
-							)}
+							) }
 						</p>
 						<div className="custom_block_style_delete_modal_button_area">
 							<Flex justify="flex-end">
 								<FlexItem>
-									<Button isSecondary onClick={closeModal}>
-										{__('Cancel')}
+									<Button isSecondary onClick={ closeModal }>
+										{ __( 'Cancel' ) }
 									</Button>
 								</FlexItem>
 								<FlexItem>
 									<Button
 										className="delete-item-button"
 										isDestructive
-										onClick={() => {
+										onClick={ () => {
 											deleteItem();
 											closeModal();
-										}}
+										} }
 									>
-										{__('Delete', 'vk-blocks')}
+										{ __( 'Delete', 'vk-blocks' ) }
 									</Button>
 								</FlexItem>
 							</Flex>
 						</div>
 					</div>
 				</Modal>
-			)}
+			) }
 		</div>
 	);
 };
