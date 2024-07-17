@@ -26,16 +26,11 @@ jobs:
         steps:
             - uses: actions/checkout@v3
 
-            # get the node version from the .node-version file
-            - name: Read .node-version
-              run: echo "##[set-output name=NODEVERSION;]$(cat .node-version)"
-              id: nodenv
-
             # setup node based on the version from the .node-version file, fetched in the previous step
             - name: Setup Node.js (.node-version)
               uses: actions/setup-node@v1
               with:
-                node-version: "${{ steps.nodenv.outputs.NODEVERSION }}"
+                node-version: 20.x
 
             - name: Cache multiple paths
               uses: actions/cache@v3
@@ -81,16 +76,11 @@ jobs:
         steps:
             - uses: actions/checkout@master
 
-            # get the node version from the .node-version file
-            - name: Read .node-version
-              run: echo "##[set-output name=NODEVERSION;]$(cat .node-version)"
-              id: nodenv
-
             # setup node based on the version from the .node-version file, fetched in the previous step
             - name: Setup Node.js (.node-version)
               uses: actions/setup-node@v1
               with:
-                node-version: "${{ steps.nodenv.outputs.NODEVERSION }}"
+                node-version: 20.x
             
             - name: Install NPM Scripts
               run: npm install
@@ -116,16 +106,11 @@ jobs:
         needs: [php_unit]
         steps:
             - uses: actions/checkout@v3
-            # get the node version from the .node-version file
-            - name: Read .node-version
-              run: echo "##[set-output name=NODEVERSION;]$(cat .node-version)"
-              id: nodenv
-
             # setup node based on the version from the .node-version file, fetched in the previous step
             - name: Setup Node.js (.node-version)
               uses: actions/setup-node@v1
               with:
-                node-version: "${{ steps.nodenv.outputs.NODEVERSION }}"
+                node-version: 20.x
             
             - name: Install NPM Scripts
               run: npm install
