@@ -6,3 +6,4 @@ inc/vk-blocks/build/
 vendor/
 build/
 temp/
+.phpunit.result.cache
