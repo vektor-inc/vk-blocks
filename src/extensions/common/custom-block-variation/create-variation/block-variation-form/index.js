@@ -93,10 +93,7 @@ export default function VariationForm(props) {
 						__nextHasNoMarginBottom
 						value={variation.description}
 						onChange={(value) => {
-							setVariation({
-								...variation,
-								description: value,
-							});
+							setVariation({ ...variation, description: value });
 						}}
 					/>
 				</div>
@@ -128,10 +125,7 @@ export default function VariationForm(props) {
 									: variation.scope.filter(
 											(item) => item !== scopeOption.name
 										);
-								setVariation({
-									...variation,
-									scope: newScope,
-								});
+								setVariation({ ...variation, scope: newScope });
 							}}
 						/>
 					))}

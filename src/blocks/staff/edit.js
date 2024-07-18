@@ -315,9 +315,7 @@ export default function StaffEdit(props) {
 						}
 						style={staffProfileTitleColorInlineStyle}
 						onChange={(value) =>
-							setAttributes({
-								vk_staff_text_profileTitle: value,
-							})
+							setAttributes({ vk_staff_text_profileTitle: value })
 						}
 						value={vk_staff_text_profileTitle} // eslint-disable-line camelcase
 						placeholder={__('Profile title', 'vk-blocks')}

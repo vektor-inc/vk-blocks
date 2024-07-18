@@ -103,9 +103,7 @@ export default function IconEdit(props) {
 						onChange={(value) => {
 							setAttributes({ iconSizeUnit: value });
 							if ('px' === value) {
-								setAttributes({
-									iconSize: parseInt(iconSize),
-								});
+								setAttributes({ iconSize: parseInt(iconSize) });
 							}
 						}}
 						options={[

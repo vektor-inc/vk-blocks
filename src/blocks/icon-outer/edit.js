@@ -43,15 +43,11 @@ export default function IconOuterEdit(props) {
 				updateBlockAttributes(thisInnerBlock.clientId, {
 					iconSizeUnit,
 				});
-				updateBlockAttributes(thisInnerBlock.clientId, {
-					iconMargin,
-				});
+				updateBlockAttributes(thisInnerBlock.clientId, { iconMargin });
 				updateBlockAttributes(thisInnerBlock.clientId, {
 					iconMarginUnit,
 				});
-				updateBlockAttributes(thisInnerBlock.clientId, {
-					iconRadius,
-				});
+				updateBlockAttributes(thisInnerBlock.clientId, { iconRadius });
 				updateBlockAttributes(thisInnerBlock.clientId, { iconType });
 			});
 		}

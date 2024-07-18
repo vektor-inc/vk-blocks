@@ -356,9 +356,7 @@ export default function ButtonEdit(props) {
 									isPrimary={buttonAlign === 'center'}
 									isSecondary={buttonAlign !== 'center'}
 									onClick={() =>
-										setAttributes({
-											buttonAlign: 'center',
-										})
+										setAttributes({ buttonAlign: 'center' })
 									}
 								>
 									{__('Center', 'vk-blocks')}
@@ -368,9 +366,7 @@ export default function ButtonEdit(props) {
 									isPrimary={buttonAlign === 'right'}
 									isSecondary={buttonAlign !== 'right'}
 									onClick={() =>
-										setAttributes({
-											buttonAlign: 'right',
-										})
+										setAttributes({ buttonAlign: 'right' })
 									}
 								>
 									{__('Right', 'vk-blocks')}
@@ -390,9 +386,7 @@ export default function ButtonEdit(props) {
 									isPrimary={buttonAlign === 'block'}
 									isSecondary={buttonAlign !== 'block'}
 									onClick={() =>
-										setAttributes({
-											buttonAlign: 'block',
-										})
+										setAttributes({ buttonAlign: 'block' })
 									}
 								>
 									{__('Block', 'vk-blocks')}

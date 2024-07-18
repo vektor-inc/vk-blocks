@@ -89,9 +89,7 @@ export const addBlockControl = createHigherOrderComponent((BlockEdit) => {
 								}
 								linkTarget={props.attributes.linkTarget}
 								setLinkTarget={(target) =>
-									props.setAttributes({
-										linkTarget: target,
-									})
+									props.setAttributes({ linkTarget: target })
 								}
 							/>
 						</ToolbarGroup>

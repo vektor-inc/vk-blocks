@@ -416,9 +416,7 @@ export default function BalloonEdit(props) {
 							isPrimary={balloonAlign === 'position-left'}
 							isSecondary={balloonAlign !== 'position-left'}
 							onClick={() =>
-								setAttributes({
-									balloonAlign: 'position-left',
-								})
+								setAttributes({ balloonAlign: 'position-left' })
 							}
 						>
 							{__('Left', 'vk-blocks')}

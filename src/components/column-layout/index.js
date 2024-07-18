@@ -40,9 +40,7 @@ export const ColumnLayout = (props) => {
 					// eslint-disable-next-line camelcase
 					value={col_xs}
 					onChange={(value) =>
-						setAttributes({
-							col_xs: formatNumCol(value, col_xs),
-						})
+						setAttributes({ col_xs: formatNumCol(value, col_xs) })
 					}
 					marks={marks}
 					min={defaultMinMax.min}
@@ -58,9 +56,7 @@ export const ColumnLayout = (props) => {
 					// eslint-disable-next-line camelcase
 					value={col_sm}
 					onChange={(value) =>
-						setAttributes({
-							col_sm: formatNumCol(value, col_sm),
-						})
+						setAttributes({ col_sm: formatNumCol(value, col_sm) })
 					}
 					marks={marks}
 					min={defaultMinMax.min}
@@ -76,9 +72,7 @@ export const ColumnLayout = (props) => {
 					// eslint-disable-next-line camelcase
 					value={col_md}
 					onChange={(value) =>
-						setAttributes({
-							col_md: formatNumCol(value, col_md),
-						})
+						setAttributes({ col_md: formatNumCol(value, col_md) })
 					}
 					marks={marks}
 					min={defaultMinMax.min}
@@ -94,9 +88,7 @@ export const ColumnLayout = (props) => {
 					// eslint-disable-next-line camelcase
 					value={col_lg}
 					onChange={(value) =>
-						setAttributes({
-							col_lg: formatNumCol(value, col_lg),
-						})
+						setAttributes({ col_lg: formatNumCol(value, col_lg) })
 					}
 					marks={marks}
 					min={defaultMinMax.min}
@@ -112,9 +104,7 @@ export const ColumnLayout = (props) => {
 					// eslint-disable-next-line camelcase
 					value={col_xl}
 					onChange={(value) =>
-						setAttributes({
-							col_xl: formatNumCol(value, col_xl),
-						})
+						setAttributes({ col_xl: formatNumCol(value, col_xl) })
 					}
 					marks={marks}
 					min={defaultMinMax.min}
@@ -130,9 +120,7 @@ export const ColumnLayout = (props) => {
 					// eslint-disable-next-line camelcase
 					value={col_xxl}
 					onChange={(value) =>
-						setAttributes({
-							col_xxl: formatNumCol(value, col_xxl),
-						})
+						setAttributes({ col_xxl: formatNumCol(value, col_xxl) })
 					}
 					marks={marks}
 					min={defaultMinMax.min}
