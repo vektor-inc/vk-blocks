@@ -37,8 +37,8 @@ module.exports = {
 					loader: 'babel-loader',
 					options: {
 						cacheDirectory: false, // キャッシュをOFF。理由：vk-blocks-js.pot を消した時に変更箇所以外の文字列が抽出されなくなる。
-						babelrc: false, // babelrcを反映させない
-						configFile: false, // babel.config.jsonを反映させない
+						babelrc: true, // babelrcを反映させない
+						configFile: true, // babel.config.jsonを反映させない
 						presets: [ "@wordpress/default" ],
 					}
 				}
