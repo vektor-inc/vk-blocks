@@ -908,37 +908,6 @@ export default function SliderEdit(props) {
 						</ButtonGroup>
 					</BaseControl>
 				</PanelBody>
-				<PanelBody title={__('Width', 'vk-blocks')} initialOpen={true}>
-					<BaseControl id={`vk_slider-width`}>
-						<ButtonGroup>
-							<Button
-								isSmall={true}
-								variant={width === '' ? 'primary' : 'secondary'}
-								onClick={() => setAttributes({ width: '' })}
-							>
-								{__('Normal', 'vk-blocks')}
-							</Button>
-							<Button
-								isSmall={true}
-								variant={
-									width === 'wide' ? 'primary' : 'secondary'
-								}
-								onClick={() => setAttributes({ width: 'wide' })}
-							>
-								{__('Wide', 'vk-blocks')}
-							</Button>
-							<Button
-								isSmall={true}
-								variant={
-									width === 'full' ? 'primary' : 'secondary'
-								}
-								onClick={() => setAttributes({ width: 'full' })}
-							>
-								{__('Full Wide', 'vk-blocks')}
-							</Button>
-						</ButtonGroup>
-					</BaseControl>
-				</PanelBody>
 				<PanelBody
 					title={__('Height', 'vk-blocks')}
 					initialOpen={false}
