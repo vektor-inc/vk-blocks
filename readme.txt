@@ -4,7 +4,7 @@ Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 6.3
 Tested up to: 6.6
-Stable tag: 1.84.0.1
+Stable tag: 1.83.0.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -105,6 +105,9 @@ e.g.
 1. VK Blocks examples.
 
 == Changelog ==
+
+= 1.84.1 =
+[ Bug fix ][Custom CSS (Pro)] Replaced wp_kses with a sanitization function in vk_blocks_output_custom_css.
 
 = 1.84.0 =
 [ Add function ][ Column ] Add toolbar link for components.
