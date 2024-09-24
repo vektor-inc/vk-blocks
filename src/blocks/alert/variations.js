@@ -1,12 +1,15 @@
 import { __ } from '@wordpress/i18n';
 import { ReactComponent as Icon } from './icon.svg';
+import { ReactComponent as IconSuccess } from './icon-success.svg';
+import { ReactComponent as IconInfo } from './icon-info.svg';
+import { ReactComponent as IconWarning } from './icon-warning.svg';
 
 const variations = [
 	{
 		name: 'alert-success',
 		title: __('Alert Success', 'vk-blocks'),
 		scope: ['inserter', 'transform'],
-		icon: <Icon />,
+		icon: <IconSuccess />,
 		attributes: {
 			style: 'success',
 			icon: '<i class="fa-solid fa-circle-check"></i>',
@@ -25,7 +28,7 @@ const variations = [
 		name: 'alert-info',
 		title: __('Alert Info', 'vk-blocks'),
 		scope: ['inserter', 'transform'],
-		icon: <Icon />,
+		icon: <IconInfo />,
 		attributes: {
 			style: 'info',
 			icon: '<i class="fa-solid fa-circle-info"></i>',
@@ -44,7 +47,7 @@ const variations = [
 		name: 'alert-warning',
 		title: __('Alert Warning', 'vk-blocks'),
 		scope: ['inserter', 'transform'],
-		icon: <Icon />,
+		icon: <IconWarning />,
 		attributes: {
 			style: 'warning',
 			icon: '<i class="fa-solid fa-triangle-exclamation"></i>',
