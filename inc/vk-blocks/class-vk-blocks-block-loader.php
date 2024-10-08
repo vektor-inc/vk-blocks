@@ -102,9 +102,6 @@ class VK_Blocks_Block_Loader {
 		// 分割読み込みの場合は register されるファイルが false 指定で何も読み込まれなくなっている.
 		wp_enqueue_style( 'vk-blocks-build-css' );
 		wp_enqueue_style( 'vk-blocks-utils-common-css' );
-		wp_enqueue_style( 'vk-blocks/core-table', VK_BLOCKS_DIR_URL . 'build/extensions/core/table/style.css', array(), VK_BLOCKS_VERSION );
-		wp_enqueue_style( 'vk-blocks/core-heading', VK_BLOCKS_DIR_URL . 'build/extensions/core/heading/style.css', array(), VK_BLOCKS_VERSION );
-		wp_enqueue_style( 'vk-blocks/core-image', VK_BLOCKS_DIR_URL . 'build/extensions/core/image/style.css', array(), VK_BLOCKS_VERSION );
 	}
 
 	/**
@@ -121,12 +118,9 @@ class VK_Blocks_Block_Loader {
 			wp_register_style( 'vk-blocks-build-css', false, array(), VK_BLOCKS_VERSION );
 			// src/utils内の内の共通cssの読み込み .
 			wp_register_style( 'vk-blocks-utils-common-css', VK_BLOCKS_DIR_URL . 'build/utils/common.css', array(), VK_BLOCKS_VERSION );
-			wp_register_style( 'vk-blocks/core-table', VK_BLOCKS_DIR_URL . 'build/extensions/core/table/style.css', array(), VK_BLOCKS_VERSION );
-			wp_register_style( 'vk-blocks/core-heading', VK_BLOCKS_DIR_URL . 'build/extensions/core/heading/style.css', array(), VK_BLOCKS_VERSION );
-			wp_register_style( 'vk-blocks/core-image', VK_BLOCKS_DIR_URL . 'build/extensions/core/image/style.css', array(), VK_BLOCKS_VERSION );
 		} else {
 			// 一括読み込みの場合 : 結合CSSを登録.
-			wp_register_style( 'vk-blocks-build-css', VK_BLOCKS_DIR_URL . 'build/block-build.css', array(), VK_BLOCKS_VERSION );
+			wp_register_style( 'vk-blocks-build-css', VK_BLOCKS_DIR_URL . 'build/block-build.css', array( 'vk-swiper-style' ), VK_BLOCKS_VERSION );
 		}
 
 		// 編集画面のCSS登録 : 分割読み込みの設定に関わらず結合CSSを登録 -> 各ブロックのindex.phpから呼び出される.
@@ -197,17 +191,17 @@ class VK_Blocks_Block_Loader {
 		 * 結合読み込みの場合 -> 個別の js / css ファイルを読み込まないように配列を改変する
 		 */
 		foreach ( $this->get_block_names( array( 'is_pro' => false ) ) as $block_name ) {
-			if ( ! empty( $args['style'] ) && 'vk-blocks/' . $block_name === $args['style'] ) {
-				$args['style']  = null;
-				$args['script'] = null;
+			if ( ! empty( $args['style'] ) && 'vk-blocks/' . $block_name === $args['name'] ) {
+				$args['style_handles']  = array();
+				$args['script_handles'] = array();
 			}
 		}
 
 		foreach ( $this->get_block_names( array( 'is_pro' => true ) ) as $block_name ) {
 			if ( file_exists( VK_BLOCKS_DIR_PATH . 'inc/vk-blocks/build/blocks/_pro/' . $block_name . '/index.php' ) ) {
-				if ( ! empty( $args['style'] ) && 'vk-blocks/' . $block_name === $args['style'] ) {
-					$args['style']  = null;
-					$args['script'] = null;
+				if ( ! empty( $args['style'] ) && 'vk-blocks/' . $block_name === $args['name'] ) {
+					$args['style_handles']  = array();
+					$args['script_handles'] = array();
 				}
 			}
 		}
