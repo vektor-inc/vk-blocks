@@ -106,11 +106,14 @@ e.g.
 
 == Changelog ==
 
+= 1.90.1 =
+[ Bug fix ][ Cover ] Fixed inline styles not being retained when adding a link.
+
 = 1.90.0 =
 [ Add function ][ Outer (Pro) ] Add book and pyramid in divider style.
 [ Bug fix ] The split loading option is now supported for core/heading, core/image, and core/table styles for block editor.
 [ Bug fix ][ Cover ] Fixed an issue where, after setting a link in the Cover block and adding two unstyled headings inside it, the content positioning would not apply upon returning to the editing screen (editing screen only).
-[ Bug fix ][ Slider ] Add alert message.
+[ Other ][ Slider ] Add alert message.
 
 = 1.89.0 =
 [ Add function ][ Outer (Pro) ] Added support for core text color settings.
