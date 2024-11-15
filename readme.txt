@@ -4,7 +4,7 @@ Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 6.4
 Tested up to: 6.7
-Stable tag: 1.91.0.1
+Stable tag: 1.91.1.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -105,6 +105,9 @@ e.g.
 1. VK Blocks examples.
 
 == Changelog ==
+
+= 1.91.1 =
+[ Bug fix ] Adjusted translation file loading to comply with changes in WordPress 6.7.
 
 = 1.91.0 =
 [ Specification change ] Adjusted translation file loading to comply with changes in WordPress 6.7.
