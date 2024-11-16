@@ -106,8 +106,11 @@ e.g.
 
 == Changelog ==
 
+= 1.91.2 =
+[ Bug fix ] Fix checkbox misalignment in the admin panel.
+
 = 1.91.1 =
-[ Bug fix ] Adjusted translation file loading to comply with changes in WordPress 6.7.
+[ Bug fix ] Avoiding translation errors in WordPress 6.7
 
 = 1.91.0 =
 [ Specification change ] Adjusted translation file loading to comply with changes in WordPress 6.7.
