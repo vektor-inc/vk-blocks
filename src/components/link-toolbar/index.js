@@ -79,7 +79,11 @@ const LinkPreview = ({
 					</button>
 				</Tooltip>
 				<Tooltip
-					text={sprintf(__('Copy link: %s', 'vk-blocks'), linkUrl)}
+					text={sprintf(
+						// translators: %s is the link URL
+						__('Copy link: %s', 'vk-blocks'),
+						linkUrl
+					)}
 				>
 					<button
 						type="button"
