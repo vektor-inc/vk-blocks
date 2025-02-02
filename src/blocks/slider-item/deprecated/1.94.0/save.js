@@ -22,8 +22,6 @@ export default function save(props) {
 		bgImage,
 		linkUrl,
 		linkTarget,
-		relAttribute,
-		linkDescription,
 		blockId,
 	} = attributes;
 
@@ -78,17 +76,18 @@ export default function save(props) {
 		</>
 	);
 
+	const relAttribute =
+		linkTarget === '_blank' ? 'noopener noreferrer' : 'noopener';
 	const GetLinkUrl = (
 		<a
 			href={linkUrl}
-			{...(linkTarget ? { target: linkTarget } : {})}
-			{...(relAttribute ? { rel: relAttribute } : {})}
+			target={linkTarget}
 			className={`${prefix}-link`}
+			rel={relAttribute}
+			aria-label={__( 'Slider item link', 'vk-blocks' )}
 		>
 			<span className="screen-reader-text">
-				{linkDescription
-					? linkDescription
-					: __('Slider item link', 'vk-blocks')}
+				{__( 'Slider item link', 'vk-blocks' )}
 			</span>
 		</a>
 	);
