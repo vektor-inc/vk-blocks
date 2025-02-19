@@ -1,5 +1,5 @@
 {
-	"apiVersion": 3,
+	"apiVersion": 2,
 	"name": "vk-blocks/slider-item",
 	"title": "Slider Item",
 	"description": "This is one item in the slider.",

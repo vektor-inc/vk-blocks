@@ -13,8 +13,7 @@
 			margin-bottom:0;
 		}
 	}
-	// .vk_tab_bodys_body と隣接する .block-list-appender だけを対象にする
-	.vk_tab_bodys_body.block-editor-block-list__block + .block-list-appender {
+	.block-list-appender{
 		position: absolute;
 		top: calc( 1rem * -6 );
 		right: calc( 1rem * 0 );
