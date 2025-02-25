@@ -10,8 +10,8 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                php-versions: ['7.4', '8.0', '8.1']
-                wp-versions: ['6.4', '6.5', '6.6']
+                php-versions: ['7.4', '8.0', '8.1', '8.2']
+                wp-versions: ['6.5', '6.6', '6.7']
         name: PHP Unit Test on PHP ${{ matrix.php-versions }} / WP ${{ matrix.wp-versions }} Test
         services:
             mysql:
