@@ -228,29 +228,37 @@ button.image-button:not(.button-delete) {
 // archive-list
 @import "./editor_before_archive-list";
 
-// VK Outer 編集パネル
+// VK Outer & スライダーアイテム 編集パネル
 $color-danger: #dd3333;
-.vk_outer_sidebar_bgImage {
+.vk_outer_sidebar_bgImage,
+.vk_slider_item_sidebar_bgImage,
+.vk_slider_item_sidebar_bgImage_button_container {
 	position: relative;
-	.components-button {
+	.components-button:not(.image-button),
+	.components-button-group {
 		position: absolute;
 		top: 50%;
 		left: 50%;
 		transform: translateY(-50%) translateX(-50%);
 		transition: all 1s;
 	}
-	.button-delete {
+	.components-button-group {
+		display: grid;
+		place-items: center;
+		gap: .375rem;
 		opacity: 0;
+		transition: all 1s;
+	}
+	.button-delete {
 		border: 1px solid $color-danger;
 		color: $color-danger;
-		transition: all 1s;
 		&:hover {
 			background-color: $color-danger;
 			border: 1px solid #b72a2a;
 			color: #fff;
 		}
 	}
-	&:hover .button-delete {
+	&:hover .components-button-group {
 		transition: all 1s;
 		opacity: 1;
 	}
@@ -414,10 +422,10 @@ $color-danger: #b52727;
 /*-------------------------------------------*/
 .vk_edit_hidden_warning {
 	// border:1px dotted #666;
-	opacity: 0.4;
+	opacity: 0.4 !important;
 }
 .vk_edit_hidden_all {
-	opacity: 0.2;
+	opacity: 0.2 !important;
 }
 
 .vk_icon-card_item_title {//Added not to decorate
@@ -466,65 +474,76 @@ $color-danger: #b52727;
 	display: block !important;
 	color: var(--blue);
 
-  &.vk_posts{
-	// display block だとカラムがすべて落ちるため posts は flexで上書き
-	display: flex !important;
-  }
-  @media (max-width: $xs-max) {
-    &-xs {
-	  display: block !important;
-	  &.vk_posts{
-		// display block だとカラムがすべて落ちるため posts は flexで上書き
+	&.vk_balloon,
+	&.vk_posts{
+		// display block だとカラムがすべて落ちるため posts と balloon は flexで上書き
 		display: flex !important;
-	  }
-    }
-  }
-  @media (min-width: $sm-min) and (max-width: $sm-max) {
-    &-sm {
-	  display: block !important;
-	  &.vk_posts{
-		// display block だとカラムがすべて落ちるため posts は flexで上書き
-		display: flex !important;
-	  }
-    }
-  }
-  @media (min-width: $md-min) and (max-width: $md-max) {
-    &-md {
-	  display: block !important;
-	  &.vk_posts{
-		// display block だとカラムがすべて落ちるため posts は flexで上書き
-		display: flex !important;
-	  }
-    }
-  }
-  @media (min-width: $lg-min) and (max-width: $lg-max) {
-    &-lg {
-	  display: block !important;
-	  &.vk_posts{
-		// display block だとカラムがすべて落ちるため posts は flexで上書き
-		display: flex !important;
-	  }
-    }
-  }
-  @media (min-width: $xl-min) {
-    &-xl {
-	  display: block !important;
-	  &.vk_posts{
-		// display block だとカラムがすべて落ちるため posts は flexで上書き
-		display: flex !important;
-	  }
-    }
-  }
-  @media (min-width: $xxl-min) {
-    &-xxl {
-	  display: block !important;
-	  &.vk_posts{
-		// display block だとカラムがすべて落ちるため posts は flexで上書き
-		display: flex !important;
-	  }
-    }
-  }
+	}
+	@media (max-width: $xs-max) {
+		&-xs {
+			display: block !important;
+
+			&.vk_balloon,
+			&.vk_posts{
+				// display block だとカラムがすべて落ちるため posts と balloon は flexで上書き
+				display: flex !important;
+			}
+		}
+	}
+	@media (min-width: $sm-min) and (max-width: $sm-max) {
+		&-sm {
+			display: block !important;
+
+			&.vk_balloon,
+			&.vk_posts{
+				// display block だとカラムがすべて落ちるため posts と balloon は flexで上書き
+				display: flex !important;
+			}
+		}
+	}
+	@media (min-width: $md-min) and (max-width: $md-max) {
+		&-md {
+	  		display: block !important;
+
+			  &.vk_balloon,
+			&.vk_posts{
+				// display block だとカラムがすべて落ちるため posts と balloon は flexで上書き
+				display: flex !important;
+	  		}
+		}
+  	}
+  	@media (min-width: $lg-min) and (max-width: $lg-max) {
+		&-lg {
+			display: block !important;
+
+			&.vk_balloon,
+			&.vk_posts{
+				// display block だとカラムがすべて落ちるため posts と balloon は flexで上書き
+				display: flex !important;
+			}
+		}
+	}
+  	@media (min-width: $xl-min) {
+		&-xl {
+			display: block !important;
+	  		&.vk_posts{
+				// display block だとカラムがすべて落ちるため posts と balloon は flexで上書き
+				display: flex !important;
+			}
+		}
+	}
+	@media (min-width: $xxl-min) {
+		&-xxl {
+			display: block !important;
+
+			&.vk_balloon,
+			&.vk_posts{
+				// display block だとカラムがすべて落ちるため posts と balloon は flexで上書き
+				display: flex !important;
+			}
+		}
+	}
 }
 }
 
-@import "./editor_after_admin_sidebar";
+@import "./editor_after_admin_sidebar.scss";
