@@ -108,6 +108,9 @@ e.g.
 
 == Changelog ==
 
+= 1.98.0 =
+[ Specification change ][ Slider ] Changed slider height minimum from 40px to 24px.
+
 = 1.97.0 =
 [ Add function ][ Animation (Pro) ] Added the "Slide Down" effect to the Animation effect options.
 [ Add function ][ Post List (Pro) / Post List Slider (Pro) ] Added the ability to set sticky posts to display.
