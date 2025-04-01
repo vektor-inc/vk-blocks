@@ -13,8 +13,8 @@ import {
 	PanelBody,
 	BaseControl,
 	TextControl,
-	ButtonGroup,
-	Button,
+	__experimentalToggleGroupControl as ToggleGroupControl,
+	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
 	SelectControl,
 	RangeControl,
 	ToolbarGroup,
@@ -289,34 +289,25 @@ export default function SliderEdit(props) {
 						label={__('Editor Mode', 'vk-blocks')}
 						id={`vk_slider-effect`}
 					>
-						<ButtonGroup>
-							<Button
-								isSmall={true}
-								variant={
-									editorMode === 'default'
-										? 'primary'
-										: 'secondary'
-								}
-								onClick={() =>
-									setAttributes({ editorMode: 'default' })
-								}
-							>
-								{__('Edit ( Stacked Layout )', 'vk-blocks')}
-							</Button>
-							<Button
-								isSmall={true}
-								variant={
-									editorMode === 'slide'
-										? 'primary'
-										: 'secondary'
-								}
-								onClick={() =>
-									setAttributes({ editorMode: 'slide' })
-								}
-							>
-								{__('Preview ( Slide )', 'vk-blocks')}
-							</Button>
-						</ButtonGroup>
+						<ToggleGroupControl
+							value={editorMode}
+							onChange={(value) =>
+								setAttributes({ editorMode: value })
+							}
+							isBlock
+						>
+							<ToggleGroupControlOption
+								value="default"
+								label={__(
+									'Edit ( Stacked Layout )',
+									'vk-blocks'
+								)}
+							/>
+							<ToggleGroupControlOption
+								value="slide"
+								label={__('Preview ( Slide )', 'vk-blocks')}
+							/>
+						</ToggleGroupControl>
 					</BaseControl>
 				</PanelBody>
 				<PanelBody
