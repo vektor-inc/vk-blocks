@@ -108,6 +108,10 @@ e.g.
 
 == Changelog ==
 
+= 1.105.1 =
+[ Bug Fix ][ Grid Column Card (Pro) ] Fixed the column padding adjustment slider's initial state functionality issue.
+[ Other ][ Highlighter ] Resolved circular dependency issue.
+
 = 1.105.0 =
 [ Add function ][ Core Post title ] Added top and bottom margin settings to the toolbar.
 [ Add function ][ Tab (Pro) ] Added support for inserting FontAwesome icons into tab labels.
