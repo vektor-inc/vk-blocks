@@ -108,6 +108,13 @@ e.g.
 
 == Changelog ==
 
+= 1.106.0 =
+[ Add function ][ Slider ] Added zoom animation feature.
+[ Specification change ][ Table of Contents (Pro) ] Removed the restriction that prevented nested headings from being displayed in the list.
+[ Bug fix ][ Button ] Add fallback to vk color primary.
+[ Bug fix ][ Core List ] Fixed an issue where list items were not applying colors selected from Japanese-named color palettes and semi-transparent colors.
+[ Bug Fix ][ Slider ] Fix an issue where the inner element of a slide item does not match the content width in the edit screen.
+
 = 1.105.1 =
 [ Bug Fix ][ Grid Column Card (Pro) ] Fixed the column padding adjustment slider's initial state functionality issue.
 [ Other ][ Highlighter ] Resolved circular dependency issue.
