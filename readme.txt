@@ -108,6 +108,9 @@ e.g.
 
 == Changelog ==
 
+= 1.106.1 =
+[ Bug Fix ][ Table of Contents (Pro) ] Fixed a security issue.
+
 = 1.106.0 =
 [ Add function ][ Slider ] Added zoom animation feature.
 [ Specification change ][ Table of Contents (Pro) ] Removed the restriction that prevented nested headings from being displayed in the list.
