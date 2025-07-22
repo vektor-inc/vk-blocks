@@ -327,6 +327,10 @@ export function DisplayCondition(props) {
 							label: __('Whole Period', 'vk-blocks'),
 						},
 						{
+							value: 'within-year',
+							label: __('Within a year', 'vk-blocks'),
+						},
+						{
 							value: 'from-today',
 							label: __('From Today', 'vk-blocks'),
 						},

@@ -1,6 +1,6 @@
 import { AdvancedToggleControl } from '@vkblocks/components/advanced-toggle-control';
 import { __ } from '@wordpress/i18n';
-import { useEffect, useRef } from '@wordpress/element';
+import { useEffect } from '@wordpress/element';
 import {
 	InspectorControls,
 	BlockControls,
@@ -57,9 +57,6 @@ export default function SliderEdit(props) {
 		zoomInitialScale,
 		zoomFinalScale,
 	} = attributes;
-
-	// 追加: 前回のzoomAnimation値を保持
-	const prevZoomAnimation = useRef(zoomAnimation);
 
 	useEffect(() => {
 		let timer;
@@ -180,14 +177,43 @@ export default function SliderEdit(props) {
 		}
 	}, [clientId]);
 
-	// ズームアニメーションが有効になった時にエフェクトをfadeに変更
+	// 複数枚表示が設定されている場合に拡大機能を無効化
 	useEffect(() => {
-		// false→trueになった瞬間だけ
-		if (!prevZoomAnimation.current && zoomAnimation) {
-			setAttributes({ effect: 'fade' });
+		if (
+			slidesPerViewPC > 1 ||
+			slidesPerViewTablet > 1 ||
+			slidesPerViewMobile > 1
+		) {
+			if (zoomAnimation) {
+				setAttributes({ zoomAnimation: false });
+			}
 		}
-		prevZoomAnimation.current = zoomAnimation;
-	}, [zoomAnimation]);
+	}, [
+		slidesPerViewPC,
+		slidesPerViewTablet,
+		slidesPerViewMobile,
+		zoomAnimation,
+	]);
+
+	// 拡大機能が有効になった場合に複数枚表示設定を1にリセット
+	useEffect(() => {
+		if (zoomAnimation) {
+			if (slidesPerViewPC > 1) {
+				setAttributes({ slidesPerViewPC: 1 });
+			}
+			if (slidesPerViewTablet > 1) {
+				setAttributes({ slidesPerViewTablet: 1 });
+			}
+			if (slidesPerViewMobile > 1) {
+				setAttributes({ slidesPerViewMobile: 1 });
+			}
+		}
+	}, [
+		zoomAnimation,
+		slidesPerViewPC,
+		slidesPerViewTablet,
+		slidesPerViewMobile,
+	]);
 
 	// 複数枚動かすときに sliderPerView が小数だと微妙なので対処
 	useEffect(() => {
@@ -529,54 +555,78 @@ export default function SliderEdit(props) {
 					/>
 				</PanelBody>
 				<PanelBody
-					title={__('Zoom Animation', 'vk-blocks')}
+					title={__('Background Image Zoom Animation', 'vk-blocks')}
 					initialOpen={false}
 				>
-					<ToggleControl
-						label={__('Enable', 'vk-blocks')}
-						checked={zoomAnimation}
-						onChange={(value) =>
-							setAttributes({ zoomAnimation: value })
-						}
-						help={__(
-							'Enabling this will apply a zoom animation to the slide background image.',
-							'vk-blocks'
-						)}
-					/>
-					{zoomAnimation && (
+					{effect !== 'fade' &&
+					(slidesPerViewPC > 1 ||
+						slidesPerViewTablet > 1 ||
+						slidesPerViewMobile > 1) ? (
+						<div className="alert alert-warning font-size-11px">
+							{__(
+								'When multiple items are set in "Multi-item Display Setting", zoom settings here will be disabled. Please set all to "1".',
+								'vk-blocks'
+							)}
+						</div>
+					) : (
 						<>
-							<RangeControl
-								label={__(
-									'Initial Background Scale',
+							<ToggleControl
+								label={__('Enable', 'vk-blocks')}
+								checked={zoomAnimation}
+								onChange={(value) =>
+									setAttributes({ zoomAnimation: value })
+								}
+								help={__(
+									'Enabling this will apply a zoom animation to the slide background image.',
 									'vk-blocks'
 								)}
-								value={zoomInitialScale}
-								onChange={(value) =>
-									setAttributes({ zoomInitialScale: value })
-								}
-								min={1}
-								max={3}
-								step={0.05}
 							/>
-							<RangeControl
-								label={__(
-									'Final Background Scale',
-									'vk-blocks'
-								)}
-								value={zoomFinalScale}
-								onChange={(value) =>
-									setAttributes({ zoomFinalScale: value })
-								}
-								min={1}
-								max={3}
-								step={0.05}
-							/>
-							<p className="vk_slider_zoomAnimation_help">
+							<div className="alert alert-info font-size-11px">
 								{__(
-									'1 means original size. Larger values will zoom in the background image.',
+									'We recommend using the Fade effect together with Background image Zoom Animation.',
 									'vk-blocks'
 								)}
-							</p>
+							</div>
+							{zoomAnimation && (
+								<>
+									<RangeControl
+										label={__(
+											'Initial Background Scale',
+											'vk-blocks'
+										)}
+										value={zoomInitialScale}
+										onChange={(value) =>
+											setAttributes({
+												zoomInitialScale: value,
+											})
+										}
+										min={1}
+										max={3}
+										step={0.05}
+									/>
+									<RangeControl
+										label={__(
+											'Final Background Scale',
+											'vk-blocks'
+										)}
+										value={zoomFinalScale}
+										onChange={(value) =>
+											setAttributes({
+												zoomFinalScale: value,
+											})
+										}
+										min={1}
+										max={3}
+										step={0.05}
+									/>
+									<p className="vk_slider_zoomAnimation_help">
+										{__(
+											'1 means original size. Larger values will zoom in the background image.',
+											'vk-blocks'
+										)}
+									</p>
+								</>
+							)}
 						</>
 					)}
 				</PanelBody>

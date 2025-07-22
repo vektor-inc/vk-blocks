@@ -91,7 +91,7 @@ document.defaultView.addEventListener('load', function () {
 			const config = {
 				autoplay: attributes.autoPlay
 					? {
-							delay: Number(attributes.autoPlayDelay) || 2500,
+							delay: Number(attributes.autoPlayDelay) ?? 2500,
 							disableOnInteraction: !!attributes.autoPlayStop,
 							stopOnLastSlide: !attributes.loop,
 						}

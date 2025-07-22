@@ -18,6 +18,7 @@ export const MultiItemSetting = (props) => {
 		loop,
 		effect,
 		centeredSlides,
+		zoomAnimation,
 	} = attributes;
 
 	// インナーブロックを取得
@@ -169,12 +170,11 @@ export const MultiItemSetting = (props) => {
 
 	// 複数枚表示設定
 	let multiItemSetting = '';
-	if (effect !== 'fade') {
-		multiItemSetting = (
-			<PanelBody
-				title={__('Multi-item Display Setting', 'vk-blocks')}
-				initialOpen={false}
-			>
+
+	// フェードエフェクトでない場合の設定UI
+	const multiItemUI =
+		effect !== 'fade' ? (
+			<>
 				<BaseControl
 					label={__(
 						'Number of Items to display per view',
@@ -323,8 +323,37 @@ export const MultiItemSetting = (props) => {
 						)}
 					/>
 				</BaseControl>
-			</PanelBody>
-		);
-	}
+			</>
+		) : null;
+
+	// 複数枚表示設定が無効な場合のアラート
+	const getDisabledReason = () => {
+		if (zoomAnimation) {
+			return __('Background Image Zoom Animation', 'vk-blocks');
+		} else if (effect === 'fade') {
+			return __('Fade', 'vk-blocks') + ' ' + __('Effect', 'vk-blocks');
+		}
+		return null;
+	};
+
+	const disabledReason = getDisabledReason();
+	const disabledAlert = disabledReason ? (
+		<div className="alert alert-warning font-size-11px">
+			{__(
+				'%s is enabled, so multi-item settings cannot be configured.',
+				'vk-blocks'
+			).replace('%s', disabledReason)}
+		</div>
+	) : null;
+
+	multiItemSetting = (
+		<PanelBody
+			title={__('Multi-item Display Setting', 'vk-blocks')}
+			initialOpen={false}
+		>
+			{disabledAlert}
+			{!zoomAnimation && multiItemUI}
+		</PanelBody>
+	);
 	return multiItemSetting;
 };

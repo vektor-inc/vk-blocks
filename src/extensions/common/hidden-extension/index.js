@@ -47,6 +47,12 @@ export const is_hidden = (blockName) => {
 		'vk-blocks/card-item',
 		'vk-blocks/icon-card-item',
 		'vk-blocks/select-post-list-item',
+		'vk-blocks/tab-item',
+		'vk-blocks/accordion-trigger',
+		'vk-blocks/accordion-target',
+		'vk-blocks/faq2-q',
+		'vk-blocks/faq2-a',
+		'vk-blocks/dynamic-if',
 	];
 	const excludeBlock =
 		excludes.find((excludeName) => in_string(blockName, excludeName)) !==

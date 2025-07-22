@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VK Blocks Pro\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/vk-blocks-pro\n"
-"POT-Creation-Date: 2025-07-15T13:24:08+00:00\n"
+"POT-Creation-Date: 2025-07-22T02:29:29+00:00\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -254,7 +254,7 @@ msgstr ""
 "保存したコンテンツにこのブロックスタイルがある場合、スタイルが解除されます。"
 
 #: src/admin/custom-block-style/item/title-area/index.js:66
-#: src/blocks/slider/edit.js:338
+#: src/blocks/slider/edit.js:364
 #: src/extensions/common/custom-block-variation/block-variation-list/item/title-area/index.js:88
 msgid "Edit"
 msgstr "編集"
@@ -877,7 +877,7 @@ msgid "2:3"
 msgstr "2:3"
 
 #: src/blocks/_pro/blog-card-featured-image/dimension-controls.js:156
-#: src/blocks/slider/edit.js:515
+#: src/blocks/slider/edit.js:538
 msgid "Height"
 msgstr "高さ"
 
@@ -977,11 +977,11 @@ msgstr "ブロックのバリエーションについて詳しく見る"
 msgid "Paste a link to the content you want to display on your site."
 msgstr "サイトに表示したいコンテンツへのリンクを貼り付けてください。"
 
-#: src/blocks/_pro/blog-card/edit/url-placeholder.js:33
+#: src/blocks/_pro/blog-card/edit/url-placeholder.js:34
 msgid "Enter URL to embed here…"
 msgstr "埋め込むURLを入力…"
 
-#: src/blocks/_pro/blog-card/edit/url-placeholder.js:43
+#: src/blocks/_pro/blog-card/edit/url-placeholder.js:45
 msgid "Sorry, this content could not be embedded."
 msgstr "このコンテンツは埋め込めませんでした。"
 
@@ -1024,7 +1024,7 @@ msgstr ""
 
 #: src/blocks/_pro/card-item/edit.js:182 src/blocks/_pro/card/edit.js:134
 #: src/blocks/_pro/icon-card/edit.js:75
-#: src/components/display-condition/index.js:387
+#: src/components/display-condition/index.js:391
 msgid "Title"
 msgstr "タイトル"
 
@@ -1091,7 +1091,7 @@ msgstr "ボタンの文字"
 msgid "Image Height"
 msgstr "画像高さ"
 
-#: src/blocks/_pro/card/edit.js:88 src/blocks/slider/edit.js:519
+#: src/blocks/_pro/card/edit.js:88 src/blocks/slider/edit.js:542
 msgid "Slide Height for each device."
 msgstr "デバイス毎の高さ"
 
@@ -1113,7 +1113,7 @@ msgid "Parent"
 msgstr "親ページ"
 
 #: src/blocks/_pro/child-page/edit.js:134
-#: src/components/display-condition/index.js:425
+#: src/components/display-condition/index.js:429
 msgid "Ignore this post"
 msgstr "この投稿を除く"
 
@@ -1574,7 +1574,7 @@ msgstr "表示"
 
 #: src/blocks/_pro/gridcolcard/edit-common.js:167
 #: src/blocks/_pro/post-list-slider/edit.js:326 src/blocks/heading/edit.js:377
-#: src/blocks/slider/edit.js:492
+#: src/blocks/slider/edit.js:515
 msgid "Hide"
 msgstr "非表示"
 
@@ -2045,43 +2045,45 @@ msgstr "メディア"
 msgid "Text 1 Column"
 msgstr "テキスト 1 カラム"
 
-#: src/blocks/_pro/post-list-slider/edit.js:185 src/blocks/slider/edit.js:351
+#: src/blocks/_pro/post-list-slider/edit.js:185 src/blocks/slider/edit.js:374
 msgid "Slider Settings"
 msgstr "スライド設定"
 
-#: src/blocks/_pro/post-list-slider/edit.js:189 src/blocks/slider/edit.js:355
+#: src/blocks/_pro/post-list-slider/edit.js:189
+#: src/blocks/slider/edit-multiItem.js:340 src/blocks/slider/edit.js:378
 msgid "Effect"
 msgstr "エフェクト"
 
-#: src/blocks/_pro/post-list-slider/edit.js:199 src/blocks/slider/edit.js:365
+#: src/blocks/_pro/post-list-slider/edit.js:199 src/blocks/slider/edit.js:388
 msgid "Slide"
 msgstr "スライド"
 
-#: src/blocks/_pro/post-list-slider/edit.js:203 src/blocks/slider/edit.js:369
+#: src/blocks/_pro/post-list-slider/edit.js:203
+#: src/blocks/slider/edit-multiItem.js:338 src/blocks/slider/edit.js:392
 msgid "Fade"
 msgstr "フェード"
 
-#: src/blocks/_pro/post-list-slider/edit.js:210 src/blocks/slider/edit.js:376
+#: src/blocks/_pro/post-list-slider/edit.js:210 src/blocks/slider/edit.js:399
 msgid "Loop"
 msgstr "ループ"
 
-#: src/blocks/_pro/post-list-slider/edit.js:220 src/blocks/slider/edit.js:386
+#: src/blocks/_pro/post-list-slider/edit.js:220 src/blocks/slider/edit.js:409
 msgid "AutoPlay"
 msgstr "自動再生"
 
-#: src/blocks/_pro/post-list-slider/edit.js:230 src/blocks/slider/edit.js:396
+#: src/blocks/_pro/post-list-slider/edit.js:230 src/blocks/slider/edit.js:419
 msgid "Stop AutoPlay when swipe"
 msgstr "スワイプ時に自動再生を停止"
 
-#: src/blocks/_pro/post-list-slider/edit.js:240 src/blocks/slider/edit.js:406
+#: src/blocks/_pro/post-list-slider/edit.js:240 src/blocks/slider/edit.js:429
 msgid "Display Time"
 msgstr "表示時間"
 
-#: src/blocks/_pro/post-list-slider/edit.js:267 src/blocks/slider/edit.js:433
+#: src/blocks/_pro/post-list-slider/edit.js:267 src/blocks/slider/edit.js:456
 msgid "Change Speed"
 msgstr "切り替え時間"
 
-#: src/blocks/_pro/post-list-slider/edit.js:291 src/blocks/slider/edit.js:457
+#: src/blocks/_pro/post-list-slider/edit.js:291 src/blocks/slider/edit.js:480
 msgid "Pagination Type"
 msgstr "ページネーションの種類"
 
@@ -2089,26 +2091,26 @@ msgstr "ページネーションの種類"
 #: src/blocks/_pro/step-item/edit.js:139
 #: src/blocks/_pro/table-of-contents-new/edit.js:224
 #: src/blocks/_pro/timeline-item/edit.js:105 src/blocks/heading/edit.js:265
-#: src/blocks/slider/edit.js:468 src/blocks/staff/edit.js:174
+#: src/blocks/slider/edit.js:491 src/blocks/staff/edit.js:174
 #: src/components/advanced-color-gradient-control/index.js:47
 msgid "Default"
 msgstr "標準"
 
-#: src/blocks/_pro/post-list-slider/edit.js:306 src/blocks/slider/edit.js:472
+#: src/blocks/_pro/post-list-slider/edit.js:306 src/blocks/slider/edit.js:495
 msgid "Number of slides"
 msgstr "スライドの枚数"
 
-#: src/blocks/_pro/post-list-slider/edit.js:319 src/blocks/slider/edit.js:485
+#: src/blocks/_pro/post-list-slider/edit.js:319 src/blocks/slider/edit.js:508
 msgid "Navigation Position"
 msgstr "ナビゲーションの位置"
 
 #: src/blocks/_pro/post-list-slider/edit.js:330 src/blocks/button/edit.js:296
-#: src/blocks/slider/edit.js:496
+#: src/blocks/slider/edit.js:519
 #: src/components/display-items-control/index.js:136
 msgid "Center"
 msgstr "中央"
 
-#: src/blocks/_pro/post-list-slider/edit.js:334 src/blocks/slider/edit.js:500
+#: src/blocks/_pro/post-list-slider/edit.js:334 src/blocks/slider/edit.js:523
 msgid "Bottom on Mobile device"
 msgstr "モバイルでは下部に表示"
 
@@ -2125,7 +2127,7 @@ msgstr ""
 "上である必要があります。"
 
 #: src/blocks/_pro/post-list-slider/multi-item-setting.js:151
-#: src/blocks/slider/edit-multiItem.js:175
+#: src/blocks/slider/edit-multiItem.js:358
 msgid "Multi-item Display Setting"
 msgstr "アイテムの複数表示設定"
 
@@ -2148,7 +2150,7 @@ msgid "Number of posts to change in a transition"
 msgstr "一度に遷移する投稿の数"
 
 #: src/blocks/_pro/post-list-slider/multi-item-setting.js:27
-#: src/blocks/slider/edit-multiItem.js:32
+#: src/blocks/slider/edit-multiItem.js:33
 msgid ""
 "If you specifying a numbers with decimals such as 1.5, Please set "
 "\"Centering the active slide\""
@@ -2177,7 +2179,7 @@ msgid ""
 msgstr "中央を指定すると左右が切れたアイテムを表示できます。"
 
 #: src/blocks/_pro/post-list-slider/multi-item-setting.js:36
-#: src/blocks/slider/edit-multiItem.js:41
+#: src/blocks/slider/edit-multiItem.js:42
 msgid ""
 "The decimal point can be set for the display number only when the display is "
 "switched one by one."
@@ -3147,7 +3149,7 @@ msgstr "カバー"
 msgid "repeat"
 msgstr "リピート"
 
-#: src/blocks/slider/edit-multiItem.js:105
+#: src/blocks/slider/edit-multiItem.js:106
 msgid ""
 "If the active slide is in the center, the number of placed slide items must "
 "be greater than or equal to the number of items you want to display in one "
@@ -3156,7 +3158,7 @@ msgstr ""
 "アクティブスライドを中央にする場合、配置されたスライドアイテムの数は、1ビュー"
 "に表示したいアイテム数＋2以上である必要があります。"
 
-#: src/blocks/slider/edit-multiItem.js:114
+#: src/blocks/slider/edit-multiItem.js:115
 msgid ""
 "If you want to loop slides, the number of placed slide items must be greater "
 "than or equal to the number of items you want to display per view + 1."
@@ -3183,13 +3185,21 @@ msgid ""
 "left and right."
 msgstr "中央を指定すると左右が切れたアイテムを表示できます。"
 
-#: src/blocks/slider/edit-multiItem.js:52
+#: src/blocks/slider/edit-multiItem.js:335 src/blocks/slider/edit.js:564
+msgid "Background Image Zoom Animation"
+msgstr "背景画像のズームアニメーション"
+
+#: src/blocks/slider/edit-multiItem.js:349
+msgid "%s is enabled, so multi-item settings cannot be configured."
+msgstr ""
+
+#: src/blocks/slider/edit-multiItem.js:53
 msgid ""
 "Enter integer divisors for the number of placed slide items for each display "
 "size."
 msgstr "各表示サイズのスライド アイテムの配置数の整数の約数を入力します。"
 
-#: src/blocks/slider/edit-multiItem.js:92
+#: src/blocks/slider/edit-multiItem.js:93
 msgid ""
 "If you want to loop slides, the number of placed slide items must be greater "
 "than or equal to twice the number of items you want to display per view."
@@ -3197,61 +3207,73 @@ msgstr ""
 "スライドをループさせたい場合、配置されたスライドアイテムの数は、1ビューに表示"
 "したいアイテム数の2倍以上である必要があります。"
 
-#: src/blocks/slider/edit.js:290
+#: src/blocks/slider/edit.js:316
 msgid "Change Slide Editor Mode"
 msgstr "スライド編集モードの変更"
 
-#: src/blocks/slider/edit.js:293
+#: src/blocks/slider/edit.js:319
 msgid "Edit ( Stacked Layout ) Mode"
 msgstr "編集（縦積み配置）モード"
 
-#: src/blocks/slider/edit.js:303
+#: src/blocks/slider/edit.js:329
 msgid "Preview ( Slide ) Mode"
 msgstr "プレビュー（スライド）モード"
 
-#: src/blocks/slider/edit.js:318
+#: src/blocks/slider/edit.js:344
 msgid "Editor Setting"
 msgstr "エディタ設定"
 
-#: src/blocks/slider/edit.js:322
+#: src/blocks/slider/edit.js:348
 msgid "Editor Mode"
 msgstr "編集モード"
 
-#: src/blocks/slider/edit.js:331
+#: src/blocks/slider/edit.js:357
 msgid ""
 "In edit mode, the elements are stacked vertically. In preview mode, the "
 "slides actually animate."
 msgstr ""
-"編集モードだと縦積みになります。プレビューモードでは実際にスライドが動きま"
+"編集モードでは縦積みになります。プレビューモードでは実際にスライドが動きま"
 "す。"
 
-#: src/blocks/slider/edit.js:345
+#: src/blocks/slider/edit.js:368
 msgid "Preview"
 msgstr "プレビュー"
 
-#: src/blocks/slider/edit.js:541
-msgid "Zoom Animation"
-msgstr "ズームアニメーション"
+#: src/blocks/slider/edit.js:575
+msgid ""
+"When multiple items are set in \"Multi-item Display Setting\", zoom settings "
+"here will be disabled. Please set all to \"1\"."
+msgstr ""
+"「複数表示設定」で複数のアイテムを設定した場合、ここでのズーム設定は無効にな"
+"ります。全て「1」に設定してください。"
 
-#: src/blocks/slider/edit.js:545
+#: src/blocks/slider/edit.js:583
 msgid "Enable"
 msgstr "有効にする"
 
-#: src/blocks/slider/edit.js:550
+#: src/blocks/slider/edit.js:588
 msgid ""
 "Enabling this will apply a zoom animation to the slide background image."
 msgstr ""
 "有効にするとスライドの背景画像がズームアニメーションするようになります。"
 
-#: src/blocks/slider/edit.js:558
+#: src/blocks/slider/edit.js:594
+msgid ""
+"We recommend using the Fade effect together with Background image Zoom "
+"Animation."
+msgstr ""
+"背景画像のズームアニメーションを使う場合はスライド設定のエフェクトはフェード"
+"を利用が推奨です。"
+
+#: src/blocks/slider/edit.js:602
 msgid "Initial Background Scale"
 msgstr "背景画像の開始倍率"
 
-#: src/blocks/slider/edit.js:571
+#: src/blocks/slider/edit.js:617
 msgid "Final Background Scale"
 msgstr "背景画像の終了倍率"
 
-#: src/blocks/slider/edit.js:584
+#: src/blocks/slider/edit.js:632
 msgid "1 means original size. Larger values will zoom in the background image."
 msgstr "1は元のサイズです。大きい値ほど背景画像が拡大されます。"
 
@@ -3486,18 +3508,22 @@ msgid "Whole Period"
 msgstr "全期間"
 
 #: src/components/display-condition/index.js:331
+msgid "Within a year"
+msgstr "1年以内"
+
+#: src/components/display-condition/index.js:335
 msgid "From Today"
 msgstr "今日以降"
 
-#: src/components/display-condition/index.js:335
+#: src/components/display-condition/index.js:339
 msgid "From Now"
 msgstr "現在以降"
 
-#: src/components/display-condition/index.js:339
+#: src/components/display-condition/index.js:343
 msgid "From Tomorrow"
 msgstr "明日以降"
 
-#: src/components/display-condition/index.js:344
+#: src/components/display-condition/index.js:348
 msgid ""
 "* If you choose a future period, you will need to customize it so that "
 "future posts will be published immediately."
@@ -3505,63 +3531,63 @@ msgstr ""
 "※ 未来の期間を選択する場合は、未来の投稿が即時公開になるように別途カスタマイ"
 "ズが必要です。"
 
-#: src/components/display-condition/index.js:351
+#: src/components/display-condition/index.js:355
 msgid "Order"
 msgstr "表示順"
 
-#: src/components/display-condition/index.js:360
+#: src/components/display-condition/index.js:364
 msgid "ASC"
 msgstr "昇順"
 
-#: src/components/display-condition/index.js:364
+#: src/components/display-condition/index.js:368
 msgid "DESC"
 msgstr "降順"
 
-#: src/components/display-condition/index.js:370
+#: src/components/display-condition/index.js:374
 msgid "Order by"
 msgstr "表示順"
 
-#: src/components/display-condition/index.js:379
+#: src/components/display-condition/index.js:383
 msgid "Published Date"
 msgstr "公開日"
 
-#: src/components/display-condition/index.js:383
+#: src/components/display-condition/index.js:387
 msgid "Modefied Date"
 msgstr "更新日"
 
-#: src/components/display-condition/index.js:391
+#: src/components/display-condition/index.js:395
 msgid "Random"
 msgstr "ランダム"
 
-#: src/components/display-condition/index.js:397
+#: src/components/display-condition/index.js:401
 msgid "offset"
 msgstr "オフセット数"
 
-#: src/components/display-condition/index.js:413
+#: src/components/display-condition/index.js:417
 msgid "Display from the first post always"
 msgstr "常に最初の投稿から表示する"
 
-#: src/components/display-condition/index.js:419
+#: src/components/display-condition/index.js:423
 msgid "Display from the first post even on pages beyond the second page."
 msgstr "2ページ目以降のページでも、常に最初の投稿から表示する。"
 
-#: src/components/display-condition/index.js:432
+#: src/components/display-condition/index.js:436
 msgid "Sticky Posts"
 msgstr "固定表示"
 
-#: src/components/display-condition/index.js:436
+#: src/components/display-condition/index.js:440
 msgid "Include"
 msgstr "含める"
 
-#: src/components/display-condition/index.js:440
+#: src/components/display-condition/index.js:444
 msgid "Exclude"
 msgstr "除外する"
 
-#: src/components/display-condition/index.js:443
+#: src/components/display-condition/index.js:447
 msgid "Only"
 msgstr "固定表示のみ"
 
-#: src/components/display-condition/index.js:451
+#: src/components/display-condition/index.js:455
 msgid "Sticky posts always appear first, regardless of their publish date."
 msgstr "固定投稿は公開日に関係なく常に最初に表示されます。"
 
@@ -3800,15 +3826,15 @@ msgstr ""
 "干渉して編集画面で意図した通りに表示されない場合は、非表示にすることをお勧め"
 "します。"
 
-#: src/extensions/common/hidden-extension/index.js:223
+#: src/extensions/common/hidden-extension/index.js:229
 msgid "Hidden Settings"
 msgstr "非表示設定"
 
-#: src/extensions/common/hidden-extension/index.js:228
+#: src/extensions/common/hidden-extension/index.js:234
 msgid "Hidden at screen size"
 msgstr "非表示にする画面サイズ"
 
-#: src/extensions/common/hidden-extension/index.js:235
+#: src/extensions/common/hidden-extension/index.js:241
 msgid ""
 "Note : This function is display hidden only. Actually Block is output to "
 "HTML. Please don't use you must not visible item. Don't use it for blocks "
@@ -3817,35 +3843,35 @@ msgstr ""
 "注意 : この機能はあくまでHTMLに出力される要素を非表示にするだけです。本当に見"
 "せてはいけない要素には使わないでください。"
 
-#: src/extensions/common/hidden-extension/index.js:241
+#: src/extensions/common/hidden-extension/index.js:247
 msgid "Hidden ( Screen size : all )"
 msgstr "非表示 ( 画面サイズ : all )"
 
-#: src/extensions/common/hidden-extension/index.js:251
+#: src/extensions/common/hidden-extension/index.js:257
 msgid "Hidden ( Screen size : xs )"
 msgstr "非表示 ( 画面サイズ : xs )"
 
-#: src/extensions/common/hidden-extension/index.js:264
+#: src/extensions/common/hidden-extension/index.js:270
 msgid "Hidden ( Screen size : sm )"
 msgstr "非表示 ( 画面サイズ : sm )"
 
-#: src/extensions/common/hidden-extension/index.js:277
+#: src/extensions/common/hidden-extension/index.js:283
 msgid "Hidden ( Screen size : md )"
 msgstr "非表示 ( 画面サイズ : md )"
 
-#: src/extensions/common/hidden-extension/index.js:290
+#: src/extensions/common/hidden-extension/index.js:296
 msgid "Hidden ( Screen size : lg )"
 msgstr "非表示 ( 画面サイズ : lg )"
 
-#: src/extensions/common/hidden-extension/index.js:303
+#: src/extensions/common/hidden-extension/index.js:309
 msgid "Hidden ( Screen size : xl )"
 msgstr "非表示 ( 画面サイズ : xl )"
 
-#: src/extensions/common/hidden-extension/index.js:318
+#: src/extensions/common/hidden-extension/index.js:324
 msgid "Hidden ( Screen size : xxl )"
 msgstr "非表示 ( 画面サイズ : xxl )"
 
-#: src/extensions/common/hidden-extension/index.js:331
+#: src/extensions/common/hidden-extension/index.js:337
 msgid ""
 "If you want to hide multiple blocks, that first you set to group block and "
 "the next, hide for the that group block."
@@ -4145,17 +4171,17 @@ msgctxt "Image scaling options"
 msgid "Scale"
 msgstr "縮尺"
 
-#: src/blocks/_pro/blog-card/edit/url-placeholder.js:37
+#: src/blocks/_pro/blog-card/edit/url-placeholder.js:39
 msgctxt "button label"
 msgid "Embed"
 msgstr "埋め込み"
 
-#: src/blocks/_pro/blog-card/edit/url-placeholder.js:46
+#: src/blocks/_pro/blog-card/edit/url-placeholder.js:48
 msgctxt "button label"
 msgid "Try again"
 msgstr "再試行"
 
-#: src/blocks/_pro/blog-card/edit/url-placeholder.js:49
+#: src/blocks/_pro/blog-card/edit/url-placeholder.js:51
 msgctxt "button label"
 msgid "Convert to link"
 msgstr "リンクに変換"
@@ -4712,13 +4738,13 @@ msgid "Setting saved."
 msgstr "設定を保存しました。"
 
 #: dist/vk-blocks-pro/inc/vk-blocks/view/class-vk-blocks-postlist.php:306
-#: inc/vk-blocks/view/class-vk-blocks-postlist.php:306
+#: inc/vk-blocks/view/class-vk-blocks-postlist.php:315
 msgid "Post"
 msgstr "投稿"
 
 #. translators: %s: 投稿タイプ名
 #: dist/vk-blocks-pro/inc/vk-blocks/view/class-vk-blocks-postlist.php:310
-#: inc/vk-blocks/view/class-vk-blocks-postlist.php:310
+#: inc/vk-blocks/view/class-vk-blocks-postlist.php:319
 msgid "There are no %s."
 msgstr "該当の%sはありません。"
 
@@ -4777,7 +4803,7 @@ msgstr "含める見出しレベル"
 #: inc/vk-blocks-pro/blocks/class-vk-blocks-toc.php:66
 msgid ""
 "Configure which heading levels should be included in the table of contents."
-msgstr ""
+msgstr "目次に含める見出しレベルを設定します。"
 
 #: dist/vk-blocks-pro/inc/vk-blocks/build/blocks/alert/block.json
 #: inc/vk-blocks/build/blocks/alert/block.json src/blocks/alert/block.json
@@ -5674,6 +5700,9 @@ msgid ""
 msgstr ""
 "様々なアイテムを配置できるタブです。タブラベルをクリックして切り替えてくださ"
 "い。"
+
+#~ msgid "Zoom Animation"
+#~ msgstr "ズームアニメーション"
 
 #~ msgid "Preview mode"
 #~ msgstr "プレビューモード"
