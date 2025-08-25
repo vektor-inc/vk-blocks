@@ -108,6 +108,20 @@ e.g.
 
 == Changelog ==
 
+[ Add function ][ Category Badge (Pro) ] Added support for displaying multiple category badges.
+[ Add function ][ Responsive Spacer ] Enable transform to or from core spacer.
+[ Add function ][ Core Content / Core Post Terms / Core Date / Core Featured Image / Core Query Title ] Added top and bottom margin settings to the toolbar.
+[ Specification change ][ Fixed Display (Pro) ] Improved "Do not display again until the browser is closed" functionality for better performance and user experience.
+[ Specification change ][ Custom CSS (Pro) ] Custom CSS is no longer displayed on the widget settings screen.
+[ Bug fix ][ Category Badge (Pro)  ] Fixed missing permission_callback in REST API route definition that was causing WordPress notices.
+[ Bug fix ][ Post List (Pro) / Post List Slider (Pro) ] Fixed an issue where warning messages for empty posts do not follow hidden settings
+[ Bug fix ][ Table of Contents (Pro) ] Fixed an issue where headings outside of the main content area were incorrectly included in the table of contents.
+[ Bug fix ][ Slider ] Fixed an issue where blocks inside cover blocks with 100% overlay opacity were unselectable when placed within slider items.
+[ Bug fix ][ Core List ] Fixed an issue where list items with custom styles were not inheriting the parent's text color.
+[ Bug fix ][ Core List ] Fixed an issue where list icon colors set in pages were not applied in the editor when displayed through Page Content blocks.
+[ Bug fix ][ Core Heading ] Fixed an issue where text with highlighter in "Both ends" style was displayed horizontally inappropriately on mobile devices.
+[ Other ] Update VK Helpers 0.2.1 / VK Breadcrumb 0.2.7
+
 = 1.108.0 =
 [ Add function ][ Post List (Pro) / Post List Slider (Pro) ] We have added items within the past year to the date filtering.
 [ Add function ][ Blog Card (Pro) ] Added internal link search and suggestions feature.

@@ -40,7 +40,7 @@ function vk_blocks_render_core_list( $block_content, $block ) {
 	}
 	$unique_classname = wp_unique_id( 'vk_list_' );
 	$block_content->add_class( $unique_classname );
-	$block_content->get_updated_html();
+	$updated_html = $block_content->get_updated_html();
 
 	$list_styles = array();
 	if ( ! empty( $block['attrs']['className'] ) && strpos( $block['attrs']['className'], 'is-style-vk-numbered-square-mark' ) !== false ) {
@@ -74,12 +74,27 @@ function vk_blocks_render_core_list( $block_content, $block ) {
 		);
 	}
 
+	// フロントエンド用のスタイルエンジン処理
 	wp_style_engine_get_stylesheet_from_css_rules(
 		$list_styles,
 		array(
 			'context' => 'vk-blocks',
 		)
 	);
-	return $block_content;
+
+	// エディター用のインラインスタイルを追加
+	if ( is_admin() ) {
+		$css = '';
+		foreach ( $list_styles as $style ) {
+			$css .= $style['selector'] . ' {';
+			foreach ( $style['declarations'] as $property => $value ) {
+				$css .= $property . ': ' . $value . ';';
+			}
+			$css .= '}';
+		}
+		wp_add_inline_style( 'vk-blocks-build-editor-css', $css );
+	}
+
+	return $updated_html;
 }
 add_filter( 'render_block_core/list', 'vk_blocks_render_core_list', 10, 2 );

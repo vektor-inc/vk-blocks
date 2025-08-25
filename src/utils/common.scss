@@ -237,7 +237,7 @@ ol {
 			padding-inline-start: 2em;
 			&:not(.has-text-color),
 			&:not(.has-link-color) {
-				color: initial;
+				color: inherit;
 			}
 			&:where(:not(.is-style-default)) li {
 				list-style: none;
@@ -704,6 +704,7 @@ ol {
 }
 //pagination
 .swiper-pagination{
+	pointer-events: none;
 	//標準
 	&-bullet{ 
 		border-radius: unset;
@@ -712,6 +713,7 @@ ol {
 		background-color: #ccc;
 		opacity: unset;
 		outline: 1px solid var(--vk-color-background-white-translucent);
+		pointer-events: auto;
 		&-active {
 			background: #666;
 		}

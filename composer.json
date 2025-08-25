@@ -19,7 +19,8 @@
 		"yahnis-elsts/plugin-update-checker": "^5.0",
 		"vektor-inc/vk-admin": "^0.4.1",
 		"vektor-inc/vk-color-palette-manager": "^0.4.0",
-		"vektor-inc/vk-breadcrumb": "^0.2.5",
+		"vektor-inc/vk-helpers": "^0.2.1",
+		"vektor-inc/vk-breadcrumb": "^0.2.8",
 		"vektor-inc/vk-term-color": "^0.7.1",
 		"vektor-inc/vk-css-optimize": "^0.2.5",
 		"vektor-inc/vk-component": "^1.6.5"

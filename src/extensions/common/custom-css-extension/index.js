@@ -9,7 +9,7 @@ import { createHigherOrderComponent, useInstanceId } from '@wordpress/compose';
 import { hasBlockSupport } from '@wordpress/blocks';
 import { useEffect } from '@wordpress/element';
 import { addQueryArgs } from '@wordpress/url';
-
+import { select } from '@wordpress/data';
 /**
  * External dependencies
  */
@@ -82,12 +82,40 @@ export function addAttribute(settings) {
 }
 
 /**
+ * Determine if the editor context is a widget screen
+ */
+const isWidgetsEditor = () => {
+	try {
+		// `core/edit-widgets` store が存在するか確認し、そこから情報を取得
+		const widgetsStore = select('core/edit-widgets');
+		return !!widgetsStore;
+	} catch (e) {
+		return false;
+	}
+};
+
+/**
+ * On the widget screen, only the blocks included in the allowList are true
+ * @param {string} blockName -Name of the block to check
+ */
+const shouldApplyOnThisScreenAndBlock = (blockName) => {
+	if (!isWidgetsEditor()) {
+		return false;
+	}
+	const allowList = new Set(['core/legacy-widget', 'core/widget-group']);
+	return allowList.has(blockName);
+};
+
+/**
  * Override the default edit UI to include layout controls
  */
 export const withInspectorControls = createHigherOrderComponent(
 	(BlockEdit) => (props) => {
 		const { name, attributes, setAttributes } = props;
-		if (!hasCustomCssSupport(name)) {
+		if (
+			!hasCustomCssSupport(name) ||
+			shouldApplyOnThisScreenAndBlock(name)
+		) {
 			return <BlockEdit {...props} />;
 		}
 
@@ -238,7 +266,10 @@ export const withInspectorControls = createHigherOrderComponent(
 const withElementsStyles = createHigherOrderComponent(
 	(BlockListBlock) => (props) => {
 		const { name, attributes } = props;
-		if (!hasCustomCssSupport(name)) {
+		if (
+			!hasCustomCssSupport(name) ||
+			shouldApplyOnThisScreenAndBlock(name)
+		) {
 			return <BlockListBlock {...props} />;
 		}
 		// 編集画面で使用出来る Unique id

@@ -9,7 +9,18 @@ const DEFAULT_STATE = {};
 const store = createReduxStore('vk-blocks/term-color', {
 	reducer(state = DEFAULT_STATE, action) {
 		switch (action.type) {
-			case 'SET_TERM_COLOR':
+			case 'SET_TERM_COLORS':
+				return {
+					...state,
+					[action.postId]: {
+						...(state[action.postId] || {}),
+						[action.taxonomy]: {
+							values: action.values, // termIdごとの色情報
+							isLoading: false,
+						},
+					},
+				};
+			case 'SET_IS_LOADING':
 				const currentTaxonomyState =
 					state[action.postId]?.[action.taxonomy] || {};
 				return {
@@ -17,23 +28,7 @@ const store = createReduxStore('vk-blocks/term-color', {
 					[action.postId]: {
 						...(state[action.postId] || {}),
 						[action.taxonomy]: {
-							value: action.value,
-							isLoading:
-								currentTaxonomyState.isLoading !== undefined
-									? currentTaxonomyState.isLoading
-									: false,
-						},
-					},
-				};
-			case 'SET_IS_LOADING':
-				const currentTaxonomyStateForLoading =
-					state[action.postId]?.[action.taxonomy] || {};
-				return {
-					...state,
-					[action.postId]: {
-						...(state[action.postId] || {}),
-						[action.taxonomy]: {
-							...currentTaxonomyStateForLoading,
+							...currentTaxonomyState,
 							isLoading: action.isLoading,
 						},
 					},
@@ -44,28 +39,28 @@ const store = createReduxStore('vk-blocks/term-color', {
 
 	actions: {
 		/**
-		 * Action that sets the color for a specific term within a post's taxonomy.
+		 * Action that sets the color for terms within a post's taxonomy.
 		 *
-		 * @param {Object} payload          The action payload containing the term color information.
+		 * @param {Object} payload          The action payload containing the terms color information.
 		 * @param {number} payload.postId   The ID of the post.
-		 * @param {string} payload.taxonomy The taxonomy to which the term belongs.
-		 * @param {string} payload.value    The color value to set for the term.
+		 * @param {string} payload.taxonomy The taxonomy to which the terms belong.
+		 * @param {Object} payload.values   An object containing term IDs as keys and color information as values.
 		 * @return {Object} Action object.
 		 */
-		setTermColor(payload) {
+		setTermColors(payload) {
 			return {
-				type: 'SET_TERM_COLOR',
+				type: 'SET_TERM_COLORS',
 				...payload,
 			};
 		},
 
 		/**
-		 * Action that sets the loading state for a specific taxonomy term within a post.
+		 * Action that sets the loading state for a specific taxonomy within a post.
 		 *
 		 * @param {Object}  payload           The action payload containing the loading state information.
 		 * @param {number}  payload.postId    The ID of the post.
-		 * @param {string}  payload.taxonomy  The taxonomy to which the term belongs.
-		 * @param {boolean} payload.isLoading The loading state to set for the term (true or false).
+		 * @param {string}  payload.taxonomy  The taxonomy to which the terms belong.
+		 * @param {boolean} payload.isLoading The loading state to set (true or false).
 		 * @return {Object} Action object.
 		 */
 		setIsLoading(payload) {
@@ -78,66 +73,70 @@ const store = createReduxStore('vk-blocks/term-color', {
 
 	selectors: {
 		/**
-		 * Retrieves term color information for a given post and taxonomy.
-		 * Automatically selects a taxonomy if not specified.
+		 * Retrieves color information for terms within a given post and taxonomy.
+		 * Always returns termID-based color information, regardless of display count.
 		 *
 		 * @param {Object} state                             Current state of the store.
 		 * @param {number} postId                            Post ID to retrieve color information for.
 		 * @param {string} [taxonomy='__VK_TAXONOMY_AUTO__'] Optional taxonomy name.
-		 * @return {Object} Term color value and loading state. Returns null and true if data is unavailable.
+		 * @return {Object} Term colors object and loading state.
 		 */
-		getTermColorInfo(state, postId, taxonomy = '__VK_TAXONOMY_AUTO__') {
+		getTermColors(state, postId, taxonomy = '__VK_TAXONOMY_AUTO__') {
 			const postInfo = state[postId];
-			if (!postInfo || !postInfo[taxonomy]?.value) {
+			if (!postInfo || !postInfo[taxonomy]?.values) {
 				return {
-					value: null,
+					values: {},
 					isLoading: true,
 				};
 			}
-
-			return postInfo[taxonomy];
+			return {
+				values: postInfo[taxonomy].values,
+				isLoading: postInfo[taxonomy].isLoading,
+			};
 		},
 	},
 
 	resolvers: {
 		/**
 		 * Fetches and sets term color information for a post, with an optional specified taxonomy.
-		 * If no taxonomy is provided, one is automatically selected.
+		 * Always fetches all terms and stores them by termID for consistent access.
 		 *
 		 * @param {number} postId                            Post ID for retrieving term color information.
 		 * @param {string} [taxonomy='__VK_TAXONOMY_AUTO__'] Optional taxonomy name.
 		 * @return {Function} Thunk action for updating store with term color information and loading state.
 		 */
-
-		getTermColorInfo(postId, taxonomy = '__VK_TAXONOMY_AUTO__') {
+		getTermColors(postId, taxonomy = '__VK_TAXONOMY_AUTO__') {
 			return async ({ dispatch }) => {
-				const fetchData = { post_id: postId };
+				const setLoadingState = (isLoading) =>
+					dispatch.setIsLoading({ postId, taxonomy, isLoading });
 
-				if ('__VK_TAXONOMY_AUTO__' !== taxonomy) {
-					fetchData.taxonomy = taxonomy;
+				setLoadingState(true);
+
+				try {
+					const fetchData = { post_id: postId };
+					if ('__VK_TAXONOMY_AUTO__' !== taxonomy) {
+						fetchData.taxonomy = taxonomy;
+					}
+
+					const res = await apiFetch({
+						path: 'vk-blocks/v1/get_post_multiple_terms_info',
+						method: 'POST',
+						data: fetchData,
+					});
+
+					// termIdごとに整形
+					const values = res.reduce((acc, term) => {
+						acc[term.term_id] = term;
+						return acc;
+					}, {});
+
+					dispatch.setTermColors({ postId, taxonomy, values });
+				} catch (error) {
+					// APIエラーが発生した場合は空の結果を設定
+					dispatch.setTermColors({ postId, taxonomy, values: {} });
+				} finally {
+					setLoadingState(false);
 				}
-				dispatch.setIsLoading({
-					postId,
-					taxonomy,
-					isLoading: true,
-				});
-				const termColorInfo = await apiFetch({
-					path: 'vk-blocks/v1/get_post_single_term_info',
-					method: 'POST',
-					data: fetchData,
-				});
-
-				const payload = {
-					postId,
-					taxonomy,
-					value: termColorInfo,
-				};
-				dispatch.setTermColor(payload);
-				dispatch.setIsLoading({
-					postId,
-					taxonomy,
-					isLoading: false,
-				});
 			};
 		},
 	},

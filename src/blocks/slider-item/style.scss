@@ -15,7 +15,7 @@
 		}
 	}
 
-	&.has-background-dim::before {
+	&.has-background-dim:not(.wp-block-cover__background)::before {
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -33,7 +33,7 @@
 	}
 	// 互換性対応ここまで
 
-	.has-background-dim::before {
+	.has-background-dim:not(.wp-block-cover__background)::before {
 		z-index: 1;
 		content: "";
 	}
@@ -44,7 +44,7 @@
 	}
 
 	.vk_slider_item-background-area,
-	.has-background-dim::before {
+	.has-background-dim:not(.wp-block-cover__background)::before {
 		position: absolute;
 		top: 0;
 		left: 0;

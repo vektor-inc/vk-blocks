@@ -28,7 +28,7 @@ class Vk_Blocks_PostList {
 		}
 
 		if ( ! isset( $wp_query ) || false === $wp_query || 'false' === $wp_query || empty( $wp_query->posts ) ) {
-			return wp_kses_post( self::get_render_no_post( $wp_query ) );
+			return wp_kses_post( self::get_render_no_post( $wp_query, $attributes ) );
 		}
 		$options = array(
 			'layout'                     => esc_html( $attributes['layout'] ),
@@ -295,9 +295,10 @@ class Vk_Blocks_PostList {
 	 * Render No Posts
 	 *
 	 * @param object $wp_query @since 1.27.0.
+	 * @param array  $attributes attributes.
 	 * @return string
 	 */
-	public static function get_render_no_post( $wp_query = null ) {
+	public static function get_render_no_post( $wp_query = null, $attributes = array() ) {
 		$name = '';
 		if ( ! empty( $wp_query->query['post_type'] ) ) {
 			if ( is_array( $wp_query->query['post_type'] ) ) {
@@ -315,8 +316,13 @@ class Vk_Blocks_PostList {
 			$name = __( 'Post', 'vk-blocks' );
 		}
 
+		$class_name = '';
+		if ( ! empty( $attributes['className'] ) ) {
+			$class_name = ' ' . esc_attr( $attributes['className'] );
+		}
+
 		/* translators: %s: 投稿タイプ名 */
-		$html = '<div class="alert alert-warning text-center">' . sprintf( __( 'There are no %s.', 'vk-blocks' ), strtolower( $name ) ) . '</div>';
+		$html = '<div class="alert alert-warning text-center' . $class_name . '">' . sprintf( __( 'There are no %s.', 'vk-blocks' ), strtolower( $name ) ) . '</div>';
 		return apply_filters( 'vk_blocks_post_list_render_no_post', $html, $wp_query );
 	}
 }

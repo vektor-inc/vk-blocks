@@ -58,10 +58,15 @@ npm run translate
 翻訳は PoEdit などを使って `.po` ファイルを開いて編集するが、
 新たに翻訳箇所が追加された場合はメニューから「potファイルから更新」を選んで更新する
 
-## AI(Cursor)用コーディングルール
-.cursor/rules/*.mdc は Cursor用のコーディングルールです。
-coding-rule.mdc のファイル構成一覧は `npm run makerule:blocks` で自動的に生成します。
+## AI用コーディングルール
 
+```
+npm run makerule
+```
+
+上記コマンドで Claude Code / Cursor / Github Copilot / Gemini CLI に対応したコーディングルールを生成します。
+生成したコーディングルールはGitの管理対象外となっています。
+環境構築時に上記コマンドを叩いて、独自のルールを追加してもらっても結構です。
 
 ## PHPUnitテスト
 
