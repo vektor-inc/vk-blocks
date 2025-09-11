@@ -188,7 +188,7 @@ export const MultiItemSetting = (props) => {
 							'vk-blocks'
 						)}
 						{__(
-							'If the number is not divisible, the sliding behaviour will be unnatural',
+							'If the number is not divisible, the sliding behavior will be unnatural',
 							'vk-blocks'
 						)}
 					</p>

@@ -241,7 +241,7 @@ msgstr ""
 
 #: src/admin/custom-css.js:20
 #: src/admin/import-export/index.js:106
-#: src/extensions/common/custom-css-extension/index.js:225
+#: src/extensions/common/custom-css-extension/index.js:253
 msgid "Custom CSS Setting"
 msgstr ""
 
@@ -312,6 +312,7 @@ msgid "Color"
 msgstr ""
 
 #: src/admin/custom-format/index.js:208
+#: src/blocks/_pro/fixed-display/edit.js:308
 #: src/blocks/_pro/grid-column-item/edit.js:115
 #: src/blocks/_pro/gridcolcard/edit-common.js:177
 #: src/blocks/button/edit.js:564
@@ -337,7 +338,7 @@ msgid "Activate Highlighter"
 msgstr ""
 
 #: src/admin/custom-format/index.js:318
-#: src/extensions/common/custom-css-extension/index.js:174
+#: src/extensions/common/custom-css-extension/index.js:202
 msgid "Custom CSS"
 msgstr ""
 
@@ -350,7 +351,7 @@ msgid ""
 msgstr ""
 
 #: src/admin/custom-format/index.js:369
-#: src/extensions/common/custom-css-extension/index.js:206
+#: src/extensions/common/custom-css-extension/index.js:234
 msgid "Example:"
 msgstr ""
 
@@ -671,6 +672,7 @@ msgid "No background color / Border"
 msgstr ""
 
 #: src/blocks/_pro/accordion/index.js:31
+#: src/blocks/_pro/fixed-display/edit.js:295
 msgid "Background color"
 msgstr ""
 
@@ -966,16 +968,28 @@ msgstr ""
 msgid "Learn more about block variations"
 msgstr ""
 
-#: src/blocks/_pro/blog-card/edit/url-placeholder.js:23
-msgid "Paste a link to the content you want to display on your site."
-msgstr ""
-
-#: src/blocks/_pro/blog-card/edit/url-placeholder.js:34
+#: src/blocks/_pro/blog-card/edit/url-placeholder.js:101
 msgid "Enter URL to embed here…"
 msgstr ""
 
-#: src/blocks/_pro/blog-card/edit/url-placeholder.js:45
+#: src/blocks/_pro/blog-card/edit/url-placeholder.js:121
 msgid "Sorry, this content could not be embedded."
+msgstr ""
+
+#: src/blocks/_pro/blog-card/edit/url-placeholder.js:43
+msgid "This URL contains a dangerous protocol and cannot be used."
+msgstr ""
+
+#: src/blocks/_pro/blog-card/edit/url-placeholder.js:54
+msgid "This URL contains HTML tags and cannot be used."
+msgstr ""
+
+#: src/blocks/_pro/blog-card/edit/url-placeholder.js:65
+msgid "Please enter a valid URL starting with http:// or https://"
+msgstr ""
+
+#: src/blocks/_pro/blog-card/edit/url-placeholder.js:89
+msgid "Paste a link to the content you want to display on your site."
 msgstr ""
 
 #: src/blocks/_pro/blog-card/hooks.js:92
@@ -1050,7 +1064,7 @@ msgid "Excerpt Text"
 msgstr ""
 
 #: src/blocks/_pro/card/edit.js:156
-msgid "Warning! When you hidden this item, you will lose the content."
+msgid "Warning! When you hide this item, you will lose the content."
 msgstr ""
 
 #: src/blocks/_pro/card/edit.js:162
@@ -1263,6 +1277,14 @@ msgstr ""
 msgid "h1"
 msgstr ""
 
+#: src/blocks/_pro/dynamic-text/edit.js:474
+msgid "Vertical writing"
+msgstr ""
+
+#: src/blocks/_pro/dynamic-text/edit.js:485
+msgid "Don’t rotate letters and numbers"
+msgstr ""
+
 #: src/blocks/_pro/dynamic-text/edit.js:50
 #: src/blocks/ancestor-page-list/edit.js:85
 msgid "h2"
@@ -1296,46 +1318,46 @@ msgstr ""
 msgid "span"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:137
+#: src/blocks/_pro/fixed-display/edit.js:171
 msgid "Fixed Display Setting"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:140
+#: src/blocks/_pro/fixed-display/edit.js:174
 msgid ""
 "The fixed position of the fixed position block will not change on the edit "
 "screen. Please check on the front screen."
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:147
+#: src/blocks/_pro/fixed-display/edit.js:181
 #: src/blocks/_pro/post-list-slider/edit.js:140
-#: src/blocks/_pro/table-of-contents-new/edit.js:209
+#: src/blocks/_pro/table-of-contents-new/edit.js:228
 #: src/components/column-layout-control/index.js:69
 msgid "Display type"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:152
+#: src/blocks/_pro/fixed-display/edit.js:186
 msgid "Always Visible"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:156
+#: src/blocks/_pro/fixed-display/edit.js:190
 msgid "Show on Scroll"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:160
+#: src/blocks/_pro/fixed-display/edit.js:194
 msgid "Specify the time until display and hide"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:169
+#: src/blocks/_pro/fixed-display/edit.js:203
 msgid "Fixed position"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:173
+#: src/blocks/_pro/fixed-display/edit.js:207
 #: src/blocks/_pro/outer/edit.js:1056
 #: src/blocks/alert/edit.js:103
 msgid "Top"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:175
+#: src/blocks/_pro/fixed-display/edit.js:209
 #: src/blocks/_pro/outer/edit.js:1101
 #: src/blocks/balloon/edit.js:435
 #: src/blocks/button/edit.js:300
@@ -1344,12 +1366,12 @@ msgstr ""
 msgid "Right"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:179
+#: src/blocks/_pro/fixed-display/edit.js:213
 #: src/blocks/_pro/outer/edit.js:1070
 msgid "Bottom"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:183
+#: src/blocks/_pro/fixed-display/edit.js:217
 #: src/blocks/_pro/outer/edit.js:1087
 #: src/blocks/balloon/edit.js:431
 #: src/blocks/button/edit.js:292
@@ -1358,68 +1380,112 @@ msgstr ""
 msgid "Left"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:191
+#: src/blocks/_pro/fixed-display/edit.js:225
 msgid "Fixed position origin"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:198
+#: src/blocks/_pro/fixed-display/edit.js:232
 msgid "Top section"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:205
+#: src/blocks/_pro/fixed-display/edit.js:239
 msgid "Bottom section"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:219
+#: src/blocks/_pro/fixed-display/edit.js:253
 msgid "Fixed position from the top"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:223
+#: src/blocks/_pro/fixed-display/edit.js:257
 msgid "Fixed position from the bottom"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:247
+#: src/blocks/_pro/fixed-display/edit.js:279
+msgid "Close Button Settings"
+msgstr ""
+
+#: src/blocks/_pro/fixed-display/edit.js:281
+msgid "Show close button"
+msgstr ""
+
+#: src/blocks/_pro/fixed-display/edit.js:286
+msgid ""
+"When enabled, a close button will be displayed that allows users to hide "
+"the fixed display."
+msgstr ""
+
+#: src/blocks/_pro/fixed-display/edit.js:309
+#: src/blocks/button/edit.js:550
+msgid ""
+"This color palette overrides the default color. If you want to use the "
+"default color, click the clear button."
+msgstr ""
+
+#: src/blocks/_pro/fixed-display/edit.js:320
+msgid "Close button text"
+msgstr ""
+
+#: src/blocks/_pro/fixed-display/edit.js:327
+msgid "Text size"
+msgstr ""
+
+#: src/blocks/_pro/fixed-display/edit.js:341
+#: src/blocks/_pro/outer/edit.js:1502
+#: src/blocks/icon-outer/edit.js:213
+#: src/blocks/icon/edit.js:206
+msgid "Border radius"
+msgstr ""
+
+#: src/blocks/_pro/fixed-display/edit.js:360
 msgid "Scroll Display Setting"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:250
+#: src/blocks/_pro/fixed-display/edit.js:363
 msgid "Timing to display"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:268
+#: src/blocks/_pro/fixed-display/edit.js:381
 msgid "Persist visibility once visible"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:282
+#: src/blocks/_pro/fixed-display/edit.js:395
 msgid "Timer Setting"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:285
+#: src/blocks/_pro/fixed-display/edit.js:398
 msgid ""
 "Set the timing for display and hide. Enter 0 to disable timing for each "
 "option."
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:294
+#: src/blocks/_pro/fixed-display/edit.js:407
 msgid "Seconds until display"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:325
+#: src/blocks/_pro/fixed-display/edit.js:439
 msgid "Seconds until hide"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:354
+#: src/blocks/_pro/fixed-display/edit.js:468
 msgid "Redisplay settings"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:357
+#: src/blocks/_pro/fixed-display/edit.js:471
 msgid "Do not display again until the browser is closed"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:368
+#: src/blocks/_pro/fixed-display/edit.js:482
 msgid ""
 "When enabled, the same content will not be shown again until the visitor "
 "closes their browser."
+msgstr ""
+
+#: src/blocks/_pro/fixed-display/edit.js:506
+msgid "Close fixed display"
+msgstr ""
+
+#: src/blocks/_pro/fixed-display/edit.js:528
+msgid "Click to hide this fixed display element"
 msgstr ""
 
 #: src/blocks/_pro/grid-column-item/deprecated/1.93.0/save.js:102
@@ -1885,12 +1951,6 @@ msgstr ""
 msgid "Border width"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1502
-#: src/blocks/icon-outer/edit.js:213
-#: src/blocks/icon/edit.js:206
-msgid "Border radius"
-msgstr ""
-
 #: src/blocks/_pro/outer/edit.js:1525
 msgid "Container Inner Side Space Setting"
 msgstr ""
@@ -1996,19 +2056,31 @@ msgstr ""
 msgid "This will not work on iPhone."
 msgstr ""
 
-#: src/blocks/_pro/post-category-badge/edit.js:100
+#: src/blocks/_pro/post-category-badge/edit.js:256
 msgid "Auto"
 msgstr ""
 
-#: src/blocks/_pro/post-category-badge/edit.js:86
+#: src/blocks/_pro/post-category-badge/edit.js:277
 msgid "Setting"
 msgstr ""
 
-#: src/blocks/_pro/post-category-badge/edit.js:88
+#: src/blocks/_pro/post-category-badge/edit.js:279
+msgid "Max Display Count"
+msgstr ""
+
+#: src/blocks/_pro/post-category-badge/edit.js:286
+msgid "Set to 0 for all terms, 1 for single display, 2 or more for multiple display"
+msgstr ""
+
+#: src/blocks/_pro/post-category-badge/edit.js:293
+msgid "Gap between badges"
+msgstr ""
+
+#: src/blocks/_pro/post-category-badge/edit.js:306
 msgid "Enable Term Link"
 msgstr ""
 
-#: src/blocks/_pro/post-category-badge/edit.js:96
+#: src/blocks/_pro/post-category-badge/edit.js:313
 msgid "Select Taxonomy"
 msgstr ""
 
@@ -2096,7 +2168,7 @@ msgstr ""
 
 #: src/blocks/_pro/post-list-slider/edit.js:302
 #: src/blocks/_pro/step-item/edit.js:139
-#: src/blocks/_pro/table-of-contents-new/edit.js:224
+#: src/blocks/_pro/table-of-contents-new/edit.js:243
 #: src/blocks/_pro/timeline-item/edit.js:105
 #: src/blocks/heading/edit.js:265
 #: src/blocks/slider/edit.js:491
@@ -2153,7 +2225,7 @@ msgstr ""
 
 #: src/blocks/_pro/post-list-slider/multi-item-setting.js:166
 #: src/blocks/slider/edit-multiItem.js:190
-msgid "If the number is not divisible, the sliding behaviour will be unnatural"
+msgid "If the number is not divisible, the sliding behavior will be unnatural"
 msgstr ""
 
 #: src/blocks/_pro/post-list-slider/multi-item-setting.js:259
@@ -2251,7 +2323,7 @@ msgid "Ex,6:00AM"
 msgstr ""
 
 #: src/blocks/_pro/step-item/edit.js:109
-#: src/blocks/_pro/table-of-contents-new/edit.js:214
+#: src/blocks/_pro/table-of-contents-new/edit.js:233
 #: src/blocks/_pro/timeline-item/edit.js:75
 #: src/blocks/icon-outer/edit.js:229
 #: src/blocks/icon/edit.js:221
@@ -2401,66 +2473,66 @@ msgstr ""
 #: src/blocks/_pro/table-of-contents-new/deprecated/1.104.0/save.js:16
 #: src/blocks/_pro/table-of-contents-new/deprecated/1.106.0/save.js:33
 #: src/blocks/_pro/table-of-contents-new/deprecated/1.78.0/save.js:16
-#: src/blocks/_pro/table-of-contents-new/edit.js:375
+#: src/blocks/_pro/table-of-contents-new/edit.js:399
 #: src/blocks/_pro/table-of-contents-new/save.js:39
 msgid "Table of Contents"
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:196
+#: src/blocks/_pro/table-of-contents-new/edit.js:215
 msgid "Note on duplicating headings"
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:201
+#: src/blocks/_pro/table-of-contents-new/edit.js:220
 msgid ""
 "If you duplicate a heading, the table of contents block will not work "
 "properly, please reassign the ID."
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:228
+#: src/blocks/_pro/table-of-contents-new/edit.js:247
 msgid "No frame"
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:235
+#: src/blocks/_pro/table-of-contents-new/edit.js:254
 msgid "Default Display Status"
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:243
+#: src/blocks/_pro/table-of-contents-new/edit.js:262
 msgid "OPEN"
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:247
+#: src/blocks/_pro/table-of-contents-new/edit.js:266
 msgid "CLOSE"
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:254
+#: src/blocks/_pro/table-of-contents-new/edit.js:273
 msgid "Heading Levels"
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:259
+#: src/blocks/_pro/table-of-contents-new/edit.js:278
 msgid "Global heading level settings:"
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:264
+#: src/blocks/_pro/table-of-contents-new/edit.js:288
 msgid "VK Blocks Setting"
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:268
+#: src/blocks/_pro/table-of-contents-new/edit.js:292
 msgid "Use custom heading levels"
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:283
+#: src/blocks/_pro/table-of-contents-new/edit.js:307
 msgid "Using custom heading levels for this block."
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:287
+#: src/blocks/_pro/table-of-contents-new/edit.js:311
 msgid "Using global heading levels settings."
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:301
+#: src/blocks/_pro/table-of-contents-new/edit.js:325
 msgid "Include Headings Up To:"
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:324
+#: src/blocks/_pro/table-of-contents-new/edit.js:348
 msgid "Exclude Headings"
 msgstr ""
 
@@ -2847,12 +2919,6 @@ msgstr ""
 #: src/blocks/button/edit.js:548
 #: src/blocks/pr-content/edit.js:201
 msgid "Button Color"
-msgstr ""
-
-#: src/blocks/button/edit.js:550
-msgid ""
-"This color palette overrides the default color. If you want to use the "
-"default color, click the clear button."
 msgstr ""
 
 #: src/blocks/button/edit.js:625
@@ -3541,7 +3607,7 @@ msgid "Published Date"
 msgstr ""
 
 #: src/components/display-condition/index.js:387
-msgid "Modefied Date"
+msgid "Modified Date"
 msgstr ""
 
 #: src/components/display-condition/index.js:395
@@ -3791,14 +3857,14 @@ msgstr ""
 msgid "Displayed in block variation transformation."
 msgstr ""
 
-#: src/extensions/common/custom-css-extension/index.js:187
+#: src/extensions/common/custom-css-extension/index.js:215
 msgid ""
 "If selector is specified, it is replaced by a block-specific CSS class. If "
 "selector is set to \"selector\", it will be replaced with a block-specific "
 "CSS class. CSS selectors other than \"selector\" may affect the entire page."
 msgstr ""
 
-#: src/extensions/common/custom-css-extension/index.js:211
+#: src/extensions/common/custom-css-extension/index.js:239
 msgid ""
 "If you want the edit screen to be as close to the public screen as "
 "possible, or if your own CSS interferes with the CSS for the identification "
@@ -3886,12 +3952,12 @@ msgstr ""
 msgid "Top XXL"
 msgstr ""
 
-#: src/extensions/common/margin-extension/index.js:297
-msgid "Margin the block"
-msgstr ""
-
 #: src/extensions/common/margin-extension/index.js:30
 msgid "Top XL"
+msgstr ""
+
+#: src/extensions/common/margin-extension/index.js:307
+msgid "Margin the block"
 msgstr ""
 
 #: src/extensions/common/margin-extension/index.js:35
@@ -3981,7 +4047,13 @@ msgid ""
 "from border panel that, specification from here is deprecated."
 msgstr ""
 
-#: src/extensions/core/list/style.js:108
+#: src/extensions/core/list/style.js:119
+msgid ""
+"When this style is selected for ordered lists, the \"List Style\", "
+"\"Initial Value\", and \"Reverse Order\" features cannot be used."
+msgstr ""
+
+#: src/extensions/core/list/style.js:142
 msgid "List Icon Color"
 msgstr ""
 
@@ -4135,17 +4207,17 @@ msgctxt "Image scaling options"
 msgid "Scale"
 msgstr ""
 
-#: src/blocks/_pro/blog-card/edit/url-placeholder.js:39
+#: src/blocks/_pro/blog-card/edit/url-placeholder.js:106
 msgctxt "button label"
 msgid "Embed"
 msgstr ""
 
-#: src/blocks/_pro/blog-card/edit/url-placeholder.js:48
+#: src/blocks/_pro/blog-card/edit/url-placeholder.js:124
 msgctxt "button label"
 msgid "Try again"
 msgstr ""
 
-#: src/blocks/_pro/blog-card/edit/url-placeholder.js:51
+#: src/blocks/_pro/blog-card/edit/url-placeholder.js:127
 msgctxt "button label"
 msgid "Convert to link"
 msgstr ""

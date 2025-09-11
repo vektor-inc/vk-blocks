@@ -1487,7 +1487,7 @@ msgid "Published Date"
 msgstr ""
 
 #: src/blocks/_pro/post-list/edit.js:333
-msgid "Modefied Date"
+msgid "Modified Date"
 msgstr ""
 
 #: src/blocks/_pro/post-list/edit.js:341
@@ -2442,7 +2442,7 @@ msgid ""
 msgstr ""
 
 #: src/blocks/slider/edit.js:298
-msgid "If the number is not divisible, the sliding behaviour will be unnatural"
+msgid "If the number is not divisible, the sliding behavior will be unnatural"
 msgstr ""
 
 #: src/blocks/slider/edit.js:391
@@ -3292,7 +3292,7 @@ msgstr ""
 
 #: inc/vk-blocks/admin/admin-load-separate.php:11
 #: inc/vk-blocks/admin/admin.php:91
-msgid "Load Separete Setting"
+msgid "Load Separate Setting"
 msgstr ""
 
 #: inc/vk-blocks/admin/admin-load-separate.php:12
@@ -3300,7 +3300,7 @@ msgid "Note that the order in which CSS/JS are loaded will change."
 msgstr ""
 
 #: inc/vk-blocks/admin/admin-load-separate.php:21
-msgid "Load Separete Option on"
+msgid "Load Separate Option on"
 msgstr ""
 
 #: inc/vk-blocks/admin/admin-margin.php:27
@@ -3377,7 +3377,7 @@ msgstr ""
 
 #: dist/vk-blocks-pro/inc/vk-blocks/admin/admin.php:82
 #: inc/vk-blocks/admin/admin.php:82
-msgid "Load Separete Setting"
+msgid "Load Separate Setting"
 msgstr ""
 
 #: dist/vk-blocks-pro/inc/vk-blocks/admin/admin.php:100
@@ -3755,7 +3755,7 @@ msgid "Nothing to do"
 msgstr ""
 
 #: inc/vk-css-optimize/package/class-vk-css-optimize.php:94
-msgid "Active Tree shaking (Recomend)"
+msgid "Active Tree shaking (Recommend)"
 msgstr ""
 
 #: inc/vk-css-optimize/package/class-vk-css-optimize.php:111
@@ -3779,7 +3779,7 @@ msgid "Preload css except for critical css"
 msgstr ""
 
 #: inc/vk-css-optimize/package/class-vk-css-optimize.php:160
-msgid "Active Preload CSS (Recomend)"
+msgid "Active Preload CSS (Recommend)"
 msgstr ""
 
 #: inc/vk-css-optimize/package/class-vk-css-optimize.php:177
@@ -4613,7 +4613,7 @@ msgstr ""
 #: inc/vk-blocks/build/blocks/_pro/taxonomy/block.json
 #: src/blocks/_pro/taxonomy/block.json
 msgctxt "block description"
-msgid "Display Taxnomy List Pulldown"
+msgid "Display Taxonomy List Pulldown"
 msgstr ""
 
 #: inc/vk-blocks/build/blocks/_pro/timeline-item/block.json

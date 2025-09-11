@@ -39,7 +39,7 @@ const GenerateBgImage = (props) => {
 		bgColorWOpacity = hex2rgba('#fff', opacity);
 	}
 
-	//moible only
+	//mobile only
 	if (bgImageMobile && !bgImageTablet && !bgImage) {
 		return (
 			<style>{`.${prefix}-${clientId}{background: linear-gradient(${bgColorWOpacity}, ${bgColorWOpacity}), url(${bgImageMobile}); ${backgroundStyle}}`}</style>

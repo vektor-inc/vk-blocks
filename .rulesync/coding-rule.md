@@ -8,74 +8,120 @@ globs: ["**/*"]
 # VK Blocks Pro コーディングルール
 
 ## 1. 共通ルール
-- 本プロジェクトは WordPress プラグイン「VK Blocks Pro」の開発を目的とし、WordPress プラグイン開発の文脈で動作します。
-- WordPress のコーディング規約およびベストプラクティスに従います。
-- PHP 7.4 以上に対応するコードを記述してください。
-- インデントは必ずタブを使用し、スペースでのインデントは禁止です。
-- フロントエンド出力には必ず `__()` や `_e()` などの i18n 関数を使用してください。
-- XSS や SQL インジェクション対策として、入力値は WordPress の関数を使って適切にバリデーションおよびサニタイズします。
-- 名前空間は使用せず、関数名やグローバル変数には必ず `vk_blocks_` 接頭辞を付けてください。
-- すべての回答は日本語で行ってください。
+- 本プラグインは WordPress のコーディング規約とベストプラクティスに準拠します。
+- 対応環境は PHP 7.4+。インデントは常にタブ（スペース禁止）。
+- フロント出力は必ず i18n 関数（`__()`, `_e()` など）を通す。
+- 受け取った値は WordPress API で検証/サニタイズし、出力は適切にエスケープする。
+- 名前空間は使用しない。関数/グローバルは `vk_blocks_` プレフィックス必須。
+- ドキュメント/コミュニケーションは原則日本語。
 
-## 2. PHP に関するルール
-- PHP ファイルは原則 `inc/` ディレクトリに格納し、構造的に整理します。
-- 各種ファイル配置の基準:
-  - `class-vk-blocks-global-settings.php`: 各ブロックの設定定義。
-  - `class-vk-blocks-options.php`: `wp_options` に保存する設定値。
-  - `admin.php`: 管理画面のメニュー追加および JS のエンキュー処理。
-  - REST API: `App/RestAPI/BlockMeta/` に配置。
-  - Font Awesome: `fontawesome/` 内に配置。
-  - ダイナミック CSS: `style/` 内の PHP ファイルで出力。
-- PHPUnit テスト:
-  - `test/phpunit/` に格納。
-  - 無料版は `free/`、Pro 版は `pro/` に分類。
+## 2. PHP
+- PHP は原則 `inc/` に配置し、役割ごとにファイルを分割する。
+- 代表例:
+	- 設定定義: `class-vk-blocks-global-settings.php`
+	- オプション: `class-vk-blocks-options.php`
+	- 管理画面/エンキュー: `admin.php`
+	- REST API: `App/RestAPI/BlockMeta/`
+	- Font Awesome: `fontawesome/`
+	- ダイナミック CSS: `style/`（PHPで出力）
 
-## 3. JavaScript / React に関するルール
-- Gutenberg カスタムブロックの JS コードは `src/` に配置。
-  - 各ブロックは `src/blocks/` 以下に専用ディレクトリを作成。
-  - 基本構成ファイル:
-    - `index.php`, `index.js`, `block.json`, `edit.js`, `save.js`, `style.scss`, `icon.svg`
-  - 無料版: `src/bundle.js` に import を追加。
-  - Pro 版: `src/bundle-pro.js` に import を追加。
-- ブロックの登録:
-  - `inc/vk-blocks/class-vk-blocks-global-settings.php` の `blocks()` メソッドに追加。
-  - 無料版は `is_pro = false`、Pro 版は `is_pro = true` に設定。
-- ビルド:
-  - `npm run build` でビルド。開発時は `npm run build:dev` や `npm run build:cache` が使えます。
-  - `npm run test-unit` でフィクスチャーテスト。
-  - `npm run test:e2e` で Playwright による E2E テストを実行。
+## 3. JavaScript / React
+- ブロックは `src/blocks/` にブロック単位で配置（基本セット: `index.php`, `index.js`, `block.json`, `edit.js`, `save.js`, `style.scss`, `icon.svg`）。
+- 無料版は `src/bundle.js`、Pro 版は `src/bundle-pro.js` に import を追加。
+- 登録は `inc/vk-blocks/class-vk-blocks-global-settings.php` の `blocks()` に追加し、`is_pro` を正しく設定（無料=false、Pro=true）。
+- ビルド/テスト: `npm run build`、開発は `npm run build:dev` / `npm run build:cache`。フィクスチャ `npm run test-unit`、E2E `npm run test:e2e`。
 
 ## 4. ファイル構成
-- 詳細なディレクトリ構成と役割は本ドキュメント末尾「ファイル構成一覧」参照。
-- ディレクトリごとの用途に沿ってファイルを整理・配置する。
+- 詳細は本ドキュメント末尾の「ファイル構成一覧」を参照。
+- 各ディレクトリの用途に沿って配置し、役割が曖昧にならないよう整理する。
 
 ## 5. ブロック作成手順
-1. ブロックが「無料版」か「Pro版」かを事前に確認。
-2. 以下のディレクトリにブロックディレクトリを作成:
-   - 無料版: `src/blocks/`
-   - Pro版: `src/blocks/_pro/`
-3. 最低限必要なファイルを準備:
-   - `index.php`, `index.js`, `block.json`, `edit.js`, `save.js`, `style.scss`, `icon.svg`
-4. `src/bundle.js` または `src/bundle-pro.js` に import を追加。
-5. `class-vk-blocks-global-settings.php` の `blocks()` に定義を追加。
-6. `is_pro` の値をブロックの種類に応じて設定（無料版=false, Pro版=true）。
+1. 種別を確認（無料版 or Pro版）。
+2. ディレクトリ作成（無料: `src/blocks/`、Pro: `src/blocks/_pro/`）。
+3. 必要ファイルを用意（`index.php` / `index.js` / `block.json` / `edit.js` / `save.js` / `style.scss` / `icon.svg`）。
+4. `bundle.js` または `bundle-pro.js` に import を追加。
+5. `class-vk-blocks-global-settings.php` の `blocks()` に定義を追加し、`is_pro` を設定。
+6. ビルドして動作確認（必要ならフィクスチャ/E2E を追加）。
 
-## 6. ブロックを新規作成するときの手順
-- まずそのブロックが「無料版」か「プロ版」か設計者に確認してください。
-- 無料版は`src/blocks/`内に、プロ版は`src/blocks/_pro'内にブロックのディレクトリを作ります。各ブロックの構成を参考にしてください。
-  - `index.php`は他のブロックを参考に必ず設置してください。ビルド時に `inc/vk-blocks/build/blocks/` の各ブロック内へコピーされ、必要なファイルがエンキューされます。
-  - `index.php`、`index.js`、`block.json`、`edit.js`、`save.js`、`style.scss`、`icon.svg`が基本セットですが絶対的なものではありません。
-- `src/bundle.js` （無料版） もしくは `src/bundle-pro.js` （プロ版）にimport定義、ブロック定義を追加してください。
-- `inc/vk-blocks/class-vk-blocks-global-settings` のblocks()内にブロックの定義を追加してください。プロ版のブロックは is_proがtrue 、無料版はfalseになります。
+## 6. テスト
+- フィクスチャ: `test/e2e-test/fixtures` に HTML を配置（生成/更新は `npm run test-unit` を参照）。
+- E2E: `test/e2e/` に Playwright テストを配置（実行: `npm run test:e2e`）。
+- PHPUnit: `test/phpunit/` に配置（無料: `free/`、Pro: `pro/`）。
 
-## 7. テストに関するルール
-- フィクスチャーテスト: `test/e2e-test/fixtures` に HTML を配置。
-- E2E テスト: `test/e2e/` に Playwright のテストケースを格納。
-- PHPUnit:
-  - 無料版: `test/phpunit/free/`
-  - Pro 版: `test/phpunit/pro/`
+## 7. プルリクエストのレビュー
+- GitHub CLI（gh）が使える場合は対象 PR を取得。未導入ならインストール案内または目視レビューを依頼。
+- PR は `.github/PULL_REQUEST_TEMPLATE.md` に準拠。「レビュワー確認方法・確認内容など」に従って動作確認（「変更内容の確認方法」に記載があるケースも）。
+- 関連する Issue / チケットがある場合は PR 説明にリンクを明記し、要件の充足・スコープの一致・未解決事項の有無を確認する（可能であれば `Closes #123` などで自動クローズを設定）。
+- ベースブランチは `develop`。異なる場合は作成者へ確認。
+- レビューコメントの投稿は承認のもとで行う（誤解や過剰な修正要求を避けるため）。
 
-## 8. ファイル構成一覧
+## 8. セキュリティ / サニタイズ
+- 入力値の検証: `sanitize_text_field()`, `sanitize_key()`, `absint()`, `floatval()`, `esc_url_raw()`, `wp_unslash()` を用途に応じて使用。配列は要素ごとにサニタイズ。
+- 出力時のエスケープ: 文字列は `esc_html()`, 属性は `esc_attr()`, URL は `esc_url()` を使用。HTML を許可する場合は `wp_kses()` / `wp_kses_post()` を使用し、許可タグは必要最小限。
+- DB アクセス: `$wpdb->prepare()` を必ず使用。独自の生 SQL は極力避け、WordPress API を優先。
+- オプション/メタ保存: 保存前に適切にサニタイズ。取得後の出力時にも必ずエスケープ。
+- 管理画面操作: `check_admin_referer()` / `wp_verify_nonce()` と権限チェック（`current_user_can()`）を必ず実装。
+- REST API: `permission_callback` を必須化し、厳密に true/false を返却。`args` に `sanitize_callback` と `validate_callback` を設定。
+- 外部リクエスト: `wp_safe_remote_get()` 等を使用し、タイムアウト・失敗時のフォールバック・キャッシュ（Transients）を検討。取得データの表示は必ずエスケープ。
+- 禁止事項: `eval()`、ユーザー入力を含む `include`/`require`、任意ファイル書き込み、未検証のファイルアップロード。
+
+## 9. 国際化 (i18n)
+- テキストドメイン: PHP/JS ともに `vk-blocks-pro` を使用。
+- PHP: `__()`, `_e()`, `_x()`, `_n()` を適切に使い分け、変数を含む出力は `printf( esc_html__( '...', 'vk-blocks-pro' ), $var )` 等でエスケープ併用。
+- 翻訳者コメント: 置換子の意味が分かりづらい場合は `/* translators: ... */` を付与。
+- JS: `@wordpress/i18n` の `__()` などを使用し、ビルド後は `wp_set_script_translations()` により翻訳を読み込み。
+- POT/JSON 生成: `npm run translate` を使用。翻訳キーの重複・不要キーを作らない。
+
+## 10. コーディングスタイル / Lint
+- PHP: WordPress Coding Standards を適用（`.phpcs.xml`）。PR 前に `npm run lint:php` を実行。すべての公開関数に DocBlock を付与。
+- JS: `@wordpress/scripts` の ESLint/Prettier 設定に準拠。`npm run lint` を実行して自動整形・静的検査を通過させる。
+- SCSS/CSS: クラス名は衝突回避のため `vk-` プレフィックス（例: `.vk-visual-embed`）。過度な `!important` を避け、アクセシビリティに配慮したフォーカススタイルを付与。
+- インデント: `.editorconfig` に従い、PHP/JS/SCSS はタブ。YAML はスペース 2。
+
+## 11. ブロック実装ルール（互換性・block.json）
+- ブロック名: `vk-blocks/xxx` 形式を必須とし、一意性を担保。
+- `block.json`: `title`, `category`, `icon`, `attributes`, `supports` を適切に定義。`textdomain` は `vk-blocks-pro`。
+- 互換性: 既存属性の削除/意味変更を行う場合は `deprecated` を実装し、旧コンテンツをマイグレーション。`save.js` の出力差分は慎重に。
+- アセット: `index.php` からのエンキューに統一。`src/` 直読みは禁止。ビルド後に `inc/vk-blocks/build/` 配下へ配置される前提で処理する。
+- 登録: `inc/vk-blocks/class-vk-blocks-global-settings.php` の `blocks()` に定義追加し、無料/Pro の `is_pro` を正しく設定。
+
+## 12. REST API 実装ガイド
+- ルーティング: ネームスペースはプロジェクトの方針に従い（例: `vk-blocks/v1`）、エンドポイント名はわかりやすく動詞を避けた名詞形を推奨。
+- `register_rest_route()`: `permission_callback` は匿名関数でも可だがテスト可能性を考慮し関数化推奨。`args` に `sanitize_callback`/`validate_callback` を必ず設定。
+- レスポンス: `WP_REST_Response` を使用し、エラーは `new WP_Error( code, message, data )` を返却。機微情報を含めない。
+- パフォーマンス: 重い処理はトランジェント等で短期キャッシュ。キャッシュキーは `vk_blocks_` 接頭辞で衝突回避。
+
+## 13. アクセシビリティ (a11y)
+- セマンティック HTML を優先し、必要に応じて `aria-*` を付与。ラベルとコントロールの関連付けを明確に。
+- キーボード操作で全機能にアクセス可能にし、フォーカス可視化を担保。
+- コントラスト比は WCAG AA 以上を目安に。点滅/自動再生などは回避または `prefers-reduced-motion` に対応。
+
+## 14. ビルド / アセット運用
+- Node は Volta 設定（`package.json`）に従う。基本コマンド: `npm run build`（本番）、`npm run build:dev`/`build:cache`（開発）。
+- 変更を含む PR ではビルドを実施し、必要な生成物（`inc/vk-blocks/build/` 等）をコミット。PR テンプレートの確認事項に従う。
+- 翻訳ファイルは `npm run translate` で更新。
+
+## 15. Git / PR 運用
+- PR は必ず `.github/PULL_REQUEST_TEMPLATE.md` に従って作成し、テンプレートのチェック項目を満たす。
+- PR のタイトルは、readme.txt に記載した変更内容をそのまま日本語化したものとする（簡潔で要点のみ）。
+- readme.txt 更新（ユーザー向け変更がある場合は必須）:
+	- 「Changelog」に既存フォーマットで追記（例: `[ Add function ][ Block Name ] ...` / `[ Bug fix ] ...` / `[ Specification change ] ...` / `[ Other ] ...`）。Pro専用機能は `[ ... (Pro) ]` と明記。
+	- バージョン見出し（例: `= 1.109.2 =`）配下に箇条書きで追加。未リリースの変更は先頭に一時的に追記し、リリース時に該当バージョン見出しへ移動。
+	- 記述は英語で簡潔に、影響範囲（対象ブロックや機能名）を角括弧で明示。
+	- 仕様変更・非推奨化がある場合は、[Blocks]/[Extensions]/[Settings] のリスト表記（例: `not recommended`）も整合させる。
+	- 互換性に影響する場合は `Requires at least` / `Tested up to` / `Requires PHP` の見直しを行い、`vk-blocks.php` のヘッダーと齟齬がないようにする。
+- 関連する Issue / チケットがある場合は PR タイトルまたは本文にリンク（例: `Closes #123`）を付与し、要件・スコープ・受入条件の整合を確認する。
+- ブランチ命名: `feature/…`, `fix/…`, `chore/…`, `test/…` など用途が分かる形に統一。
+- 小さな PR を心掛け、リファクタや整形のみの変更は機能修正と分離。
+- 送信前チェック: `npm run lint`, `npm run lint:php`, `npm run build`, `npm run test-unit`, `npm run test:e2e`（必要な場合）。
+- ベースブランチは `develop` 固定。強制 push や rebase が必要な場合は事前に共有。
+
+## 16. 互換性ポリシー
+- 対応 PHP バージョン: 7.4 以上。対応 WordPress バージョン: `vk-blocks.php` の `Requires at least` に準拠。
+- API 利用: 対象バージョン未満の関数/フックを使用しない。必要に応じてフォールバック実装。
+- JS は `@wordpress/scripts` によりトランスパイルされる前提で、モダン構文はビルド経由で提供。
+
+## 17. ファイル構成一覧
 - **`inc/`**: PHPコードを原則ここに格納する
   - **`vk-blocks/`**: 本プラグインに関する処理はここに格納する
     - **`class-vk-blocks-global-settings.php`**: 各ブロックの定義
@@ -179,13 +225,13 @@ globs: ["**/*"]
       - **`tab`**: These are tabs where you can place various items. Click on the tab label to switch between them.
       - **`tab-item`**: A single item in a tab.
       - **`table-of-contents-new`**: This is a table of contents that is automatically generated according to the headings when added.
-      - **`taxonomy`**: Display Taxnomy List Pulldown
+      - **`taxonomy`**: Display Taxonomy List Pulldown
       - **`timeline`**: Displays a simple schedule and other information that is useful for explaining the order.
       - **`timeline-item`**: This element sets the label, color, and style of the timeline.
 - **`test`**: テストを格納する
   - **`e2e`**: playwrightによるE2Eテストケースが格納される
   - **`e2e-test`**: Gutenbergのテスト用
     - **`fixtures`**: 各ブロックのフィクスチャーをここに格納する (*.html)
-  - **`phpunit`**: PHPUnit用
+- **`phpunit`**: PHPUnit用
     - **`free`**: VK Blocks 無料版で使うブロックのテストケース
     - **`pro`**: VK Blocks Proで使うブロックのテストケース

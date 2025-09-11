@@ -15,7 +15,7 @@ class VK_Blocks_Faq_Schema_Manager {
 	 *
 	 * @var array
 	 */
-	private static $datas = array();
+	private static $data = array();
 
 	/**
 	 * FAQ ブロックのコンテンツを追加
@@ -48,7 +48,7 @@ class VK_Blocks_Faq_Schema_Manager {
 				$question_text = trim( preg_replace( "/\r|\n|\r\n|\n\n/", '', wp_strip_all_tags( $doc->saveHTML( $question ) ) ) );
 				$answer_text   = null !== $answers->item( $index ) ? trim( preg_replace( "/\r|\n|\r\n|\n\n/", '', wp_strip_all_tags( $doc->saveHTML( $answers->item( $index ) ) ) ) ) : '';
 
-				self::$datas[] = array(
+				self::$data[] = array(
 					'@type'          => 'Question',
 					'name'           => $question_text,
 					'acceptedAnswer' => array(
@@ -77,10 +77,10 @@ class VK_Blocks_Faq_Schema_Manager {
 	public static function output_schema() {
 		$schema_graph = array();
 
-		if ( ! empty( self::$datas ) && apply_filters( 'vk_blocks_output_faq_schema', true ) ) {
+		if ( ! empty( self::$data ) && apply_filters( 'vk_blocks_output_faq_schema', true ) ) {
 			$faq_schema     = array(
 				'@type'      => 'FAQPage',
-				'mainEntity' => self::$datas,
+				'mainEntity' => self::$data,
 			);
 			$schema_graph[] = $faq_schema;
 		}

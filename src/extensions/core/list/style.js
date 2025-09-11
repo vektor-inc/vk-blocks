@@ -10,8 +10,9 @@ import {
 	getColorObjectByColorValue,
 	getColorObjectByAttributeValues,
 } from '@wordpress/block-editor';
-import { select } from '@wordpress/data';
+import { select, dispatch } from '@wordpress/data';
 import { createHigherOrderComponent } from '@wordpress/compose';
+import { useEffect, useRef } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -88,7 +89,7 @@ addFilter('blocks.registerBlockType', 'vk-blocks/list-style', addAttribute);
 export const addBlockControl = createHigherOrderComponent(
 	(BlockEdit) => (props) => {
 		const { name, attributes, setAttributes } = props;
-		const { color, className } = attributes;
+		const { color, className, ordered } = attributes;
 		if (!isValidBlockType(name)) {
 			return <BlockEdit {...props} />;
 		}
@@ -99,6 +100,39 @@ export const addBlockControl = createHigherOrderComponent(
 		if (!isLagerThanWp62() && !isVKColorPaletteManager(colorSet)) {
 			return <BlockEdit {...props} />;
 		}
+
+		// 順序付きリストでスタイルが「デフォルト」以外の場合の注意書きを表示するかどうか
+		const nowClassArray = className ? className.split(' ') : [];
+		const hasNonDefaultStyle = nowClassArray.find(
+			(item) => item.match(/is-style-/) && !item.match(/is-style-default/)
+		);
+
+		const showNotice = ordered && hasNonDefaultStyle;
+		const noticeShownRef = useRef(false);
+
+		// 通知での表示
+		useEffect(() => {
+			if (showNotice && !noticeShownRef.current) {
+				// 通知がまだ表示されていない場合のみ作成
+				dispatch('core/notices').createNotice(
+					'warning',
+					__(
+						'When this style is selected for ordered lists, the "List Style", "Initial Value", and "Reverse Order" features cannot be used.',
+						'vk-blocks'
+					),
+					{
+						id: 'vk-blocks-list-notice',
+						isDismissible: true,
+						autoDismiss: false,
+					}
+				);
+				noticeShownRef.current = true;
+			} else if (!showNotice && noticeShownRef.current) {
+				// 条件が変わった時のみ通知を削除
+				dispatch('core/notices').removeNotice('vk-blocks-list-notice');
+				noticeShownRef.current = false;
+			}
+		}, [showNotice]);
 
 		return (
 			<>

@@ -157,7 +157,7 @@ test('Taxonomy Block Test', async ({ editor, page }) => {
 	await page.getByLabel('Display as dropdown').check();
 	await page.getByRole('button', { name: 'Update' }).click();
 	// タクソノミーブロックが配置された投稿を表示
-	// await page.getByRole('link', { name: 'View Post', exact: true }).click(); // <- 複数 Vew Post があるとエラーになる
+	// await page.getByRole('link', { name: 'View Post', exact: true }).click(); // <- 複数 View Post があるとエラーになる
 	// View Post 表記のリンクが複数ある（管理バーがアクティブの場合）とエラーになるため .components-snackbar__action の View Post をクリックする
 	// 一旦 .components-snackbar__action のリンクをすべて取得して...
 	const links = await page.$$('.components-snackbar__action');
@@ -243,7 +243,7 @@ test('Taxonomy Block Test', async ({ editor, page }) => {
 	// expect関数を使用して、h1タグのテキストが「Uncategorized」を含むことを確認する
 	expect(h1Text).toContain('Uncategorized');
 
-	// Chack Post tag /////////////////////////////////////////////////
+	// Check Post tag /////////////////////////////////////////////////
 
 	await page.getByRole('link', { name: 'Test Post' }).first().click();
 	await page.getByRole('menuitem', { name: ' Edit Post' }).click();

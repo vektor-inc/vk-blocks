@@ -8,7 +8,7 @@
 } from '@wordpress/e2e-test-utils';
 
 /**
- * Visits general settings page and changes the language to the given vaule.
+ * Visits general settings page and changes the language to the given value.
  *
  * @param {string} lang Value of the language to set.
  *

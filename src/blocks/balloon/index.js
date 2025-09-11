@@ -1,5 +1,5 @@
 /**
- * Baloon block type
+ * Balloon block type
  *
  */
 

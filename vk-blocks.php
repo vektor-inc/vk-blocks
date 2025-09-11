@@ -3,7 +3,7 @@
  * Plugin Name: VK Blocks
  * Plugin URI: https://github.com/vektor-inc/vk-blocks
  * Description: This is a plugin that extends Block Editor.
- * Version: 1.109.0.1
+ * Version: 1.110.0.0
  * Requires at least: 6.5
  * Author: Vektor,Inc.
  * Author URI: https://vektor-inc.co.jp
@@ -35,7 +35,7 @@ if ( ! function_exists( 'vk_blocks_get_version' ) ) {
 }
 
 /**
- * Deactive VK Blocks ( Free )
+ * Deactivate VK Blocks ( Free )
  *
  * 読み込んでだ時に無料版が有効化されていたら、誤動作しないようになるべく早く無効化するためそのまま実行させている
  * VK Blocks 無料版の 1.36.0 で vk_blocks_is_pro を function_exists を経由せずに定義してしまっているため、
@@ -53,7 +53,7 @@ if ( strpos( plugin_dir_path( __FILE__ ), 'vk-blocks-pro' ) !== false ) {
 	if ( is_plugin_active( 'vk-blocks/vk-blocks.php' ) ) {
 		deactivate_plugins( 'vk-blocks/vk-blocks.php' );
 
-		// Deactive ExUnit included VK Blocks.
+		// Deactivate ExUnit included VK Blocks.
 		$vk_blocks_exunit_common_options = get_option( 'vkExUnit_common_options' );
 		if ( ! empty( $vk_blocks_exunit_common_options['active_vk-blocks'] ) ) {
 			$vk_blocks_exunit_common_options['active_vk-blocks'] = false;
@@ -64,7 +64,7 @@ if ( strpos( plugin_dir_path( __FILE__ ), 'vk-blocks-pro' ) !== false ) {
 	if ( is_plugin_active( 'vk-gridcolcard/vk-gridcolcard.php' ) ) {
 		deactivate_plugins( 'vk-gridcolcard/vk-gridcolcard.php' );
 		require_once ABSPATH . 'wp-admin/includes/plugin.php';
-		// Deactive ExUnit included VK Blocks.
+		// Deactivate ExUnit included VK Blocks.
 		$vk_blocks_exunit_common_options = get_option( 'vkExUnit_common_options' );
 		if ( ! empty( $vk_blocks_exunit_common_options['active_vk-blocks'] ) ) {
 			$vk_blocks_exunit_common_options['active_vk-blocks'] = false;
@@ -75,7 +75,7 @@ if ( strpos( plugin_dir_path( __FILE__ ), 'vk-blocks-pro' ) !== false ) {
 } elseif ( strpos( plugin_dir_path( __FILE__ ), 'vk-blocks' ) !== false ) {
 	if ( is_plugin_active( 'vk-blocks-pro/vk-blocks.php' ) ) {
 		require_once ABSPATH . 'wp-admin/includes/plugin.php';
-		// Deactive ExUnit included VK Blocks.
+		// Deactivate ExUnit included VK Blocks.
 		$vk_blocks_exunit_common_options = get_option( 'vkExUnit_common_options' );
 		if ( ! empty( $vk_blocks_exunit_common_options['active_vk-blocks'] ) ) {
 			$vk_blocks_exunit_common_options['active_vk-blocks'] = false;
@@ -237,7 +237,7 @@ if ( function_exists( 'vk_blocks_is_pro' ) && vk_blocks_is_pro() ) {
 
 	if ( ! function_exists( 'vk_blocks_license_check' ) ) {
 		/**
-		 * Lisence Chcker
+		 * Licence Checker
 		 *
 		 * @param array $test_data    テストデータ.
 		 * @return string $check_result ライセンス認証の結果.

@@ -108,10 +108,27 @@ e.g.
 
 == Changelog ==
 
+= 1.110.0 =
+[ Add function ][ Tab (Pro) ] Added tab anchor link functionality.
+[ Design Bug Fix ][ Card (Pro) / Editor ] Scoped .vk_posts width rules to top-level children so nested blocks (e.g., Accordion) expand to full width.
+[ Specification change ][ Blog Card (Pro) ] Relax WordPress standard embed restrictions and add security validation
+[ Specification change ][ Category Badge (Pro) ] Modified to allow selection of non-hierarchical custom taxonomies.
+[ Bug fix ][ Table of Contents (Pro) ] Fixed an issue where after changing VK Blocks Settings > Table of Contents block settings, previewing from the editor still used the previous heading levels.
+
+= 1.109.2 =
+[ Bug fix ][ Table of Contents (Pro) ] Fixed an issue where global heading level settings were not applied when "Use custom heading levels" was disabled in subdirectory installations.
+[ Bug fix ][ Table of Contents (Pro) ] Fixed hardcoded admin URL in the editor settings link.
+
+= 1.109.1 =
+[ Other ] Translation
+
+= 1.109.0 =
 [ Add function ][ Category Badge (Pro) ] Added support for displaying multiple category badges.
+[ Add function ][ Fixed Display (Pro) ] Added close button feature.
 [ Add function ][ Responsive Spacer ] Enable transform to or from core spacer.
 [ Add function ][ Core Content / Core Post Terms / Core Date / Core Featured Image / Core Query Title ] Added top and bottom margin settings to the toolbar.
 [ Specification change ][ Fixed Display (Pro) ] Improved "Do not display again until the browser is closed" functionality for better performance and user experience.
+[ Specification change ][ Core List ] Added warning notice when non-default styles are selected for ordered lists, as WordPress standard list features (List Style, Initial Value, Reverse Order) cannot be used with custom styles.
 [ Specification change ][ Custom CSS (Pro) ] Custom CSS is no longer displayed on the widget settings screen.
 [ Bug fix ][ Category Badge (Pro)  ] Fixed missing permission_callback in REST API route definition that was causing WordPress notices.
 [ Bug fix ][ Post List (Pro) / Post List Slider (Pro) ] Fixed an issue where warning messages for empty posts do not follow hidden settings
@@ -401,7 +418,7 @@ e.g.
 = 1.80.0 =
 [ Add function ][ Outer (Pro) ] Add serrated and large triangle in divider style.
 [ Bug Fix ][ Outer (Pro) ] Add vertical padding variables.
-[ Bug Fix ][ Grid Colum (Pro) ] Fix error
+[ Bug Fix ][ Grid Column (Pro) ] Fix error
 
 = 1.79.1 =
 [ Bug Fix (Free) ] Fixed an issue where blocks couldn't be used in WordPress 6.6.
@@ -730,7 +747,7 @@ e.g.
 [ Bug fix ][ Select Post List Item (Pro) ] Fixed a bug where additional CSS classes were not attached.
 
 = 1.43.0 =
-[ Add function ][ Spacer ][ Common mergin ] Add size option xl/xs.
+[ Add function ][ Spacer ][ Common margin ] Add size option xl/xs.
 [ Improvement ][ Admin screen ] Display the SaveButton sticky.
 [ Bug fix ] Fix PHP 8.X Error
 
@@ -749,7 +766,7 @@ e.g.
 [ Bug fix ][ button ] buttonColorCustom clear convert to primary.
 
 = 1.41.1 =
-[ Bug fix ] Fix don't display Admin screen in case of spacific option value
+[ Bug fix ] Fix don't display Admin screen in case of specific option value
 
 = 1.41.0 =
 [ Add function ][ Balloon ] Add width option.
@@ -826,11 +843,11 @@ e.g.
 = 1.34.0 =
 [ Improvement ][ Button ] Support for transformation of paragraph block to VK button block.
 [ Other ] add term color composer library
-[ Bug fix ][ Grid Col Card(Pro) ] Fix bocome narrow width in case of innner block on edit screen
+[ Bug fix ][ Grid Col Card(Pro) ] Fix become narrow width in case of innner block on edit screen
 
 = 1.33.2 =
 [ Bug fix ][ Button ] Fix horizontal padding for X-T9
-[ Bug fix ][ Common mergin ] cope with table bottom
+[ Bug fix ][ Common margin ] cope with table bottom
 [ Bug fix ][ Breadcrumb(Pro) ] Fix front page breadcrumb
 [ Bug fix ][ Grid Column(Pro) ] fix row block layout in Grid Column Block
 [ Improvement ][ Button ] Delete block id UI.
@@ -861,7 +878,7 @@ e.g.
 = 1.30.0 =
 [ Add function ][ Border Box ] Add body align control in toolbar.
 [ Add function ][ Button outer(Pro) ] Add button width option.
-[ Update ][ Font Awesome ] Add version chenge setting on block-editor screen.
+[ Update ][ Font Awesome ] Add version change setting on block-editor screen.
 [ Specification change ][ Button ] Move url interface to block toolbar.
 [ Specification change ] Change default --vk-margin-md size 2rem -> 2.4rem
 [ Specification change ][ icon ] fix icon margin bottom
@@ -1231,7 +1248,7 @@ Cope with WordPress 5.9
 
 = 1.3.2 =
 [ Bug fix ][ Card ] Fix sentence of align control.
-[ Bug fix ][ Heading Extention ] Fix editor css is not reflected.
+[ Bug fix ][ Heading Extension ] Fix editor css is not reflected.
 [ Bug fix ][ Button ] Fix Button width of 'Wide' on editor.
 [ Bug fix / Specification Change ][ Staff ] Add font selector of heading, mintyo or not.
 
@@ -1301,7 +1318,7 @@ Cope with WordPress 5.9
 [ Design bug fix ][ Slider ][ Staff ][ PR Blocks ][ PR Content ] fix style bug for katawara.
 
 = 1.0.5 =
-[ Bug fix ][ Animation ][ Balloon ][ Heading ][ PR Content ][ Icon Card ] Fix data by old versoin needs recovery.
+[ Bug fix ][ Animation ][ Balloon ][ Heading ][ PR Content ][ Icon Card ] Fix data by old version needs recovery.
 [ Design bug fix ][ QA Block ] Fix style in editor.
 [ Design bug fix ][ Button ] Fix style of sub caption.
 
@@ -1316,7 +1333,7 @@ Cope with WordPress 5.9
 [ Bug fix ][ Spacer ] fix bug for deprecated.
 
 = 1.0.2 =
-[ Bug fix ] fix bug when instert block.
+[ Bug fix ] fix bug when insert block.
 
 = 1.0.1 =
 
@@ -1353,7 +1370,7 @@ Cope with WordPress 5.9
 
 = 0.55.0 =
 [ Add function ][ Outer ] Background image repeat
-[ Bug fix ] fix can not save on some plugin using enviroment
+[ Bug fix ] fix can not save on some plugin using environment
 [ Specification change ][ Heading ] delete font weight specification from Plain style
 
 = 0.54.2 =
@@ -1381,7 +1398,7 @@ Cope with WordPress 5.9
 = 0.52.1 =
 [ Bug fix ][ Grid Column(Pro) ] Fixed a bug that the hidden specification is removed when re-editing
 [ Bug fix ][ Slider(Pro) ] Fix Can not stop loop
-[ Bug fix ][ Outer(Pro) ] Fix cant edit outer block(cant save style tag) on Editor role user
+[ Bug fix ][ Outer(Pro) ] Fix can't edit outer block(can't save style tag) on Editor role user
 
 = 0.52.0 =
 [ Specification change ][ CSS Optimize ] Delete package
@@ -1779,7 +1796,7 @@ build only
 = 0.25.3 =
 [ Bug fix ][ Post list(Pro) ] Offset Bug Fix
 [ Bug fix ][ Card ] Block clash bug fix
-[ Bug fix ][ Hidden Function ] ReEnable
+[ Bug fix ][ Hidden Function ] re-enable
 
 
 = 0.25.1 =

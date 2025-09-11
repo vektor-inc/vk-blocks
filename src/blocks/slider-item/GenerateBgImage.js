@@ -18,7 +18,7 @@ const GenerateBgImage = (props) => {
 		backgroundStyle = ``;
 	}
 
-	//moible only
+	//mobile only
 	if (bgImageMobile && !bgImageTablet && !bgImage) {
 		return (
 			<style>{`.${prefix}-${blockId}{background-image: url(${bgImageMobile}); ${backgroundStyle}}`}</style>

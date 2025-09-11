@@ -36,7 +36,7 @@ function vk_blocks_register_block_page_content() {
 }
 add_action( 'init', 'vk_blocks_register_block_page_content', 99 );
 
-// Add fiter for render post content
+// Add filter for render post content
 add_filter( 'vk_page_content', 'do_blocks', 9 );
 add_filter( 'vk_page_content', 'wptexturize' );
 add_filter( 'vk_page_content', 'convert_smilies', 20 );

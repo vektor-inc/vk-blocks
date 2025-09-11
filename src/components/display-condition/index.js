@@ -384,7 +384,7 @@ export function DisplayCondition(props) {
 						},
 						{
 							value: 'modified',
-							label: __('Modefied Date', 'vk-blocks'),
+							label: __('Modified Date', 'vk-blocks'),
 						},
 						{
 							value: 'title',

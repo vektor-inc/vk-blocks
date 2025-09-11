@@ -84,8 +84,8 @@ add_filter( 'css_tree_shaking_exclude', 'vk_blocks_css_tree_shaking_exclude_clas
 /**
  * CSS Optimize option default
  *
- * @param array $vk_css_optimize_options_default : recieve array.
- * @return array $vk_css_optimize_options_default : return modefied array.
+ * @param array $vk_css_optimize_options_default : receive array.
+ * @return array $vk_css_optimize_options_default : return modified array.
  */
 function VK_blocks_css_optimize_options_default( $vk_css_optimize_options_default ) {
 	$vk_css_optimize_options_default = array(

@@ -28,7 +28,7 @@ if ( ! class_exists( 'VK_Blocks_Font_Awesome_API' ) ) {
 }
 
 /**
- * Font Awsome のアイコンの URL を渡す
+ * Font Awesome のアイコンの URL を渡す
  */
 function vk_blocks_font_awesome_init() {
 	$options     = VkFontAwesomeVersions::get_option_fa();
