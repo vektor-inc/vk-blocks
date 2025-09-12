@@ -491,10 +491,10 @@ ol {
 	@each $colorClass, $color in $colorPalette {
 		&.vk-has-#{"#{$colorClass}"}-color,
 		&.has-vk-#{"#{$colorClass}"}-color {
-			color: initial;
+			color: inherit;
 			border-color: $color;
 			.wp-block-group__inner-container {
-				color: initial;
+				color: inherit;
 				border-color: $color;
 			}
 		}

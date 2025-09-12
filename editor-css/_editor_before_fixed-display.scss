@@ -3,6 +3,7 @@
 	z-index: unset;
 	border: 1px dashed #ccc;
 	min-height:3em;
+	padding: 1.2em 0 0;
 	// そのままだと編集画面でも消えてしまうので上書き（.wp-block-vk-blocks-fixed-display）がないと負けてしまう
 	&.wp-block-vk-blocks-fixed-display{
 		opacity: 1;

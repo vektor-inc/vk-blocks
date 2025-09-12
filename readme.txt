@@ -108,6 +108,11 @@ e.g.
 
 == Changelog ==
 
+= 1.110.1 =
+[ Bug fix ][ Table of Contents (Pro) ] Fixed an issue where Basic Auth login screen would not disappear on sites with Basic Auth enabled.
+[ Design bug fix ][ Animation ( Pro ) / Fixed Display ( Pro ) ] Fixed overlapping of the top-right label and the "Add block" button in the editor screen.
+[ Design bug fix ][ Core Group ] Fixed an issue where text color settings in group blocks were not inherited by child elements for classic theme.
+
 = 1.110.0 =
 [ Add function ][ Tab (Pro) ] Added tab anchor link functionality.
 [ Design Bug Fix ][ Card (Pro) / Editor ] Scoped .vk_posts width rules to top-level children so nested blocks (e.g., Accordion) expand to full width.
