@@ -536,7 +536,7 @@ export default function SliderEdit(props) {
 					initialOpen={false}
 				>
 					<ResponsiveSizeControl
-						label={__('Slide Height for each device.', 'vk-blocks')}
+						label={__('Slide Height for each device', 'vk-blocks')}
 						valuePC={pc}
 						valueTablet={tablet}
 						valueMobile={mobile}

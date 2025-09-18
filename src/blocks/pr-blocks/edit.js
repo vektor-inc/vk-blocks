@@ -110,7 +110,7 @@ export default function PrBlocksEdit(props) {
 							onChange={(value) => setAttributes({ url1: value })}
 						/>
 						<CheckboxControl
-							label={__('Open link new tab.', 'vk-blocks')}
+							label={__('Open link new tab', 'vk-blocks')}
 							checked={urlOpenType1}
 							onChange={(checked) =>
 								setAttributes({ urlOpenType1: checked })
@@ -185,7 +185,7 @@ export default function PrBlocksEdit(props) {
 							onChange={(value) => setAttributes({ url2: value })}
 						/>
 						<CheckboxControl
-							label={__('Open link new tab.', 'vk-blocks')}
+							label={__('Open link new tab', 'vk-blocks')}
 							checked={urlOpenType2}
 							onChange={(checked) =>
 								setAttributes({ urlOpenType2: checked })
@@ -260,7 +260,7 @@ export default function PrBlocksEdit(props) {
 							onChange={(value) => setAttributes({ url3: value })}
 						/>
 						<CheckboxControl
-							label={__('Open link new tab.', 'vk-blocks')}
+							label={__('Open link new tab', 'vk-blocks')}
 							checked={urlOpenType3}
 							onChange={(checked) =>
 								setAttributes({ urlOpenType3: checked })

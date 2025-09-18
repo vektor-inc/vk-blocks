@@ -1,6 +1,7 @@
 import save1_21_0 from './1.21.0/save';
 import save1_29_2 from './1.29.2/save';
 import save1_75_0 from './1.75.0/save';
+import save1_102_2 from './1.102.2/save';
 
 const blockAttributes = {
 	heading: {
@@ -39,7 +40,28 @@ const blockAttributes3 = {
 	}	
 }
 
+/* 次回対応おねがいします
+// 1.102.2 からの変更で追加したもの
+const blockAttributes4 = {
+	...blockAttributes3,
+	anchor: {
+		type: 'string',
+		source: 'attribute',
+		attribute: 'id',
+		selector: 'h3,h4,h5,h6'
+	},
+	includeInToc: {
+		type: 'boolean',
+		default: false
+	}
+};
+*/
+
 const deprecated = [
+	{
+		attributes: blockAttributes3,
+		save: save1_102_2,
+	},
 	{
 		attributes: blockAttributes3,
 		save: save1_75_0,

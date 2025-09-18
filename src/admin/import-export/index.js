@@ -98,6 +98,9 @@ export const OPTION_DEFAULT_SETTINGS = [
 			{
 				name: 'toc_heading_levels',
 			},
+			{
+				name: 'toc_include_border_box',
+			},
 		],
 		isImport: !!vkBlocksObject.isPro,
 		isShow: !!vkBlocksObject.isPro,

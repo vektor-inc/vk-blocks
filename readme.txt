@@ -108,6 +108,11 @@ e.g.
 
 == Changelog ==
 
+= 1.111.0 =
+[ Add function ][ Core Query (Pro) ] Added "Modified date" as an option for post order. (Pro only)
+[ Add function ][ Table of Contents (Pro) ] Added support for detecting headings from Border Box blocks. Border Box headings (h3-h6) can now be included in the Table of Contents.
+[ Bug fix ] Fix link to FontAwesome icon list to correctly point to the free icons page.
+
 = 1.110.1 =
 [ Bug fix ][ Table of Contents (Pro) ] Fixed an issue where Basic Auth login screen would not disappear on sites with Basic Auth enabled.
 [ Design bug fix ][ Animation ( Pro ) / Fixed Display ( Pro ) ] Fixed overlapping of the top-right label and the "Add block" button in the editor screen.

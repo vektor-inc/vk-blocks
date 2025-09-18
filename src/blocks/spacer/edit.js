@@ -53,7 +53,7 @@ export default function SpacerEdit({
 					className={className}
 				/>
 				<BaseControl
-					label={__('Height for each device.', 'vk-blocks')}
+					label={__('Height for each device', 'vk-blocks')}
 					id={`vk_spacer-viewPort-${clientId}`}
 				>
 					<AdvancedViewportControl

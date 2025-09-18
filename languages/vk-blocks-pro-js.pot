@@ -93,12 +93,12 @@ msgid "Under the WordPress default blocks"
 msgstr ""
 
 #: src/admin/block-manager/index.js:51
-#: src/admin/import-export/index.js:116
+#: src/admin/import-export/index.js:119
 msgid "Block Manager Setting"
 msgstr ""
 
 #: src/admin/block-style-manager/index.js:27
-#: src/admin/import-export/index.js:125
+#: src/admin/import-export/index.js:128
 msgid "Block Style Manager Setting"
 msgstr ""
 
@@ -240,7 +240,7 @@ msgid "Edit"
 msgstr ""
 
 #: src/admin/custom-css.js:20
-#: src/admin/import-export/index.js:106
+#: src/admin/import-export/index.js:109
 #: src/extensions/common/custom-css-extension/index.js:253
 msgid "Custom CSS Setting"
 msgstr ""
@@ -304,7 +304,7 @@ msgstr ""
 #: src/admin/custom-format/index.js:203
 #: src/blocks/_pro/step-item/edit.js:106
 #: src/blocks/_pro/timeline-item/edit.js:72
-#: src/blocks/border-box/edit.js:238
+#: src/blocks/border-box/edit.js:260
 #: src/blocks/button/edit.js:492
 #: src/blocks/icon/edit.js:316
 #: src/blocks/staff/edit.js:200
@@ -323,7 +323,7 @@ msgstr ""
 #: src/admin/custom-format/index.js:239
 #: src/blocks/_pro/grid-column-item/edit.js:121
 #: src/blocks/_pro/gridcolcard/edit-common.js:183
-#: src/blocks/border-box/edit.js:250
+#: src/blocks/border-box/edit.js:272
 #: src/blocks/button/edit.js:547
 #: src/blocks/icon/edit.js:321
 msgid "Background Color"
@@ -430,11 +430,11 @@ msgstr ""
 msgid "Import Success"
 msgstr ""
 
-#: src/admin/import-export/index.js:134
+#: src/admin/import-export/index.js:137
 msgid "Font Awesome Custom Lists Setting"
 msgstr ""
 
-#: src/admin/import-export/index.js:145
+#: src/admin/import-export/index.js:148
 msgid "Custom Block Variation Setting"
 msgstr ""
 
@@ -442,11 +442,11 @@ msgstr ""
 msgid "License Key"
 msgstr ""
 
-#: src/admin/import-export/index.js:158
+#: src/admin/import-export/index.js:161
 msgid "Breadcrumb Separator Setting"
 msgstr ""
 
-#: src/admin/import-export/index.js:177
+#: src/admin/import-export/index.js:180
 msgid "Import Export Tool"
 msgstr ""
 
@@ -466,7 +466,7 @@ msgid "FAQ Block Setting"
 msgstr ""
 
 #: src/admin/import-export/index.js:96
-#: src/admin/toc.js:29
+#: src/admin/toc.js:71
 msgid "Table of Contents Setting"
 msgstr ""
 
@@ -516,7 +516,7 @@ msgid "ex)"
 msgstr ""
 
 #: src/admin/margin.js:141
-#: src/blocks/border-box/edit.js:202
+#: src/blocks/border-box/edit.js:219
 #: src/blocks/icon-outer/edit.js:151
 #: src/blocks/icon/edit.js:145
 msgid "Margin"
@@ -633,12 +633,26 @@ msgstr ""
 msgid "Save Success"
 msgstr ""
 
-#: src/admin/toc.js:31
+#: src/admin/toc.js:131
+msgid ""
+"When enabled, headings within Border Box blocks will be included in the "
+"Table of Contents."
+msgstr ""
+
+#: src/admin/toc.js:40
+msgid "Border Box"
+msgstr ""
+
+#: src/admin/toc.js:73
 msgid "Please specify a common heading level setting to be used across the site."
 msgstr ""
 
-#: src/admin/toc.js:50
+#: src/admin/toc.js:92
 msgid "Headings from H2 up to the selected level will be included."
+msgstr ""
+
+#: src/admin/toc.js:98
+msgid "Include in Table of Contents"
 msgstr ""
 
 #: src/blocks/_pro/accordion/edit.js:160
@@ -1086,7 +1100,7 @@ msgstr ""
 #: src/components/display-items-control/index.js:112
 msgid ""
 "Click each card block to set the target url. You can find the url form at "
-"it's sidebar."
+"its sidebar."
 msgstr ""
 
 #: src/blocks/_pro/card/edit.js:183
@@ -1100,7 +1114,7 @@ msgstr ""
 
 #: src/blocks/_pro/card/edit.js:88
 #: src/blocks/slider/edit.js:542
-msgid "Slide Height for each device."
+msgid "Slide Height for each device"
 msgstr ""
 
 #: src/blocks/_pro/child-page/edit.js:101
@@ -1266,7 +1280,7 @@ msgstr ""
 #: src/blocks/pr-blocks/edit.js:263
 #: src/blocks/pr-content/edit.js:131
 #: src/components/link-toolbar/index.js:321
-msgid "Open link new tab."
+msgid "Open link new tab"
 msgstr ""
 
 #: src/blocks/_pro/dynamic-text/edit.js:455
@@ -1330,7 +1344,7 @@ msgstr ""
 
 #: src/blocks/_pro/fixed-display/edit.js:181
 #: src/blocks/_pro/post-list-slider/edit.js:140
-#: src/blocks/_pro/table-of-contents-new/edit.js:228
+#: src/blocks/_pro/table-of-contents-new/edit.js:337
 #: src/components/column-layout-control/index.js:69
 msgid "Display type"
 msgstr ""
@@ -1593,12 +1607,12 @@ msgid "Link URL:"
 msgstr ""
 
 #: src/blocks/_pro/gridcolcard-item/edit.js:238
-#: src/components/link-toolbar/index.js:334
+#: src/components/link-toolbar/index.js:331
 msgid "Add noreferrer"
 msgstr ""
 
 #: src/blocks/_pro/gridcolcard-item/edit.js:246
-#: src/components/link-toolbar/index.js:351
+#: src/components/link-toolbar/index.js:348
 msgid "Add nofollow"
 msgstr ""
 
@@ -1654,7 +1668,7 @@ msgid "Border Width"
 msgstr ""
 
 #: src/blocks/_pro/gridcolcard/edit-common.js:220
-#: src/blocks/border-box/edit.js:241
+#: src/blocks/border-box/edit.js:263
 #: src/extensions/core/group/style.js:119
 msgid "Border Color"
 msgstr ""
@@ -1730,9 +1744,9 @@ msgstr ""
 
 #: src/blocks/_pro/icon-card-item/edit.js:138
 #: src/blocks/_pro/step-item/edit.js:83
-#: src/blocks/_pro/tab-item/edit.js:181
+#: src/blocks/_pro/tab-item/edit.js:188
 #: src/blocks/alert/edit.js:75
-#: src/blocks/border-box/edit.js:274
+#: src/blocks/border-box/edit.js:296
 #: src/blocks/button/edit.js:575
 #: src/blocks/heading/edit.js:336
 #: src/blocks/icon/edit.js:293
@@ -2168,7 +2182,7 @@ msgstr ""
 
 #: src/blocks/_pro/post-list-slider/edit.js:302
 #: src/blocks/_pro/step-item/edit.js:139
-#: src/blocks/_pro/table-of-contents-new/edit.js:243
+#: src/blocks/_pro/table-of-contents-new/edit.js:352
 #: src/blocks/_pro/timeline-item/edit.js:105
 #: src/blocks/heading/edit.js:265
 #: src/blocks/slider/edit.js:491
@@ -2323,7 +2337,7 @@ msgid "Ex,6:00AM"
 msgstr ""
 
 #: src/blocks/_pro/step-item/edit.js:109
-#: src/blocks/_pro/table-of-contents-new/edit.js:233
+#: src/blocks/_pro/table-of-contents-new/edit.js:342
 #: src/blocks/_pro/timeline-item/edit.js:75
 #: src/blocks/icon-outer/edit.js:229
 #: src/blocks/icon/edit.js:221
@@ -2352,19 +2366,19 @@ msgstr ""
 msgid "First Dot Number"
 msgstr ""
 
-#: src/blocks/_pro/tab-item/edit.js:170
+#: src/blocks/_pro/tab-item/edit.js:177
 msgid "Tab Color Setting"
 msgstr ""
 
-#: src/blocks/_pro/tab-item/edit.js:173
+#: src/blocks/_pro/tab-item/edit.js:180
 msgid "Tab Color"
 msgstr ""
 
-#: src/blocks/_pro/tab-item/edit.js:178
+#: src/blocks/_pro/tab-item/edit.js:185
 msgid "Tab Icon Setting"
 msgstr ""
 
-#: src/blocks/_pro/tab-item/edit.js:188
+#: src/blocks/_pro/tab-item/edit.js:195
 #: src/blocks/button/edit.js:582
 #: src/blocks/heading/edit.js:340
 #: src/blocks/pr-content/edit.js:219
@@ -2372,7 +2386,7 @@ msgstr ""
 msgid "Before text"
 msgstr ""
 
-#: src/blocks/_pro/tab-item/edit.js:213
+#: src/blocks/_pro/tab-item/edit.js:220
 #: src/blocks/button/edit.js:604
 #: src/blocks/heading/edit.js:349
 #: src/blocks/pr-content/edit.js:231
@@ -2380,7 +2394,7 @@ msgstr ""
 msgid "After text"
 msgstr ""
 
-#: src/blocks/_pro/tab-item/edit.js:221
+#: src/blocks/_pro/tab-item/edit.js:228
 #: src/blocks/button/edit.js:611
 #: src/blocks/icon-outer/edit.js:90
 #: src/blocks/icon/edit.js:87
@@ -2391,75 +2405,97 @@ msgstr ""
 msgid "Tab Item"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:37
+#: src/blocks/_pro/tab/edit.js:1005
+msgid "Tab Display Options ( PC )"
+msgstr ""
+
+#: src/blocks/_pro/tab/edit.js:1012
+msgid "Not set"
+msgstr ""
+
+#: src/blocks/_pro/tab/edit.js:1016
+msgid "Scroll"
+msgstr ""
+
+#: src/blocks/_pro/tab/edit.js:1020
+msgid "Wrap to 2 rows"
+msgstr ""
+
+#: src/blocks/_pro/tab/edit.js:260
+msgid "Tab %d"
+msgstr ""
+
+#: src/blocks/_pro/tab/edit.js:273
+msgid "Copy"
+msgstr ""
+
+#: src/blocks/_pro/tab/edit.js:278
+msgid "Copied!"
+msgstr ""
+
+#: src/blocks/_pro/tab/edit.js:36
 msgid "Tab 01"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:41
+#: src/blocks/_pro/tab/edit.js:40
 msgid "Tab 02"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:606
+#: src/blocks/_pro/tab/edit.js:716
 #. %s is the tab number
 msgid "Tab Label [ %s ]"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:756
+#: src/blocks/_pro/tab/edit.js:867
+msgid "Anchor Link Information"
+msgstr ""
+
+#: src/blocks/_pro/tab/edit.js:871
+msgid ""
+"You can link directly to specific tabs using anchor links. Click the copy "
+"button to copy the anchor link for each tab."
+msgstr ""
+
+#: src/blocks/_pro/tab/edit.js:896
 msgid "Tab Size Setting"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:758
+#: src/blocks/_pro/tab/edit.js:898
 msgid "Tab Size ( Smart Phone )"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:775
+#: src/blocks/_pro/tab/edit.js:915
 msgid "Tab Size ( Tablet )"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:792
+#: src/blocks/_pro/tab/edit.js:932
 msgid "Tab Size ( PC )"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:796
+#: src/blocks/_pro/tab/edit.js:936
 msgid "Fit to the text"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:800
+#: src/blocks/_pro/tab/edit.js:940
 msgid "Monospaced"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:809
+#: src/blocks/_pro/tab/edit.js:949
 msgid "Tab Display Options"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:811
+#: src/blocks/_pro/tab/edit.js:951
 msgid ""
 "If there are many labels or the screen width is narrow, you can adjust it "
 "here. *Tab size setting will not be effective."
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:817
+#: src/blocks/_pro/tab/edit.js:957
 msgid "Tab Display Options ( Smart Phone )"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:841
+#: src/blocks/_pro/tab/edit.js:981
 msgid "Tab Display Options ( Tablet )"
-msgstr ""
-
-#: src/blocks/_pro/tab/edit.js:865
-msgid "Tab Display Options ( PC )"
-msgstr ""
-
-#: src/blocks/_pro/tab/edit.js:872
-msgid "Not set"
-msgstr ""
-
-#: src/blocks/_pro/tab/edit.js:876
-msgid "Scroll"
-msgstr ""
-
-#: src/blocks/_pro/tab/edit.js:880
-msgid "Wrap to 2 rows"
 msgstr ""
 
 #: src/blocks/_pro/tab/index.js:18
@@ -2473,66 +2509,66 @@ msgstr ""
 #: src/blocks/_pro/table-of-contents-new/deprecated/1.104.0/save.js:16
 #: src/blocks/_pro/table-of-contents-new/deprecated/1.106.0/save.js:33
 #: src/blocks/_pro/table-of-contents-new/deprecated/1.78.0/save.js:16
-#: src/blocks/_pro/table-of-contents-new/edit.js:399
+#: src/blocks/_pro/table-of-contents-new/edit.js:544
 #: src/blocks/_pro/table-of-contents-new/save.js:39
 msgid "Table of Contents"
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:215
+#: src/blocks/_pro/table-of-contents-new/edit.js:324
 msgid "Note on duplicating headings"
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:220
+#: src/blocks/_pro/table-of-contents-new/edit.js:329
 msgid ""
 "If you duplicate a heading, the table of contents block will not work "
 "properly, please reassign the ID."
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:247
+#: src/blocks/_pro/table-of-contents-new/edit.js:356
 msgid "No frame"
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:254
+#: src/blocks/_pro/table-of-contents-new/edit.js:363
 msgid "Default Display Status"
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:262
+#: src/blocks/_pro/table-of-contents-new/edit.js:371
 msgid "OPEN"
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:266
+#: src/blocks/_pro/table-of-contents-new/edit.js:375
 msgid "CLOSE"
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:273
+#: src/blocks/_pro/table-of-contents-new/edit.js:382
 msgid "Heading Levels"
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:278
+#: src/blocks/_pro/table-of-contents-new/edit.js:387
 msgid "Global heading level settings:"
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:288
+#: src/blocks/_pro/table-of-contents-new/edit.js:397
 msgid "VK Blocks Setting"
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:292
+#: src/blocks/_pro/table-of-contents-new/edit.js:401
 msgid "Use custom heading levels"
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:307
+#: src/blocks/_pro/table-of-contents-new/edit.js:416
 msgid "Using custom heading levels for this block."
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:311
+#: src/blocks/_pro/table-of-contents-new/edit.js:420
 msgid "Using global heading levels settings."
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:325
+#: src/blocks/_pro/table-of-contents-new/edit.js:434
 msgid "Include Headings Up To:"
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:348
+#: src/blocks/_pro/table-of-contents-new/edit.js:457
 msgid "Exclude Headings"
 msgstr ""
 
@@ -2782,7 +2818,7 @@ msgstr ""
 msgid "Icon Name"
 msgstr ""
 
-#: src/blocks/border-box/edit.js:207
+#: src/blocks/border-box/edit.js:224
 msgid ""
 "The margin-top of the first element and the margin-bottom of the last "
 "element in the border block will be automatically set to 0.If you want to "
@@ -2790,19 +2826,19 @@ msgid ""
 "instead of margin."
 msgstr ""
 
-#: src/blocks/border-box/edit.js:220
+#: src/blocks/border-box/edit.js:237
 msgid "HTML element of the title"
 msgstr ""
 
-#: src/blocks/border-box/edit.js:260
+#: src/blocks/border-box/edit.js:282
 msgid "Transparent"
 msgstr ""
 
-#: src/blocks/border-box/edit.js:264
+#: src/blocks/border-box/edit.js:286
 msgid "White"
 msgstr ""
 
-#: src/blocks/border-box/edit.js:52
+#: src/blocks/border-box/edit.js:68
 msgid "Please enter a title."
 msgstr ""
 
@@ -3367,7 +3403,7 @@ msgid "You can change each common margin size from Setting > VK Blocks"
 msgstr ""
 
 #: src/blocks/spacer/edit.js:56
-msgid "Height for each device."
+msgid "Height for each device"
 msgstr ""
 
 #: src/blocks/spacer/edit.js:75
@@ -3599,6 +3635,7 @@ msgid "DESC"
 msgstr ""
 
 #: src/components/display-condition/index.js:374
+#: src/extensions/core/query/style.js:61
 msgid "Order by"
 msgstr ""
 
@@ -3698,11 +3735,11 @@ msgstr ""
 msgid "Currently selected"
 msgstr ""
 
-#: src/components/link-toolbar/index.js:372
+#: src/components/link-toolbar/index.js:369
 msgid "Accessibility link description"
 msgstr ""
 
-#: src/components/link-toolbar/index.js:402
+#: src/components/link-toolbar/index.js:399
 msgid "Link copied to clipboard."
 msgstr ""
 
@@ -4055,6 +4092,26 @@ msgstr ""
 
 #: src/extensions/core/list/style.js:142
 msgid "List Icon Color"
+msgstr ""
+
+#: src/extensions/core/query/style.js:105
+msgid "Modified (Newest to oldest)"
+msgstr ""
+
+#: src/extensions/core/query/style.js:112
+msgid "Modified (Oldest to newest)"
+msgstr ""
+
+#: src/extensions/core/query/style.js:56
+msgid "VK Query Extension"
+msgstr ""
+
+#: src/extensions/core/query/style.js:62
+msgid "This setting will override the standard order setting."
+msgstr ""
+
+#: src/extensions/core/query/style.js:98
+msgid "Use standard options"
 msgstr ""
 
 #: src/extensions/core/table/style.js:294

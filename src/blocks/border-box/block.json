@@ -14,6 +14,16 @@
 			"type": "string",
 			"default": "h4"
 		},
+		"anchor": {
+			"type": "string",
+			"source": "attribute",
+			"attribute": "id",
+			"selector": "h3,h4,h5,h6"
+		},
+		"includeInToc": {
+			"type": "boolean",
+			"default": false
+		},
 		"color": {
 			"type": "string"
 		},

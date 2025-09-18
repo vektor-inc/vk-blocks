@@ -40,7 +40,7 @@ function vk_blocks_font_awesome_init() {
 		$fa_icon_url = 'https://fontawesome.com/v5/search?m=free';
 		$fa_family   = 'Font Awesome 5 Free';
 	} elseif ( '6_WebFonts_CSS' === $options || '6_SVG_JS' === $options ) {
-		$fa_icon_url = 'https://fontawesome.com/search?m=free';
+		$fa_icon_url = 'https://fontawesome.com/search?ic=free&o=r';
 		$fa_family   = 'Font Awesome 6 Free';
 	}
 

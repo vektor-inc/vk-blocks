@@ -128,7 +128,7 @@ export default function PrcontentEdit({ attributes, setAttributes, clientId }) {
 						/>
 					</BaseControl>
 					<CheckboxControl
-						label={__('Open link new tab.', 'vk-blocks')}
+						label={__('Open link new tab', 'vk-blocks')}
 						checked={buttonTarget}
 						onChange={(checked) =>
 							setAttributes({ buttonTarget: checked })

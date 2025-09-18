@@ -16,7 +16,6 @@ export default function save(props) {
 	const {
 		heading,
 		headingTag,
-		anchor,
 		faIcon,
 		color,
 		bgColor,
@@ -30,7 +29,6 @@ export default function save(props) {
 			tagName={headingTag}
 			className={'vk_borderBox_title'}
 			value={heading}
-			id={headingTag === 'p' ? undefined : anchor}
 		/>
 	);
 

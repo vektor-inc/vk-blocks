@@ -25,20 +25,36 @@ import parse from 'html-react-parser';
 import { AdvancedColorPalette } from '@vkblocks/components/advanced-color-palette';
 import { isHexColor } from '@vkblocks/utils/is-hex-color';
 import { sanitizeSlug } from '@vkblocks/utils/sanitizeSlug';
+import { useEffect, useRef } from '@wordpress/element';
 
 export default function BorderBoxEdit(props) {
 	const { attributes, setAttributes } = props;
 	const {
 		heading,
 		headingTag,
+		anchor,
+		includeInToc,
 		faIcon,
 		color,
 		bgColor,
 		borderColor,
 		bodyAlign,
 	} = attributes;
+
 	// eslint-disable-next-line no-undef
 	const iconFamily = vkFontAwesome.iconFamily;
+
+	// 新しく作成されたブロックのみ目次に含める（既存ブロックは除外のまま）
+	const hasInitialized = useRef(false);
+	useEffect(() => {
+		if (!hasInitialized.current) {
+			// 新しく作成されたブロック（headingが空）の場合は目次に含める
+			if (!heading || heading.trim() === '') {
+				setAttributes({ includeInToc: true });
+			}
+			hasInitialized.current = true;
+		}
+	}, [includeInToc, setAttributes, heading]);
 	const inner = (
 		<InnerBlocks templateLock={false} template={[['core/paragraph']]} />
 	);
@@ -50,6 +66,7 @@ export default function BorderBoxEdit(props) {
 			onChange={(value) => setAttributes({ heading: value })}
 			value={heading}
 			placeholder={__('Please enter a title.', 'vk-blocks')}
+			id={headingTag === 'p' ? undefined : anchor}
 		/>
 	);
 
@@ -226,9 +243,14 @@ export default function BorderBoxEdit(props) {
 								{ label: 'H6', value: 'h6' },
 								{ label: 'p', value: 'p' },
 							]}
-							onChange={(value) =>
-								setAttributes({ headingTag: value })
-							}
+							onChange={(value) => {
+								const newAttributes = { headingTag: value };
+								// 見出しタグがpに変更された場合はアンカーIDを削除
+								if (value === 'p' && anchor) {
+									newAttributes.anchor = '';
+								}
+								setAttributes(newAttributes);
+							}}
 						/>
 					</BaseControl>
 				</PanelBody>

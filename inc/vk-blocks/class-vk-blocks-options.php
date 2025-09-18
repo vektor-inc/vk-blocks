@@ -93,6 +93,11 @@ class VK_Blocks_Options {
 			}
 		}
 
+		// 目次に枠線ブロックを含める設定のサニタイズ
+		if ( isset( $options['toc_include_border_box'] ) ) {
+			$options['toc_include_border_box'] = (bool) $options['toc_include_border_box'];
+		}
+
 		return $options;
 	}
 
@@ -146,6 +151,10 @@ class VK_Blocks_Options {
 					'enum' => array( 'h2', 'h3', 'h4', 'h5', 'h6' ),
 				),
 				'default' => array( 'h2', 'h3', 'h4', 'h5', 'h6' ),
+			),
+			'toc_include_border_box'      => array(
+				'type'    => 'boolean',
+				'default' => true,
 			),
 			'balloon_border_width'        => array(
 				'type' => 'number',
@@ -445,6 +454,7 @@ class VK_Blocks_Options {
 		$default = array(
 			'block_category_position'     => 'above-core-blocks',
 			'toc_heading_levels'          => array( 'h2' ),
+			'toc_include_border_box'      => true,
 			'balloon_border_width'        => 1,
 			'margin_unit'                 => 'rem',
 			'margin_size'                 => array(

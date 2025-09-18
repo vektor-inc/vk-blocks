@@ -7,6 +7,14 @@
 			flex-wrap: wrap;
 			margin-left: calc(1.5em - 2em);
 			margin-top: 4px;
+
+			&--no-parent {
+				.block-manager__checklist-item {
+					width: calc((100% / 3) - .5em);
+					margin: 0 0 0 .5em;
+				}
+			}
+
 		}
 
 		.block-manager__checklist-item {

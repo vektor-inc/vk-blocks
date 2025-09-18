@@ -303,7 +303,7 @@ export default function IconEdit(props) {
 						onChange={(value) => setAttributes({ iconUrl: value })}
 					/>
 					<CheckboxControl
-						label={__('Open link new tab.', 'vk-blocks')}
+						label={__('Open link new tab', 'vk-blocks')}
 						checked={iconTarget}
 						onChange={(checked) => {
 							setAttributes({ iconTarget: checked });
