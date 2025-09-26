@@ -99,6 +99,10 @@
 			"type": "number",
 			"default": 1.25
 		},
+		"direction": {
+			"type": "string",
+			"default": "rtl"
+		},
 		"blockId": {
 			"type": "string"
 		}

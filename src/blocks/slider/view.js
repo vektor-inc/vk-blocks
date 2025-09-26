@@ -94,6 +94,8 @@ document.defaultView.addEventListener('load', function () {
 							delay: Number(attributes.autoPlayDelay) ?? 2500,
 							disableOnInteraction: !!attributes.autoPlayStop,
 							stopOnLastSlide: !attributes.loop,
+							// direction='ltr'時はreverseDirection=trueで左→右、'rtl'時はfalseで右→左
+							reverseDirection: attributes.direction === 'ltr',
 						}
 					: false,
 				pagination:

@@ -20,7 +20,6 @@ export default function save({ attributes }) {
 		zoomAnimation,
 		zoomInitialScale,
 		zoomFinalScale,
-		direction,
 	} = attributes;
 
 	const sliderData = {
@@ -28,11 +27,11 @@ export default function save({ attributes }) {
 		autoPlayStop,
 		autoPlayDelay,
 		pagination,
+		blockId,
 		width,
 		loop,
 		effect,
 		speed,
-		direction,
 		slidesPerViewMobile,
 		slidesPerViewTablet,
 		slidesPerViewPC,
@@ -41,7 +40,6 @@ export default function save({ attributes }) {
 		zoomAnimation,
 		zoomInitialScale,
 		zoomFinalScale,
-		blockId,
 	};
 
 	let alignClass = '';

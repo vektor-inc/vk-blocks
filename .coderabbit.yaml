@@ -1,0 +1,18 @@
+# Minimal configuration for getting started
+language: "ja-JP"
+path_filters:
+  - "!dist/**"
+  - "!vendor/**"
+  - "!node_modules/**"
+  - "!*.min.js"
+  - "!*.min.css"
+reviews:
+  profile: "chill"
+  high_level_summary: true
+  auto_review:
+    enabled: true
+    drafts: false
+    base_branches:
+      - develop
+    auto_incremental_review: false
+

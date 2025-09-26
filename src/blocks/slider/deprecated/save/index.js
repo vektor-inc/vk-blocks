@@ -1,4 +1,5 @@
 /* eslint camelcase: 0 */
+import save1_110_1 from './1.110.1/save';
 import save1_105_0 from './1.105.0/save';
 import save1_80_1 from './1.80.1/save';
 import save1_51_0 from './1.51.0/save';
@@ -178,8 +179,6 @@ const blockAttributes10 = {
 	},
 }
 
-/*
-// 1.105.0 時点からの変更点
 const blockAttributes11 = {
 	...blockAttributes10,
 	zoomAnimation: {
@@ -190,14 +189,28 @@ const blockAttributes11 = {
 		type: 'number',
 		default: 1
 	},
-	zoomFinalScal: {
+	zoomFinalScale: {
 		type: 'number',
 		default: 1.25
+	},
+}
+
+/*
+// 1.110.1 時点からの変更点
+const blockAttributes12 = {
+	...blockAttributes11,
+	direction: {
+		type: 'string',
+		default: 'rtl'
 	},
 }
 */
 
 const deprecated = [
+	{
+		attributes: blockAttributes11,
+		save: save1_110_1,
+	},
 	{
 		attributes: blockAttributes10,
 		save: save1_105_0,

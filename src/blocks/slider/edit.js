@@ -51,11 +51,12 @@ export default function SliderEdit(props) {
 		slidesPerGroup,
 		centeredSlides,
 		navigationPosition,
-		blockId,
+		direction,
 		unit,
 		zoomAnimation,
 		zoomInitialScale,
 		zoomFinalScale,
+		blockId,
 	} = attributes;
 
 	useEffect(() => {
@@ -175,6 +176,11 @@ export default function SliderEdit(props) {
 		if (zoomFinalScale === undefined) {
 			setAttributes({ zoomFinalScale: 1.25 });
 		}
+
+		// 1.68 以前では direction が定義されていないので互換設定を追加
+		if (direction === undefined) {
+			setAttributes({ direction: 'rtl' });
+		}
 	}, [clientId]);
 
 	// 複数枚表示が設定されている場合に拡大機能を無効化
@@ -262,6 +268,7 @@ export default function SliderEdit(props) {
 		zoomAnimation,
 		zoomInitialScale,
 		zoomFinalScale,
+		direction,
 	};
 
 	// ページネーションの HTML
@@ -415,6 +422,31 @@ export default function SliderEdit(props) {
 							{...props}
 						/>
 					</BaseControl>
+
+					{/* Slide Direction is only available when AutoPlay is enabled because reverseDirection is an autoplay-specific setting in Swiper.js */}
+					{autoPlay && (
+						<BaseControl
+							label={__('Slide Direction', 'vk-blocks')}
+							id={`vk_slider-direction`}
+						>
+							<SelectControl
+								value={direction}
+								options={[
+									{
+										label: __('Right to Left', 'vk-blocks'),
+										value: 'rtl',
+									},
+									{
+										label: __('Left to Right', 'vk-blocks'),
+										value: 'ltr',
+									},
+								]}
+								onChange={(value) =>
+									setAttributes({ direction: value })
+								}
+							/>
+						</BaseControl>
+					)}
 					<BaseControl
 						label={__('Stop AutoPlay when swipe', 'vk-blocks')}
 						id={`vk_slider-autoPlay`}

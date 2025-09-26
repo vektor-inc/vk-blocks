@@ -11,8 +11,13 @@ import {
 	FormTokenField,
 } from '@wordpress/components';
 import { useState, useEffect, useMemo } from '@wordpress/element';
-// Load VK Blocks Utils
-import { useTaxonomies } from '@vkblocks/utils/hooks';
+import { useSelect } from '@wordpress/data';
+// useTaxonomies はこのコンポーネント専用のためローカル定義
+const useTaxonomies = () => {
+	return useSelect((select) => {
+		return select('core').getTaxonomies({ per_page: -1 }) || [];
+	}, []);
+};
 import { fixBrokenUnicode } from '@vkblocks/utils/depModules';
 
 // Load VK Blocks Compornents

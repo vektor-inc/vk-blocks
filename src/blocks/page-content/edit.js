@@ -2,7 +2,23 @@ import { __ } from '@wordpress/i18n';
 import { PanelBody, BaseControl, SelectControl } from '@wordpress/components';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import ServerSideRender from '@wordpress/server-side-render';
-import { usePosts } from '@vkblocks/utils/hooks';
+import { useSelect } from '@wordpress/data';
+
+// usePosts は本ブロック専用のためローカル定義
+const usePosts = (postType, query) => {
+	return useSelect(
+		(select) => {
+			return (
+				select('core').getEntityRecords(
+					'postType',
+					postType.slug,
+					query
+				) || []
+			);
+		},
+		[postType, query]
+	);
+};
 
 const getPageLabel = (page) => {
 	let label = page.title.rendered;

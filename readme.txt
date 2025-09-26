@@ -108,6 +108,10 @@ e.g.
 
 == Changelog ==
 
+= 1.112.0 =
+[ Add function ][ Slider / Post List Slider (Pro) ] Added slide direction setting.
+[ Bug fix ][ Tab (Pro) ] Fixed tab anchor link conflict issue (changed from #tab- to #vk-tab-)
+
 = 1.111.0 =
 [ Add function ][ Core Query (Pro) ] Added "Modified date" as an option for post order. (Pro only)
 [ Add function ][ Table of Contents (Pro) ] Added support for detecting headings from Border Box blocks. Border Box headings (h3-h6) can now be included in the Table of Contents.
@@ -115,7 +119,7 @@ e.g.
 
 = 1.110.1 =
 [ Bug fix ][ Table of Contents (Pro) ] Fixed an issue where Basic Auth login screen would not disappear on sites with Basic Auth enabled.
-[ Design bug fix ][ Animation ( Pro ) / Fixed Display ( Pro ) ] Fixed overlapping of the top-right label and the "Add block" button in the editor screen.
+[ Design bug fix ][ Animation (Pro) / Fixed Display (Pro) ] Fixed overlapping of the top-right label and the "Add block" button in the editor screen.
 [ Design bug fix ][ Core Group ] Fixed an issue where text color settings in group blocks were not inherited by child elements for classic theme.
 
 = 1.110.0 =
