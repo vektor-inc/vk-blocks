@@ -108,6 +108,9 @@ e.g.
 
 == Changelog ==
 
+= 1.112.1 =
+[ Bug fix ][ Tab (Pro) ] Fixed tab item duplication issue where copied tab items had duplicate anchor links.
+
 = 1.112.0 =
 [ Add function ][ Slider / Post List Slider (Pro) ] Added slide direction setting.
 [ Bug fix ][ Tab (Pro) ] Fixed tab anchor link conflict issue (changed from #tab- to #vk-tab-)

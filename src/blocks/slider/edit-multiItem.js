@@ -198,7 +198,10 @@ export const MultiItemSetting = (props) => {
 						label={__('PC', 'vk-blocks')}
 						value={slidesPerViewPC}
 						onChange={(value) => {
-							if (Number(value) === NaN || Number(value) < 1) {
+							if (
+								Number.isNaN(Number(value)) ||
+								Number(value) < 1
+							) {
 								setAttributes({
 									slidesPerViewPC: 1,
 								});
@@ -225,7 +228,10 @@ export const MultiItemSetting = (props) => {
 						label={__('Tablet', 'vk-blocks')}
 						value={slidesPerViewTablet}
 						onChange={(value) => {
-							if (Number(value) === NaN || Number(value) < 1) {
+							if (
+								Number.isNaN(Number(value)) ||
+								Number(value) < 1
+							) {
 								setAttributes({
 									slidesPerViewTablet: 1,
 								});
@@ -254,7 +260,10 @@ export const MultiItemSetting = (props) => {
 						label={__('Mobile', 'vk-blocks')}
 						value={slidesPerViewMobile}
 						onChange={(value) => {
-							if (Number(value) === NaN || Number(value) < 1) {
+							if (
+								Number.isNaN(Number(value)) ||
+								Number(value) < 1
+							) {
 								setAttributes({
 									slidesPerViewMobile: 1,
 								});

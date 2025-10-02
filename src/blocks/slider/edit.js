@@ -466,7 +466,7 @@ export default function SliderEdit(props) {
 							value={autoPlayDelay}
 							onChange={(value) => {
 								if (
-									Number(value) === NaN ||
+									Number.isNaN(Number(value)) ||
 									Number(value) < 0
 								) {
 									setAttributes({
@@ -493,7 +493,7 @@ export default function SliderEdit(props) {
 							value={speed}
 							onChange={(value) => {
 								if (
-									Number(value) === NaN ||
+									Number.isNaN(Number(value)) ||
 									Number(value) < 0
 								) {
 									setAttributes({
