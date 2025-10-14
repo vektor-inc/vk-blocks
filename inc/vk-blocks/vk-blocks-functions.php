@@ -99,6 +99,17 @@ add_filter(
  */
 function vk_blocks_blocks_assets() {
 	$vk_blocks_options = VK_Blocks_Options::get_options();
+	$has_theme_json    = false;
+
+	// テーマに theme.json があるかどうかを判定（ content-width-half のパネル表示制御で使用 ）
+	if ( function_exists( 'wp_is_block_theme' ) && wp_is_block_theme() ) {
+		$has_theme_json = true;
+	} elseif ( function_exists( 'wp_theme_has_theme_json' ) ) {
+		$has_theme_json = wp_theme_has_theme_json();
+	} else {
+		$theme          = wp_get_theme();
+		$has_theme_json = file_exists( $theme->get_stylesheet_directory() . '/theme.json' ) || file_exists( $theme->get_template_directory() . '/theme.json' );
+	}
 
 	// プロ版の値をフロントエンドに出力.
 	include_once ABSPATH . 'wp-admin/includes/plugin.php';
@@ -117,6 +128,7 @@ function vk_blocks_blocks_assets() {
 			'balloon_meta_lists'          => $vk_blocks_options['balloon_meta_lists'],
 			'custom_format_lists'         => $vk_blocks_options['custom_format_lists'],
 			'block_variation_lists'       => $vk_blocks_options['block_variation_lists'],
+			'has_theme_json'              => $has_theme_json,
 		)
 	);
 

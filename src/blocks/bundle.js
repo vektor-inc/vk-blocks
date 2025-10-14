@@ -56,6 +56,7 @@ import '@vkblocks/extensions/common/inline-font-size';
 import '@vkblocks/extensions/common/nowrap';
 import '@vkblocks/extensions/common/responsive-br';
 import '@vkblocks/extensions/common/margin-extension';
+import '@vkblocks/extensions/common/content-width-half';
 
 const vkBlocks = [
 	alert,
