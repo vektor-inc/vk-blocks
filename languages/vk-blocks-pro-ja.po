@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VK Blocks Pro\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/vk-blocks-pro\n"
-"POT-Creation-Date: 2025-09-28T09:17:51+00:00\n"
+"POT-Creation-Date: 2025-10-15T09:16:05+00:00\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -480,6 +480,7 @@ msgid "Margin Setting"
 msgstr "余白設定"
 
 #: src/admin/import-export/index.js:77 src/admin/load-separate.js:33
+#: dist/vk-blocks-pro/inc/vk-blocks/admin/admin.php:116
 #: inc/vk-blocks/admin/admin.php:116
 msgid "Load Separate Setting"
 msgstr "分割読み込み設定"
@@ -588,16 +589,16 @@ msgstr "PC"
 
 #: src/admin/margin.js:55 src/blocks/_pro/accordion/edit.js:122
 #: src/blocks/_pro/outer/edit.js:1387
-#: src/blocks/_pro/post-list-slider/multi-item-setting.js:201
-#: src/blocks/button/edit.js:360 src/blocks/slider/edit-multiItem.js:225
+#: src/blocks/_pro/post-list-slider/multi-item-setting.js:204
+#: src/blocks/button/edit.js:360 src/blocks/slider/edit-multiItem.js:228
 #: src/components/advanced-viewport-control/index.js:32
 msgid "Tablet"
 msgstr "タブレット"
 
 #: src/admin/margin.js:59 src/blocks/_pro/accordion/edit.js:105
 #: src/blocks/_pro/outer/edit.js:1372
-#: src/blocks/_pro/post-list-slider/multi-item-setting.js:230
-#: src/blocks/button/edit.js:327 src/blocks/slider/edit-multiItem.js:254
+#: src/blocks/_pro/post-list-slider/multi-item-setting.js:236
+#: src/blocks/button/edit.js:327 src/blocks/slider/edit-multiItem.js:260
 #: src/components/advanced-viewport-control/index.js:41
 msgid "Mobile"
 msgstr "モバイル"
@@ -661,7 +662,7 @@ msgid ""
 msgstr "目次ブロックで使用する共通の見出しレベル設定を指定してください。"
 
 #: src/admin/toc.js:92
-#: dist/vk-blocks-pro/inc/vk-blocks-pro/blocks/class-vk-blocks-toc.php:91
+#: dist/vk-blocks-pro/inc/vk-blocks-pro/blocks/class-vk-blocks-toc.php:94
 #: inc/vk-blocks-pro/blocks/class-vk-blocks-toc.php:94
 msgid "Headings from H2 up to the selected level will be included."
 msgstr "H2から選択されたレベルまでの見出しが含まれます。"
@@ -858,7 +859,7 @@ msgstr "設定"
 
 #: src/blocks/_pro/blog-card-excerpt/edit.js:81
 msgid "Max number of words"
-msgstr ""
+msgstr "最大長さ"
 
 #: src/blocks/_pro/blog-card-featured-image/dimension-controls.js:102
 msgid "Aspect ratio"
@@ -1759,7 +1760,7 @@ msgid "Icon Card Setting"
 msgstr "アイコンカード設定"
 
 #: src/blocks/_pro/icon-card-item/edit.js:138
-#: src/blocks/_pro/step-item/edit.js:83 src/blocks/_pro/tab-item/edit.js:188
+#: src/blocks/_pro/step-item/edit.js:83 src/blocks/_pro/tab-item/edit.js:275
 #: src/blocks/alert/edit.js:75 src/blocks/border-box/edit.js:296
 #: src/blocks/button/edit.js:575 src/blocks/heading/edit.js:336
 #: src/blocks/icon/edit.js:293 src/blocks/pr-content/edit.js:212
@@ -2143,7 +2144,7 @@ msgid "Slider Settings"
 msgstr "スライド設定"
 
 #: src/blocks/_pro/post-list-slider/edit.js:195
-#: src/blocks/slider/edit-multiItem.js:340 src/blocks/slider/edit.js:385
+#: src/blocks/slider/edit-multiItem.js:349 src/blocks/slider/edit.js:385
 msgid "Effect"
 msgstr "エフェクト"
 
@@ -2152,7 +2153,7 @@ msgid "Slide"
 msgstr "スライド"
 
 #: src/blocks/_pro/post-list-slider/edit.js:209
-#: src/blocks/slider/edit-multiItem.js:338 src/blocks/slider/edit.js:399
+#: src/blocks/slider/edit-multiItem.js:347 src/blocks/slider/edit.js:399
 msgid "Fade"
 msgstr "フェード"
 
@@ -2232,7 +2233,7 @@ msgstr ""
 "上である必要があります。"
 
 #: src/blocks/_pro/post-list-slider/multi-item-setting.js:151
-#: src/blocks/slider/edit-multiItem.js:358
+#: src/blocks/slider/edit-multiItem.js:367
 msgid "Multi-item Display Setting"
 msgstr "アイテムの複数表示設定"
 
@@ -2250,7 +2251,7 @@ msgstr "表示（取得）件数を割り切れる数を入力してください
 msgid "If the number is not divisible, the sliding behavior will be unnatural"
 msgstr "割り切れない数の場合、スライド動作が不自然になります。"
 
-#: src/blocks/_pro/post-list-slider/multi-item-setting.js:259
+#: src/blocks/_pro/post-list-slider/multi-item-setting.js:268
 msgid "Number of posts to change in a transition"
 msgstr "一度に遷移する投稿の数"
 
@@ -2263,21 +2264,21 @@ msgstr ""
 "1.5などの小数点以下の数値を指定する場合は「アクティブスライドを中央にする」に"
 "設定してください"
 
-#: src/blocks/_pro/post-list-slider/multi-item-setting.js:270
-#: src/blocks/slider/edit-multiItem.js:294
+#: src/blocks/_pro/post-list-slider/multi-item-setting.js:279
+#: src/blocks/slider/edit-multiItem.js:303
 msgid "One by One"
 msgstr "１つずつ"
 
-#: src/blocks/_pro/post-list-slider/multi-item-setting.js:274
+#: src/blocks/_pro/post-list-slider/multi-item-setting.js:283
 msgid "Same as the number of posts to display"
 msgstr "表示投稿数と同じ"
 
-#: src/blocks/_pro/post-list-slider/multi-item-setting.js:290
-#: src/blocks/slider/edit-multiItem.js:314
+#: src/blocks/_pro/post-list-slider/multi-item-setting.js:299
+#: src/blocks/slider/edit-multiItem.js:323
 msgid "Centering the active slide"
 msgstr "アクティブスライドを中央にする"
 
-#: src/blocks/_pro/post-list-slider/multi-item-setting.js:299
+#: src/blocks/_pro/post-list-slider/multi-item-setting.js:308
 msgid ""
 "If you specify the center, you can display posts that are cut off on the "
 "left and right."
@@ -2380,31 +2381,31 @@ msgstr "Font Awesome の class 名が入力されている場合は数字は上�
 msgid "First Dot Number"
 msgstr "ステップの開始番号"
 
-#: src/blocks/_pro/tab-item/edit.js:177
+#: src/blocks/_pro/tab-item/edit.js:264
 msgid "Tab Color Setting"
 msgstr "タブカラー設定"
 
-#: src/blocks/_pro/tab-item/edit.js:180
+#: src/blocks/_pro/tab-item/edit.js:267
 msgid "Tab Color"
 msgstr "タブカラー"
 
-#: src/blocks/_pro/tab-item/edit.js:185
+#: src/blocks/_pro/tab-item/edit.js:272
 msgid "Tab Icon Setting"
 msgstr "タブアイコン設定"
 
-#: src/blocks/_pro/tab-item/edit.js:195 src/blocks/button/edit.js:582
+#: src/blocks/_pro/tab-item/edit.js:282 src/blocks/button/edit.js:582
 #: src/blocks/heading/edit.js:340 src/blocks/pr-content/edit.js:219
 #: src/components/scroll-hint/index.js:118
 msgid "Before text"
 msgstr "文字の前"
 
-#: src/blocks/_pro/tab-item/edit.js:220 src/blocks/button/edit.js:604
+#: src/blocks/_pro/tab-item/edit.js:307 src/blocks/button/edit.js:604
 #: src/blocks/heading/edit.js:349 src/blocks/pr-content/edit.js:231
 #: src/components/scroll-hint/index.js:143
 msgid "After text"
 msgstr "文字の後"
 
-#: src/blocks/_pro/tab-item/edit.js:228 src/blocks/button/edit.js:611
+#: src/blocks/_pro/tab-item/edit.js:315 src/blocks/button/edit.js:611
 #: src/blocks/icon-outer/edit.js:90 src/blocks/icon/edit.js:87
 msgid "Size"
 msgstr "サイズ"
@@ -2413,52 +2414,11 @@ msgstr "サイズ"
 msgid "Tab Item"
 msgstr "タブアイテム"
 
-#: src/blocks/_pro/tab/edit.js:1005
-msgid "Tab Display Options ( PC )"
-msgstr "タブ表示オプション ( PC )"
-
-#: src/blocks/_pro/tab/edit.js:1012
-msgid "Not set"
-msgstr "未設定"
-
-#: src/blocks/_pro/tab/edit.js:1016
-msgid "Scroll"
-msgstr "スクロール"
-
-#: src/blocks/_pro/tab/edit.js:1020
-msgid "Wrap to 2 rows"
-msgstr "2行に折り返す"
-
-#: src/blocks/_pro/tab/edit.js:260
-msgid "Tab %d"
-msgstr "タブ %d"
-
-#: src/blocks/_pro/tab/edit.js:273
-msgid "Copy"
-msgstr "コピー"
-
-#: src/blocks/_pro/tab/edit.js:278
-msgid "Copied!"
-msgstr "コピーしました！"
-
-#: src/blocks/_pro/tab/edit.js:36
-msgid "Tab 01"
-msgstr "タブ 01"
-
-#: src/blocks/_pro/tab/edit.js:40
-msgid "Tab 02"
-msgstr "タブ 02"
-
-#. %s is the tab number
-#: src/blocks/_pro/tab/edit.js:716
-msgid "Tab Label [ %s ]"
-msgstr "タブラベル [ %s ]"
-
-#: src/blocks/_pro/tab/edit.js:867
+#: src/blocks/_pro/tab/edit.js:1023
 msgid "Anchor Link Information"
 msgstr "アンカーリンク情報"
 
-#: src/blocks/_pro/tab/edit.js:871
+#: src/blocks/_pro/tab/edit.js:1027
 msgid ""
 "You can link directly to specific tabs using anchor links. Click the copy "
 "button to copy the anchor link for each tab."
@@ -2466,35 +2426,35 @@ msgstr ""
 "アンカーリンクを使用して特定のタブに直接リンクできます。コピーボタンをクリッ"
 "クすると、各タブのアンカーリンクがコピーされます。"
 
-#: src/blocks/_pro/tab/edit.js:896
+#: src/blocks/_pro/tab/edit.js:1052
 msgid "Tab Size Setting"
 msgstr "タブサイズ設定"
 
-#: src/blocks/_pro/tab/edit.js:898
+#: src/blocks/_pro/tab/edit.js:1054
 msgid "Tab Size ( Smart Phone )"
 msgstr "タブサイズ ( スマートフォン )"
 
-#: src/blocks/_pro/tab/edit.js:915
+#: src/blocks/_pro/tab/edit.js:1071
 msgid "Tab Size ( Tablet )"
 msgstr "タブサイズ ( タブレット )"
 
-#: src/blocks/_pro/tab/edit.js:932
+#: src/blocks/_pro/tab/edit.js:1088
 msgid "Tab Size ( PC )"
 msgstr "タブサイズ ( PC )"
 
-#: src/blocks/_pro/tab/edit.js:936
+#: src/blocks/_pro/tab/edit.js:1092
 msgid "Fit to the text"
 msgstr "テキストに合わせる"
 
-#: src/blocks/_pro/tab/edit.js:940
+#: src/blocks/_pro/tab/edit.js:1096
 msgid "Monospaced"
 msgstr "等幅"
 
-#: src/blocks/_pro/tab/edit.js:949
+#: src/blocks/_pro/tab/edit.js:1105
 msgid "Tab Display Options"
 msgstr "タブ表示オプション"
 
-#: src/blocks/_pro/tab/edit.js:951
+#: src/blocks/_pro/tab/edit.js:1107
 msgid ""
 "If there are many labels or the screen width is narrow, you can adjust it "
 "here. *Tab size setting will not be effective."
@@ -2502,13 +2462,54 @@ msgstr ""
 "ラベルが多い場合や画面の幅が狭い場合、ここで調整することができます。* タブサ"
 "イズの設定は反映されなくなります。"
 
-#: src/blocks/_pro/tab/edit.js:957
+#: src/blocks/_pro/tab/edit.js:1113
 msgid "Tab Display Options ( Smart Phone )"
 msgstr "タブ表示オプション ( スマートフォン )"
 
-#: src/blocks/_pro/tab/edit.js:981
+#: src/blocks/_pro/tab/edit.js:1137
 msgid "Tab Display Options ( Tablet )"
 msgstr "タブ表示オプション ( タブレット )"
+
+#: src/blocks/_pro/tab/edit.js:1161
+msgid "Tab Display Options ( PC )"
+msgstr "タブ表示オプション ( PC )"
+
+#: src/blocks/_pro/tab/edit.js:1168
+msgid "Not set"
+msgstr "未設定"
+
+#: src/blocks/_pro/tab/edit.js:1172
+msgid "Scroll"
+msgstr "スクロール"
+
+#: src/blocks/_pro/tab/edit.js:1176
+msgid "Wrap to 2 rows"
+msgstr "2行に折り返す"
+
+#: src/blocks/_pro/tab/edit.js:415
+msgid "Tab %d"
+msgstr "タブ %d"
+
+#: src/blocks/_pro/tab/edit.js:42
+msgid "Tab 01"
+msgstr "タブ 01"
+
+#: src/blocks/_pro/tab/edit.js:428
+msgid "Copy"
+msgstr "コピー"
+
+#: src/blocks/_pro/tab/edit.js:433
+msgid "Copied!"
+msgstr "コピーしました！"
+
+#: src/blocks/_pro/tab/edit.js:46
+msgid "Tab 02"
+msgstr "タブ 02"
+
+#. %s is the tab number
+#: src/blocks/_pro/tab/edit.js:871
+msgid "Tab Label [ %s ]"
+msgstr "タブラベル [ %s ]"
 
 #: src/blocks/_pro/tab/index.js:18
 msgid "Tab"
@@ -3292,25 +3293,25 @@ msgid ""
 "Enter divisors for the number of placed slide items for each display size."
 msgstr "配置済みのスライドアイテムを割り切れる数を入力してください。"
 
-#: src/blocks/slider/edit-multiItem.js:283
+#: src/blocks/slider/edit-multiItem.js:292
 msgid "Number of items to change in a transition"
 msgstr "一度に遷移するスライドアイテムの数"
 
-#: src/blocks/slider/edit-multiItem.js:298
+#: src/blocks/slider/edit-multiItem.js:307
 msgid "Same as the number of items to display"
 msgstr "表示アイテム数と同じ"
 
-#: src/blocks/slider/edit-multiItem.js:323
+#: src/blocks/slider/edit-multiItem.js:332
 msgid ""
 "If you specify the center, you can display items that are cut off on the "
 "left and right."
 msgstr "中央を指定すると左右が切れたアイテムを表示できます。"
 
-#: src/blocks/slider/edit-multiItem.js:335 src/blocks/slider/edit.js:602
+#: src/blocks/slider/edit-multiItem.js:344 src/blocks/slider/edit.js:602
 msgid "Background Image Zoom Animation"
 msgstr "背景画像のズームアニメーション"
 
-#: src/blocks/slider/edit-multiItem.js:349
+#: src/blocks/slider/edit-multiItem.js:358
 msgid "%s is enabled, so multi-item settings cannot be configured."
 msgstr "%s が有効になっているため、複数の項目の設定はできません。"
 
@@ -3665,7 +3666,7 @@ msgid "DESC"
 msgstr "降順"
 
 #: src/components/display-condition/index.js:379
-#: src/extensions/core/query/style.js:61
+#: src/extensions/core/query/style.js:70
 msgid "Order by"
 msgstr "並び順"
 
@@ -3802,6 +3803,22 @@ msgstr "スクロールメッセージを表示"
 msgid "Scroll Message Text"
 msgstr "スクロールメッセージテキスト"
 
+#: src/extensions/common/content-width-half/index.js:148
+msgid "Layout Extension"
+msgstr "レイアウト拡張"
+
+#: src/extensions/common/content-width-half/index.js:153
+msgid "Half Content Width"
+msgstr "半分のコンテント幅"
+
+#: src/extensions/common/content-width-half/index.js:157
+msgid ""
+"When the screen size is 782px or more, the maximum width of the inner block "
+"is half of the content width. Below 782px, the horizontal padding is removed."
+msgstr ""
+"画面サイズが782px以上の場合、インナーブロックの最大幅はコンテント幅の半分にな"
+"ります。782px未満の場合は、水平方向のパディングは削除されます。"
+
 #: src/extensions/common/custom-block-variation/block-variation-explorer/sidebar.js:17
 msgid "Create"
 msgstr "作成"
@@ -3820,10 +3837,8 @@ msgstr "変更は保存されていません。続けますか？"
 
 #: src/extensions/common/custom-block-variation/block-variation-list/item/body-area/index.js:115
 #: src/extensions/common/custom-block-variation/create-variation/block-variation-form/index.js:137
-#, fuzzy
-#| msgid "Class name is required"
 msgid "scope is required"
-msgstr "クラス名は必須項目です"
+msgstr "スコープがは必須です"
 
 #: src/extensions/common/custom-block-variation/block-variation-list/item/body-area/index.js:121
 #: src/extensions/common/custom-block-variation/create-variation/block-variation-form/index.js:143
@@ -4149,25 +4164,25 @@ msgstr ""
 msgid "List Icon Color"
 msgstr "リストアイコンの色"
 
-#: src/extensions/core/query/style.js:105
+#: src/extensions/core/query/style.js:107
+msgid "Use standard options"
+msgstr "標準の設定を使用"
+
+#: src/extensions/core/query/style.js:114
 msgid "Modified (Newest to oldest)"
 msgstr "更新日 (最新から)"
 
-#: src/extensions/core/query/style.js:112
+#: src/extensions/core/query/style.js:121
 msgid "Modified (Oldest to newest)"
 msgstr "更新日 (過去から)"
 
-#: src/extensions/core/query/style.js:56
+#: src/extensions/core/query/style.js:65
 msgid "VK Query Extension"
 msgstr "VK クエリー拡張"
 
-#: src/extensions/core/query/style.js:62
+#: src/extensions/core/query/style.js:71
 msgid "This setting will override the standard order setting."
 msgstr "この設定をすると標準の並び順設定は上書きされます。"
-
-#: src/extensions/core/query/style.js:98
-msgid "Use standard options"
-msgstr "標準の設定を使用"
 
 #: src/extensions/core/table/style.js:294
 msgid "Table Horizontal Scroll"
@@ -4568,17 +4583,17 @@ msgstr "ヘルプが必要な場合はこのサイトの管理者にお問い合
 msgid "FAQ Setting"
 msgstr "FAQ ブロックの設定"
 
-#: dist/vk-blocks-pro/inc/vk-blocks-pro/blocks/class-vk-blocks-toc.php:48
+#: dist/vk-blocks-pro/inc/vk-blocks-pro/blocks/class-vk-blocks-toc.php:51
 #: inc/vk-blocks-pro/blocks/class-vk-blocks-toc.php:51
 msgid "Table of Contents Settings"
 msgstr "目次ブロック設定"
 
-#: dist/vk-blocks-pro/inc/vk-blocks-pro/blocks/class-vk-blocks-toc.php:55
+#: dist/vk-blocks-pro/inc/vk-blocks-pro/blocks/class-vk-blocks-toc.php:58
 #: inc/vk-blocks-pro/blocks/class-vk-blocks-toc.php:58
 msgid "Heading Levels to Include"
 msgstr "含める見出しレベル"
 
-#: dist/vk-blocks-pro/inc/vk-blocks-pro/blocks/class-vk-blocks-toc.php:66
+#: dist/vk-blocks-pro/inc/vk-blocks-pro/blocks/class-vk-blocks-toc.php:69
 #: inc/vk-blocks-pro/blocks/class-vk-blocks-toc.php:69
 msgid ""
 "Configure which heading levels should be included in the table of contents."
@@ -4604,10 +4619,6 @@ msgstr "Blocks 設定"
 #: inc/vk-blocks/admin/admin.php:110
 msgid "Balloon Block Setting"
 msgstr "吹き出しブロック設定"
-
-#: dist/vk-blocks-pro/inc/vk-blocks/admin/admin.php:116
-msgid "Load Separete Setting"
-msgstr "分割読み込み設定"
 
 #: dist/vk-blocks-pro/inc/vk-blocks/blocks.php:27
 #: dist/vk-blocks-pro/inc/vk-blocks/blocks.php:67 inc/vk-blocks/blocks.php:27
@@ -5807,9 +5818,11 @@ msgid "Taxonomy"
 msgstr "タクソノミー"
 
 #: dist/vk-blocks-pro/inc/vk-blocks/build/blocks/_pro/taxonomy/block.json
+#: inc/vk-blocks/build/blocks/_pro/taxonomy/block.json
+#: src/blocks/_pro/taxonomy/block.json
 msgctxt "block description"
-msgid "Display Taxnomy List Pulldown"
-msgstr "分類リストプルダウンを表示"
+msgid "Display Taxonomy List Pulldown"
+msgstr "タクソノミーの一覧やプルダウンを表示します"
 
 #: dist/vk-blocks-pro/inc/vk-blocks/build/blocks/_pro/timeline-item/block.json
 #: inc/vk-blocks/build/blocks/_pro/timeline-item/block.json
@@ -5841,11 +5854,12 @@ msgid ""
 "explaining the order."
 msgstr "注文内容の説明に役立つ簡単なスケジュールやその他の情報を表示します。"
 
-#: inc/vk-blocks/build/blocks/_pro/taxonomy/block.json
-#: src/blocks/_pro/taxonomy/block.json
-msgctxt "block description"
-msgid "Display Taxonomy List Pulldown"
-msgstr "タクソノミーの一覧やプルダウンを表示します"
+#~ msgid "Load Separete Setting"
+#~ msgstr "分割読み込み設定"
+
+#~ msgctxt "block description"
+#~ msgid "Display Taxnomy List Pulldown"
+#~ msgstr "分類リストプルダウンを表示"
 
 #, fuzzy
 #~| msgid "Style"

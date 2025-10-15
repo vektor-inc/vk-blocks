@@ -570,9 +570,9 @@ msgstr ""
 #: src/admin/margin.js:55
 #: src/blocks/_pro/accordion/edit.js:122
 #: src/blocks/_pro/outer/edit.js:1387
-#: src/blocks/_pro/post-list-slider/multi-item-setting.js:201
+#: src/blocks/_pro/post-list-slider/multi-item-setting.js:204
 #: src/blocks/button/edit.js:360
-#: src/blocks/slider/edit-multiItem.js:225
+#: src/blocks/slider/edit-multiItem.js:228
 #: src/components/advanced-viewport-control/index.js:32
 msgid "Tablet"
 msgstr ""
@@ -580,9 +580,9 @@ msgstr ""
 #: src/admin/margin.js:59
 #: src/blocks/_pro/accordion/edit.js:105
 #: src/blocks/_pro/outer/edit.js:1372
-#: src/blocks/_pro/post-list-slider/multi-item-setting.js:230
+#: src/blocks/_pro/post-list-slider/multi-item-setting.js:236
 #: src/blocks/button/edit.js:327
-#: src/blocks/slider/edit-multiItem.js:254
+#: src/blocks/slider/edit-multiItem.js:260
 #: src/components/advanced-viewport-control/index.js:41
 msgid "Mobile"
 msgstr ""
@@ -1744,7 +1744,7 @@ msgstr ""
 
 #: src/blocks/_pro/icon-card-item/edit.js:138
 #: src/blocks/_pro/step-item/edit.js:83
-#: src/blocks/_pro/tab-item/edit.js:188
+#: src/blocks/_pro/tab-item/edit.js:275
 #: src/blocks/alert/edit.js:75
 #: src/blocks/border-box/edit.js:296
 #: src/blocks/button/edit.js:575
@@ -2134,7 +2134,7 @@ msgid "Slider Settings"
 msgstr ""
 
 #: src/blocks/_pro/post-list-slider/edit.js:195
-#: src/blocks/slider/edit-multiItem.js:340
+#: src/blocks/slider/edit-multiItem.js:349
 #: src/blocks/slider/edit.js:385
 msgid "Effect"
 msgstr ""
@@ -2145,7 +2145,7 @@ msgid "Slide"
 msgstr ""
 
 #: src/blocks/_pro/post-list-slider/edit.js:209
-#: src/blocks/slider/edit-multiItem.js:338
+#: src/blocks/slider/edit-multiItem.js:347
 #: src/blocks/slider/edit.js:399
 msgid "Fade"
 msgstr ""
@@ -2239,7 +2239,7 @@ msgid ""
 msgstr ""
 
 #: src/blocks/_pro/post-list-slider/multi-item-setting.js:151
-#: src/blocks/slider/edit-multiItem.js:358
+#: src/blocks/slider/edit-multiItem.js:367
 msgid "Multi-item Display Setting"
 msgstr ""
 
@@ -2257,7 +2257,7 @@ msgstr ""
 msgid "If the number is not divisible, the sliding behavior will be unnatural"
 msgstr ""
 
-#: src/blocks/_pro/post-list-slider/multi-item-setting.js:259
+#: src/blocks/_pro/post-list-slider/multi-item-setting.js:268
 msgid "Number of posts to change in a transition"
 msgstr ""
 
@@ -2268,21 +2268,21 @@ msgid ""
 "\"Centering the active slide\""
 msgstr ""
 
-#: src/blocks/_pro/post-list-slider/multi-item-setting.js:270
-#: src/blocks/slider/edit-multiItem.js:294
+#: src/blocks/_pro/post-list-slider/multi-item-setting.js:279
+#: src/blocks/slider/edit-multiItem.js:303
 msgid "One by One"
 msgstr ""
 
-#: src/blocks/_pro/post-list-slider/multi-item-setting.js:274
+#: src/blocks/_pro/post-list-slider/multi-item-setting.js:283
 msgid "Same as the number of posts to display"
 msgstr ""
 
-#: src/blocks/_pro/post-list-slider/multi-item-setting.js:290
-#: src/blocks/slider/edit-multiItem.js:314
+#: src/blocks/_pro/post-list-slider/multi-item-setting.js:299
+#: src/blocks/slider/edit-multiItem.js:323
 msgid "Centering the active slide"
 msgstr ""
 
-#: src/blocks/_pro/post-list-slider/multi-item-setting.js:299
+#: src/blocks/_pro/post-list-slider/multi-item-setting.js:308
 msgid ""
 "If you specify the center, you can display posts that are cut off on the "
 "left and right."
@@ -2381,19 +2381,19 @@ msgstr ""
 msgid "First Dot Number"
 msgstr ""
 
-#: src/blocks/_pro/tab-item/edit.js:177
+#: src/blocks/_pro/tab-item/edit.js:264
 msgid "Tab Color Setting"
 msgstr ""
 
-#: src/blocks/_pro/tab-item/edit.js:180
+#: src/blocks/_pro/tab-item/edit.js:267
 msgid "Tab Color"
 msgstr ""
 
-#: src/blocks/_pro/tab-item/edit.js:185
+#: src/blocks/_pro/tab-item/edit.js:272
 msgid "Tab Icon Setting"
 msgstr ""
 
-#: src/blocks/_pro/tab-item/edit.js:195
+#: src/blocks/_pro/tab-item/edit.js:282
 #: src/blocks/button/edit.js:582
 #: src/blocks/heading/edit.js:340
 #: src/blocks/pr-content/edit.js:219
@@ -2401,7 +2401,7 @@ msgstr ""
 msgid "Before text"
 msgstr ""
 
-#: src/blocks/_pro/tab-item/edit.js:220
+#: src/blocks/_pro/tab-item/edit.js:307
 #: src/blocks/button/edit.js:604
 #: src/blocks/heading/edit.js:349
 #: src/blocks/pr-content/edit.js:231
@@ -2409,7 +2409,7 @@ msgstr ""
 msgid "After text"
 msgstr ""
 
-#: src/blocks/_pro/tab-item/edit.js:228
+#: src/blocks/_pro/tab-item/edit.js:315
 #: src/blocks/button/edit.js:611
 #: src/blocks/icon-outer/edit.js:90
 #: src/blocks/icon/edit.js:87
@@ -2420,97 +2420,97 @@ msgstr ""
 msgid "Tab Item"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1005
-msgid "Tab Display Options ( PC )"
-msgstr ""
-
-#: src/blocks/_pro/tab/edit.js:1012
-msgid "Not set"
-msgstr ""
-
-#: src/blocks/_pro/tab/edit.js:1016
-msgid "Scroll"
-msgstr ""
-
-#: src/blocks/_pro/tab/edit.js:1020
-msgid "Wrap to 2 rows"
-msgstr ""
-
-#: src/blocks/_pro/tab/edit.js:260
-msgid "Tab %d"
-msgstr ""
-
-#: src/blocks/_pro/tab/edit.js:273
-msgid "Copy"
-msgstr ""
-
-#: src/blocks/_pro/tab/edit.js:278
-msgid "Copied!"
-msgstr ""
-
-#: src/blocks/_pro/tab/edit.js:36
-msgid "Tab 01"
-msgstr ""
-
-#: src/blocks/_pro/tab/edit.js:40
-msgid "Tab 02"
-msgstr ""
-
-#: src/blocks/_pro/tab/edit.js:716
-#. %s is the tab number
-msgid "Tab Label [ %s ]"
-msgstr ""
-
-#: src/blocks/_pro/tab/edit.js:867
+#: src/blocks/_pro/tab/edit.js:1023
 msgid "Anchor Link Information"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:871
+#: src/blocks/_pro/tab/edit.js:1027
 msgid ""
 "You can link directly to specific tabs using anchor links. Click the copy "
 "button to copy the anchor link for each tab."
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:896
+#: src/blocks/_pro/tab/edit.js:1052
 msgid "Tab Size Setting"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:898
+#: src/blocks/_pro/tab/edit.js:1054
 msgid "Tab Size ( Smart Phone )"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:915
+#: src/blocks/_pro/tab/edit.js:1071
 msgid "Tab Size ( Tablet )"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:932
+#: src/blocks/_pro/tab/edit.js:1088
 msgid "Tab Size ( PC )"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:936
+#: src/blocks/_pro/tab/edit.js:1092
 msgid "Fit to the text"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:940
+#: src/blocks/_pro/tab/edit.js:1096
 msgid "Monospaced"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:949
+#: src/blocks/_pro/tab/edit.js:1105
 msgid "Tab Display Options"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:951
+#: src/blocks/_pro/tab/edit.js:1107
 msgid ""
 "If there are many labels or the screen width is narrow, you can adjust it "
 "here. *Tab size setting will not be effective."
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:957
+#: src/blocks/_pro/tab/edit.js:1113
 msgid "Tab Display Options ( Smart Phone )"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:981
+#: src/blocks/_pro/tab/edit.js:1137
 msgid "Tab Display Options ( Tablet )"
+msgstr ""
+
+#: src/blocks/_pro/tab/edit.js:1161
+msgid "Tab Display Options ( PC )"
+msgstr ""
+
+#: src/blocks/_pro/tab/edit.js:1168
+msgid "Not set"
+msgstr ""
+
+#: src/blocks/_pro/tab/edit.js:1172
+msgid "Scroll"
+msgstr ""
+
+#: src/blocks/_pro/tab/edit.js:1176
+msgid "Wrap to 2 rows"
+msgstr ""
+
+#: src/blocks/_pro/tab/edit.js:415
+msgid "Tab %d"
+msgstr ""
+
+#: src/blocks/_pro/tab/edit.js:42
+msgid "Tab 01"
+msgstr ""
+
+#: src/blocks/_pro/tab/edit.js:428
+msgid "Copy"
+msgstr ""
+
+#: src/blocks/_pro/tab/edit.js:433
+msgid "Copied!"
+msgstr ""
+
+#: src/blocks/_pro/tab/edit.js:46
+msgid "Tab 02"
+msgstr ""
+
+#: src/blocks/_pro/tab/edit.js:871
+#. %s is the tab number
+msgid "Tab Label [ %s ]"
 msgstr ""
 
 #: src/blocks/_pro/tab/index.js:18
@@ -3295,26 +3295,26 @@ msgstr ""
 msgid "Enter divisors for the number of placed slide items for each display size."
 msgstr ""
 
-#: src/blocks/slider/edit-multiItem.js:283
+#: src/blocks/slider/edit-multiItem.js:292
 msgid "Number of items to change in a transition"
 msgstr ""
 
-#: src/blocks/slider/edit-multiItem.js:298
+#: src/blocks/slider/edit-multiItem.js:307
 msgid "Same as the number of items to display"
 msgstr ""
 
-#: src/blocks/slider/edit-multiItem.js:323
+#: src/blocks/slider/edit-multiItem.js:332
 msgid ""
 "If you specify the center, you can display items that are cut off on the "
 "left and right."
 msgstr ""
 
-#: src/blocks/slider/edit-multiItem.js:335
+#: src/blocks/slider/edit-multiItem.js:344
 #: src/blocks/slider/edit.js:602
 msgid "Background Image Zoom Animation"
 msgstr ""
 
-#: src/blocks/slider/edit-multiItem.js:349
+#: src/blocks/slider/edit-multiItem.js:358
 msgid "%s is enabled, so multi-item settings cannot be configured."
 msgstr ""
 
@@ -3650,7 +3650,7 @@ msgid "DESC"
 msgstr ""
 
 #: src/components/display-condition/index.js:379
-#: src/extensions/core/query/style.js:61
+#: src/extensions/core/query/style.js:70
 msgid "Order by"
 msgstr ""
 
@@ -3785,6 +3785,21 @@ msgstr ""
 
 #: src/components/scroll-hint/index.js:98
 msgid "Scroll Message Text"
+msgstr ""
+
+#: src/extensions/common/content-width-half/index.js:148
+msgid "Layout Extension"
+msgstr ""
+
+#: src/extensions/common/content-width-half/index.js:153
+msgid "Half Content Width"
+msgstr ""
+
+#: src/extensions/common/content-width-half/index.js:157
+msgid ""
+"When the screen size is 782px or more, the maximum width of the inner block "
+"is half of the content width. Below 782px, the horizontal padding is "
+"removed."
 msgstr ""
 
 #: src/extensions/common/custom-block-variation/block-variation-explorer/sidebar.js:17
@@ -4109,24 +4124,24 @@ msgstr ""
 msgid "List Icon Color"
 msgstr ""
 
-#: src/extensions/core/query/style.js:105
+#: src/extensions/core/query/style.js:107
+msgid "Use standard options"
+msgstr ""
+
+#: src/extensions/core/query/style.js:114
 msgid "Modified (Newest to oldest)"
 msgstr ""
 
-#: src/extensions/core/query/style.js:112
+#: src/extensions/core/query/style.js:121
 msgid "Modified (Oldest to newest)"
 msgstr ""
 
-#: src/extensions/core/query/style.js:56
+#: src/extensions/core/query/style.js:65
 msgid "VK Query Extension"
 msgstr ""
 
-#: src/extensions/core/query/style.js:62
+#: src/extensions/core/query/style.js:71
 msgid "This setting will override the standard order setting."
-msgstr ""
-
-#: src/extensions/core/query/style.js:98
-msgid "Use standard options"
 msgstr ""
 
 #: src/extensions/core/table/style.js:294

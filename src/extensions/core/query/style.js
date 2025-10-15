@@ -35,10 +35,19 @@ const withQueryOrderExtension = createHigherOrderComponent(
 		const { orderBy = 'date', order = 'desc' } = query || {};
 
 		// アイコンスタイルを定義
-		const iconStyle = {
+		let iconStyle = {
 			width: '24px',
 			height: '24px',
 		};
+
+		// orderByがmodifiedの時にアイコンの色を反転
+		if (orderBy === 'modified') {
+			iconStyle = {
+				...iconStyle,
+				color: '#fff',
+				background: '#1e1e1e',
+			};
+		}
 
 		// セレクトボックスの値を取得
 		const getSelectValue = () => {

@@ -4,7 +4,7 @@ Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 6.5
 Tested up to: 6.8
-Stable tag: 1.113.0.1
+Stable tag: 1.112.0.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -107,6 +107,9 @@ e.g.
 1. VK Blocks examples.
 
 == Changelog ==
+
+= 1.113.1 =
+[ Other ][ VK Query Extension (Pro) ] Added icon color inversion when "Modified date" order is selected in the right menu panel.
 
 = 1.113.0 =
 [ Add function ][ Core column ] Added a Layout Extensions toggle that limits the block width to half of the content width by applying the is-vk-content-width-half class.
