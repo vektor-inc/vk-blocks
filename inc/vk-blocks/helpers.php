@@ -40,33 +40,47 @@ if ( ! function_exists( 'vk_blocks_allow_wp_kses_allowed_html' ) ) {
 	 * @return array Modified HTML tags & attributes.
 	 */
 	function vk_blocks_allow_wp_kses_allowed_html( $tags ) {
-		// Used by Card, Outer Blocks.
-		$tags['style'] = array(
+
+		$style_defaults = array(
 			'type' => true,
 		);
-
-		// Used by Table of Contents Blocks.
-		$tags['input'] = array(
-			'type' => true,
-			'id'   => true,
+		$input_defaults = array(
+			'type'        => true,
+			'id'          => true,
+			'class'       => true,
+			'style'       => true,
+			'name'        => true,
+			'value'       => true,
+			'checked'     => true,
+			'placeholder' => true,
 		);
-
-		// Used by OuterBlock
-		$tags['svg']  = array(
+		$svg_defaults   = array(
 			'viewbox'             => true,
 			'xmlns'               => true,
 			'preserveaspectratio' => true,
 		);
-		$tags['path'] = array(
-			'fill'        => true,
-			'd'           => true,
-			'strokewidth' => true,
+		$path_defaults  = array(
+			'fill'         => true,
+			'd'            => true,
+			'stroke-width' => true,
 		);
+
+		$current_style = ( isset( $tags['style'] ) && is_array( $tags['style'] ) ) ? $tags['style'] : array();
+		$tags['style'] = array_merge( $style_defaults, $current_style );
+
+		$current_input = ( isset( $tags['input'] ) && is_array( $tags['input'] ) ) ? $tags['input'] : array();
+		$tags['input'] = array_merge( $input_defaults, $current_input );
+
+		$current_svg = ( isset( $tags['svg'] ) && is_array( $tags['svg'] ) ) ? $tags['svg'] : array();
+		$tags['svg'] = array_merge( $svg_defaults, $current_svg );
+
+		$current_path = ( isset( $tags['path'] ) && is_array( $tags['path'] ) ) ? $tags['path'] : array();
+		$tags['path'] = array_merge( $path_defaults, $current_path );
 
 		return $tags;
 	}
 
-	add_filter( 'wp_kses_allowed_html', 'vk_blocks_allow_wp_kses_allowed_html', 10, 2 );
+	add_filter( 'wp_kses_allowed_html', 'vk_blocks_allow_wp_kses_allowed_html', 10, 1 );
 }
 
 if ( ! function_exists( 'vk_blocks_fix_gt_style_errors' ) ) {

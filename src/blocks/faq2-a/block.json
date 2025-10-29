@@ -9,6 +9,7 @@
 	"supports": {
 		"html": false,
 		"anchor": true,
-		"reusable": false
+		"reusable": false,
+		"lock": false
 	}
 }

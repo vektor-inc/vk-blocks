@@ -31,6 +31,17 @@ const transforms = {
 				let toSize = 'medium';
 				let toValue = 40;
 				let toUnit = 'px';
+
+				// core classname
+				let toClassName = attributes.className;
+				if (toClassName !== undefined) {
+					toClassName = (toClassName || '')
+						.trim()
+						.split(/\s+/)
+						.filter((word) => word && !word.startsWith('is-style-'))
+						.join(' ');
+				}
+
 				if (!height.startsWith('var:preset|spacing|')) {
 					// custom
 					toSize = 'custom';
@@ -46,10 +57,16 @@ const transforms = {
 				}
 
 				const transformAttributes = {
+					...(toClassName ? { className: toClassName } : {}),
 					spaceSize: toSize,
 					pc: toValue,
 					unit: toUnit,
 				};
+
+				if (!toClassName) {
+					// クラスがひとつもないとき
+					delete attributes.className;
+				}
 
 				return createBlock('vk-blocks/spacer', transformAttributes);
 			},

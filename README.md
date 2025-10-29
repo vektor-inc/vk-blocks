@@ -32,7 +32,8 @@ npm start
 // 本番環境用
 npm build
 
-// 翻訳のみ
+// 翻訳ファイルの更新（JS に文言を追加した場合はこの前に npm run build を実行）
+npm run update-po
 npm run translate
 
 // 開発用（開発者ツールのconsoleでログが追いやすくなる）
@@ -51,12 +52,13 @@ npm run watch
 ## 翻訳
 
 ```
-// .pot ファイル生成、.po ファイルから翻訳用JSONを生成
-npm run translate
+1. JS に新しい文言を追加したら `npm run build`
+2. `npm run update-po`
+3. PoEdit などで `vk-blocks-pro-ja.po` を編集
+4. `npm run translate`
 ```
 
-翻訳は PoEdit などを使って `.po` ファイルを開いて編集するが、
-新たに翻訳箇所が追加された場合はメニューから「potファイルから更新」を選んで更新する
+翻訳は PoEdit などを使って `.po` ファイルを編集します。上記の順番で実行すれば変更が反映されます。
 
 ## AI用コーディングルール
 

@@ -25,15 +25,28 @@ export const AdvancedColorGradientControl = (props) => {
 
 	let defaultGradients;
 	let themeGradients;
+	let defaultColors;
+	let themeColors;
 
 	if (typeof useSettings === 'function') {
-		defaultGradients = [...useSettings('color.gradients.default')[0]];
+		defaultGradients = [
+			...(useSettings('color.gradients.default')?.[0] || []),
+		];
 		themeGradients = [...(useSettings('color.gradients.theme')?.[0] || [])];
+		defaultColors = [...(useSettings('color.palette.default')?.[0] || [])];
+		themeColors = [...(useSettings('color.palette.theme')?.[0] || [])];
 	} else if (typeof useSetting === 'function') {
 		// 6.4 互換
-		defaultGradients = [...useSetting('color.gradients.default')[0]];
+		defaultGradients = [
+			...(useSetting('color.gradients.default')?.[0] || []),
+		];
 		themeGradients = [...(useSetting('color.gradients.theme')?.[0] || [])];
+		defaultColors = [...(useSetting('color.palette.default')?.[0] || [])];
+		themeColors = [...(useSetting('color.palette.theme')?.[0] || [])];
 	}
+
+	// Editor settings を一度だけ取得
+	const editorSettings = select('core/block-editor')?.getSettings();
 
 	const gradientsArray = [];
 	if (themeGradients?.length > 0) {
@@ -48,15 +61,37 @@ export const AdvancedColorGradientControl = (props) => {
 			gradients: defaultGradients,
 		});
 	}
+
+	// useSettings で取得したカラー（テーマカラー + 無料版カラー）を配列に追加
+	const colorsArray = [];
+	if (themeColors?.length > 0) {
+		colorsArray.push(...themeColors);
+	}
+	if (defaultColors?.length > 0) {
+		colorsArray.push(...defaultColors);
+	}
+
+	// ユーザーが新たに追加したカスタムカラーを追加
+	const customColors = editorSettings?.colors || [];
+	if (customColors.length > 0) {
+		// 既に colorsArray に含まれているものを除外する
+		customColors.forEach((customColor) => {
+			const exists = colorsArray.some((c) => c.slug === customColor.slug);
+			if (!exists) {
+				colorsArray.push(customColor);
+			}
+		});
+	}
+
 	return (
 		<ColorGradientControl
 			gradients={gradientsArray}
+			colors={colorsArray}
 			colorValue={hexColorValue}
 			gradientValue={gradientValue ?? undefined}
 			onColorChange={(value) => {
 				// カラーパレットの色名・スラッグ・カラーコードを取得
-				const colorSet =
-					select('core/block-editor').getSettings().colors;
+				const colorSet = editorSettings?.colors;
 
 				// 色コードを colorSet から探して色データを取得
 				// カスタムカラーの場合 undefined が返る
@@ -70,8 +105,7 @@ export const AdvancedColorGradientControl = (props) => {
 				}
 			}}
 			onGradientChange={(value) => {
-				const gradientSet =
-					select('core/block-editor').getSettings().gradients;
+				const gradientSet = editorSettings?.gradients;
 
 				const _gradientValue = getGradientSlugByValue(
 					gradientSet,
