@@ -108,6 +108,9 @@ e.g.
 
 == Changelog ==
 
+= 1.114.1 =
+[ Other ] Add translation
+
 = 1.114.0 =
 [ Add function ][ Fixed Display (Pro) ] Add option to hide the block when the hamburger menu is clicked.
 [ Specification change ][ Accordion (Pro) / New FAQ ] Disabled delete and move buttons for child blocks to prevent users from accidentally operating them.

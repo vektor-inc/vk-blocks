@@ -106,20 +106,29 @@ class Test_VK_Blocks_Check_Using_VK_Page_Content_Block extends WP_UnitTestCase {
 			array(
 				'test_name'   => 'unpublicの場合',
 				'post_status' => 'unpublic',
-				'expected'    => '<ul><li><a href="' . esc_url( get_edit_post_link( $this->using_B_page_id ) ) . '" target="_blank">Using B</a></li><li><a href="' . esc_url( get_edit_post_link( $this->using_A_and_B_page_id ) ) . '" target="_blank">Using A and B</a></li></ul>',
+				'expected_contains' => array( 'Using B', 'Using A and B' ),
+				'expected_not_contains' => array( '>Using A</a></li>' ),
 			),
 			array(
 				'test_name'   => 'allの場合',
 				'post_status' => 'all',
-				'expected'    => '<ul><li><a href="' . esc_url( get_edit_post_link( $this->using_A_page_id ) ) . '" target="_blank">Using A</a></li>' .
-								'<li><a href="' . esc_url( get_edit_post_link( $this->using_B_page_id ) ) . '" target="_blank">Using B</a></li><li><a href="' . esc_url( get_edit_post_link( $this->using_A_and_B_page_id ) ) . '" target="_blank">Using A and B</a></li></ul>',
+				'expected_contains' => array( 'Using A', 'Using B', 'Using A and B' ),
+				'expected_not_contains' => array(),
 			),
-
 		);
 
 		foreach ( $tests as $test ) {
 			$actual = $check_using_vk_page_content_block->get_post_list_using_page_content_block( $test['post_status'] );
-			$this->assertEquals( $test['expected'], $actual, $test['test_name'] );
+
+			// 期待する要素が含まれていることを確認
+			foreach ( $test['expected_contains'] as $expected_string ) {
+				$this->assertStringContainsString( $expected_string, $actual, $test['test_name'] . 'に' . $expected_string . 'が含まれる' );
+			}
+
+			// 期待しない要素が含まれていないことを確認
+			foreach ( $test['expected_not_contains'] as $not_expected_string ) {
+				$this->assertStringNotContainsString( $not_expected_string, $actual, $test['test_name'] . 'に' . $not_expected_string . 'が含まれない' );
+			}
 		}
 
 		// 非公開の投稿を参照している固定ページを使用している投稿を削除

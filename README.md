@@ -38,9 +38,6 @@ npm run translate
 
 // 開発用（開発者ツールのconsoleでログが追いやすくなる）
 npm run build:dev
-
-// リリース用（石川専用：gulp dist して zip に圧縮してそのzipファイルをvwsのパッケージディレクトリに移動している）
-bin/dist_kuru.sh
 ```
 
 ## Watch

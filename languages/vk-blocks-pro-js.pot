@@ -312,7 +312,7 @@ msgid "Color"
 msgstr ""
 
 #: src/admin/custom-format/index.js:208
-#: src/blocks/_pro/fixed-display/edit.js:308
+#: src/blocks/_pro/fixed-display/edit.js:324
 #: src/blocks/_pro/grid-column-item/edit.js:115
 #: src/blocks/_pro/gridcolcard/edit-common.js:177
 #: src/blocks/button/edit.js:564
@@ -686,7 +686,7 @@ msgid "No background color / Border"
 msgstr ""
 
 #: src/blocks/_pro/accordion/index.js:31
-#: src/blocks/_pro/fixed-display/edit.js:295
+#: src/blocks/_pro/fixed-display/edit.js:311
 msgid "Background color"
 msgstr ""
 
@@ -1050,7 +1050,7 @@ msgid "Title"
 msgstr ""
 
 #: src/blocks/_pro/card-item/edit.js:217
-#: src/blocks/_pro/dynamic-text/edit.js:419
+#: src/blocks/_pro/dynamic-text/edit.js:563
 msgid "URL"
 msgstr ""
 
@@ -1143,137 +1143,170 @@ msgstr ""
 msgid "Current page"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:138
+#: src/blocks/_pro/dynamic-text/edit.js:148
 msgid "Please select display element from the Setting sidebar."
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:146
+#: src/blocks/_pro/dynamic-text/edit.js:185
+msgid "Preview display"
+msgstr ""
+
+#: src/blocks/_pro/dynamic-text/edit.js:197
 msgid "Post Type Name"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:150
+#: src/blocks/_pro/dynamic-text/edit.js:217
 msgid "Ancestor Page Title"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:154
+#: src/blocks/_pro/dynamic-text/edit.js:237
 msgid "Parent Page Title"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:167
-msgid "Custom field"
-msgstr ""
-
-#: src/blocks/_pro/dynamic-text/edit.js:181
+#: src/blocks/_pro/dynamic-text/edit.js:281
 msgid "This block is not rendered because no custom field name is specified."
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:190
+#: src/blocks/_pro/dynamic-text/edit.js:291
+msgid "ex"
+msgstr ""
+
+#: src/blocks/_pro/dynamic-text/edit.js:291
+msgid "Custom field"
+msgstr ""
+
+#: src/blocks/_pro/dynamic-text/edit.js:311
 msgid "Set the slug and save the post to display it."
-msgstr ""
-
-#: src/blocks/_pro/dynamic-text/edit.js:243
-msgid "Display element settings"
-msgstr ""
-
-#: src/blocks/_pro/dynamic-text/edit.js:248
-msgid "Display element"
-msgstr ""
-
-#: src/blocks/_pro/dynamic-text/edit.js:257
-msgid "Please Select"
-msgstr ""
-
-#: src/blocks/_pro/dynamic-text/edit.js:261
-msgid "Post type name of the page being viewed"
-msgstr ""
-
-#: src/blocks/_pro/dynamic-text/edit.js:268
-msgid "Page name in the ancestor hierarchy of the displayed page"
-msgstr ""
-
-#: src/blocks/_pro/dynamic-text/edit.js:275
-msgid "Page name in the parent hierarchy of the displayed page"
-msgstr ""
-
-#: src/blocks/_pro/dynamic-text/edit.js:282
-msgid "Current login user name"
-msgstr ""
-
-#: src/blocks/_pro/dynamic-text/edit.js:289
-msgid "Custom Field"
-msgstr ""
-
-#: src/blocks/_pro/dynamic-text/edit.js:293
-msgid "Post Slug"
-msgstr ""
-
-#: src/blocks/_pro/dynamic-text/edit.js:301
-msgid "Hide on Ancestor Hierarchy Pages"
-msgstr ""
-
-#: src/blocks/_pro/dynamic-text/edit.js:314
-msgid "This block is not displayed on pages without a parent page."
-msgstr ""
-
-#: src/blocks/_pro/dynamic-text/edit.js:325
-msgid "Hide on Parent Hierarchy Pages"
-msgstr ""
-
-#: src/blocks/_pro/dynamic-text/edit.js:338
-msgid ""
-"This block will not display on pages other than pages that have a parent "
-"hierarchy."
-msgstr ""
-
-#: src/blocks/_pro/dynamic-text/edit.js:349
-msgid "Prefix Label"
-msgstr ""
-
-#: src/blocks/_pro/dynamic-text/edit.js:356
-msgid "Suffix Label"
-msgstr ""
-
-#: src/blocks/_pro/dynamic-text/edit.js:363
-msgid "Text for Logged Out Users"
 msgstr ""
 
 #: src/blocks/_pro/dynamic-text/edit.js:37
 msgid "HTML element"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:375
-msgid "Link to Login on Logout"
+#: src/blocks/_pro/dynamic-text/edit.js:381
+msgid "Display element settings"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:391
-msgid "Custom Field Name"
+#: src/blocks/_pro/dynamic-text/edit.js:386
+msgid "Display element"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:398
-msgid "Field Type"
+#: src/blocks/_pro/dynamic-text/edit.js:395
+msgid "Please Select"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:407
-msgid "text"
+#: src/blocks/_pro/dynamic-text/edit.js:399
+msgid "Post type name of the page being viewed"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:411
-msgid "textarea"
+#: src/blocks/_pro/dynamic-text/edit.js:406
+msgid "Page name in the ancestor hierarchy of the displayed page"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:415
-msgid "wysiwyg"
+#: src/blocks/_pro/dynamic-text/edit.js:413
+msgid "Page name in the parent hierarchy of the displayed page"
 msgstr ""
 
 #: src/blocks/_pro/dynamic-text/edit.js:42
 msgid "div (default)"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:426
-msgid "Setting up a link"
+#: src/blocks/_pro/dynamic-text/edit.js:420
+msgid "Current login user name"
+msgstr ""
+
+#: src/blocks/_pro/dynamic-text/edit.js:427
+msgid "Custom Field"
+msgstr ""
+
+#: src/blocks/_pro/dynamic-text/edit.js:431
+msgid "Post Slug"
 msgstr ""
 
 #: src/blocks/_pro/dynamic-text/edit.js:439
+msgid "Hide on Ancestor Hierarchy Pages"
+msgstr ""
+
+#: src/blocks/_pro/dynamic-text/edit.js:452
+msgid "This block is not displayed on pages without a parent page."
+msgstr ""
+
+#: src/blocks/_pro/dynamic-text/edit.js:46
+msgid "h1"
+msgstr ""
+
+#: src/blocks/_pro/dynamic-text/edit.js:463
+msgid "Hide on Parent Hierarchy Pages"
+msgstr ""
+
+#: src/blocks/_pro/dynamic-text/edit.js:476
+msgid ""
+"This block will not display on pages other than pages that have a parent "
+"hierarchy."
+msgstr ""
+
+#: src/blocks/_pro/dynamic-text/edit.js:487
+msgid "Prefix Label"
+msgstr ""
+
+#: src/blocks/_pro/dynamic-text/edit.js:494
+msgid "Suffix Label"
+msgstr ""
+
+#: src/blocks/_pro/dynamic-text/edit.js:50
+#: src/blocks/ancestor-page-list/edit.js:85
+msgid "h2"
+msgstr ""
+
+#: src/blocks/_pro/dynamic-text/edit.js:501
+msgid "Text for Logged Out Users"
+msgstr ""
+
+#: src/blocks/_pro/dynamic-text/edit.js:513
+msgid "Link to Login on Logout"
+msgstr ""
+
+#: src/blocks/_pro/dynamic-text/edit.js:529
+msgid "Custom Field Name"
+msgstr ""
+
+#: src/blocks/_pro/dynamic-text/edit.js:536
+msgid ""
+"This custom field may not be displayed if the field is not available or has "
+"no value in the content."
+msgstr ""
+
+#: src/blocks/_pro/dynamic-text/edit.js:54
+#: src/blocks/ancestor-page-list/edit.js:89
+msgid "h3"
+msgstr ""
+
+#: src/blocks/_pro/dynamic-text/edit.js:542
+msgid "Field Type"
+msgstr ""
+
+#: src/blocks/_pro/dynamic-text/edit.js:551
+msgid "text"
+msgstr ""
+
+#: src/blocks/_pro/dynamic-text/edit.js:555
+msgid "textarea"
+msgstr ""
+
+#: src/blocks/_pro/dynamic-text/edit.js:559
+msgid "wysiwyg"
+msgstr ""
+
+#: src/blocks/_pro/dynamic-text/edit.js:570
+msgid "Setting up a link"
+msgstr ""
+
+#: src/blocks/_pro/dynamic-text/edit.js:58
+#: src/blocks/ancestor-page-list/edit.js:93
+msgid "h4"
+msgstr ""
+
+#: src/blocks/_pro/dynamic-text/edit.js:583
 #: src/blocks/_pro/gridcolcard-item/edit.js:230
 #: src/blocks/_pro/icon-card-item/edit.js:129
 #: src/blocks/icon/edit.js:309
@@ -1283,40 +1316,21 @@ msgstr ""
 msgid "Open link new tab"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:455
+#: src/blocks/_pro/dynamic-text/edit.js:599
 msgid "Link Text"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:46
-msgid "h1"
-msgstr ""
-
-#: src/blocks/_pro/dynamic-text/edit.js:474
+#: src/blocks/_pro/dynamic-text/edit.js:618
 msgid "Vertical writing"
-msgstr ""
-
-#: src/blocks/_pro/dynamic-text/edit.js:485
-msgid "Don’t rotate letters and numbers"
-msgstr ""
-
-#: src/blocks/_pro/dynamic-text/edit.js:50
-#: src/blocks/ancestor-page-list/edit.js:85
-msgid "h2"
-msgstr ""
-
-#: src/blocks/_pro/dynamic-text/edit.js:54
-#: src/blocks/ancestor-page-list/edit.js:89
-msgid "h3"
-msgstr ""
-
-#: src/blocks/_pro/dynamic-text/edit.js:58
-#: src/blocks/ancestor-page-list/edit.js:93
-msgid "h4"
 msgstr ""
 
 #: src/blocks/_pro/dynamic-text/edit.js:62
 #: src/blocks/ancestor-page-list/edit.js:97
 msgid "h5"
+msgstr ""
+
+#: src/blocks/_pro/dynamic-text/edit.js:629
+msgid "Don’t rotate letters and numbers"
 msgstr ""
 
 #: src/blocks/_pro/dynamic-text/edit.js:66
@@ -1332,46 +1346,46 @@ msgstr ""
 msgid "span"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:171
+#: src/blocks/_pro/fixed-display/edit.js:176
 msgid "Fixed Display Setting"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:174
+#: src/blocks/_pro/fixed-display/edit.js:179
 msgid ""
 "The fixed position of the fixed position block will not change on the edit "
 "screen. Please check on the front screen."
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:181
+#: src/blocks/_pro/fixed-display/edit.js:186
 #: src/blocks/_pro/post-list-slider/edit.js:146
 #: src/blocks/_pro/table-of-contents-new/edit.js:337
 #: src/components/column-layout-control/index.js:69
 msgid "Display type"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:186
+#: src/blocks/_pro/fixed-display/edit.js:191
 msgid "Always Visible"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:190
+#: src/blocks/_pro/fixed-display/edit.js:195
 msgid "Show on Scroll"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:194
+#: src/blocks/_pro/fixed-display/edit.js:199
 msgid "Specify the time until display and hide"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:203
+#: src/blocks/_pro/fixed-display/edit.js:208
 msgid "Fixed position"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:207
+#: src/blocks/_pro/fixed-display/edit.js:212
 #: src/blocks/_pro/outer/edit.js:1056
 #: src/blocks/alert/edit.js:103
 msgid "Top"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:209
+#: src/blocks/_pro/fixed-display/edit.js:214
 #: src/blocks/_pro/outer/edit.js:1101
 #: src/blocks/balloon/edit.js:435
 #: src/blocks/button/edit.js:300
@@ -1380,12 +1394,12 @@ msgstr ""
 msgid "Right"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:213
+#: src/blocks/_pro/fixed-display/edit.js:218
 #: src/blocks/_pro/outer/edit.js:1070
 msgid "Bottom"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:217
+#: src/blocks/_pro/fixed-display/edit.js:222
 #: src/blocks/_pro/outer/edit.js:1087
 #: src/blocks/balloon/edit.js:431
 #: src/blocks/button/edit.js:292
@@ -1394,111 +1408,121 @@ msgstr ""
 msgid "Left"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:225
+#: src/blocks/_pro/fixed-display/edit.js:230
 msgid "Fixed position origin"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:232
+#: src/blocks/_pro/fixed-display/edit.js:237
 msgid "Top section"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:239
+#: src/blocks/_pro/fixed-display/edit.js:244
 msgid "Bottom section"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:253
+#: src/blocks/_pro/fixed-display/edit.js:258
 msgid "Fixed position from the top"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:257
+#: src/blocks/_pro/fixed-display/edit.js:262
 msgid "Fixed position from the bottom"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:279
+#: src/blocks/_pro/fixed-display/edit.js:284
+msgid "Hide when menu opens"
+msgstr ""
+
+#: src/blocks/_pro/fixed-display/edit.js:289
+msgid ""
+"When enabled, this block will be hidden when the Navigation block's modal "
+"menu is opened."
+msgstr ""
+
+#: src/blocks/_pro/fixed-display/edit.js:295
 msgid "Close Button Settings"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:281
+#: src/blocks/_pro/fixed-display/edit.js:297
 msgid "Show close button"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:286
+#: src/blocks/_pro/fixed-display/edit.js:302
 msgid ""
 "When enabled, a close button will be displayed that allows users to hide "
 "the fixed display."
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:309
+#: src/blocks/_pro/fixed-display/edit.js:325
 #: src/blocks/button/edit.js:550
 msgid ""
 "This color palette overrides the default color. If you want to use the "
 "default color, click the clear button."
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:320
+#: src/blocks/_pro/fixed-display/edit.js:336
 msgid "Close button text"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:327
+#: src/blocks/_pro/fixed-display/edit.js:343
 msgid "Text size"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:341
+#: src/blocks/_pro/fixed-display/edit.js:357
 #: src/blocks/_pro/outer/edit.js:1502
 #: src/blocks/icon-outer/edit.js:213
 #: src/blocks/icon/edit.js:206
 msgid "Border radius"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:360
+#: src/blocks/_pro/fixed-display/edit.js:376
 msgid "Scroll Display Setting"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:363
+#: src/blocks/_pro/fixed-display/edit.js:379
 msgid "Timing to display"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:381
+#: src/blocks/_pro/fixed-display/edit.js:397
 msgid "Persist visibility once visible"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:395
+#: src/blocks/_pro/fixed-display/edit.js:411
 msgid "Timer Setting"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:398
+#: src/blocks/_pro/fixed-display/edit.js:414
 msgid ""
 "Set the timing for display and hide. Enter 0 to disable timing for each "
 "option."
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:407
+#: src/blocks/_pro/fixed-display/edit.js:423
 msgid "Seconds until display"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:439
+#: src/blocks/_pro/fixed-display/edit.js:455
 msgid "Seconds until hide"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:468
+#: src/blocks/_pro/fixed-display/edit.js:484
 msgid "Redisplay settings"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:471
+#: src/blocks/_pro/fixed-display/edit.js:487
 msgid "Do not display again until the browser is closed"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:482
+#: src/blocks/_pro/fixed-display/edit.js:498
 msgid ""
 "When enabled, the same content will not be shown again until the visitor "
 "closes their browser."
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:506
+#: src/blocks/_pro/fixed-display/edit.js:522
 msgid "Close fixed display"
 msgstr ""
 
-#: src/blocks/_pro/fixed-display/edit.js:528
+#: src/blocks/_pro/fixed-display/edit.js:544
 msgid "Click to hide this fixed display element"
 msgstr ""
 
@@ -2202,7 +2226,7 @@ msgstr ""
 #: src/blocks/heading/edit.js:265
 #: src/blocks/slider/edit.js:529
 #: src/blocks/staff/edit.js:174
-#: src/components/advanced-color-gradient-control/index.js:47
+#: src/components/advanced-color-gradient-control/index.js:60
 msgid "Default"
 msgstr ""
 
@@ -3526,7 +3550,7 @@ msgid ""
 "will not respond to these adjustments."
 msgstr ""
 
-#: src/components/advanced-color-gradient-control/index.js:41
+#: src/components/advanced-color-gradient-control/index.js:54
 msgid "Theme"
 msgstr ""
 
