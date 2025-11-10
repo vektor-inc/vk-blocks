@@ -1,6 +1,6 @@
 import { AdvancedToggleControl } from '@vkblocks/components/advanced-toggle-control';
 import { __ } from '@wordpress/i18n';
-import { useEffect } from '@wordpress/element';
+import { useEffect, useRef } from '@wordpress/element';
 import {
 	InspectorControls,
 	BlockControls,
@@ -27,6 +27,7 @@ import { MultiItemSetting } from './edit-multiItem';
 import ResponsiveSizeControl, {
 	getMaxByUnit,
 } from '@vkblocks/components/responsive-size-control';
+import { useSelect } from '@wordpress/data';
 
 // eslint-disable no-shadow
 export default function SliderEdit(props) {
@@ -59,15 +60,103 @@ export default function SliderEdit(props) {
 		blockId,
 	} = attributes;
 
-	useEffect(() => {
-		let timer;
-		if (editorMode) {
-			timer = setTimeout(() => {
-				editSliderLaunch();
-			}, 50);
-		}
+	// インナーブロックを取得
+	const innerBlocks = useSelect((select) =>
+		select('core/block-editor').getBlocks(clientId)
+	);
 
-		return () => clearTimeout(timer);
+	// editorMode と innerBlocks の順序をログ出力
+	useEffect(() => {
+		// 編集モード（default）に戻す時に DOM 要素を正しい順序に復元
+		if (editorMode === 'default') {
+			const sliderElement = blockRef.current;
+
+			if (sliderElement) {
+				const wrapper = sliderElement.querySelector(
+					'.block-editor-block-list__layout'
+				);
+
+				if (wrapper && innerBlocks && innerBlocks.length > 0) {
+					// 現在の DOM 順序を取得
+					const currentOrder = Array.from(
+						wrapper.querySelectorAll('.vk_slider_item')
+					)
+						.map((el) => {
+							const classMatch = el.className.match(
+								/vk_slider_item-([a-f0-9\-]+)/
+							);
+							return classMatch ? classMatch[1] : null;
+						})
+						.filter((id) => id !== null);
+
+					// 期待される順序
+					const expectedOrder = innerBlocks.map(
+						(b) => b.attributes.blockId || b.clientId
+					);
+
+					// 順序が同じなら何もしない（不要な DOM 操作を避ける）
+					if (
+						JSON.stringify(currentOrder) ===
+						JSON.stringify(expectedOrder)
+					) {
+						return;
+					}
+
+					// 順序が異なる場合のみ並べ替え
+					// innerBlocks の順序に従って slider-item を並べ替え
+					let previousElement = null;
+					innerBlocks.forEach((block) => {
+						const blockIdToUse =
+							block.attributes.blockId || block.clientId;
+						const element = wrapper.querySelector(
+							`.vk_slider_item-${blockIdToUse}`
+						);
+						if (!element) {
+							return;
+						}
+
+						if (previousElement) {
+							// 前の要素の次に挿入
+							if (previousElement.nextSibling) {
+								wrapper.insertBefore(
+									element,
+									previousElement.nextSibling
+								);
+							} else {
+								wrapper.appendChild(element);
+							}
+						} else if (element !== wrapper.firstChild) {
+							// 最初の要素が先頭にない場合のみ移動
+							wrapper.insertBefore(element, wrapper.firstChild);
+						}
+
+						previousElement = element;
+					});
+				}
+			}
+		}
+	}, [editorMode, innerBlocks, clientId]);
+
+	// プレビューモードに戻す時に、Swiper インスタンスをリセットして確実に再初期化
+	useEffect(() => {
+		if (editorMode === 'slide') {
+			// requestAnimationFrame で React のレンダリングが完了するのを待ってから初期化
+			let timerId;
+			// eslint-disable-next-line no-undef
+			const rafId = requestAnimationFrame(() => {
+				timerId = setTimeout(() => {
+					editSliderLaunch();
+				}, 50);
+			});
+			// eslint-disable-next-line no-undef
+			return () => {
+				// eslint-disable-next-line no-undef
+				cancelAnimationFrame(rafId);
+				if (timerId) {
+					clearTimeout(timerId);
+				}
+			};
+		}
 	}, [editorMode]);
 
 	useEffect(() => {
@@ -297,8 +386,11 @@ export default function SliderEdit(props) {
 		);
 	}
 
+	const blockRef = useRef(null);
+
 	const blockProps = useBlockProps({
 		className: `vk_slider vk_swiper vk_slider_editorMode--${editorMode} vk_slider_${clientId}${alignClass}`,
+		ref: blockRef,
 	});
 
 	return (

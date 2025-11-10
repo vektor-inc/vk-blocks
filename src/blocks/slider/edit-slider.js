@@ -3,6 +3,9 @@ import Swiper from 'swiper/bundle';
 // スライダーの格納
 const swiper = {};
 
+// 監視中の editorRoot を管理
+const observedRoots = new Set();
+
 // swiper クラスを削除
 const removeSwiperClassName = (targetElement) => {
 	if (targetElement) {
@@ -206,6 +209,9 @@ const LaunchSwiper = (slider) => {
 					),
 					SwiperSetting
 				);
+			} else if (swiper[sliderId]) {
+				// 既存の Swiper インスタンスがある場合は、スライド要素が変わっている可能性があるため更新
+				swiper[sliderId].update();
 			}
 		} else {
 			// 不要な swiper クラスを削除
@@ -275,6 +281,14 @@ export const LaunchSwiperAll = (editorRoot) => {
 
 // スライダーの監視
 export const SliderObserver = (editorRoot) => {
+	// 既に監視中の場合はスキップ
+	if (observedRoots.has(editorRoot)) {
+		return;
+	}
+
+	// このルートを監視中として記録
+	observedRoots.add(editorRoot);
+
 	const config = { childList: true, subtree: true, attributes: true };
 
 	const callback = (mutationsList) => {
@@ -315,7 +329,14 @@ export const SliderObserver = (editorRoot) => {
 
 const editorRootLaunch = (editorRoot) => {
 	LaunchSwiperAll(editorRoot);
-	SliderObserver(editorRoot);
+
+	// editorRoot ごとに1回だけ Observer をセットアップ
+	// eslint-disable-next-line no-undef
+	if (!editorRoot.dataset.vkSliderObserverInitialized) {
+		SliderObserver(editorRoot);
+		// eslint-disable-next-line no-undef
+		editorRoot.dataset.vkSliderObserverInitialized = 'true';
+	}
 };
 
 export const editSliderLaunch = () => {

@@ -73,6 +73,53 @@ const isVKColorPaletteManager = (colorSet) => {
 	return false;
 };
 
+const convertPresetToCssVar = (value = '') => {
+	const matches = value.match(/^var:preset\|([^|]+)\|([^|]+)$/);
+	if (matches) {
+		return `var(--wp--preset--${matches[1]}--${matches[2]})`;
+	}
+	return value;
+};
+
+const getNumberedListLineHeightLength = (attributes = {}) => {
+	const rawLineHeight = attributes?.style?.typography?.lineHeight;
+	if (rawLineHeight === undefined || rawLineHeight === null) {
+		return '';
+	}
+
+	const lineHeight = rawLineHeight.toString().trim();
+	if (!lineHeight || lineHeight.toLowerCase() === 'normal') {
+		return '';
+	}
+
+	let value = lineHeight;
+	if (value.startsWith('var:preset|')) {
+		value = convertPresetToCssVar(value);
+	}
+
+	if (value.toLowerCase().startsWith('calc(')) {
+		return value;
+	}
+
+	if (value.startsWith('var(')) {
+		return `calc( ${value} * 1em )`;
+	}
+
+	if (value.endsWith('%')) {
+		const numeric = parseFloat(value.slice(0, -1));
+		if (!Number.isNaN(numeric)) {
+			return `calc( ${(numeric / 100).toString()} * 1em )`;
+		}
+	}
+
+	const numeric = Number(value);
+	if (!Number.isNaN(numeric)) {
+		return `calc( ${value} * 1em )`;
+	}
+
+	return value;
+};
+
 export const addAttribute = (settings) => {
 	if (isValidBlockType(settings.name)) {
 		settings.attributes = {
@@ -231,42 +278,54 @@ const withElementsStyles = createHigherOrderComponent(
 			return <BlockListBlock {...props} />;
 		}
 
-		if (!color) {
-			return <BlockListBlock {...props} />;
-		}
-
 		const colorSet = select('core/block-editor').getSettings().colors;
-		const ColorValue = getColorObjectByAttributeValues(colorSet, color);
 		let colorValue;
-		if (ColorValue.slug !== undefined) {
-			const safeSlug = sanitizeSlug(ColorValue.slug);
-			colorValue = `var(--wp--preset--color--${safeSlug})`;
-		} else {
-			colorValue = color;
+		if (color) {
+			const ColorValue =
+				getColorObjectByAttributeValues(colorSet, color) || {};
+			if (ColorValue.slug !== undefined) {
+				const safeSlug = sanitizeSlug(ColorValue.slug);
+				colorValue = `var(--wp--preset--color--${safeSlug})`;
+			} else if (ColorValue.color) {
+				colorValue = ColorValue.color;
+			} else {
+				colorValue = color;
+			}
 		}
 
 		const bgStyle = nowClassArray.find((item) =>
 			item.match(/is-style-vk-numbered-(circle|square)-mark/)
 		);
-		let cssTag = '';
-		if (bgStyle) {
-			cssTag = `#block-${clientId} li::before {
+		const lineHeightLength = getNumberedListLineHeightLength(attributes);
+		const cssRules = [];
+		const blockSelector = `#block-${clientId}`;
+
+		if (bgStyle && lineHeightLength) {
+			cssRules.push(
+				`${blockSelector} { --vk-numbered-line-height-length: ${lineHeightLength}; }`
+			);
+		}
+
+		if (colorValue) {
+			if (bgStyle) {
+				cssRules.push(`${blockSelector} li::before {
 				color: #fff;
 				background-color: ${colorValue};
-			}`;
-		} else {
-			cssTag = `#block-${clientId} li::marker, #block-${clientId} li::before {
+			}`);
+			} else {
+				cssRules.push(`${blockSelector} li::marker, ${blockSelector} li::before {
 				color: ${colorValue};
-			}`;
+			}`);
+			}
+		}
+
+		if (!cssRules.length) {
+			return <BlockListBlock {...props} />;
 		}
 
 		return (
 			<>
-				{(() => {
-					if (cssTag) {
-						return <style>{cssTag}</style>;
-					}
-				})()}
+				<style>{cssRules.join('\n')}</style>
 				<BlockListBlock {...props} />
 			</>
 		);

@@ -1307,7 +1307,7 @@ msgid "h4"
 msgstr ""
 
 #: src/blocks/_pro/dynamic-text/edit.js:583
-#: src/blocks/_pro/gridcolcard-item/edit.js:230
+#: src/blocks/_pro/gridcolcard-item/edit.js:372
 #: src/blocks/_pro/icon-card-item/edit.js:129
 #: src/blocks/icon/edit.js:309
 #: src/blocks/pr-blocks/edit.js:263
@@ -1601,52 +1601,52 @@ msgstr ""
 msgid "You can create a variety of layouts with grid column card blocks."
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard-item/edit.js:194
+#: src/blocks/_pro/gridcolcard-item/edit.js:336
 msgid "Edit mode"
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard-item/edit.js:198
+#: src/blocks/_pro/gridcolcard-item/edit.js:340
 msgid ""
 "If Edit Lock is disabled, changes made in this item block (such as color or "
 "image ratio) will be overwritten when the parent Grid Column Card block is "
 "re-selected."
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard-item/edit.js:204
+#: src/blocks/_pro/gridcolcard-item/edit.js:346
 msgid "Edit Lock"
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard-item/edit.js:207
+#: src/blocks/_pro/gridcolcard-item/edit.js:349
 msgid "Lock edits this block from the parent and other Grid Column Item block"
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard-item/edit.js:218
+#: src/blocks/_pro/gridcolcard-item/edit.js:360
 msgid "Column Setting"
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard-item/edit.js:222
+#: src/blocks/_pro/gridcolcard-item/edit.js:364
 #: src/blocks/_pro/icon-card-item/edit.js:121
 #: src/blocks/pr-blocks/edit.js:255
 msgid "Link URL:"
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard-item/edit.js:238
+#: src/blocks/_pro/gridcolcard-item/edit.js:380
 #: src/components/link-toolbar/index.js:331
 msgid "Add noreferrer"
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard-item/edit.js:246
+#: src/blocks/_pro/gridcolcard-item/edit.js:388
 #: src/components/link-toolbar/index.js:348
 msgid "Add nofollow"
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard-item/edit.js:254
+#: src/blocks/_pro/gridcolcard-item/edit.js:396
 msgid ""
 "If you set a link URL, do not place the link element (text or button) in "
 "the Grid Column Card Item. It may not be displayed correctly."
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard-item/edit.js:258
+#: src/blocks/_pro/gridcolcard-item/edit.js:400
 msgid "Make sure that no link is specified for the image block, etc."
 msgstr ""
 
@@ -1723,42 +1723,42 @@ msgstr ""
 msgid "Column padding"
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard/edit.js:121
+#: src/blocks/_pro/gridcolcard/edit.js:228
 msgid "Column Width Setting"
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard/edit.js:125
+#: src/blocks/_pro/gridcolcard/edit.js:232
 msgid ""
 "If you specify the minimum column size on a tablet or PC with %, it will be "
 "easier to align the number of columns in the upper and lower rows according "
 "to the screen size."
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard/edit.js:131
+#: src/blocks/_pro/gridcolcard/edit.js:238
 msgid "Column min width (Mobile)"
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard/edit.js:139
+#: src/blocks/_pro/gridcolcard/edit.js:246
 msgid "Column min width (Tablet / Optional)"
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard/edit.js:150
+#: src/blocks/_pro/gridcolcard/edit.js:257
 msgid "Column min width (PC / Optional)"
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard/edit.js:161
+#: src/blocks/_pro/gridcolcard/edit.js:268
 msgid "Column Gap Setting"
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard/edit.js:165
+#: src/blocks/_pro/gridcolcard/edit.js:272
 msgid "Column gap size"
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard/edit.js:171
+#: src/blocks/_pro/gridcolcard/edit.js:278
 msgid "Column row-gap size (optional)"
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard/edit.js:180
+#: src/blocks/_pro/gridcolcard/edit.js:287
 msgid "Specify all columns at once"
 msgstr ""
 
@@ -4138,13 +4138,13 @@ msgid ""
 "from border panel that, specification from here is deprecated."
 msgstr ""
 
-#: src/extensions/core/list/style.js:119
+#: src/extensions/core/list/style.js:166
 msgid ""
 "When this style is selected for ordered lists, the \"List Style\", "
 "\"Initial Value\", and \"Reverse Order\" features cannot be used."
 msgstr ""
 
-#: src/extensions/core/list/style.js:142
+#: src/extensions/core/list/style.js:189
 msgid "List Icon Color"
 msgstr ""
 

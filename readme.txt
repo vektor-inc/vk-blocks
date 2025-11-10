@@ -108,6 +108,12 @@ e.g.
 
 == Changelog ==
 
+= 1.114.2 =
+[ Bug fix ][ Grid Column Card (Pro) ] Automatically restore missing header, body, or footer inner blocks when editing with the visual editor.
+[ Bug fix ][ New Badge (Pro) ] Fixed editor display issue where the block was hidden for non-post post types.
+[ Bug fix ][ Core List ] Fixed an issue where line-height settings in the admin screen were not applied when using non-default list styles.
+[ Bug fix ][ Slider ] Fixed slider item order not being preserved when switching editor modes.
+
 = 1.114.1 =
 [ Other ] Add translation
 

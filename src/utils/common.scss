@@ -288,13 +288,15 @@ ol {
 			&:not(.has-link-color) {
 				color: inherit;
 			}
-			&:where(:not(.is-style-default)) li {
-				list-style: none;
-				position: relative;
-				margin-top:0;
-				margin-left: 0;
-				margin:calc( 1rem * 0.8 ) 0;
+			&:where(:not(.is-style-default)) {
 				line-height: calc( 1rem * 1.65 );
+				li {
+					list-style: none;
+					position: relative;
+					margin-top:0;
+					margin-left: 0;
+					margin:calc( 1rem * 0.8 ) 0;
+				}
 			}
 		}
 	}
@@ -304,12 +306,14 @@ ol {
 		list-style-type: none;
 
 		li {
+			--vk-numbered-marker-leading: 0px;
 			position: relative;
 			list-style: none;
 			padding-left: .5em;
 			&:before {
 				position: absolute;
 				left: 0;
+				top: var( --vk-numbered-marker-leading, 0 );
 				counter-increment: number;
 				content: counter(number);
 				margin-left: -1.8em;
@@ -346,12 +350,14 @@ ol {
 		list-style-type: none;
 
 		li {
+			--vk-numbered-marker-leading: 0px;
 			position: relative;
 			list-style: none;
 			padding-left: .5em;
 			&:before {
 				position: absolute;
 				left: -0.3em;
+				top: var( --vk-numbered-marker-leading, 0 );
 				counter-increment: number;
 				content: counter(number);
 				margin-left: -25px;
@@ -385,6 +391,20 @@ ol {
 
 	&.is-style-vk-numbered-circle-mark,
 	&.is-style-vk-numbered-square-mark {
+		--vk-numbered-default-line-height-length: calc( 1rem * 1.65 );
+
+		li {
+			--vk-numbered-marker-leading: max(
+				calc(
+					(
+						var( --vk-numbered-line-height-length, var( --vk-numbered-default-line-height-length ) )
+						- var( --vk-numbered-default-line-height-length )
+					) / 2
+				),
+				0px
+			);
+		}
+
 		&.fa-lg {
 			li::before {
 				left: -0.8em;
