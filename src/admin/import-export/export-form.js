@@ -28,12 +28,15 @@ export default function ExportForm(props) {
 	async function handleExport(event) {
 		event.preventDefault();
 
-		// exportOptionListsからすべてのオプションプロパティー名を取得
+		// exportOptionListsからすべてのオプションプロパティー名を取得（isShow が false でないもののみ）
 		const allOptionNames = new Set();
 		exportOptionLists.forEach((setting) => {
-			setting.options.forEach((option) => {
-				allOptionNames.add(option.name);
-			});
+			// isShowがfalseの設定はエクスポート対象から除外
+			if (setting.isShow !== false) {
+				setting.options.forEach((option) => {
+					allOptionNames.add(option.name);
+				});
+			}
 		});
 
 		// 一旦DBから全ての値をエクスポート対象の変数に入れる
@@ -55,6 +58,11 @@ export default function ExportForm(props) {
 			}
 		});
 
+		// ライセンスキーを空文字に設定（セキュリティのため）
+		if (exportVkBlocksOptions.vk_blocks_pro_license_key !== undefined) {
+			exportVkBlocksOptions.vk_blocks_pro_license_key = '';
+		}
+
 		const exportContents = {
 			vkBlocksOptions: {
 				...exportVkBlocksOptions,
@@ -66,9 +74,15 @@ export default function ExportForm(props) {
 		download(fileName, fileContent, 'application/json');
 	}
 
-	const isExportLists = exportOptionLists.filter((list) => !!list.isExport);
+	// 表示されている項目のみをカウント
+	const visibleExportLists = exportOptionLists.filter((list, index) => {
+		const { isShow = true } = OPTION_DEFAULT_SETTINGS[index];
+		return isShow;
+	});
+	const isExportLists = visibleExportLists.filter((list) => !!list.isExport);
+
 	let ariaChecked;
-	if (isExportLists.length === exportOptionLists.length) {
+	if (isExportLists.length === visibleExportLists.length) {
 		ariaChecked = 'true';
 	} else if (isExportLists.length > 0) {
 		ariaChecked = 'mixed';

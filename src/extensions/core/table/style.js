@@ -1,12 +1,7 @@
 import { useEffect } from 'react';
 import { __ } from '@wordpress/i18n';
 import { addFilter } from '@wordpress/hooks';
-import {
-	PanelBody,
-	ToggleControl,
-	SelectControl,
-	Icon,
-} from '@wordpress/components';
+import { PanelBody, ToggleControl, SelectControl } from '@wordpress/components';
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import ScrollHint from '@vkblocks/components/scroll-hint';
@@ -14,7 +9,7 @@ import ScrollHint from '@vkblocks/components/scroll-hint';
 /**
  * Internal dependencies
  */
-import { ReactComponent as IconSVG } from './icon.svg';
+import { VkPanelIcon } from '@vkblocks/components/vk-icon';
 
 const isValidBlockType = (name) => {
 	const validBlockTypes = ['core/table'];
@@ -94,36 +89,6 @@ export const addBlockControl = createHigherOrderComponent((BlockEdit) => {
 				'data-cell-vertical-breakpoint': cellVerticalBreakpoint,
 			}),
 		});
-
-		// アイコンスタイルを定義
-		const iconStyle = {
-			width: '24px',
-			height: '24px',
-		};
-
-		// scrollable に関連するアイコンスタイル
-		const scrollableIconStyle = {
-			color: scrollable ? '#fff' : 'initial', // scrollable が ON のときは白、OFF のときはデフォルト
-			background: scrollable ? '#1e1e1e' : 'transparent', // scrollable が ON のときは背景色、OFF のときは透明
-		};
-
-		// cellVertical に関連するアイコンスタイル
-		const cellVerticalIconStyle = {
-			color: cellVertical ? '#fff' : 'initial', // cellVertical が ON のときは白、OFF のときはデフォルト
-			background: cellVertical ? '#1e1e1e' : 'transparent', // cellVertical が ON のときは背景色、OFF のときは透明
-		};
-
-		// scrollable 用アイコンスタイルを独立して適用
-		const scrollableIconStyleFinal = {
-			...iconStyle,
-			...scrollableIconStyle,
-		};
-
-		// cellVertical 用アイコンスタイルを独立して適用
-		const cellVerticalIconStyleFinal = {
-			...iconStyle,
-			...cellVerticalIconStyle,
-		};
 
 		// スクロール可能トグル変更のハンドル
 		const handleToggleChange = (checked) => {
@@ -292,12 +257,7 @@ export const addBlockControl = createHigherOrderComponent((BlockEdit) => {
 					<InspectorControls>
 						<PanelBody
 							title={__('Table Horizontal Scroll', 'vk-blocks')}
-							icon={
-								<Icon
-									icon={IconSVG}
-									style={scrollableIconStyleFinal}
-								/>
-							}
+							icon={<VkPanelIcon isActive={scrollable} />}
 							initialOpen={false}
 						>
 							<ToggleControl
@@ -350,12 +310,7 @@ export const addBlockControl = createHigherOrderComponent((BlockEdit) => {
 						</PanelBody>
 						<PanelBody
 							title={__('Table Cell Vertical', 'vk-blocks')}
-							icon={
-								<Icon
-									icon={IconSVG}
-									style={cellVerticalIconStyleFinal}
-								/>
-							}
+							icon={<VkPanelIcon isActive={cellVertical} />}
 							initialOpen={false}
 						>
 							<ToggleControl

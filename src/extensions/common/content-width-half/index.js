@@ -4,7 +4,7 @@
 import { useEffect } from 'react';
 import { __ } from '@wordpress/i18n';
 import { addFilter } from '@wordpress/hooks';
-import { PanelBody, ToggleControl, Icon } from '@wordpress/components';
+import { PanelBody, ToggleControl } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
 import { createHigherOrderComponent } from '@wordpress/compose';
@@ -13,7 +13,7 @@ import classnames from 'classnames';
 /**
  * Internal dependencies
  */
-import { ReactComponent as IconSVG } from './icon.svg';
+import { VkPanelIcon } from '@vkblocks/components/vk-icon';
 
 const TARGET_BLOCKS = ['core/column'];
 const HALF_CLASS = 'is-vk-content-width-half';
@@ -77,14 +77,6 @@ const withContentWidthHalfControls = createHigherOrderComponent((BlockEdit) => {
 			},
 			[clientId]
 		);
-		const iconStyle = {
-			width: '24px',
-			height: '24px',
-			...(contentWidthHalf && {
-				color: '#fff',
-				background: '#1e1e1e',
-			}),
-		};
 
 		useEffect(() => {
 			const classList =
@@ -146,7 +138,7 @@ const withContentWidthHalfControls = createHigherOrderComponent((BlockEdit) => {
 					<InspectorControls>
 						<PanelBody
 							title={__('Layout Extension', 'vk-blocks')}
-							icon={<Icon icon={IconSVG} style={iconStyle} />}
+							icon={<VkPanelIcon isActive={!!contentWidthHalf} />}
 							initialOpen={false}
 						>
 							<ToggleControl

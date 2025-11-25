@@ -3,6 +3,8 @@
 -----------------------------------------------*/
 .vk_outer-width-full.vk_outer-paddingLR-use,
 .vk_outer-width-full.vk_outer-paddingLR-zero{
+	// コンテント幅を使用する設定がある場合はそちらを優先させるため :not() で除外
+	.vk_outer_container > .block-editor-inner-blocks > :where(:not(.is-layout-constrained)) {
 	// コンテンツエリアをはみ出させる
 	.wp-block:where(:not( 
 		.alignfull,
@@ -16,6 +18,7 @@
 			max-width: var(--vk-width-container);
 		}
 	}
+	}
 }
 
 .wp-block-vk-blocks-outer.vk_outer.vk_outer-width-full {
@@ -25,10 +28,12 @@
 	margin-right: 0;
 	padding-left: 0;
 	padding-right: 0;
-	&.vk_outer-paddingLR-use,
-	&.vk_outer-paddingLR-zero {
+	&.vk_outer-paddingLR-use{
 		padding-left: var(--vk-outer-padding);
 		padding-right: var(--vk-outer-padding);
+	}
+	&.vk_outer-paddingLR-use,
+	&.vk_outer-paddingLR-zero {
 		.block-editor-inner-blocks {
 			max-width: var(--vk-width-full);
 		}

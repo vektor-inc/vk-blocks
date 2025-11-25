@@ -21,8 +21,12 @@ export const getMaxByUnit = (unit) => {
 export const getStepByUnit = (unit) => (unit === 'px' ? 1 : 0.1);
 
 const handleValueChange = (value, onChange) => {
-	const numericValue = value !== '' && value !== null ? Number(value) : 0;
-	onChange(numericValue);
+	// 空文字列、null、undefinedの場合はundefinedを設定（blank状態を保持）
+	if (value === '' || value === null || value === undefined) {
+		onChange(undefined);
+	} else {
+		onChange(Number(value));
+	}
 };
 
 export default function ResponsiveSizeControl({
@@ -61,6 +65,7 @@ export default function ResponsiveSizeControl({
 					min={0}
 					max={defaultMaxPC}
 					step={getStepByUnit(unit)}
+					allowReset={true}
 				/>
 				<RangeControl
 					label="Tablet"
@@ -71,6 +76,7 @@ export default function ResponsiveSizeControl({
 					min={0}
 					max={defaultMaxTablet}
 					step={getStepByUnit(unit)}
+					allowReset={true}
 				/>
 				<RangeControl
 					label="Mobile"
@@ -81,6 +87,7 @@ export default function ResponsiveSizeControl({
 					min={0}
 					max={defaultMaxMobile}
 					step={getStepByUnit(unit)}
+					allowReset={true}
 				/>
 			</BaseControl>
 		</>

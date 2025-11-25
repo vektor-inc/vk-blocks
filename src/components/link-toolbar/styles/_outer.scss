@@ -1,0 +1,9 @@
+@use 'components/link-toolbar/styles/base' as *;
+
+/* Outerブロック */
+.wp-block-vk-blocks-outer.vk_outer {
+	// リンク設定
+	& > .vkb-outer-link {
+		@extend %vk-link-overlay-base;
+	}
+}

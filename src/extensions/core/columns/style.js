@@ -4,12 +4,7 @@
  */
 import { __ } from '@wordpress/i18n';
 import { addFilter } from '@wordpress/hooks';
-import {
-	PanelBody,
-	ToggleControl,
-	Icon,
-	ToolbarGroup,
-} from '@wordpress/components';
+import { PanelBody, ToggleControl, ToolbarGroup } from '@wordpress/components';
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { InspectorControls, BlockControls } from '@wordpress/block-editor';
 import classnames from 'classnames';
@@ -18,7 +13,7 @@ import LinkToolbar from '@vkblocks/components/link-toolbar';
 /**
  * Internal dependencies
  */
-import { ReactComponent as IconSVG } from './icon.svg';
+import { VkPanelIcon } from '@vkblocks/components/vk-icon';
 
 const isColumnsBlock = (name) => name === 'core/columns';
 const isColumnBlock = (name) => name === 'core/column';
@@ -37,27 +32,13 @@ export const enhanceColumnBlock = createHigherOrderComponent((BlockEdit) => {
 
 		if (isColumnsBlock(props.name) && props.isSelected) {
 			// カラムの方向設定
-			// アイコン設定
-			let iconStyle = {
-				width: '24px',
-				height: '24px',
-			};
-
-			if (reverse) {
-				iconStyle = {
-					...iconStyle,
-					color: '#fff',
-					background: '#1e1e1e',
-				};
-			}
-
 			return (
 				<>
 					<BlockEdit {...props} />
 					<InspectorControls>
 						<PanelBody
 							title={__('Column Direction', 'vk-blocks')}
-							icon={<Icon icon={IconSVG} style={iconStyle} />}
+							icon={<VkPanelIcon isActive={reverse} />}
 							initialOpen={false}
 						>
 							<ToggleControl

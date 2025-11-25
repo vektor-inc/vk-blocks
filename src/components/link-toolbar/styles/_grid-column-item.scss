@@ -1,0 +1,17 @@
+@use 'components/link-toolbar/styles/base' as *;
+
+/* グリッドカラムアイテムブロック */
+.wp-block-vk-blocks-grid-column-item {
+	.vk_gridColumn_item_inner {
+		// リンク設定
+		&:has(.vk_gridColumn_item_link) {
+			position: relative;
+		}
+		& > .vk_gridColumn_item_link {
+			@extend %vk-link-overlay-base;
+		}
+		& > *:first-of-type:not(.vk_gridColumn_item_link) {
+			margin-top: 0;
+		}
+	}
+}

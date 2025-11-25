@@ -1,0 +1,9 @@
+@use 'components/link-toolbar/styles/base' as *;
+
+/* スライダーアイテムブロック */
+.vk_slider_item {
+	// リンク設定
+	& > .vk_slider_item-link {
+		@extend %vk-link-overlay-base;
+	}
+}

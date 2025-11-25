@@ -1,0 +1,18 @@
+/*-------------------------------------------*/
+/* リンクツールバー - 共通ベースクラス
+/*-------------------------------------------*/
+/* このクラスは@extendで継承することで、CSSの重複出力を防ぎます。
+/* 各ブロックのpartialファイルで @extend %vk-link-overlay-base; を使用してください。
+/*-------------------------------------------*/
+
+%vk-link-overlay-base {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    margin: unset;
+	color: transparent;
+	cursor: pointer;
+	z-index: 10;
+}

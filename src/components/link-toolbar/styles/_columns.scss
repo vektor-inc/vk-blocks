@@ -1,0 +1,24 @@
+@use 'components/link-toolbar/styles/base' as *;
+
+/* カラムブロック */
+.wp-block-columns {
+	/* リンク設定 */
+	&:has(.wp-block-column-vk-link) {
+		.wp-block-column {
+			> * {
+				&:first-of-type {
+					margin-top: 0;
+				}
+			}
+		}
+	}
+	.wp-block-column:has(.wp-block-column-vk-link) {
+		position: relative;
+		.wp-block-column-vk-link {
+			@extend %vk-link-overlay-base;
+			> p {
+				line-height: var(--vk-line-height); // 自動で入るコアの .is-layout-flow CSSに負けるため
+			}
+		}
+	}
+}

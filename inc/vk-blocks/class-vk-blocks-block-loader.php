@@ -105,9 +105,14 @@ class VK_Blocks_Block_Loader {
 		// 分割読み込みが有効かどうかをチェック
 		if ( self::should_load_separate_assets() && ! is_admin() ) {
 			// 分割読み込みが有効な場合は個別のスタイルを読み込む
+			// 注意: core/group のブロックスタイルは block_style_lists に定義されているため、vk_blocks_register_block_style() で登録される
+			// ただし、リンク機能のCSSは拡張機能として実装されているため、ここで明示的に読み込む必要がある
+			wp_enqueue_style( 'vk-blocks/core-group', VK_BLOCKS_DIR_URL . 'build/extensions/core/group/style.css', array(), VK_BLOCKS_VERSION );
 			wp_enqueue_style( 'vk-blocks/core-table', VK_BLOCKS_DIR_URL . 'build/extensions/core/table/style.css', array(), VK_BLOCKS_VERSION );
 			wp_enqueue_style( 'vk-blocks/core-heading', VK_BLOCKS_DIR_URL . 'build/extensions/core/heading/style.css', array(), VK_BLOCKS_VERSION );
 			wp_enqueue_style( 'vk-blocks/core-image', VK_BLOCKS_DIR_URL . 'build/extensions/core/image/style.css', array(), VK_BLOCKS_VERSION );
+			wp_enqueue_style( 'vk-blocks/core-columns', VK_BLOCKS_DIR_URL . 'build/extensions/core/columns/style.css', array(), VK_BLOCKS_VERSION );
+			wp_enqueue_style( 'vk-blocks/core-cover', VK_BLOCKS_DIR_URL . 'build/extensions/core/cover/style.css', array(), VK_BLOCKS_VERSION );
 		} else {
 			// 分割読み込みが無効な場合はフロントエンド画面では結合スタイルを読み込まない
 			wp_enqueue_style( 'vk-blocks-build-css' );

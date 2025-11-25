@@ -8,7 +8,7 @@ import { Icon } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import { ReactComponent as IconSVG } from './icon.svg';
+import { IconSVG, getVkIconStyle } from '@vkblocks/components/vk-icon';
 /*globals vk_blocks_params */
 
 if (window.vk_blocks_params) {
@@ -36,7 +36,9 @@ if (window.vk_blocks_params) {
 							<>
 								<Icon
 									icon={IconSVG}
-									style={{ marginRight: '8px' }}
+									style={getVkIconStyle(false, {
+										marginRight: '8px',
+									})}
 								/>
 								<span className={className}>{title}</span>
 							</>

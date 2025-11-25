@@ -4,13 +4,13 @@
 import { addFilter } from '@wordpress/hooks';
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, SelectControl, Icon } from '@wordpress/components';
+import { PanelBody, SelectControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
  */
-import { ReactComponent as IconSVG } from './icon.svg';
+import { VkPanelIcon } from '@vkblocks/components/vk-icon';
 
 /**
  * Query Block Extension - Add Modified Date Order Option
@@ -34,21 +34,6 @@ const withQueryOrderExtension = createHigherOrderComponent(
 		const { query } = attributes;
 		const { orderBy = 'date', order = 'desc' } = query || {};
 
-		// アイコンスタイルを定義
-		let iconStyle = {
-			width: '24px',
-			height: '24px',
-		};
-
-		// orderByがmodifiedの時にアイコンの色を反転
-		if (orderBy === 'modified') {
-			iconStyle = {
-				...iconStyle,
-				color: '#fff',
-				background: '#1e1e1e',
-			};
-		}
-
 		// セレクトボックスの値を取得
 		const getSelectValue = () => {
 			if (orderBy === 'modified') {
@@ -63,7 +48,7 @@ const withQueryOrderExtension = createHigherOrderComponent(
 				<InspectorControls>
 					<PanelBody
 						title={__('VK Query Extension', 'vk-blocks')}
-						icon={<Icon icon={IconSVG} style={iconStyle} />}
+						icon={<VkPanelIcon isActive={orderBy === 'modified'} />}
 						initialOpen={false}
 					>
 						<SelectControl

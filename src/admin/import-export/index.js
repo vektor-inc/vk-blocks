@@ -19,7 +19,7 @@ export const OPTION_DEFAULT_SETTINGS = [
 			},
 		],
 		isImport: !!vkBlocksObject.isLicenseSetting,
-		isShow: !!vkBlocksObject.isLicenseSetting,
+		isShow: false, // エクスポートチェックボックスを非表示にする
 	},
 	{
 		groupTitle: __('Balloon Setting', 'vk-blocks'),

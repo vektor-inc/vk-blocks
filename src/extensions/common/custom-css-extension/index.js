@@ -3,7 +3,7 @@
  */
 import { __, getLocaleData } from '@wordpress/i18n';
 import { addFilter } from '@wordpress/hooks';
-import { PanelBody, Icon, Button, ExternalLink } from '@wordpress/components';
+import { PanelBody, Button, ExternalLink } from '@wordpress/components';
 import { InspectorControls, transformStyles } from '@wordpress/block-editor';
 import { createHigherOrderComponent, useInstanceId } from '@wordpress/compose';
 import { hasBlockSupport } from '@wordpress/blocks';
@@ -20,7 +20,7 @@ import classnames from 'classnames';
  */
 import { CodeMirrorCss } from '@vkblocks/components/code-mirror-css';
 import { emptyStringToUndefined } from '@vkblocks/utils/empty-string-to-undefined';
-import { ReactComponent as IconSVG } from './icon.svg';
+import { VkPanelIcon } from '@vkblocks/components/vk-icon';
 /*globals vk_blocks_params */
 
 export const inString = (str, keyword) => {
@@ -179,26 +179,15 @@ export const withInspectorControls = createHigherOrderComponent(
 			}
 		}, [className]);
 
-		// アイコンのスタイル
-		let iconStyle = {
-			width: '24px',
-			height: '24px',
-		};
-		if (existsCss(vkbCustomCss)) {
-			iconStyle = {
-				...iconStyle,
-				color: '#fff',
-				background: '#1e1e1e',
-			};
-		}
-
 		return (
 			<>
 				<BlockEdit {...props} />
 				<InspectorControls>
 					<PanelBody
 						className={'vk_custom_css_panel'}
-						icon={<Icon icon={IconSVG} style={iconStyle} />}
+						icon={
+							<VkPanelIcon isActive={existsCss(vkbCustomCss)} />
+						}
 						title={__('Custom CSS', 'vk-blocks')}
 						initialOpen={false}
 					>

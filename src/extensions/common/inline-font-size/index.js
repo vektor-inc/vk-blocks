@@ -10,7 +10,7 @@ import { Icon } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import { ReactComponent as IconSVG } from './icon.svg';
+import { IconSVG, getVkIconBaseStyle } from '@vkblocks/components/vk-icon';
 import { default as InlineFontSizeUI, getActiveInlineFontSize } from './inline';
 
 const name = 'vk-blocks/inline-font-size';
@@ -25,10 +25,6 @@ function FontSizeEdit({
 	const shortcutType = 'primary';
 	const shortcutChar = 'h';
 
-	const iconStyle = {
-		width: '24px',
-		height: '24px',
-	};
 	const [isSettingFontSize, setIsSettingFontSize] = useState(false);
 
 	const enableIsAddingFontSize = useCallback(
@@ -47,6 +43,7 @@ function FontSizeEdit({
 		return null;
 	}
 
+	const iconStyle = getVkIconBaseStyle();
 	return (
 		<>
 			<RichTextToolbarButton

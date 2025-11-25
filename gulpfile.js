@@ -7,6 +7,7 @@ const uglify = require('gulp-uglify');
 const rename = require('gulp-rename');
 const plumber = require('gulp-plumber');
 const notify = require('gulp-notify');
+const path = require('path');
 
 // replace_text_domain
 gulp.task('text-domain-free', (done) => {
@@ -97,6 +98,7 @@ gulp.task('sass', (done) => {
 			sass({
 				errLogToConsole: true,
 				outputStyle: 'compressed',
+				includePaths: [path.resolve(__dirname, 'src')],
 			})
 		)
 		.pipe(autoprefixer())
@@ -117,6 +119,7 @@ gulp.task('sass_editor', (done) => {
 			sass({
 				errLogToConsole: true,
 				outputStyle: 'compressed',
+				includePaths: [path.resolve(__dirname, 'src')],
 			})
 		)
 		.pipe(autoprefixer())
@@ -179,6 +182,7 @@ gulp.task('sass-separate-free', (done) => {
 			sass({
 				errLogToConsole: true,
 				outputStyle: 'compressed',
+				includePaths: [path.resolve(__dirname, 'src')],
 			})
 		)
 		.pipe(autoprefixer())
@@ -189,6 +193,7 @@ gulp.task('sass-separate-free', (done) => {
 			sass({
 				errLogToConsole: true,
 				outputStyle: 'compressed',
+				includePaths: [path.resolve(__dirname, 'src')],
 			})
 		)
 		.pipe(autoprefixer())
@@ -199,6 +204,7 @@ gulp.task('sass-separate-free', (done) => {
 			sass({
 				errLogToConsole: true,
 				outputStyle: 'compressed',
+				includePaths: [path.resolve(__dirname, 'src')],
 			})
 		)
 		.pipe(autoprefixer())
@@ -213,6 +219,7 @@ gulp.task('sass-separate-pro', (done) => {
 			sass({
 				errLogToConsole: true,
 				outputStyle: 'compressed',
+				includePaths: [path.resolve(__dirname, 'src')],
 			})
 		)
 		.pipe(autoprefixer())

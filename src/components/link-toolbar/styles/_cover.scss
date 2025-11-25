@@ -1,0 +1,12 @@
+@use 'components/link-toolbar/styles/base' as *;
+
+/* カバーブロック */
+.wp-block-cover {
+	// リンク設定
+	&.has-link {
+		position: relative;
+	}
+	&-vk-link {
+		@extend %vk-link-overlay-base;
+	}
+}

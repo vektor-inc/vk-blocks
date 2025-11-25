@@ -12,11 +12,13 @@ require_once __DIR__ . '/utils/hex-to-rgba.php';
 require_once __DIR__ . '/utils/color-slug-to-color-code.php';
 require_once __DIR__ . '/utils/array-merge.php';
 require_once __DIR__ . '/utils/minify-css.php';
+require_once __DIR__ . '/extensions/core/heading.php';
+require_once __DIR__ . '/extensions/core/image.php';
+require_once __DIR__ . '/extensions/core/list.php';
 require_once __DIR__ . '/style/balloon.php';
+require_once __DIR__ . '/style/flow.php';
 require_once __DIR__ . '/style/hidden-extension.php';
 require_once __DIR__ . '/style/common-margin.php';
-require_once __DIR__ . '/extensions/core/heading.php';
-require_once __DIR__ . '/extensions/core/list.php';
 require_once __DIR__ . '/view/responsive-br.php';
 require_once __DIR__ . '/view/class-vk-blocks-postlist.php';
 require_once __DIR__ . '/view/class-vk-blocks-scrollhintrenderer.php';
@@ -176,28 +178,27 @@ function vk_blocks_blocks_assets() {
 		),
 	);
 
-	$dynamic_css = '
-		:root {
-			--vk_flow-arrow: url(' . VK_BLOCKS_URL . 'images/arrow_bottom.svg);
-			--vk_image-mask-circle: url(' . VK_BLOCKS_URL . 'images/circle.svg);
-			--vk_image-mask-wave01: url(' . VK_BLOCKS_URL . 'images/wave01.svg);
-			--vk_image-mask-wave02: url(' . VK_BLOCKS_URL . 'images/wave02.svg);
-			--vk_image-mask-wave03: url(' . VK_BLOCKS_URL . 'images/wave03.svg);
-			--vk_image-mask-wave04: url(' . VK_BLOCKS_URL . 'images/wave04.svg);
-		}
-	';
-
 	// Pro版のためfunction_existsを挟む
+	$dynamic_css = '';
 	if ( function_exists( 'vk_blocks_get_custom_format_lists_inline_css' ) ) {
 		$dynamic_css .= vk_blocks_get_custom_format_lists_inline_css();
 	}
 
 	$dynamic_css = vk_blocks_minify_css( $dynamic_css );
 
-	wp_add_inline_style( 'vk-blocks-build-css', $dynamic_css );
-	wp_add_inline_style( 'vk-blocks-utils-common-css', $dynamic_css );
-	// --vk_image-mask-waveはコアの画像ブロックに依存するのでwp-edit-blocksを追加
-	wp_add_inline_style( 'wp-edit-blocks', $dynamic_css );
+	// 分割読み込みが有効な場合は、フロント側ではローダー側で該当ハンドルに付与する
+	if ( method_exists( 'VK_Blocks_Block_Loader', 'should_load_separate_assets' )
+		&& VK_Blocks_Block_Loader::should_load_separate_assets() && ! is_admin() ) {
+		if ( $dynamic_css ) {
+			wp_add_inline_style( 'vk-blocks-utils-common-css', $dynamic_css );
+		}
+	} elseif ( $dynamic_css ) {
+		// 一括読み込み時や管理画面では従来通り
+		wp_add_inline_style( 'vk-blocks-build-css', $dynamic_css );
+		wp_add_inline_style( 'vk-blocks-utils-common-css', $dynamic_css );
+		// エディターにも追加
+		wp_add_inline_style( 'wp-edit-blocks', $dynamic_css );
+	}
 }
 add_action( 'init', 'vk_blocks_blocks_assets', 10 );
 
