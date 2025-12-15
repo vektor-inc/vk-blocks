@@ -15,4 +15,3 @@ reviews:
     base_branches:
       - develop
     auto_incremental_review: false
-    
