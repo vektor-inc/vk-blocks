@@ -159,6 +159,10 @@ msgstr "追加"
 msgid "Add Custom Block Style"
 msgstr "ブロックスタイルを追加"
 
+#: src/blocks/_pro/step/edit.js:49
+msgid "Add step item"
+msgstr "ステップアイテムを追加"
+
 #: src/admin/custom-block-style/add-button/set-block-name.js:22
 msgid "Target Block (Required/Unchangeable)"
 msgstr "対象のブロック (必須/変更不可)"

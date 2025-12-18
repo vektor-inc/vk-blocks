@@ -10,10 +10,15 @@ import { Icon } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import { IconSVG, getVkIconBaseStyle } from '@vkblocks/components/vk-icon';
+import { ReactComponent as IconSVG } from './icon.svg';
 import { default as InlineFontSizeUI, getActiveInlineFontSize } from './inline';
 
 const name = 'vk-blocks/inline-font-size';
+
+const iconStyle = {
+	width: '24px',
+	height: '24px',
+};
 
 function FontSizeEdit({
 	value,
@@ -43,7 +48,6 @@ function FontSizeEdit({
 		return null;
 	}
 
-	const iconStyle = getVkIconBaseStyle();
 	return (
 		<>
 			<RichTextToolbarButton

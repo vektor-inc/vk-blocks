@@ -102,11 +102,18 @@ export default function SliderItemEdit(props) {
 		attributes.bgImageMobile,
 	]);
 
+	const spacingPaddingLeft = attributes?.style?.spacing?.padding?.left;
+	const spacingPaddingRight = attributes?.style?.spacing?.padding?.right;
+
 	// classPaddingLRのクラス切り替え
 	let classPaddingLR = '';
 	let paddingValue = '';
 
-	if (padding_left_and_right === '0' || !padding_left_and_right) {
+	if (spacingPaddingLeft || spacingPaddingRight) {
+		// コア spacing がある場合はそれを優先
+		paddingValue = spacingPaddingLeft || spacingPaddingRight || '';
+		classPaddingLR = ` is-layout-constrained`;
+	} else if (padding_left_and_right === '0' || !padding_left_and_right) {
 		classPaddingLR = ` is-layout-constrained`;
 		paddingValue = '0';
 	} else if (padding_left_and_right === '1') {
@@ -122,9 +129,11 @@ export default function SliderItemEdit(props) {
 		const currentLeftPadding = attributes?.style?.spacing?.padding?.left;
 		const currentRightPadding = attributes?.style?.spacing?.padding?.right;
 
+		// レガシー属性が存在する場合のみ spacing へ移行し、ユーザー指定の spacing は上書きしない
 		if (
-			paddingValue !== currentLeftPadding ||
-			paddingValue !== currentRightPadding
+			padding_left_and_right !== undefined &&
+			(paddingValue !== currentLeftPadding ||
+				paddingValue !== currentRightPadding)
 		) {
 			setAttributes((prevAttrs) => ({
 				...prevAttrs,
@@ -139,8 +148,13 @@ export default function SliderItemEdit(props) {
 					},
 				},
 			}));
+			setAttributes({ padding_left_and_right: undefined });
 		}
-	}, [paddingValue, attributes?.style?.spacing?.padding]);
+	}, [
+		paddingValue,
+		attributes?.style?.spacing?.padding,
+		padding_left_and_right,
+	]);
 
 	let containerClass = '';
 	if (classPaddingLR === ` is-layout-constrained` || classPaddingLR === '') {

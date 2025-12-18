@@ -36,6 +36,7 @@
     "fixtures:regenerate": "npm run build && npm run fixtures:clean && npm run fixtures:generate",
     "test-unit": "npm run test-unit:clean && npm run fixtures:regenerate",
     "test-unit:withcache": "npm run fixtures:regenerate",
+    "test:unit": "JEST_WORKERS=1 wp-scripts test-unit-js --runInBand --config test/jest.config.js --testPathPattern=\"test/unit/.*\\\\.test\\\\.js\"",
     "test-unit:clean": "wp-scripts test-unit-js --clearCache",
     "test:e2e": "node ./test/e2e-tests/run-tests.js",
     "test:e2e-no-gui": "wp-scripts test-e2e --config ./test/e2e-tests/jest-e2e.config.js",

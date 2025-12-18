@@ -94,6 +94,7 @@ export default function save(props) {
 
 	const blockProps = useBlockProps.save({
 		className: `vk_slider_item swiper-slide vk_valign-${verticalAlignment} ${prefix}-${blockId} ${classPaddingLR} ${prefix}-paddingVertical-none`,
+		style: { paddingLeft: paddingValue, paddingRight: paddingValue },
 	});
 	return (
 		<div {...blockProps}>

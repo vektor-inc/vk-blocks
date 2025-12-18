@@ -1,3 +1,4 @@
+import SliderHook1_115_0 from './1.115.0';
 import SliderHook1_104_0 from './1.104.0';
 import SliderHook1_48_1 from './1.48.1';
 import SliderHook1_34_1 from './1.34.1';
@@ -9,7 +10,9 @@ import SliderHook1_2_1 from './1.2.1';
 import SliderHook1_0_16 from './1.0.16';
 
 export default [
-	SliderHook1_104_0, // 1.110.1
+	SliderHook1_115_0, // 1.115.0
+	SliderHook1_104_0, // 1.110.1 (direction attributeあり)
+	SliderHook1_104_0, // 1.110.1 (direction属性追加前)
 	SliderHook1_48_1, // 1.104.0
 	SliderHook1_48_1, // 1.80.1
 	SliderHook1_48_1, // 1.51.0

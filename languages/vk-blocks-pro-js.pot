@@ -1050,7 +1050,7 @@ msgid "Title"
 msgstr ""
 
 #: src/blocks/_pro/card-item/edit.js:217
-#: src/blocks/_pro/dynamic-text/edit.js:563
+#: src/blocks/_pro/dynamic-text/edit.js:554
 msgid "URL"
 msgstr ""
 
@@ -1143,39 +1143,39 @@ msgstr ""
 msgid "Current page"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:148
+#: src/blocks/_pro/dynamic-text/edit.js:156
 msgid "Please select display element from the Setting sidebar."
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:185
+#: src/blocks/_pro/dynamic-text/edit.js:193
 msgid "Preview display"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:197
+#: src/blocks/_pro/dynamic-text/edit.js:205
 msgid "Post Type Name"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:217
+#: src/blocks/_pro/dynamic-text/edit.js:226
 msgid "Ancestor Page Title"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:237
+#: src/blocks/_pro/dynamic-text/edit.js:247
 msgid "Parent Page Title"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:281
+#: src/blocks/_pro/dynamic-text/edit.js:292
 msgid "This block is not rendered because no custom field name is specified."
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:291
+#: src/blocks/_pro/dynamic-text/edit.js:302
 msgid "ex"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:291
+#: src/blocks/_pro/dynamic-text/edit.js:302
 msgid "Custom field"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:311
+#: src/blocks/_pro/dynamic-text/edit.js:323
 msgid "Set the slug and save the post to display it."
 msgstr ""
 
@@ -1183,74 +1183,78 @@ msgstr ""
 msgid "HTML element"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:381
+#: src/blocks/_pro/dynamic-text/edit.js:372
 msgid "Display element settings"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:386
+#: src/blocks/_pro/dynamic-text/edit.js:377
 msgid "Display element"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:395
+#: src/blocks/_pro/dynamic-text/edit.js:386
 msgid "Please Select"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:399
+#: src/blocks/_pro/dynamic-text/edit.js:390
 msgid "Post type name of the page being viewed"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:406
+#: src/blocks/_pro/dynamic-text/edit.js:397
 msgid "Page name in the ancestor hierarchy of the displayed page"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:413
+#: src/blocks/_pro/dynamic-text/edit.js:404
 msgid "Page name in the parent hierarchy of the displayed page"
+msgstr ""
+
+#: src/blocks/_pro/dynamic-text/edit.js:411
+msgid "Current login user name"
+msgstr ""
+
+#: src/blocks/_pro/dynamic-text/edit.js:418
+msgid "Custom Field"
 msgstr ""
 
 #: src/blocks/_pro/dynamic-text/edit.js:42
 msgid "div (default)"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:420
-msgid "Current login user name"
-msgstr ""
-
-#: src/blocks/_pro/dynamic-text/edit.js:427
-msgid "Custom Field"
-msgstr ""
-
-#: src/blocks/_pro/dynamic-text/edit.js:431
+#: src/blocks/_pro/dynamic-text/edit.js:422
 msgid "Post Slug"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:439
+#: src/blocks/_pro/dynamic-text/edit.js:430
 msgid "Hide on Ancestor Hierarchy Pages"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:452
+#: src/blocks/_pro/dynamic-text/edit.js:443
 msgid "This block is not displayed on pages without a parent page."
+msgstr ""
+
+#: src/blocks/_pro/dynamic-text/edit.js:454
+msgid "Hide on Parent Hierarchy Pages"
 msgstr ""
 
 #: src/blocks/_pro/dynamic-text/edit.js:46
 msgid "h1"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:463
-msgid "Hide on Parent Hierarchy Pages"
-msgstr ""
-
-#: src/blocks/_pro/dynamic-text/edit.js:476
+#: src/blocks/_pro/dynamic-text/edit.js:467
 msgid ""
 "This block will not display on pages other than pages that have a parent "
 "hierarchy."
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:487
+#: src/blocks/_pro/dynamic-text/edit.js:478
 msgid "Prefix Label"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:494
+#: src/blocks/_pro/dynamic-text/edit.js:485
 msgid "Suffix Label"
+msgstr ""
+
+#: src/blocks/_pro/dynamic-text/edit.js:492
+msgid "Text for Logged Out Users"
 msgstr ""
 
 #: src/blocks/_pro/dynamic-text/edit.js:50
@@ -1258,22 +1262,22 @@ msgstr ""
 msgid "h2"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:501
-msgid "Text for Logged Out Users"
-msgstr ""
-
-#: src/blocks/_pro/dynamic-text/edit.js:513
+#: src/blocks/_pro/dynamic-text/edit.js:504
 msgid "Link to Login on Logout"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:529
+#: src/blocks/_pro/dynamic-text/edit.js:520
 msgid "Custom Field Name"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:536
+#: src/blocks/_pro/dynamic-text/edit.js:527
 msgid ""
 "This custom field may not be displayed if the field is not available or has "
 "no value in the content."
+msgstr ""
+
+#: src/blocks/_pro/dynamic-text/edit.js:533
+msgid "Field Type"
 msgstr ""
 
 #: src/blocks/_pro/dynamic-text/edit.js:54
@@ -1282,31 +1286,22 @@ msgid "h3"
 msgstr ""
 
 #: src/blocks/_pro/dynamic-text/edit.js:542
-msgid "Field Type"
-msgstr ""
-
-#: src/blocks/_pro/dynamic-text/edit.js:551
 msgid "text"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:555
+#: src/blocks/_pro/dynamic-text/edit.js:546
 msgid "textarea"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:559
+#: src/blocks/_pro/dynamic-text/edit.js:550
 msgid "wysiwyg"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:570
+#: src/blocks/_pro/dynamic-text/edit.js:561
 msgid "Setting up a link"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:58
-#: src/blocks/ancestor-page-list/edit.js:93
-msgid "h4"
-msgstr ""
-
-#: src/blocks/_pro/dynamic-text/edit.js:583
+#: src/blocks/_pro/dynamic-text/edit.js:574
 #: src/blocks/_pro/gridcolcard-item/edit.js:372
 #: src/blocks/_pro/icon-card-item/edit.js:129
 #: src/blocks/icon/edit.js:309
@@ -1316,11 +1311,16 @@ msgstr ""
 msgid "Open link new tab"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:599
+#: src/blocks/_pro/dynamic-text/edit.js:58
+#: src/blocks/ancestor-page-list/edit.js:93
+msgid "h4"
+msgstr ""
+
+#: src/blocks/_pro/dynamic-text/edit.js:590
 msgid "Link Text"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:618
+#: src/blocks/_pro/dynamic-text/edit.js:609
 msgid "Vertical writing"
 msgstr ""
 
@@ -1329,7 +1329,7 @@ msgstr ""
 msgid "h5"
 msgstr ""
 
-#: src/blocks/_pro/dynamic-text/edit.js:629
+#: src/blocks/_pro/dynamic-text/edit.js:620
 msgid "Don’t rotate letters and numbers"
 msgstr ""
 
@@ -1357,7 +1357,7 @@ msgid ""
 msgstr ""
 
 #: src/blocks/_pro/fixed-display/edit.js:186
-#: src/blocks/_pro/post-list-slider/edit.js:146
+#: src/blocks/_pro/post-list-slider/edit.js:102
 #: src/blocks/_pro/table-of-contents-new/edit.js:337
 #: src/components/column-layout-control/index.js:69
 msgid "Display type"
@@ -1672,7 +1672,7 @@ msgid "Display"
 msgstr ""
 
 #: src/blocks/_pro/gridcolcard/edit-common.js:167
-#: src/blocks/_pro/post-list-slider/edit.js:363
+#: src/blocks/_pro/post-list-slider/edit.js:319
 #: src/blocks/heading/edit.js:377
 #: src/blocks/slider/edit.js:645
 msgid "Hide"
@@ -2135,104 +2135,104 @@ msgstr ""
 msgid "Select Taxonomy"
 msgstr ""
 
-#: src/blocks/_pro/post-list-slider/edit.js:157
+#: src/blocks/_pro/post-list-slider/edit.js:113
 #: src/components/column-layout-control/index.js:26
 msgid "Card"
 msgstr ""
 
-#: src/blocks/_pro/post-list-slider/edit.js:161
+#: src/blocks/_pro/post-list-slider/edit.js:117
 #: src/components/column-layout-control/index.js:30
 msgid "Card (No border)"
 msgstr ""
 
-#: src/blocks/_pro/post-list-slider/edit.js:168
+#: src/blocks/_pro/post-list-slider/edit.js:124
 #: src/components/column-layout-control/index.js:34
 msgid "Card (Intext)"
 msgstr ""
 
-#: src/blocks/_pro/post-list-slider/edit.js:172
+#: src/blocks/_pro/post-list-slider/edit.js:128
 #: src/components/column-layout-control/index.js:38
 msgid "Card (Horizontal)"
 msgstr ""
 
-#: src/blocks/_pro/post-list-slider/edit.js:179
+#: src/blocks/_pro/post-list-slider/edit.js:135
 #: src/components/column-layout-control/index.js:42
 msgid "Media"
 msgstr ""
 
-#: src/blocks/_pro/post-list-slider/edit.js:183
+#: src/blocks/_pro/post-list-slider/edit.js:139
 #: src/components/column-layout-control/index.js:46
 msgid "Text 1 Column"
 msgstr ""
 
-#: src/blocks/_pro/post-list-slider/edit.js:191
+#: src/blocks/_pro/post-list-slider/edit.js:147
 #: src/blocks/slider/edit.js:473
 msgid "Slider Settings"
 msgstr ""
 
-#: src/blocks/_pro/post-list-slider/edit.js:195
+#: src/blocks/_pro/post-list-slider/edit.js:151
 #: src/blocks/slider/edit-multiItem.js:349
 #: src/blocks/slider/edit.js:477
 msgid "Effect"
 msgstr ""
 
-#: src/blocks/_pro/post-list-slider/edit.js:205
+#: src/blocks/_pro/post-list-slider/edit.js:161
 #: src/blocks/slider/edit.js:487
 msgid "Slide"
 msgstr ""
 
-#: src/blocks/_pro/post-list-slider/edit.js:209
+#: src/blocks/_pro/post-list-slider/edit.js:165
 #: src/blocks/slider/edit-multiItem.js:347
 #: src/blocks/slider/edit.js:491
 msgid "Fade"
 msgstr ""
 
-#: src/blocks/_pro/post-list-slider/edit.js:216
+#: src/blocks/_pro/post-list-slider/edit.js:172
 #: src/blocks/slider/edit.js:498
 msgid "Loop"
 msgstr ""
 
-#: src/blocks/_pro/post-list-slider/edit.js:226
+#: src/blocks/_pro/post-list-slider/edit.js:182
 #: src/blocks/slider/edit.js:508
 msgid "AutoPlay"
 msgstr ""
 
-#: src/blocks/_pro/post-list-slider/edit.js:238
+#: src/blocks/_pro/post-list-slider/edit.js:194
 #: src/blocks/slider/edit.js:521
 msgid "Slide Direction"
 msgstr ""
 
-#: src/blocks/_pro/post-list-slider/edit.js:245
+#: src/blocks/_pro/post-list-slider/edit.js:201
 #: src/blocks/slider/edit.js:528
 msgid "Right to Left"
 msgstr ""
 
-#: src/blocks/_pro/post-list-slider/edit.js:252
+#: src/blocks/_pro/post-list-slider/edit.js:208
 #: src/blocks/slider/edit.js:535
 msgid "Left to Right"
 msgstr ""
 
-#: src/blocks/_pro/post-list-slider/edit.js:267
+#: src/blocks/_pro/post-list-slider/edit.js:223
 #: src/blocks/slider/edit.js:549
 msgid "Stop AutoPlay when swipe"
 msgstr ""
 
-#: src/blocks/_pro/post-list-slider/edit.js:277
+#: src/blocks/_pro/post-list-slider/edit.js:233
 #: src/blocks/slider/edit.js:559
 msgid "Display Time"
 msgstr ""
 
-#: src/blocks/_pro/post-list-slider/edit.js:304
+#: src/blocks/_pro/post-list-slider/edit.js:260
 #: src/blocks/slider/edit.js:586
 msgid "Change Speed"
 msgstr ""
 
-#: src/blocks/_pro/post-list-slider/edit.js:328
+#: src/blocks/_pro/post-list-slider/edit.js:284
 #: src/blocks/slider/edit.js:610
 msgid "Pagination Type"
 msgstr ""
 
-#: src/blocks/_pro/post-list-slider/edit.js:339
+#: src/blocks/_pro/post-list-slider/edit.js:295
 #: src/blocks/_pro/step-item/edit.js:139
 #: src/blocks/_pro/table-of-contents-new/edit.js:352
 #: src/blocks/_pro/timeline-item/edit.js:105
@@ -2243,29 +2243,29 @@ msgstr ""
 msgid "Default"
 msgstr ""
 
-#: src/blocks/_pro/post-list-slider/edit.js:343
+#: src/blocks/_pro/post-list-slider/edit.js:299
 #: src/blocks/slider/edit.js:625
 msgid "Number of slides"
 msgstr ""
 
-#: src/blocks/_pro/post-list-slider/edit.js:356
+#: src/blocks/_pro/post-list-slider/edit.js:312
 #: src/blocks/slider/edit.js:638
 msgid "Navigation Position"
 msgstr ""
 
-#: src/blocks/_pro/post-list-slider/edit.js:367
+#: src/blocks/_pro/post-list-slider/edit.js:323
 #: src/blocks/button/edit.js:296
 #: src/blocks/slider/edit.js:649
 #: src/components/display-items-control/index.js:136
 msgid "Center"
 msgstr ""
 
-#: src/blocks/_pro/post-list-slider/edit.js:371
+#: src/blocks/_pro/post-list-slider/edit.js:327
 #: src/blocks/slider/edit.js:653
 msgid "Bottom on Mobile device"
 msgstr ""
 
-#: src/blocks/_pro/post-list-slider/edit.js:388
+#: src/blocks/_pro/post-list-slider/edit.js:344
 msgid "Please check the actual behavior on the live site."
 msgstr ""
 
@@ -2364,22 +2364,22 @@ msgstr ""
 msgid "New Badge"
 msgstr ""
 
-#: src/blocks/_pro/select-post-list-item/edit.js:102
+#: src/blocks/_pro/select-post-list-item/edit.js:107
 #: src/components/link-toolbar/index.js:315
 msgid "Submit"
 msgstr ""
 
-#: src/blocks/_pro/select-post-list-item/edit.js:34
+#: src/blocks/_pro/select-post-list-item/edit.js:39
 #: src/blocks/page-content/edit.js:75
 msgid "Because no post is selected, The block Will not render"
 msgstr ""
 
-#: src/blocks/_pro/select-post-list-item/edit.js:66
+#: src/blocks/_pro/select-post-list-item/edit.js:71
 #: src/components/link-toolbar/index.js:280
 msgid "Unlink"
 msgstr ""
 
-#: src/blocks/_pro/select-post-list-item/edit.js:67
+#: src/blocks/_pro/select-post-list-item/edit.js:72
 msgid "Input Internal Post URL"
 msgstr ""
 
@@ -2414,7 +2414,7 @@ msgstr ""
 msgid "If Font Awesome tags entered, it will overrides the number."
 msgstr ""
 
-#: src/blocks/_pro/step/edit.js:42
+#: src/blocks/_pro/step/edit.js:47
 msgid "First Dot Number"
 msgstr ""
 

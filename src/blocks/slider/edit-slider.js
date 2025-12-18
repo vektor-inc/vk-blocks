@@ -340,7 +340,9 @@ const editorRootLaunch = (editorRoot) => {
 };
 
 export const editSliderLaunch = () => {
-	const iframe = document.querySelector('.block-editor__container iframe');
+	const iframe = document.querySelector(
+		'.block-editor-iframe__container iframe'
+	);
 	const iframeDoc = iframe?.contentWindow?.document;
 	const editorRoot =
 		iframeDoc?.querySelector('.block-editor-block-list__layout') ||

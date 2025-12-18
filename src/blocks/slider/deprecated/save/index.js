@@ -1,4 +1,5 @@
 /* eslint camelcase: 0 */
+import save1_115_0 from './1.115.0/save';
 import save1_110_1 from './1.110.1/save';
 import save1_105_0 from './1.105.0/save';
 import save1_80_1 from './1.80.1/save';
@@ -195,8 +196,7 @@ const blockAttributes11 = {
 	},
 }
 
-/*
-// 1.110.1 時点からの変更点
+// 1.110.1 時点からの変更点（direction属性を追加）
 const blockAttributes12 = {
 	...blockAttributes11,
 	direction: {
@@ -204,9 +204,16 @@ const blockAttributes12 = {
 		default: 'rtl'
 	},
 }
-*/
 
 const deprecated = [
+	{
+		attributes: blockAttributes12,
+		save: save1_115_0,
+	},
+	{
+		attributes: blockAttributes12,
+		save: save1_110_1,
+	},
 	{
 		attributes: blockAttributes11,
 		save: save1_110_1,

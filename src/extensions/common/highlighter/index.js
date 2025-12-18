@@ -12,7 +12,7 @@ import { Icon } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import { IconSVG, getVkIconBaseStyle } from '@vkblocks/components/vk-icon';
+import { ReactComponent as IconSVG } from './icon.svg';
 import hex2rgba from '@vkblocks/utils/hex-to-rgba';
 import { default as InlineColorUI } from './inline';
 import {
@@ -37,13 +37,12 @@ function HighlighterEdit({
 		const activeFormat = getActiveFormat(value, name);
 		heightlightColor = activeFormat.attributes.data;
 	}
-	let iconStyle = getVkIconBaseStyle();
+	let iconStyle = {};
 	if (heightlightColor) {
 		const rgbaHeightlightColor = hex2rgba(heightlightColor, alpha);
 		iconStyle = {
 			...iconStyle,
-			color: 'initial',
-			background: `linear-gradient(transparent 60%, ${rgbaHeightlightColor} 0)`,
+			backgroundImage: `linear-gradient(transparent 60%, ${rgbaHeightlightColor} 0)`,
 		};
 	}
 

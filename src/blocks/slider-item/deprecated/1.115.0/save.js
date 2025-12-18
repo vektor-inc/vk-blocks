@@ -18,7 +18,6 @@ export default function save(props) {
 		bgColor,
 		opacity,
 		padding_left_and_right,
-		style,
 		bgImageMobile,
 		bgImageTablet,
 		bgImage,
@@ -32,18 +31,11 @@ export default function save(props) {
 	let classPaddingLR;
 	let containerClass;
 
-	const spacingPaddingLeft = style?.spacing?.padding?.left;
-	const spacingPaddingRight = style?.spacing?.padding?.right;
-
 	// classPaddingLRのクラス切り替え
 	classPaddingLR = '';
 	let paddingValue = '';
 
-	if (spacingPaddingLeft || spacingPaddingRight) {
-		// コア spacing がある場合はそれを優先
-		paddingValue = spacingPaddingLeft || spacingPaddingRight || '';
-		classPaddingLR = ` is-layout-constrained`;
-	} else if (
+	if (
 		padding_left_and_right === '0' ||
 		padding_left_and_right === 'vk_slider_item-paddingLR-none'
 	) {
@@ -97,17 +89,14 @@ export default function save(props) {
 			<span className="screen-reader-text">
 				{linkDescription
 					? linkDescription
-					: __('Slider item link', 'vk-blocks')}
+					: __( 'Slider item link', 'vk-blocks' )}
 			</span>
 		</a>
 	);
 
 	const blockProps = useBlockProps.save({
 		className: `vk_slider_item swiper-slide vk_valign-${verticalAlignment} ${prefix}-${blockId} ${classPaddingLR} ${prefix}-paddingVertical-none`,
-		style: {
-			paddingLeft: paddingValue || spacingPaddingLeft,
-			paddingRight: paddingValue || spacingPaddingRight,
-		},
+		style: { paddingLeft: paddingValue, paddingRight: paddingValue },
 	});
 	return (
 		<div {...blockProps}>

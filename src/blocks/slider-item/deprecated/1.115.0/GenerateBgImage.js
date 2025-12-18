@@ -18,29 +18,22 @@ const GenerateBgImage = (props) => {
 		backgroundStyle = ``;
 	}
 
-	const createBgCss = (imageUrl) => `
-		--vk-slider-item-bg-image: url(${imageUrl});
-		background-image: url(${imageUrl});
-		background-image: var(--vk-slider-item-bg-image);
-		${backgroundStyle}
-	`;
-
 	//mobile only
 	if (bgImageMobile && !bgImageTablet && !bgImage) {
 		return (
-			<style>{`.${prefix}-${blockId}{${createBgCss(bgImageMobile)}}`}</style>
+			<style>{`.${prefix}-${blockId}{background-image: url(${bgImageMobile}); ${backgroundStyle}}`}</style>
 		);
 	}
 	//tablet only
 	if (!bgImageMobile && bgImageTablet && !bgImage) {
 		return (
-			<style>{`.${prefix}-${blockId}{${createBgCss(bgImageTablet)}}`}</style>
+			<style>{`.${prefix}-${blockId}{background-image: url(${bgImageTablet}); ${backgroundStyle}}`}</style>
 		);
 	}
 	//pc only
 	if (!bgImageMobile && !bgImageTablet && bgImage) {
 		return (
-			<style>{`.${prefix}-${blockId}{${createBgCss(bgImage)}}`}</style>
+			<style>{`.${prefix}-${blockId}{background-image: url(${bgImage}); ${backgroundStyle}}`}</style>
 		);
 	}
 	//pc -mobile
@@ -49,10 +42,10 @@ const GenerateBgImage = (props) => {
 			<style>
 				{`
           @media screen and (${underPcViewport}) {
-            .${prefix}-${blockId}{${createBgCss(bgImageMobile)}}
+            .${prefix}-${blockId}{background-image: url(${bgImageMobile}); ${backgroundStyle}}
          }
           @media screen and (${pcViewport}) {
-            .${prefix}-${blockId}{${createBgCss(bgImage)}}
+            .${prefix}-${blockId}{background-image: url(${bgImage}); ${backgroundStyle}}
          }
           `}
 			</style>
@@ -64,10 +57,10 @@ const GenerateBgImage = (props) => {
 			<style>
 				{`
           @media screen and (${underPcViewport}) {
-            .${prefix}-${blockId}{${createBgCss(bgImageTablet)}}
+            .${prefix}-${blockId}{background-image: url(${bgImageTablet}); ${backgroundStyle}}
          }
           @media screen and (${pcViewport}) {
-            .${prefix}-${blockId}{${createBgCss(bgImage)}}
+            .${prefix}-${blockId}{background-image: url(${bgImage}); ${backgroundStyle}}
          }
           `}
 			</style>
@@ -79,10 +72,10 @@ const GenerateBgImage = (props) => {
 			<style>
 				{`
           @media screen and (${mobileViewport}) {
-            .${prefix}-${blockId}{${createBgCss(bgImageMobile)}}
+            .${prefix}-${blockId}{background-image: url(${bgImageMobile}); ${backgroundStyle}}
          }
           @media screen and (${tabletViewport}) {
-            .${prefix}-${blockId}{${createBgCss(bgImageTablet)}}
+            .${prefix}-${blockId}{background-image: url(${bgImageTablet}); ${backgroundStyle}}
          }
         `}
 			</style>
@@ -94,19 +87,17 @@ const GenerateBgImage = (props) => {
 			<style>
 				{`
         @media screen and (${mobileViewport}) {
-          .${prefix}-${blockId}{${createBgCss(bgImageMobile)}}
+          .${prefix}-${blockId}{background-image: url(${bgImageMobile}); ${backgroundStyle}}
        }
         @media screen and (${tabletViewport}) {
-          .${prefix}-${blockId}{${createBgCss(bgImageTablet)}}
+          .${prefix}-${blockId}{background-image: url(${bgImageTablet}); ${backgroundStyle}}
        }
         @media screen and (${pcViewport}) {
-          .${prefix}-${blockId}{${createBgCss(bgImage)}}
+          .${prefix}-${blockId}{background-image: url(${bgImage}); ${backgroundStyle}}
        }
-       `}
+        `}
 			</style>
 		);
 	}
-
-	return null;
 };
 export default GenerateBgImage;

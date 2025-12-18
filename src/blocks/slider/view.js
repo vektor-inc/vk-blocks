@@ -22,33 +22,33 @@ document.defaultView.addEventListener('load', function () {
 			const zoomSelector = `.vk_slider_${sliderId}`;
 
 			css += `
-				.vk_slider_${sliderId} .vk_slider_item.swiper-slide-active::before,
-				.vk_slider_${sliderId} .vk_slider_item.swiper-slide-duplicate-active::before {
-					content: "";
-					position: absolute;
-					top: 0;
-					left: 0;
-					width: 100%;
-					height: 100%;
-					background-size: cover;
-					background-position: center;
-					background-image: inherit;
-					will-change: transform;
-					transform: scale(${zoomInitialScale !== undefined ? zoomInitialScale : 1});
-					transition: transform ${(autoPlayDelay + speed + autoPlayDelay * 0.5) / 1000 || 6}s linear;
-					z-index: -1;
-				}
-				
-				${zoomSelector} .vk_slider_item.swiper-slide-active::before,
-				${zoomSelector} .vk_slider_item.swiper-slide-duplicate-active::before {
-					transform: scale(${zoomFinalScale !== undefined ? zoomFinalScale : 1.25});
-				}
-				
-				${zoomSelector} .vk_slider_item.swiper-slide-prev::before,
-				${zoomSelector} .vk_slider_item.swiper-slide-next::before {
-					transform: scale(${zoomInitialScale !== undefined ? zoomInitialScale : 1});
-				}
-			`;
+.vk_slider_${sliderId} .vk_slider_item.swiper-slide-active::before,
+.vk_slider_${sliderId} .vk_slider_item.swiper-slide-duplicate-active::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+	background-position: center;
+	background-image: var(--vk-slider-item-bg-image, inherit);
+	will-change: transform;
+	transform: scale(${zoomInitialScale !== undefined ? zoomInitialScale : 1});
+	transition: transform ${(autoPlayDelay + speed + autoPlayDelay * 0.5) / 1000 || 6}s linear;
+	z-index: -1;
+}
+
+${zoomSelector} .vk_slider_item.swiper-slide-active::before,
+${zoomSelector} .vk_slider_item.swiper-slide-duplicate-active::before {
+	transform: scale(${zoomFinalScale !== undefined ? zoomFinalScale : 1.25});
+}
+
+${zoomSelector} .vk_slider_item.swiper-slide-prev::before,
+${zoomSelector} .vk_slider_item.swiper-slide-next::before {
+	transform: scale(${zoomInitialScale !== undefined ? zoomInitialScale : 1});
+}
+`;
 		}
 
 		return css;

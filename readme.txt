@@ -108,6 +108,13 @@ e.g.
 
 == Changelog ==
 
+= 1.115.1 =
+[ Specification change ][ Step ( Pro) ] Added an “Add step item” appender button to the Step block’s inner blocks 
+[ Specification change ][ Selected Post List (Pro) ] Disabled links on the edit screen.
+[ Bug fix ] Fix Font Awesome icons page link
+[ Bug fix ][ Slider ] Fix background zoom animation on iOS 26.2
+[ Bug fix ][ Highlighter / Inline Font Size ] Fixed icons that were incorrectly displaying VK icon instead of their respective icons.
+
 = 1.115.0 =
 [ Add function ][ Outer (Pro) ] Added HTML tag selection option.
 [ Specification change ][ Image / Flow / Balloon ] Reduce unnecessary style loads during split loading.
@@ -796,7 +803,7 @@ e.g.
 [ Add function ][ Button ] Add Button Effect option in Solid color button.
 [ Specification change ][ Post List (Pro) ] Change to don't display unpublic posttype and terms list.
 [ Bug fix ][ Grid Column Card(Pro) ] Fixed a bug that css for editor was displayed in front.
-[ Bug fix ][ Select Post List Item (Pro) ] Fixed a bug where additional CSS classes were not attached.
+[ Bug fix ][ Selected Post List Item (Pro) ] Fixed a bug where additional CSS classes were not attached.
 
 = 1.43.0 =
 [ Add function ][ Spacer ][ Common margin ] Add size option xl/xs.
@@ -1018,7 +1025,7 @@ Change stable version
 = 1.24.0 =
 [ fix ][ Icon outer ] add orientation horizontal & fix appender
 [ fix ][ Card(Pro) ] add orientation horizontal & fix appender
-[ fix ][ selected post list(Pro) ] add orientation horizontal & fix appender
+[ fix ][ Selected Post List (Pro) ] add orientation horizontal & fix appender
 [ fix ][ Button outer(Pro) ] add orientation horizontal & fix appender
 [ fix ][ Icon Card(Pro) ] add orientation horizontal & fix appender
 [ fix ][ Grid column(Pro) ] add orientation horizontal & fix appender
@@ -1039,7 +1046,7 @@ Change stable version
 [ Bug fix ][ core/heading ] fix width
 
 = 1.22.2 =
-[ Bug fix ][ selected post list(Pro) ] fix post id
+[ Bug fix ][ Selected Post List (Pro) ] fix post id
 
 = 1.22.1 =
 Cope with WordPress 5.9
@@ -1269,8 +1276,8 @@ Cope with WordPress 5.9
 
 = 1.4.0 =
 [ Improvement ][ title ] Convert to VK Blocks Title from core title block
-[ Improvement ][ Select Post List Item ]setting from toolbar and enable search URL
-[ Bug fix ][ translate ] in Select Post List Item
+[ Improvement ][ Selected Post List Item ]setting from toolbar and enable search URL
+[ Bug fix ][ translate ] in Selected Post List Item
 [ Bug fix ][ New FAQ ] Fix multiple select
 [ Bug fix ][ Accordion ] Fix multiple select
 [ Specification change ][ Border Box ] Delete margin-top from first element / delete margin-bottom from last element

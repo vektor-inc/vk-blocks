@@ -28,7 +28,6 @@ export default function save({ attributes }) {
 		autoPlayStop,
 		autoPlayDelay,
 		pagination,
-		blockId,
 		width,
 		loop,
 		effect,
@@ -42,6 +41,7 @@ export default function save({ attributes }) {
 		zoomAnimation,
 		zoomInitialScale,
 		zoomFinalScale,
+		blockId,
 	};
 
 	let alignClass = '';
@@ -51,7 +51,6 @@ export default function save({ attributes }) {
 		alignClass = ' alignwide';
 	}
 
-	// ページネーションの HTML
 	let pagination_html = '';
 	if (pagination !== 'hide') {
 		pagination_html = (
@@ -61,7 +60,6 @@ export default function save({ attributes }) {
 		);
 	}
 
-	// ナビゲーションの HTML
 	let navigation_next_html = '';
 	let navigation_prev_html = '';
 	if (navigationPosition !== 'hide') {
