@@ -1,4 +1,5 @@
 /* eslint camelcase: 0 */
+import save1_115_1 from './1.115.1/save';
 import save1_115_0 from './1.115.0/save';
 import save1_9_2 from './1.9.2/save';
 import save1_22_1 from './1.22.1/save';
@@ -122,7 +123,22 @@ const blockAttributes7 = {
 	},
 }
 
+/*
+// 1.115.1 で width を追加
+const blockAttributes8 = {
+	...blockAttributes7,
+	width: {
+		type: 'string',
+		default: 'full',
+	},
+}
+*/
+
 export default [
+	{
+		attributes: blockAttributes7,
+		save: save1_115_1,
+	},
 	{
 		attributes: blockAttributes7,
 		save: save1_115_0,

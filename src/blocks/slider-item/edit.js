@@ -20,6 +20,7 @@ import {
 	PanelBody,
 	BaseControl,
 	ToolbarGroup,
+	ToggleControl,
 } from '@wordpress/components';
 import { AdvancedMediaUpload } from '@vkblocks/components/advanced-media-upload';
 import GenerateBgImage from './GenerateBgImage';
@@ -46,6 +47,7 @@ export default function SliderItemEdit(props) {
 		linkTarget,
 		relAttribute,
 		linkDescription,
+		contentWidth,
 		blockId,
 	} = attributes;
 
@@ -109,11 +111,13 @@ export default function SliderItemEdit(props) {
 	let classPaddingLR = '';
 	let paddingValue = '';
 
-	if (spacingPaddingLeft || spacingPaddingRight) {
+	if (spacingPaddingLeft || spacingPaddingRight || contentWidth) {
 		// コア spacing がある場合はそれを優先
 		paddingValue = spacingPaddingLeft || spacingPaddingRight || '';
-		classPaddingLR = ` is-layout-constrained`;
-	} else if (padding_left_and_right === '0' || !padding_left_and_right) {
+		if (contentWidth) {
+			classPaddingLR = ` is-layout-constrained`;
+		}
+	} else if (padding_left_and_right === '0') {
 		classPaddingLR = ` is-layout-constrained`;
 		paddingValue = '0';
 	} else if (padding_left_and_right === '1') {
@@ -157,7 +161,7 @@ export default function SliderItemEdit(props) {
 	]);
 
 	let containerClass = '';
-	if (classPaddingLR === ` is-layout-constrained` || classPaddingLR === '') {
+	if (classPaddingLR === ` is-layout-constrained`) {
 		containerClass = `${prefix}_container container`;
 	} else {
 		containerClass = `${prefix}_container`;
@@ -235,6 +239,25 @@ export default function SliderItemEdit(props) {
 								})
 							}
 							value={verticalAlignment}
+						/>
+					</BaseControl>
+					<BaseControl
+						label={__('Content Area Width', 'vk-blocks')}
+						id={`vk_slider-effect`}
+					>
+						<ToggleControl
+							label={__(
+								'Use content width for inner blocks.',
+								'vk-blocks'
+							)}
+							checked={contentWidth}
+							onChange={(checked) =>
+								setAttributes({ contentWidth: checked })
+							}
+							help={__(
+								'Nested blocks should inherit the content width.',
+								'vk-blocks'
+							)}
 						/>
 					</BaseControl>
 				</PanelBody>

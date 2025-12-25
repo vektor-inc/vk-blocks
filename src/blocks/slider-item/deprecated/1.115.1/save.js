@@ -26,7 +26,6 @@ export default function save(props) {
 		linkTarget,
 		relAttribute,
 		linkDescription,
-		contentWidth,
 		blockId,
 	} = attributes;
 
@@ -40,13 +39,14 @@ export default function save(props) {
 	classPaddingLR = '';
 	let paddingValue = '';
 
-	if (spacingPaddingLeft || spacingPaddingRight || contentWidth) {
+	if (spacingPaddingLeft || spacingPaddingRight) {
 		// コア spacing がある場合はそれを優先
 		paddingValue = spacingPaddingLeft || spacingPaddingRight || '';
-		if (contentWidth) {
-			classPaddingLR = ` is-layout-constrained`;
-		}
-	} else if (padding_left_and_right === '0') {
+		classPaddingLR = ` is-layout-constrained`;
+	} else if (
+		padding_left_and_right === '0' ||
+		padding_left_and_right === 'vk_slider_item-paddingLR-none'
+	) {
 		classPaddingLR = ` is-layout-constrained`;
 		paddingValue = '0';
 	} else if (padding_left_and_right === '1') {
@@ -57,7 +57,7 @@ export default function save(props) {
 		paddingValue = '0';
 	}
 
-	if (classPaddingLR === ` is-layout-constrained`) {
+	if (classPaddingLR === ` is-layout-constrained` || classPaddingLR === '') {
 		containerClass = `${prefix}_container container`;
 	} else {
 		containerClass = `${prefix}_container`;
@@ -97,7 +97,7 @@ export default function save(props) {
 			<span className="screen-reader-text">
 				{linkDescription
 					? linkDescription
-					: __('Slider item link', 'vk-blocks')}
+					: __( 'Slider item link', 'vk-blocks' )}
 			</span>
 		</a>
 	);

@@ -1778,7 +1778,7 @@ msgstr ""
 #: src/components/scroll-hint/index.js:103
 #: src/extensions/common/custom-block-variation/block-variation-list/item/body-area/index.js:142
 #: src/extensions/common/custom-block-variation/create-variation/block-variation-form/index.js:167
-#: src/utils/font-awesome-new.js:189
+#: src/utils/font-awesome-new.js:197
 msgid "Icon"
 msgstr ""
 
@@ -1854,7 +1854,7 @@ msgstr ""
 
 #: src/blocks/_pro/outer/edit.js:1106
 #: src/blocks/pr-content/edit.js:244
-#: src/blocks/slider-item/edit.js:210
+#: src/blocks/slider-item/edit.js:228
 msgid "Layout Setting"
 msgstr ""
 
@@ -2007,40 +2007,40 @@ msgid "Min Height Setting"
 msgstr ""
 
 #: src/blocks/_pro/outer/edit.js:717
-#: src/blocks/slider-item/edit.js:228
+#: src/blocks/slider-item/edit.js:265
 msgid "Background Setting"
 msgstr ""
 
 #: src/blocks/_pro/outer/edit.js:722
 #: src/blocks/pr-content/edit.js:67
-#: src/blocks/slider-item/edit.js:232
+#: src/blocks/slider-item/edit.js:269
 msgid "Color Setting"
 msgstr ""
 
 #: src/blocks/_pro/outer/edit.js:723
-#: src/blocks/slider-item/edit.js:234
+#: src/blocks/slider-item/edit.js:271
 msgid ""
 "Color will overcome background image. If you want to display image, set "
 "opacity 0."
 msgstr ""
 
 #: src/blocks/_pro/outer/edit.js:735
-#: src/blocks/slider-item/edit.js:246
+#: src/blocks/slider-item/edit.js:283
 msgid "Opacity Setting"
 msgstr ""
 
 #: src/blocks/_pro/outer/edit.js:749
-#: src/blocks/slider-item/edit.js:281
+#: src/blocks/slider-item/edit.js:318
 msgid "Background Image PC"
 msgstr ""
 
 #: src/blocks/_pro/outer/edit.js:766
-#: src/blocks/slider-item/edit.js:298
+#: src/blocks/slider-item/edit.js:335
 msgid "Background Image Tablet"
 msgstr ""
 
 #: src/blocks/_pro/outer/edit.js:777
-#: src/blocks/slider-item/edit.js:309
+#: src/blocks/slider-item/edit.js:346
 msgid "Background Image Mobile"
 msgstr ""
 
@@ -3292,25 +3292,39 @@ msgstr ""
 msgid "Image Border Color"
 msgstr ""
 
+#: src/blocks/slider-item/deprecated/1.115.0/save.js:92
+#: src/blocks/slider-item/deprecated/1.115.1/save.js:100
 #: src/blocks/slider-item/deprecated/1.76.0/save.js:83
 #: src/blocks/slider-item/deprecated/1.94.0/save.js:90
-#: src/blocks/slider-item/save.js:92
+#: src/blocks/slider-item/save.js:100
 msgid "Slider item link"
 msgstr ""
 
-#: src/blocks/slider-item/edit.js:214
+#: src/blocks/slider-item/edit.js:232
 msgid "Vertical align"
 msgstr ""
 
-#: src/blocks/slider-item/edit.js:260
+#: src/blocks/slider-item/edit.js:245
+msgid "Content Area Width"
+msgstr ""
+
+#: src/blocks/slider-item/edit.js:249
+msgid "Use content width for inner blocks."
+msgstr ""
+
+#: src/blocks/slider-item/edit.js:257
+msgid "Nested blocks should inherit the content width."
+msgstr ""
+
+#: src/blocks/slider-item/edit.js:297
 msgid "Background Image Size"
 msgstr ""
 
-#: src/blocks/slider-item/edit.js:267
+#: src/blocks/slider-item/edit.js:304
 msgid "cover"
 msgstr ""
 
-#: src/blocks/slider-item/edit.js:271
+#: src/blocks/slider-item/edit.js:308
 msgid "repeat"
 msgstr ""
 
@@ -4028,11 +4042,11 @@ msgstr ""
 msgid "Highlighter"
 msgstr ""
 
-#: src/extensions/common/inline-font-size/index.js:50
+#: src/extensions/common/inline-font-size/index.js:54
 msgid "Inline Font Size"
 msgstr ""
 
-#: src/extensions/common/inline-font-size/index.js:82
+#: src/extensions/common/inline-font-size/index.js:86
 msgid "Inline font size"
 msgstr ""
 
@@ -4245,48 +4259,56 @@ msgstr ""
 msgid "Lorem ipsum"
 msgstr ""
 
-#: src/utils/font-awesome-new.js:195
+#: src/utils/font-awesome-new.js:203
 msgid "Custom list"
 msgstr ""
 
-#: src/utils/font-awesome-new.js:347
+#: src/utils/font-awesome-new.js:355
 msgid "Preset"
 msgstr ""
 
-#: src/utils/font-awesome-new.js:386
+#: src/utils/font-awesome-new.js:394
 msgid "Font Awesome icon list"
 msgstr ""
 
-#: src/utils/font-awesome-new.js:389
+#: src/utils/font-awesome-new.js:397
 msgid ""
 "If you want to use an icon other than the ones listed above, you can use "
 "any of the icons from Font Awesome's icon list Please select a tag and "
 "enter it."
 msgstr ""
 
-#: src/utils/font-awesome-new.js:394
+#: src/utils/font-awesome-new.js:402
 msgid "Ex)"
 msgstr ""
 
-#: src/utils/font-awesome-new.js:408
+#: src/utils/font-awesome-new.js:416
 msgid "Add selected icon to custom list"
 msgstr ""
 
-#: src/utils/font-awesome-new.js:416
+#: src/utils/font-awesome-new.js:424
 msgid "Delete/Sort mode"
 msgstr ""
 
-#: src/utils/font-awesome-new.js:432
+#: src/utils/font-awesome-new.js:443
+msgid "Compatibility mode 4"
+msgstr ""
+
+#: src/utils/font-awesome-new.js:459
+msgid "Compatibility mode 5"
+msgstr ""
+
+#: src/utils/font-awesome-new.js:476
 msgid ""
 "When you click save button, the window will be reloaded and this setting "
 "will be applied."
 msgstr ""
 
-#: src/utils/font-awesome-new.js:442
+#: src/utils/font-awesome-new.js:486
 msgid "Save"
 msgstr ""
 
-#: src/utils/font-awesome-new.js:466
+#: src/utils/font-awesome-new.js:510
 msgid "Select Icon"
 msgstr ""
 

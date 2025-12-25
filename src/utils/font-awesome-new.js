@@ -27,6 +27,14 @@ import parse from 'html-react-parser';
 import AdvancedPopOverControl from '@vkblocks/components/advanced-popover-control';
 import { STORE_NAME } from '@vkblocks/utils/store/constants';
 import { updateOptions } from '@vkblocks/utils/store';
+import {
+	getFontAwesomeVersionValue,
+	normalizeFontAwesomeConfig,
+	updateFontAwesomeCompatibility,
+	updateFontAwesomeVersion,
+	isFontAwesomeConfigChanged,
+	serializeFontAwesomeConfig,
+} from '@vkblocks/utils/font-awesome-version';
 
 const FontAwesomeIconList = [
 	'<i class="fa-solid fa-arrow-right"></i>',
@@ -158,7 +166,7 @@ export const FontAwesome = (props) => {
 		apiFetch({
 			path: REST_API_ROUTE,
 			method: 'POST',
-			data: version,
+			data: serializeFontAwesomeConfig(version),
 		})
 			.then(() => {
 				setIsWaiting(false);
@@ -418,12 +426,48 @@ export const FontAwesome = (props) => {
 					<hr />
 					<SelectControl
 						label="Font Awesome Version"
-						value={version}
+						value={getFontAwesomeVersionValue(version)}
 						options={versions}
-						onChange={(value) => setVersion(value)}
+						onChange={(value) =>
+							setVersion((prev) =>
+								updateFontAwesomeVersion(prev, value)
+							)
+						}
 						className="mt-1"
 					/>
-					{version !== currentVersion && (
+					<ToggleControl
+						className="mt-1"
+						label={__('Compatibility mode 4', 'vk-blocks')}
+						checked={
+							normalizeFontAwesomeConfig(version).compatibility.v4
+						}
+						onChange={(checked) =>
+							setVersion((prev) =>
+								updateFontAwesomeCompatibility(
+									prev,
+									'v4',
+									checked
+								)
+							)
+						}
+					/>
+					<ToggleControl
+						className="mt-1"
+						label={__('Compatibility mode 5', 'vk-blocks')}
+						checked={
+							normalizeFontAwesomeConfig(version).compatibility.v5
+						}
+						onChange={(checked) =>
+							setVersion((prev) =>
+								updateFontAwesomeCompatibility(
+									prev,
+									'v5',
+									checked
+								)
+							)
+						}
+					/>
+					{isFontAwesomeConfigChanged(version, currentVersion) && (
 						<>
 							<p className="mt-1">
 								{__(

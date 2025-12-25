@@ -31,17 +31,14 @@ if ( ! class_exists( 'VK_Blocks_Font_Awesome_API' ) ) {
  * Font Awesome のアイコンの URL を渡す
  */
 function vk_blocks_font_awesome_init() {
-	$options     = VkFontAwesomeVersions::get_option_fa();
-	$fa_icon_url = '';
-	if ( '4.7' === $options ) {
-		$fa_icon_url = 'https://fontawesome.com/v4/icons/';
-		$fa_family   = 'Font Awesome 4';
-	} elseif ( '5_WebFonts_CSS' === $options || '5_SVG_JS' === $options ) {
-		$fa_icon_url = 'https://fontawesome.com/v5/search?m=free';
-		$fa_family   = 'Font Awesome 5 Free';
-	} elseif ( '6_WebFonts_CSS' === $options || '6_SVG_JS' === $options ) {
+	$options          = VkFontAwesomeVersions::get_option_fa();
+	$fa_version       = is_array( $options ) && ! empty( $options['version'] ) ? $options['version'] : $options;
+	$fa_compatibility = is_array( $options ) && ! empty( $options['compatibility'] ) ? $options['compatibility'] : array();
+	$fa_icon_url      = '';
+	$fa_family        = '';
+	if ( '7_WebFonts_CSS' === $fa_version || '7_SVG_JS' === $fa_version ) {
 		$fa_icon_url = 'https://fontawesome.com/search?ic=free-collection';
-		$fa_family   = 'Font Awesome 6 Free';
+		$fa_family   = 'Font Awesome 7 Free';
 	}
 
 	$choice_array = VkFontAwesomeVersions::versions();
@@ -62,7 +59,10 @@ function vk_blocks_font_awesome_init() {
 			'iconsUrl'       => $fa_icon_url,
 			'iconFamily'     => $fa_family,
 			'versions'       => $font_awesome_versions,
-			'currentVersion' => $options,
+			'currentVersion' => array(
+				'version'       => $fa_version,
+				'compatibility' => $fa_compatibility,
+			),
 		)
 	);
 }

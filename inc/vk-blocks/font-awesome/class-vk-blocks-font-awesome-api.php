@@ -66,11 +66,20 @@ class VK_Blocks_Font_Awesome_API {
 	 */
 	public function update_options( $request ) {
 		$options = $request->get_json_params();
-		update_option( 'vk_font_awesome_version', $options );
+		if ( isset( $options['compatibility'] ) && is_array( $options['compatibility'] ) ) {
+			foreach ( array( 'v4', 'v5' ) as $key ) {
+				if ( isset( $options['compatibility'][ $key ] ) ) {
+					$options['compatibility'][ $key ] = ! empty( $options['compatibility'][ $key ] ) && '0' !== $options['compatibility'][ $key ];
+				}
+			}
+		}
+		// ```VkFontAwesomeVersions::get_option_fa()``` reads/writes this option key.
+		update_option( 'vk_font_awesome_options', $options );
 		return rest_ensure_response(
 			array(
 				'status'  => 'success',
 				'message' => __( 'Setting saved.', 'vk-blocks' ),
+				'options' => $options,
 			)
 		);
 	}

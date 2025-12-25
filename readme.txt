@@ -3,7 +3,7 @@ Contributors: vektor-inc,kurudrive,naoki0h,nc30,una9,kaorock72,rickaddison7634,m
 Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 6.5
-Tested up to: 6.8
+Tested up to: 6.9
 Stable tag: 1.115.1.1
 Requires PHP: 7.4
 License: GPLv2 or later
@@ -107,6 +107,10 @@ e.g.
 1. VK Blocks examples.
 
 == Changelog ==
+
+= 1.115.2 =
+[ Bug fix ][ Slider item ] Fix width control.
+[ Other ] Font Awesome 7.1.0 support
 
 = 1.115.1 =
 [ Specification change ][ Step ( Pro) ] Added an “Add step item” appender button to the Step block’s inner blocks 
