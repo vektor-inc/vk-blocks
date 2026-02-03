@@ -24,6 +24,7 @@ import parse from 'html-react-parser';
  */
 import { AdvancedColorPalette } from '@vkblocks/components/advanced-color-palette';
 import { isHexColor } from '@vkblocks/utils/is-hex-color';
+import { iconLabel } from '@vkblocks/utils/icon-label';
 import { sanitizeSlug } from '@vkblocks/utils/sanitizeSlug';
 import { useEffect, useRef } from '@wordpress/element';
 
@@ -40,9 +41,6 @@ export default function BorderBoxEdit(props) {
 		borderColor,
 		bodyAlign,
 	} = attributes;
-
-	// eslint-disable-next-line no-undef
-	const iconFamily = vkFontAwesome.iconFamily;
 
 	// 新しく作成されたブロックのみ目次に含める（既存ブロックは除外のまま）
 	const hasInitialized = useRef(false);
@@ -289,9 +287,7 @@ export default function BorderBoxEdit(props) {
 				<PanelBody title={__('Icon', 'vk-blocks')}>
 					<BaseControl
 						id="dot-fa"
-						label={
-							__('Icon', 'vk-blocks') + ' ( ' + iconFamily + ' )'
-						}
+						label={iconLabel(__('Icon', 'vk-blocks'))}
 					>
 						<FontAwesome
 							attributeName={'faIcon'}

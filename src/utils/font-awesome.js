@@ -29,8 +29,9 @@ export class FontAwesome extends Component {
 					{__('Ex) fas fa-arrow-circle-right', 'vk-blocks')}
 					<br />
 					<a
-						href={`https://fontawesome.com/icons?d=gallery&m=free`}
+						href={`https://fontawesome.com/search?ic=free-collection`}
 						target={`_blank`}
+						rel="noreferrer"
 					>
 						{__('Font Awesome icon list', 'vk-blocks')}
 					</a>

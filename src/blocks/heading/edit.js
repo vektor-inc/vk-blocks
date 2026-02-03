@@ -22,6 +22,7 @@ import { AdvancedColorPalette } from '@vkblocks/components/advanced-color-palett
 import parse from 'html-react-parser';
 import classnames from 'classnames';
 import { sanitizeSlug } from '@vkblocks/utils/sanitizeSlug';
+import { iconLabel } from '@vkblocks/utils/icon-label';
 
 const renderTitle = (level, contents, tStyle, headingStyle) => {
 	switch (level) {
@@ -83,9 +84,6 @@ export default function HeaddingEdit(props) {
 		fontAwesomeIconAfter,
 		fontAwesomeIconColor,
 	} = attributes;
-
-	// eslint-disable-next-line no-undef
-	const iconFamily = vkFontAwesome.iconFamily;
 
 	const setTitleFontSize = (newLevel) => {
 		setAttributes({ level: newLevel });
@@ -331,9 +329,7 @@ export default function HeaddingEdit(props) {
 						/>
 					</BaseControl>
 				</PanelBody>
-				<PanelBody
-					title={__('Icon', 'vk-blocks') + ' ( ' + iconFamily + ' )'}
-				>
+				<PanelBody title={iconLabel(__('Icon', 'vk-blocks'))}>
 					<BaseControl
 						label={__('Before text', 'vk-blocks')}
 						id={`vk_heading_beforeText`}

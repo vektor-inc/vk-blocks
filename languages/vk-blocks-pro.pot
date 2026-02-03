@@ -1,15 +1,15 @@
-# Copyright (C) 2025 Vektor,Inc.
+# Copyright (C) 2026 Vektor,Inc.
 # This file is distributed under the same license as the VK Blocks Pro plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: VK Blocks Pro 1.115.1.0\n"
+"Project-Id-Version: VK Blocks Pro 1.115.2.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/vk-blocks-pro\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-12-25T09:19:35+00:00\n"
+"POT-Creation-Date: 2026-02-02T05:57:12+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: vk-blocks-pro\n"
@@ -322,7 +322,7 @@ msgstr ""
 #: src/blocks/_pro/timeline-item/edit.js:72
 #: src/blocks/border-box/edit.js:260
 #: src/blocks/button/edit.js:492
-#: src/blocks/icon/edit.js:316
+#: src/blocks/icon/edit.js:319
 #: src/blocks/staff/edit.js:200
 msgid "Color"
 msgstr ""
@@ -341,7 +341,7 @@ msgstr ""
 #: src/blocks/_pro/gridcolcard/edit-common.js:183
 #: src/blocks/border-box/edit.js:272
 #: src/blocks/button/edit.js:547
-#: src/blocks/icon/edit.js:321
+#: src/blocks/icon/edit.js:337
 msgid "Background Color"
 msgstr ""
 
@@ -532,7 +532,7 @@ msgstr ""
 #: src/admin/margin.js:141
 #: src/blocks/border-box/edit.js:219
 #: src/blocks/icon-outer/edit.js:151
-#: src/blocks/icon/edit.js:145
+#: src/blocks/icon/edit.js:148
 msgid "Margin"
 msgstr ""
 
@@ -1267,7 +1267,7 @@ msgid "Text for Logged Out Users"
 msgstr ""
 
 #: src/blocks/_pro/dynamic-text/edit.js:50
-#: src/blocks/ancestor-page-list/edit.js:85
+#: src/blocks/ancestor-page-list/edit.js:84
 msgid "h2"
 msgstr ""
 
@@ -1288,7 +1288,7 @@ msgid "Field Type"
 msgstr ""
 
 #: src/blocks/_pro/dynamic-text/edit.js:54
-#: src/blocks/ancestor-page-list/edit.js:89
+#: src/blocks/ancestor-page-list/edit.js:88
 msgid "h3"
 msgstr ""
 
@@ -1311,7 +1311,7 @@ msgstr ""
 #: src/blocks/_pro/dynamic-text/edit.js:574
 #: src/blocks/_pro/gridcolcard-item/edit.js:372
 #: src/blocks/_pro/icon-card-item/edit.js:129
-#: src/blocks/icon/edit.js:309
+#: src/blocks/icon/edit.js:312
 #: src/blocks/pr-blocks/edit.js:263
 #: src/blocks/pr-content/edit.js:131
 #: src/components/link-toolbar/index.js:321
@@ -1319,7 +1319,7 @@ msgid "Open link new tab"
 msgstr ""
 
 #: src/blocks/_pro/dynamic-text/edit.js:58
-#: src/blocks/ancestor-page-list/edit.js:93
+#: src/blocks/ancestor-page-list/edit.js:92
 msgid "h4"
 msgstr ""
 
@@ -1332,7 +1332,7 @@ msgid "Vertical writing"
 msgstr ""
 
 #: src/blocks/_pro/dynamic-text/edit.js:62
-#: src/blocks/ancestor-page-list/edit.js:97
+#: src/blocks/ancestor-page-list/edit.js:96
 msgid "h5"
 msgstr ""
 
@@ -1341,7 +1341,7 @@ msgid "Don’t rotate letters and numbers"
 msgstr ""
 
 #: src/blocks/_pro/dynamic-text/edit.js:66
-#: src/blocks/ancestor-page-list/edit.js:101
+#: src/blocks/ancestor-page-list/edit.js:100
 msgid "h6"
 msgstr ""
 
@@ -1469,7 +1469,7 @@ msgstr ""
 #: src/blocks/_pro/fixed-display/edit.js:357
 #: src/blocks/_pro/outer/edit.js:1509
 #: src/blocks/icon-outer/edit.js:213
-#: src/blocks/icon/edit.js:206
+#: src/blocks/icon/edit.js:209
 msgid "Border radius"
 msgstr ""
 
@@ -1551,7 +1551,7 @@ msgstr ""
 #: src/blocks/_pro/grid-column-item/edit.js:199
 #: src/blocks/_pro/grid-column/edit.js:96
 #: src/blocks/icon-outer/edit.js:184
-#: src/blocks/icon/edit.js:177
+#: src/blocks/icon/edit.js:180
 #: src/utils/unit-options.js:6
 msgid "px"
 msgstr ""
@@ -1559,7 +1559,7 @@ msgstr ""
 #: src/blocks/_pro/grid-column-item/edit.js:200
 #: src/blocks/_pro/grid-column/edit.js:100
 #: src/blocks/icon-outer/edit.js:188
-#: src/blocks/icon/edit.js:181
+#: src/blocks/icon/edit.js:184
 #: src/utils/unit-options.js:10
 msgid "em"
 msgstr ""
@@ -1567,7 +1567,7 @@ msgstr ""
 #: src/blocks/_pro/grid-column-item/edit.js:201
 #: src/blocks/_pro/grid-column/edit.js:104
 #: src/blocks/icon-outer/edit.js:192
-#: src/blocks/icon/edit.js:185
+#: src/blocks/icon/edit.js:188
 #: src/utils/unit-options.js:14
 msgid "rem"
 msgstr ""
@@ -1575,7 +1575,7 @@ msgstr ""
 #: src/blocks/_pro/grid-column-item/edit.js:202
 #: src/blocks/_pro/grid-column/edit.js:108
 #: src/blocks/icon-outer/edit.js:196
-#: src/blocks/icon/edit.js:189
+#: src/blocks/icon/edit.js:192
 #: src/utils/unit-options.js:18
 msgid "vw"
 msgstr ""
@@ -1687,7 +1687,7 @@ msgstr ""
 
 #: src/blocks/_pro/gridcolcard/edit-common.js:220
 #: src/blocks/border-box/edit.js:263
-#: src/extensions/core/group/style.js:119
+#: src/extensions/core/group/style.js:505
 msgid "Border Color"
 msgstr ""
 
@@ -1770,9 +1770,9 @@ msgstr ""
 #: src/blocks/border-box/edit.js:296
 #: src/blocks/button/edit.js:575
 #: src/blocks/heading/edit.js:336
-#: src/blocks/icon/edit.js:293
+#: src/blocks/icon/edit.js:296
 #: src/blocks/pr-content/edit.js:212
-#: src/components/scroll-hint/index.js:103
+#: src/components/scroll-hint/index.js:118
 #: src/extensions/common/custom-block-variation/block-variation-list/item/body-area/index.js:142
 #: src/extensions/common/custom-block-variation/create-variation/block-variation-form/index.js:167
 #: src/utils/font-awesome-new.js:197
@@ -1787,7 +1787,7 @@ msgstr ""
 #: src/blocks/_pro/icon-card-item/edit.js:154
 #: src/blocks/button/edit.js:449
 #: src/blocks/icon-outer/edit.js:238
-#: src/blocks/icon/edit.js:235
+#: src/blocks/icon/edit.js:238
 #: src/blocks/pr-blocks/edit.js:286
 msgid "Solid color"
 msgstr ""
@@ -1849,7 +1849,7 @@ msgstr ""
 
 #: src/blocks/_pro/outer/edit.js:1106
 #: src/blocks/pr-content/edit.js:244
-#: src/blocks/slider-item/edit.js:228
+#: src/blocks/slider-item/edit.js:189
 msgid "Layout Setting"
 msgstr ""
 
@@ -2004,38 +2004,38 @@ msgid "Min Height Setting"
 msgstr ""
 
 #: src/blocks/_pro/outer/edit.js:717
-#: src/blocks/slider-item/edit.js:265
+#: src/blocks/slider-item/edit.js:226
 msgid "Background Setting"
 msgstr ""
 
 #: src/blocks/_pro/outer/edit.js:722
 #: src/blocks/pr-content/edit.js:67
-#: src/blocks/slider-item/edit.js:269
+#: src/blocks/slider-item/edit.js:230
 msgid "Color Setting"
 msgstr ""
 
 #: src/blocks/_pro/outer/edit.js:723
-#: src/blocks/slider-item/edit.js:271
+#: src/blocks/slider-item/edit.js:232
 msgid "Color will overcome background image. If you want to display image, set opacity 0."
 msgstr ""
 
 #: src/blocks/_pro/outer/edit.js:735
-#: src/blocks/slider-item/edit.js:283
+#: src/blocks/slider-item/edit.js:244
 msgid "Opacity Setting"
 msgstr ""
 
 #: src/blocks/_pro/outer/edit.js:749
-#: src/blocks/slider-item/edit.js:318
+#: src/blocks/slider-item/edit.js:279
 msgid "Background Image PC"
 msgstr ""
 
 #: src/blocks/_pro/outer/edit.js:766
-#: src/blocks/slider-item/edit.js:335
+#: src/blocks/slider-item/edit.js:296
 msgid "Background Image Tablet"
 msgstr ""
 
 #: src/blocks/_pro/outer/edit.js:777
-#: src/blocks/slider-item/edit.js:346
+#: src/blocks/slider-item/edit.js:307
 msgid "Background Image Mobile"
 msgstr ""
 
@@ -2374,7 +2374,7 @@ msgstr ""
 #: src/blocks/_pro/table-of-contents-new/edit.js:342
 #: src/blocks/_pro/timeline-item/edit.js:75
 #: src/blocks/icon-outer/edit.js:229
-#: src/blocks/icon/edit.js:221
+#: src/blocks/icon/edit.js:224
 msgid "Style"
 msgstr ""
 
@@ -2416,7 +2416,7 @@ msgstr ""
 #: src/blocks/button/edit.js:582
 #: src/blocks/heading/edit.js:340
 #: src/blocks/pr-content/edit.js:219
-#: src/components/scroll-hint/index.js:118
+#: src/components/scroll-hint/index.js:133
 msgid "Before text"
 msgstr ""
 
@@ -2424,14 +2424,14 @@ msgstr ""
 #: src/blocks/button/edit.js:604
 #: src/blocks/heading/edit.js:349
 #: src/blocks/pr-content/edit.js:231
-#: src/components/scroll-hint/index.js:143
+#: src/components/scroll-hint/index.js:158
 msgid "After text"
 msgstr ""
 
 #: src/blocks/_pro/tab-item/edit.js:315
 #: src/blocks/button/edit.js:611
 #: src/blocks/icon-outer/edit.js:90
-#: src/blocks/icon/edit.js:87
+#: src/blocks/icon/edit.js:90
 msgid "Size"
 msgstr ""
 
@@ -2439,83 +2439,83 @@ msgstr ""
 msgid "Tab Item"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1023
+#: src/blocks/_pro/tab/edit.js:1035
 msgid "Anchor Link Information"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1027
+#: src/blocks/_pro/tab/edit.js:1039
 msgid "You can link directly to specific tabs using anchor links. Click the copy button to copy the anchor link for each tab."
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1052
+#: src/blocks/_pro/tab/edit.js:1064
 msgid "Tab Size Setting"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1054
+#: src/blocks/_pro/tab/edit.js:1066
 msgid "Tab Size ( Smart Phone )"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1071
+#: src/blocks/_pro/tab/edit.js:1083
 msgid "Tab Size ( Tablet )"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1088
+#: src/blocks/_pro/tab/edit.js:1100
 msgid "Tab Size ( PC )"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1092
+#: src/blocks/_pro/tab/edit.js:1104
 msgid "Fit to the text"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1096
+#: src/blocks/_pro/tab/edit.js:1108
 msgid "Monospaced"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1105
+#: src/blocks/_pro/tab/edit.js:1117
 msgid "Tab Display Options"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1107
+#: src/blocks/_pro/tab/edit.js:1119
 msgid "If there are many labels or the screen width is narrow, you can adjust it here. *Tab size setting will not be effective."
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1113
+#: src/blocks/_pro/tab/edit.js:1125
 msgid "Tab Display Options ( Smart Phone )"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1137
+#: src/blocks/_pro/tab/edit.js:1149
 msgid "Tab Display Options ( Tablet )"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1161
+#: src/blocks/_pro/tab/edit.js:1173
 msgid "Tab Display Options ( PC )"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1168
+#: src/blocks/_pro/tab/edit.js:1180
 msgid "Not set"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1172
+#: src/blocks/_pro/tab/edit.js:1184
 msgid "Scroll"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1176
+#: src/blocks/_pro/tab/edit.js:1188
 msgid "Wrap to 2 rows"
-msgstr ""
-
-#: src/blocks/_pro/tab/edit.js:415
-msgid "Tab %d"
 msgstr ""
 
 #: src/blocks/_pro/tab/edit.js:42
 msgid "Tab 01"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:428
+#: src/blocks/_pro/tab/edit.js:427
+msgid "Tab %d"
+msgstr ""
+
+#: src/blocks/_pro/tab/edit.js:440
 msgid "Copy"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:433
+#: src/blocks/_pro/tab/edit.js:445
 msgid "Copied!"
 msgstr ""
 
@@ -2524,7 +2524,7 @@ msgid "Tab 02"
 msgstr ""
 
 #. %s is the tab number
-#: src/blocks/_pro/tab/edit.js:871
+#: src/blocks/_pro/tab/edit.js:883
 msgid "Tab Label [ %s ]"
 msgstr ""
 
@@ -2731,32 +2731,32 @@ msgstr ""
 msgid "This is a danger alert."
 msgstr ""
 
-#: src/blocks/ancestor-page-list/edit.js:106
+#: src/blocks/ancestor-page-list/edit.js:105
 msgid "Ancestor page title class name"
 msgstr ""
 
-#: src/blocks/ancestor-page-list/edit.js:120
+#: src/blocks/ancestor-page-list/edit.js:119
 msgid "Add link to ancestor page title"
 msgstr ""
 
-#: src/blocks/ancestor-page-list/edit.js:131
+#: src/blocks/ancestor-page-list/edit.js:130
 msgid "If there is no child page, the block itself is not displayed"
 msgstr ""
 
-#: src/blocks/ancestor-page-list/edit.js:141
+#: src/blocks/ancestor-page-list/edit.js:140
 msgid "Don't display inactive grand child pages"
 msgstr ""
 
-#: src/blocks/ancestor-page-list/edit.js:62
+#: src/blocks/ancestor-page-list/edit.js:61
 msgid "Ancestor Page List Setting"
 msgstr ""
 
-#: src/blocks/ancestor-page-list/edit.js:65
+#: src/blocks/ancestor-page-list/edit.js:64
 msgid "Display Ancestor Page Title"
 msgstr ""
 
-#: src/blocks/ancestor-page-list/edit.js:75
-msgid "Archive title tag"
+#: src/blocks/ancestor-page-list/edit.js:74
+msgid "Ancestor title tag"
 msgstr ""
 
 #: src/blocks/balloon/edit.js:143
@@ -3108,7 +3108,7 @@ msgid "Heading Settings"
 msgstr ""
 
 #: src/blocks/heading/edit.js:358
-#: src/blocks/icon/edit.js:330
+#: src/blocks/icon/edit.js:346
 msgid "Icon Color"
 msgstr ""
 
@@ -3130,17 +3130,17 @@ msgid "Heading %d"
 msgstr ""
 
 #: src/blocks/icon-outer/edit.js:209
-#: src/blocks/icon/edit.js:202
+#: src/blocks/icon/edit.js:205
 msgid "Reset"
 msgstr ""
 
 #: src/blocks/icon-outer/edit.js:242
-#: src/blocks/icon/edit.js:239
+#: src/blocks/icon/edit.js:242
 msgid "Icon & Frame"
 msgstr ""
 
 #: src/blocks/icon-outer/edit.js:246
-#: src/blocks/icon/edit.js:243
+#: src/blocks/icon/edit.js:246
 msgid "Icon only"
 msgstr ""
 
@@ -3148,17 +3148,26 @@ msgstr ""
 msgid "Icon Common Setting"
 msgstr ""
 
-#: src/blocks/icon/component.js:161
+#: src/blocks/icon/component.js:171
+#: src/blocks/icon/deprecated/1.112.1/component.js:160
 msgid "Icon link"
 msgstr ""
 
-#: src/blocks/icon/edit.js:290
+#: src/blocks/icon/edit.js:293
 msgid "Icon Setting"
 msgstr ""
 
-#: src/blocks/icon/edit.js:304
+#: src/blocks/icon/edit.js:307
 #: src/blocks/pr-content/edit.js:122
 msgid "Link URL"
+msgstr ""
+
+#: src/blocks/icon/edit.js:321
+msgid "Inherit Parent Color"
+msgstr ""
+
+#: src/blocks/icon/edit.js:328
+msgid "When checked, the icon color will inherit from the parent element."
 msgstr ""
 
 #: src/blocks/page-content/edit.js:101
@@ -3277,37 +3286,38 @@ msgstr ""
 
 #: src/blocks/slider-item/deprecated/1.115.0/save.js:92
 #: src/blocks/slider-item/deprecated/1.115.1/save.js:100
+#: src/blocks/slider-item/deprecated/1.115.2/save.js:117
 #: src/blocks/slider-item/deprecated/1.76.0/save.js:83
 #: src/blocks/slider-item/deprecated/1.94.0/save.js:90
-#: src/blocks/slider-item/save.js:100
+#: src/blocks/slider-item/save.js:89
 msgid "Slider item link"
 msgstr ""
 
-#: src/blocks/slider-item/edit.js:232
+#: src/blocks/slider-item/edit.js:193
 msgid "Vertical align"
 msgstr ""
 
-#: src/blocks/slider-item/edit.js:245
+#: src/blocks/slider-item/edit.js:206
 msgid "Content Area Width"
 msgstr ""
 
-#: src/blocks/slider-item/edit.js:249
+#: src/blocks/slider-item/edit.js:210
 msgid "Use content width for inner blocks."
 msgstr ""
 
-#: src/blocks/slider-item/edit.js:257
+#: src/blocks/slider-item/edit.js:218
 msgid "Nested blocks should inherit the content width."
 msgstr ""
 
-#: src/blocks/slider-item/edit.js:297
+#: src/blocks/slider-item/edit.js:258
 msgid "Background Image Size"
 msgstr ""
 
-#: src/blocks/slider-item/edit.js:304
+#: src/blocks/slider-item/edit.js:265
 msgid "cover"
 msgstr ""
 
-#: src/blocks/slider-item/edit.js:308
+#: src/blocks/slider-item/edit.js:269
 msgid "repeat"
 msgstr ""
 
@@ -3779,20 +3789,20 @@ msgstr ""
 msgid "Copy link"
 msgstr ""
 
-#: src/components/scroll-hint/index.js:109
-msgid "Display the icon before the text"
-msgstr ""
-
-#: src/components/scroll-hint/index.js:134
-msgid "Display the icon after the text."
-msgstr ""
-
-#: src/components/scroll-hint/index.js:91
+#: src/components/scroll-hint/index.js:106
 msgid "Show Scroll Message"
 msgstr ""
 
-#: src/components/scroll-hint/index.js:98
+#: src/components/scroll-hint/index.js:113
 msgid "Scroll Message Text"
+msgstr ""
+
+#: src/components/scroll-hint/index.js:124
+msgid "Display the icon before the text"
+msgstr ""
+
+#: src/components/scroll-hint/index.js:149
+msgid "Display the icon after the text."
 msgstr ""
 
 #: src/extensions/common/content-width-half/index.js:140
@@ -4096,12 +4106,95 @@ msgid "Cover link"
 msgstr ""
 
 #: src/extensions/core/group/deprecated/1.95.2/save.js:31
-#: src/extensions/core/group/style.js:217
+#: src/extensions/core/group/style.js:1088
 msgid "Group link"
 msgstr ""
 
-#: src/extensions/core/group/style.js:124
+#: src/extensions/core/group/style.js:1231
+msgid "Horizontal scroll area"
+msgstr ""
+
+#: src/extensions/core/group/style.js:150
+#: src/extensions/core/table/style.js:36
+#: dist/vk-blocks-pro/inc/vk-blocks/view/class-vk-blocks-scrollhintrenderer.php:72
+#: inc/vk-blocks/view/class-vk-blocks-scrollhintrenderer.php:87
+msgid "You can scroll"
+msgstr ""
+
+#: src/extensions/core/group/style.js:510
 msgid "Because of the theme that enabled theme.json become can specify the color from border panel that, specification from here is deprecated."
+msgstr ""
+
+#: src/extensions/core/group/style.js:555
+msgid "Group Horizontal Scroll"
+msgstr ""
+
+#: src/extensions/core/group/style.js:564
+msgid "This Group is inside a parent Group with horizontal scroll enabled. The parent scroll setting takes precedence."
+msgstr ""
+
+#: src/extensions/core/group/style.js:573
+msgid "This setting applies only when all direct child blocks are the following block."
+msgstr ""
+
+#: src/extensions/core/group/style.js:579
+msgid "Supported direct blocks:"
+msgstr ""
+
+#: src/extensions/core/group/style.js:596
+msgid "Groups are supported only when their layout is Flex/Grid or when their direct inner blocks are supported."
+msgstr ""
+
+#: src/extensions/core/group/style.js:612
+msgid "Enable horizontal scrolling for all blocks inside this group."
+msgstr ""
+
+#: src/extensions/core/group/style.js:627
+msgid "Prevent text wrapping"
+msgstr ""
+
+#: src/extensions/core/group/style.js:644
+msgid "This option is disabled when Table Mode is enabled or when using Grid/Flex layouts."
+msgstr ""
+
+#: src/extensions/core/group/style.js:648
+msgid "Prevents text from wrapping to multiple lines and ensures horizontal scrolling. Disable this only if you want text to wrap naturally within the scrollable area."
+msgstr ""
+
+#: src/extensions/core/group/style.js:655
+msgid "Table Mode (Core Column Blocks Only)"
+msgstr ""
+
+#: src/extensions/core/group/style.js:671
+msgid "Unifies column widths across multiple rows. Only works with core Column blocks."
+msgstr ""
+
+#: src/extensions/core/group/style.js:675
+msgid "This option is only available when there are multiple core Column blocks."
+msgstr ""
+
+#: src/extensions/core/group/style.js:700
+msgid "OFF"
+msgstr ""
+
+#: src/extensions/core/group/style.js:821
+msgid "Different widths"
+msgstr ""
+
+#: src/extensions/core/group/style.js:836
+msgid "ON"
+msgstr ""
+
+#: src/extensions/core/group/style.js:922
+msgid "Col 1"
+msgstr ""
+
+#: src/extensions/core/group/style.js:943
+msgid "Col 2"
+msgstr ""
+
+#: src/extensions/core/group/style.js:961
+msgid "Unified to max width"
 msgstr ""
 
 #: src/extensions/core/list/style.js:166
@@ -4136,42 +4229,31 @@ msgstr ""
 msgid "Table Horizontal Scroll"
 msgstr ""
 
-#: src/extensions/core/table/style.js:267
-msgid "Scrollable"
-msgstr ""
-
-#: src/extensions/core/table/style.js:274
-msgid "Horizontal Scroll Breakpoint"
-msgstr ""
-
-#: src/extensions/core/table/style.js:315
+#: src/extensions/core/table/style.js:282
 msgid "Table Cell Vertical"
 msgstr ""
 
-#: src/extensions/core/table/style.js:320
+#: src/extensions/core/table/style.js:287
 msgid "Cell Vertical"
 msgstr ""
 
-#: src/extensions/core/table/style.js:327
+#: src/extensions/core/table/style.js:294
 msgid "Cell Vertical Breakpoint"
 msgstr ""
 
-#: src/extensions/core/table/style.js:334
+#: src/extensions/core/table/style.js:301
+#: src/utils/horizontal-scroll-controls.js:42
 msgid "Mobile size"
 msgstr ""
 
-#: src/extensions/core/table/style.js:341
+#: src/extensions/core/table/style.js:308
+#: src/utils/horizontal-scroll-controls.js:46
 msgid "Tablet size"
 msgstr ""
 
-#: src/extensions/core/table/style.js:348
+#: src/extensions/core/table/style.js:315
+#: src/utils/horizontal-scroll-controls.js:50
 msgid "PC size"
-msgstr ""
-
-#: src/extensions/core/table/style.js:36
-#: dist/vk-blocks-pro/inc/vk-blocks/view/class-vk-blocks-scrollhintrenderer.php:72
-#: inc/vk-blocks/view/class-vk-blocks-scrollhintrenderer.php:72
-msgid "You can scroll"
 msgstr ""
 
 #: src/utils/example-data.js:14
@@ -4244,6 +4326,14 @@ msgstr ""
 
 #: src/utils/font-awesome-new.js:510
 msgid "Select Icon"
+msgstr ""
+
+#: src/utils/horizontal-scroll-controls.js:59
+msgid "Scrollable"
+msgstr ""
+
+#: src/utils/horizontal-scroll-controls.js:66
+msgid "Horizontal Scroll Breakpoint"
 msgstr ""
 
 #: src/utils/unit-options.js:22

@@ -15,7 +15,7 @@ const TITLE_TAG_REGEX = /^(h[2-6]).*/;
 const CLASS_NAME_REGEX = /[^a-zA-Z0-9-_ ]/g;
 
 export default function AncestorPageListEdit(props) {
-	const { attributes, setAttributes, name } = props;
+	const { attributes, setAttributes } = props;
 	const {
 		ancestorTitleDisplay,
 		ancestorTitleTagName,
@@ -24,11 +24,6 @@ export default function AncestorPageListEdit(props) {
 		displayHasChildOnly,
 		hiddenGrandChild,
 	} = attributes;
-
-	// nameをsetAttributesで設定
-	useEffect(() => {
-		setAttributes({ name });
-	}, [name]);
 
 	const blockProps = useBlockProps();
 
@@ -46,12 +41,16 @@ export default function AncestorPageListEdit(props) {
 	// useEffectを使ってレンダリング後にstateを更新
 	useEffect(() => {
 		const validatedTag = validateTitleTag(ancestorTitleTagName);
-		if (validatedTag !== ancestorTitleTagName) {
-			setAttributes({ ancestorTitleTagName: validatedTag });
-		}
 		const sanitizedValue = sanitizeClassName(ancestorTitleClassName);
+		const updates = {};
+		if (validatedTag !== ancestorTitleTagName) {
+			updates.ancestorTitleTagName = validatedTag;
+		}
 		if (sanitizedValue !== ancestorTitleClassName) {
-			setAttributes({ ancestorTitleClassName: sanitizedValue });
+			updates.ancestorTitleClassName = sanitizedValue;
+		}
+		if (Object.keys(updates).length > 0) {
+			setAttributes(updates);
 		}
 	}, [ancestorTitleTagName, ancestorTitleClassName]);
 
@@ -69,7 +68,7 @@ export default function AncestorPageListEdit(props) {
 						}
 					/>
 					<SelectControl
-						label={__('Archive title tag', 'vk-blocks')}
+						label={__('Ancestor title tag', 'vk-blocks')}
 						value={ancestorTitleTagName}
 						onChange={(value) => {
 							setAttributes({

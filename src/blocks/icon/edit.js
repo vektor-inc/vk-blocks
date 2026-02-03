@@ -24,6 +24,7 @@ import { useEffect } from '@wordpress/element';
 
 import { AdvancedColorPalette } from '@vkblocks/components/advanced-color-palette';
 import LinkToolbar from '@vkblocks/components/link-toolbar';
+import { iconLabel } from '@vkblocks/utils/icon-label';
 
 export default function IconEdit(props) {
 	const { attributes, setAttributes, clientId } = props;
@@ -43,9 +44,6 @@ export default function IconEdit(props) {
 		linkDescription,
 		iconTarget,
 	} = attributes;
-
-	// eslint-disable-next-line no-undef
-	const iconFamily = vkFontAwesome.iconFamily;
 
 	/**
 	 * 親ブロックが vk-blocks/icon-outer かどうか判定
@@ -76,6 +74,9 @@ export default function IconEdit(props) {
 	// 空白チェック
 	const defaultIconSize = 'px' === iconSizeUnit ? 36 : 1;
 	const defaultIconMargin = 'px' === iconMarginUnit ? 22 : 1;
+
+	// 親のテキストカラーを継承するか？
+	const isColorInherit = iconColor === 'inherit' ? true : false;
 
 	/**
 	 * 親ブロックが vk-blocks/icon-outer でなければ設定項目を追加
@@ -289,9 +290,7 @@ export default function IconEdit(props) {
 			<InspectorControls>
 				<PanelBody title={__('Icon Setting', 'vk-blocks')}>
 					<BaseControl
-						label={
-							__('Icon', 'vk-blocks') + ' ( ' + iconFamily + ' )'
-						}
+						label={iconLabel(__('Icon', 'vk-blocks'))}
 						id={`vk_icon-font`}
 					>
 						<FontAwesome attributeName={'faIcon'} {...props} />
@@ -311,6 +310,19 @@ export default function IconEdit(props) {
 					/>
 				</PanelBody>
 				<PanelBody title={__('Color', 'vk-blocks')}>
+					<CheckboxControl
+						label={__('Inherit Parent Color', 'vk-blocks')}
+						checked={isColorInherit}
+						onChange={(checked) => {
+							setAttributes({
+								iconColor: checked ? 'inherit' : undefined,
+							});
+						}}
+						help={__(
+							'When checked, the icon color will inherit from the parent element.',
+							'vk-blocks'
+						)}
+					/>
 					<BaseControl
 						id={`vk_block_icon_color`}
 						label={

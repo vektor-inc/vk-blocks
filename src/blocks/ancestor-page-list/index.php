@@ -137,12 +137,17 @@ function vk_blocks_ancestor_page_list_render_callback( $attributes ) {
 		$classes .= ' vk_ancestorPageList-hiddenGrandChild-true';
 	}
 
-	// block.jsonのSupportsで設定したクラス名やスタイルを取得する.
-	$wrapper_classes = get_block_wrapper_attributes(
-		array(
-			'class' => $classes,
-		)
-	);
+	// Editor preview (REST block renderer) already wraps the block with support styles; avoid double rendering.
+	if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
+		$wrapper_classes = 'class="' . esc_attr( $classes ) . '"';
+	} else {
+		// block.jsonのSupportsで設定したクラス名やスタイルを取得する.
+		$wrapper_classes = get_block_wrapper_attributes(
+			array(
+				'class' => $classes,
+			)
+		);
+	}
 
 	$block  = '<aside ' . $wrapper_classes . '>';
 	$block .= vk_blocks_get_ancestor_page_list_title( $attributes );
@@ -184,45 +189,45 @@ function vk_blocks_register_block_ancestor_page_list() {
 			'editor_script'   => 'vk-blocks-build-js',
 			'attributes'      => array_merge(
 				array(
-					'className' => array(
+					'className'              => array(
 						'type'    => 'string',
 						'default' => '',
 					),
-				),
-				array(
-					'ancestorTitleDisplay' => array(
+					'ancestorTitleDisplay'   => array(
 						'type'    => 'boolean',
 						'default' => true,
 					),
-				),
-				array(
-					'ancestorTitleTagName' => array(
+					'ancestorTitleTagName'   => array(
 						'type'    => 'string',
 						'default' => 'h4',
 					),
-				),
-				array(
 					'ancestorTitleClassName' => array(
 						'type'    => 'string',
 						'default' => null,
 					),
-				),
-				array(
-					'ancestorTitleLink' => array(
+					'ancestorTitleLink'      => array(
 						'type'    => 'boolean',
 						'default' => false,
 					),
-				),
-				array(
-					'displayHasChildOnly' => array(
+					'displayHasChildOnly'    => array(
 						'type'    => 'boolean',
 						'default' => false,
 					),
-				),
-				array(
-					'hiddenGrandChild' => array(
+					'hiddenGrandChild'       => array(
 						'type'    => 'boolean',
 						'default' => false,
+					),
+					'backgroundColor'        => array(
+						'type' => 'string',
+					),
+					'textColor'              => array(
+						'type' => 'string',
+					),
+					'style'                  => array(
+						'type' => 'object',
+					),
+					'borderColor'            => array(
+						'type' => 'string',
 					),
 				),
 				$vk_blocks_common_attributes

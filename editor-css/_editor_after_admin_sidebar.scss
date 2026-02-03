@@ -26,3 +26,15 @@ Admin Setting Sidebar utility
 .text-danger {
 	color: #dc3545!important;
 }
+.editor-sidebar {
+	.alert {
+		ul {
+			padding-left:1.2em;
+			list-style: disc;
+		}
+		p + p {
+			margin-top:1em;
+		}
+	}
+}
+

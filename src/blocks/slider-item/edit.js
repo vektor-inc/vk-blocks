@@ -29,6 +29,7 @@ import { AdvancedColorPalette } from '@vkblocks/components/advanced-color-palett
 import { isParentReusableBlock } from '@vkblocks/utils/is-parent-reusable-block';
 import LinkToolbar from '@vkblocks/components/link-toolbar';
 import { sanitizeSlug } from '@vkblocks/utils/sanitizeSlug';
+import { toPresetSpacingVar } from '@vkblocks/utils/to-preset-spacing-var';
 
 const prefix = 'vk_slider_item';
 
@@ -38,7 +39,6 @@ export default function SliderItemEdit(props) {
 		verticalAlignment,
 		bgColor,
 		opacity,
-		padding_left_and_right,
 		bgSize,
 		bgImageMobile,
 		bgImageTablet,
@@ -106,62 +106,19 @@ export default function SliderItemEdit(props) {
 
 	const spacingPaddingLeft = attributes?.style?.spacing?.padding?.left;
 	const spacingPaddingRight = attributes?.style?.spacing?.padding?.right;
+	const spacingPaddingLeftVar = toPresetSpacingVar(spacingPaddingLeft);
+	const spacingPaddingRightVar = toPresetSpacingVar(spacingPaddingRight);
 
-	// classPaddingLRのクラス切り替え
 	let classPaddingLR = '';
-	let paddingValue = '';
-
-	if (spacingPaddingLeft || spacingPaddingRight || contentWidth) {
-		// コア spacing がある場合はそれを優先
-		paddingValue = spacingPaddingLeft || spacingPaddingRight || '';
-		if (contentWidth) {
-			classPaddingLR = ` is-layout-constrained`;
-		}
-	} else if (padding_left_and_right === '0') {
-		classPaddingLR = ` is-layout-constrained`;
-		paddingValue = '0';
-	} else if (padding_left_and_right === '1') {
-		classPaddingLR = ` ${prefix}-paddingLR-use`;
-		paddingValue = '4em';
-	} else if (padding_left_and_right === '2') {
-		classPaddingLR = ` ${prefix}-paddingLR-zero`;
-		paddingValue = '0';
+	if (contentWidth) {
+		classPaddingLR += `is-layout-constrained`;
+	}
+	if (!spacingPaddingLeft && !spacingPaddingRight) {
+		classPaddingLR += ` ${prefix}-paddingLR-use`;
 	}
 
-	// コアの余白システムに値を適用
-	useEffect(() => {
-		const currentLeftPadding = attributes?.style?.spacing?.padding?.left;
-		const currentRightPadding = attributes?.style?.spacing?.padding?.right;
-
-		// レガシー属性が存在する場合のみ spacing へ移行し、ユーザー指定の spacing は上書きしない
-		if (
-			padding_left_and_right !== undefined &&
-			(paddingValue !== currentLeftPadding ||
-				paddingValue !== currentRightPadding)
-		) {
-			setAttributes((prevAttrs) => ({
-				...prevAttrs,
-				style: {
-					...prevAttrs.style,
-					spacing: {
-						...prevAttrs.style?.spacing,
-						padding: {
-							left: paddingValue,
-							right: paddingValue,
-						},
-					},
-				},
-			}));
-			setAttributes({ padding_left_and_right: undefined });
-		}
-	}, [
-		paddingValue,
-		attributes?.style?.spacing?.padding,
-		padding_left_and_right,
-	]);
-
 	let containerClass = '';
-	if (classPaddingLR === ` is-layout-constrained`) {
+	if (contentWidth) {
 		containerClass = `${prefix}_container container`;
 	} else {
 		containerClass = `${prefix}_container`;
@@ -178,8 +135,8 @@ export default function SliderItemEdit(props) {
 
 	const bgAreaStyles = {
 		backgroundColor: isHexColor(bgColor) ? bgColor : undefined,
-		paddingLeft: paddingValue,
-		paddingRight: paddingValue,
+		paddingLeft: spacingPaddingLeftVar,
+		paddingRight: spacingPaddingRightVar,
 	};
 
 	const GetBgImage = (
@@ -193,6 +150,10 @@ export default function SliderItemEdit(props) {
 
 	const blockProps = useBlockProps({
 		className: `vk_slider_item vk_valign-${verticalAlignment} ${prefix}-${blockId} ${classPaddingLR} ${prefix}-paddingVertical-none swiper-slide`,
+		style: {
+			paddingLeft: spacingPaddingLeftVar,
+			paddingRight: spacingPaddingRightVar,
+		},
 	});
 
 	return (

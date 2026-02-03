@@ -43,7 +43,12 @@ export class VKBIcon extends Component {
 				// Solid color
 				borderClass += ` has-background`;
 
-				if (isHexColor(iconColor)) {
+				if (iconColor === 'inherit') {
+					// inherit color
+					borderStyle = {
+						backgroundColor: 'currentColor',
+					};
+				} else if (isHexColor(iconColor)) {
 					// custom color
 					borderStyle = {
 						backgroundColor: `${iconColor}`,
@@ -61,7 +66,12 @@ export class VKBIcon extends Component {
 			) {
 				borderClass += ` has-text-color`;
 
-				if (isHexColor(iconColor)) {
+				if (iconColor === 'inherit') {
+					// inherit color
+					borderStyle = {
+						color: 'currentColor',
+					};
+				} else if (isHexColor(iconColor)) {
 					// custom color
 					borderStyle = {
 						color: `${iconColor}`,

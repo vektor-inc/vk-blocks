@@ -7,12 +7,12 @@ import {
 	useBlockProps,
 } from '@wordpress/block-editor';
 import { FontAwesome } from '@vkblocks/utils/font-awesome-new';
+import { iconLabel } from '@vkblocks/utils/icon-label';
 import parse from 'html-react-parser';
 
 export default function AlertEdit(props) {
 	const { attributes, setAttributes } = props;
 	const { style, icon, iconText, mobileIconPosition } = attributes;
-	const iconFamily = vkFontAwesome.iconFamily; // eslint-disable-line no-undef
 
 	const blockProps = useBlockProps({
 		className: `vk_alert alert alert-${style} ${icon ? 'has-alert-icon' : ''} ${
@@ -71,9 +71,7 @@ export default function AlertEdit(props) {
 						/>
 					</BaseControl>
 					<BaseControl
-						label={
-							__('Icon', 'vk-blocks') + ' ( ' + iconFamily + ' )'
-						}
+						label={iconLabel(__('Icon', 'vk-blocks'))}
 						id={`vk_alert-icon`}
 					>
 						<FontAwesome attributeName={'icon'} {...props} />

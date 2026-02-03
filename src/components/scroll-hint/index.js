@@ -2,8 +2,24 @@ import { useState, useEffect } from 'react';
 import { __ } from '@wordpress/i18n';
 import { ToggleControl, TextControl, BaseControl } from '@wordpress/components';
 import { FontAwesome } from '@vkblocks/utils/font-awesome-new';
+import { iconLabel } from '@vkblocks/utils/icon-label';
 
-const ScrollMessageControls = ({
+/**
+ * Scroll Hint Component
+ *
+ * スクロールヒントメッセージの設定UIコンポーネント
+ * tableとgroupブロックのHorizontal Scrollで使用
+ *
+ * @param {Object}   props                   - Component props
+ * @param {boolean}  props.showScrollMessage - スクロールメッセージを表示するか
+ * @param {string}   props.scrollMessageText - スクロールメッセージのテキスト
+ * @param {string}   props.scrollIconLeft    - 左側のアイコンクラス
+ * @param {string}   props.scrollIconRight   - 右側のアイコンクラス
+ * @param {Function} props.setAttributes     - 属性を設定する関数
+ * @param {Object}   props.attributes        - ブロックの属性オブジェクト
+ * @return {JSX.Element} Scroll Hint Controls
+ */
+const ScrollHint = ({
 	showScrollMessage,
 	scrollMessageText,
 	scrollIconLeft,
@@ -12,9 +28,6 @@ const ScrollMessageControls = ({
 	attributes,
 	...props
 }) => {
-	// eslint-disable-next-line no-undef
-	const iconFamily = vkFontAwesome.iconFamily;
-
 	const [iconOutputLeft, setIconOutputLeft] = useState(scrollIconLeft !== '');
 	const [iconOutputRight, setIconOutputRight] = useState(
 		scrollIconRight !== ''
@@ -99,9 +112,7 @@ const ScrollMessageControls = ({
 						value={scrollMessageText}
 						onChange={(value) => handleMessageTextChange(value)} // handleMessageTextChangeに正しく引数を渡す
 					/>
-					<h4>
-						{__('Icon', 'vk-blocks') + ' ( ' + iconFamily + ' )'}
-					</h4>
+					<h4>{iconLabel(__('Icon', 'vk-blocks'))}</h4>
 					<ToggleControl
 						label={__(
 							'Display the icon before the text',
@@ -158,4 +169,4 @@ const ScrollMessageControls = ({
 	);
 };
 
-export default ScrollMessageControls;
+export default ScrollHint;

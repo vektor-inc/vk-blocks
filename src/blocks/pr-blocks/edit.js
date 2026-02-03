@@ -1,6 +1,7 @@
 import { isNotJSON } from '@vkblocks/utils/is-not-json';
 import { FontAwesome } from '@vkblocks/utils/font-awesome-new';
 import { fixBrokenUnicode } from '@vkblocks/utils/depModules';
+import { iconLabel } from '@vkblocks/utils/icon-label';
 import { __ } from '@wordpress/i18n';
 import {
 	RadioControl,
@@ -39,9 +40,6 @@ export default function PrBlocksEdit(props) {
 		insertImage2,
 		insertImage3,
 	} = attributes;
-
-	// eslint-disable-next-line no-undef
-	const iconFamily = vkFontAwesome.iconFamily;
 
 	const containerClass = `vk_prBlocks row`;
 
@@ -118,12 +116,7 @@ export default function PrBlocksEdit(props) {
 						/>
 					</BaseControl>
 					<BaseControl
-						label={
-							__('Icon 1', 'vk-blocks') +
-							' ( ' +
-							iconFamily +
-							' )'
-						}
+						label={iconLabel(__('Icon 1', 'vk-blocks'))}
 						id={`vk_prBlocks_Icon1`}
 					>
 						<FontAwesome attributeName={'icon1'} {...props} />
@@ -193,12 +186,7 @@ export default function PrBlocksEdit(props) {
 						/>
 					</BaseControl>
 					<BaseControl
-						label={
-							__('Icon 2', 'vk-blocks') +
-							' ( ' +
-							iconFamily +
-							' )'
-						}
+						label={iconLabel(__('Icon 2', 'vk-blocks'))}
 						id={`vk_prBlocks_Icon2`}
 					>
 						<FontAwesome attributeName={'icon2'} {...props} />
@@ -268,12 +256,7 @@ export default function PrBlocksEdit(props) {
 						/>
 					</BaseControl>
 					<BaseControl
-						label={
-							__('Icon 3', 'vk-blocks') +
-							' ( ' +
-							iconFamily +
-							' )'
-						}
+						label={iconLabel(__('Icon 3', 'vk-blocks'))}
 						id={`vk_prBlocks_Icon3`}
 					>
 						<FontAwesome attributeName={'icon3'} {...props} />

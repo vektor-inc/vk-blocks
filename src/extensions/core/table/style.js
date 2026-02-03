@@ -4,7 +4,7 @@ import { addFilter } from '@wordpress/hooks';
 import { PanelBody, ToggleControl, SelectControl } from '@wordpress/components';
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
-import ScrollHint from '@vkblocks/components/scroll-hint';
+import HorizontalScrollControls from '@vkblocks/utils/horizontal-scroll-controls';
 
 /**
  * Internal dependencies
@@ -260,53 +260,20 @@ export const addBlockControl = createHigherOrderComponent((BlockEdit) => {
 							icon={<VkPanelIcon isActive={scrollable} />}
 							initialOpen={false}
 						>
-							<ToggleControl
-								label={__('Scrollable', 'vk-blocks')}
-								checked={scrollable}
-								onChange={handleToggleChange}
+							<HorizontalScrollControls
+								scrollable={scrollable}
+								scrollBreakpoint={scrollBreakpoint}
+								onScrollableChange={handleToggleChange}
+								onBreakpointChange={handleSelectChange}
+								prefix="table-scrollable-"
+								scrollHintProps={{
+									showScrollMessage,
+									scrollMessageText,
+									scrollIconLeft,
+									scrollIconRight,
+									...props,
+								}}
 							/>
-							{scrollable && (
-								<>
-									<SelectControl
-										label={__(
-											'Horizontal Scroll Breakpoint',
-											'vk-blocks'
-										)}
-										value={scrollBreakpoint}
-										options={[
-											{
-												label: __(
-													'Mobile size',
-													'vk-blocks'
-												),
-												value: 'table-scrollable-mobile',
-											},
-											{
-												label: __(
-													'Tablet size',
-													'vk-blocks'
-												),
-												value: 'table-scrollable-tablet',
-											},
-											{
-												label: __(
-													'PC size',
-													'vk-blocks'
-												),
-												value: 'table-scrollable-pc',
-											},
-										]}
-										onChange={handleSelectChange}
-									/>
-									<ScrollHint
-										showScrollMessage={showScrollMessage}
-										scrollMessageText={scrollMessageText}
-										scrollIconLeft={scrollIconLeft}
-										scrollIconRight={scrollIconRight}
-										{...props}
-									/>
-								</>
-							)}
 						</PanelBody>
 						<PanelBody
 							title={__('Table Cell Vertical', 'vk-blocks')}

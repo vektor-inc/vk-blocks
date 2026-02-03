@@ -27,11 +27,39 @@
 		"hiddenGrandChild": {
 			"type": "boolean",
 			"default": false
+		},
+		"backgroundColor": {
+			"type": "string"
+		},
+		"textColor": {
+			"type": "string"
+		},
+		"style": {
+			"type": "object"
+		},
+		"borderColor": {
+			"type": "string"
 		}
 	},
 	"description": "Display Page list from ancestor page",
 	"textdomain": "vk-blocks",
 	"supports": {
-		"className": true
+		"className": true,
+		"color": {
+			"gradients": true,
+			"link": true,
+			"background": true,
+			"text": true
+		},
+		"spacing": {
+			"padding": true,
+			"margin": true
+		},
+		"__experimentalBorder": {
+			"color": true,
+			"radius": true,
+			"style": true,
+			"width": true
+		}
 	}
 }

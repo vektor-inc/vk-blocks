@@ -9,6 +9,7 @@ import { __ } from '@wordpress/i18n';
 import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 import GenerateBgImage from './GenerateBgImage';
 import { isHexColor } from '@vkblocks/utils/is-hex-color';
+import { toPresetSpacingVar } from '@vkblocks/utils/to-preset-spacing-var';
 const prefix = 'vk_slider_item';
 
 export default function save(props) {
@@ -17,7 +18,6 @@ export default function save(props) {
 		verticalAlignment,
 		bgColor,
 		opacity,
-		padding_left_and_right,
 		style,
 		bgImageMobile,
 		bgImageTablet,
@@ -30,34 +30,23 @@ export default function save(props) {
 		blockId,
 	} = attributes;
 
-	let classPaddingLR;
-	let containerClass;
-
 	const spacingPaddingLeft = style?.spacing?.padding?.left;
 	const spacingPaddingRight = style?.spacing?.padding?.right;
+	const spacingPaddingLeftVar = toPresetSpacingVar(spacingPaddingLeft);
+	const spacingPaddingRightVar = toPresetSpacingVar(spacingPaddingRight);
 
 	// classPaddingLRのクラス切り替え
-	classPaddingLR = '';
-	let paddingValue = '';
+	let classPaddingLR = '';
 
-	if (spacingPaddingLeft || spacingPaddingRight || contentWidth) {
-		// コア spacing がある場合はそれを優先
-		paddingValue = spacingPaddingLeft || spacingPaddingRight || '';
-		if (contentWidth) {
-			classPaddingLR = ` is-layout-constrained`;
-		}
-	} else if (padding_left_and_right === '0') {
-		classPaddingLR = ` is-layout-constrained`;
-		paddingValue = '0';
-	} else if (padding_left_and_right === '1') {
-		classPaddingLR = ` ${prefix}-paddingLR-use`;
-		paddingValue = '4em';
-	} else if (padding_left_and_right === '2') {
-		classPaddingLR = ` ${prefix}-paddingLR-zero`;
-		paddingValue = '0';
+	if (contentWidth) {
+		classPaddingLR += `is-layout-constrained`;
+	}
+	if (!spacingPaddingLeft && !spacingPaddingRight) {
+		classPaddingLR += ` ${prefix}-paddingLR-use`;
 	}
 
-	if (classPaddingLR === ` is-layout-constrained`) {
+	let containerClass = '';
+	if (contentWidth) {
 		containerClass = `${prefix}_container container`;
 	} else {
 		containerClass = `${prefix}_container`;
@@ -74,8 +63,8 @@ export default function save(props) {
 
 	const bgAreaStyles = {
 		backgroundColor: isHexColor(bgColor) ? bgColor : undefined,
-		paddingLeft: paddingValue,
-		paddingRight: paddingValue,
+		paddingLeft: spacingPaddingLeftVar,
+		paddingRight: spacingPaddingRightVar,
 	};
 
 	const GetBgImage = (
@@ -105,8 +94,8 @@ export default function save(props) {
 	const blockProps = useBlockProps.save({
 		className: `vk_slider_item swiper-slide vk_valign-${verticalAlignment} ${prefix}-${blockId} ${classPaddingLR} ${prefix}-paddingVertical-none`,
 		style: {
-			paddingLeft: paddingValue || spacingPaddingLeft,
-			paddingRight: paddingValue || spacingPaddingRight,
+			paddingLeft: spacingPaddingLeftVar,
+			paddingRight: spacingPaddingRightVar,
 		},
 	});
 	return (

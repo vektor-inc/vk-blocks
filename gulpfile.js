@@ -52,6 +52,10 @@ gulp.task('helper-js', (done) => {
 		.pipe(uglify())
 		.pipe(rename('vk-slider.min.js'))
 		.pipe(gulp.dest('./build/'));
+	gulp.src('src/extensions/core/group/view.js')
+		.pipe(uglify())
+		.pipe(rename('vk-group-scrollable.min.js'))
+		.pipe(gulp.dest('./build/'));
 	done();
 });
 

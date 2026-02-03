@@ -23,6 +23,7 @@ import { AdvancedColorPalette } from '@vkblocks/components/advanced-color-palett
 import { isHexColor } from '@vkblocks/utils/is-hex-color';
 import { isParentReusableBlock } from '@vkblocks/utils/is-parent-reusable-block';
 import LinkToolbar from '@vkblocks/components/link-toolbar';
+import { iconLabel } from '@vkblocks/utils/icon-label';
 
 export default function ButtonEdit(props) {
 	const { attributes, setAttributes, clientId } = props;
@@ -51,8 +52,6 @@ export default function ButtonEdit(props) {
 		old_1_31_0,
 	} = attributes;
 
-	// eslint-disable-next-line no-undef
-	const iconFamily = vkFontAwesome.iconFamily;
 	// 親ブロックが vk-blocks/button-outer かどうか判定
 	const parents = select('core/block-editor').getBlockParentsByBlockName(
 		clientId,
@@ -568,10 +567,7 @@ export default function ButtonEdit(props) {
 					</BaseControl>
 					<BaseControl>
 						<h4 className={`mt-0 mb-2`}>
-							{__('Icon', 'vk-blocks') +
-								' ( ' +
-								iconFamily +
-								' )'}
+							{iconLabel(__('Icon', 'vk-blocks'))}
 						</h4>
 						<BaseControl
 							id={`vk_block_button_fa_before_text`}

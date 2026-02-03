@@ -108,6 +108,20 @@ e.g.
 
 == Changelog ==
 
+= 1.116.0 =
+[ Add function ][ Core Group ] Add scroll hint for horizontal scrolling.
+[ Add function ] Add support for custom colors in the color palette.
+[ Add function ][ Blog Card Title (Pro) ] Added paragraph (p) tag option in addition to heading tags (h1-h6).
+[ Add function ][ Page List Ancestor ] Add color / space / border support
+[ Add function ][ Icon ] Added inherit parent element color option as default.
+[ Specification change ][ Slider item ] Fix Padding Control.
+[ Specification change ][ Select Post List ] Disabled links on the edit screen.
+[Bug Fix] Fixed an issue where, if the Font Awesome version could not be retrieved, the editor icon label would incorrectly display only “( )” at the end.
+[ Bug fix ][ Tab (Pro) ] Fixed an issue where FontAwesome icons configured in the editor settings panel were not displayed in tab labels.
+[ Bug fix ] Fix link to FontAwesome icon list to use new URL format for v7.
+[ Design Bug fix ][ Fixed Display (Pro) ] Fixed admin bar positioning for from-top/from-bottom positions.
+[ Other ][ Import Export Tool ] Removed license key from export settings. The license key checkbox has been removed from the export form, and exported JSON files will have an empty string for the license key field.
+
 = 1.115.2 =
 [ Bug fix ][ Slider item ] Fix width control.
 [ Other ] Font Awesome 7.1.0 support
@@ -123,11 +137,11 @@ e.g.
 [ Add function ][ Outer (Pro) ] Added HTML tag selection option.
 [ Specification change ][ Image / Flow / Balloon ] Reduce unnecessary style loads during split loading.
 [ Specification change ][ Slider / Outer ( Pro ) ] Add reset button on height setting panel.
+[ Bug fix ][ Outer ( Pro ) ] Fixed an issue where the layout broke in the editor.
 [ Design Bug Fix ][ Core Social Links ] Fixed unnecessary left padding for list block.
 [ Other ][ Import Export Tool ] Removed license key from export settings. The license key checkbox has been removed from the export form, and exported JSON files will have an empty string for the license key field.
 [ Other ] Refactored VK icons and style settings used in panels and toolbar buttons into a shared component.
 [ Other ][ Link Toolbar ] Improved CSS loading efficiency in split loading mode.
-[ Bug fix ][ Outer ( Pro ) ] Fixed an issue where the layout broke in the editor.
 
 = 1.114.2 =
 [ Bug fix ][ Grid Column Card (Pro) ] Automatically restore missing header, body, or footer inner blocks when editing with the visual editor.

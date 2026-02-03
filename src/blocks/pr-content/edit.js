@@ -21,6 +21,7 @@ import {
 } from './utils';
 import { PrContentMediaUploadEdit } from './mediaUpload';
 import { FontAwesome } from '@vkblocks/utils/font-awesome-new';
+import { iconLabel } from '@vkblocks/utils/icon-label';
 import parse from 'html-react-parser';
 
 export default function PrcontentEdit({ attributes, setAttributes, clientId }) {
@@ -41,8 +42,6 @@ export default function PrcontentEdit({ attributes, setAttributes, clientId }) {
 		fontAwesomeIconBefore,
 		fontAwesomeIconAfter,
 	} = attributes;
-	// eslint-disable-next-line no-undef
-	const iconFamily = vkFontAwesome.iconFamily;
 	const containerClass = getContainerClass(layout);
 	const btnClass = getButtonClass(buttonColorCustom);
 	const linkClass = getLinkClass(buttonColor, buttonColorCustom, buttonType);
@@ -209,10 +208,7 @@ export default function PrcontentEdit({ attributes, setAttributes, clientId }) {
 					</BaseControl>
 					<BaseControl id={`vk_prContent_icon-${clientId}`}>
 						<h4 className="mt-0 mb-2">
-							{__('Icon', 'vk-blocks') +
-								' ( ' +
-								iconFamily +
-								' )'}
+							{iconLabel(__('Icon', 'vk-blocks'))}
 						</h4>
 						<BaseControl
 							id={`vk_prContent_icon_beforeText${clientId}`}

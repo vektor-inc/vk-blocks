@@ -1,0 +1,77 @@
+/*-------------------------------------------*/
+/* スクロールヒント - 共通ベーススタイル
+/*-------------------------------------------*/
+@mixin scrollable-block-scroll-hint {
+	display: block;
+	text-align: right;
+	font-size: .85rem;
+	&:has(i:last-of-type ) {
+		margin-right: 3px;
+	}
+	i {
+		margin: 0;
+		&:first-of-type {
+			animation: shake-left 1.5s ease-in-out infinite;
+		}
+		&:last-of-type {
+			animation: shake-right 1.5s ease-in-out infinite;
+		}
+		// 視覚過敏対策: prefers-reduced-motionでアニメーションを停止
+		@media (prefers-reduced-motion: reduce) {
+			animation: none;
+		}
+ 	}
+  	/* 横揺れアニメーションの定義 */
+	@keyframes shake-left {
+		0% { transform: translateX(0); }
+		50% { transform: translateX(-3px); }
+		100% { transform: translateX(0); }
+	}
+	@keyframes shake-right {
+		0% { transform: translateX(0); }
+		50% { transform: translateX(3px); }
+		100% { transform: translateX(0); }
+	}
+}
+
+.vk-scroll-hint {
+	display: none;
+
+	// ブレークポイントの定義
+	$breakpoints: (
+		'mobile': 575.98px,
+		'tablet': 991.98px,
+		'pc': null, // PCはメディアクエリなし
+	);
+
+	// ブロックタイプの定義
+	$block-types: 'table', 'group';
+
+	// 各ブロックタイプとブレークポイントの組み合わせを生成
+	@each $block-type in $block-types {
+		@each $breakpoint-name, $max-width in $breakpoints {
+			$attr-value: '#{$block-type}-scrollable-#{$breakpoint-name}';
+			
+			&[data-scroll-breakpoint="#{$attr-value}"] {
+				@if $max-width {
+					@media (max-width: $max-width) {
+						@include scrollable-block-scroll-hint;
+					}
+				} @else {
+					@include scrollable-block-scroll-hint;
+				}
+			}
+		}
+	}
+
+	+ * {
+		margin-top: 0;
+	}
+}
+
+.editor-styles-wrapper {
+	.vk-scroll-hint {
+		@include scrollable-block-scroll-hint;
+	}
+}
+

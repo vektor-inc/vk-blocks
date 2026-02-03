@@ -1,0 +1,393 @@
+@use 'components/scroll-hint/styles/base' as *;
+
+/*-------------------------------------------*/
+/* スクロールヒント - グループブロック用
+/*-------------------------------------------*/
+
+// 共通のテキスト要素セレクタ
+$text-elements: p, h1, h2, h3, h4, h5, h6, li, span, div;
+
+// 横並びレイアウトの共通パターン
+@mixin horizontal-layout {
+	flex-wrap: nowrap;
+
+	> * {
+		flex-shrink: 0;
+	}
+}
+
+@mixin scrollable-group-default-child-layout(
+	$set-display: false,
+	$include-grid-auto-columns: true
+) {
+	@if $set-display {
+		display: block;
+	}
+
+	> *:not(.is-layout-grid):not(.is-layout-flex) {
+		width: 100%;
+	}
+
+	> .is-layout-grid,
+	> .is-layout-flex {
+		width: auto;
+	}
+
+	> .wp-block-group.is-layout-grid {
+		grid-template-columns: none;
+		grid-auto-flow: column;
+
+		@if $include-grid-auto-columns {
+			grid-auto-columns: 100%;
+		}
+	}
+
+	> .wp-block-group.is-layout-flex {
+		@include horizontal-layout;
+	}
+}
+
+// 横スクロール
+@mixin scrollable-group {
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+	// モバイルでのオーバースクロール連鎖を抑制
+	overscroll-behavior-inline: contain;
+
+	@include scrollable-group-default-child-layout(true, true);
+
+	// カラムブロックを横並びに保つ
+	&.wp-block-columns,
+	.wp-block-columns {
+		flex-wrap: nowrap;
+		align-items: stretch;
+
+		.wp-block-column {
+			flex-shrink: 0;
+
+			// 注意: テーブルモード（data-table-mode="true"）が有効な場合、
+			// view.jsのprocessGroupBlock()関数によって、.wp-block-columnに
+			// min-widthが動的に設定されます。これにより、複数の行にわたって
+			// 同じ列位置のカラム幅が統一され、テーブルのような見た目になります。
+
+			// カラム内のすべての要素がコンテンツ幅に合わせる
+			> * {
+				max-width: 100%;
+			}
+
+			// テキスト要素は特に最大幅を基準にする
+			> p,
+			> h1,
+			> h2,
+			> h3,
+			> h4,
+			> h5,
+			> h6 {
+				max-width: 100%;
+			}
+		}
+	}
+
+	// テーブルモード以外の場合、各カラムがコンテンツ幅に応じた幅を持つようにする
+	&:not([data-table-mode="true"]) {
+		&.wp-block-columns,
+		.wp-block-columns {
+			.wp-block-column {
+				min-width: max-content;
+			}
+		}
+	}
+
+	// テキスト要素をnowrapにする（オプションが有効な場合のみ）
+	&[data-text-nowrap="true"] {
+		// グループ内のすべてのテキスト要素
+		#{$text-elements} {
+			white-space: nowrap;
+		}
+
+		// カラムブロック内のテキスト要素
+		&.wp-block-columns,
+		.wp-block-columns {
+			.wp-block-column {
+				#{$text-elements} {
+					white-space: nowrap;
+				}
+			}
+		}
+	}
+
+	// グリッドカラムブロックを横並びに保つ
+	.vk_gridColumn {
+		flex-wrap: nowrap;
+
+		.row {
+			flex-wrap: nowrap;
+		}
+
+		> [class*="col-"],
+		[class*="col-"] {
+			flex-shrink: 0;
+			width: auto;
+			flex: none;
+			max-width: none;
+		}
+	}
+
+	// グリッドカラムカードブロックを横並びに保つ
+	.vk_gridcolcard {
+		// インラインスタイルで設定されたgrid-template-columnsを上書き
+		grid-template-columns: none;
+		grid-auto-flow: column;
+		grid-auto-columns: max-content;
+
+		> * {
+			flex-shrink: 0;
+		}
+	}
+
+	// カードブロックを横並びに保つ
+	.vk_posts {
+		@include horizontal-layout;
+
+		.wp-block-vk-blocks-card-item {
+			width: auto;
+		}
+	}
+
+	// 横並びボタンブロックを横並びに保つ
+	.vk_buttons,
+	.vk_buttons_col {
+		@include horizontal-layout;
+	}
+
+	// 横並びアイコンブロックを横並びに保つ
+	.vk_icons,
+	.vk_icons_col {
+		@include horizontal-layout;
+	}
+
+	// アイコンカードブロックを横並びに保つ
+	.wp-block-vk-blocks-icon-card {
+		@include horizontal-layout;
+
+		.vk_icon-card_item,
+		.wp-block-vk-blocks-icon-card-item {
+			width: auto;
+		}
+	}
+
+	// ギャラリーブロックを横並びに保つ
+	.wp-block-gallery {
+		@include horizontal-layout;
+
+		.wp-block-image,
+		.wp-block-gallery-item {
+			flex-shrink: 0;
+		}
+	}
+
+	// ソーシャルリンクブロックを横並びに保つ
+	.wp-block-social-links {
+		@include horizontal-layout;
+
+		.wp-social-link {
+			flex-shrink: 0;
+		}
+	}
+}
+
+@mixin scrollable-group-editor {
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+
+	@include scrollable-group-default-child-layout(false, false);
+
+	// カラムブロックを横並びに保つ
+	&.wp-block-columns,
+	.wp-block-columns {
+		flex-wrap: nowrap;
+		align-items: stretch;
+
+		.wp-block-column {
+			flex-shrink: 0;
+
+			// カラム内のすべての要素がコンテンツ幅に合わせる
+			> * {
+				max-width: 100%;
+			}
+
+			// テキスト要素は特に最大幅を基準にする
+			> p,
+			> h1,
+			> h2,
+			> h3,
+			> h4,
+			> h5,
+			> h6 {
+				width: max-content;
+				max-width: 100%;
+			}
+		}
+	}
+
+	// テーブルモード以外の場合、各カラムがコンテンツ幅に応じた幅を持つようにする
+	&:not([data-table-mode="true"]) {
+		&.wp-block-columns,
+		.wp-block-columns {
+			.wp-block-column {
+				min-width: max-content;
+			}
+		}
+	}
+
+	// テキスト要素をnowrapにする（オプションが有効な場合のみ）
+	&[data-text-nowrap="true"] {
+		// グループ内のすべてのテキスト要素
+		#{$text-elements} {
+			white-space: nowrap;
+		}
+
+		// 編集画面のリッチテキストエディタ用
+		div[role="textbox"] {
+			white-space: nowrap !important;
+		}
+
+		// カラムブロック内のテキスト要素
+		&.wp-block-columns,
+		.wp-block-columns {
+			.wp-block-column {
+				#{$text-elements} {
+					white-space: nowrap;
+				}
+			}
+		}
+	}
+
+	// グリッドカラムブロックを横並びに保つ
+	.vk_gridColumn {
+		flex-wrap: nowrap;
+
+		.row {
+			flex-wrap: nowrap;
+		}
+
+		> [class*="col-"],
+		[class*="col-"] {
+			flex-shrink: 0;
+			width: auto;
+			flex: none;
+			max-width: none;
+		}
+	}
+
+	// グリッドカラムカードブロックを横並びに保つ
+	.vk_gridcolcard {
+		// インラインスタイルで設定されたgrid-template-columnsを上書き
+		grid-template-columns: none;
+		grid-auto-flow: column;
+		grid-auto-columns: max-content;
+
+		> * {
+			flex-shrink: 0;
+		}
+	}
+
+	// カードブロックを横並びに保つ
+	.vk_posts {
+		@include horizontal-layout;
+
+		.wp-block-vk-blocks-card-item {
+			width: auto;
+		}
+	}
+
+	// 横並びボタンブロックを横並びに保つ
+	.vk_buttons,
+	.vk_buttons_col {
+		@include horizontal-layout;
+	}
+
+	// 横並びアイコンブロックを横並びに保つ
+	.vk_icons,
+	.vk_icons_col {
+		@include horizontal-layout;
+	}
+
+	// アイコンカードブロックを横並びに保つ
+	.wp-block-vk-blocks-icon-card {
+		@include horizontal-layout;
+
+		.vk_icon-card_item,
+		.wp-block-vk-blocks-icon-card-item {
+			width: auto;
+		}
+	}
+
+	// ギャラリーブロックを横並びに保つ
+	.wp-block-gallery {
+		@include horizontal-layout;
+
+		.wp-block-image,
+		.wp-block-gallery-item {
+			flex-shrink: 0;
+		}
+	}
+
+	// ソーシャルリンクブロックを横並びに保つ
+	.wp-block-social-links {
+		@include horizontal-layout;
+
+		.wp-social-link {
+			flex-shrink: 0;
+		}
+	}
+}
+
+/*      フロントエンド
+/*-------------------------------------------*/
+.wp-block-group {
+	&.is-style-vk-group-scrollable {
+
+		&[data-scroll-breakpoint="group-scrollable-mobile"] {
+			@media (max-width: 575.98px) {
+				@include scrollable-group;
+			}
+		}
+
+		&[data-scroll-breakpoint="group-scrollable-tablet"] {
+			@media (max-width: 991.98px) {
+				@include scrollable-group;
+			}
+		}
+
+		&[data-scroll-breakpoint="group-scrollable-pc"] {
+			@include scrollable-group;
+		}
+	}
+}
+
+/*      編集画面
+/*-------------------------------------------*/
+.editor-styles-wrapper {
+	.wp-block-group {
+		&.is-style-vk-group-scrollable {
+
+			&[data-scroll-breakpoint="group-scrollable-mobile"] {
+				@media (max-width: 575.98px) {
+					@include scrollable-group-editor;
+				}
+			}
+
+			&[data-scroll-breakpoint="group-scrollable-tablet"] {
+				@media (max-width: 991.98px) {
+					@include scrollable-group-editor;
+				}
+			}
+
+			&[data-scroll-breakpoint="group-scrollable-pc"] {
+				@include scrollable-group-editor;
+			}
+		}
+	}
+}
+

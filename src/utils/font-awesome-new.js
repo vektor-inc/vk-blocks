@@ -1,3 +1,4 @@
+/* global vkFontAwesome */
 /**
  * WordPress dependencies
  */
@@ -35,6 +36,7 @@ import {
 	isFontAwesomeConfigChanged,
 	serializeFontAwesomeConfig,
 } from '@vkblocks/utils/font-awesome-version';
+import { iconLabel } from '@vkblocks/utils/icon-label';
 
 const FontAwesomeIconList = [
 	'<i class="fa-solid fa-arrow-right"></i>',
@@ -83,13 +85,16 @@ export const FontAwesome = (props) => {
 		modeClass = false,
 	} = props;
 	// eslint-disable-next-line no-undef
-	const iconsUrl = vkFontAwesome.iconsUrl;
+	const hasVkFontAwesome =
+		typeof vkFontAwesome !== 'undefined' && vkFontAwesome;
 	// eslint-disable-next-line no-undef
-	const iconFamily = vkFontAwesome.iconFamily;
+	const iconsUrl = hasVkFontAwesome ? vkFontAwesome.iconsUrl : '';
 	// eslint-disable-next-line no-undef
-	const versions = vkFontAwesome.versions;
+	const versions = hasVkFontAwesome ? vkFontAwesome.versions : [];
 	// eslint-disable-next-line no-undef
-	const currentVersion = vkFontAwesome.currentVersion;
+	const currentVersion = hasVkFontAwesome
+		? vkFontAwesome.currentVersion
+		: undefined;
 	const REST_API_ROUTE = '/vk-blocks/v1/options/vk_font_awesome_version/';
 	const [isWaiting, setIsWaiting] = useState(false);
 	const [version, setVersion] = useState();
@@ -194,7 +199,7 @@ export const FontAwesome = (props) => {
 			<BaseControl
 				className={'components-base-control__label'}
 				id={`vk_fa_icon_list`}
-				label={__('Icon', 'vk-blocks') + ' ( ' + iconFamily + ' ) '}
+				label={iconLabel(__('Icon', 'vk-blocks'))}
 			>
 				<div className="vk_icon_list_wrap">
 					{existsIconPreset && (

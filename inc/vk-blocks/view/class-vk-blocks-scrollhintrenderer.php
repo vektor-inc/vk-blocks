@@ -41,7 +41,7 @@ class VK_Blocks_ScrollHintRenderer {
 
 		$processor = new WP_HTML_Tag_Processor( $block_content );
 
-		// 'is-style-vk-*-scrollable' クラスを持つ任意のタグにスクロールヒントを適用
+		// 'is-style-vk-*-scrollable' クラスを持つ最初のタグにスクロールヒントを適用
 		if ( $processor->next_tag() && preg_match( '/is-style-vk-[a-zA-Z0-9_-]+-scrollable/', $processor->get_attribute( 'class' ) ) ) {
 			// vk_hidden や vk_hidden-XXX のすべてのクラスを抽出
 			$hidden_classes = array();
@@ -51,8 +51,13 @@ class VK_Blocks_ScrollHintRenderer {
 
 			$scroll_hint = self::generate_scroll_hint( $block, $hidden_classes );
 
-			// マッチしたタグの前にスクロールヒントを挿入
-			$block_content = preg_replace( '/(<[^>]*class="[^"]*is-style-vk-[a-zA-Z0-9_-]+-scrollable[^"]*"[^>]*>)/i', $scroll_hint . '$1', $block_content );
+			// 空のスクロールヒントの場合は何もしない
+			if ( empty( $scroll_hint ) ) {
+				return $block_content;
+			}
+
+			// マッチした最初のタグの前にスクロールヒントを挿入（limit=1で最初のマッチのみ）
+			$block_content = preg_replace( '/(<[^>]*class="[^"]*is-style-vk-[a-zA-Z0-9_-]+-scrollable[^"]*"[^>]*>)/i', $scroll_hint . '$1', $block_content, 1 );
 		}
 
 		return $block_content;
@@ -67,6 +72,16 @@ class VK_Blocks_ScrollHintRenderer {
 	 */
 	public static function generate_scroll_hint( $block, $hidden_classes = array() ) {
 
+		// ブロックタイプに応じてデフォルトのブレークポイントを設定
+		$default_breakpoint = 'table-scrollable-mobile';
+		if ( isset( $block['blockName'] ) ) {
+			if ( 'core/group' === $block['blockName'] ) {
+				$default_breakpoint = 'group-scrollable-mobile';
+			} elseif ( 'core/table' === $block['blockName'] ) {
+				$default_breakpoint = 'table-scrollable-mobile';
+			}
+		}
+
 		// デフォルトの設定を一括で処理
 		$default_attrs = array(
 			'scrollMessageText' => __( 'You can scroll', 'vk-blocks' ),
@@ -74,12 +89,13 @@ class VK_Blocks_ScrollHintRenderer {
 			'iconOutputRight'   => true,
 			'scrollIconLeft'    => 'fa-solid fa-caret-left',
 			'scrollIconRight'   => 'fa-solid fa-caret-right',
-			'scrollBreakpoint'  => apply_filters( 'vk_blocks_default_scroll_breakpoint', 'table-scrollable-mobile', $block ),
+			'scrollBreakpoint'  => apply_filters( 'vk_blocks_default_scroll_breakpoint', $default_breakpoint, $block ),
 			'showScrollMessage' => false,
 		);
 
 		// ブロックの属性をデフォルト設定で上書き
-		$attrs = wp_parse_args( $block['attrs'], $default_attrs );
+		$block_attrs = isset( $block['attrs'] ) ? $block['attrs'] : array();
+		$attrs       = wp_parse_args( $block_attrs, $default_attrs );
 
 		// アイコンHTMLを生成
 		$left_icon_html  = $attrs['iconOutputLeft'] ? '<i class="' . esc_attr( $attrs['scrollIconLeft'] ) . '"></i>' : '';

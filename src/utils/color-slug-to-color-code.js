@@ -10,6 +10,11 @@ import { select } from '@wordpress/data';
 export const colorSlugToColorCode = (color) => {
 	let colorCode;
 	if (color) {
+		// inheritの場合はundefinedを返す（パレットに表示されない）
+		if (color === 'inherit') {
+			return undefined;
+		}
+
 		// カラーパレットの色名・スラッグ・カラーコードを取得
 		const colorSet = select('core/block-editor').getSettings().colors;
 
