@@ -108,6 +108,10 @@ e.g.
 
 == Changelog ==
 
+= 1.116.1 =
+[ Bug fix ][ Fixed Display (Pro) ] Fixed an issue where guest actions could affect other visitors' fixed display visibility.
+[ Design Bug fix ][ Core Group ] Fixed issue where horizontal scroll cannot scroll fully when horizontal group blocks are nested inside scrollable group blocks.
+
 = 1.116.0 =
 [ Add function ][ Core Group ] Add scroll hint for horizontal scrolling.
 [ Add function ] Add support for custom colors in the color palette.
@@ -116,7 +120,7 @@ e.g.
 [ Add function ][ Icon ] Added inherit parent element color option as default.
 [ Specification change ][ Slider item ] Fix Padding Control.
 [ Specification change ][ Select Post List ] Disabled links on the edit screen.
-[Bug Fix] Fixed an issue where, if the Font Awesome version could not be retrieved, the editor icon label would incorrectly display only “( )” at the end.
+[ Bug Fix ] Fixed an issue where, if the Font Awesome version could not be retrieved, the editor icon label would incorrectly display only “( )” at the end.
 [ Bug fix ][ Tab (Pro) ] Fixed an issue where FontAwesome icons configured in the editor settings panel were not displayed in tab labels.
 [ Bug fix ] Fix link to FontAwesome icon list to use new URL format for v7.
 [ Design Bug fix ][ Fixed Display (Pro) ] Fixed admin bar positioning for from-top/from-bottom positions.

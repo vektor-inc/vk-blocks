@@ -3,7 +3,7 @@
  * Plugin Name: VK Blocks
  * Plugin URI: https://github.com/vektor-inc/vk-blocks
  * Description: This is a plugin that extends Block Editor.
- * Version: 1.116.0.1
+ * Version: 1.116.1.0
  * Requires at least: 6.5
  * Author: Vektor,Inc.
  * Author URI: https://vektor-inc.co.jp
@@ -283,9 +283,9 @@ if ( function_exists( 'vk_blocks_is_pro' ) && vk_blocks_is_pro() ) {
 			}
 
 			// 条件に応じて認証結果を返す.
-			if ( 'katawara' === $template || false === $is_pro ) {
+			if ( 'katawara' === $template || 'smaveksive' === $template || false === $is_pro ) {
 
-				// Katawara と無料版はライセンス認証免除対象なので 'exemption' を返す
+				// Katawara と SmaVeksive と無料版はライセンス認証免除対象なので 'exemption' を返す
 				$check_result = 'exemption';
 			} elseif ( empty( $license_key ) ) {
 

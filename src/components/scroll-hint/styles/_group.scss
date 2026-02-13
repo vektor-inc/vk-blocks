@@ -43,6 +43,8 @@ $text-elements: p, h1, h2, h3, h4, h5, h6, li, span, div;
 	}
 
 	> .wp-block-group.is-layout-flex {
+		// 中身の幅に追従させて、はみ出し分もスクロール可能にする
+		min-width: max-content;
 		@include horizontal-layout;
 	}
 }
@@ -51,6 +53,8 @@ $text-elements: p, h1, h2, h3, h4, h5, h6, li, span, div;
 @mixin scrollable-group {
 	overflow-x: auto;
 	-webkit-overflow-scrolling: touch;
+	// padding を幅に含めて、要素自体のはみ出しを抑制
+	box-sizing: border-box;
 	// モバイルでのオーバースクロール連鎖を抑制
 	overscroll-behavior-inline: contain;
 
@@ -199,6 +203,7 @@ $text-elements: p, h1, h2, h3, h4, h5, h6, li, span, div;
 @mixin scrollable-group-editor {
 	overflow-x: auto;
 	-webkit-overflow-scrolling: touch;
+	box-sizing: border-box;
 
 	@include scrollable-group-default-child-layout(false, false);
 
