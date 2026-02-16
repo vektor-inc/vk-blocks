@@ -68,6 +68,9 @@ addFilter('blocks.registerBlockType', 'vk-blocks/table-style', addAttribute);
 export const addBlockControl = createHigherOrderComponent((BlockEdit) => {
 	return (props) => {
 		const { attributes, setAttributes, name } = props;
+		if (!isValidBlockType(name)) {
+			return <BlockEdit {...props} />;
+		}
 		const {
 			scrollable,
 			scrollBreakpoint,
@@ -130,13 +133,14 @@ export const addBlockControl = createHigherOrderComponent((BlockEdit) => {
 			const checkTableScrollAttributes = () => {
 				const tables = document.querySelectorAll('.wp-block-table');
 				tables.forEach((table) => {
+					const hasScrollableClass = table.classList.contains(
+						'is-style-vk-table-scrollable'
+					);
+					const hasBreakpointAttr = table.hasAttribute(
+						'data-scroll-breakpoint'
+					);
 					// もし is-style-vk-table-scrollable クラスや data-scroll-breakpoint 属性がついていたら scrollable を ON に設定
-					if (
-						table.classList.contains(
-							'is-style-vk-table-scrollable'
-						) ||
-						table.hasAttribute('data-scroll-breakpoint')
-					) {
+					if (hasScrollableClass || hasBreakpointAttr) {
 						setAttributes({ scrollable: true });
 					}
 				});
@@ -216,7 +220,7 @@ export const addBlockControl = createHigherOrderComponent((BlockEdit) => {
 			cellVerticalBreakpoint,
 		]);
 
-		if (isValidBlockType(name) && props.isSelected) {
+		if (props.isSelected) {
 			const blockEditContent = <BlockEdit {...props} />;
 
 			return (
@@ -377,8 +381,9 @@ const addExtraProps = (saveElementProps, blockType, attributes) => {
 		} else {
 			delete saveElementProps['data-icon-output-right'];
 		}
-	} else {
+	} else if (blockType.name !== 'core/group') {
 		// 他のブロックでは不要な属性を削除
+		// core/group はグループブロック独自の横スクロール機能で data-scroll-breakpoint 等を使用するため除外
 		delete saveElementProps['data-scroll-breakpoint'];
 		delete saveElementProps['data-output-scroll-hint'];
 		delete saveElementProps['data-icon-output-left'];

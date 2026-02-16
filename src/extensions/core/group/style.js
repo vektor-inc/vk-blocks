@@ -190,6 +190,9 @@ export const addBlockControl = createHigherOrderComponent((BlockEdit) => {
 
 	return (props) => {
 		const { attributes, setAttributes, name, clientId } = props;
+		if (!isValidBlockType(name)) {
+			return <BlockEdit {...props} />;
+		}
 		const {
 			scrollable,
 			scrollableAutoDisabled,
@@ -1228,8 +1231,9 @@ const addExtraProps = (saveElementProps, blockType, attributes) => {
 				);
 			}
 		}
-	} else {
+	} else if (blockType.name !== 'core/table') {
 		// 他のブロックでは不要な属性を削除
+		// core/table はテーブルブロック独自の横スクロール機能で data-scroll-breakpoint 等を使用するため除外
 		delete saveElementProps['data-scroll-breakpoint'];
 		delete saveElementProps['data-output-scroll-hint'];
 		delete saveElementProps['data-icon-output-left'];

@@ -108,6 +108,10 @@ e.g.
 
 == Changelog ==
 
+= 1.116.2 =
+[ Bug fix ][ Blog Card ( Pro ) ] Fixed external metadata fetching to support relative and protocol-relative URLs, and correctly retrieve information from category and archive pages.
+[ Bug fix ][ Core Table / Core Group ] Fixed an issue where horizontal scroll settings interfered between Table and Group blocks.
+
 = 1.116.1 =
 [ Bug fix ][ Fixed Display (Pro) ] Fixed an issue where guest actions could affect other visitors' fixed display visibility.
 [ Design Bug fix ][ Core Group ] Fixed issue where horizontal scroll cannot scroll fully when horizontal group blocks are nested inside scrollable group blocks.
