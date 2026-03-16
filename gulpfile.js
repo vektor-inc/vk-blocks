@@ -4,14 +4,18 @@ const sass = require('gulp-sass')(require('sass'));
 const autoprefixer = require('gulp-autoprefixer');
 const replace = require('gulp-replace');
 const uglify = require('gulp-uglify');
-const rename = require('gulp-rename');
 const plumber = require('gulp-plumber');
 const notify = require('gulp-notify');
 const path = require('path');
+const { finished } = require('stream/promises');
+
+const waitForStream = (stream) => finished(stream);
 
 // replace_text_domain
-gulp.task('text-domain-free', (done) => {
-	gulp.src(['./inc/**',])
+gulp.task('text-domain-free', () => {
+	return Promise.all([
+		waitForStream(
+			gulp.src(['./inc/**',])
 		.pipe(replace(/__\(\s*?(['"`].*?['"`]),\s*?['"`]vk-blocks-pro['"`]\s*?\)/gm, "__( $1, 'vk-blocks' )"))
 		.pipe(replace(/_e\(\s*?(['"`].*?['"`]),\s*?['"`]vk-blocks-pro['"`]\s*?\)/gm, "_e( $1, 'vk-blocks' )"))
 		.pipe(replace(/_n_noop\(\s*?(['"`].*?['"`]),\s*?(['"`].*?['"`]),\s*?['"`]vk-blocks-pro['"`]\s*?\)/gm, "_n_noop( $1, $2, 'vk-blocks' )"))
@@ -19,80 +23,109 @@ gulp.task('text-domain-free', (done) => {
 		.pipe(replace("$vk_blocks_components_textdomain = 'vk-blocks-pro';", "$vk_blocks_components_textdomain = 'vk-blocks';"))
 		.pipe(replace("wp_set_script_translations( 'vk-blocks-admin-js', 'vk-blocks-pro', VK_BLOCKS_DIR_PATH . 'languages' );", "wp_set_script_translations( 'vk-blocks-admin-js', 'vk-blocks' );"))
 		.pipe(replace("wp_set_script_translations( 'vk-blocks-build-js', 'vk-blocks-pro', VK_BLOCKS_DIR_PATH . 'languages' );", "wp_set_script_translations( 'vk-blocks-build-js', 'vk-blocks' );"))
-		.pipe(gulp.dest('./inc/'));
-	gulp.src(['./src/**'])
+		.pipe(gulp.dest('./inc/'))
+		),
+		waitForStream(
+			gulp.src(['./src/**'])
 		.pipe(replace(/__\(\s*?(['"`].*?['"`]),\s*?['"`]vk-blocks-pro['"`]\s*?\)/gsm, "__( $1, 'vk-blocks' )"))
 		.pipe(replace(/_e\(\s*?(['"`].*?['"`]),\s*?['"`]vk-blocks-pro['"`]\s*?\)/gsm, "_e( $1, 'vk-blocks' )"))
 		.pipe(replace(/_n_noop\(\s*?(['"`].*?['"`]),\s*?(['"`].*?['"`]),\s*?['"`]vk-blocks-pro['"`]\s*?\)/gsm, "_n_noop( $1, $2, 'vk-blocks' )"))
 		.pipe(replace(/_x\(\s*?(['"`].*?['"`]),\s*?(['"`].*?['"`]),\s*?['"`]vk-blocks-pro['"`]\s*?\)/gsm, "_x( $1, $2, 'vk-blocks' )"))
 		.pipe(replace(/"textdomain":\s*?["']vk-blocks-pro["']/gsm, '"textdomain": "vk-blocks"'))
-		.pipe(gulp.dest('./src/'));
-	gulp.src(['./test/**'])
+		.pipe(gulp.dest('./src/'))
+		),
+		waitForStream(
+			gulp.src(['./test/**'])
 		.pipe(replace(/__\(\s*?(['"`].*?['"`]),\s*?['"`]vk-blocks-pro['"`]\s*?\)/gm, "__( $1, 'vk-blocks' )"))
 		.pipe(replace(/_e\(\s*?(['"`].*?['"`]),\s*?['"`]vk-blocks-pro['"`]\s*?\)/gm, "_e( $1, 'vk-blocks' )"))
 		.pipe(replace(/_n_noop\(\s*?(['"`].*?['"`]),\s*?(['"`].*?['"`]),\s*?['"`]vk-blocks-pro['"`]\s*?\)/gm, "_n_noop( $1, $2, 'vk-blocks' )"))
 		.pipe(replace(/_x\(\s*?(['"`].*?['"`]),\s*?(['"`].*?['"`]),\s*?['"`]vk-blocks-pro['"`]\s*?\)/gm, "_x( $1, $2, 'vk-blocks' )"))
-		.pipe(gulp.dest('./test/'));
-	gulp.src(['./vk-blocks.php'])
+		.pipe(gulp.dest('./test/'))
+		),
+		waitForStream(
+			gulp.src(['./vk-blocks.php'])
 		.pipe(replace(/__\(\s*?(['"`].*?['"`]),\s*?['"`]vk-blocks-pro['"`]\s*?\)/gm, "__( $1, 'vk-blocks' )"))
 		.pipe(replace(/_e\(\s*?(['"`].*?['"`]),\s*?['"`]vk-blocks-pro['"`]\s*?\)/gm, "_e( $1, 'vk-blocks' )"))
 		.pipe(replace(/_n_noop\(\s*?(['"`].*?['"`]),\s*?(['"`].*?['"`]),\s*?['"`]vk-blocks-pro['"`]\s*?\)/gm, "_n_noop( $1, $2, 'vk-blocks' )"))
 		.pipe(replace(/_x\(\s*?(['"`].*?['"`]),\s*?(['"`].*?['"`]),\s*?['"`]vk-blocks-pro['"`]\s*?\)/gm, "_x( $1, $2, 'vk-blocks' )"))
 		.pipe(replace("Text Domain: vk-blocks-pro", "Text Domain: vk-blocks"))
-		.pipe(gulp.dest('./'));
-	done();
+		.pipe(gulp.dest('./'))
+		),
+	]);
 });
 
-gulp.task('helper-js', (done) => {
-	gulp.src('src/blocks/faq2/view.js')
+gulp.task('helper-js', () => {
+	return Promise.all([
+		waitForStream(
+			gulp.src('src/blocks/faq2/view.js')
 		.pipe(uglify())
-		.pipe(rename('vk-faq2.min.js'))
-		.pipe(gulp.dest('./build/'));
-	gulp.src('src/blocks/slider/view.js')
+		.pipe(concat('vk-faq2.min.js'))
+		.pipe(gulp.dest('./build/'))
+		),
+		waitForStream(
+			gulp.src('src/blocks/slider/view.js')
 		.pipe(uglify())
-		.pipe(rename('vk-slider.min.js'))
-		.pipe(gulp.dest('./build/'));
-	gulp.src('src/extensions/core/group/view.js')
+		.pipe(concat('vk-slider.min.js'))
+		.pipe(gulp.dest('./build/'))
+		),
+		waitForStream(
+			gulp.src('src/extensions/core/group/view.js')
 		.pipe(uglify())
-		.pipe(rename('vk-group-scrollable.min.js'))
-		.pipe(gulp.dest('./build/'));
-	done();
+		.pipe(concat('vk-group-scrollable.min.js'))
+		.pipe(gulp.dest('./build/'))
+		),
+	]);
 });
 
-gulp.task('helper-js-pro', (done) => {
-	gulp.src('src/blocks/_pro/accordion/view.js')
+gulp.task('helper-js-pro', () => {
+	return Promise.all([
+		waitForStream(
+			gulp.src('src/blocks/_pro/accordion/view.js')
 		.pipe(uglify())
-		.pipe(rename('vk-accordion.min.js'))
-		.pipe(gulp.dest('./build/'));
-	gulp.src('src/blocks/_pro/animation/view.js')
+		.pipe(concat('vk-accordion.min.js'))
+		.pipe(gulp.dest('./build/'))
+		),
+		waitForStream(
+			gulp.src('src/blocks/_pro/animation/view.js')
 		.pipe(uglify())
-		.pipe(rename('vk-animation.min.js'))
-		.pipe(gulp.dest('./build/'));
-	gulp.src('src/blocks/_pro/breadcrumb/view.js')
+		.pipe(concat('vk-animation.min.js'))
+		.pipe(gulp.dest('./build/'))
+		),
+		waitForStream(
+			gulp.src('src/blocks/_pro/breadcrumb/view.js')
 		.pipe(uglify())
-		.pipe(rename('vk-breadcrumb.min.js'))
-		.pipe(gulp.dest('./build/'));
-	gulp.src('src/blocks/_pro/fixed-display/view.js')
+		.pipe(concat('vk-breadcrumb.min.js'))
+		.pipe(gulp.dest('./build/'))
+		),
+		waitForStream(
+			gulp.src('src/blocks/_pro/fixed-display/view.js')
 		.pipe(uglify())
-		.pipe(rename('vk-fixed-display.min.js'))
-		.pipe(gulp.dest('./build/'));
-	gulp.src('src/blocks/_pro/tab/view.js')
+		.pipe(concat('vk-fixed-display.min.js'))
+		.pipe(gulp.dest('./build/'))
+		),
+		waitForStream(
+			gulp.src('src/blocks/_pro/tab/view.js')
 		.pipe(uglify())
-		.pipe(rename('vk-tab.min.js'))
-		.pipe(gulp.dest('./build/'));
-	gulp.src('src/blocks/_pro/table-of-contents-new/view.js')
+		.pipe(concat('vk-tab.min.js'))
+		.pipe(gulp.dest('./build/'))
+		),
+		waitForStream(
+			gulp.src('src/blocks/_pro/table-of-contents-new/view.js')
 		.pipe(uglify())
-		.pipe(rename('vk-table-of-contents-new.min.js'))
-		.pipe(gulp.dest('./build/'));
-	gulp.src('src/blocks/_pro/post-list-slider/view.js')
+		.pipe(concat('vk-table-of-contents-new.min.js'))
+		.pipe(gulp.dest('./build/'))
+		),
+		waitForStream(
+			gulp.src('src/blocks/_pro/post-list-slider/view.js')
 		.pipe(uglify())
-		.pipe(rename('vk-post-list-slider.min.js'))
-		.pipe(gulp.dest('./build/'));
-	done();
+		.pipe(concat('vk-post-list-slider.min.js'))
+		.pipe(gulp.dest('./build/'))
+		),
+	]);
 });
 
-gulp.task('sass', (done) => {
-	gulp.src(['./src/**/*.scss'])
+gulp.task('sass', () => {
+	return gulp.src(['./src/**/*.scss'])
 		.pipe(
 			plumber({
 				errorHandler: notify.onError('<%= error.message %>'),
@@ -108,11 +141,10 @@ gulp.task('sass', (done) => {
 		.pipe(autoprefixer())
 		.pipe(concat('block-build.css'))
 		.pipe(gulp.dest('./build/'));
-	done();
 });
 
-gulp.task('sass_editor', (done) => {
-	gulp.src([
+gulp.task('sass_editor', () => {
+	return gulp.src([
 		'./editor-css/_editor_common_core.scss',
 		'./editor-css/_editor_before.scss',
 		'./editor-css/_editor_after.scss',
@@ -129,12 +161,11 @@ gulp.task('sass_editor', (done) => {
 		.pipe(autoprefixer())
 		.pipe(concat('block-build-editor.css'))
 		.pipe(gulp.dest('./build/'));
-	done();
 });
 
 // vk_blocks_options管理画面 css
-gulp.task('sass_vk_blocks_options', (done) => {
-	gulp.src(['./options-css/*.scss'])
+gulp.task('sass_vk_blocks_options', () => {
+	return gulp.src(['./options-css/*.scss'])
 		.pipe(
 			sass({
 				errLogToConsole: true,
@@ -144,13 +175,12 @@ gulp.task('sass_vk_blocks_options', (done) => {
 		.pipe(autoprefixer())
 		.pipe(concat('vk_blocks_options.css'))
 		.pipe(gulp.dest('./build/'));
-	done();
 });
 
 // VK Block で使用しているBootstrapのみコンパイル
 // ※ Lightning 以外のテーマで利用の際に読込
-gulp.task('sass_bootstrap', (done) => {
-	gulp.src(['./lib/bootstrap/scss/bootstrap.scss'])
+gulp.task('sass_bootstrap', () => {
+	return gulp.src(['./lib/bootstrap/scss/bootstrap.scss'])
 		.pipe(
 			sass({
 				errLogToConsole: true,
@@ -160,13 +190,12 @@ gulp.task('sass_bootstrap', (done) => {
 		.pipe(autoprefixer())
 		.pipe(concat('bootstrap_vk_using.css'))
 		.pipe(gulp.dest('./build/'));
-	done();
 });
 
 // VK Block で使用しているBootstrapのみコンパイル
 // ※ Lightning 以外のテーマで利用の際に読込
-gulp.task('sass_vk_components', (done) => {
-	gulp.src(['./vendor/vektor-inc/vk-component/src/assets/scss'])
+gulp.task('sass_vk_components', () => {
+	return gulp.src(['./vendor/vektor-inc/vk-component/src/assets/scss'])
 		.pipe(
 			sass({
 				errLogToConsole: true,
@@ -176,12 +205,13 @@ gulp.task('sass_vk_components', (done) => {
 		.pipe(autoprefixer())
 		.pipe(concat('vk-components.css'))
 		.pipe(gulp.dest('./build/'));
-	done();
 });
 
 // ブロックごとのscssそれぞれビルド free
-gulp.task('sass-separate-free', (done) => {
-	gulp.src('./src/blocks/**/*.scss')
+gulp.task('sass-separate-free', () => {
+	return Promise.all([
+		waitForStream(
+			gulp.src('./src/blocks/**/*.scss')
 		.pipe(
 			sass({
 				errLogToConsole: true,
@@ -190,9 +220,11 @@ gulp.task('sass-separate-free', (done) => {
 			})
 		)
 		.pipe(autoprefixer())
-		.pipe(gulp.dest('./build'));
+		.pipe(gulp.dest('./build'))
+		),
 	// extensions内をビルド
-	gulp.src('./src/extensions/**/**/*.scss')
+		waitForStream(
+			gulp.src('./src/extensions/**/**/*.scss')
 		.pipe(
 			sass({
 				errLogToConsole: true,
@@ -201,9 +233,11 @@ gulp.task('sass-separate-free', (done) => {
 			})
 		)
 		.pipe(autoprefixer())
-		.pipe(gulp.dest('./build/extensions'));
+		.pipe(gulp.dest('./build/extensions'))
+		),
 	// utils内をビルド
-	gulp.src('./src/utils/*.scss')
+		waitForStream(
+			gulp.src('./src/utils/*.scss')
 		.pipe(
 			sass({
 				errLogToConsole: true,
@@ -212,13 +246,14 @@ gulp.task('sass-separate-free', (done) => {
 			})
 		)
 		.pipe(autoprefixer())
-		.pipe(gulp.dest('./build/utils'));
-	done();
+		.pipe(gulp.dest('./build/utils'))
+		),
+	]);
 });
 
 // ブロックごとのscssそれぞれビルド pro
-gulp.task('sass-separate-pro', (done) => {
-	gulp.src('./src/blocks/_pro/**/*.scss')
+gulp.task('sass-separate-pro', () => {
+	return gulp.src('./src/blocks/_pro/**/*.scss')
 		.pipe(
 			sass({
 				errLogToConsole: true,
@@ -228,7 +263,6 @@ gulp.task('sass-separate-pro', (done) => {
 		)
 		.pipe(autoprefixer())
 		.pipe(gulp.dest('./build/pro'));
-	done();
 });
 
 // watch

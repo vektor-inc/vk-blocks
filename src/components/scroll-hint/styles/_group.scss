@@ -1,4 +1,5 @@
 @use 'components/scroll-hint/styles/base' as *;
+@use 'components/scrollbar-styles/scrollbar' as *;
 
 /*-------------------------------------------*/
 /* スクロールヒント - グループブロック用
@@ -356,17 +357,20 @@ $text-elements: p, h1, h2, h3, h4, h5, h6, li, span, div;
 		&[data-scroll-breakpoint="group-scrollable-mobile"] {
 			@media (max-width: 575.98px) {
 				@include scrollable-group;
+				@include scrollbar-custom;
 			}
 		}
 
 		&[data-scroll-breakpoint="group-scrollable-tablet"] {
 			@media (max-width: 991.98px) {
 				@include scrollable-group;
+				@include scrollbar-custom;
 			}
 		}
 
 		&[data-scroll-breakpoint="group-scrollable-pc"] {
 			@include scrollable-group;
+			@include scrollbar-custom;
 		}
 	}
 }
@@ -380,17 +384,23 @@ $text-elements: p, h1, h2, h3, h4, h5, h6, li, span, div;
 			&[data-scroll-breakpoint="group-scrollable-mobile"] {
 				@media (max-width: 575.98px) {
 					@include scrollable-group-editor;
+					@include scrollbar-custom;
+					@include scrollbar-custom-editor-override;
 				}
 			}
 
 			&[data-scroll-breakpoint="group-scrollable-tablet"] {
 				@media (max-width: 991.98px) {
 					@include scrollable-group-editor;
+					@include scrollbar-custom;
+					@include scrollbar-custom-editor-override;
 				}
 			}
 
 			&[data-scroll-breakpoint="group-scrollable-pc"] {
 				@include scrollable-group-editor;
+				@include scrollbar-custom;
+				@include scrollbar-custom-editor-override;
 			}
 		}
 	}

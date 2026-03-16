@@ -24,7 +24,8 @@
 	.vk_icon {
 		&_border {
 			display: flex;
-			position: relative;
+			align-items: center;
+			justify-content: center;
 			width: 80px;
 			height: 80px;
 			border-radius: 50%;
@@ -36,11 +37,11 @@
 			}
 		}
 		&_font {
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translateY(-50%) translateX(-50%);
+			// 中央寄せは親の flex で行うため transform を使わない
+			// → fa-rotate-* / fa-flip-* など FA の transform がそのまま効く
 			font-size: 36px;
+			margin-right: 0;
+			margin-left: 0;
 		}
 	}
 

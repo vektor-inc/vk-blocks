@@ -17,11 +17,7 @@ export default function save({ attributes }) {
 		iconTarget,
 		relAttribute,
 		linkDescription,
-		linkToPost,
 	} = attributes;
-
-	// 投稿へのリンクがONのときはURLはPHPで付与するため空にする
-	const effectiveUrl = linkToPost ? '' : iconUrl;
 
 	if (faIcon && !faIcon.match(/<i/)) {
 		faIcon = `<i class="${faIcon}"></i>`;
@@ -44,11 +40,10 @@ export default function save({ attributes }) {
 				lbType={iconType}
 				lbColor={iconColor}
 				lbFontColor={iconFontColor}
-				lbUrl={effectiveUrl}
+				lbUrl={iconUrl}
 				lbTarget={iconTarget}
 				lbRelAttribute={relAttribute}
 				lbLinkDescription={linkDescription}
-				lbLinkToPost={linkToPost}
 			/>
 		</div>
 	);

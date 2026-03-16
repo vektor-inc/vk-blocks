@@ -27,7 +27,7 @@ import LinkToolbar from '@vkblocks/components/link-toolbar';
 import { iconLabel } from '@vkblocks/utils/icon-label';
 
 export default function IconEdit(props) {
-	const { attributes, setAttributes, clientId } = props;
+	const { attributes, setAttributes, clientId, context } = props;
 	let {
 		faIcon,
 		iconSize,
@@ -43,7 +43,12 @@ export default function IconEdit(props) {
 		relAttribute,
 		linkDescription,
 		iconTarget,
+		linkToPost,
 	} = attributes;
+
+	const isDescendentOfQueryLoop =
+		typeof context?.queryId === 'number' &&
+		Number.isFinite(context.queryId);
 
 	/**
 	 * 親ブロックが vk-blocks/icon-outer かどうか判定
@@ -283,6 +288,11 @@ export default function IconEdit(props) {
 						linkDescription={linkDescription}
 						setLinkDescription={(description) =>
 							setAttributes({ linkDescription: description })
+						}
+						isDescendentOfQueryLoop={isDescendentOfQueryLoop}
+						linkToPost={linkToPost}
+						setLinkToPost={(checked) =>
+							setAttributes({ linkToPost: !!checked })
 						}
 					/>
 				</ToolbarGroup>

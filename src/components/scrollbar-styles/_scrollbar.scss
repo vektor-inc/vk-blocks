@@ -1,0 +1,220 @@
+/*-------------------------------------------*/
+/* スクロールバー共通スタイル
+/* Group / Table / Tab ブロックで共通使用
+/*-------------------------------------------*/
+
+// デフォルトのスクロールバースタイル（Tabブロックで従来使われていたもの）
+@mixin scrollbar-default {
+	&::-webkit-scrollbar {
+		height: 8px;
+	}
+	&::-webkit-scrollbar-track {
+		background: var(--vk-color-bg-inactive);
+		border-radius: 10px;
+	}
+	&::-webkit-scrollbar-thumb {
+		background: var(--vk-color-border);
+		border-radius: 10px;
+	}
+}
+
+// スクロールバーのカスタマイズ（ブロック要素自体がスクロールコンテナの場合）
+// Group / Table ブロック用
+@mixin scrollbar-custom {
+	// スクロールバー非表示
+	&[data-scrollbar-visible="false"] {
+		scrollbar-width: none; // Firefox
+		&::-webkit-scrollbar {
+			display: none; // Chrome, Safari, Edge
+		}
+	}
+
+	// スクロールバーカラー（カスタムカラーが設定されている場合のみ）
+	&[data-scrollbar-color] {
+		// Firefox
+		scrollbar-width: thin;
+		scrollbar-color: var(--vk-scrollbar-color) var(--vk-scrollbar-track-color, transparent);
+
+		// Chrome, Safari, Edge
+		&::-webkit-scrollbar {
+			height: 8px;
+		}
+		&::-webkit-scrollbar-track {
+			background: var(--vk-scrollbar-track-color, transparent);
+			border-radius: 10px;
+		}
+		&::-webkit-scrollbar-thumb {
+			background: var(--vk-scrollbar-color);
+			border-radius: 10px;
+		}
+	}
+
+	// トラックカラーのみ設定（thumbカラーなし）
+	&[data-scrollbar-track-color]:not([data-scrollbar-color]) {
+		scrollbar-width: thin;
+		// Firefox: scrollbar-color は auto 単体か <color> <color> のみ有効。
+		// auto と色の混在は無効なので、トラック色のみの場合は指定しない（native のまま）。
+
+		&::-webkit-scrollbar {
+			height: 8px;
+		}
+		&::-webkit-scrollbar-track {
+			background: var(--vk-scrollbar-track-color);
+			border-radius: 10px;
+		}
+	}
+
+	// 非表示が優先
+	&[data-scrollbar-visible="false"][data-scrollbar-color],
+	&[data-scrollbar-visible="false"][data-scrollbar-track-color] {
+		scrollbar-width: none;
+		&::-webkit-scrollbar {
+			display: none;
+		}
+	}
+}
+
+// エディタ内ではスクロールバー非表示時でも薄く表示して操作可能にする
+@mixin scrollbar-custom-editor-override {
+	&[data-scrollbar-visible="false"] {
+		scrollbar-width: thin; // Firefox
+		scrollbar-color: rgba(0, 0, 0, 0.12) transparent;
+
+		&::-webkit-scrollbar {
+			display: block;
+			height: 6px;
+		}
+		&::-webkit-scrollbar-track {
+			background: transparent;
+		}
+		&::-webkit-scrollbar-thumb {
+			background: rgba(0, 0, 0, 0.12);
+			border-radius: 10px;
+		}
+	}
+
+	// 非表示 + カラー指定の場合もエディタでは薄く表示
+	&[data-scrollbar-visible="false"][data-scrollbar-color],
+	&[data-scrollbar-visible="false"][data-scrollbar-track-color] {
+		scrollbar-width: thin;
+		scrollbar-color: rgba(0, 0, 0, 0.12) transparent;
+
+		&::-webkit-scrollbar {
+			display: block;
+			height: 6px;
+		}
+		&::-webkit-scrollbar-track {
+			background: transparent;
+		}
+		&::-webkit-scrollbar-thumb {
+			background: rgba(0, 0, 0, 0.12);
+			border-radius: 10px;
+		}
+	}
+}
+
+// エディタ内で子要素のスクロールバー非表示時でも薄く表示して操作可能にする
+// Tab ブロック用：親にdata属性、子がスクロールコンテナの親子構造向け
+@mixin scrollbar-custom-child-editor-override($child-selector) {
+	&[data-scrollbar-visible="false"] {
+		#{$child-selector} {
+			scrollbar-width: thin;
+			scrollbar-color: rgba(0, 0, 0, 0.12) transparent;
+
+			&::-webkit-scrollbar {
+				display: block;
+				height: 6px;
+			}
+			&::-webkit-scrollbar-track {
+				background: transparent;
+			}
+			&::-webkit-scrollbar-thumb {
+				background: rgba(0, 0, 0, 0.12);
+				border-radius: 10px;
+			}
+		}
+	}
+
+	// 非表示 + カラー指定の場合もエディタでは薄く表示
+	&[data-scrollbar-visible="false"][data-scrollbar-color],
+	&[data-scrollbar-visible="false"][data-scrollbar-track-color] {
+		#{$child-selector} {
+			scrollbar-width: thin;
+			scrollbar-color: rgba(0, 0, 0, 0.12) transparent;
+
+			&::-webkit-scrollbar {
+				display: block;
+				height: 6px;
+			}
+			&::-webkit-scrollbar-track {
+				background: transparent;
+			}
+			&::-webkit-scrollbar-thumb {
+				background: rgba(0, 0, 0, 0.12);
+				border-radius: 10px;
+			}
+		}
+	}
+}
+
+// スクロールバーのカスタマイズ（親要素にdata属性、子要素がスクロールコンテナの場合）
+// Tab ブロック用：親(.vk_tab)にdata属性、子(.vk_tab_labels--scroll-*)がスクロール
+@mixin scrollbar-custom-child($child-selector) {
+	// スクロールバー非表示
+	&[data-scrollbar-visible="false"] {
+		#{$child-selector} {
+			scrollbar-width: none;
+			&::-webkit-scrollbar {
+				display: none;
+			}
+		}
+	}
+
+	// スクロールバーカラー
+	&[data-scrollbar-color] {
+		#{$child-selector} {
+			scrollbar-width: thin;
+			scrollbar-color: var(--vk-scrollbar-color) var(--vk-scrollbar-track-color, transparent);
+
+			&::-webkit-scrollbar {
+				height: 8px;
+			}
+			&::-webkit-scrollbar-track {
+				background: var(--vk-scrollbar-track-color, transparent);
+				border-radius: 10px;
+			}
+			&::-webkit-scrollbar-thumb {
+				background: var(--vk-scrollbar-color);
+				border-radius: 10px;
+			}
+		}
+	}
+
+	// トラックカラーのみ設定（thumbカラーなし）
+	&[data-scrollbar-track-color]:not([data-scrollbar-color]) {
+		#{$child-selector} {
+			scrollbar-width: thin;
+			// Firefox: scrollbar-color は auto 単体か <color> <color> のみ有効。
+		// auto と色の混在は無効なので、トラック色のみの場合は指定しない（native のまま）。
+
+			&::-webkit-scrollbar {
+				height: 8px;
+			}
+			&::-webkit-scrollbar-track {
+				background: var(--vk-scrollbar-track-color);
+				border-radius: 10px;
+			}
+		}
+	}
+
+	// 非表示が優先
+	&[data-scrollbar-visible="false"][data-scrollbar-color],
+	&[data-scrollbar-visible="false"][data-scrollbar-track-color] {
+		#{$child-selector} {
+			scrollbar-width: none;
+			&::-webkit-scrollbar {
+				display: none;
+			}
+		}
+	}
+}

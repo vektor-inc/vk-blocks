@@ -26,13 +26,14 @@ import LinkToolbar from '@vkblocks/components/link-toolbar';
 import { iconLabel } from '@vkblocks/utils/icon-label';
 
 export default function ButtonEdit(props) {
-	const { attributes, setAttributes, clientId } = props;
+	const { attributes, setAttributes, clientId, context } = props;
 	const {
 		content,
 		subCaption,
 		buttonUrl,
 		buttonTarget,
 		relAttribute,
+		linkToPost,
 		buttonSize,
 		buttonType,
 		buttonEffect,
@@ -51,6 +52,10 @@ export default function ButtonEdit(props) {
 		blockId,
 		old_1_31_0,
 	} = attributes;
+
+	const isDescendentOfQueryLoop =
+		typeof context?.queryId === 'number' &&
+		Number.isFinite(context.queryId);
 
 	// 親ブロックが vk-blocks/button-outer かどうか判定
 	const parents = select('core/block-editor').getBlockParentsByBlockName(
@@ -234,6 +239,11 @@ export default function ButtonEdit(props) {
 						relAttribute={relAttribute || ''}
 						setRelAttribute={(value) =>
 							setAttributes({ relAttribute: value })
+						}
+						isDescendentOfQueryLoop={isDescendentOfQueryLoop}
+						linkToPost={linkToPost}
+						setLinkToPost={(checked) =>
+							setAttributes({ linkToPost: !!checked })
 						}
 					/>
 				</ToolbarGroup>

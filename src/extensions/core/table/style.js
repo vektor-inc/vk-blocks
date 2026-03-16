@@ -4,7 +4,10 @@ import { addFilter } from '@wordpress/hooks';
 import { PanelBody, ToggleControl, SelectControl } from '@wordpress/components';
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
-import HorizontalScrollControls from '@vkblocks/utils/horizontal-scroll-controls';
+import HorizontalScrollControls, {
+	scrollbarAttributes,
+	applyScrollbarProps,
+} from '@vkblocks/utils/horizontal-scroll-controls';
 
 /**
  * Internal dependencies
@@ -59,6 +62,7 @@ export const addAttribute = (settings) => {
 				type: 'string',
 				default: 'table-cell-vertical-mobile',
 			},
+			...scrollbarAttributes,
 		};
 	}
 	return settings;
@@ -67,7 +71,7 @@ addFilter('blocks.registerBlockType', 'vk-blocks/table-style', addAttribute);
 
 export const addBlockControl = createHigherOrderComponent((BlockEdit) => {
 	return (props) => {
-		const { attributes, setAttributes, name } = props;
+		const { attributes, setAttributes, name, clientId } = props;
 		if (!isValidBlockType(name)) {
 			return <BlockEdit {...props} />;
 		}
@@ -82,12 +86,38 @@ export const addBlockControl = createHigherOrderComponent((BlockEdit) => {
 			iconOutputRight,
 			cellVertical,
 			cellVerticalBreakpoint,
+			scrollbarVisible,
+			scrollbarColor,
+			scrollbarTrackColor,
 		} = attributes;
 
 		const blockProps = useBlockProps({
 			className:
 				`${scrollable ? 'is-style-vk-table-scrollable' : ''} ${cellVertical ? 'is-style-vk-table-cell-vertical' : ''}`.trim(),
 			...(scrollable && { 'data-scroll-breakpoint': scrollBreakpoint }),
+			...(scrollable &&
+				scrollbarVisible === false && {
+					'data-scrollbar-visible': 'false',
+				}),
+			...(scrollable &&
+				scrollbarColor && {
+					'data-scrollbar-color': scrollbarColor,
+				}),
+			...(scrollable &&
+				scrollbarTrackColor && {
+					'data-scrollbar-track-color': scrollbarTrackColor,
+				}),
+			...(scrollable &&
+				(scrollbarColor || scrollbarTrackColor) && {
+					style: {
+						...(scrollbarColor && {
+							'--vk-scrollbar-color': scrollbarColor,
+						}),
+						...(scrollbarTrackColor && {
+							'--vk-scrollbar-track-color': scrollbarTrackColor,
+						}),
+					},
+				}),
 			...(cellVertical && {
 				'data-cell-vertical-breakpoint': cellVerticalBreakpoint,
 			}),
@@ -101,6 +131,9 @@ export const addBlockControl = createHigherOrderComponent((BlockEdit) => {
 				setAttributes({
 					showScrollMessage: false,
 					scrollBreakpoint: 'table-scrollable-mobile',
+					scrollbarVisible: true,
+					scrollbarColor: '',
+					scrollbarTrackColor: '',
 				});
 			}
 		};
@@ -129,9 +162,15 @@ export const addBlockControl = createHigherOrderComponent((BlockEdit) => {
 
 		// コンポーネントのマウントまたは更新後に属性を更新
 		useEffect(() => {
-			// 初期ロード時にクラスや属性を確認して scrollable を ON にする∂
+			// 初期ロード時にクラスや属性を確認して scrollable を ON にする
 			const checkTableScrollAttributes = () => {
-				const tables = document.querySelectorAll('.wp-block-table');
+				const blockRoot = document.querySelector(
+					`[data-block="${clientId}"]`
+				);
+				if (!blockRoot) {
+					return;
+				}
+				const tables = blockRoot.querySelectorAll('.wp-block-table');
 				tables.forEach((table) => {
 					const hasScrollableClass = table.classList.contains(
 						'is-style-vk-table-scrollable'
@@ -148,13 +187,19 @@ export const addBlockControl = createHigherOrderComponent((BlockEdit) => {
 
 			// コンポーネントの初回レンダリング時に実行
 			checkTableScrollAttributes();
-		}, []); // 初期レンダリング時のみ実行
+		}, [clientId]); // 初期レンダリング時のみ実行
 
 		// scrollable、cellVertical の状態が確定したら処理を実行
 		useEffect(() => {
 			const updateTableAttributes = () => {
-				// .wp-block-table を持つすべてのテーブル要素を取得
-				const tables = document.querySelectorAll('.wp-block-table');
+				// clientId で現在のブロック root を特定してスコープを絞る
+				const blockRoot = document.querySelector(
+					`[data-block="${clientId}"]`
+				);
+				if (!blockRoot) {
+					return;
+				}
+				const tables = blockRoot.querySelectorAll('.wp-block-table');
 				tables.forEach((table) => {
 					// scrollable 状態に応じてクラスと属性を更新
 					if (!scrollable) {
@@ -201,6 +246,44 @@ export const addBlockControl = createHigherOrderComponent((BlockEdit) => {
 							cellVerticalBreakpoint
 						);
 					}
+					// scrollbar visibility
+					if (scrollbarVisible === false) {
+						table.setAttribute('data-scrollbar-visible', 'false');
+					} else {
+						table.removeAttribute('data-scrollbar-visible');
+					}
+
+					// scrollbar color
+					if (scrollbarColor) {
+						table.setAttribute(
+							'data-scrollbar-color',
+							scrollbarColor
+						);
+						table.style.setProperty(
+							'--vk-scrollbar-color',
+							scrollbarColor
+						);
+					} else {
+						table.removeAttribute('data-scrollbar-color');
+						table.style.removeProperty('--vk-scrollbar-color');
+					}
+
+					// scrollbar track color
+					if (scrollbarTrackColor) {
+						table.setAttribute(
+							'data-scrollbar-track-color',
+							scrollbarTrackColor
+						);
+						table.style.setProperty(
+							'--vk-scrollbar-track-color',
+							scrollbarTrackColor
+						);
+					} else {
+						table.removeAttribute('data-scrollbar-track-color');
+						table.style.removeProperty(
+							'--vk-scrollbar-track-color'
+						);
+					}
 				});
 			};
 
@@ -209,6 +292,7 @@ export const addBlockControl = createHigherOrderComponent((BlockEdit) => {
 				updateTableAttributes();
 			}
 		}, [
+			clientId,
 			scrollable,
 			scrollBreakpoint,
 			showScrollMessage,
@@ -218,6 +302,9 @@ export const addBlockControl = createHigherOrderComponent((BlockEdit) => {
 			iconOutputRight,
 			cellVertical,
 			cellVerticalBreakpoint,
+			scrollbarVisible,
+			scrollbarColor,
+			scrollbarTrackColor,
 		]);
 
 		if (props.isSelected) {
@@ -270,6 +357,24 @@ export const addBlockControl = createHigherOrderComponent((BlockEdit) => {
 								onScrollableChange={handleToggleChange}
 								onBreakpointChange={handleSelectChange}
 								prefix="table-scrollable-"
+								scrollbarVisible={scrollbarVisible}
+								scrollbarColor={scrollbarColor}
+								scrollbarTrackColor={scrollbarTrackColor}
+								onScrollbarVisibleChange={(checked) => {
+									setAttributes({
+										scrollbarVisible: checked,
+									});
+								}}
+								onScrollbarColorChange={(color) => {
+									setAttributes({
+										scrollbarColor: color || '',
+									});
+								}}
+								onScrollbarTrackColorChange={(color) => {
+									setAttributes({
+										scrollbarTrackColor: color || '',
+									});
+								}}
 								scrollHintProps={{
 									showScrollMessage,
 									scrollMessageText,
@@ -381,6 +486,9 @@ const addExtraProps = (saveElementProps, blockType, attributes) => {
 		} else {
 			delete saveElementProps['data-icon-output-right'];
 		}
+
+		// scrollbar関連の属性を適用
+		applyScrollbarProps(saveElementProps, attributes);
 	} else if (blockType.name !== 'core/group') {
 		// 他のブロックでは不要な属性を削除
 		// core/group はグループブロック独自の横スクロール機能で data-scroll-breakpoint 等を使用するため除外

@@ -21,10 +21,14 @@ import {
 } from '@wordpress/block-editor';
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { useSelect } from '@wordpress/data';
-import { useEffect, useRef } from '@wordpress/element';
+import { Fragment, useEffect, useRef } from '@wordpress/element';
 import { VkPanelIcon } from '@vkblocks/components/vk-icon';
 import LinkToolbar from '@vkblocks/components/link-toolbar';
-import HorizontalScrollControls from '@vkblocks/utils/horizontal-scroll-controls';
+import HorizontalScrollControls, {
+	scrollbarAttributes,
+	buildScrollDataProps,
+	SCROLL_DATA_ATTR_KEYS,
+} from '@vkblocks/utils/horizontal-scroll-controls';
 import deprecated from './deprecated/index';
 
 /**
@@ -126,6 +130,10 @@ export const addAttribute = (settings) => {
 				type: 'string',
 				default: '',
 			},
+			linkToPost: {
+				type: 'boolean',
+				default: false,
+			},
 			tagName: {
 				type: 'string',
 				default: 'div',
@@ -173,7 +181,16 @@ export const addAttribute = (settings) => {
 				type: 'boolean',
 				default: false,
 			},
+			...scrollbarAttributes,
 		};
+		if (settings.name === 'core/group') {
+			settings.usesContext = [
+				...(settings.usesContext || []),
+				'postId',
+				'postType',
+				'queryId',
+			];
+		}
 	}
 	return settings;
 };
@@ -189,10 +206,13 @@ export const addBlockControl = createHigherOrderComponent((BlockEdit) => {
 	let activeColor = '';
 
 	return (props) => {
-		const { attributes, setAttributes, name, clientId } = props;
+		const { attributes, setAttributes, name, clientId, context } = props;
 		if (!isValidBlockType(name)) {
 			return <BlockEdit {...props} />;
 		}
+		const isDescendentOfQueryLoop =
+			typeof context?.queryId === 'number' &&
+			Number.isFinite(context.queryId);
 		const {
 			scrollable,
 			scrollableAutoDisabled,
@@ -205,6 +225,9 @@ export const addBlockControl = createHigherOrderComponent((BlockEdit) => {
 			iconOutputRight,
 			textNoWrap,
 			tableMode,
+			scrollbarVisible,
+			scrollbarColor,
+			scrollbarTrackColor,
 		} = attributes || {};
 
 		// レイアウトタイプを取得
@@ -387,32 +410,35 @@ export const addBlockControl = createHigherOrderComponent((BlockEdit) => {
 			}
 		}, [isGridOrFlexLayout, textNoWrap, scrollable, setAttributes]);
 
-		const blockProps = useBlockProps({
-			className: scrollable ? 'is-style-vk-group-scrollable' : undefined,
-			...(scrollable
-				? { 'data-scroll-breakpoint': scrollBreakpoint }
-				: {}),
-			'data-output-scroll-hint': showScrollMessage ? 'true' : undefined,
-			'data-icon-output-left':
-				scrollable && showScrollMessage && iconOutputLeft
-					? 'true'
-					: undefined,
-			'data-icon-output-right':
-				scrollable && showScrollMessage && iconOutputRight
-					? 'true'
-					: undefined,
-			'data-text-nowrap':
-				scrollable &&
-				textNoWrap !== false &&
-				!(tableMode === true && hasMultipleColumns) &&
-				!isGridOrFlexLayout
-					? 'true'
-					: undefined,
-			'data-table-mode':
-				scrollable && tableMode === true && hasMultipleColumns
-					? 'true'
-					: undefined,
-		});
+		// スクロールヒントをエディタ内に表示（BlockEdit の前に配置）。
+		// BlockListBlock HOC はクラス名のみを追加し、ヒント要素は BlockEdit 内でレンダリング。
+		// これにより、二重ラップを避けつつ、エディタ内でのみヒントを表示。
+		// ヒントをコンテンツの前に置くのは意図的（編集時に「このブロックは横スクロール可能」を先に示すため）。
+		const scrollHintInEditor =
+			scrollable && showScrollMessage ? (
+				<div
+					className="vk-scroll-hint"
+					data-scroll-breakpoint={scrollBreakpoint}
+					data-icon-output-left={iconOutputLeft ? 'true' : undefined}
+					data-icon-output-right={
+						iconOutputRight ? 'true' : undefined
+					}
+					data-hint-icon-left={
+						iconOutputLeft ? scrollIconLeft : undefined
+					}
+					data-hint-icon-right={
+						iconOutputRight ? scrollIconRight : undefined
+					}
+				>
+					{iconOutputLeft && (
+						<i className={`${scrollIconLeft} left-icon`} />
+					)}
+					<span>{scrollMessageText}</span>
+					{iconOutputRight && (
+						<i className={`${scrollIconRight} right-icon`} />
+					)}
+				</div>
+			) : null;
 
 		if (isValidBlockType(name) && props.isSelected) {
 			if (attributes.color) {
@@ -433,6 +459,9 @@ export const addBlockControl = createHigherOrderComponent((BlockEdit) => {
 					setAttributes({
 						showScrollMessage: false,
 						scrollBreakpoint: 'group-scrollable-mobile',
+						scrollbarVisible: true,
+						scrollbarColor: '',
+						scrollbarTrackColor: '',
 					});
 				}
 			};
@@ -443,42 +472,9 @@ export const addBlockControl = createHigherOrderComponent((BlockEdit) => {
 			};
 
 			return (
-				<>
-					<div {...blockProps}>
-						{scrollable && showScrollMessage && (
-							<div
-								className="vk-scroll-hint"
-								data-scroll-breakpoint={scrollBreakpoint}
-								data-icon-output-left={
-									iconOutputLeft ? 'true' : undefined
-								}
-								data-icon-output-right={
-									iconOutputRight ? 'true' : undefined
-								}
-								data-hint-icon-left={
-									iconOutputLeft ? scrollIconLeft : undefined
-								}
-								data-hint-icon-right={
-									iconOutputRight
-										? scrollIconRight
-										: undefined
-								}
-							>
-								{iconOutputLeft && (
-									<i
-										className={`${scrollIconLeft} left-icon`}
-									/>
-								)}
-								<span>{scrollMessageText}</span>
-								{iconOutputRight && (
-									<i
-										className={`${scrollIconRight} right-icon`}
-									/>
-								)}
-							</div>
-						)}
-						<BlockEdit {...props} />
-					</div>
+				<Fragment>
+					{scrollHintInEditor}
+					<BlockEdit {...props} />
 					<BlockControls>
 						<ToolbarGroup>
 							<LinkToolbar
@@ -499,6 +495,13 @@ export const addBlockControl = createHigherOrderComponent((BlockEdit) => {
 									setAttributes({
 										linkDescription: description,
 									})
+								}
+								isDescendentOfQueryLoop={
+									isDescendentOfQueryLoop
+								}
+								linkToPost={attributes.linkToPost}
+								setLinkToPost={(checked) =>
+									setAttributes({ linkToPost: !!checked })
 								}
 							/>
 						</ToolbarGroup>
@@ -604,6 +607,29 @@ export const addBlockControl = createHigherOrderComponent((BlockEdit) => {
 										onScrollableChange={handleToggleChange}
 										onBreakpointChange={handleSelectChange}
 										prefix="group-scrollable-"
+										scrollbarVisible={scrollbarVisible}
+										scrollbarColor={scrollbarColor}
+										scrollbarTrackColor={
+											scrollbarTrackColor
+										}
+										onScrollbarVisibleChange={(checked) => {
+											setAttributes({
+												scrollbarVisible: checked,
+											});
+										}}
+										onScrollbarColorChange={(color) => {
+											setAttributes({
+												scrollbarColor: color || '',
+											});
+										}}
+										onScrollbarTrackColorChange={(
+											color
+										) => {
+											setAttributes({
+												scrollbarTrackColor:
+													color || '',
+											});
+										}}
 										description={
 											<p>
 												{__(
@@ -969,14 +995,69 @@ export const addBlockControl = createHigherOrderComponent((BlockEdit) => {
 							</PanelBody>
 						)}
 					</InspectorControls>
-				</>
+				</Fragment>
 			);
 		}
-		return <BlockEdit {...props} />;
+		return (
+			<Fragment>
+				{scrollHintInEditor}
+				<BlockEdit {...props} />
+			</Fragment>
+		);
 	};
 }, 'addMyCustomBlockControls');
 
 addFilter('editor.BlockEdit', 'vk-blocks/group-style', addBlockControl);
+
+// Attach classes/props to the editor block wrapper (BlockListBlock)
+const attachPropsToBlockList = createHigherOrderComponent((BlockListBlock) => {
+	return (props) => {
+		if (!isValidBlockType(props.name)) {
+			return <BlockListBlock {...props} />;
+		}
+
+		const { attributes = {}, className: existingClassName } = props;
+		const { className = '', scrollable } = attributes;
+
+		// Build attached class name (scroll hint is rendered inside block via BlockEdit)
+		let attachedClass = [existingClassName, className]
+			.filter(Boolean)
+			.join(' ');
+		if (scrollable === true) {
+			attachedClass = [attachedClass, 'is-style-vk-group-scrollable']
+				.filter(Boolean)
+				.join(' ');
+		}
+
+		// エディタのブロックラッパーにdata属性を追加して、
+		// エディタ用CSSのブレークポイントセレクタがマッチするようにする
+		const { dataAttrs, styles } = buildScrollDataProps(attributes);
+		const wrapperProps = {
+			...(props.wrapperProps || {}),
+			...dataAttrs,
+		};
+		if (Object.keys(styles).length > 0) {
+			wrapperProps.style = {
+				...(wrapperProps.style || {}),
+				...styles,
+			};
+		}
+
+		return (
+			<BlockListBlock
+				{...props}
+				className={attachedClass}
+				wrapperProps={wrapperProps}
+			/>
+		);
+	};
+}, 'attachPropsToGroupBlockList');
+
+addFilter(
+	'editor.BlockListBlock',
+	'vk-blocks/group-blocklist',
+	attachPropsToBlockList
+);
 
 /**
  * Define the save function for the group block, including link settings.
@@ -991,21 +1072,17 @@ const save = (props) => {
 		linkTarget,
 		relAttribute,
 		linkDescription,
+		linkToPost,
 		className = '',
 		tagName: CustomTag = 'div',
 		scrollable,
-		scrollBreakpoint,
-		showScrollMessage,
-		iconOutputLeft,
-		iconOutputRight,
-		textNoWrap,
-		tableMode,
-		layout,
 	} = attributes;
 
 	// スクロール関連のクラスと属性を組み立て
+	const hasLink = linkUrl || linkToPost;
+	const effectiveUrl = linkToPost ? '' : linkUrl;
 	const classNames = [];
-	if (linkUrl) {
+	if (hasLink) {
 		classNames.push(className, 'has-link');
 	} else {
 		classNames.push(className);
@@ -1021,11 +1098,14 @@ const save = (props) => {
 		className: classNames.filter(Boolean).join(' ').trim(),
 	});
 
-	// スクロール関連の属性を追加（scrollableが明示的にtrueの場合のみ）
-	// scrollableがfalseまたはundefinedの場合、属性を追加しない
-	if (scrollable === true && scrollBreakpoint) {
-		baseBlockProps['data-scroll-breakpoint'] = scrollBreakpoint;
+	// スクロール関連の属性を追加（buildScrollDataProps で一元管理）
+	const { dataAttrs, styles: scrollStyles } =
+		buildScrollDataProps(attributes);
+	Object.assign(baseBlockProps, dataAttrs);
+	if (Object.keys(scrollStyles).length > 0) {
+		baseBlockProps.style = { ...baseBlockProps.style, ...scrollStyles };
 	}
+	// アクセシビリティ属性
 	if (scrollable === true) {
 		if (!baseBlockProps.role) {
 			baseBlockProps.role = 'region';
@@ -1040,29 +1120,6 @@ const save = (props) => {
 			);
 		}
 	}
-	if (showScrollMessage === true) {
-		baseBlockProps['data-output-scroll-hint'] = 'true';
-	}
-	if (iconOutputLeft === true && showScrollMessage === true) {
-		baseBlockProps['data-icon-output-left'] = 'true';
-	}
-	if (iconOutputRight === true && showScrollMessage === true) {
-		baseBlockProps['data-icon-output-right'] = 'true';
-	}
-	// グリッド/フレックスレイアウトまたはテーブルモードの場合は data-text-nowrap を設定しない
-	const layoutType = layout?.type;
-	const isGridOrFlexLayout = layoutType === 'grid' || layoutType === 'flex';
-	if (
-		scrollable === true &&
-		textNoWrap !== false &&
-		!(tableMode === true) &&
-		!isGridOrFlexLayout
-	) {
-		baseBlockProps['data-text-nowrap'] = 'true';
-	}
-	if (scrollable === true && tableMode === true) {
-		baseBlockProps['data-table-mode'] = 'true';
-	}
 
 	const blockProps = baseBlockProps;
 
@@ -1072,9 +1129,10 @@ const save = (props) => {
 	return (
 		<CustomTag {...blockProps}>
 			<InnerBlocks.Content />
-			{linkUrl && (
+			{hasLink && (
 				<a
-					href={linkUrl}
+					href={effectiveUrl}
+					{...(linkToPost ? { 'data-vk-link-to-post': '1' } : {})}
 					{...(linkTarget ? { target: linkTarget } : {})}
 					{...(relAttribute ? { rel: relAttribute } : {})}
 					className={`${prefix}-vk-link`}
@@ -1161,62 +1219,39 @@ addFilter(
 // 保存時に追加のプロパティを設定
 const addExtraProps = (saveElementProps, blockType, attributes) => {
 	if (isValidBlockType(blockType.name)) {
-		// save関数で既にクラスと属性が設定されているため、ここでは追加しない
-		// scrollableがfalseの場合のみ、不要なクラスや属性を削除（他のプラグインなどで追加された場合の対策）
+		// buildScrollDataProps で属性を一元構築
+		const { dataAttrs, styles } = buildScrollDataProps(attributes);
+
+		// scrollableがfalseの場合、不要なクラスを削除（他のプラグインなどで追加された場合の対策）
 		if (!attributes.scrollable) {
-			// scrollableがfalseの場合、不要なクラスや属性を削除
 			if (saveElementProps.className) {
 				saveElementProps.className = saveElementProps.className
 					.replace('is-style-vk-group-scrollable', '')
 					.replace(/\s+/g, ' ')
 					.trim();
 			}
-			delete saveElementProps['data-scroll-breakpoint'];
 		}
 
-		// 'showScrollMessage' が true の場合のみ 'data-output-scroll-hint' を追加
-		if (attributes.showScrollMessage) {
-			saveElementProps['data-output-scroll-hint'] = 'true';
-		} else {
-			delete saveElementProps['data-output-scroll-hint'];
+		// すべてのスクロール関連data属性をクリーンアップしてから再適用
+		for (const key of SCROLL_DATA_ATTR_KEYS) {
+			delete saveElementProps[key];
+		}
+		// scrollbar 関連の CSS カスタムプロパティもクリーンアップ
+		if (saveElementProps.style) {
+			delete saveElementProps.style['--vk-scrollbar-color'];
+			delete saveElementProps.style['--vk-scrollbar-track-color'];
 		}
 
-		// iconOutputLeft が true の場合のみ属性を追加
-		if (attributes.iconOutputLeft && attributes.showScrollMessage) {
-			saveElementProps['data-icon-output-left'] = 'true';
-		} else {
-			delete saveElementProps['data-icon-output-left'];
+		// buildScrollDataProps の結果を適用
+		Object.assign(saveElementProps, dataAttrs);
+		if (Object.keys(styles).length > 0) {
+			saveElementProps.style = {
+				...saveElementProps.style,
+				...styles,
+			};
 		}
 
-		// iconOutputRight が true の場合のみ属性を追加
-		if (attributes.iconOutputRight && attributes.showScrollMessage) {
-			saveElementProps['data-icon-output-right'] = 'true';
-		} else {
-			delete saveElementProps['data-icon-output-right'];
-		}
-
-		// textNoWrap が false でない場合のみ属性を追加
-		// （tableMode が有効な場合、またはグリッド/フレックスレイアウトの場合は除外）
-		const layoutType = attributes?.layout?.type;
-		const isGridOrFlexLayout =
-			layoutType === 'grid' || layoutType === 'flex';
-		if (
-			attributes.scrollable &&
-			attributes.textNoWrap !== false &&
-			!(attributes.tableMode === true) &&
-			!isGridOrFlexLayout
-		) {
-			saveElementProps['data-text-nowrap'] = 'true';
-		} else {
-			delete saveElementProps['data-text-nowrap'];
-		}
-
-		// tableMode が true の場合のみ属性を追加
-		if (attributes.scrollable && attributes.tableMode === true) {
-			saveElementProps['data-table-mode'] = 'true';
-		} else {
-			delete saveElementProps['data-table-mode'];
-		}
+		// アクセシビリティ属性
 		if (attributes.scrollable) {
 			if (!saveElementProps.role) {
 				saveElementProps.role = 'region';
@@ -1231,15 +1266,16 @@ const addExtraProps = (saveElementProps, blockType, attributes) => {
 				);
 			}
 		}
-	} else if (blockType.name !== 'core/table') {
+	} else if (
+		blockType.name !== 'core/table' &&
+		blockType.name !== 'vk-blocks/tab'
+	) {
 		// 他のブロックでは不要な属性を削除
 		// core/table はテーブルブロック独自の横スクロール機能で data-scroll-breakpoint 等を使用するため除外
-		delete saveElementProps['data-scroll-breakpoint'];
-		delete saveElementProps['data-output-scroll-hint'];
-		delete saveElementProps['data-icon-output-left'];
-		delete saveElementProps['data-icon-output-right'];
-		delete saveElementProps['data-text-nowrap'];
-		delete saveElementProps['data-table-mode'];
+		// vk-blocks/tab は独自の data-scrollbar-* 属性を save.js で設定するため除外
+		for (const key of SCROLL_DATA_ATTR_KEYS) {
+			delete saveElementProps[key];
+		}
 	}
 
 	return saveElementProps;

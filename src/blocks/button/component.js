@@ -14,6 +14,7 @@ export class VKBButton extends Component {
 		const buttonUrl = this.props.lbUrl;
 		const buttonTarget = this.props.lbTarget;
 		const relAttribute = this.props.lbRelAttribute;
+		const linkToPost = this.props.lbLinkToPost;
 		let fontAwesomeIconBefore = this.props.lbFontAwesomeIconBefore;
 		let fontAwesomeIconAfter = this.props.lbFontAwesomeIconAfter;
 		const iconSizeBefore = this.props.lbIconSizeBefore;
@@ -141,14 +142,16 @@ export class VKBButton extends Component {
 
 		return (
 			/* eslint react/jsx-no-target-blank: 0 */
+			/* eslint-disable-next-line jsx-a11y/anchor-is-valid -- linkToPost: href replaced server-side with permalink */
 			<a
-				href={buttonUrl}
+				href={linkToPost ? '#' : buttonUrl}
 				style={btnInlineStyle}
 				className={aClass}
 				role={'button'}
 				aria-pressed={true}
 				target={buttonTarget ? '_blank' : null}
 				rel={relValue}
+				{...(linkToPost ? { 'data-vk-link-to-post': '1' } : {})}
 			>
 				<div className={'vk_button_link_caption'}>
 					{parse(iconBefore)}

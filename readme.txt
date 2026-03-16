@@ -108,6 +108,14 @@ e.g.
 
 == Changelog ==
 
+= 1.117.0 =
+[ Add function ][ Tab ( Pro ) / Core Group / Core Table ] Added scrollbar customization options (color change and hide/show) for horizontal scroll feature.
+[ Add function ][ Link toolbar ] Added "Link to post" for Icon, Button, Outer, Group, and Cover when the block is inside a Query Loop (so the link points to the current post in the loop).
+[ Add function ][ Icon ] Icon block now supports Font Awesome rotate and flip classes.
+[ Add function ][ Animation ( Pro ) ] Added option to disable animation on smartphone (viewport 767.98px or less).
+[ Bug fix ][ Core Group ] Prevent duplicate group wrapper in the editor.
+[ Bug fix ][ Tab ( Pro ) ] Fixed an issue where, in the editor with "standard" tab style, the active tab label's custom color reverted to default when switching tabs by clicking the tab label.
+
 = 1.116.2 =
 [ Bug fix ][ Blog Card ( Pro ) ] Fixed external metadata fetching to support relative and protocol-relative URLs, and correctly retrieve information from category and archive pages.
 [ Bug fix ][ Core Table / Core Group ] Fixed an issue where horizontal scroll settings interfered between Table and Group blocks.

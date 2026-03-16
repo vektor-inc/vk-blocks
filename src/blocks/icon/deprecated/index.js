@@ -2,6 +2,7 @@ import save1_13_2 from './1.13.2/save';
 import save1_16_1 from './1.16.1/save';
 import save1_94_2 from './1.94.2/save';
 import save1_112_1 from './1.112.1/save';
+import save1_116_2 from './1.116.2/save';
 
 const blockAttributes = {
 	faIcon: {
@@ -45,7 +46,7 @@ const blockAttributes = {
 		default: "",
 	},
 	iconTarget: {
-		type: 'Boolean',
+		type: 'boolean',
 		default: false,
 	},
 };
@@ -80,6 +81,10 @@ const blockAttributes4 = {
 }
 
 export const deprecated = [
+	{
+		attributes: blockAttributes4,
+		save: save1_116_2,
+	},
 	{
 		attributes: blockAttributes4,
 		save: save1_112_1,

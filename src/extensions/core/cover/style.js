@@ -22,9 +22,20 @@ const enhanceCoverBlock = createHigherOrderComponent((BlockEdit) => {
 		}
 
 		const {
-			attributes: { linkUrl, linkTarget, relAttribute, linkDescription },
+			attributes: {
+				linkUrl,
+				linkTarget,
+				relAttribute,
+				linkDescription,
+				linkToPost,
+			},
 			setAttributes,
+			context,
 		} = props;
+
+		const isDescendentOfQueryLoop =
+			typeof context?.queryId === 'number' &&
+			Number.isFinite(context?.queryId);
 
 		return (
 			<Fragment>
@@ -48,6 +59,11 @@ const enhanceCoverBlock = createHigherOrderComponent((BlockEdit) => {
 							setLinkDescription={(description) =>
 								setAttributes({ linkDescription: description })
 							}
+							isDescendentOfQueryLoop={isDescendentOfQueryLoop}
+							linkToPost={linkToPost}
+							setLinkToPost={(checked) =>
+								setAttributes({ linkToPost: !!checked })
+							}
 						/>
 					</ToolbarGroup>
 				</BlockControls>
@@ -63,13 +79,21 @@ const extendCoverBlock = (settings, name) => {
 
 	const save = (props) => {
 		const { attributes } = props;
-		const { linkUrl, linkTarget, relAttribute, linkDescription } =
-			attributes;
+		const {
+			linkUrl,
+			linkTarget,
+			relAttribute,
+			linkDescription,
+			linkToPost,
+		} = attributes;
 
 		// 元のブロックの `save` を取得
 		const saveElement = settings.save(props);
 
-		if (!saveElement || !linkUrl) {
+		const hasLink = linkUrl || linkToPost;
+		const effectiveUrl = linkToPost ? '' : linkUrl;
+
+		if (!saveElement || !hasLink) {
 			return saveElement;
 		}
 
@@ -81,7 +105,8 @@ const extendCoverBlock = (settings, name) => {
 			<div className={classNameWithLink} style={existingStyle}>
 				{saveElement.props.children}
 				<a
-					href={linkUrl}
+					href={effectiveUrl}
+					{...(linkToPost ? { 'data-vk-link-to-post': '1' } : {})}
 					{...(linkTarget ? { target: linkTarget } : {})}
 					{...(relAttribute ? { rel: relAttribute } : {})}
 					className="wp-block-cover-vk-link"
@@ -116,7 +141,17 @@ const extendCoverBlock = (settings, name) => {
 				type: 'string',
 				default: '',
 			},
+			linkToPost: {
+				type: 'boolean',
+				default: false,
+			},
 		},
+		usesContext: [
+			...(settings.usesContext || []),
+			'postId',
+			'postType',
+			'queryId',
+		],
 		edit: enhanceCoverBlock(settings.edit),
 		save, // 修正した `save` を適用
 	};

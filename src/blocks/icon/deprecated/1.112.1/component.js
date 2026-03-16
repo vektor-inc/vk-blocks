@@ -130,11 +130,11 @@ export class VKBIcon extends Component {
 				}
 			}
 
-			// add class and inline css
+			// add class and inline css (join with space to preserve fa-rotate-*, fa-flip-* etc.)
 			const faIconFragment = fontAwesomeIcon.split(' ');
 			faIconFragment[0] = faIconFragment[0] + ` style="${fontStyle};"`;
 			faIconFragment[1] = ' ' + faIconFragment[1] + fontClass;
-			faIconTag = faIconFragment.join('');
+			faIconTag = faIconFragment.join(' ');
 		}
 
 		const blockContent = (

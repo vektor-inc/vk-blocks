@@ -57,6 +57,15 @@ npm run watch
 
 翻訳は PoEdit などを使って `.po` ファイルを編集します。上記の順番で実行すれば変更が反映されます。
 
+## Claude Code スキルのセットアップ
+
+```
+bash tools/claude-skills/setup.sh
+```
+
+上記コマンドで Claude Code のリリーススキルを `~/.claude/skills/` にインストールします。
+インストール後に Claude Code を再起動するとスキルが有効になります。
+
 ## AI用コーディングルール
 
 ```

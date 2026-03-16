@@ -20,7 +20,6 @@ export class VKBIcon extends Component {
 		const iconTarget = this.props.lbTarget;
 		const relAttribute = this.props.lbRelAttribute;
 		const linkDescription = this.props.lbLinkDescription;
-		const linkToPost = this.props.lbLinkToPost;
 
 		// outer & align
 		let outerClass = 'vk_icon_frame';
@@ -142,11 +141,11 @@ export class VKBIcon extends Component {
 				}
 			}
 
-			// add class and inline css (join with space to preserve fa-rotate-*, fa-flip-* etc.)
+			// add class and inline css
 			const faIconFragment = fontAwesomeIcon.split(' ');
 			faIconFragment[0] = faIconFragment[0] + ` style="${fontStyle};"`;
 			faIconFragment[1] = ' ' + faIconFragment[1] + fontClass;
-			faIconTag = faIconFragment.join(' ');
+			faIconTag = faIconFragment.join('');
 		}
 
 		const blockContent = (
@@ -158,21 +157,18 @@ export class VKBIcon extends Component {
 		);
 
 		let blockContentWrapper = '';
-		const hasLink = !!iconUrl || !!linkToPost;
-		if (hasLink) {
+		if (iconUrl !== null && iconUrl !== undefined && iconUrl !== '') {
 			blockContentWrapper = (
-				/* eslint-disable-next-line jsx-a11y/anchor-is-valid -- linkToPost: href replaced server-side with permalink */
 				<a
-					href={linkToPost ? '#' : iconUrl}
+					href={iconUrl}
 					className="vk_icon_link"
-					{...(linkToPost ? { 'data-vk-link-to-post': '1' } : {})}
 					{...(iconTarget ? { target: '_blank' } : {})}
 					{...(relAttribute ? { rel: relAttribute } : {})}
 				>
 					<span className="screen-reader-text">
 						{linkDescription
 							? linkDescription
-							: __('Icon link', 'vk-blocks')}
+							: __( 'Icon link', 'vk-blocks' )}
 					</span>
 					{blockContent}
 				</a>

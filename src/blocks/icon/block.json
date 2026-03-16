@@ -47,7 +47,7 @@
 			"type": "string"
 		},
 		"iconTarget": {
-			"type": "Boolean",
+			"type": "boolean",
 			"default": false
 		},
 		"relAttribute": {
@@ -57,6 +57,10 @@
 		"linkDescription": {
 			"type": "string",
 			"default": ""
+		},
+		"linkToPost": {
+			"type": "boolean",
+			"default": false
 		}
 	},
 	"description": "Display icons with Font Awesome.",
@@ -64,5 +68,6 @@
 	"supports": {
 		"className": true,
 		"anchor": true
-	}
+	},
+	"usesContext": ["postId", "postType", "queryId"]
 }

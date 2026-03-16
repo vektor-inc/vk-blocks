@@ -30,6 +30,9 @@ export default function save(props) {
 		blockId,
 	} = attributes;
 
+	const hasLink = !!linkUrl;
+	const effectiveUrl = linkUrl;
+
 	const spacingPaddingLeft = style?.spacing?.padding?.left;
 	const spacingPaddingRight = style?.spacing?.padding?.right;
 	const spacingPaddingLeftVar = toPresetSpacingVar(spacingPaddingLeft);
@@ -78,7 +81,7 @@ export default function save(props) {
 
 	const GetLinkUrl = (
 		<a
-			href={linkUrl}
+			href={effectiveUrl}
 			{...(linkTarget ? { target: linkTarget } : {})}
 			{...(relAttribute ? { rel: relAttribute } : {})}
 			className={`${prefix}-link`}
@@ -100,7 +103,7 @@ export default function save(props) {
 	});
 	return (
 		<div {...blockProps}>
-			{linkUrl && GetLinkUrl}
+			{hasLink && GetLinkUrl}
 			{GetBgImage}
 			<div className={containerClass}>
 				<InnerBlocks.Content />

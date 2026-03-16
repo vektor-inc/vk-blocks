@@ -82,8 +82,10 @@ export const enhanceColumnBlock = createHigherOrderComponent((BlockEdit) => {
 					</InspectorControls>
 				</>
 			);
-		} else if (isColumnBlock(props.name) && props.isSelected) {
-			// カラムのリンク設定
+		}
+
+		if (isColumnBlock(props.name) && props.isSelected) {
+			// カラムのリンク設定（URL指定のみ。投稿へのリンクは非対応）
 			return (
 				<>
 					<BlockEdit {...props} />
@@ -161,36 +163,46 @@ const extendColumnBlock = (settings, name) => {
 		attributes: {
 			...settings.attributes,
 		},
-
 		edit: enhanceColumnBlock(settings.edit),
-		save: (props) => {
-			const { attributes } = props;
-			const { linkUrl, linkTarget, relAttribute, linkDescription } =
-				attributes;
-			const saveElement = settings.save(props);
+		save:
+			isColumnBlock(name) && settings.save
+				? (props) => {
+						const { attributes } = props;
+						const {
+							linkUrl: colLinkUrl,
+							linkTarget: colLinkTarget,
+							relAttribute: colRelAttribute,
+							linkDescription: colLinkDescription,
+						} = attributes;
+						const saveElement = settings.save(props);
 
-			if (!linkUrl) {
-				return saveElement;
-			}
+						if (!colLinkUrl) {
+							return saveElement;
+						}
 
-			return (
-				<div {...saveElement.props}>
-					<a
-						href={linkUrl}
-						{...(linkTarget ? { target: linkTarget } : {})}
-						{...(relAttribute ? { rel: relAttribute } : {})}
-						className="wp-block-column-vk-link"
-					>
-						<span className="screen-reader-text">
-							{linkDescription
-								? linkDescription
-								: __('Column link', 'vk-blocks')}
-						</span>
-					</a>
-					{saveElement.props.children}
-				</div>
-			);
-		},
+						return (
+							<div {...saveElement.props}>
+								<a
+									href={colLinkUrl}
+									{...(colLinkTarget
+										? { target: colLinkTarget }
+										: {})}
+									{...(colRelAttribute
+										? { rel: colRelAttribute }
+										: {})}
+									className="wp-block-column-vk-link"
+								>
+									<span className="screen-reader-text">
+										{colLinkDescription
+											? colLinkDescription
+											: __('Column link', 'vk-blocks')}
+									</span>
+								</a>
+								{saveElement.props.children}
+							</div>
+						);
+					}
+				: settings.save,
 	};
 };
 

@@ -10,6 +10,7 @@ export default function save(props) {
 		buttonUrl,
 		buttonTarget,
 		relAttribute,
+		linkToPost,
 		buttonSize,
 		buttonType,
 		buttonEffect,
@@ -29,6 +30,8 @@ export default function save(props) {
 		borderRadius,
 		blockId,
 	} = attributes;
+
+	const effectiveUrl = linkToPost ? '' : buttonUrl;
 
 	let containerClass = '';
 	// カスタムカラーの場合 またはアウターにギャップが指定されれいる場合
@@ -82,8 +85,9 @@ export default function save(props) {
 				lbType={buttonType}
 				lbAlign={buttonAlign}
 				lbSize={buttonSize}
-				lbUrl={buttonUrl}
+				lbUrl={effectiveUrl}
 				lbTarget={buttonTarget}
+				lbLinkToPost={linkToPost}
 				lbRelAttribute={relAttribute}
 				lbFontAwesomeIconBefore={fontAwesomeIconBefore}
 				lbFontAwesomeIconAfter={fontAwesomeIconAfter}

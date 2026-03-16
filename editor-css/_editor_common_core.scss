@@ -46,6 +46,97 @@
 .vk-block-editor-url-input-wrapper {
 	display: flex;
 	margin-bottom: 8px;
+	gap: 4px;
+	// URLInput が flex で幅を正しく計算できるようにする（検索窓の表示崩れ防止）
+	> *:first-child {
+		flex: 1;
+		min-width: 0;
+	}
+}
+
+/*-------------------------------------------*/
+/* リンクツールバー（投稿へのリンク / URL指定）
+/*-------------------------------------------*/
+.vk-block-editor-link-toolbar-popover {
+	min-width: 280px;
+	padding: 4px 0;
+	// URLInput（.block-editor-url-input）が flex 内で幅を正しく取るように
+	.block-editor-url-input {
+		min-width: 0;
+		flex: 1;
+	}
+	// リンクプレビュー：コアの __preview 系クラス・構造に合わせているため、コアの block-editor-link-control__preview 用CSSが使われる
+	// 当コンポーネントは Flex を使わないため、レイアウト用の flex と見た目の微調整をここで指定
+	.block-editor-link-control__preview {
+		display: flex;
+		align-items: flex-start;
+		gap: 8px;
+		margin-bottom: 8px;
+		.block-editor-link-control__link-information {
+			display: flex;
+			justify-content: flex-start;
+			align-items: flex-start;
+			gap: 10px;
+			flex: 1;
+			min-width: 0;
+		}
+		.block-editor-link-control__preview-icon {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-shrink: 0;
+			width: 32px;
+			height: 32px;
+			min-width: 32px;
+			svg {
+				width: 20px;
+				height: 20px;
+			}
+		}
+		.block-editor-link-control__preview-details {
+			display: flex;
+			flex-direction: column;
+			gap: 2px;
+			min-width: 0;
+			overflow: hidden;
+		}
+		.block-editor-link-control__preview-title,
+		.block-editor-link-control__preview-info {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+	}
+}
+
+.vk-block-editor-link-destination-choice {
+	margin-bottom: 12px;
+}
+
+/* セクション余白 */
+.vk-block-editor-link-toolbar-popover {
+	.vk-block-editor-link-toolbar-form {
+		display: flex;
+		flex-direction: column;
+		gap: 0;
+	}
+	.vk-block-editor-link-toolbar-section {
+		padding-top: 12px;
+		&:first-of-type {
+			padding-top: 0;
+		}
+	}
+	.vk-block-editor-link-toolbar-section-options {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+	}
+}
+
+/* URL指定時もツールバーアイコンを反転 */
+.vk-block-editor-link-toolbar-button.is-pressed {
+	background: var(--wp-admin-theme-color, #007cba);
+	color: #fff;
 }
 
 /*-------------------------------------------*/

@@ -440,7 +440,10 @@ export default function BalloonEdit(props) {
 						{__('Type', 'vk-blocks')}
 					</p>
 					<p className={'mb-1'}>
-						{__('Please select the type of balloon.', 'vk-blocks')}{' '}
+						{__(
+							'Please select the type of balloon.',
+							'vk-blocks'
+						)}{' '}
 					</p>
 					<ToggleGroupControl
 						value={balloonType}

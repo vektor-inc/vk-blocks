@@ -1,4 +1,5 @@
 @use 'components/scroll-hint/styles/base' as *;
+@use 'components/scrollbar-styles/scrollbar' as *;
 
 /*-------------------------------------------*/
 /* スクロールヒント - テーブルブロック用
@@ -45,17 +46,20 @@
 		&[data-scroll-breakpoint="table-scrollable-mobile"] {
 			@media (max-width: 575.98px) {
 				@include scrollable-table;
+				@include scrollbar-custom;
 			}
 		}
 
 		&[data-scroll-breakpoint="table-scrollable-tablet"] {
 			@media (max-width: 991.98px) {
 				@include scrollable-table;
+				@include scrollbar-custom;
 			}
 		}
 
 		&[data-scroll-breakpoint="table-scrollable-pc"] {
 			@include scrollable-table;
+			@include scrollbar-custom;
 		}
 	}
 }
@@ -69,17 +73,23 @@
 			&[data-scroll-breakpoint="table-scrollable-mobile"] {
 				@media (max-width: 575.98px) {
 					@include scrollable-table-editor;
+					@include scrollbar-custom;
+					@include scrollbar-custom-editor-override;
 				}
 			}
-	
+
 			&[data-scroll-breakpoint="table-scrollable-tablet"] {
 				@media (max-width: 991.98px) {
 					@include scrollable-table-editor;
+					@include scrollbar-custom;
+					@include scrollbar-custom-editor-override;
 				}
 			}
-	
+
 			&[data-scroll-breakpoint="table-scrollable-pc"] {
 				@include scrollable-table-editor;
+				@include scrollbar-custom;
+				@include scrollbar-custom-editor-override;
 			}
 		}
 	}
