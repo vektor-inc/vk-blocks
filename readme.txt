@@ -4,7 +4,7 @@ Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 6.5
 Tested up to: 6.9
-Stable tag: 1.117.0.1
+Stable tag: 1.116.2.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -107,6 +107,9 @@ e.g.
 1. VK Blocks examples.
 
 == Changelog ==
+
+= 1.117.1 =
+[ Bug fix ][ Table of Contents ( Pro ) ] Fixed an issue where CSS classes (button_status-open/close, tab_content-open/close) did not switch when toggling the open/close button.
 
 = 1.117.0 =
 [ Add function ][ Tab ( Pro ) / Core Group / Core Table ] Added scrollbar customization options (color change and hide/show) for horizontal scroll feature.

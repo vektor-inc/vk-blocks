@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git merge:*)",
+      "Bash(bash tools/claude-skills/vk-blocks-pro-release/scripts/detect-release-state.sh)",
+      "Bash(git tag:*)",
+      "Bash(gh run:*)",
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(gh release:*)",
+      "Bash(docker info:*)",
+      "Bash(wp-env start:*)",
+      "Bash(yes)",
+      "Bash(wp-env destroy:*)",
+      "Bash(unzip -q vk-blocks-pro.zip -d .)",
+      "Bash(gh api:*)"
+    ],
+    "additionalDirectories": [
+      "/tmp"
+    ]
+  }
+}

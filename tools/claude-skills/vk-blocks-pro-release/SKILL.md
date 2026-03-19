@@ -1,6 +1,6 @@
 ---
 name: vk-blocks-pro-release
-description: "VK Blocks Pro をリリース・デプロイする際に使用する。バージョン番号の付与、プレリリース（pre_ タグ）、本番リリース（VWS 配信）のワークフローを管理する。"
+description: "VK Blocks Pro をリリース・デプロイする際に使用する。バージョン番号の付与、プレリリース（*.*.*.0 タグ）、本番リリース（*.*.*.1 タグ・VWS 配信）のワークフローを管理する。"
 compatibility: "git、gh CLI が必要"
 disable-model-invocation: true
 ---
@@ -19,15 +19,16 @@ disable-model-invocation: true
 
 VK Blocks Pro のリリースは **2段階タグ戦略** を採用している：
 
-1. **プレリリース**（`pre_X.X.X.0`）: GitHub Release 作成 + テストサーバーへのデプロイ。一般ユーザーには配信されない
-2. **本番リリース**（`X.X.X.0`）: VWS 配信サーバーへのデプロイ。ユーザーへの更新通知が有効になる
+1. **プレリリース**（`X.X.X.0`）: GitHub Release 作成（prerelease）+ テストサーバーへのデプロイ。一般ユーザーには配信されない
+2. **本番リリース**（`X.X.X.1`）: VWS 配信サーバーへのデプロイ。ユーザーへの更新通知が有効になる
 
-なお `pre_X.X.X.0` タグを打つと、無料版（vk-blocks）の自動デプロイも連動して実行される。
+なお `X.X.X.0` タグを打つと、無料版（vk-blocks）の自動デプロイも連動して実行される。
+本番リリース配信が失敗した場合は `X.X.X.2`, `X.X.X.3` とバージョンを上げることで再配信が可能。
 
 バージョン形式：
 - `vk-blocks.php` の `Version:` : 4桁（例: `1.116.2.0`）
 - readme.txt の Changelog ヘッダー: 3桁（例: `= 1.116.2 =`）
-- Git タグ: `pre_X.X.X.0`（プレリリース）/ `X.X.X.0`（本番）
+- Git タグ: `X.X.X.0`（プレリリース）/ `X.X.X.1`（本番）
 
 ## ステップ1: 現在の状態を検出する
 
@@ -44,24 +45,24 @@ bash tools/claude-skills/vk-blocks-pro-release/scripts/detect-release-state.sh
 | STATE | 意味 | 推奨開始フェーズ |
 |-------|------|----------------|
 | `NEEDS_VERSION` | Changelog にバージョンなし変更エントリがある | **フェーズ1** から開始 |
-| `NEEDS_PRE_RELEASE` | バージョンはあるが `pre_` タグがない | **フェーズ2** から開始 |
-| `NEEDS_STABLE_RELEASE` | `pre_` タグはあるが本番タグがない | **フェーズ3** から開始 |
+| `NEEDS_PRE_RELEASE` | バージョンはあるが `X.X.X.0` タグがない | **フェーズ2** から開始 |
+| `NEEDS_STABLE_RELEASE` | `X.X.X.0` タグはあるが本番タグ（`X.X.X.1`以上）がない | **フェーズ3** から開始 |
 | `UP_TO_DATE` | 本番タグ済み | 作業不要 |
 
 `UP_TO_DATE` の場合はユーザーに以下を伝える：
 
-> 現在のバージョン `X.X.X.0` はすでに本番リリース済みです。新たにリリースする変更がなければ作業不要です。
+> 現在のバージョン `X.X.X.1` はすでに本番リリース済みです。新たにリリースする変更がなければ作業不要です。
 
 ユーザーが手動で一部の作業を済ませている場合の例：
 - 「バージョン番号は手動で付けた」→ **フェーズ2** から開始
-- 「pre_ タグも打った」→ **フェーズ3** から開始
+- 「`X.X.X.0` タグも打った」→ **フェーズ3** から開始
 
 ## 各フェーズのファイル
 
 各フェーズの詳細手順は以下のファイルに記載されている：
 
 - [phase-1-add-version.md](phase-1-add-version.md) — バージョン番号を Changelog・PHP ファイルに追加して master へ PR
-- [phase-2-pre-release.md](phase-2-pre-release.md) — `pre_X.X.X.0` タグで GitHub Release + テストサーバーにデプロイ
-- [phase-3-stable-release.md](phase-3-stable-release.md) — `X.X.X.0` タグで VWS 配信サーバーに本番デプロイ
+- [phase-2-pre-release.md](phase-2-pre-release.md) — `X.X.X.0` タグで GitHub Release（prerelease）+ テストサーバーにデプロイ
+- [phase-3-stable-release.md](phase-3-stable-release.md) — `X.X.X.1` タグで VWS 配信サーバーに本番デプロイ
 
 指定されたフェーズのファイルを読み込んでから作業を開始すること。

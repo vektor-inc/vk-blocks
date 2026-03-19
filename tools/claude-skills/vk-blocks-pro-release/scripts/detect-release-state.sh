@@ -32,7 +32,7 @@ echo "CHANGELOG_HAS_VERSION=$CHANGELOG_HAS_VERSION"
 
 # Changelog にバージョンなし変更エントリがあるか確認
 # "== Changelog ==" の直後から最初の "= X.X.X =" の前までの行を抽出
-UNVERSIONED=$(awk '/^== Changelog ==/{found=1; next} found && /^= [0-9]+\.[0-9]/{exit} found && /\S/{print}' readme.txt | head -5)
+UNVERSIONED=$(sed -n '/^== Changelog ==/,/^= [0-9]/p' readme.txt | grep -v "^== Changelog ==" | grep -v "^= [0-9]" | grep -v "^$" | head -5)
 if [ -n "$UNVERSIONED" ]; then
   HAS_UNVERSIONED=true
   echo "HAS_UNVERSIONED=true"
@@ -45,16 +45,16 @@ else
   echo "HAS_UNVERSIONED=false"
 fi
 
-# pre_ タグが存在するか確認
-if git tag | grep -q "^pre_${PHP_VERSION}$"; then
+# プレリリースタグ（X.X.X.0）が存在するか確認
+if git tag | grep -q "^${PHP_VERSION}$"; then
   PRE_TAG_EXISTS=true
 else
   PRE_TAG_EXISTS=false
 fi
 echo "PRE_TAG_EXISTS=$PRE_TAG_EXISTS"
 
-# 本番タグが存在するか確認
-if git tag | grep -q "^${PHP_VERSION}$"; then
+# 本番タグ（X.X.X.1 以上）が存在するか確認
+if git tag | grep -qE "^${VERSION_3}\.[1-9][0-9]*$"; then
   STABLE_TAG_EXISTS=true
 else
   STABLE_TAG_EXISTS=false
