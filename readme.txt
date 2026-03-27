@@ -108,10 +108,18 @@ e.g.
 
 == Changelog ==
 
+= 1.118.0 =
+[ Bug fix ][ Link toolbar ] Fixed an issue where "Link to post" did not work in the free version (VK Blocks) because the initialization was only in the Pro-specific file.
+[ Add function ][ Table of Contents ( Pro ) ] Added numbering style option (Auto / H2 only / None) to both global settings and per-block settings.
+[ Bug fix ][ Alert / Step ( Pro ) / Icon / Icon Card ( Pro ) / PR Blocks / Border Box / Heading / Button / PR Content ] Fixed broken Font Awesome icons to be restored automatically.
+[ Design Bug fix ] Added left margin to the VK icon displayed in block settings panels.
+
 = 1.117.1 =
+[ Bug fix ][ Table of Contents ( Pro ) ] Fixed an issue where duplicating the block caused the open/close toggle to malfunction due to duplicate checkbox IDs.
 [ Bug fix ][ Table of Contents ( Pro ) ] Fixed an issue where CSS classes (button_status-open/close, tab_content-open/close) did not switch when toggling the open/close button.
 
 = 1.117.0 =
+[ Design Bug fix ][ Core Group ] Fixed an issue where text color set on a nested group block was overridden by the parent group's text color.
 [ Add function ][ Tab ( Pro ) / Core Group / Core Table ] Added scrollbar customization options (color change and hide/show) for horizontal scroll feature.
 [ Add function ][ Link toolbar ] Added "Link to post" for Icon, Button, Outer, Group, and Cover when the block is inside a Query Loop (so the link points to the current post in the loop).
 [ Add function ][ Icon ] Icon block now supports Font Awesome rotate and flip classes.
@@ -126,6 +134,7 @@ e.g.
 = 1.116.1 =
 [ Bug fix ][ Fixed Display (Pro) ] Fixed an issue where guest actions could affect other visitors' fixed display visibility.
 [ Design Bug fix ][ Core Group ] Fixed issue where horizontal scroll cannot scroll fully when horizontal group blocks are nested inside scrollable group blocks.
+[ Other ][ Slider ] Fix Typo
 
 = 1.116.0 =
 [ Add function ][ Core Group ] Add scroll hint for horizontal scrolling.

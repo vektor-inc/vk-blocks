@@ -10,6 +10,7 @@ import { InnerBlocks, RichText, useBlockProps } from '@wordpress/block-editor';
 import parse from 'html-react-parser';
 import { isHexColor } from '@vkblocks/utils/is-hex-color';
 import { sanitizeSlug } from '@vkblocks/utils/sanitizeSlug';
+import { fixBrokenUnicode } from '@vkblocks/utils/fixBrokenUnicode';
 
 export default function save(props) {
 	const { attributes } = props;
@@ -17,12 +18,13 @@ export default function save(props) {
 		heading,
 		headingTag,
 		anchor,
-		faIcon,
+		faIcon: rawFaIcon,
 		color,
 		bgColor,
 		borderColor,
 		bodyAlign,
 	} = attributes;
+	const faIcon = rawFaIcon ? fixBrokenUnicode(rawFaIcon) : rawFaIcon;
 
 	const inner = <InnerBlocks.Content />;
 	const title = (
@@ -120,7 +122,11 @@ export default function save(props) {
 		icon = `<div class="${classnames(
 			iconClasses
 		)}" style="${iconStyle}">${faIcon}</div>`;
-	} else if (faIcon.indexOf('<i class="') === -1) {
+	} else if (
+		faIcon !== null &&
+		faIcon !== undefined &&
+		faIcon.indexOf('<i class="') === -1
+	) {
 		//iタグでdeprecatedが効かなかったので追加。
 		// アイコンなし
 		icon = `<i class="${faIcon}"></i>`;

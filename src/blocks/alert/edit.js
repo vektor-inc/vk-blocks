@@ -9,10 +9,21 @@ import {
 import { FontAwesome } from '@vkblocks/utils/font-awesome-new';
 import { iconLabel } from '@vkblocks/utils/icon-label';
 import parse from 'html-react-parser';
+import { useEffect } from '@wordpress/element';
+import { fixBrokenUnicode } from '@vkblocks/utils/fixBrokenUnicode';
 
 export default function AlertEdit(props) {
 	const { attributes, setAttributes } = props;
 	const { style, icon, iconText, mobileIconPosition } = attributes;
+
+	useEffect(() => {
+		if (icon) {
+			const fixed = fixBrokenUnicode(icon);
+			if (fixed !== icon) {
+				setAttributes({ icon: fixed });
+			}
+		}
+	}, [icon]);
 
 	const blockProps = useBlockProps({
 		className: `vk_alert alert alert-${style} ${icon ? 'has-alert-icon' : ''} ${

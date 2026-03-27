@@ -27,6 +27,7 @@ import { isHexColor } from '@vkblocks/utils/is-hex-color';
 import { iconLabel } from '@vkblocks/utils/icon-label';
 import { sanitizeSlug } from '@vkblocks/utils/sanitizeSlug';
 import { useEffect, useRef } from '@wordpress/element';
+import { fixBrokenUnicode } from '@vkblocks/utils/fixBrokenUnicode';
 
 export default function BorderBoxEdit(props) {
 	const { attributes, setAttributes } = props;
@@ -42,6 +43,8 @@ export default function BorderBoxEdit(props) {
 		bodyAlign,
 	} = attributes;
 
+	const fixedFaIcon = faIcon ? fixBrokenUnicode(faIcon) : faIcon;
+
 	// 新しく作成されたブロックのみ目次に含める（既存ブロックは除外のまま）
 	const hasInitialized = useRef(false);
 	useEffect(() => {
@@ -53,6 +56,14 @@ export default function BorderBoxEdit(props) {
 			hasInitialized.current = true;
 		}
 	}, [includeInToc, setAttributes, heading]);
+	useEffect(() => {
+		if (faIcon) {
+			const fixed = fixBrokenUnicode(faIcon);
+			if (fixed !== faIcon) {
+				setAttributes({ faIcon: fixed });
+			}
+		}
+	}, [faIcon]);
 	const inner = (
 		<InnerBlocks templateLock={false} template={[['core/paragraph']]} />
 	);
@@ -189,14 +200,18 @@ export default function BorderBoxEdit(props) {
 		// iタグ必須
 		icon = `<div class="${classnames(
 			iconClasses
-		)}" style="${iconStyle}">${faIcon}</div>`;
-	} else if (faIcon.indexOf('<i class="') === -1) {
+		)}" style="${iconStyle}">${fixedFaIcon}</div>`;
+	} else if (
+		fixedFaIcon !== null &&
+		fixedFaIcon !== undefined &&
+		fixedFaIcon.indexOf('<i class="') === -1
+	) {
 		//iタグでdeprecatedが効かなかったので追加。
 		// アイコンなし
-		icon = `<i class="${faIcon}"></i>`;
+		icon = `<i class="${fixedFaIcon}"></i>`;
 	} else {
 		// アイコンあり
-		icon = faIcon;
+		icon = fixedFaIcon;
 	}
 
 	const bodyClasses = classnames('vk_borderBox_body', {

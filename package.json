@@ -14,7 +14,10 @@
 		"create:dist-dir": "mkdir -p dist/vk-blocks-pro && mkdir -p dist/vk-blocks",
 		"copy:files": "cp -r build inc languages vendor *.txt *.png *.php dist/vk-blocks-pro",
 		"copy:files:free": "cp -r build inc vendor *.txt *.png *.php dist/vk-blocks",
-		"dist": "composer install --no-dev && npm run build && npm run clean:dist && npm run create:dist-dir && npm run copy:files && composer install",
+		"dist": "composer install --no-dev && npm run build && npm run clean:dist && npm run create:dist-dir && npm run copy:files && composer install && npm run zip",
+		"zip:pro": "cd dist && zip -r vk-blocks-pro.zip vk-blocks-pro",
+		"zip:free": "cd dist && zip -r vk-blocks.zip vk-blocks",
+		"zip": "npm run zip:pro && npm run zip:free",
 		"prebuild": "rimraf ./inc/vk-blocks/build/*",
 		"build:dev": "composer install && wp-scripts build --webpack-copy-php --config webpack.config.js --progress --mode=development && cross-env NODE_OPTIONS=--disable-warning=DEP0180 gulp build:dev:pro",
 		"build": "wp-scripts build --webpack-copy-php --config webpack.config.js --progress --mode=production && cross-env NODE_OPTIONS=--disable-warning=DEP0180 gulp build:pro && npm run build:js && npm run translate",
@@ -31,6 +34,7 @@
 		"build:js": "webpack --config webpack2.config.js",
 		"gulp": "cross-env NODE_OPTIONS=--disable-warning=DEP0180 npx gulp",
 		"lint": "wp-scripts format src/ && wp-scripts lint-js src/ --fix",
+		"lint:check": "wp-scripts format src/ --check && wp-scripts lint-js src/",
 		"lint:php": "composer install && composer format && composer phpcs",
 		"fixtures:clean": "rimraf test/e2e-tests/fixtures/blocks/*.json test/e2e-tests/fixtures/blocks/*.serialized.html",
 		"fixtures:generate": "cross-env GENERATE_MISSING_FIXTURES=y wp-scripts test-unit-js --config test/jest.config.js test/integration/full-content/full-content.test.js",
@@ -39,8 +43,8 @@
 		"test-unit:withcache": "npm run fixtures:regenerate",
 		"test:unit": "JEST_WORKERS=1 wp-scripts test-unit-js --runInBand --config test/jest.config.js --testPathPattern=\"test/unit/.*\\\\.test\\\\.js\"",
 		"test-unit:clean": "wp-scripts test-unit-js --clearCache",
-		"test:e2e": "node ./test/e2e-tests/run-tests.js",
-		"test:e2e-no-gui": "wp-scripts test-e2e --config ./test/e2e-tests/jest-e2e.config.js",
+		"e2e": "node ./test/e2e-tests/run-tests.js",
+		"e2e-no-gui": "wp-scripts test-e2e --config ./test/e2e-tests/jest-e2e.config.js",
 		"composer:install": "wp-env run composer \"composer install\"",
 		"phpunit": "composer install && wp-env run tests-cli --env-cwd='wp-content/plugins/vk-blocks-pro' vendor/bin/phpunit -c .phpunit.xml",
 		"phpunit:free": "composer install && wp-env run tests-cli --env-cwd='wp-content/plugins/vk-blocks' vendor/bin/phpunit -c .phpunit.xml",
@@ -96,8 +100,8 @@
 		"concurrently": "^9.2.1",
 		"cross-env": "^10.1.0",
 		"css-loader": "^7.1.4",
-		"eslint-plugin-prettier": "^5.5.5",
 		"encoding": "^0.1.13",
+		"eslint-plugin-prettier": "^5.5.5",
 		"gettext-parser": "9.0.1",
 		"gettext-to-messageformat": "0.4.0",
 		"gulp": "^4.0.2",
@@ -111,6 +115,7 @@
 		"html-react-parser": "^5.2.17",
 		"husky": "^9.1.7",
 		"jest-transform-stub": "^2.0.0",
+		"lint-staged": "^16.4.0",
 		"memize": "^2.1.1",
 		"npm-check-updates": "^19.6.3",
 		"npm-run-all": "^4.1.5",
@@ -127,5 +132,11 @@
 	},
 	"dependencies": {
 		"regenerator-runtime": "^0.14.1"
+	},
+	"lint-staged": {
+		"src/**/*.js": [
+			"wp-scripts format",
+			"wp-scripts lint-js --fix"
+		]
 	}
 }

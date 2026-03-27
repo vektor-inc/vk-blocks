@@ -1,8 +1,10 @@
 import { InnerBlocks, useBlockProps, RichText } from '@wordpress/block-editor';
 import parse from 'html-react-parser';
+import { fixBrokenUnicode } from '@vkblocks/utils/fixBrokenUnicode';
 
 export default function save({ attributes }) {
-	const { style, icon, iconText, mobileIconPosition } = attributes;
+	const { style, icon: rawIcon, iconText, mobileIconPosition } = attributes;
+	const icon = rawIcon ? fixBrokenUnicode(rawIcon) : rawIcon;
 
 	const blockProps = useBlockProps.save({
 		className: `vk_alert alert alert-${style} ${icon ? 'has-alert-icon' : ''} ${

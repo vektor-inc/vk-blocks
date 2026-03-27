@@ -1,6 +1,6 @@
 ---
 name: vk-blocks-pro-release
-description: "VK Blocks Pro をリリース・デプロイする際に使用する。バージョン番号の付与、プレリリース（*.*.*.0 タグ）、本番リリース（*.*.*.1 タグ・VWS 配信）のワークフローを管理する。"
+description: "VK Blocks Pro をリリース・デプロイする際に使用する。バージョン番号の付与、タグの push、GitHub Actions による CI/デプロイのワークフローを管理する。"
 compatibility: "git、gh CLI が必要"
 disable-model-invocation: true
 ---
@@ -11,24 +11,24 @@ disable-model-invocation: true
 
 ユーザーが以下のいずれかを言ったときにこのスキルを使用する：
 - 「リリースする」「プラグインをリリース」「vk-blocks-pro をリリース」
-- 「プレリリース」「pre_ タグを打つ」
-- 「本番リリース」「VWS にデプロイ」
+- 「VWS にデプロイ」
 - 「vk-blocks-pro-release」
 
 ## 概要
 
-VK Blocks Pro のリリースは **2段階タグ戦略** を採用している：
+タグ（`X.X.X`）を push すると GitHub Actions が自動起動し、以下の処理がすべて自動実行される：
 
-1. **プレリリース**（`X.X.X.0`）: GitHub Release 作成（prerelease）+ テストサーバーへのデプロイ。一般ユーザーには配信されない
-2. **本番リリース**（`X.X.X.1`）: VWS 配信サーバーへのデプロイ。ユーザーへの更新通知が有効になる
+1. **ビルド** — `npm run dist` で配布ディレクトリ + zip 作成
+2. **スモークテスト** — wp-env 起動、公開画面・管理画面の PHP エラー検出
+3. **PHPUnit** — dist パッケージでテスト実行
+4. **リリース** — GitHub Release 作成（zip 添付、リリースノート自動生成）
+5. **デプロイ** — VWS 配信サーバー + テストサーバーへのデプロイ
+6. **無料版反映** — Release 成功後、無料版リポジトリ（vk-blocks）の master に自動コミット
 
-なお `X.X.X.0` タグを打つと、無料版（vk-blocks）の自動デプロイも連動して実行される。
-本番リリース配信が失敗した場合は `X.X.X.2`, `X.X.X.3` とバージョンを上げることで再配信が可能。
+テストが1つでも失敗した場合、Actions はそこで停止しデプロイは実行されない。
+無料版のタグ付け・WordPress.org へのデプロイは無料版リポジトリ側で別途実施する。
 
-バージョン形式：
-- `vk-blocks.php` の `Version:` : 4桁（例: `1.116.2.0`）
-- readme.txt の Changelog ヘッダー: 3桁（例: `= 1.116.2 =`）
-- Git タグ: `X.X.X.0`（プレリリース）/ `X.X.X.1`（本番）
+バージョン形式：`MAJOR.MINOR.PATCH`（3桁、例: `1.118.0`）
 
 ## ステップ1: 現在の状態を検出する
 
@@ -44,25 +44,22 @@ bash tools/claude-skills/vk-blocks-pro-release/scripts/detect-release-state.sh
 
 | STATE | 意味 | 推奨開始フェーズ |
 |-------|------|----------------|
-| `NEEDS_VERSION` | Changelog にバージョンなし変更エントリがある | **フェーズ1** から開始 |
-| `NEEDS_PRE_RELEASE` | バージョンはあるが `X.X.X.0` タグがない | **フェーズ2** から開始 |
-| `NEEDS_STABLE_RELEASE` | `X.X.X.0` タグはあるが本番タグ（`X.X.X.1`以上）がない | **フェーズ3** から開始 |
-| `UP_TO_DATE` | 本番タグ済み | 作業不要 |
+| `NEEDS_VERSION` | Changelog の先頭にバージョンがない | **フェーズ1** から開始 |
+| `NEEDS_TAG` | バージョン追加済みだがタグが未 push | **フェーズ2** から開始 |
+| `UP_TO_DATE` | 最新バージョンのタグが push 済み | 作業不要 |
 
 `UP_TO_DATE` の場合はユーザーに以下を伝える：
 
-> 現在のバージョン `X.X.X.1` はすでに本番リリース済みです。新たにリリースする変更がなければ作業不要です。
+> 現在のバージョン `X.X.X` はすでにリリース済みです（タグが push されています）。新たにリリースする変更がなければ作業不要です。
 
 ユーザーが手動で一部の作業を済ませている場合の例：
 - 「バージョン番号は手動で付けた」→ **フェーズ2** から開始
-- 「`X.X.X.0` タグも打った」→ **フェーズ3** から開始
 
 ## 各フェーズのファイル
 
 各フェーズの詳細手順は以下のファイルに記載されている：
 
-- [phase-1-add-version.md](phase-1-add-version.md) — バージョン番号を Changelog・PHP ファイルに追加して master へ PR
-- [phase-2-pre-release.md](phase-2-pre-release.md) — `X.X.X.0` タグで GitHub Release（prerelease）+ テストサーバーにデプロイ
-- [phase-3-stable-release.md](phase-3-stable-release.md) — `X.X.X.1` タグで VWS 配信サーバーに本番デプロイ
+- [phase-1-add-version.md](phase-1-add-version.md) — バージョン番号を Changelog・PHP ファイルに追加して master へコミット
+- [phase-2-deploy.md](phase-2-deploy.md) — タグ付け・push・GitHub Actions 監視
 
 指定されたフェーズのファイルを読み込んでから作業を開始すること。

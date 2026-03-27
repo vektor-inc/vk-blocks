@@ -18,7 +18,7 @@ const useTaxonomies = () => {
 		return select('core').getTaxonomies({ per_page: -1 }) || [];
 	}, []);
 };
-import { fixBrokenUnicode } from '@vkblocks/utils/depModules';
+import { fixBrokenUnicode } from '@vkblocks/utils/fixBrokenUnicode';
 
 // Load VK Blocks Compornents
 import { AdvancedCheckboxControl } from '@vkblocks/components/advanced-checkbox-control';

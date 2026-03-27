@@ -2,6 +2,7 @@ import { Component } from '@wordpress/element';
 import parse from 'html-react-parser';
 import { isHexColor } from '@vkblocks/utils/is-hex-color';
 import { sanitizeSlug } from '@vkblocks/utils/sanitizeSlug';
+import { fixBrokenUnicode } from '@vkblocks/utils/fixBrokenUnicode';
 
 export class VKBButton extends Component {
 	render() {
@@ -17,6 +18,12 @@ export class VKBButton extends Component {
 		const linkToPost = this.props.lbLinkToPost;
 		let fontAwesomeIconBefore = this.props.lbFontAwesomeIconBefore;
 		let fontAwesomeIconAfter = this.props.lbFontAwesomeIconAfter;
+		if (fontAwesomeIconBefore) {
+			fontAwesomeIconBefore = fixBrokenUnicode(fontAwesomeIconBefore);
+		}
+		if (fontAwesomeIconAfter) {
+			fontAwesomeIconAfter = fixBrokenUnicode(fontAwesomeIconAfter);
+		}
 		const iconSizeBefore = this.props.lbIconSizeBefore;
 		const iconSizeAfter = this.props.lbIconSizeAfter;
 		const richText = this.props.lbRichtext;

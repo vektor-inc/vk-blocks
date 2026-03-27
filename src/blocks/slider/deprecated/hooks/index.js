@@ -10,6 +10,8 @@ import SliderHook1_2_1 from './1.2.1';
 import SliderHook1_0_16 from './1.0.16';
 
 export default [
+	SliderHook1_115_0, // 1.115.0 (zoomFinalScal typo後方互換)
+	SliderHook1_104_0, // 1.110.1 (zoomFinalScal typo後方互換)
 	SliderHook1_115_0, // 1.115.0
 	SliderHook1_104_0, // 1.110.1 (direction attributeあり)
 	SliderHook1_104_0, // 1.110.1 (direction属性追加前)

@@ -543,12 +543,19 @@ ol {
 	}
 
 	@each $colorClass, $color in $colorPalette {
-		&.vk-has-#{"#{$colorClass}"}-color,
-		&.has-vk-#{"#{$colorClass}"}-color {
+		// 線の色パネル用（vk-has-*）→ テキスト色は変えない
+		&.vk-has-#{"#{$colorClass}"}-color {
 			color: inherit;
 			border-color: $color;
 			.wp-block-group__inner-container {
 				color: inherit;
+				border-color: $color;
+			}
+		}
+		// テキスト色用（has-vk-*）→ :rootルールに任せる
+		&.has-vk-#{"#{$colorClass}"}-color {
+			border-color: $color;
+			.wp-block-group__inner-container {
 				border-color: $color;
 			}
 		}
@@ -594,6 +601,7 @@ ol {
 			width: calc(100% - 1em);
 			height: calc(100% - 1em);
 			border: dashed 2px;
+			border-color: inherit;
 			border-radius: 8px;
 			pointer-events: none;
 		}

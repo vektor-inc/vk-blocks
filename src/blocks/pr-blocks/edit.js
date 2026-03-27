@@ -1,6 +1,6 @@
 import { isNotJSON } from '@vkblocks/utils/is-not-json';
 import { FontAwesome } from '@vkblocks/utils/font-awesome-new';
-import { fixBrokenUnicode } from '@vkblocks/utils/depModules';
+import { fixBrokenUnicode } from '@vkblocks/utils/fixBrokenUnicode';
 import { iconLabel } from '@vkblocks/utils/icon-label';
 import { __ } from '@wordpress/i18n';
 import {
@@ -11,7 +11,7 @@ import {
 	CheckboxControl,
 	TextControl,
 } from '@wordpress/components';
-import { Component } from '@wordpress/element';
+import { Component, useEffect } from '@wordpress/element';
 import {
 	InspectorControls,
 	MediaUpload,
@@ -26,6 +26,27 @@ import { sanitizeSlug } from '@vkblocks/utils/sanitizeSlug';
 
 export default function PrBlocksEdit(props) {
 	const { attributes, setAttributes } = props;
+
+	useEffect(() => {
+		const { icon1, icon2, icon3 } = attributes;
+		const fixes = {};
+		[
+			['icon1', icon1],
+			['icon2', icon2],
+			['icon3', icon3],
+		].forEach(([key, val]) => {
+			if (val) {
+				const fixed = fixBrokenUnicode(val);
+				if (fixed !== val) {
+					fixes[key] = fixed;
+				}
+			}
+		});
+		if (Object.keys(fixes).length > 0) {
+			setAttributes(fixes);
+		}
+	}, [attributes.icon1, attributes.icon2, attributes.icon3]);
+
 	const {
 		url1,
 		url2,
@@ -439,6 +460,9 @@ export class ComponentBlockEdit extends Component {
 			}
 
 			let faIcon = icon[blockNumArrIndex];
+			if (faIcon) {
+				faIcon = fixBrokenUnicode(faIcon);
+			}
 			//過去バージョンをリカバリーした時にiconを正常に表示する
 			if (faIcon && !faIcon.match(/<i/)) {
 				faIcon = `<i class="${faIcon}"></i>`;

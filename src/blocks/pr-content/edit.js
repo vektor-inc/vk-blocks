@@ -1,4 +1,6 @@
 import { __ } from '@wordpress/i18n';
+import { useEffect } from '@wordpress/element';
+import { fixBrokenUnicode } from '@vkblocks/utils/fixBrokenUnicode';
 import {
 	PanelBody,
 	BaseControl,
@@ -42,6 +44,25 @@ export default function PrcontentEdit({ attributes, setAttributes, clientId }) {
 		fontAwesomeIconBefore,
 		fontAwesomeIconAfter,
 	} = attributes;
+	useEffect(() => {
+		const fixes = {};
+		if (fontAwesomeIconBefore) {
+			const fixed = fixBrokenUnicode(fontAwesomeIconBefore);
+			if (fixed !== fontAwesomeIconBefore) {
+				fixes.fontAwesomeIconBefore = fixed;
+			}
+		}
+		if (fontAwesomeIconAfter) {
+			const fixed = fixBrokenUnicode(fontAwesomeIconAfter);
+			if (fixed !== fontAwesomeIconAfter) {
+				fixes.fontAwesomeIconAfter = fixed;
+			}
+		}
+		if (Object.keys(fixes).length > 0) {
+			setAttributes(fixes);
+		}
+	}, [fontAwesomeIconBefore, fontAwesomeIconAfter]);
+
 	const containerClass = getContainerClass(layout);
 	const btnClass = getButtonClass(buttonColorCustom);
 	const linkClass = getLinkClass(buttonColor, buttonColorCustom, buttonType);

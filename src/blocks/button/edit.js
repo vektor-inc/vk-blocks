@@ -24,6 +24,7 @@ import { isHexColor } from '@vkblocks/utils/is-hex-color';
 import { isParentReusableBlock } from '@vkblocks/utils/is-parent-reusable-block';
 import LinkToolbar from '@vkblocks/components/link-toolbar';
 import { iconLabel } from '@vkblocks/utils/icon-label';
+import { fixBrokenUnicode } from '@vkblocks/utils/fixBrokenUnicode';
 
 export default function ButtonEdit(props) {
 	const { attributes, setAttributes, clientId, context } = props;
@@ -164,6 +165,25 @@ export default function ButtonEdit(props) {
 			updateBlockAttributes(clientId, { buttonColor: 'primary' });
 		}
 	}, [buttonColorCustom]);
+
+	useEffect(() => {
+		const fixes = {};
+		if (fontAwesomeIconBefore) {
+			const fixed = fixBrokenUnicode(fontAwesomeIconBefore);
+			if (fixed !== fontAwesomeIconBefore) {
+				fixes.fontAwesomeIconBefore = fixed;
+			}
+		}
+		if (fontAwesomeIconAfter) {
+			const fixed = fixBrokenUnicode(fontAwesomeIconAfter);
+			if (fixed !== fontAwesomeIconAfter) {
+				fixes.fontAwesomeIconAfter = fixed;
+			}
+		}
+		if (Object.keys(fixes).length > 0) {
+			setAttributes(fixes);
+		}
+	}, [fontAwesomeIconBefore, fontAwesomeIconAfter]);
 
 	let containerClass;
 	// カスタムカラーの場合 またはアウターにギャップが指定されれいる場合

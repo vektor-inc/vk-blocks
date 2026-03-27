@@ -1,4 +1,5 @@
 import { __ } from '@wordpress/i18n';
+import { fixBrokenUnicode } from '@vkblocks/utils/fixBrokenUnicode';
 import { VKBIcon } from './component';
 import { FontAwesome } from '@vkblocks/utils/font-awesome-new';
 import {
@@ -45,6 +46,15 @@ export default function IconEdit(props) {
 		iconTarget,
 		linkToPost,
 	} = attributes;
+
+	useEffect(() => {
+		if (attributes.faIcon) {
+			const fixed = fixBrokenUnicode(attributes.faIcon);
+			if (fixed !== attributes.faIcon) {
+				setAttributes({ faIcon: fixed });
+			}
+		}
+	}, [attributes.faIcon]);
 
 	const isDescendentOfQueryLoop =
 		typeof context?.queryId === 'number' &&

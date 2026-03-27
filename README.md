@@ -88,29 +88,29 @@ npm run phpunit
 ## e2eテスト
 
 ```
-npm run test:e2e
+npm run e2e
 ```
 
 GUI無しの場合
 ```
-npm run test:e2e-no-gui
+npm run e2e-no-gui
 ```
 
 wp-env の port を変更している場合
 
 ```
-WP_BASE_URL='http://localhost:xxxx/' npm run test:e2e
+WP_BASE_URL='http://localhost:xxxx/' npm run e2e
 ```
 
 単体で動かしたい場合
 ```
-npm run test:e2e ./test/e2e-tests/specs/xxxx.test.js
+npm run e2e ./test/e2e-tests/specs/xxxx.test.js
 ```
 
 wp-env の port を変更していて、単体でテストしたい場合
 （spacerの例）
 ```
-WP_BASE_URL='http://localhost:xxxx/' npm run test:e2e ./test/e2e-tests/specs/spacer.test.js
+WP_BASE_URL='http://localhost:xxxx/' npm run e2e ./test/e2e-tests/specs/spacer.test.js
 ```
 
 ---
@@ -187,8 +187,8 @@ remove：削除（ファイル）
 upgrade：バージョンアップ
 revert：変更取り消し
 
-## develop branch
-develop ブランチにマージされると自動でテストサーバー https://vk-block-test.vs4.nagoya/ にデプロイされます。
+## テストサーバーへのデプロイ
+リリースタグを push すると、テスト通過後にテストサーバー https://vk-block-test.vs4.nagoya/ へ自動デプロイされます。
 
 ---
 

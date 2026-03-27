@@ -98,6 +98,14 @@ class VK_Blocks_Options {
 			$options['toc_include_border_box'] = (bool) $options['toc_include_border_box'];
 		}
 
+		// 目次の番号付与設定のサニタイズ
+		if ( isset( $options['toc_numbering'] ) ) {
+			$allowed_numbering = array( 'auto', 'h2-only', 'none' );
+			if ( ! in_array( $options['toc_numbering'], $allowed_numbering, true ) ) {
+				$options['toc_numbering'] = 'auto';
+			}
+		}
+
 		return $options;
 	}
 
@@ -155,6 +163,11 @@ class VK_Blocks_Options {
 			'toc_include_border_box'      => array(
 				'type'    => 'boolean',
 				'default' => true,
+			),
+			'toc_numbering'               => array(
+				'type'    => 'string',
+				'enum'    => array( 'auto', 'h2-only', 'none' ),
+				'default' => 'auto',
 			),
 			'balloon_border_width'        => array(
 				'type' => 'number',
@@ -455,6 +468,7 @@ class VK_Blocks_Options {
 			'block_category_position'     => 'above-core-blocks',
 			'toc_heading_levels'          => array( 'h2' ),
 			'toc_include_border_box'      => true,
+			'toc_numbering'               => 'auto',
 			'balloon_border_width'        => 1,
 			'margin_unit'                 => 'rem',
 			'margin_size'                 => array(

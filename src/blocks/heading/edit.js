@@ -23,6 +23,8 @@ import parse from 'html-react-parser';
 import classnames from 'classnames';
 import { sanitizeSlug } from '@vkblocks/utils/sanitizeSlug';
 import { iconLabel } from '@vkblocks/utils/icon-label';
+import { useEffect } from '@wordpress/element';
+import { fixBrokenUnicode } from '@vkblocks/utils/fixBrokenUnicode';
 
 const renderTitle = (level, contents, tStyle, headingStyle) => {
 	switch (level) {
@@ -169,8 +171,12 @@ export default function HeaddingEdit(props) {
 			? `style="color:${fontAwesomeIconColor};"`
 			: '';
 
-	let iconBefore = fontAwesomeIconBefore;
-	let iconAfter = fontAwesomeIconAfter;
+	let iconBefore = fontAwesomeIconBefore
+		? fixBrokenUnicode(fontAwesomeIconBefore)
+		: fontAwesomeIconBefore;
+	let iconAfter = fontAwesomeIconAfter
+		? fixBrokenUnicode(fontAwesomeIconAfter)
+		: fontAwesomeIconAfter;
 	//add class
 	if (iconBefore && iconColorClassName) {
 		const faIconFragmentBefore = iconBefore.split('<i class="');
@@ -200,6 +206,25 @@ export default function HeaddingEdit(props) {
 			faIconFragmentAfter[0] + `<i ${fontAwesomeIconStyle} `;
 		iconAfter = faIconFragmentAfter.join('');
 	}
+
+	useEffect(() => {
+		const fixes = {};
+		if (fontAwesomeIconBefore) {
+			const fixed = fixBrokenUnicode(fontAwesomeIconBefore);
+			if (fixed !== fontAwesomeIconBefore) {
+				fixes.fontAwesomeIconBefore = fixed;
+			}
+		}
+		if (fontAwesomeIconAfter) {
+			const fixed = fixBrokenUnicode(fontAwesomeIconAfter);
+			if (fixed !== fontAwesomeIconAfter) {
+				fixes.fontAwesomeIconAfter = fixed;
+			}
+		}
+		if (Object.keys(fixes).length > 0) {
+			setAttributes(fixes);
+		}
+	}, [fontAwesomeIconBefore, fontAwesomeIconAfter]);
 
 	const titleContent = (
 		<>

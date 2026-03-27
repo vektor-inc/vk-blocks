@@ -8,10 +8,10 @@
 
 ### 1-0. ブランチ切り替えとリモートから最新の変更を取得する
 
-作業は `develop` ブランチで行う：
+作業は `master` ブランチで行う：
 
 ```bash
-git checkout develop
+git checkout master
 git pull
 ```
 
@@ -30,7 +30,6 @@ git pull
 
 **ルール:**
 - 上げた桁より下の桁はすべて 0 にリセット
-- 4桁目はこの時点では必ず `0`
 
 新しいバージョン番号を決定したら確認なしでそのまま次のステップへ進む。
 
@@ -86,67 +85,18 @@ git pull
 
 ### 1-4. vk-blocks.php のバージョンを更新
 
-`vk-blocks.php` の `Version:` を4桁で更新する：
+`vk-blocks.php` の `Version:` を3桁で更新する：
 
 ```
-Version: X.X.X.0
+Version: X.X.X
 ```
 
-### 1-5. 変更をコミット・develop へプッシュ
+### 1-5. 変更をコミット・master へプッシュ
 
 ```bash
 git add vk-blocks.php readme.txt
-git commit -m "[ Change version ] X.X.X.0"
-git push origin develop
-```
-
-### 1-6. master へプルリクエストを作成
-
-```bash
-gh pr create --base master --head develop --title "[ Change version ] X.X.X.0" --body "バージョン番号を X.X.X.0 に更新"
-```
-
-作成した PR の URL をユーザーに報告する。
-
-### 1-7. CI チェックの完了を待つ
-
-PR に対して GitHub Actions が完了するまで待つ：
-
-```bash
-gh pr checks <PR番号> --watch
-```
-
-全チェックが `pass` になるまで待機する。失敗したチェックがある場合はマージせず、内容をユーザーに報告して対応を依頼する：
-
-> CI チェックが失敗しています。内容を確認してください：`gh run view`
-
-### 1-8. コンフリクトを確認してマージする
-
-CI チェック通過後、PR のマージ可否を確認する：
-
-```bash
-gh pr view <PR番号> --json mergeable,mergeStateStatus
-```
-
-- `mergeable` が `MERGEABLE` であればマージを実行する：
-
-```bash
-gh pr merge <PR番号> --merge --admin --subject "[ Change version ] X.X.X.0"
-```
-
-- `mergeable` が `CONFLICTING` の場合はマージせず、コンフリクトの内容をユーザーに報告して手動対応を依頼する：
-
-> コンフリクトが発生しています。手動で解消してからフェーズ2に進んでください。
-
-- `mergeable` が `UNKNOWN` の場合（GitHub がまだ判定中）は数秒待ってから再確認する。
-
-### 1-8. master をローカルに反映
-
-マージ成功後、master を最新化する：
-
-```bash
-git checkout master
-git pull
+git commit -m "[ Change version ] X.X.X"
+git push origin master
 ```
 
 ---
@@ -154,11 +104,7 @@ git pull
 ## 完了条件
 
 - [ ] readme.txt の Changelog 先頭に `= X.X.X =` が追加された
-- [ ] `vk-blocks.php` の `Version:` が `X.X.X.0` に更新された
-- [ ] develop へのコミット・プッシュが完了した
-- [ ] master への PR が作成された
-- [ ] CI チェック（PHPUnit 等）が全て pass した
-- [ ] コンフリクトなしで PR がマージされた
-- [ ] ローカルの master が最新化された
+- [ ] `vk-blocks.php` の `Version:` が `X.X.X` に更新された
+- [ ] master へのコミット・プッシュが完了した
 
-完了したら **フェーズ2**（[phase-2-pre-release.md](phase-2-pre-release.md)）に進む。
+完了したら **フェーズ2**（[phase-2-deploy.md](phase-2-deploy.md)）に進む。

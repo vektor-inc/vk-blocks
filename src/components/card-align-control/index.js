@@ -2,7 +2,7 @@ import { __ } from '@wordpress/i18n';
 import { PanelBody, BaseControl } from '@wordpress/components';
 import { AlignControl } from '@vkblocks/components/align-control';
 import { capitalize } from '@vkblocks/utils/capitalize';
-import { fixBrokenUnicode } from '@vkblocks/utils/depModules';
+import { fixBrokenUnicode } from '@vkblocks/utils/fixBrokenUnicode';
 
 export const CardAlignControls = (props) => {
 	const { attributes } = props;

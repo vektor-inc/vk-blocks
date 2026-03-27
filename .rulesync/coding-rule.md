@@ -29,7 +29,7 @@ globs: ["**/*"]
 - ブロックは `src/blocks/` にブロック単位で配置（基本セット: `index.php`, `index.js`, `block.json`, `edit.js`, `save.js`, `style.scss`, `icon.svg`）。
 - 無料版は `src/bundle.js`、Pro 版は `src/bundle-pro.js` に import を追加。
 - 登録は `inc/vk-blocks/class-vk-blocks-global-settings.php` の `blocks()` に追加し、`is_pro` を正しく設定（無料=false、Pro=true）。
-- ビルド/テスト: `npm run build`、開発は `npm run build:dev` / `npm run build:cache`。フィクスチャ `npm run test-unit`、E2E `npm run test:e2e`。
+- ビルド/テスト: `npm run build`、開発は `npm run build:dev` / `npm run build:cache`。フィクスチャ `npm run test-unit`、E2E `npm run e2e`。
 
 ## 4. ファイル構成
 - 詳細は本ドキュメント末尾の「ファイル構成一覧」を参照。
@@ -45,14 +45,14 @@ globs: ["**/*"]
 
 ## 6. テスト
 - フィクスチャ: `test/e2e-test/fixtures` に HTML を配置（生成/更新は `npm run test-unit` を参照）。
-- E2E: `test/e2e/` に Playwright テストを配置（実行: `npm run test:e2e`）。
+- E2E: `test/e2e/` に Playwright テストを配置（実行: `npm run e2e`）。
 - PHPUnit: `test/phpunit/` に配置（無料: `free/`、Pro: `pro/`）。
 
 ## 7. プルリクエストのレビュー
 - GitHub CLI（gh）が使える場合は対象 PR を取得。未導入ならインストール案内または目視レビューを依頼。
 - PR は `.github/PULL_REQUEST_TEMPLATE.md` に準拠。「レビュワー確認方法・確認内容など」に従って動作確認（「変更内容の確認方法」に記載があるケースも）。
 - 関連する Issue / チケットがある場合は PR 説明にリンクを明記し、要件の充足・スコープの一致・未解決事項の有無を確認する（可能であれば `Closes #123` などで自動クローズを設定）。
-- ベースブランチは `develop`。異なる場合は作成者へ確認。
+- ベースブランチは `master`。異なる場合は作成者へ確認。
 - レビューコメントの投稿は承認のもとで行う（誤解や過剰な修正要求を避けるため）。
 
 ## 8. セキュリティ / サニタイズ
@@ -113,8 +113,8 @@ globs: ["**/*"]
 - 関連する Issue / チケットがある場合は PR タイトルまたは本文にリンク（例: `Closes #123`）を付与し、要件・スコープ・受入条件の整合を確認する。
 - ブランチ命名: `feature/…`, `fix/…`, `chore/…`, `test/…` など用途が分かる形に統一。
 - 小さな PR を心掛け、リファクタや整形のみの変更は機能修正と分離。
-- 送信前チェック: `npm run lint`, `npm run lint:php`, `npm run build`, `npm run test-unit`, `npm run test:e2e`（必要な場合）。
-- ベースブランチは `develop` 固定。強制 push や rebase が必要な場合は事前に共有。
+- 送信前チェック: `npm run lint`, `npm run lint:php`, `npm run build`, `npm run test-unit`, `npm run e2e`（必要な場合）。
+- ベースブランチは `master` 固定。強制 push や rebase が必要な場合は事前に共有。
 
 ## 16. 互換性ポリシー
 - 対応 PHP バージョン: 7.4 以上。対応 WordPress バージョン: `vk-blocks.php` の `Requires at least` に準拠。

@@ -205,7 +205,47 @@ const blockAttributes12 = {
 	},
 }
 
+// zoomFinalScale が zoomFinalScal として保存されていた後方互換
+// blockAttributes11 から zoomFinalScale を除外し、typo版の zoomFinalScal のみにする
+const { zoomFinalScale: _removed, ...blockAttributes11WithoutZoomFinalScale } = blockAttributes11;
+const blockAttributes12Typo = {
+	...blockAttributes11WithoutZoomFinalScale,
+	zoomFinalScal: {
+		type: 'number',
+		default: 1.25
+	},
+	direction: {
+		type: 'string',
+		default: 'rtl'
+	},
+}
+
+const migrateZoomFinalScaleTypo = (attributes) => {
+	// Backward compatibility: handle typo in old attribute name.
+	if (
+		attributes.zoomFinalScale === undefined &&
+		attributes.zoomFinalScal !== undefined
+	) {
+		const { zoomFinalScal, ...rest } = attributes;
+		return {
+			...rest,
+			zoomFinalScale: zoomFinalScal,
+		};
+	}
+	return attributes;
+};
+
 const deprecated = [
+	{
+		attributes: blockAttributes12Typo,
+		save: save1_115_0,
+		migrate: migrateZoomFinalScaleTypo,
+	},
+	{
+		attributes: blockAttributes12Typo,
+		save: save1_110_1,
+		migrate: migrateZoomFinalScaleTypo,
+	},
 	{
 		attributes: blockAttributes12,
 		save: save1_115_0,

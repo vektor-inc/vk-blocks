@@ -3,10 +3,14 @@ import { Component } from '@wordpress/element';
 import parse from 'html-react-parser';
 import { isHexColor } from '@vkblocks/utils/is-hex-color';
 import { sanitizeSlug } from '@vkblocks/utils/sanitizeSlug';
+import { fixBrokenUnicode } from '@vkblocks/utils/fixBrokenUnicode';
 
 export class VKBIcon extends Component {
 	render() {
 		let fontAwesomeIcon = this.props.lbFontAwesomeIcon;
+		if (fontAwesomeIcon) {
+			fontAwesomeIcon = fixBrokenUnicode(fontAwesomeIcon);
+		}
 		const iconSize = this.props.lbSize;
 		const iconSizeUnit = this.props.lbSizeUnit;
 		const iconMargin = this.props.lbMargin;

@@ -4,6 +4,7 @@ import parse from 'html-react-parser';
 import { isHexColor } from '@vkblocks/utils/is-hex-color';
 import classnames from 'classnames';
 import { sanitizeSlug } from '@vkblocks/utils/sanitizeSlug';
+import { fixBrokenUnicode } from '@vkblocks/utils/fixBrokenUnicode';
 
 const renderTitle = (level, contents, tStyle, headingStyle) => {
 	switch (level) {
@@ -145,8 +146,12 @@ export default function save(props) {
 			? `style="color:${fontAwesomeIconColor};"`
 			: '';
 
-	let iconBefore = fontAwesomeIconBefore;
-	let iconAfter = fontAwesomeIconAfter;
+	let iconBefore = fontAwesomeIconBefore
+		? fixBrokenUnicode(fontAwesomeIconBefore)
+		: fontAwesomeIconBefore;
+	let iconAfter = fontAwesomeIconAfter
+		? fixBrokenUnicode(fontAwesomeIconAfter)
+		: fontAwesomeIconAfter;
 	//add class
 	if (iconBefore && iconColorClassName) {
 		const faIconFragmentBefore = iconBefore.split('<i class="');

@@ -2,7 +2,11 @@
 import { __ } from '@wordpress/i18n';
 import { useContext, useMemo, useCallback } from '@wordpress/element';
 import { AdminContext } from './index';
-import { SelectControl, CheckboxControl } from '@wordpress/components';
+import {
+	SelectControl,
+	CheckboxControl,
+	RadioControl,
+} from '@wordpress/components';
 import { BlockIcon } from '@wordpress/block-editor';
 import { withSelect } from '@wordpress/data';
 import { useInstanceId } from '@wordpress/compose';
@@ -58,6 +62,13 @@ function AdminToc({ borderBoxBlockType }) {
 		setVkBlocksOption({
 			...vkBlocksOption,
 			toc_heading_levels: levels,
+		});
+	};
+
+	const handleNumberingChange = (value) => {
+		setVkBlocksOption({
+			...vkBlocksOption,
+			toc_numbering: value,
 		});
 	};
 
@@ -130,6 +141,36 @@ function AdminToc({ borderBoxBlockType }) {
 				<p className="description">
 					{__(
 						'When enabled, headings within Border Box blocks will be included in the Table of Contents.',
+						'vk-blocks'
+					)}
+				</p>
+			</div>
+			<div style={{ marginTop: '1rem' }}>
+				<h4>{__('Numbering', 'vk-blocks')}</h4>
+				<RadioControl
+					selected={vkBlocksOption?.toc_numbering || 'auto'}
+					options={[
+						{
+							label: __(
+								'Auto (hierarchical numbering)',
+								'vk-blocks'
+							),
+							value: 'auto',
+						},
+						{
+							label: __('H2 only', 'vk-blocks'),
+							value: 'h2-only',
+						},
+						{
+							label: __('None', 'vk-blocks'),
+							value: 'none',
+						},
+					]}
+					onChange={handleNumberingChange}
+				/>
+				<p className="description">
+					{__(
+						'Choose how numbers are displayed in the Table of Contents.',
 						'vk-blocks'
 					)}
 				</p>

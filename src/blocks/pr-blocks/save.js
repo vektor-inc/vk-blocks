@@ -1,7 +1,7 @@
 import { useBlockProps, RichText } from '@wordpress/block-editor';
 import { isNotJSON } from '@vkblocks/utils/is-not-json';
 import { Component } from '@wordpress/element';
-import { fixBrokenUnicode } from '@vkblocks/utils/depModules';
+import { fixBrokenUnicode } from '@vkblocks/utils/fixBrokenUnicode';
 import parse from 'html-react-parser';
 import { isHexColor } from '@vkblocks/utils/is-hex-color';
 import { sanitizeSlug } from '@vkblocks/utils/sanitizeSlug';
@@ -141,9 +141,15 @@ export class ComponentBlockSave extends Component {
 			}
 
 			let faIcon = icon[blockNumArrIndex];
+			if (faIcon) {
+				faIcon = fixBrokenUnicode(faIcon);
+			}
 			//過去バージョンをリカバリーした時にiconを正常に表示する
 			if (faIcon && !faIcon.match(/<i/)) {
 				faIcon = `<i class="${faIcon}"></i>`;
+			}
+			if (!faIcon) {
+				return null;
 			}
 			//add class and inline css
 			const faIconFragment = faIcon.split(' ');

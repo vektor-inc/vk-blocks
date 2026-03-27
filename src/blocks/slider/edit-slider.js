@@ -25,6 +25,13 @@ const removeSwiperClassName = (targetElement) => {
 const LaunchSwiper = (slider) => {
 	// 値を取得して配列に格納
 	const attributes = JSON.parse(slider.getAttribute('data-vkb-slider'));
+	// Backward compatibility: handle typo in old attribute name.
+	if (
+		attributes.zoomFinalScale === undefined &&
+		attributes.zoomFinalScal !== undefined
+	) {
+		attributes.zoomFinalScale = attributes.zoomFinalScal;
+	}
 
 	// スライダーの ID を取得
 	if (attributes && (attributes.blockId || attributes.clientId)) {

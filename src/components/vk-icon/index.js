@@ -14,6 +14,7 @@ import { ReactComponent as IconSVG } from './icon.svg';
 export const getVkIconBaseStyle = () => ({
 	width: '24px',
 	height: '24px',
+	marginLeft: '4px',
 });
 
 /**

@@ -8,7 +8,12 @@ export const isValidJson = (value) => {
 };
 
 export const fixBrokenUnicode = (text) => {
+	if (!text || typeof text !== 'string') {
+		return text;
+	}
 	if (!isValidJson(text)) {
+		text = text.replace(/u003c/g, '<');
+		text = text.replace(/u003e/g, '>');
 		text = text.replace(/u0022/g, '"');
 	}
 

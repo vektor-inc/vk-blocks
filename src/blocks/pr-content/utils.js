@@ -1,3 +1,5 @@
+import { fixBrokenUnicode } from '@vkblocks/utils/fixBrokenUnicode';
+
 export const getContainerClass = (layout) => {
 	let layoutClass;
 	if (layout === 'right') {
@@ -59,6 +61,11 @@ export const getLinkStyle = (buttonColorCustom, buttonType) => {
 export const getFontawesomeIcon = (fontAwesomeIconSelector, iconClassName) => {
 	let icon = '';
 	let faIconDatas;
+
+	// Fix broken unicode escape sequences
+	if (fontAwesomeIconSelector) {
+		fontAwesomeIconSelector = fixBrokenUnicode(fontAwesomeIconSelector);
+	}
 
 	//過去バージョンをリカバリーした時にiconを正常に表示する
 	if (fontAwesomeIconSelector && !fontAwesomeIconSelector.match(/<i/)) {

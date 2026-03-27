@@ -7,6 +7,7 @@ import {
 	getContainerClass,
 } from './utils';
 import { PrContentMediaUpload } from './mediaUpload';
+import { fixBrokenUnicode } from '@vkblocks/utils/fixBrokenUnicode';
 import parse from 'html-react-parser';
 
 export default function save({ attributes }) {
@@ -24,9 +25,12 @@ export default function save({ attributes }) {
 		Image,
 		ImageBorderColor,
 		layout,
-		fontAwesomeIconBefore,
-		fontAwesomeIconAfter,
+		fontAwesomeIconBefore: fontAwesomeIconBeforeRaw,
+		fontAwesomeIconAfter: fontAwesomeIconAfterRaw,
 	} = attributes;
+
+	const fontAwesomeIconBefore = fixBrokenUnicode(fontAwesomeIconBeforeRaw);
+	const fontAwesomeIconAfter = fixBrokenUnicode(fontAwesomeIconAfterRaw);
 
 	const containerClass = getContainerClass(layout);
 	const btnClass = getButtonClass(buttonColorCustom);

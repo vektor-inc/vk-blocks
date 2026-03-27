@@ -1368,7 +1368,7 @@ msgstr ""
 
 #: src/blocks/_pro/fixed-display/edit.js:186
 #: src/blocks/_pro/post-list-slider/edit.js:102
-#: src/blocks/_pro/table-of-contents-new/edit.js:337
+#: src/blocks/_pro/table-of-contents-new/edit.js:365
 #: src/components/column-layout-control/index.js:69
 msgid "Display type"
 msgstr ""
@@ -2244,7 +2244,7 @@ msgstr ""
 
 #: src/blocks/_pro/post-list-slider/edit.js:295
 #: src/blocks/_pro/step-item/edit.js:132
-#: src/blocks/_pro/table-of-contents-new/edit.js:352
+#: src/blocks/_pro/table-of-contents-new/edit.js:380
 #: src/blocks/_pro/timeline-item/edit.js:105
 #: src/blocks/heading/edit.js:263
 #: src/blocks/slider/edit.js:621
@@ -2394,7 +2394,7 @@ msgid "Input Internal Post URL"
 msgstr ""
 
 #: src/blocks/_pro/step-item/edit.js:102
-#: src/blocks/_pro/table-of-contents-new/edit.js:342
+#: src/blocks/_pro/table-of-contents-new/edit.js:370
 #: src/blocks/_pro/timeline-item/edit.js:75
 #: src/blocks/icon-outer/edit.js:229
 #: src/blocks/icon/edit.js:227
@@ -2467,129 +2467,105 @@ msgstr ""
 msgid "Tab Item"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1106
+#: src/blocks/_pro/tab/edit.js:1101
 msgid "Anchor Link Information"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1110
+#: src/blocks/_pro/tab/edit.js:1105
 msgid ""
 "You can link directly to specific tabs using anchor links. Click the copy "
 "button to copy the anchor link for each tab."
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1135
+#: src/blocks/_pro/tab/edit.js:1130
 msgid "Tab Size Setting"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1137
+#: src/blocks/_pro/tab/edit.js:1132
 msgid "Tab Size ( Smart Phone )"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1154
+#: src/blocks/_pro/tab/edit.js:1149
 msgid "Tab Size ( Tablet )"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1171
+#: src/blocks/_pro/tab/edit.js:1166
 msgid "Tab Size ( PC )"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1175
+#: src/blocks/_pro/tab/edit.js:1170
 msgid "Fit to the text"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1179
+#: src/blocks/_pro/tab/edit.js:1174
 msgid "Monospaced"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1188
+#: src/blocks/_pro/tab/edit.js:1183
 msgid "Tab Display Options"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1190
+#: src/blocks/_pro/tab/edit.js:1185
 msgid ""
 "If there are many labels or the screen width is narrow, you can adjust it "
 "here. *Tab size setting will not be effective."
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1196
+#: src/blocks/_pro/tab/edit.js:1191
 msgid "Tab Display Options ( Smart Phone )"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1220
+#: src/blocks/_pro/tab/edit.js:1215
 msgid "Tab Display Options ( Tablet )"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1244
+#: src/blocks/_pro/tab/edit.js:1239
 msgid "Tab Display Options ( PC )"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1251
+#: src/blocks/_pro/tab/edit.js:1246
 msgid "Not set"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1255
+#: src/blocks/_pro/tab/edit.js:1250
 msgid "Scroll"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1259
+#: src/blocks/_pro/tab/edit.js:1254
 msgid "Wrap to 2 rows"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1270
+#: src/blocks/_pro/tab/edit.js:1265
 msgid "Scrollbar Settings"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:1274
-#: src/utils/horizontal-scroll-controls.js:231
-msgid "Show Scrollbar"
-msgstr ""
-
-#: src/blocks/_pro/tab/edit.js:1281
-msgid "The scrollbar is hidden. Users can still scroll by touch or mouse drag."
-msgstr ""
-
-#: src/blocks/_pro/tab/edit.js:1285
-#: src/utils/horizontal-scroll-controls.js:240
-msgid "The scrollbar is visible."
-msgstr ""
-
-#: src/blocks/_pro/tab/edit.js:1294
-#: src/utils/horizontal-scroll-controls.js:249
-msgid "Scrollbar Color"
-msgstr ""
-
-#: src/blocks/_pro/tab/edit.js:1306
-#: src/utils/horizontal-scroll-controls.js:257
-msgid "Scrollbar Track Color"
-msgstr ""
-
-#: src/blocks/_pro/tab/edit.js:1353
+#: src/blocks/_pro/tab/edit.js:1317
 #: src/extensions/core/group/style.js:158
 #: src/extensions/core/table/style.js:39
 msgid "You can scroll"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:443
+#: src/blocks/_pro/tab/edit.js:438
 msgid "Tab %d"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:456
+#: src/blocks/_pro/tab/edit.js:451
 msgid "Copy"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:461
+#: src/blocks/_pro/tab/edit.js:456
 msgid "Copied!"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:58
+#: src/blocks/_pro/tab/edit.js:53
 msgid "Tab 01"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:62
+#: src/blocks/_pro/tab/edit.js:57
 msgid "Tab 02"
 msgstr ""
 
-#: src/blocks/_pro/tab/edit.js:915
+#: src/blocks/_pro/tab/edit.js:910
 #. %s is the tab number
 msgid "Tab Label [ %s ]"
 msgstr ""
@@ -2605,66 +2581,66 @@ msgstr ""
 #: src/blocks/_pro/table-of-contents-new/deprecated/1.104.0/save.js:16
 #: src/blocks/_pro/table-of-contents-new/deprecated/1.106.0/save.js:33
 #: src/blocks/_pro/table-of-contents-new/deprecated/1.78.0/save.js:16
-#: src/blocks/_pro/table-of-contents-new/edit.js:544
+#: src/blocks/_pro/table-of-contents-new/edit.js:572
 #: src/blocks/_pro/table-of-contents-new/save.js:39
 msgid "Table of Contents"
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:324
+#: src/blocks/_pro/table-of-contents-new/edit.js:352
 msgid "Note on duplicating headings"
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:329
+#: src/blocks/_pro/table-of-contents-new/edit.js:357
 msgid ""
 "If you duplicate a heading, the table of contents block will not work "
 "properly, please reassign the ID."
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:356
+#: src/blocks/_pro/table-of-contents-new/edit.js:384
 msgid "No frame"
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:363
+#: src/blocks/_pro/table-of-contents-new/edit.js:391
 msgid "Default Display Status"
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:371
+#: src/blocks/_pro/table-of-contents-new/edit.js:399
 msgid "OPEN"
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:375
+#: src/blocks/_pro/table-of-contents-new/edit.js:403
 msgid "CLOSE"
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:382
+#: src/blocks/_pro/table-of-contents-new/edit.js:410
 msgid "Heading Levels"
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:387
+#: src/blocks/_pro/table-of-contents-new/edit.js:415
 msgid "Global heading level settings:"
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:397
+#: src/blocks/_pro/table-of-contents-new/edit.js:425
 msgid "VK Blocks Setting"
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:401
+#: src/blocks/_pro/table-of-contents-new/edit.js:429
 msgid "Use custom heading levels"
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:416
+#: src/blocks/_pro/table-of-contents-new/edit.js:444
 msgid "Using custom heading levels for this block."
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:420
+#: src/blocks/_pro/table-of-contents-new/edit.js:448
 msgid "Using global heading levels settings."
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:434
+#: src/blocks/_pro/table-of-contents-new/edit.js:462
 msgid "Include Headings Up To:"
 msgstr ""
 
-#: src/blocks/_pro/table-of-contents-new/edit.js:457
+#: src/blocks/_pro/table-of-contents-new/edit.js:485
 msgid "Exclude Headings"
 msgstr ""
 
@@ -4368,17 +4344,17 @@ msgid "Cell Vertical Breakpoint"
 msgstr ""
 
 #: src/extensions/core/table/style.js:410
-#: src/utils/horizontal-scroll-controls.js:198
+#: src/utils/horizontal-scroll-controls.js:261
 msgid "Mobile size"
 msgstr ""
 
 #: src/extensions/core/table/style.js:417
-#: src/utils/horizontal-scroll-controls.js:202
+#: src/utils/horizontal-scroll-controls.js:265
 msgid "Tablet size"
 msgstr ""
 
 #: src/extensions/core/table/style.js:424
-#: src/utils/horizontal-scroll-controls.js:206
+#: src/utils/horizontal-scroll-controls.js:269
 msgid "PC size"
 msgstr ""
 
@@ -4459,18 +4435,34 @@ msgstr ""
 msgid "Select Icon"
 msgstr ""
 
-#: src/utils/horizontal-scroll-controls.js:215
-msgid "Scrollable"
+#: src/utils/horizontal-scroll-controls.js:182
+msgid "Show Scrollbar"
 msgstr ""
 
-#: src/utils/horizontal-scroll-controls.js:222
-msgid "Horizontal Scroll Breakpoint"
-msgstr ""
-
-#: src/utils/horizontal-scroll-controls.js:236
+#: src/utils/horizontal-scroll-controls.js:187
 msgid ""
 "The scrollbar is hidden on the front end. Users can still scroll by touch "
 "or mouse drag."
+msgstr ""
+
+#: src/utils/horizontal-scroll-controls.js:191
+msgid "The scrollbar is visible."
+msgstr ""
+
+#: src/utils/horizontal-scroll-controls.js:197
+msgid "Scrollbar Color"
+msgstr ""
+
+#: src/utils/horizontal-scroll-controls.js:205
+msgid "Scrollbar Track Color"
+msgstr ""
+
+#: src/utils/horizontal-scroll-controls.js:278
+msgid "Scrollable"
+msgstr ""
+
+#: src/utils/horizontal-scroll-controls.js:285
+msgid "Horizontal Scroll Breakpoint"
 msgstr ""
 
 #: src/utils/unit-options.js:22

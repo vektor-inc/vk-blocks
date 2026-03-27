@@ -73,6 +73,13 @@ ${zoomSelector} .vk_slider_item.swiper-slide-next::before {
 			const attributes = JSON.parse(
 				sliderNode.getAttribute('data-vkb-slider')
 			);
+			// Backward compatibility: handle typo in old attribute name.
+			if (
+				attributes.zoomFinalScale === undefined &&
+				attributes.zoomFinalScal !== undefined
+			) {
+				attributes.zoomFinalScale = attributes.zoomFinalScal;
+			}
 			if (!sliderNode.classList.contains('swiper')) {
 				sliderNode.classList.add('swiper');
 			}
