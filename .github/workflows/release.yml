@@ -3,6 +3,9 @@ on:
   push:
     tags:
       - '[0-9]+.[0-9]+.[0-9]+'
+concurrency:
+  group: release-vk-blocks
+  cancel-in-progress: false
 env:
   plugin_name: vk-blocks
 jobs:
@@ -45,7 +48,13 @@ jobs:
           path: dist/
       - name: Setup wp-env for dist
         run: |
-          echo '{"plugins":["./dist/${{ env.plugin_name }}"]}' > .wp-env.json
+          node <<'NODE'
+          const fs = require('fs');
+          const p = '.wp-env.json';
+          const config = fs.existsSync(p) ? JSON.parse(fs.readFileSync(p, 'utf8')) : {};
+          config.plugins = ['./dist/${{ env.plugin_name }}'];
+          fs.writeFileSync(p, JSON.stringify(config));
+          NODE
       - name: Start wp-env
         run: |
           for n in 1 2 3; do npx wp-env start --update && break || [ "$n" -lt 3 ] || exit 1; done
@@ -66,7 +75,7 @@ jobs:
       - name: Deploy test server [ Lightning ]
         uses: burnett01/rsync-deployments@5.2.1
         with:
-          switches: -avzr
+          switches: -avzr --delete
           path: dist/${{ env.plugin_name }}/
           remote_path: /home/vs4/www/test/lightning-g3/wp-content/plugins/vk-blocks/
           remote_host: ${{ secrets.DEPLOY_HOST_VS4 }}
@@ -121,7 +130,13 @@ jobs:
           ls dist/${{ env.plugin_name }}/vendor/bin/phpunit && echo "phpunit OK" || echo "phpunit NOT FOUND"
       - name: Setup wp-env for dist
         run: |
-          echo '{"plugins":["./dist/${{ env.plugin_name }}"]}' > .wp-env.json
+          node <<'NODE'
+          const fs = require('fs');
+          const p = '.wp-env.json';
+          const config = fs.existsSync(p) ? JSON.parse(fs.readFileSync(p, 'utf8')) : {};
+          config.plugins = ['./dist/${{ env.plugin_name }}'];
+          fs.writeFileSync(p, JSON.stringify(config));
+          NODE
       - name: Start wp-env
         run: |
           for n in 1 2 3; do npx wp-env start --update && break || [ "$n" -lt 3 ] || exit 1; done
@@ -165,12 +180,18 @@ jobs:
           path: dist/
       - name: Setup wp-env for dist
         run: |
-          echo '{"plugins":["./dist/${{ env.plugin_name }}"]}' > .wp-env.json
+          node <<'NODE'
+          const fs = require('fs');
+          const p = '.wp-env.json';
+          const config = fs.existsSync(p) ? JSON.parse(fs.readFileSync(p, 'utf8')) : {};
+          config.plugins = ['./dist/${{ env.plugin_name }}'];
+          fs.writeFileSync(p, JSON.stringify(config));
+          NODE
       - name: Start wp-env
         run: |
           for n in 1 2 3; do npx wp-env start --update && break || [ "$n" -lt 3 ] || exit 1; done
       - name: Install Playwright Browsers
-        run: npx playwright install
+        run: npx playwright install --with-deps
       - name: Run E2E Tests
         run: npm run e2e
       - uses: actions/upload-artifact@v4
