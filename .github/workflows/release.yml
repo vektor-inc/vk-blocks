@@ -73,7 +73,7 @@ jobs:
           name: dist
           path: dist/
       - name: Deploy test server [ Lightning ]
-        uses: burnett01/rsync-deployments@5.2.1
+        uses: burnett01/rsync-deployments@2651e3eecb4ea772cbe952695d04952e92027b4f # v5.2.1
         with:
           switches: -avzr --delete
           path: dist/${{ env.plugin_name }}/
