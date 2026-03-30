@@ -106,7 +106,7 @@
 		"eslint-plugin-prettier": "^5.5.5",
 		"gettext-parser": "9.0.1",
 		"gettext-to-messageformat": "0.4.0",
-		"gulp": "^4.0.2",
+		"gulp": "^5.0.1",
 		"gulp-autoprefixer": "^8.0.0",
 		"gulp-concat": "^2.6.1",
 		"gulp-notify": "^5.0.0",
