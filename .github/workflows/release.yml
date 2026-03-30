@@ -1,0 +1,219 @@
+name: Release
+on:
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
+env:
+  plugin_name: vk-blocks
+jobs:
+  # 1. dist 作成 + スモークテスト
+  smoke_test:
+    name: Smoke Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: npm
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+      - name: Get Composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+      - name: Install NPM Scripts
+        run: npm install
+      - name: Install Composer Packages
+        run: composer install --optimize-autoloader --prefer-dist --no-dev
+      - name: Build
+        run: npm run build:free
+      - name: Create dist
+        run: bash bin/dist.sh
+      - name: Upload dist artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - name: Setup wp-env for dist
+        run: |
+          echo '{"plugins":["./dist/${{ env.plugin_name }}"]}' > .wp-env.json
+      - name: Start wp-env
+        run: |
+          for n in 1 2 3; do npx wp-env start --update && break || [ "$n" -lt 3 ] || exit 1; done
+      - name: Smoke test
+        uses: vektor-inc/wp-actions/smoke-test@90f5a231bc956543bf235f36be4928d57af2edab
+
+  # 2. テストサーバーへ早期デプロイ（目視確認用）
+  deploy_test_server:
+    name: Deploy to Test Server
+    runs-on: ubuntu-latest
+    needs: [smoke_test]
+    steps:
+      - name: Download dist artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - name: Deploy test server [ Lightning ]
+        uses: burnett01/rsync-deployments@5.2.1
+        with:
+          switches: -avzr
+          path: dist/${{ env.plugin_name }}/
+          remote_path: /home/vs4/www/test/lightning-g3/wp-content/plugins/vk-blocks/
+          remote_host: ${{ secrets.DEPLOY_HOST_VS4 }}
+          remote_port: ${{ secrets.DEPLOY_PORT_VS4 }}
+          remote_user: ${{ secrets.DEPLOY_USER_VS4 }}
+          remote_key: ${{ secrets.DEPLOY_KEY_VS4 }}
+
+  # 3. PHPUnit テスト（dist パッケージで実行）
+  php_unit:
+    name: PHP Unit Test
+    runs-on: ubuntu-latest
+    needs: [smoke_test]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: npm
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+      - name: Get Composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+      - name: Install NPM Scripts
+        run: npm install
+      - name: Install Composer Packages
+        run: composer install
+      - name: Install Themes
+        run: bash bin/install-theme.sh
+      - name: Download dist artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - name: Copy test dependencies into dist for phpunit
+        run: |
+          rm -rf dist/${{ env.plugin_name }}/vendor
+          cp -rL vendor dist/${{ env.plugin_name }}/vendor
+          for f in .phpunit.xml phpunit.xml phpunit.xml.dist; do
+            [ -f "$f" ] && cp "$f" "dist/${{ env.plugin_name }}/$f" || true
+          done
+          [ -d test ] && cp -r test "dist/${{ env.plugin_name }}/test" || true
+          ls dist/${{ env.plugin_name }}/vendor/bin/phpunit && echo "phpunit OK" || echo "phpunit NOT FOUND"
+      - name: Setup wp-env for dist
+        run: |
+          echo '{"plugins":["./dist/${{ env.plugin_name }}"]}' > .wp-env.json
+      - name: Start wp-env
+        run: |
+          for n in 1 2 3; do npx wp-env start --update && break || [ "$n" -lt 3 ] || exit 1; done
+      - name: Run PHP Unit Test
+        run: npm run phpunit:free
+
+  # 4. E2E テスト（Playwright）
+  e2e:
+    name: E2E Test (Playwright)
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    needs: [smoke_test]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: npm
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+      - name: Get Composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+      - name: Install NPM Scripts
+        run: npm install
+      - name: Install Composer Packages
+        run: composer install
+      - name: Download dist artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - name: Setup wp-env for dist
+        run: |
+          echo '{"plugins":["./dist/${{ env.plugin_name }}"]}' > .wp-env.json
+      - name: Start wp-env
+        run: |
+          for n in 1 2 3; do npx wp-env start --update && break || [ "$n" -lt 3 ] || exit 1; done
+      - name: Install Playwright Browsers
+        run: npx playwright install
+      - name: Run E2E Tests
+        run: npm run e2e
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+
+  # 5. GitHub Release（全テスト通過後）
+  release:
+    name: GitHub Release
+    runs-on: ubuntu-latest
+    needs: [smoke_test, php_unit, e2e]
+    permissions:
+      contents: write
+    steps:
+      - name: Download dist artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - name: Create Release
+        uses: softprops/action-gh-release@153bb8e04406b158c6c84fc1615b65b24149a1fe
+        with:
+          generate_release_notes: true
+          files: dist/${{ env.plugin_name }}.zip
+
+  # 6. WordPress.org SVN デプロイ（全テスト通過後）
+  deploy:
+    name: Deploy to WordPress.org
+    runs-on: ubuntu-latest
+    needs: [smoke_test, php_unit, e2e]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download dist artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - name: WordPress Plugin Deploy
+        uses: 10up/action-wordpress-plugin-deploy@stable
+        env:
+          BUILD_DIR: dist/${{ env.plugin_name }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
