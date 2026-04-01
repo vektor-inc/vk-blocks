@@ -20,6 +20,8 @@
 `release.yml` が成功すると、`deploy-free.yml` が連動実行される：
 - Free 版リポジトリ（vk-blocks）の master にコミット・プッシュ
 
+**注意:** Pro 版の `copy:files:free` スクリプトは `build`, `inc`, `vendor`, `*.txt`, `*.png`, `*.php` のみをコピーするため、無料版リポジトリの `.github/` ディレクトリは Pro 版から上書きされない。無料版の GitHub Actions ワークフロー（`wp-plugin-deploy.yml` 等）は無料版リポジトリ側で独立して管理される。
+
 ## 完了報告
 
 > リリース完了しました。
