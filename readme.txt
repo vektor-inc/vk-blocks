@@ -4,7 +4,7 @@ Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 6.5
 Tested up to: 6.9
-Stable tag: 1.118.3
+Stable tag: 1.118.4
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -107,6 +107,10 @@ e.g.
 1. VK Blocks examples.
 
 == Changelog ==
+
+= 1.118.4 =
+[ Bug fix ][ Grid Column / Grid Column Card ( Pro ) ] Fixed an issue where the block editor crashed with "This block has encountered an error" when certain third-party plugins were active.
+[ Bug Fix ][ Table of Contents ( Pro ) ] Fixed OPEN/CLOSE toggle not working when separate asset loading is disabled.
 
 = 1.118.3 =
 [ Bug Fix ][ Table of Contents Block ( Pro ) ] Fixed a missing translation in the numbering settings.
