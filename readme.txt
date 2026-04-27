@@ -4,7 +4,7 @@ Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 6.5
 Tested up to: 6.9
-Stable tag: 1.118.4
+Stable tag: 1.118.5
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -107,6 +107,13 @@ e.g.
 1. VK Blocks examples.
 
 == Changelog ==
+
+= 1.118.5 =
+[ Bug Fix ][ Slider ] Fixed an issue where loop mode caused slides to disappear when "Centering the active slide" was enabled with an even number of items per view (e.g. 2). Swiper internally increments even slidesPerView to the next odd number in this case, raising the minimum required slide count. Loop is now automatically disabled when the slide count is insufficient.
+[ Bug fix ][ Outer ( Pro ) ] Fixed an issue where "Fit to the Content area" padding did not work on block themes (TT3, TT4, etc.).
+[ Bug fix ][ Outer ( Pro ) ] Fixed an issue where "Fit to the Content area" did not constrain content width on classic themes without contentSize (e.g. Lightning Pro G2).
+[ Bug fix ][ Highlighter ] Fixed an issue where the highlighter color was removed when a post was saved by a user without the `unfiltered_html` capability (e.g. Author role, or any user on multisite).
+[ Other ][ Blog Card ( Pro ) / Visual Embed ] Compatible for WordPress 7.0 Real-Time Collaboration.
 
 = 1.118.4 =
 [ Bug fix ][ Grid Column / Grid Column Card ( Pro ) ] Fixed an issue where the block editor crashed with "This block has encountered an error" when certain third-party plugins were active.

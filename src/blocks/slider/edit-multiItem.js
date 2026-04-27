@@ -1,4 +1,4 @@
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import {
 	PanelBody,
 	BaseControl,
@@ -7,6 +7,7 @@ import {
 	ToggleControl,
 } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
+import { getMinSlidesForLoop } from './loop-min-slides';
 
 export const MultiItemSetting = (props) => {
 	const { attributes, setAttributes, clientId } = props;
@@ -26,27 +27,6 @@ export const MultiItemSetting = (props) => {
 		select('core/block-editor').getBlocks(clientId)
 	);
 
-	let demicalPointAlert = '';
-	if (slidesPerGroup === 'one-by-one') {
-		demicalPointAlert = (
-			<p className="font-size-11px">
-				{__(
-					'If you specifying a numbers with decimals such as 1.5, Please set "Centering the active slide"',
-					'vk-blocks'
-				)}
-			</p>
-		);
-	} else if (slidesPerGroup === 'slides-per-view') {
-		demicalPointAlert = (
-			<p>
-				{__(
-					'The decimal point can be set for the display number only when the display is switched one by one.',
-					'vk-blocks'
-				)}
-			</p>
-		);
-	}
-
 	// １スライドあたりの表示枚数がスライダーの総枚数の約数出なかったときに表示するアラート
 	const slidesPerViewAlert = (
 		<div className="text-danger font-size-11px">
@@ -57,116 +37,92 @@ export const MultiItemSetting = (props) => {
 		</div>
 	);
 
-	// 上記アラートを表示するか否かのモバイル時の処理
-	let slidesPerViewMobileAlert = '';
-	if (
-		innerBlocks.length % parseInt(slidesPerViewMobile) !== 0 &&
-		slidesPerGroup === 'slides-per-view'
-	) {
-		slidesPerViewMobileAlert = slidesPerViewAlert;
-	}
+	const isNotDivisor = (value) => {
+		if (value === null || value === undefined || value === '') {
+			return false;
+		}
+		const n = parseInt(value, 10);
+		return !Number.isNaN(n) && innerBlocks.length % n !== 0;
+	};
 
-	// 上記アラートを表示するか否かのタブレット時の処理
-	let slidesPerViewTabletAlert = '';
-	if (
-		innerBlocks.length % parseInt(slidesPerViewTablet) !== 0 &&
-		slidesPerGroup === 'slides-per-view'
-	) {
-		slidesPerViewTabletAlert = slidesPerViewAlert;
-	}
+	const slidesPerViewMobileAlert =
+		slidesPerGroup === 'slides-per-view' &&
+		isNotDivisor(slidesPerViewMobile)
+			? slidesPerViewAlert
+			: '';
+	const slidesPerViewTabletAlert =
+		slidesPerGroup === 'slides-per-view' &&
+		isNotDivisor(slidesPerViewTablet)
+			? slidesPerViewAlert
+			: '';
+	const slidesPerViewPCAlert =
+		slidesPerGroup === 'slides-per-view' && isNotDivisor(slidesPerViewPC)
+			? slidesPerViewAlert
+			: '';
 
-	// 上記アラートを表示するか否かの PC 時の処理
-	let slidesPerViewPCAlert = '';
-	if (
-		innerBlocks.length % parseInt(slidesPerViewPC) !== 0 &&
-		slidesPerGroup === 'slides-per-view'
-	) {
-		slidesPerViewPCAlert = slidesPerViewAlert;
-	}
-
-	// ループに関するアラート
-	let sloderPerViewLoopAlert = '';
-	if (slidesPerGroup === 'slides-per-view') {
-		// 一度に遷移するスライドアイテムの数 : 表示アイテム数と同じ
-		sloderPerViewLoopAlert = (
+	const makeLoopAlert = (spv, spg) => {
+		const minRequired = getMinSlidesForLoop(spv, spg, !!centeredSlides);
+		if (innerBlocks.length >= minRequired) {
+			return '';
+		}
+		return (
 			<div className="alert alert-danger font-size-11px">
-				{__(
-					'If you want to loop slides, the number of placed slide items must be greater than or equal to twice the number of items you want to display per view.',
-					'vk-blocks'
+				{sprintf(
+					/* translators: %d: minimum number of slides required for loop mode */
+					__(
+						'Loop mode requires at least %d slides with the current slider settings. Please add more slides or disable loop.',
+						'vk-blocks'
+					),
+					minRequired
 				)}
 			</div>
 		);
-	} else if (slidesPerGroup !== 'slides-per-view') {
-		// ↑ else だけだと lint でエラーにされてコミットさせてもらえないため...
-		// 一度に遷移するスライドアイテムの数 : １つずつ
-		if (attributes.centeredSlides) {
-			// アクティブスライドを中央にする場合
-			sloderPerViewLoopAlert = (
-				<div className="alert alert-danger font-size-11px">
-					{__(
-						'If the active slide is in the center, the number of placed slide items must be greater than or equal to the number of items you want to display in one view + 2.',
-						'vk-blocks'
-					)}
-				</div>
-			);
-		} else {
-			sloderPerViewLoopAlert = (
-				<div className="alert alert-danger font-size-11px">
-					{__(
-						'If you want to loop slides, the number of placed slide items must be greater than or equal to the number of items you want to display per view + 1.',
-						'vk-blocks'
-					)}
-				</div>
-			);
+	};
+
+	// toSpv: spv を最低 1 にクランプする（小数はそのまま保持し getMinSlidesForLoop 側で正規化）。
+	// toSpg: spv を正整数に正規化する。null/undefined/'' または有限数でない場合は undefined を返す。
+	const toSpv = (spv) => Math.max(1, spv);
+	const toSpg = (spv) => {
+		if (spv === null || spv === undefined || spv === '') {
+			return undefined;
 		}
-	}
+		const n = Number(spv);
+		return Number.isFinite(n) ? Math.max(1, Math.floor(n)) : undefined;
+	};
 
 	/* ループ時のアラート */
-	// モバイル
-	let slidesPerViewMobileLoopAlert = '';
-	// タブレット
-	let slidesPerViewTabletLoopAlert = '';
-	// PC
-	let slidesPerViewPCLoopAlert = '';
-	if (!!loop) {
-		if (
-			(slidesPerGroup === 'slides-per-view' &&
-				innerBlocks.length / slidesPerViewMobile < 2) ||
-			(slidesPerGroup === 'one-by-one' &&
-				innerBlocks.length - (slidesPerViewMobile + 1) < 0 &&
-				!attributes.centeredSlides) ||
-			(slidesPerGroup === 'one-by-one' &&
-				innerBlocks.length - (slidesPerViewMobile + 2) < 0 &&
-				attributes.centeredSlides)
-		) {
-			slidesPerViewMobileLoopAlert = sloderPerViewLoopAlert;
-		}
-		if (
-			(slidesPerGroup === 'slides-per-view' &&
-				innerBlocks.length / slidesPerViewTablet < 2) ||
-			(slidesPerGroup === 'one-by-one' &&
-				innerBlocks.length - (slidesPerViewTablet + 1) < 0 &&
-				!attributes.centeredSlides) ||
-			(slidesPerGroup === 'one-by-one' &&
-				innerBlocks.length - (slidesPerViewTablet + 2) < 0 &&
-				attributes.centeredSlides)
-		) {
-			slidesPerViewTabletLoopAlert = sloderPerViewLoopAlert;
-		}
-
-		if (
-			(slidesPerGroup === 'slides-per-view' &&
-				innerBlocks.length / slidesPerViewPC < 2) ||
-			(slidesPerGroup === 'one-by-one' &&
-				innerBlocks.length - (slidesPerViewPC + 1) < 0 &&
-				!attributes.centeredSlides) ||
-			(slidesPerGroup === 'one-by-one' &&
-				innerBlocks.length - (slidesPerViewPC + 2) < 0 &&
-				attributes.centeredSlides)
-		) {
-			slidesPerViewPCLoopAlert = sloderPerViewLoopAlert;
-		}
-	}
+	const slidesPerViewMobileLoopAlert = loop
+		? makeLoopAlert(
+				toSpv(slidesPerViewMobile || 1),
+				slidesPerGroup === 'slides-per-view'
+					? (toSpg(slidesPerViewMobile || 1) ?? 1)
+					: 1
+			)
+		: '';
+	const slidesPerViewTabletLoopAlert =
+		loop &&
+		slidesPerViewTablet !== null &&
+		slidesPerViewTablet !== undefined &&
+		slidesPerViewTablet !== ''
+			? makeLoopAlert(
+					toSpv(slidesPerViewTablet),
+					slidesPerGroup === 'slides-per-view'
+						? (toSpg(slidesPerViewTablet) ?? 1)
+						: 1
+				)
+			: '';
+	const slidesPerViewPCLoopAlert =
+		loop &&
+		slidesPerViewPC !== null &&
+		slidesPerViewPC !== undefined &&
+		slidesPerViewPC !== ''
+			? makeLoopAlert(
+					toSpv(slidesPerViewPC),
+					slidesPerGroup === 'slides-per-view'
+						? (toSpg(slidesPerViewPC) ?? 1)
+						: 1
+				)
+			: '';
 
 	// 複数枚表示設定
 	let multiItemSetting = '';
@@ -184,15 +140,28 @@ export const MultiItemSetting = (props) => {
 				>
 					<p className="font-size-11px">
 						{__(
-							'Enter divisors for the number of placed slide items for each display size.',
-							'vk-blocks'
-						)}
-						{__(
-							'If the number is not divisible, the sliding behavior will be unnatural',
+							'Enter the number of slide items to display on each device.',
 							'vk-blocks'
 						)}
 					</p>
-					{demicalPointAlert}
+					<p className="font-size-11px">
+						{__(
+							'In one-by-one mode, you can set decimals (e.g. 1.5). If you specify a decimal, please enable "Centering the active slide".',
+							'vk-blocks'
+						)}
+					</p>
+					<p className="font-size-11px">
+						{__(
+							'In slides-per-view mode, enter a divisor of the total number of placed slides. If the number is not a divisor, the sliding behavior will be unnatural.',
+							'vk-blocks'
+						)}
+					</p>
+					<p className="font-size-11px">
+						{__(
+							'When "Centering the active slide" is enabled and the number of items to display is even, it is automatically treated as the next odd number internally. This may increase the minimum number of slides required for loop mode.',
+							'vk-blocks'
+						)}
+					</p>
 					<TextControl
 						type={'number'}
 						label={__('PC', 'vk-blocks')}
@@ -311,11 +280,24 @@ export const MultiItemSetting = (props) => {
 								value: 'slides-per-view',
 							},
 						]}
-						onChange={(value) =>
-							setAttributes({
-								slidesPerGroup: value,
-							})
-						}
+						onChange={(value) => {
+							const attrs = { slidesPerGroup: value };
+							if (value === 'slides-per-view') {
+								const pcVal = toSpg(slidesPerViewPC);
+								if (pcVal !== undefined) {
+									attrs.slidesPerViewPC = pcVal;
+								}
+								const tabletVal = toSpg(slidesPerViewTablet);
+								if (tabletVal !== undefined) {
+									attrs.slidesPerViewTablet = tabletVal;
+								}
+								const mobileVal = toSpg(slidesPerViewMobile);
+								if (mobileVal !== undefined) {
+									attrs.slidesPerViewMobile = mobileVal;
+								}
+							}
+							setAttributes(attrs);
+						}}
 					/>
 				</BaseControl>
 				<BaseControl id={`vk_slider-slidesPerGroup`}>
@@ -348,10 +330,14 @@ export const MultiItemSetting = (props) => {
 	const disabledReason = getDisabledReason();
 	const disabledAlert = disabledReason ? (
 		<div className="alert alert-warning font-size-11px">
-			{__(
-				'%s is enabled, so multi-item settings cannot be configured.',
-				'vk-blocks'
-			).replace('%s', disabledReason)}
+			{sprintf(
+				/* translators: %s: name of the feature that is enabled (e.g. "Fade Effect" or "Background Image Zoom Animation") */
+				__(
+					'%s is enabled, so multi-item settings cannot be configured.',
+					'vk-blocks'
+				),
+				disabledReason
+			)}
 		</div>
 	) : null;
 

@@ -183,6 +183,89 @@ ${zoomSelector} .vk_slider_item.swiper-slide-next::before {
 				}
 			}
 
+			// slidesPerGroup を正整数に正規化する（Swiper に渡す値とループ判定を一致させる）。
+			const toIntSpg = (v) => {
+				const n = Number(v);
+				return Number.isFinite(n) ? Math.max(1, Math.floor(n)) : 1;
+			};
+			if (config.slidesPerGroup !== undefined) {
+				config.slidesPerGroup = toIntSpg(config.slidesPerGroup);
+			}
+			if (config.breakpoints) {
+				Object.keys(config.breakpoints).forEach((bp) => {
+					const spg = config.breakpoints[bp].slidesPerGroup;
+					if (spg !== undefined) {
+						config.breakpoints[bp].slidesPerGroup = toIntSpg(spg);
+					}
+				});
+			}
+
+			// ループモードに必要なスライド数が不足する場合は自動的に無効化する。
+			// Swiper の loopFix は centeredSlides=true かつ slidesPerView が偶数のとき
+			// 内部的に slidesPerView を +1 するため、必要最小スライド数が増加する。
+			// 例: slidesPerView=2, centeredSlides=true → 最小5枚必要、4枚では破綻する。
+			if (config.loop) {
+				const slideCount = sliderNode.querySelectorAll(
+					':scope > .swiper-wrapper > .swiper-slide'
+				).length;
+				const centeredSlides = !!config.centeredSlides;
+
+				// 全ブレークポイントを含む設定ペアを収集
+				const configPairs = [
+					{
+						spv: config.slidesPerView || 1,
+						spg: config.slidesPerGroup || 1,
+					},
+				];
+				if (config.breakpoints) {
+					Object.values(config.breakpoints).forEach(
+						({ slidesPerView, slidesPerGroup }) => {
+							if (slidesPerView) {
+								configPairs.push({
+									spv: slidesPerView,
+									spg: slidesPerGroup || 1,
+								});
+							}
+						}
+					);
+				}
+
+				// Swiper の loopFix と同じロジックで最小必要枚数を計算。
+				// このロジックは loop-min-slides.js の getMinSlidesForLoop と同一。
+				// view.js は gulp で直接 minify されるため ES module import が使えず、
+				// やむなく重複させている。変更時は両方を同期すること。
+				const needsLoopDisable = configPairs.some(({ spv, spg }) => {
+					const parsedSpv = Number(spv);
+					const normalizedSpv = Math.max(
+						1,
+						Number.isFinite(parsedSpv) ? parsedSpv : 1
+					);
+					const parsedSpg = Number(spg);
+					const normalizedSpg = Math.max(
+						1,
+						Number.isFinite(parsedSpg) ? Math.floor(parsedSpg) : 1
+					);
+					let w = Math.ceil(normalizedSpv);
+					if (centeredSlides && w % 2 === 0) {
+						w += 1;
+					}
+					let y = centeredSlides
+						? Math.max(normalizedSpg, Math.ceil(w / 2))
+						: normalizedSpg;
+					if (y % normalizedSpg !== 0) {
+						y += normalizedSpg - (y % normalizedSpg);
+					}
+					return slideCount < w + y;
+				});
+
+				if (needsLoopDisable) {
+					config.loop = false;
+					if (config.autoplay && config.autoplay !== false) {
+						config.autoplay.stopOnLastSlide = true;
+					}
+				}
+			}
+
 			// Swiperインスタンスをwindow変数に格納
 			window[`swiper${index}`] = new Swiper(
 				`.vk_slider_${sliderId}`,

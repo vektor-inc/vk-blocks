@@ -1992,9 +1992,21 @@ msgstr "埋め込むURLを入力…"
 msgid "Enter a value as an integer divisor of the number of items to retrieve."
 msgstr "表示（取得）件数の整数の約数で入力してください。"
 
-#: src/blocks/slider/edit-multiItem.js:186
-msgid "Enter divisors for the number of placed slide items for each display size."
-msgstr "配置済みのスライドアイテムを割り切れる数を入力してください。"
+#: src/blocks/slider/edit-multiItem.js:158
+msgid "Enter the number of slide items to display on each device."
+msgstr "各デバイスで表示するスライドアイテムの枚数を入力してください。"
+
+#: src/blocks/slider/edit-multiItem.js:143
+msgid "In one-by-one mode, you can set decimals (e.g. 1.5). If you specify a decimal, please enable \"Centering the active slide\"."
+msgstr "1つずつ切り替えモードでは、1.5 などの小数点以下の数値を指定することができます。小数点以下の数値を指定する場合は「アクティブスライドを中央にする」を有効にしてください。"
+
+#: src/blocks/slider/edit-multiItem.js:149
+msgid "In slides-per-view mode, enter a divisor of the total number of placed slides. If the number is not a divisor, the sliding behavior will be unnatural."
+msgstr "表示枚数と同じモードでは、配置済みスライドアイテム数の約数を入力してください。約数でない場合、スライド動作が不自然になります。"
+
+#: src/blocks/slider/edit-multiItem.js:155
+msgid "When \"Centering the active slide\" is enabled and the number of items to display is even, it is automatically treated as the next odd number internally. This may increase the minimum number of slides required for loop mode."
+msgstr "「アクティブスライドを中央にする」が有効かつ表示枚数が偶数の場合、内部的に自動で奇数に切り上げられます。そのため、ループモードに必要な最小スライド数が増える場合があります。"
 
 #: src/blocks/_pro/post-list-slider/multi-item-setting.js:162
 msgid "Enter divisors for the number of posts for each display size."
@@ -5985,3 +5997,8 @@ msgstr "wysiwyg"
 #: src/admin/custom-format/index.js:96
 msgid "※ Required If no title is entered, it will not appear on the toolbar."
 msgstr "※ タイトルが入力されていない場合、ツールバーには表示されません。"
+
+#. %d: minimum number of slides required for loop mode
+#: src/blocks/slider/edit-multiItem.js:76
+msgid "Loop mode requires at least %d slides with the current slider settings. Please add more slides or disable loop."
+msgstr "現在のスライダー設定ではループモードに最低 %d 枚のスライドが必要です。スライドを追加するか、ループを無効にしてください。"

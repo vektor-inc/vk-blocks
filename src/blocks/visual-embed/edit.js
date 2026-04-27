@@ -72,6 +72,12 @@ export default function EmbedCodeEdit({ attributes, setAttributes }) {
 	};
 	const [isIframe, setIsIframe] = useState(!!parseIframeCode(iframeCode));
 
+	// 外部からの属性変更（RTC・Undo/Redo等）をローカルstateに反映
+	useEffect(() => {
+		setTempIframeCode(iframeCode);
+		setIsIframe(!!parseIframeCode(iframeCode));
+	}, [iframeCode]);
+
 	const blockProps = useBlockProps({
 		className: 'vk-visual-embed',
 	});
