@@ -1,32 +1,125 @@
-.git/
-.github/
-.husky/
-.wordpress-org/
-/bin/
-/dist/
-inc/vk-blocks/src/
-node_modules/
-/src/
-test/
+# `wp dist-archive`（wp-cli/dist-archive-command）は gitignore 互換構文を採用。
+# 名前単独で書けばリポジトリ全階層にマッチする。
+
+# --- VCS / GitHub 関連 ---
+.git
+.gitignore
+.gitattributes
+.github
+
+# --- AI / エディタ / 開発支援 ---
+.claude
+.cursor
+.cursorignore
+.cursorrules
+.clinerules
+.clineignore
+.copilotignore
+.aiexclude
+.aiignore
+.augmentignore
+.augment
+.augment-guidelines
+.codex
+.codexignore
+.gemini
+.junie
+.kiro
+.noai
+.roo
+.rooignore
+.serena
+.rulesync
+.vscode
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+codex.md
+
+# --- リポジトリ配布制御ファイル ---
 .distignore
+.freeignore
+.svnignore
+.wordpress-org
+
+# --- Husky / Lint / Editor 設定 ---
+.husky
 .editorconfig
 .eslintignore
 .eslintrc.js
-.gitignore
-.node-version
-.phpcs.xml
-.phpunit.xml
 .prettierignore
-.wp-env.json
-babel.config.js
-composer.json
-composer.lock
-gulpfile_free.js
-gulpfile.js
-package-lock.json
-package.json
-playwright.config.ts
-README.md
-webpack.config.js
+.phpcs.xml
+.coderabbit.yaml
 
+# --- PHPUnit / Playwright 関連の設定・キャッシュ ---
+.phpunit.xml
+.phpunit.result.cache
+playwright.config.ts
+playwright-report
+test-results
+
+# --- WordPress 開発環境 ---
+.wp-env.json
+.wp-env.override.json
+.node-version
+
+# --- ビルドツール / 依存定義（配布物では再生成不要） ---
+babel.config.js
+gulpfile.js
+webpack.config.js
+webpack2.config.js
+jest.setup.js
+generate-block-docs.js
+package.json
+package-lock.json
+node_modules
+
+# --- 開発用スクリプト・ツール ---
+bin
+tools
+
+# --- テスト関連（プラグイン本体およびベンダー配下を含む） ---
+# ※ `tests` / `test` という名前のディレクトリ・ファイルを名前ベースで一括除外。
+test
+tests
+Tests
+
+# --- ベンダー配下の不要ファイル（具体パス指定） ---
+# ※ `plugins` 単体だと WordPress のプラグインディレクトリと誤爆するため具体パス指定。
+vendor/tgmpa/tgm-plugin-activation/plugins
+
+# --- ドキュメント / ローカルメモ ---
+README.md
+docs
+_notes
+temp
+artifacts
+
+# --- OS / エディタの一時ファイル ---
+.DS_Store
+._.DS_Store
+Thumbs.db
+*~
+*.bak
+*.log
+*.swp
+*.override.json
+sftp-config.json
+
+# Sensitive files (defense in depth)
+.env
+.env.*
+*.pem
+*.key
+id_rsa*
+*.sql
+*.sql.gz
+dump*
+wp-config.php
+wp-config.local.php
+.npmrc
+.yarnrc
+.yarnrc.yml
+auth.json
+secrets*
 

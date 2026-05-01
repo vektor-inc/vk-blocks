@@ -4,7 +4,7 @@ Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 6.5
 Tested up to: 6.9
-Stable tag: 1.118.5
+Stable tag: 1.118.7
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -107,6 +107,15 @@ e.g.
 1. VK Blocks examples.
 
 == Changelog ==
+
+= 1.118.7 =
+[ Other ] Internal release pipeline fix. No changes to plugin functionality.
+
+= 1.118.6 =
+[ Other ] Added a `.distignore` file to exclude development files (such as build configs, tests, AI assistant configs, and bundled vendor demo files) from the distributed plugin package.
+[ Other ] Added License and License URI declarations to the plugin file header to comply with the WordPress.org Plugin Directory review requirements.
+[ Spec Change ] Included composer.json in the distributed plugin zip to comply with the WordPress.org plugin review guideline that requires bundling composer.json when Composer is used.
+[ Spec Change ] Excluded the `yahnis-elsts/plugin-update-checker` library from the free version distribution package to comply with the WordPress.org plugin guideline that prohibits external update checks for plugins hosted on WordPress.org.
 
 = 1.118.5 =
 [ Bug Fix ][ Slider ] Fixed an issue where loop mode caused slides to disappear when "Centering the active slide" was enabled with an even number of items per view (e.g. 2). Swiper internally increments even slidesPerView to the next odd number in this case, raising the minimum required slide count. Loop is now automatically disabled when the slide count is insufficient.

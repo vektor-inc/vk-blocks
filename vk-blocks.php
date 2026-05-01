@@ -3,11 +3,13 @@
  * Plugin Name: VK Blocks
  * Plugin URI: https://github.com/vektor-inc/vk-blocks
  * Description: This is a plugin that extends Block Editor.
- * Version: 1.118.5
+ * Version: 1.118.7
  * Requires at least: 6.5
  * Author: Vektor,Inc.
  * Author URI: https://vektor-inc.co.jp
  * Text Domain: vk-blocks
+ * License: GPLv2 or later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  *
  * @package vk-blocks
  */
