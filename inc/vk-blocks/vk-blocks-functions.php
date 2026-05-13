@@ -15,6 +15,7 @@ require_once __DIR__ . '/utils/minify-css.php';
 require_once __DIR__ . '/extensions/core/heading.php';
 require_once __DIR__ . '/extensions/core/image.php';
 require_once __DIR__ . '/extensions/core/list.php';
+require_once __DIR__ . '/extensions/core/site-logo.php';
 require_once __DIR__ . '/style/balloon.php';
 require_once __DIR__ . '/style/flow.php';
 require_once __DIR__ . '/style/hidden-extension.php';

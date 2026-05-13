@@ -1,15 +1,15 @@
 # Copyright (C) 2026 Vektor,Inc.
-# This file is distributed under the same license as the VK Blocks Pro plugin.
+# This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: VK Blocks Pro 1.118.2\n"
+"Project-Id-Version: VK Blocks Pro 1.118.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/vk-blocks-pro\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-04-01T05:15:31+00:00\n"
+"POT-Creation-Date: 2026-05-12T06:49:59+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: vk-blocks-pro\n"
@@ -332,7 +332,7 @@ msgstr ""
 #: src/blocks/_pro/grid-column-item/edit.js:116
 #: src/blocks/_pro/gridcolcard/edit-common.js:177
 #: src/blocks/button/edit.js:593
-#: src/blocks/heading/edit.js:344
+#: src/blocks/heading/edit.js:348
 msgid "Text Color"
 msgstr ""
 
@@ -470,7 +470,7 @@ msgid "Import Export Tool"
 msgstr ""
 
 #: src/admin/import-export/index.js:65
-#: src/blocks/heading/edit.js:294
+#: src/blocks/heading/edit.js:298
 msgid "Margin Setting"
 msgstr ""
 
@@ -573,30 +573,30 @@ msgstr ""
 
 #: src/admin/margin.js:51
 #: src/blocks/_pro/accordion/edit.js:139
-#: src/blocks/_pro/outer/edit.js:1419
+#: src/blocks/_pro/outer/edit.js:1427
 #: src/blocks/_pro/post-list-slider/multi-item-setting.js:174
 #: src/blocks/button/edit.js:424
-#: src/blocks/slider/edit-multiItem.js:198
+#: src/blocks/slider/edit-multiItem.js:169
 #: src/components/advanced-viewport-control/index.js:25
 msgid "PC"
 msgstr ""
 
 #: src/admin/margin.js:55
 #: src/blocks/_pro/accordion/edit.js:122
-#: src/blocks/_pro/outer/edit.js:1404
+#: src/blocks/_pro/outer/edit.js:1412
 #: src/blocks/_pro/post-list-slider/multi-item-setting.js:204
 #: src/blocks/button/edit.js:389
-#: src/blocks/slider/edit-multiItem.js:228
+#: src/blocks/slider/edit-multiItem.js:199
 #: src/components/advanced-viewport-control/index.js:32
 msgid "Tablet"
 msgstr ""
 
 #: src/admin/margin.js:59
 #: src/blocks/_pro/accordion/edit.js:105
-#: src/blocks/_pro/outer/edit.js:1389
+#: src/blocks/_pro/outer/edit.js:1397
 #: src/blocks/_pro/post-list-slider/multi-item-setting.js:236
 #: src/blocks/button/edit.js:356
-#: src/blocks/slider/edit-multiItem.js:260
+#: src/blocks/slider/edit-multiItem.js:231
 #: src/components/advanced-viewport-control/index.js:41
 msgid "Mobile"
 msgstr ""
@@ -613,7 +613,7 @@ msgstr ""
 
 #: src/admin/margin.js:81
 #: src/blocks/_pro/grid-column-item/edit.js:187
-#: src/blocks/_pro/grid-column/edit.js:83
+#: src/blocks/_pro/grid-column/edit.js:103
 #: src/blocks/_pro/outer/edit.js:1033
 msgid "Unit"
 msgstr ""
@@ -677,7 +677,7 @@ msgid "H2 only"
 msgstr ""
 
 #: src/admin/toc.js:165
-#: src/blocks/_pro/outer/edit.js:1463
+#: src/blocks/_pro/outer/edit.js:1471
 #: src/blocks/_pro/step-item/edit.js:146
 #: src/blocks/_pro/table-of-contents-new/edit.js:567
 #: src/blocks/_pro/timeline-item/edit.js:109
@@ -747,7 +747,7 @@ msgid "Background color / Rounded / Border"
 msgstr ""
 
 #: src/blocks/_pro/accordion/index.js:47
-#: src/blocks/heading/edit.js:288
+#: src/blocks/heading/edit.js:292
 #: dist/vk-blocks-pro/inc/vk-blocks/class-vk-blocks-global-settings.php:304
 #: inc/vk-blocks/class-vk-blocks-global-settings.php:304
 msgid "Plain"
@@ -899,7 +899,7 @@ msgstr ""
 #: src/blocks/_pro/blog-card-site-logo/edit.js:33
 #: src/blocks/_pro/blog-card-site-title/edit.js:67
 #: src/blocks/_pro/blog-card-title/edit.js:77
-#: src/blocks/_pro/blog-card/edit/index.js:131
+#: src/blocks/_pro/blog-card/edit/index.js:137
 msgid "Settings"
 msgstr ""
 
@@ -996,38 +996,38 @@ msgstr ""
 msgid "Choose a pattern. The original block settings will be cleared."
 msgstr ""
 
-#: src/blocks/_pro/blog-card/edit/index.js:108
+#: src/blocks/_pro/blog-card/edit/index.js:114
 msgid "Edit URL"
 msgstr ""
 
-#: src/blocks/_pro/blog-card/edit/index.js:125
+#: src/blocks/_pro/blog-card/edit/index.js:131
 msgid "Replace"
 msgstr ""
 
-#: src/blocks/_pro/blog-card/edit/index.js:141
+#: src/blocks/_pro/blog-card/edit/index.js:147
 msgid "Clear cache"
 msgstr ""
 
-#: src/blocks/_pro/blog-card/edit/index.js:144
+#: src/blocks/_pro/blog-card/edit/index.js:150
 msgid "If the data is old, please clear the cache. It is usually updated every hour."
 msgstr ""
 
-#: src/blocks/_pro/blog-card/edit/index.js:161
+#: src/blocks/_pro/blog-card/edit/index.js:167
 #: src/extensions/common/custom-block-variation/block-variation-explorer/index.js:20
 msgid "Variation settings"
 msgstr ""
 
-#: src/blocks/_pro/blog-card/edit/index.js:167
+#: src/blocks/_pro/blog-card/edit/index.js:173
 #: src/extensions/common/custom-block-variation/create-variation/block-variation-form/index.js:49
 msgid "You can register the current block settings as block variations."
 msgstr ""
 
-#: src/blocks/_pro/blog-card/edit/index.js:173
+#: src/blocks/_pro/blog-card/edit/index.js:179
 #: src/extensions/common/custom-block-variation/create-variation/block-variation-form/index.js:54
 msgid "https://developer.wordpress.org/block-editor/reference-guides/block-api/block-variations/"
 msgstr ""
 
-#: src/blocks/_pro/blog-card/edit/index.js:180
+#: src/blocks/_pro/blog-card/edit/index.js:186
 #: src/extensions/common/custom-block-variation/create-variation/block-variation-form/index.js:61
 msgid "Learn more about block variations"
 msgstr ""
@@ -1347,7 +1347,7 @@ msgid "Setting up a link"
 msgstr ""
 
 #: src/blocks/_pro/dynamic-text/edit.js:574
-#: src/blocks/_pro/gridcolcard-item/edit.js:372
+#: src/blocks/_pro/gridcolcard-item/edit.js:377
 #: src/blocks/_pro/icon-card-item/edit.js:146
 #: src/blocks/icon/edit.js:325
 #: src/blocks/pr-blocks/edit.js:272
@@ -1505,7 +1505,7 @@ msgid "Text size"
 msgstr ""
 
 #: src/blocks/_pro/fixed-display/edit.js:357
-#: src/blocks/_pro/outer/edit.js:1519
+#: src/blocks/_pro/outer/edit.js:1527
 #: src/blocks/icon-outer/edit.js:213
 #: src/blocks/icon/edit.js:222
 msgid "Border radius"
@@ -1587,7 +1587,7 @@ msgid "Padding (Bottom)"
 msgstr ""
 
 #: src/blocks/_pro/grid-column-item/edit.js:200
-#: src/blocks/_pro/grid-column/edit.js:96
+#: src/blocks/_pro/grid-column/edit.js:116
 #: src/blocks/icon-outer/edit.js:184
 #: src/blocks/icon/edit.js:193
 #: src/utils/unit-options.js:6
@@ -1595,7 +1595,7 @@ msgid "px"
 msgstr ""
 
 #: src/blocks/_pro/grid-column-item/edit.js:201
-#: src/blocks/_pro/grid-column/edit.js:100
+#: src/blocks/_pro/grid-column/edit.js:120
 #: src/blocks/icon-outer/edit.js:188
 #: src/blocks/icon/edit.js:197
 #: src/utils/unit-options.js:10
@@ -1603,7 +1603,7 @@ msgid "em"
 msgstr ""
 
 #: src/blocks/_pro/grid-column-item/edit.js:202
-#: src/blocks/_pro/grid-column/edit.js:104
+#: src/blocks/_pro/grid-column/edit.js:124
 #: src/blocks/icon-outer/edit.js:192
 #: src/blocks/icon/edit.js:201
 #: src/utils/unit-options.js:14
@@ -1611,22 +1611,22 @@ msgid "rem"
 msgstr ""
 
 #: src/blocks/_pro/grid-column-item/edit.js:203
-#: src/blocks/_pro/grid-column/edit.js:108
+#: src/blocks/_pro/grid-column/edit.js:128
 #: src/blocks/icon-outer/edit.js:196
 #: src/blocks/icon/edit.js:205
 #: src/utils/unit-options.js:18
 msgid "vw"
 msgstr ""
 
-#: src/blocks/_pro/grid-column/edit.js:58
+#: src/blocks/_pro/grid-column/edit.js:78
 msgid "Layout Columns"
 msgstr ""
 
-#: src/blocks/_pro/grid-column/edit.js:64
+#: src/blocks/_pro/grid-column/edit.js:84
 msgid "Column Margin Bottom Setting"
 msgstr ""
 
-#: src/blocks/_pro/grid-column/edit.js:68
+#: src/blocks/_pro/grid-column/edit.js:88
 msgid "Margin Bottom"
 msgstr ""
 
@@ -1634,47 +1634,47 @@ msgstr ""
 msgid "You can create a variety of layouts with grid column card blocks."
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard-item/edit.js:336
+#: src/blocks/_pro/gridcolcard-item/edit.js:341
 msgid "Edit mode"
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard-item/edit.js:340
+#: src/blocks/_pro/gridcolcard-item/edit.js:345
 msgid "If Edit Lock is disabled, changes made in this item block (such as color or image ratio) will be overwritten when the parent Grid Column Card block is re-selected."
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard-item/edit.js:346
+#: src/blocks/_pro/gridcolcard-item/edit.js:351
 msgid "Edit Lock"
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard-item/edit.js:349
+#: src/blocks/_pro/gridcolcard-item/edit.js:354
 msgid "Lock edits this block from the parent and other Grid Column Item block"
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard-item/edit.js:360
+#: src/blocks/_pro/gridcolcard-item/edit.js:365
 msgid "Column Setting"
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard-item/edit.js:364
+#: src/blocks/_pro/gridcolcard-item/edit.js:369
 #: src/blocks/_pro/icon-card-item/edit.js:138
 #: src/blocks/pr-blocks/edit.js:264
 msgid "Link URL:"
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard-item/edit.js:380
+#: src/blocks/_pro/gridcolcard-item/edit.js:385
 #: src/components/link-toolbar/index.js:396
 msgid "Add noreferrer"
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard-item/edit.js:388
+#: src/blocks/_pro/gridcolcard-item/edit.js:393
 #: src/components/link-toolbar/index.js:413
 msgid "Add nofollow"
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard-item/edit.js:396
+#: src/blocks/_pro/gridcolcard-item/edit.js:401
 msgid "If you set a link URL, do not place the link element (text or button) in the Grid Column Card Item. It may not be displayed correctly."
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard-item/edit.js:400
+#: src/blocks/_pro/gridcolcard-item/edit.js:405
 msgid "Make sure that no link is specified for the image block, etc."
 msgstr ""
 
@@ -1695,13 +1695,13 @@ msgid "Column footer button area"
 msgstr ""
 
 #: src/blocks/_pro/gridcolcard/edit-common.js:163
-#: src/blocks/heading/edit.js:388
+#: src/blocks/heading/edit.js:392
 msgid "Display"
 msgstr ""
 
 #: src/blocks/_pro/gridcolcard/edit-common.js:167
 #: src/blocks/_pro/post-list-slider/edit.js:319
-#: src/blocks/heading/edit.js:392
+#: src/blocks/heading/edit.js:396
 #: src/blocks/slider/edit.js:645
 msgid "Hide"
 msgstr ""
@@ -1734,7 +1734,7 @@ msgid "Border Style"
 msgstr ""
 
 #: src/blocks/_pro/gridcolcard/edit-common.js:69
-#: src/blocks/_pro/outer/edit.js:1467
+#: src/blocks/_pro/outer/edit.js:1475
 #: src/blocks/_pro/step-item/edit.js:122
 #: src/blocks/_pro/timeline-item/edit.js:89
 #: src/blocks/pr-content/edit.js:165
@@ -1744,14 +1744,14 @@ msgid "Solid"
 msgstr ""
 
 #: src/blocks/_pro/gridcolcard/edit-common.js:70
-#: src/blocks/_pro/outer/edit.js:1475
+#: src/blocks/_pro/outer/edit.js:1483
 #: dist/vk-blocks-pro/inc/vk-blocks/class-vk-blocks-global-settings.php:460
 #: inc/vk-blocks/class-vk-blocks-global-settings.php:460
 msgid "Dashed"
 msgstr ""
 
 #: src/blocks/_pro/gridcolcard/edit-common.js:71
-#: src/blocks/_pro/outer/edit.js:1471
+#: src/blocks/_pro/outer/edit.js:1479
 #: dist/vk-blocks-pro/inc/vk-blocks/class-vk-blocks-global-settings.php:456
 #: inc/vk-blocks/class-vk-blocks-global-settings.php:456
 msgid "Dotted"
@@ -1761,39 +1761,39 @@ msgstr ""
 msgid "Column padding"
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard/edit.js:228
+#: src/blocks/_pro/gridcolcard/edit.js:250
 msgid "Column Width Setting"
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard/edit.js:232
+#: src/blocks/_pro/gridcolcard/edit.js:254
 msgid "If you specify the minimum column size on a tablet or PC with %, it will be easier to align the number of columns in the upper and lower rows according to the screen size."
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard/edit.js:238
+#: src/blocks/_pro/gridcolcard/edit.js:260
 msgid "Column min width (Mobile)"
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard/edit.js:246
+#: src/blocks/_pro/gridcolcard/edit.js:268
 msgid "Column min width (Tablet / Optional)"
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard/edit.js:257
+#: src/blocks/_pro/gridcolcard/edit.js:279
 msgid "Column min width (PC / Optional)"
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard/edit.js:268
+#: src/blocks/_pro/gridcolcard/edit.js:290
 msgid "Column Gap Setting"
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard/edit.js:272
+#: src/blocks/_pro/gridcolcard/edit.js:294
 msgid "Column gap size"
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard/edit.js:278
+#: src/blocks/_pro/gridcolcard/edit.js:300
 msgid "Column row-gap size (optional)"
 msgstr ""
 
-#: src/blocks/_pro/gridcolcard/edit.js:287
+#: src/blocks/_pro/gridcolcard/edit.js:309
 msgid "Specify all columns at once"
 msgstr ""
 
@@ -1807,7 +1807,7 @@ msgstr ""
 #: src/blocks/alert/edit.js:85
 #: src/blocks/border-box/edit.js:308
 #: src/blocks/button/edit.js:604
-#: src/blocks/heading/edit.js:353
+#: src/blocks/heading/edit.js:357
 #: src/blocks/icon/edit.js:313
 #: src/blocks/pr-content/edit.js:232
 #: src/components/scroll-hint/index.js:115
@@ -1895,140 +1895,140 @@ msgstr ""
 msgid "Fit to the Content area"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1137
+#: src/blocks/_pro/outer/edit.js:1140
 msgid "Add padding to the Outer area"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1142
+#: src/blocks/_pro/outer/edit.js:1145
 msgid "Deprecated"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1147
+#: src/blocks/_pro/outer/edit.js:1155
 msgid "Remove padding from the Outer area"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1161
+#: src/blocks/_pro/outer/edit.js:1169
 msgid "Padding (Top and Bottom)"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1169
+#: src/blocks/_pro/outer/edit.js:1177
 msgid "Use default padding"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1176
+#: src/blocks/_pro/outer/edit.js:1184
 msgid "Do not use default padding"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1190
+#: src/blocks/_pro/outer/edit.js:1198
 msgid "* If you select \"Do not use\" that, please set yourself it such as a spacer block."
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1197
+#: src/blocks/_pro/outer/edit.js:1205
 msgid "HTML Element"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1202
+#: src/blocks/_pro/outer/edit.js:1210
 msgid "Default (<div>)"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1215
+#: src/blocks/_pro/outer/edit.js:1223
 msgid "Divider Setting"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1220
+#: src/blocks/_pro/outer/edit.js:1228
 #: src/blocks/balloon/edit.js:440
 msgid "Type"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1228
+#: src/blocks/_pro/outer/edit.js:1236
 msgid "Tilt"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1232
+#: src/blocks/_pro/outer/edit.js:1240
 msgid "Curve"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1236
+#: src/blocks/_pro/outer/edit.js:1244
 msgid "Wave"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1240
+#: src/blocks/_pro/outer/edit.js:1248
 #: dist/vk-blocks-pro/inc/vk-blocks/class-vk-blocks-global-settings.php:346
 #: inc/vk-blocks/class-vk-blocks-global-settings.php:346
 msgid "Triangle"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1244
+#: src/blocks/_pro/outer/edit.js:1252
 msgid "Large triangle"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1251
+#: src/blocks/_pro/outer/edit.js:1259
 msgid "Serrated"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1255
+#: src/blocks/_pro/outer/edit.js:1263
 msgid "Book"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1259
+#: src/blocks/_pro/outer/edit.js:1267
 msgid "Pyramid"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1266
+#: src/blocks/_pro/outer/edit.js:1274
 msgid "Settings for each device"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1279
+#: src/blocks/_pro/outer/edit.js:1287
 msgid "Upper Divider Level"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1361
+#: src/blocks/_pro/outer/edit.js:1369
 msgid "Lower Divider Level"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1444
+#: src/blocks/_pro/outer/edit.js:1452
 msgid "Border Setting"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1449
+#: src/blocks/_pro/outer/edit.js:1457
 msgid "Border will disappear when divider effect is applied."
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1455
+#: src/blocks/_pro/outer/edit.js:1463
 msgid "Border type"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1479
+#: src/blocks/_pro/outer/edit.js:1487
 #: dist/vk-blocks-pro/inc/vk-blocks/class-vk-blocks-global-settings.php:464
 #: inc/vk-blocks/class-vk-blocks-global-settings.php:464
 msgid "Double"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1483
+#: src/blocks/_pro/outer/edit.js:1491
 msgid "Groove"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1487
+#: src/blocks/_pro/outer/edit.js:1495
 msgid "Ridge"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1491
+#: src/blocks/_pro/outer/edit.js:1499
 msgid "Inset"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1495
+#: src/blocks/_pro/outer/edit.js:1503
 msgid "Outset"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1507
+#: src/blocks/_pro/outer/edit.js:1515
 msgid "Border width"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1542
+#: src/blocks/_pro/outer/edit.js:1550
 msgid "Container Inner Side Space Setting"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1579
+#: src/blocks/_pro/outer/edit.js:1587
 msgid "Min Height Setting"
 msgstr ""
 
@@ -2194,7 +2194,7 @@ msgid "Slider Settings"
 msgstr ""
 
 #: src/blocks/_pro/post-list-slider/edit.js:151
-#: src/blocks/slider/edit-multiItem.js:349
+#: src/blocks/slider/edit-multiItem.js:330
 #: src/blocks/slider/edit.js:477
 msgid "Effect"
 msgstr ""
@@ -2205,7 +2205,7 @@ msgid "Slide"
 msgstr ""
 
 #: src/blocks/_pro/post-list-slider/edit.js:165
-#: src/blocks/slider/edit-multiItem.js:347
+#: src/blocks/slider/edit-multiItem.js:328
 #: src/blocks/slider/edit.js:491
 msgid "Fade"
 msgstr ""
@@ -2259,7 +2259,7 @@ msgstr ""
 #: src/blocks/_pro/step-item/edit.js:142
 #: src/blocks/_pro/table-of-contents-new/edit.js:424
 #: src/blocks/_pro/timeline-item/edit.js:105
-#: src/blocks/heading/edit.js:284
+#: src/blocks/heading/edit.js:288
 #: src/blocks/slider/edit.js:621
 #: src/blocks/staff/edit.js:174
 #: src/components/advanced-color-gradient-control/index.js:60
@@ -2297,12 +2297,12 @@ msgid "If you want to loop slides, the number of posts must be greater than or e
 msgstr ""
 
 #: src/blocks/_pro/post-list-slider/multi-item-setting.js:151
-#: src/blocks/slider/edit-multiItem.js:367
+#: src/blocks/slider/edit-multiItem.js:352
 msgid "Multi-item Display Setting"
 msgstr ""
 
 #: src/blocks/_pro/post-list-slider/multi-item-setting.js:155
-#: src/blocks/slider/edit-multiItem.js:179
+#: src/blocks/slider/edit-multiItem.js:137
 msgid "Number of Items to display per view"
 msgstr ""
 
@@ -2311,7 +2311,6 @@ msgid "Enter divisors for the number of posts for each display size."
 msgstr ""
 
 #: src/blocks/_pro/post-list-slider/multi-item-setting.js:166
-#: src/blocks/slider/edit-multiItem.js:190
 msgid "If the number is not divisible, the sliding behavior will be unnatural"
 msgstr ""
 
@@ -2320,12 +2319,11 @@ msgid "Number of posts to change in a transition"
 msgstr ""
 
 #: src/blocks/_pro/post-list-slider/multi-item-setting.js:27
-#: src/blocks/slider/edit-multiItem.js:33
 msgid "If you specifying a numbers with decimals such as 1.5, Please set \"Centering the active slide\""
 msgstr ""
 
 #: src/blocks/_pro/post-list-slider/multi-item-setting.js:279
-#: src/blocks/slider/edit-multiItem.js:303
+#: src/blocks/slider/edit-multiItem.js:274
 msgid "One by One"
 msgstr ""
 
@@ -2334,7 +2332,7 @@ msgid "Same as the number of posts to display"
 msgstr ""
 
 #: src/blocks/_pro/post-list-slider/multi-item-setting.js:299
-#: src/blocks/slider/edit-multiItem.js:323
+#: src/blocks/slider/edit-multiItem.js:304
 msgid "Centering the active slide"
 msgstr ""
 
@@ -2343,7 +2341,6 @@ msgid "If you specify the center, you can display posts that are cut off on the 
 msgstr ""
 
 #: src/blocks/_pro/post-list-slider/multi-item-setting.js:36
-#: src/blocks/slider/edit-multiItem.js:42
 msgid "The decimal point can be set for the display number only when the display is switched one by one."
 msgstr ""
 
@@ -2443,7 +2440,7 @@ msgstr ""
 
 #: src/blocks/_pro/tab-item/edit.js:277
 #: src/blocks/button/edit.js:608
-#: src/blocks/heading/edit.js:355
+#: src/blocks/heading/edit.js:359
 #: src/blocks/pr-content/edit.js:236
 #: src/components/scroll-hint/index.js:126
 msgid "Before text"
@@ -2451,7 +2448,7 @@ msgstr ""
 
 #: src/blocks/_pro/tab-item/edit.js:302
 #: src/blocks/button/edit.js:630
-#: src/blocks/heading/edit.js:364
+#: src/blocks/heading/edit.js:368
 #: src/blocks/pr-content/edit.js:248
 #: src/components/scroll-hint/index.js:151
 msgid "After text"
@@ -2539,7 +2536,7 @@ msgstr ""
 #: src/blocks/_pro/tab/edit.js:1317
 #: src/extensions/core/group/style.js:158
 #: src/extensions/core/table/style.js:39
-#: dist/vk-blocks-pro/inc/vk-blocks/view/class-vk-blocks-scrollhintrenderer.php:72
+#: dist/vk-blocks-pro/inc/vk-blocks/view/class-vk-blocks-scrollhintrenderer.php:87
 #: inc/vk-blocks/view/class-vk-blocks-scrollhintrenderer.php:87
 msgid "You can scroll"
 msgstr ""
@@ -2702,7 +2699,7 @@ msgid "Icon Text"
 msgstr ""
 
 #: src/blocks/alert/edit.js:54
-#: src/blocks/heading/edit.js:275
+#: src/blocks/heading/edit.js:279
 msgid "Style Settings"
 msgstr ""
 
@@ -2838,7 +2835,7 @@ msgid "Balloon setting"
 msgstr ""
 
 #: src/blocks/balloon/edit.js:414
-#: src/blocks/heading/edit.js:384
+#: src/blocks/heading/edit.js:388
 msgid "Position"
 msgstr ""
 
@@ -3137,40 +3134,40 @@ msgstr ""
 msgid "Input content"
 msgstr ""
 
-#: src/blocks/heading/edit.js:234
+#: src/blocks/heading/edit.js:238
 msgid "Input title…"
 msgstr ""
 
-#: src/blocks/heading/edit.js:249
+#: src/blocks/heading/edit.js:253
 msgid "Input sub text…"
 msgstr ""
 
-#: src/blocks/heading/edit.js:277
+#: src/blocks/heading/edit.js:281
 msgid "Heading style"
 msgstr ""
 
-#: src/blocks/heading/edit.js:296
+#: src/blocks/heading/edit.js:300
 msgid "Margin between Heading and sub text (rem)"
 msgstr ""
 
-#: src/blocks/heading/edit.js:313
+#: src/blocks/heading/edit.js:317
 msgid "Margin bottom size of after this block (rem)"
 msgstr ""
 
-#: src/blocks/heading/edit.js:330
+#: src/blocks/heading/edit.js:334
 msgid "Heading Settings"
 msgstr ""
 
-#: src/blocks/heading/edit.js:373
+#: src/blocks/heading/edit.js:377
 #: src/blocks/icon/edit.js:359
 msgid "Icon Color"
 msgstr ""
 
-#: src/blocks/heading/edit.js:382
+#: src/blocks/heading/edit.js:386
 msgid "Sub Text Settings"
 msgstr ""
 
-#: src/blocks/heading/edit.js:400
+#: src/blocks/heading/edit.js:404
 msgid "Text size (rem)"
 msgstr ""
 
@@ -3376,45 +3373,51 @@ msgstr ""
 msgid "repeat"
 msgstr ""
 
-#: src/blocks/slider/edit-multiItem.js:106
-msgid "If the active slide is in the center, the number of placed slide items must be greater than or equal to the number of items you want to display in one view + 2."
+#: src/blocks/slider/edit-multiItem.js:144
+msgid "Enter the number of slide items to display on each device."
 msgstr ""
 
-#: src/blocks/slider/edit-multiItem.js:115
-msgid "If you want to loop slides, the number of placed slide items must be greater than or equal to the number of items you want to display per view + 1."
+#: src/blocks/slider/edit-multiItem.js:150
+msgid "In one-by-one mode, you can set decimals (e.g. 1.5). If you specify a decimal, please enable \"Centering the active slide\"."
 msgstr ""
 
-#: src/blocks/slider/edit-multiItem.js:186
-msgid "Enter divisors for the number of placed slide items for each display size."
+#: src/blocks/slider/edit-multiItem.js:156
+msgid "In slides-per-view mode, enter a divisor of the total number of placed slides. If the number is not a divisor, the sliding behavior will be unnatural."
 msgstr ""
 
-#: src/blocks/slider/edit-multiItem.js:292
+#: src/blocks/slider/edit-multiItem.js:162
+msgid "When \"Centering the active slide\" is enabled and the number of items to display is even, it is automatically treated as the next odd number internally. This may increase the minimum number of slides required for loop mode."
+msgstr ""
+
+#: src/blocks/slider/edit-multiItem.js:263
 msgid "Number of items to change in a transition"
 msgstr ""
 
-#: src/blocks/slider/edit-multiItem.js:307
+#: src/blocks/slider/edit-multiItem.js:278
 msgid "Same as the number of items to display"
 msgstr ""
 
-#: src/blocks/slider/edit-multiItem.js:332
+#: src/blocks/slider/edit-multiItem.js:313
 msgid "If you specify the center, you can display items that are cut off on the left and right."
 msgstr ""
 
-#: src/blocks/slider/edit-multiItem.js:344
+#: src/blocks/slider/edit-multiItem.js:325
 #: src/blocks/slider/edit.js:694
 msgid "Background Image Zoom Animation"
 msgstr ""
 
-#: src/blocks/slider/edit-multiItem.js:358
-msgid "%s is enabled, so multi-item settings cannot be configured."
-msgstr ""
-
-#: src/blocks/slider/edit-multiItem.js:53
+#: src/blocks/slider/edit-multiItem.js:33
 msgid "Enter integer divisors for the number of placed slide items for each display size."
 msgstr ""
 
-#: src/blocks/slider/edit-multiItem.js:93
-msgid "If you want to loop slides, the number of placed slide items must be greater than or equal to twice the number of items you want to display per view."
+#. %s: name of the feature that is enabled (e.g. "Fade Effect" or "Background Image Zoom Animation")
+#: src/blocks/slider/edit-multiItem.js:341
+msgid "%s is enabled, so multi-item settings cannot be configured."
+msgstr ""
+
+#. %d: minimum number of slides required for loop mode
+#: src/blocks/slider/edit-multiItem.js:76
+msgid "Loop mode requires at least %d slides with the current slider settings. Please add more slides or disable loop."
 msgstr ""
 
 #: src/blocks/slider/edit.js:415
@@ -3565,39 +3568,39 @@ msgstr ""
 msgid "Profile text"
 msgstr ""
 
-#: src/blocks/visual-embed/edit.js:114
+#: src/blocks/visual-embed/edit.js:120
 msgid "Only allowed URLs can be embedded."
 msgstr ""
 
-#: src/blocks/visual-embed/edit.js:174
+#: src/blocks/visual-embed/edit.js:180
 msgid "Embed Code Settings"
 msgstr ""
 
-#: src/blocks/visual-embed/edit.js:176
+#: src/blocks/visual-embed/edit.js:182
 msgid "Embed Code"
 msgstr ""
 
-#: src/blocks/visual-embed/edit.js:197
+#: src/blocks/visual-embed/edit.js:203
 msgid "Please paste the iframe embed code directly. Only iframe tags with allowed URLs (Google Maps, Google Calendar, Google Forms, YouTube、OpenStreetMap, Vimeo) are permitted."
 msgstr ""
 
-#: src/blocks/visual-embed/edit.js:208
+#: src/blocks/visual-embed/edit.js:214
 msgid "Please enter an iframe embed code."
 msgstr ""
 
-#: src/blocks/visual-embed/edit.js:220
+#: src/blocks/visual-embed/edit.js:226
 msgid "The provided URL is not allowed. Please use an approved embed source."
 msgstr ""
 
-#: src/blocks/visual-embed/edit.js:227
+#: src/blocks/visual-embed/edit.js:233
 msgid "Iframe Width"
 msgstr ""
 
-#: src/blocks/visual-embed/edit.js:250
+#: src/blocks/visual-embed/edit.js:256
 msgid "Iframe Height"
 msgstr ""
 
-#: src/blocks/visual-embed/edit.js:274
+#: src/blocks/visual-embed/edit.js:280
 msgid "Note: These settings are only applicable to iframe tags. Other embed codes will not respond to these adjustments."
 msgstr ""
 
@@ -4472,6 +4475,18 @@ msgctxt "button label"
 msgid "Convert to link"
 msgstr ""
 
+#: src/extensions/core/site-logo/style.js
+msgid "Site Logo Tag Setting"
+msgstr ""
+
+#: src/extensions/core/site-logo/style.js
+msgid "Use <h1> tag on the front page"
+msgstr ""
+
+#: src/extensions/core/site-logo/style.js
+msgid "When enabled, this site logo is output as <h1> only on the front page. On other pages it is output as <div>."
+msgstr ""
+
 #. Plugin Name of the plugin
 #: vk-blocks.php
 msgid "VK Blocks Pro"
@@ -4996,7 +5011,7 @@ msgstr ""
 msgid "Stitch"
 msgstr ""
 
-#: dist/vk-blocks-pro/inc/vk-blocks/font-awesome/class-vk-blocks-font-awesome-api.php:73
+#: dist/vk-blocks-pro/inc/vk-blocks/font-awesome/class-vk-blocks-font-awesome-api.php:81
 #: inc/vk-blocks/font-awesome/class-vk-blocks-font-awesome-api.php:81
 msgid "Setting saved."
 msgstr ""
@@ -5018,38 +5033,43 @@ msgid "VK Blocks "
 msgstr ""
 
 #: dist/vk-blocks-pro/vk-blocks.php:98
-#: vk-blocks.php:98
+#: vk-blocks.php:100
 msgid "Disabled Blocks module on VK All in One Expansion Unit. Because VK-Blocks Plugin running."
 msgstr ""
 
 #: dist/vk-blocks-pro/vk-blocks.php:324
-#: vk-blocks.php:324
+#: vk-blocks.php:326
 msgid "License Key has no registered."
 msgstr ""
 
 #: dist/vk-blocks-pro/vk-blocks.php:329
-#: vk-blocks.php:329
+#: vk-blocks.php:331
 msgid "The VK Blocks Pro license is invalid."
 msgstr ""
 
 #: dist/vk-blocks-pro/vk-blocks.php:353
-#: vk-blocks.php:353
+#: vk-blocks.php:355
 msgid "Please enter a valid license key for any of the following products on the settings screen."
 msgstr ""
 
 #: dist/vk-blocks-pro/vk-blocks.php:363
-#: vk-blocks.php:363
+#: vk-blocks.php:365
 msgid "Enter the license key"
 msgstr ""
 
 #: dist/vk-blocks-pro/vk-blocks.php:366
-#: vk-blocks.php:366
+#: vk-blocks.php:368
 msgid "If this display does not disappear even after entering a valid license key, re-acquire the update."
 msgstr ""
 
 #: dist/vk-blocks-pro/vk-blocks.php:367
-#: vk-blocks.php:367
+#: vk-blocks.php:369
 msgid "Re-acquisition of updates"
+msgstr ""
+
+#: inc/vk-blocks-pro/App/RestAPI/BlockMeta/class-vk-blocks-pro-entrypoint.php:80
+#: inc/vk-blocks-pro/App/RestAPI/BlockMeta/class-vk-blocks-pro-entrypoint.php:94
+msgid "Invalid URL."
 msgstr ""
 
 #: dist/vk-blocks-pro/inc/vk-blocks/build/blocks/alert/block.json

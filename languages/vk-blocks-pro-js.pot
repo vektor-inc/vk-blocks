@@ -4559,3 +4559,15 @@ msgstr ""
 msgctxt "button label"
 msgid "Convert to link"
 msgstr ""
+
+#: src/extensions/core/site-logo/style.js
+msgid "Site Logo Tag Setting"
+msgstr ""
+
+#: src/extensions/core/site-logo/style.js
+msgid "Use <h1> tag on the front page"
+msgstr ""
+
+#: src/extensions/core/site-logo/style.js
+msgid "When enabled, this site logo is output as <h1> only on the front page. On other pages it is output as <div>."
+msgstr ""

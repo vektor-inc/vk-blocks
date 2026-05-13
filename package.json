@@ -134,11 +134,5 @@
 	},
 	"dependencies": {
 		"regenerator-runtime": "^0.14.1"
-	},
-	"lint-staged": {
-		"src/**/*.js": [
-			"wp-scripts format",
-			"wp-scripts lint-js --fix"
-		]
 	}
 }
