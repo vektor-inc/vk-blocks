@@ -42,12 +42,11 @@ Pro 版でタグ付け
   → release.yml が発火（テスト・GitHub Release・VWS デプロイ）
   → 成功したら deploy-free.yml が連動実行
   → Free 版リポジトリ（vk-blocks）の master にコードをコミット
+  → 引き続きスキル側で Free 版リポジトリにも同じバージョンのタグを付与・push
+  → Free 版の release.yml が発火 → wordpress.org SVN デプロイ
 ```
 
-**ここまでが Pro 版リポジトリの責務。**
-
-Free 版の wordpress.org へのデプロイは Free 版リポジトリ側で別途実施する：
-- Free 版リポジトリで手動タグ付け → Free 版の release.yml が発火 → wordpress.org デプロイ
+Pro 版のリリーススキルは Free 版の wordpress.org 反映確認まで一気通貫で実行する（フェーズ2で完結）。Free 版リポジトリで手動タグ付けする必要はない。
 
 ### VK Blocks Free 版固有の注意事項
 

@@ -13,6 +13,8 @@ import {
 } from '@wordpress/components';
 import { useEffect, useRef, useState } from '@wordpress/element';
 
+import { isAllowedSrc as isAllowedSrcByPatterns } from './utils/match-url-pattern';
+
 const allowedUrlPatterns =
 	typeof vkBlocksVisualEmbed !== 'undefined' && // eslint-disable-line no-undef
 	vkBlocksVisualEmbed.allowedUrlPatterns // eslint-disable-line no-undef
@@ -82,20 +84,9 @@ export default function EmbedCodeEdit({ attributes, setAttributes }) {
 		className: 'vk-visual-embed',
 	});
 
-	// iframeのsrc属性を検証する関数
-	const isAllowedSrc = (src) => {
-		if (!src) {
-			return false;
-		}
-		return filteredAllowedUrlPatterns.some((pattern) => {
-			// ワイルドカードパターンを正規表現に変換
-			const regexPattern = pattern
-				.replace(/\./g, '\\.')
-				.replace(/\*/g, '.*');
-			const regex = new RegExp(`^${regexPattern}$`);
-			return regex.test(src);
-		});
-	};
+	// iframeのsrc属性を検証する関数（許可パターン判定は utils に切り出し済み）
+	const isAllowedSrc = (src) =>
+		isAllowedSrcByPatterns(src, filteredAllowedUrlPatterns);
 
 	// iframeタグ以外を削除する関数
 	const sanitizeIframeCode = (code) => {

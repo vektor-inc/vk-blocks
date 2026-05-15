@@ -4,7 +4,7 @@ Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 6.5
 Tested up to: 6.9
-Stable tag: 1.119.0
+Stable tag: 1.119.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -108,9 +108,12 @@ e.g.
 
 == Changelog ==
 
+= 1.119.1 =
+[ Bug Fix ][ Outer ( Pro ) ] Fixed an issue where in "Fit to the Content area" mode, blocks with a saved inner side space value of 0 caused the theme's default left/right padding to disappear. Note: If you have applied custom CSS assuming padding: 0 in this mode, the appearance will change after the update. To intentionally remove the padding, please deselect "Fit to the Content area".
+
 = 1.119.0 =
 [ New Feature ][ Site Logo Block ] Added an option to output the site logo block as an h1 tag only on the front page. Useful for keeping the site logo as the page-level heading on the home page without affecting other pages.
-
+[ Security Fix ][ Visual Embed ] Reviewed the allowed-URL check for embed sources so that disallowed domains can no longer slip through when their URL contains a permitted domain name in the path, query string, or fragment.
 [ Security Fix ][ Blog Card ( Pro ) ] Strengthened URL handling for blog card embeds. Previously, a contributor-level user could trigger requests to internal network resources via the blog card URL fetch feature.
 [ Other ] Excluded build/, vendor/, and node_modules/ from ESLint so that local lint does not scan generated artifacts and bundled dependencies. No changes to plugin functionality.
 [ Other ] Migrated lint-staged configuration to a JS file so that the pre-commit hook lints only staged files instead of scanning the whole project. No changes to plugin functionality.

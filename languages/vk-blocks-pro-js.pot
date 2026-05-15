@@ -562,7 +562,7 @@ msgstr ""
 #: src/blocks/_pro/outer/edit.js:1427
 #: src/blocks/_pro/post-list-slider/multi-item-setting.js:174
 #: src/blocks/button/edit.js:424
-#: src/blocks/slider/edit-multiItem.js:169
+#: src/blocks/slider/edit-multiItem.js:167
 #: src/components/advanced-viewport-control/index.js:25
 msgid "PC"
 msgstr ""
@@ -572,7 +572,7 @@ msgstr ""
 #: src/blocks/_pro/outer/edit.js:1412
 #: src/blocks/_pro/post-list-slider/multi-item-setting.js:204
 #: src/blocks/button/edit.js:389
-#: src/blocks/slider/edit-multiItem.js:199
+#: src/blocks/slider/edit-multiItem.js:197
 #: src/components/advanced-viewport-control/index.js:32
 msgid "Tablet"
 msgstr ""
@@ -582,7 +582,7 @@ msgstr ""
 #: src/blocks/_pro/outer/edit.js:1397
 #: src/blocks/_pro/post-list-slider/multi-item-setting.js:236
 #: src/blocks/button/edit.js:356
-#: src/blocks/slider/edit-multiItem.js:231
+#: src/blocks/slider/edit-multiItem.js:229
 #: src/components/advanced-viewport-control/index.js:41
 msgid "Mobile"
 msgstr ""
@@ -2029,11 +2029,18 @@ msgstr ""
 msgid "Border width"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1550
+#: src/blocks/_pro/outer/edit.js:1551
+msgid ""
+"Specifies the left/right inner padding of the container. When \"Fit to the "
+"Content area\" is selected, entering 0 keeps the theme's default padding. "
+"To remove the padding completely, deselect \"Fit to the Content area\"."
+msgstr ""
+
+#: src/blocks/_pro/outer/edit.js:1557
 msgid "Container Inner Side Space Setting"
 msgstr ""
 
-#: src/blocks/_pro/outer/edit.js:1587
+#: src/blocks/_pro/outer/edit.js:1595
 msgid "Min Height Setting"
 msgstr ""
 
@@ -2202,7 +2209,7 @@ msgid "Slider Settings"
 msgstr ""
 
 #: src/blocks/_pro/post-list-slider/edit.js:151
-#: src/blocks/slider/edit-multiItem.js:330
+#: src/blocks/slider/edit-multiItem.js:331
 #: src/blocks/slider/edit.js:477
 msgid "Effect"
 msgstr ""
@@ -2213,7 +2220,7 @@ msgid "Slide"
 msgstr ""
 
 #: src/blocks/_pro/post-list-slider/edit.js:165
-#: src/blocks/slider/edit-multiItem.js:328
+#: src/blocks/slider/edit-multiItem.js:329
 #: src/blocks/slider/edit.js:491
 msgid "Fade"
 msgstr ""
@@ -2307,12 +2314,12 @@ msgid ""
 msgstr ""
 
 #: src/blocks/_pro/post-list-slider/multi-item-setting.js:151
-#: src/blocks/slider/edit-multiItem.js:352
+#: src/blocks/slider/edit-multiItem.js:353
 msgid "Multi-item Display Setting"
 msgstr ""
 
 #: src/blocks/_pro/post-list-slider/multi-item-setting.js:155
-#: src/blocks/slider/edit-multiItem.js:137
+#: src/blocks/slider/edit-multiItem.js:135
 msgid "Number of Items to display per view"
 msgstr ""
 
@@ -2335,7 +2342,7 @@ msgid ""
 msgstr ""
 
 #: src/blocks/_pro/post-list-slider/multi-item-setting.js:279
-#: src/blocks/slider/edit-multiItem.js:274
+#: src/blocks/slider/edit-multiItem.js:272
 msgid "One by One"
 msgstr ""
 
@@ -2344,7 +2351,7 @@ msgid "Same as the number of posts to display"
 msgstr ""
 
 #: src/blocks/_pro/post-list-slider/multi-item-setting.js:299
-#: src/blocks/slider/edit-multiItem.js:304
+#: src/blocks/slider/edit-multiItem.js:305
 msgid "Centering the active slide"
 msgstr ""
 
@@ -3390,24 +3397,24 @@ msgstr ""
 msgid "repeat"
 msgstr ""
 
-#: src/blocks/slider/edit-multiItem.js:144
+#: src/blocks/slider/edit-multiItem.js:142
 msgid "Enter the number of slide items to display on each device."
 msgstr ""
 
-#: src/blocks/slider/edit-multiItem.js:150
+#: src/blocks/slider/edit-multiItem.js:148
 msgid ""
 "In one-by-one mode, you can set decimals (e.g. 1.5). If you specify a "
 "decimal, please enable \"Centering the active slide\"."
 msgstr ""
 
-#: src/blocks/slider/edit-multiItem.js:156
+#: src/blocks/slider/edit-multiItem.js:154
 msgid ""
 "In slides-per-view mode, enter a divisor of the total number of placed "
 "slides. If the number is not a divisor, the sliding behavior will be "
 "unnatural."
 msgstr ""
 
-#: src/blocks/slider/edit-multiItem.js:162
+#: src/blocks/slider/edit-multiItem.js:160
 msgid ""
 "When \"Centering the active slide\" is enabled and the number of items to "
 "display is even, it is automatically treated as the next odd number "
@@ -3415,21 +3422,21 @@ msgid ""
 "loop mode."
 msgstr ""
 
-#: src/blocks/slider/edit-multiItem.js:263
+#: src/blocks/slider/edit-multiItem.js:261
 msgid "Number of items to change in a transition"
 msgstr ""
 
-#: src/blocks/slider/edit-multiItem.js:278
+#: src/blocks/slider/edit-multiItem.js:276
 msgid "Same as the number of items to display"
 msgstr ""
 
-#: src/blocks/slider/edit-multiItem.js:313
+#: src/blocks/slider/edit-multiItem.js:314
 msgid ""
 "If you specify the center, you can display items that are cut off on the "
 "left and right."
 msgstr ""
 
-#: src/blocks/slider/edit-multiItem.js:325
+#: src/blocks/slider/edit-multiItem.js:326
 #: src/blocks/slider/edit.js:694
 msgid "Background Image Zoom Animation"
 msgstr ""
@@ -3440,12 +3447,12 @@ msgid ""
 "display size."
 msgstr ""
 
-#: src/blocks/slider/edit-multiItem.js:341
+#: src/blocks/slider/edit-multiItem.js:342
 #. %s: name of the feature that is enabled (e.g. "Fade Effect" or "Background Image Zoom Animation")
 msgid "%s is enabled, so multi-item settings cannot be configured."
 msgstr ""
 
-#: src/blocks/slider/edit-multiItem.js:76
+#: src/blocks/slider/edit-multiItem.js:72
 #. %d: minimum number of slides required for loop mode
 msgid ""
 "Loop mode requires at least %d slides with the current slider settings. "
@@ -4366,6 +4373,20 @@ msgstr ""
 msgid "Modified (Newest to oldest)"
 msgstr ""
 
+#: src/extensions/core/site-logo/style.js:34
+msgid "Site Logo Tag Setting"
+msgstr ""
+
+#: src/extensions/core/site-logo/style.js:39
+msgid "Use <h1> tag on the front page"
+msgstr ""
+
+#: src/extensions/core/site-logo/style.js:47
+msgid ""
+"When enabled, this site logo is output as <h1> only on the front page. On "
+"other pages it is output as <div>."
+msgstr ""
+
 #: src/extensions/core/table/style.js:350
 msgid "Table Horizontal Scroll"
 msgstr ""
@@ -4558,16 +4579,4 @@ msgstr ""
 #: src/blocks/_pro/blog-card/edit/url-placeholder.js:127
 msgctxt "button label"
 msgid "Convert to link"
-msgstr ""
-
-#: src/extensions/core/site-logo/style.js
-msgid "Site Logo Tag Setting"
-msgstr ""
-
-#: src/extensions/core/site-logo/style.js
-msgid "Use <h1> tag on the front page"
-msgstr ""
-
-#: src/extensions/core/site-logo/style.js
-msgid "When enabled, this site logo is output as <h1> only on the front page. On other pages it is output as <div>."
 msgstr ""
