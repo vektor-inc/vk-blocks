@@ -4,7 +4,7 @@ Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 6.5
 Tested up to: 6.9
-Stable tag: 1.119.1
+Stable tag: 1.119.2
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -107,6 +107,9 @@ e.g.
 1. VK Blocks examples.
 
 == Changelog ==
+
+= 1.119.2 =
+[ Bug Fix ][ Breadcrumb (Pro) ] Fixed an issue where clicking a breadcrumb link in the block editor unexpectedly navigated away from the post edit screen. Links are now disabled in the editor, matching the behavior of the post list block.
 
 = 1.119.1 =
 [ Bug Fix ][ Outer ( Pro ) ] Fixed an issue where in "Fit to the Content area" mode, blocks with a saved inner side space value of 0 caused the theme's default left/right padding to disappear. Note: If you have applied custom CSS assuming padding: 0 in this mode, the appearance will change after the update. To intentionally remove the padding, please deselect "Fit to the Content area".
