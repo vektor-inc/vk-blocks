@@ -93,14 +93,13 @@ curl -s "https://wordpress.org/plugins/vk-blocks/" | grep -oE 'Version[[:space:]
 > wordpress.org のプラグインページへの反映には数十分かかる場合があります。
 > 反映状況: https://wordpress.org/plugins/vk-blocks/
 
-## 完了報告
+## フェーズ2 完了後の進行
 
-> リリース完了しました。
-> - Pro 版 GitHub Release: （URL を表示）
-> - VWS への配信完了
-> - テストサーバーへのデプロイ完了
-> - Free 版 GitHub Release: （URL を表示）
-> - wordpress.org への配信完了（プラグインページの Version 反映を確認）
+完了条件をすべて満たしたら、**確認なしで続けてフェーズ3**（`phase-3-update-website.md`）に進む。
+
+ここで「リリース完了しました」と完了報告して止めてはいけない。フェーズ3 の公式サイト更新情報ページ更新 + Discord 通知まで含めて「リリース完了」とみなす。完了報告はフェーズ3 の末尾で行う。
+
+フェーズ3 の前提条件（`~/.wp-release-config.sh`、更新情報記事ID `22065`）が満たされていない場合のみ、フェーズ2 終了時点で STOP してユーザーに報告する。
 
 ## 完了条件
 

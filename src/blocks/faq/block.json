@@ -11,10 +11,12 @@
 		"heading": {
 			"type": "string",
 			"source": "html",
-			"selector": "dt"
+			"selector": "dt",
+			"role": "content"
 		}
 	},
 	"supports": {
+		"contentRole": true,
 		"html": false,
 		"anchor": true
 	}

@@ -8,7 +8,7 @@
 			"type": "string",
 			"source": "html",
 			"selector": "h3,h4,h5,h6,p",
-			"__experimentalRole": "content"
+			"role": "content"
 		},
 		"headingTag": {
 			"type": "string",
@@ -45,6 +45,7 @@
 	"description": "This is a border box where you can place headings to attract attention.",
 	"textdomain": "vk-blocks",
 	"supports": {
+		"contentRole": true,
 		"html": false,
 		"className": true
 	}

@@ -9,31 +9,37 @@
 		"vk_staff_text_name": {
 			"type": "string",
 			"source": "html",
-			"selector": "h3"
+			"selector": "h3",
+			"role": "content"
 		},
 		"vk_staff_text_caption": {
 			"type": "string",
 			"source": "html",
-			"selector": "p.vk_staff_text_caption"
+			"selector": "p.vk_staff_text_caption",
+			"role": "content"
 		},
 		"vk_staff_text_role": {
 			"type": "string",
 			"source": "html",
-			"selector": "p.vk_staff_text_role"
+			"selector": "p.vk_staff_text_role",
+			"role": "content"
 		},
 		"vk_staff_text_profileTitle": {
 			"type": "string",
 			"source": "html",
-			"selector": "h4"
+			"selector": "h4",
+			"role": "content"
 		},
 		"vk_staff_text_profileText": {
 			"type": "string",
 			"source": "html",
-			"selector": "p.vk_staff_text_profileText"
+			"selector": "p.vk_staff_text_profileText",
+			"role": "content"
 		},
 		"vk_staff_photo_image": {
 			"type": "string",
-			"default": ""
+			"default": "",
+			"role": "content"
 		},
 		"vk_staff_photo_image_alt": {
 			"type": "string",

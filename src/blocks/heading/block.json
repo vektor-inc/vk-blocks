@@ -29,7 +29,8 @@
 			"type": "string",
 			"source": "html",
 			"selector": "span",
-			"default": ""
+			"default": "",
+			"role": "content"
 		},
 		"titleColor": {
 			"type": "string"
@@ -44,7 +45,8 @@
 		"subText": {
 			"source": "html",
 			"selector": "p",
-			"default": ""
+			"default": "",
+			"role": "content"
 		},
 		"subTextFlag": {
 			"type": "string",

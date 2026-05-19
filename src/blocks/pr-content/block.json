@@ -7,7 +7,8 @@
 	"attributes": {
 		"title": {
 			"source": "html",
-			"selector": ".vk_prContent_colTxt_title"
+			"selector": ".vk_prContent_colTxt_title",
+			"role": "content"
 		},
 		"titleColor": {
 			"type": "string",
@@ -15,7 +16,8 @@
 		},
 		"content": {
 			"source": "html",
-			"selector": ".vk_prContent_colTxt_text"
+			"selector": ".vk_prContent_colTxt_text",
+			"role": "content"
 		},
 		"contentColor": {
 			"type": "string",
@@ -48,7 +50,8 @@
 		},
 		"Image": {
 			"type": "string",
-			"default": "{}"
+			"default": "{}",
+			"role": "content"
 		},
 		"ImageBorderColor": {
 			"type": "string",

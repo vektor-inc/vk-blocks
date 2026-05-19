@@ -7,21 +7,25 @@
 		"content": {
 			"type": "string",
 			"source": "html",
-			"selector": "span"
+			"selector": "span",
+			"role": "content"
 		},
 		"subCaption": {
 			"type": "string"
 		},
 		"buttonUrl": {
-			"type": "string"
+			"type": "string",
+			"role": "content"
 		},
 		"buttonTarget": {
 			"type": "boolean",
-			"default": false
+			"default": false,
+			"role": "content"
 		},
 		"relAttribute": {
 			"type": "string",
-			"default": ""
+			"default": "",
+			"role": "content"
 		},
 		"linkToPost": {
 			"type": "boolean",

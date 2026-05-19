@@ -25,6 +25,7 @@
 		"blockId": { "type": "string" }
 	},
 	"supports": {
+		"contentRole": true,
 		"html": false,
 		"className": true,
 		"spacing": { "padding": true }

@@ -7,11 +7,13 @@
 	"attributes": {
 		"content": {
 			"source": "html",
-			"selector": "p"
+			"selector": "p",
+			"role": "content"
 		},
 		"balloonName": {
 			"source": "html",
-			"selector": "figcaption"
+			"selector": "figcaption",
+			"role": "content"
 		},
 		"balloonType": {
 			"type": "string",
@@ -49,7 +51,8 @@
 		},
 		"IconImage": {
 			"type": "string",
-			"default": null
+			"default": null,
+			"role": "content"
 		},
 		"balloonImageType": {
 			"type": "string",
@@ -62,6 +65,7 @@
 	},
 	"textdomain": "vk-blocks",
 	"supports": {
+		"contentRole": true,
 		"html": false,
 		"className": true
 	}

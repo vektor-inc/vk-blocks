@@ -21,7 +21,8 @@
 		"content": {
 			"type": "string",
 			"source": "html",
-			"selector": "p"
+			"selector": "p",
+			"role": "content"
 		},
 		"mobileIconPosition": {
 			"type": "string",
@@ -29,6 +30,7 @@
 		}
 	},
 	"supports": {
+		"contentRole": true,
 		"className": true
 	}
 }

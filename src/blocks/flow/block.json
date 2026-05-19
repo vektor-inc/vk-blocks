@@ -7,12 +7,14 @@
 		"heading": {
 			"type": "string",
 			"source": "html",
-			"selector": "dt"
+			"selector": "dt",
+			"role": "content"
 		},
 		"content": {
 			"type": "string",
 			"source": "html",
-			"selector": "dd"
+			"selector": "dd",
+			"role": "content"
 		},
 		"arrowFlag": {
 			"type": "string",
@@ -20,11 +22,13 @@
 		},
 		"insertImage": {
 			"type": "string",
-			"default": null
+			"default": null,
+			"role": "content"
 		},
 		"insertImageAlt": {
 			"type": "string",
-			"default": null
+			"default": null,
+			"role": "content"
 		}
 	},
 	"description": "Displays a sequential description in time series.",
