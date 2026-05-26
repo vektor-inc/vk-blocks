@@ -4,7 +4,7 @@ Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 6.5
 Tested up to: 6.9
-Stable tag: 1.120.0
+Stable tag: 1.121.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -108,9 +108,16 @@ e.g.
 
 == Changelog ==
 
+= 1.121.0 =
+[ Design Bug Fix ][ Balloon ] Fixed design issue where arrow and bubble decorations overflowed when balloon content was empty.
+[ New Feature ][ List Block ] Added "Circle" and "Cross" block styles.
+[ Bug fix ][ Link toolbar ] Fixed relative URLs (/foo) and in-page anchors (#anchor) not opening in a new tab from the link preview in the editor (fixed malformed link preview href values such as http:///foo).
+[ Design Bug Fix ][ List Block ] Fixed an issue where style variation rules were also applied to ul / ol elements outside of the List block.
+[ Spec Change ][ Table of Contents ] Improved the open / close animation to feel smoother. Also respects the user's "Reduce motion" OS setting (WCAG 2.3.3) to skip the animation when enabled.
+
 = 1.120.0 =
-[ Spec Change ][ 各種ブロック ] WordPress 7.0 でパターンから挿入したブロックが contentOnly モードで編集できなくなる問題に対応。エディター本文欄やツールバーで操作するコンテンツ属性（テキスト・URL・画像・ボタンリンク等）に `role: "content"` を、InnerBlocks 主体の親ブロックに `supports.contentRole: true` を付与しました。色・サイズ・レイアウト等のデザイン設定はパターン制作者の意図を尊重してロックを維持します。
-[ Other ] リリーススキルのフェーズ2 完了時にフェーズ3 へ自動遷移する旨を明記。プラグイン機能への変更はありません。
+[ Spec Change ][ Various Blocks ] Made content attributes (text, URL, image, button link, etc.) editable when blocks are inserted from patterns in WordPress 7.0. Design settings remain locked to respect the pattern creator's intent.
+[ Other ] Documented the release skill's auto-transition from Phase 2 to Phase 3. No changes to plugin functionality.
 
 = 1.119.2 =
 [ Bug Fix ][ Breadcrumb (Pro) ] Fixed an issue where clicking a breadcrumb link in the block editor unexpectedly navigated away from the post edit screen. Links are now disabled in the editor, matching the behavior of the post list block.
@@ -140,7 +147,7 @@ e.g.
 [ Bug fix ][ Outer ( Pro ) ] Fixed an issue where "Fit to the Content area" did not constrain content width on classic themes without contentSize (e.g. Lightning Pro G2).
 [ Bug fix ][ Highlighter ] Fixed an issue where the highlighter color was removed when a post was saved by a user without the `unfiltered_html` capability (e.g. Author role, or any user on multisite).
 [ Other ][ Blog Card ( Pro ) / Visual Embed ] Compatible for WordPress 7.0 Real-Time Collaboration.
-[ Other ][ 全ブロック ] WordPress 7.0 のパターン挿入時に各ブロックがロックされて編集できなくなる問題に対応。テキスト・URL・画像等のコンテンツに加え、投稿リスト系の投稿タイプ・カテゴリー・件数や、動的テキストの表示要素・カスタムフィールド名など、パターン挿入後に必ず差し替える必要のある設定を編集可能にしました。色・サイズ・レイアウト等のデザイン設定はパターン制作者の意図を尊重してロックを維持しています。
+[ Other ][ All Blocks ] Made content settings (text, URL, image, post type, category, count, custom field name, etc.) editable when blocks are inserted from patterns in WordPress 7.0. Design settings remain locked to respect the pattern creator's intent.
 
 = 1.118.4 =
 [ Bug fix ][ Grid Column / Grid Column Card ( Pro ) ] Fixed an issue where the block editor crashed with "This block has encountered an error" when certain third-party plugins were active.

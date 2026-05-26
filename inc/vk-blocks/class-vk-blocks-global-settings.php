@@ -374,6 +374,14 @@ class VK_Blocks_Global_Settings {
 					'label' => __( 'Frown', 'vk-blocks' ),
 				),
 				array(
+					'name'  => 'vk-circle-mark',
+					'label' => __( 'Circle', 'vk-blocks' ),
+				),
+				array(
+					'name'  => 'vk-times-mark',
+					'label' => __( 'Cross', 'vk-blocks' ),
+				),
+				array(
 					'name'  => 'vk-numbered-circle-mark',
 					'label' => __( 'Numbered Circle', 'vk-blocks' ),
 				),

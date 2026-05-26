@@ -12,6 +12,8 @@ import { URLInput } from '@wordpress/block-editor';
 import { __, sprintf } from '@wordpress/i18n';
 import { link, linkOff, keyboardReturn, globe, copy } from '@wordpress/icons';
 
+import { formatLinkUrl } from './format-link-url';
+
 // コアの LinkControl と同じ __preview 系クラス・構造に合わせる（WP仕様に準拠）
 const LinkPreview = ({
 	linkUrl,
@@ -23,13 +25,9 @@ const LinkPreview = ({
 	relAttribute,
 	linkDescription,
 }) => {
-	const displayURL =
-		linkUrl.startsWith('http://') ||
-		linkUrl.startsWith('https://') ||
-		linkUrl.startsWith('tel:') ||
-		linkUrl.startsWith('mailto:')
-			? linkUrl
-			: 'http://' + linkUrl;
+	// LinkToolbar 側の formatUrl と同じ判定で URL を整形する。
+	// （`/foo` や `#section` などの相対パス・アンカーをそのまま素通しする）
+	const displayURL = formatLinkUrl(linkUrl);
 	const isUrlTitle = linkTitle === linkUrl;
 
 	return (
@@ -115,7 +113,7 @@ const LinkToolbar = (props) => {
 
 	useEffect(() => {
 		if (linkUrl) {
-			const formattedUrl = formatUrl(linkUrl);
+			const formattedUrl = formatLinkUrl(linkUrl);
 			const isExternalLink =
 				!formattedUrl.startsWith(window.location.origin) &&
 				!formattedUrl.startsWith('#'); // 外部リンクかどうか判定
@@ -209,7 +207,8 @@ const LinkToolbar = (props) => {
 		!!(linkUrl && typeof linkUrl === 'string' && linkUrl.trim() !== '');
 
 	const handleCopy = function (url) {
-		const formattedUrl = url.startsWith('#') ? url : formatUrl(url);
+		// `#` や `/` などの素通し条件は formatLinkUrl 内で一元管理する
+		const formattedUrl = formatLinkUrl(url);
 		if (typeof window !== 'undefined' && window.navigator.clipboard) {
 			window.navigator.clipboard
 				.writeText(formattedUrl)
@@ -238,27 +237,9 @@ const LinkToolbar = (props) => {
 		}
 	};
 
-	// URLのフォーマット関数を更新
-	const formatUrl = (url) => {
-		// 絶対パス・相対パス・アンカーリンクであればそのまま返す
-		if (
-			url.startsWith('http://') ||
-			url.startsWith('https://') ||
-			url.startsWith('/') ||
-			url.startsWith('#') ||
-			url.startsWith('tel:') ||
-			url.startsWith('mailto:') ||
-			url === ''
-		) {
-			return url;
-		}
-		// その他のリンクは http:// を付加する
-		return 'http://' + url;
-	};
-
 	const handleSubmit = () => {
 		if (linkUrl) {
-			setLinkUrl(formatUrl(linkUrl));
+			setLinkUrl(formatLinkUrl(linkUrl));
 		}
 	};
 
@@ -335,8 +316,10 @@ const LinkToolbar = (props) => {
 							</div>
 						)}
 						{!isLinkToPostMode && linkUrl && (
+							// LinkPreview には生の linkUrl を渡し、表示用 URL の整形は LinkPreview 内部の formatLinkUrl に一任する
+							// （二重呼び出しを避け、プレゼンテーション層に責務を統一する）
 							<LinkPreview
-								linkUrl={formatUrl(linkUrl)}
+								linkUrl={linkUrl}
 								linkTitle={linkTitle}
 								icon={icon}
 								linkTarget={linkTarget}

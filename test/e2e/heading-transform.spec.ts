@@ -51,8 +51,9 @@ test.describe( 'Block', () => {
         await page.getByRole('menuitem', { name: 'Heading' }).click();
 
 		// 変換内容
+		// wp-elements-N の N は Style Engine が発行する連番で、テスト前の状態に依存して変動するため正規表現で吸収する
 		await expect( editor.canvas.locator( '.wp-block-heading' ) ).toHaveClass(
-			'block-editor-rich-text__editable block-editor-block-list__block wp-block is-multi-selected wp-elements-0 has-accent-1-color has-text-color wp-block-heading rich-text'
+			/^block-editor-rich-text__editable block-editor-block-list__block wp-block is-multi-selected wp-elements-\d+ has-accent-1-color has-text-color wp-block-heading rich-text$/
 		);
 		await expect( editor.canvas.locator( '.wp-block-heading' ) ).toHaveCSS(
 			'margin-bottom',
@@ -62,8 +63,9 @@ test.describe( 'Block', () => {
 			'font-size',
 			'26.1152px'
 		);
+		// wp-elements-N の N は Style Engine が発行する連番で、テスト前の状態に依存して変動するため正規表現で吸収する
 		await expect( editor.canvas.locator( '.wp-block-heading' ) ).toHaveClass(
-			'block-editor-rich-text__editable block-editor-block-list__block wp-block is-multi-selected wp-elements-0 has-accent-1-color has-text-color wp-block-heading rich-text'
+			/^block-editor-rich-text__editable block-editor-block-list__block wp-block is-multi-selected wp-elements-\d+ has-accent-1-color has-text-color wp-block-heading rich-text$/
 		);
 		await expect( editor.canvas.locator( '.wp-block-heading' ) ).toHaveCSS(
 			'margin-bottom',

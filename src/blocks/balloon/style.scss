@@ -89,6 +89,8 @@
 	background: #f5f5f5;
 	// padding: 1rem 1.2rem;
 	padding: calc( 1rem * 1 ) calc( 1rem * 1.2);
+	// コンテンツが空の時に吹き出しの矢印やもくもくの丸がはみ出さないよう最低限の高さを確保
+	min-height: 3em;
 }
 
 .vk_balloon_content_before,
