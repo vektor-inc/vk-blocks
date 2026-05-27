@@ -1390,6 +1390,11 @@ msgstr "カバーリンク"
 msgid "Create"
 msgstr "作成"
 
+#: dist/vk-blocks-pro/inc/vk-blocks/class-vk-blocks-global-settings.php:382
+#: inc/vk-blocks/class-vk-blocks-global-settings.php:382
+msgid "Cross"
+msgstr "✕"
+
 #: src/blocks/_pro/dynamic-text/edit.js:411
 msgid "Current login user name"
 msgstr "現在のログインユーザー名"
@@ -2998,6 +3003,13 @@ msgstr "プラグイン %s をインストール中"
 #: src/admin/import-export/import-form.js:154
 msgid "Invalid JSON file"
 msgstr "無効なJSONファイルです"
+
+#: dist/vk-blocks-pro/inc/vk-blocks-pro/App/RestAPI/BlockMeta/class-vk-blocks-pro-entrypoint.php:80
+#: dist/vk-blocks-pro/inc/vk-blocks-pro/App/RestAPI/BlockMeta/class-vk-blocks-pro-entrypoint.php:94
+#: inc/vk-blocks-pro/App/RestAPI/BlockMeta/class-vk-blocks-pro-entrypoint.php:80
+#: inc/vk-blocks-pro/App/RestAPI/BlockMeta/class-vk-blocks-pro-entrypoint.php:94
+msgid "Invalid URL."
+msgstr "無効な URL です。"
 
 #: dist/vk-blocks-pro/inc/vk-blocks/build/blocks/faq2/block.json
 #: inc/vk-blocks/build/blocks/faq2/block.json src/blocks/faq2/block.json

@@ -2,9 +2,9 @@
 Contributors: vektor-inc,kurudrive,naoki0h,nc30,una9,kaorock72,rickaddison7634,mimitips,mthaichi,shimotomoki,sysbird,chiakikouno,doshimaf,mtdkei
 Donate link:
 Tags: Gutenberg,FAQ,alert
-Requires at least: 6.5
-Tested up to: 6.9
-Stable tag: 1.121.0
+Requires at least: 6.6
+Tested up to: 7.0
+Stable tag: 1.121.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -107,6 +107,10 @@ e.g.
 1. VK Blocks examples.
 
 == Changelog ==
+
+= 1.121.1 =
+[ Bug Fix ][ List Block ] Added missing Japanese translation for the "Cross" mark style label.
+[ Bug Fix ][ Blog Card (Pro) ] Added missing Japanese translation for the "Invalid URL." error message returned by the REST API.
 
 = 1.121.0 =
 [ Design Bug Fix ][ Balloon ] Fixed design issue where arrow and bubble decorations overflowed when balloon content was empty.
