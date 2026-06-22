@@ -304,7 +304,7 @@ export const MultiItemSetting = (props) => {
 					<ToggleControl
 						label={__('Centering the active slide', 'vk-blocks')}
 						className={'mb-1'}
-						checked={centeredSlides} //eslint-disable-line camelcase
+						checked={centeredSlides}
 						onChange={(checked) =>
 							setAttributes({ centeredSlides: checked })
 						}

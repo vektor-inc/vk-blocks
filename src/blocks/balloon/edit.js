@@ -24,7 +24,6 @@ import { AdvancedColorPalette } from '@vkblocks/components/advanced-color-palett
 import { sanitizeSlug } from '@vkblocks/utils/sanitizeSlug';
 /*globals vk_blocks_params */
 
-// eslint-disable-next-line camelcase,no-undef
 const defaultAvatar =
 	typeof img_path !== 'undefined' && !!img_path.full_path // eslint-disable-line no-undef
 		? img_path.full_path // eslint-disable-line no-undef

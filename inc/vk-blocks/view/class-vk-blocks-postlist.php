@@ -124,6 +124,108 @@ class Vk_Blocks_PostList {
 	}
 
 	/**
+	 * Format Exclude Terms
+	 *
+	 * 除外するタームを tax_query の NOT IN 句に変換する。
+	 * 同一タクソノミーのタームはまとめて 1 つの NOT IN 句にし、各句は AND で連結する。
+	 * Convert terms to be excluded into NOT IN clauses of tax_query.
+	 * Terms belonging to the same taxonomy are grouped into a single NOT IN clause, and each clause is joined with AND.
+	 *
+	 * @param array        $exclusion_terms : term ids to exclude. 除外するタームidの配列.
+	 * @param array|string $post_type Post type(s).
+	 *
+	 * @return array $return : NOT IN clauses for tax_query.
+	 */
+	private static function format_exclude_terms( $exclusion_terms, $post_type ) {
+		// タクソノミーごとに除外タームをまとめる / Group exclusion terms by taxonomy.
+		$grouped_terms = array();
+
+		// 投稿タイプのタクソノミー一覧はループ内で不変なので一度だけ取得する。
+		// The post type's taxonomies are invariant within the loop, so fetch them once.
+		$post_type_taxonomies = get_object_taxonomies( $post_type );
+
+		foreach ( $exclusion_terms as $term_id ) {
+			$term = get_term( $term_id );
+			if ( ! $term || is_wp_error( $term ) ) {
+				continue; // 不正なタームや存在しないタームはスキップ / Skip invalid or non-existent terms.
+			}
+
+			// 対象投稿タイプに属するタクソノミーのタームのみ対象 / Only terms whose taxonomy belongs to the target post type.
+			if ( in_array( $term->taxonomy, $post_type_taxonomies, true ) ) {
+				$grouped_terms[ $term->taxonomy ][] = $term_id;
+			}
+		}
+
+		// タクソノミーごとに NOT IN 句を生成 / Build a NOT IN clause per taxonomy.
+		$return = array();
+		foreach ( $grouped_terms as $taxonomy => $term_ids ) {
+			$return[] = array(
+				'taxonomy' => $taxonomy,
+				'field'    => 'term_id',
+				'terms'    => $term_ids,
+				'operator' => 'NOT IN',
+			);
+		}
+		return $return;
+	}
+
+	/**
+	 * Build Tax Query
+	 *
+	 * 絞り込み（include）と除外（exclude）の tax_query を組み立てて返す。
+	 * 両方指定された場合は AND で連結する。
+	 * Build the tax_query from the include and exclude conditions.
+	 * When both are specified, they are joined with AND.
+	 *
+	 * @param string       $tax_query_relation : AND or OR ( relation for include terms ).
+	 * @param array        $is_checked_terms : term ids to include. 絞り込むタームidの配列.
+	 * @param array        $exclusion_terms : term ids to exclude. 除外するタームidの配列.
+	 * @param array|string $post_type Post type(s).
+	 *
+	 * @return array $tax_query.
+	 */
+	private static function build_tax_query( $tax_query_relation, $is_checked_terms, $exclusion_terms, $post_type ) {
+		// 絞り込み句を生成（relation のみで実句が無い場合は空扱い） / Build include clauses ( treated as empty when only relation exists ).
+		$include_query   = ! empty( $is_checked_terms ) ? self::format_terms( $tax_query_relation, $is_checked_terms, $post_type ) : array();
+		$include_clauses = array();
+		foreach ( $include_query as $key => $value ) {
+			if ( 'relation' !== $key ) {
+				$include_clauses[] = $value;
+			}
+		}
+
+		// 除外句を生成 / Build exclude clauses.
+		$exclude_clauses = ! empty( $exclusion_terms ) ? self::format_exclude_terms( $exclusion_terms, $post_type ) : array();
+
+		$has_include = ! empty( $include_clauses );
+		$has_exclude = ! empty( $exclude_clauses );
+
+		// どちらも無い場合は空の tax_query / Empty tax_query when neither is set.
+		if ( ! $has_include && ! $has_exclude ) {
+			return array();
+		}
+
+		// 絞り込みのみの場合は従来通りの構造を返す / Return the conventional structure when only include is set.
+		if ( $has_include && ! $has_exclude ) {
+			return $include_query;
+		}
+
+		// 除外のみの場合は除外句を AND で連結 / Join exclude clauses with AND when only exclude is set.
+		if ( ! $has_include && $has_exclude ) {
+			return array_merge( array( 'relation' => 'AND' ), $exclude_clauses );
+		}
+
+		// 絞り込み・除外の両方がある場合は、絞り込みサブクエリと除外句を AND で連結 / Join the include sub-query and exclude clauses with AND when both are set.
+		return array_merge(
+			array(
+				'relation' => 'AND',
+				$include_query,
+			),
+			$exclude_clauses
+		);
+	}
+
+	/**
 	 * Get Loop Query
 	 *
 	 * @param array $attributes attributes.
@@ -133,8 +235,15 @@ class Vk_Blocks_PostList {
 	public static function get_loop_query( $attributes ) {
 
 		$is_checked_post_type = json_decode( $attributes['isCheckedPostType'], true );
-		$is_checked_terms     = json_decode( $attributes['isCheckedTerms'], true );
+		$is_checked_terms     = isset( $attributes['isCheckedTerms'] ) ? json_decode( $attributes['isCheckedTerms'], true ) : array();
 		$tax_query_relation   = isset( $attributes['taxQueryRelation'] ) ? $attributes['taxQueryRelation'] : 'OR';
+
+		// 除外設定（タクソノミー・投稿ID）を取得 / Get exclusion settings ( taxonomy / post id ).
+		$exclusion_terms = isset( $attributes['exclusionTerms'] ) ? json_decode( $attributes['exclusionTerms'], true ) : array();
+		$exclusion_posts = isset( $attributes['exclusionPosts'] ) ? json_decode( $attributes['exclusionPosts'], true ) : array();
+		// json_decode が配列以外（null 等）を返した場合に備えて配列へ正規化 / Normalize to array in case json_decode returns a non-array ( e.g. null ).
+		$exclusion_terms = is_array( $exclusion_terms ) ? $exclusion_terms : array();
+		$exclusion_posts = is_array( $exclusion_posts ) ? $exclusion_posts : array();
 
 		if ( empty( $is_checked_post_type ) ) {
 			return false;
@@ -143,6 +252,11 @@ class Vk_Blocks_PostList {
 		$post__not_in = array();
 		if ( ! empty( $attributes['selfIgnore'] ) ) {
 			$post__not_in = array( get_the_ID() );
+		}
+
+		// 除外する投稿IDを post__not_in にマージ / Merge excluded post ids into post__not_in.
+		if ( ! empty( $exclusion_posts ) ) {
+			$post__not_in = array_merge( $post__not_in, array_map( 'intval', $exclusion_posts ) );
 		}
 
 		$offset         = isset( $attributes['offset'] ) ? intval( $attributes['offset'] ) : 0;
@@ -206,8 +320,9 @@ class Vk_Blocks_PostList {
 
 		$args = array(
 			'post_type'              => $is_checked_post_type,
+			// 絞り込み・除外を合わせた tax_query を構築 / Build the tax_query combining include and exclude conditions.
 			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
-			'tax_query'              => ! empty( $is_checked_terms ) ? self::format_terms( $tax_query_relation, $is_checked_terms, $is_checked_post_type ) : array(),
+			'tax_query'              => self::build_tax_query( $tax_query_relation, $is_checked_terms, $exclusion_terms, $is_checked_post_type ),
 			'paged'                  => $paged,
 			// 0で全件取得
 			'posts_per_page'         => $posts_per_page,

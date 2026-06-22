@@ -1,4 +1,5 @@
 /* eslint camelcase: 0 */
+import save1_121_1 from './1.121.1/save';
 import save1_115_0 from './1.115.0/save';
 import save1_110_1 from './1.110.1/save';
 import save1_105_0 from './1.105.0/save';
@@ -220,6 +221,11 @@ const blockAttributes12Typo = {
 	},
 }
 
+// 1.121.1 以降のスキーマ変更（pauseButton 属性の追加・autoPlayStop の既定値を false→true に変更）は
+// 最新スキーマとして block.json が保持しているため、ここに blockAttributes13 は定義しない。
+// 直前バージョンまでの保存形式（pauseButton なし／autoPlayStop 既定 false）は
+// blockAttributes12 を使う下記 deprecated エントリで救済する。
+
 const migrateZoomFinalScaleTypo = (attributes) => {
 	// Backward compatibility: handle typo in old attribute name.
 	if (
@@ -236,6 +242,12 @@ const migrateZoomFinalScaleTypo = (attributes) => {
 };
 
 const deprecated = [
+	// pauseButton 属性追加・autoPlayStop の既定値を false→true に変更する前
+	// （= 1.121.1 までの保存形式: pauseButton なし／autoPlayStop 既定 false）を救済する。
+	{
+		attributes: blockAttributes12,
+		save: save1_121_1,
+	},
 	{
 		attributes: blockAttributes12Typo,
 		save: save1_115_0,

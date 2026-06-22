@@ -1603,8 +1603,9 @@ msgstr ""
 
 #: src/blocks/_pro/table-of-contents-new/edit.js:122
 msgid ""
-"If you duplicate a heading, the table of contents block will not work "
-"properly, please reassign the ID."
+"Duplicate heading IDs are automatically corrected on the front end, so the "
+"table of contents links always point to the right heading. No manual changes "
+"are needed (the editor may still show duplicate IDs)."
 msgstr ""
 
 #: src/blocks/_pro/table-of-contents-new/edit.js:130

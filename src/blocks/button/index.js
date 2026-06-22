@@ -49,9 +49,37 @@ export const settings = {
 	transforms,
 };
 
+/**
+ * ホバー色のCSS値を取得する
+ * @param {string} value - 色の値（HEX、rgba、またはパレットスラッグ）
+ * @return {string|null} CSS で使用できる色の値、または null
+ */
+const getHoverColorCssValue = (value) => {
+	if (value === undefined || value === '' || value === null) {
+		return null;
+	}
+	// HEX カラーの場合
+	if (isHexColor(value)) {
+		return value;
+	}
+	// rgba / rgb / hsla / hsl カラーの場合（厳格にバリデーション）
+	const cssFuncColorPattern = /^(rgba?|hsla?)\(\s*[\d.%\s,/]+\s*\)$/;
+	if (cssFuncColorPattern.test(value)) {
+		return value;
+	}
+	// パレットのスラッグの場合 → CSS カスタムプロパティで参照
+	return `var(--wp--preset--color--${value})`;
+};
+
 const generateInlineCss = (attributes) => {
-	const { buttonTextColorCustom, buttonColorCustom, buttonType, blockId } =
-		attributes;
+	const {
+		buttonTextColorCustom,
+		buttonColorCustom,
+		buttonHoverBgColorCustom,
+		buttonHoverTextColorCustom,
+		buttonType,
+		blockId,
+	} = attributes;
 	let inlineCss = '';
 
 	// カスタムカラーの場合
@@ -94,6 +122,35 @@ const generateInlineCss = (attributes) => {
 				color: ${buttonTextColorCustom};
 			}`;
 		}
+	}
+
+	// ホバー時の背景色が設定されている場合
+	// WP コアが .has-*-background-color に !important を付与するため
+	// !important で上書きする必要がある
+	// filter: none でテーマの brightness/saturate フィルタをリセット
+	const hoverBgCssValue = getHoverColorCssValue(buttonHoverBgColorCustom);
+	if (hoverBgCssValue) {
+		inlineCss += ` .vk_button.vk_button-${blockId} .vk_button_link:hover {
+			background-color: ${hoverBgCssValue} !important;
+			border-color: ${hoverBgCssValue} !important;
+			box-shadow: none !important;
+			opacity: 1 !important;
+			filter: none !important;
+		}`;
+	}
+
+	// ホバー時のテキスト色が設定されている場合
+	const hoverTextCssValue = getHoverColorCssValue(buttonHoverTextColorCustom);
+	if (hoverTextCssValue) {
+		inlineCss += ` .vk_button.vk_button-${blockId} .vk_button_link:hover {
+			color: ${hoverTextCssValue} !important;
+		}`;
+		inlineCss += ` .vk_button.vk_button-${blockId} .vk_button_link:hover .vk_button_link_txt,
+		.vk_button.vk_button-${blockId} .vk_button_link:hover .vk_button_link_subCaption,
+		.vk_button.vk_button-${blockId} .vk_button_link:hover .vk_button_link_before,
+		.vk_button.vk_button-${blockId} .vk_button_link:hover .vk_button_link_after {
+			color: ${hoverTextCssValue} !important;
+		}`;
 	}
 
 	return inlineCss;

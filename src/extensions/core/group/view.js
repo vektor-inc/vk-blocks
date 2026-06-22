@@ -1,5 +1,3 @@
-/* eslint-env browser */
-
 /**
  * Group Block Scrollable Extension - Frontend View
  *

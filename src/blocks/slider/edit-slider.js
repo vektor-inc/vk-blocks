@@ -209,7 +209,6 @@ const LaunchSwiper = (slider) => {
 					SwiperSetting.slideActiveClass = 'is-selected';
 				}
 
-				// eslint-disable-next-line no-undef
 				swiper[sliderId] = new Swiper(
 					slider.querySelector(
 						'div > div > div.block-editor-inner-blocks'
@@ -330,7 +329,7 @@ export const SliderObserver = (editorRoot) => {
 		}
 	};
 
-	const observer = new MutationObserver(callback); // eslint-disable-line no-undef
+	const observer = new MutationObserver(callback);
 	observer.observe(editorRoot, config);
 };
 
@@ -338,10 +337,10 @@ const editorRootLaunch = (editorRoot) => {
 	LaunchSwiperAll(editorRoot);
 
 	// editorRoot ごとに1回だけ Observer をセットアップ
-	// eslint-disable-next-line no-undef
+
 	if (!editorRoot.dataset.vkSliderObserverInitialized) {
 		SliderObserver(editorRoot);
-		// eslint-disable-next-line no-undef
+
 		editorRoot.dataset.vkSliderObserverInitialized = 'true';
 	}
 };

@@ -1,0 +1,47 @@
+/*-------------------------------------------*/
+/* core/navigation : メニュー項目の説明を表示 */
+/* Show menu item description option (editor)  */
+/*-------------------------------------------*/
+
+/*
+ * エディタープレビュー用。フロント（src/extensions/core/navigation/style.scss）と
+ * 同じセレクタで、コアの display:none を上書きする。
+ * Editor preview. Same selector as the front-end style to override the
+ * core display:none for the description.
+ */
+.wp-block-navigation.vk-navigation-show-description {
+	/* フロントと同じく、項目の高さをそろえて矢印（サブメニューインジケーター）の縦位置を安定させる。 */
+	/* Same as the front-end: stretch items to equal height so the submenu arrow stays put. */
+	.wp-block-navigation__container {
+		align-items: stretch;
+	}
+	/* フロントと同じく、コンテンツ（<a>）を項目いっぱいに伸ばす（背景・クリック範囲を高さにそろえる）。ラベルは上端のまま。 */
+	/* Same as the front-end: stretch the content (<a>) to fill the item height; the label stays at the top. */
+	.wp-block-navigation__container
+		> .wp-block-navigation-item
+		> .wp-block-navigation-item__content {
+		align-self: stretch;
+	}
+	/* フロントと同じく、矢印は項目の縦中央に固定する。 */
+	/* Same as the front-end: keep the submenu arrow centered vertically within the item. */
+	.wp-block-navigation__container
+		> .wp-block-navigation-item
+		> .wp-block-navigation__submenu-icon {
+		align-self: center;
+	}
+	.wp-block-navigation-item__description {
+		display: block;
+		/* フロントと同じ最小スタイル。エディタとフロントの見た目を一致させる。 */
+		/* Same minimal style as the front-end to keep editor and front-end consistent. */
+		font-size: 0.8em;
+		margin-top: 0.25em;
+		opacity: 0.85;
+	}
+	/* フロントと同じく、サブメニューはコアの flex(row) を縦積みに戻し、左寄せにする。 */
+	/* Same as the front-end: restore vertical stacking and left-align for submenu items. */
+	.wp-block-navigation__submenu-container .wp-block-navigation-item__content {
+		flex-direction: column;
+		align-items: flex-start;
+		text-align: left;
+	}
+}

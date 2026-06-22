@@ -4,7 +4,7 @@ Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 6.6
 Tested up to: 7.0
-Stable tag: 1.121.1
+Stable tag: 1.122.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -107,6 +107,29 @@ e.g.
 1. VK Blocks examples.
 
 == Changelog ==
+
+= 1.122.0 =
+[ New Feature ][ Post List Block (Pro) / Post List Slider Block (Pro) ] Added exclusion settings that let you exclude specific posts by post ID and by taxonomy term.
+[ New Feature ][ Outer ( Pro ) ][ Slider ] Added a background image button to the block toolbar, allowing the responsive background images (PC / Tablet / Mobile) to be changed without opening the sidebar.
+[ New Feature ][ Button Block ] Added hover background color and hover text color settings.
+[ New Feature ][ Button Block ] Added support for adjusting the button's inner padding via the standard spacing controls.
+[ New Feature ][ Slider Block ][ Post List Slider Block (Pro) ] Added a pause / play button that lets visitors stop and resume the autoplay.
+[ New Feature ][ Step Block / Timeline Block ] Added an option to customize the border radius of the dot in the Style panel.
+[ New Feature ][ Navigation Block ] Added an option to display the description set for each menu item.
+[ New Feature ][ Button Block ] Expanded button size presets to five steps (XL / L / M / S / XS) and added an option to set an exact font size in px.
+[ Spec Change ][ Responsive Spacer ] Changed the "Setting > VK Blocks" text in the sidebar description to a link that opens the Common Margin Setting section of the setting page in a new tab.
+[ Spec Change ][ Table of Contents ( Pro ) ] Replaced the checkbox-based open/close toggle with an aria-expanded button so screen readers announce the open/closed state (WCAG 4.1.2). Existing posts keep working.
+[ Spec Change ][ Slider Block ][ Post List Slider Block (Pro) ] Autoplay no longer starts when the visitor's device requests reduced motion (prefers-reduced-motion).
+[ Spec Change ][ Slider Block ][ Post List Slider Block (Pro) ] Changed the default value of "Stop AutoPlay when swipe" to enabled for newly added blocks.
+[ Bug Fix ][ Setting Page ] Fixed an issue where the appearance or behavior of the setting page could fail to update after an update because the admin styles and scripts were served from the cache.
+[ Bug Fix ][ Setting Page ] Fixed an issue where the left side navigation on the setting page could be cut off while a notice was displayed.
+[ Bug Fix ][ Table of Contents (Pro) ] Fixed an incorrect Japanese translation for the setting description "When enabled, headings within Border Box blocks will be included in the Table of Contents."
+[ Bug Fix ][ Table of Contents ] Fixed an issue where duplicating a heading produced a shared ID, causing table of contents links to always jump to the first heading.
+[ Bug Fix ][ Visual Embed ] Fixed an error displayed in the editor when a YouTube embed code was inserted.
+[ Bug Fix ][ Button Block ] Fixed an issue where the Sub Caption could not be edited when a button was inserted from a block pattern in WordPress 7.0. The Sub Caption can now also be edited directly inside the block, in addition to the existing setting in the sidebar.
+[ Bug Fix ][ Inline Font Size ] Fixed an issue where the unit (such as rem or em) appeared to revert to px in the toolbar when reopening the inline font size setting, even though the saved value was unchanged.
+[ Design Bug Fix ][ Icon Block ] Fixed an issue where an unintended underline appeared on the icon when a link was set.
+[ Other ][ Timeline Block ] Internal refactor: cleaned up a duplicate "color" key in the deprecated attributes definition. No changes to plugin functionality.
 
 = 1.121.1 =
 [ Bug Fix ][ List Block ] Added missing Japanese translation for the "Cross" mark style label.

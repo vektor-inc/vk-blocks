@@ -22,6 +22,7 @@ import { fixBrokenUnicode } from '@vkblocks/utils/fixBrokenUnicode';
 
 // Load VK Blocks Compornents
 import { AdvancedCheckboxControl } from '@vkblocks/components/advanced-checkbox-control';
+import { PostExclusionControl } from '@vkblocks/components/post-exclusion-control';
 
 export function DisplayCondition(props) {
 	const { attributes, setAttributes, postTypesProps, termsByTaxonomyName } =
@@ -31,6 +32,7 @@ export function DisplayCondition(props) {
 		isCheckedPostType,
 		taxQueryRelation,
 		isCheckedTerms,
+		exclusionTerms,
 		offset,
 		targetPeriod,
 		order,
@@ -52,6 +54,10 @@ export function DisplayCondition(props) {
 	);
 	const [isCheckedPostTypeData, setIsCheckedPostTypeData] = useState(
 		JSON.parse(fixBrokenUnicode(isCheckedPostType))
+	);
+	// 除外するタームの選択状態 / Selection state of terms to exclude.
+	const [isExcludedTermsData, setIsExcludedTermsData] = useState(
+		JSON.parse(fixBrokenUnicode(exclusionTerms || '[]'))
 	);
 
 	const postTypeToTaxonomyMap = {};
@@ -82,9 +88,30 @@ export function DisplayCondition(props) {
 		});
 	};
 
+	// 除外タームの追加 / Add an exclusion term.
+	const saveStateExcludedTerms = (termId) => {
+		if (!isExcludedTermsData.includes(termId)) {
+			const updatedTerms = [...isExcludedTermsData, termId];
+			setIsExcludedTermsData(updatedTerms);
+			setAttributes({ exclusionTerms: JSON.stringify(updatedTerms) });
+		}
+	};
+
+	// 除外タームの削除 / Remove an exclusion term.
+	const removeStateExcludedTerms = (termId) => {
+		const newTermsData = isExcludedTermsData.filter((id) => id !== termId);
+		setIsExcludedTermsData(newTermsData);
+		setAttributes({
+			exclusionTerms: JSON.stringify(newTermsData),
+		});
+	};
+
 	const saveStatePostTypes = (slug) => {
 		let newPostTypeData = [...isCheckedPostTypeData];
 		let newTermsData = [...isCheckedTermsData];
+		// 除外タームも絞り込みタームと同様にクリーンアップする
+		// Clean up the excluded terms in the same way as the filter terms.
+		let newExcludedTermsData = [...isExcludedTermsData];
 		if (!newPostTypeData.includes(slug)) {
 			newPostTypeData.push(slug);
 		} else {
@@ -96,14 +123,21 @@ export function DisplayCondition(props) {
 					newTermsData = newTermsData.filter(
 						(id) => id !== term.term_id
 					);
+					// 解除した投稿タイプのタクソノミーに属するタームを除外設定からも除く
+					// Also drop terms of the deselected post type's taxonomies from the exclusion settings.
+					newExcludedTermsData = newExcludedTermsData.filter(
+						(id) => id !== term.term_id
+					);
 				});
 			});
 		}
 		setIsCheckedPostTypeData(newPostTypeData);
 		setIsCheckedTermsData(newTermsData);
+		setIsExcludedTermsData(newExcludedTermsData);
 		setAttributes({
 			isCheckedPostType: JSON.stringify(newPostTypeData),
 			isCheckedTerms: JSON.stringify(newTermsData),
+			exclusionTerms: JSON.stringify(newExcludedTermsData),
 		});
 	};
 
@@ -144,113 +178,147 @@ export function DisplayCondition(props) {
 		getTaxonomiesByPostType(postType)
 	);
 
-	const termFormTokenFields = filteredTaxonomies
-		.filter((taxonomy) => {
-			return !taxonomy.hierarchical && termsByTaxonomyName[taxonomy.slug];
-		})
-		.map((taxonomy) => {
-			const termsMapByName = termsByTaxonomyName[taxonomy.slug].reduce(
-				(acc, term) => {
+	// 絞り込み用・除外用で共通のターム選択UIを生成するファクトリ。
+	// state / schema / ラベル / ハンドラのみが異なるため、共通化して重複と乖離リスクを排除する。
+	// Factory that builds the shared term-selection UI for both the filter and the exclusion.
+	// Only the state / schema / label / handlers differ, so this is centralized to avoid duplication and divergence.
+	const buildTermFields = ({
+		checkedData,
+		setCheckedData,
+		schema,
+		labelFormat,
+		saveState,
+		removeState,
+		baseControlId,
+	}) => {
+		// 非階層タクソノミー（タグ等）→ FormTokenField / Non-hierarchical taxonomies ( tags etc. ) -> FormTokenField.
+		const tokenFields = filteredTaxonomies
+			.filter((taxonomy) => {
+				return (
+					!taxonomy.hierarchical && termsByTaxonomyName[taxonomy.slug]
+				);
+			})
+			.map((taxonomy) => {
+				const termsMapByName = termsByTaxonomyName[
+					taxonomy.slug
+				].reduce((acc, term) => {
 					return {
 						...acc,
 						[term.name]: term,
 					};
-				},
-				{}
-			);
+				}, {});
 
-			const termsMapById = termsByTaxonomyName[taxonomy.slug].reduce(
-				(acc, term) => {
-					return {
-						...acc,
-						[term.term_id]: term,
-					};
-				},
-				{}
-			);
+				const termsMapById = termsByTaxonomyName[taxonomy.slug].reduce(
+					(acc, term) => {
+						return {
+							...acc,
+							[term.term_id]: term,
+						};
+					},
+					{}
+				);
 
-			const termNames = termsByTaxonomyName[taxonomy.slug].map(
-				(term) => term.name
-			);
+				const termNames = termsByTaxonomyName[taxonomy.slug].map(
+					(term) => term.name
+				);
 
-			return termsByTaxonomyName[taxonomy.slug] &&
-				termsByTaxonomyName[taxonomy.slug]?.length > 0 ? (
-				<FormTokenField
-					key={taxonomy.slug}
-					label={sprintf(
-						// translators: Filter by %s
-						__('Filter by %s', 'vk-blocks'),
-						taxonomy.labels.name
-					)}
-					value={isCheckedTermsData
-						.filter((termId) => {
-							return termId in termsMapById;
-						})
-						.map((termId) => {
-							return termsMapById[termId].name;
-						})}
-					suggestions={termNames}
-					onChange={(newTerms) => {
-						const termIds = newTerms.map((termName) => {
-							return termsMapByName[termName].term_id;
-						});
-						const replacedIsCheckedTermsData =
-							replaceIsCheckedTermData(
+				return termsByTaxonomyName[taxonomy.slug] &&
+					termsByTaxonomyName[taxonomy.slug]?.length > 0 ? (
+					<FormTokenField
+						key={taxonomy.slug}
+						label={sprintf(labelFormat, taxonomy.labels.name)}
+						value={checkedData
+							.filter((termId) => {
+								return termId in termsMapById;
+							})
+							.map((termId) => {
+								return termsMapById[termId].name;
+							})}
+						suggestions={termNames}
+						onChange={(newTerms) => {
+							const termIds = newTerms.map((termName) => {
+								return termsMapByName[termName].term_id;
+							});
+							const replacedTermsData = replaceIsCheckedTermData(
 								taxonomy.slug,
-								isCheckedTermsData,
+								checkedData,
 								termIds
 							);
-						setIsCheckedTermsData(replacedIsCheckedTermsData);
-						setAttributes({
-							isCheckedTerms: JSON.stringify(
-								replacedIsCheckedTermsData
-							),
-						});
-					}}
-				></FormTokenField>
-			) : null;
-		}, taxonomies);
+							setCheckedData(replacedTermsData);
+							setAttributes({
+								[schema]: JSON.stringify(replacedTermsData),
+							});
+						}}
+					></FormTokenField>
+				) : null;
+			}, taxonomies);
 
-	// taxonomiesCheckBox ////////////////////////////////////////////////////////
-	// key を BaseControlのlabelに代入。valueの配列をmapでAdvancedCheckboxControlに渡す
-	const taxonomiesCheckBox = filteredTaxonomies
-		.filter((taxonomy) => {
-			return (
-				taxonomy.hierarchical === true &&
-				termsByTaxonomyName[taxonomy.slug]?.length
-			);
-		})
-		.map(function (taxonomy, index) {
-			const taxonomiesProps = (
-				termsByTaxonomyName[taxonomy.slug] || []
-			).map((term) => {
-				return {
-					label: term.name,
-					slug: term.term_id,
-				};
-			});
+		// 階層タクソノミー（カテゴリー等）→ チェックボックス / Hierarchical taxonomies ( categories etc. ) -> checkboxes.
+		const checkBoxes = filteredTaxonomies
+			.filter((taxonomy) => {
+				return (
+					taxonomy.hierarchical === true &&
+					termsByTaxonomyName[taxonomy.slug]?.length
+				);
+			})
+			.map(function (taxonomy, index) {
+				const taxonomiesProps = (
+					termsByTaxonomyName[taxonomy.slug] || []
+				).map((term) => {
+					return {
+						label: term.name,
+						slug: term.term_id,
+					};
+				});
 
-			return (
-				<BaseControl
-					label={sprintf(
-						// translators: Filter by %s
-						__('Filter by %s', 'vk-blocks'),
-						taxonomy.labels.name
-					)}
-					id={`vk_postList-terms`}
-					key={index}
-				>
-					<AdvancedCheckboxControl
-						schema={'isCheckedTerms'}
-						rawData={taxonomiesProps}
-						checkedData={isCheckedTermsData}
-						saveState={saveStateTerms}
-						removeState={removeStateTerms} // チェック解除時の処理を追加
-						{...props}
-					/>
-				</BaseControl>
-			);
-		}, termsByTaxonomyName);
+				return (
+					<BaseControl
+						label={sprintf(labelFormat, taxonomy.labels.name)}
+						id={baseControlId}
+						key={index}
+					>
+						<AdvancedCheckboxControl
+							schema={schema}
+							rawData={taxonomiesProps}
+							checkedData={checkedData}
+							saveState={saveState}
+							removeState={removeState}
+							{...props}
+						/>
+					</BaseControl>
+				);
+			}, termsByTaxonomyName);
+
+		return { tokenFields, checkBoxes };
+	};
+
+	// 絞り込み（include）用のターム選択UI / Term-selection UI for the filter ( include ).
+	const { tokenFields: termFormTokenFields, checkBoxes: taxonomiesCheckBox } =
+		buildTermFields({
+			checkedData: isCheckedTermsData,
+			setCheckedData: setIsCheckedTermsData,
+			schema: 'isCheckedTerms',
+			// translators: Filter by %s
+			labelFormat: __('Filter by %s', 'vk-blocks'),
+			saveState: saveStateTerms,
+			removeState: removeStateTerms,
+			baseControlId: 'vk_postList-terms',
+		});
+
+	// 除外（exclude）用のターム選択UI / Term-selection UI for the exclusion ( exclude ).
+	const {
+		tokenFields: excludedTermFormTokenFields,
+		checkBoxes: excludedTaxonomiesCheckBox,
+	} = buildTermFields({
+		checkedData: isExcludedTermsData,
+		setCheckedData: setIsExcludedTermsData,
+		schema: 'exclusionTerms',
+		// translators: Exclude by %s
+		labelFormat: __('Exclude by %s', 'vk-blocks'),
+		saveState: saveStateExcludedTerms,
+		removeState: removeStateExcludedTerms,
+		baseControlId: 'vk_postList-excludeTerms',
+	});
 
 	// `offset`が空の場合に0に設定する
 	useEffect(() => {
@@ -259,12 +327,21 @@ export function DisplayCondition(props) {
 		}
 	}, [offset]);
 
+	// state を属性へ再同期する安全網。
+	// AdvancedCheckboxControl の onChange は saveState/removeState 直後に
+	// 古いクロージャの checkedData で属性を上書きするため、属性が1操作分遅れる。
+	// state 変化時に毎回 state から属性を再同期して、このズレを打ち消す。
+	// Safety net that re-syncs the state into the attributes.
+	// AdvancedCheckboxControl's onChange overwrites the attributes with a stale
+	// checkedData closure right after saveState/removeState, so the attributes lag
+	// one operation behind. Re-syncing from state on every change cancels this lag.
 	useEffect(() => {
 		setAttributes({
 			isCheckedPostType: JSON.stringify(isCheckedPostTypeData),
 			isCheckedTerms: JSON.stringify(isCheckedTermsData),
+			exclusionTerms: JSON.stringify(isExcludedTermsData),
 		});
-	}, [isCheckedPostTypeData, isCheckedTermsData]);
+	}, [isCheckedPostTypeData, isCheckedTermsData, isExcludedTermsData]);
 
 	return (
 		<PanelBody
@@ -308,17 +385,6 @@ export function DisplayCondition(props) {
 			{taxonomiesCheckBox}
 			{termFormTokenFields}
 			<BaseControl
-				label={__('Number of Posts', 'vk-blocks')}
-				id={`vk_postList-numberPosts`}
-			>
-				<RangeControl
-					value={numberPosts}
-					onChange={(value) => setAttributes({ numberPosts: value })}
-					min="1"
-					max="100"
-				/>
-			</BaseControl>
-			<BaseControl
 				label={__('Filter by Date', 'vk-blocks')}
 				id={`vk_postList-dateFilter`}
 			>
@@ -355,6 +421,36 @@ export function DisplayCondition(props) {
 						'vk-blocks'
 					)}
 				</p>
+			</BaseControl>
+			<hr />
+			<h4 className={`mt-0 mb-2`}>
+				{__('Exclusion settings', 'vk-blocks')}
+			</h4>
+			{excludedTaxonomiesCheckBox}
+			{excludedTermFormTokenFields}
+			<PostExclusionControl
+				attributes={attributes}
+				setAttributes={setAttributes}
+				selectedPostTypes={isCheckedPostTypeData}
+			/>
+			<BaseControl>
+				<CheckboxControl
+					label={__('Ignore this post', 'vk-blocks')}
+					checked={selfIgnore}
+					onChange={(v) => setAttributes({ selfIgnore: v })}
+				/>
+			</BaseControl>
+			<hr />
+			<BaseControl
+				label={__('Number of Posts', 'vk-blocks')}
+				id={`vk_postList-numberPosts`}
+			>
+				<RangeControl
+					value={numberPosts}
+					onChange={(value) => setAttributes({ numberPosts: value })}
+					min="1"
+					max="100"
+				/>
 			</BaseControl>
 			<BaseControl
 				label={__('Order', 'vk-blocks')}
@@ -429,11 +525,6 @@ export function DisplayCondition(props) {
 						'Display from the first post even on pages beyond the second page.',
 						'vk-blocks'
 					)}
-				/>
-				<CheckboxControl
-					label={__('Ignore this post', 'vk-blocks')}
-					checked={selfIgnore}
-					onChange={(v) => setAttributes({ selfIgnore: v })}
 				/>
 			</BaseControl>
 			<BaseControl>

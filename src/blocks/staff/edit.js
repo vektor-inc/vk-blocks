@@ -34,26 +34,26 @@ export default function StaffEdit(props) {
 	const vkStaffProfileTitleColorId = `vk_staff_profileTitle-color-${clientId}`;
 	const vkStaffProfileTextColorId = `vk_staff_profileText-color-${clientId}`;
 	const {
-		vk_staff_layout, // eslint-disable-line camelcase
-		vk_staff_nameColor, // eslint-disable-line camelcase
-		vk_staff_captionColor, // eslint-disable-line camelcase
-		vk_staff_positionColor, // eslint-disable-line camelcase
-		vk_staff_profileTitleColor, // eslint-disable-line camelcase
-		vk_staff_profileTextColor, // eslint-disable-line camelcase
-		vk_staff_photo_image_alt, // eslint-disable-line camelcase
-		vk_staff_photoBorder, // eslint-disable-line camelcase
-		vk_staff_text_name, // eslint-disable-line camelcase
-		vk_staff_text_caption, // eslint-disable-line camelcase
-		vk_staff_text_role, // eslint-disable-line camelcase
-		vk_staff_text_profileTitle, // eslint-disable-line camelcase
-		vk_staff_text_profileText, // eslint-disable-line camelcase
-		vk_staff_photo_image, // eslint-disable-line camelcase
+		vk_staff_layout,
+		vk_staff_nameColor,
+		vk_staff_captionColor,
+		vk_staff_positionColor,
+		vk_staff_profileTitleColor,
+		vk_staff_profileTextColor,
+		vk_staff_photo_image_alt,
+		vk_staff_photoBorder,
+		vk_staff_text_name,
+		vk_staff_text_caption,
+		vk_staff_text_role,
+		vk_staff_text_profileTitle,
+		vk_staff_text_profileText,
+		vk_staff_photo_image,
 		vk_staff_fontFamily,
 	} = attributes;
 
 	const classes = classnames('vk_staff', {
 		[className]: !!className,
-		[`vk_staff-layout-${vk_staff_layout}`]: !!vk_staff_layout, // eslint-disable-line camelcase
+		[`vk_staff-layout-${vk_staff_layout}`]: !!vk_staff_layout,
 	});
 
 	const blockProps = useBlockProps({
@@ -63,7 +63,7 @@ export default function StaffEdit(props) {
 	// 画像の線のクラスとimgタグの親タグのクラス名を生成.
 	const imgBorderClassName = classnames('vk_staff_photo', {
 		[`vk_staff_photo-border-${vk_staff_photoBorder}`]:
-			!!vk_staff_photoBorder, // eslint-disable-line camelcase
+			!!vk_staff_photoBorder,
 	});
 
 	let staffTextClassName = classnames;
@@ -145,9 +145,9 @@ export default function StaffEdit(props) {
 			<InspectorControls>
 				<PanelBody title={__('Layout', 'vk-blocks')}>
 					<SelectControl
-						value={vk_staff_layout} // eslint-disable-line camelcase
-						onChange={
-							(value) => setAttributes({ vk_staff_layout: value }) // eslint-disable-line camelcase
+						value={vk_staff_layout}
+						onChange={(value) =>
+							setAttributes({ vk_staff_layout: value })
 						}
 						options={[
 							{
@@ -163,10 +163,9 @@ export default function StaffEdit(props) {
 				</PanelBody>
 				<PanelBody title={__('Image border', 'vk-blocks')}>
 					<SelectControl
-						value={vk_staff_photoBorder} // eslint-disable-line camelcase
-						onChange={
-							(value) =>
-								setAttributes({ vk_staff_photoBorder: value }) // eslint-disable-line camelcase
+						value={vk_staff_photoBorder}
+						onChange={(value) =>
+							setAttributes({ vk_staff_photoBorder: value })
 						}
 						options={[
 							{
@@ -188,10 +187,10 @@ export default function StaffEdit(props) {
 						)}
 					>
 						<TextControl
-							value={vk_staff_photo_image_alt} // eslint-disable-line camelcase
+							value={vk_staff_photo_image_alt}
 							onChange={(value) =>
 								setAttributes({
-									vk_staff_photo_image_alt: value, // eslint-disable-line camelcase
+									vk_staff_photo_image_alt: value,
 								})
 							}
 						/>
@@ -281,7 +280,7 @@ export default function StaffEdit(props) {
 						onChange={(value) =>
 							setAttributes({ vk_staff_text_name: value })
 						}
-						value={vk_staff_text_name} // eslint-disable-line camelcase
+						value={vk_staff_text_name}
 						placeholder={__('Your Name', 'vk-blocks')}
 					/>
 					<RichText
@@ -293,7 +292,7 @@ export default function StaffEdit(props) {
 						onChange={(value) =>
 							setAttributes({ vk_staff_text_caption: value })
 						}
-						value={vk_staff_text_caption} // eslint-disable-line camelcase
+						value={vk_staff_text_caption}
 						placeholder={__('Caption', 'vk-blocks')}
 					/>
 					<RichText
@@ -305,7 +304,7 @@ export default function StaffEdit(props) {
 						onChange={(value) =>
 							setAttributes({ vk_staff_text_role: value })
 						}
-						value={vk_staff_text_role} // eslint-disable-line camelcase
+						value={vk_staff_text_role}
 						placeholder={__('Role position', 'vk-blocks')}
 					/>
 					<RichText
@@ -318,7 +317,7 @@ export default function StaffEdit(props) {
 						onChange={(value) =>
 							setAttributes({ vk_staff_text_profileTitle: value })
 						}
-						value={vk_staff_text_profileTitle} // eslint-disable-line camelcase
+						value={vk_staff_text_profileTitle}
 						placeholder={__('Profile title', 'vk-blocks')}
 					/>
 					<RichText
@@ -328,13 +327,12 @@ export default function StaffEdit(props) {
 							staffProfileTextClassName
 						}
 						style={staffProfileTextColorInlineStyle}
-						onChange={
-							(value) =>
-								setAttributes({
-									vk_staff_text_profileText: value,
-								}) // eslint-disable-line camelcase
+						onChange={(value) =>
+							setAttributes({
+								vk_staff_text_profileText: value,
+							})
 						}
-						value={vk_staff_text_profileText} // eslint-disable-line camelcase
+						value={vk_staff_text_profileText}
 						placeholder={__('Profile text', 'vk-blocks')}
 					/>
 				</div>
@@ -346,23 +344,23 @@ export default function StaffEdit(props) {
 							})
 						}
 						type="image"
-						value={vk_staff_photo_image} // eslint-disable-line camelcase
+						value={vk_staff_photo_image}
 						render={({ open }) => (
 							<Button
 								onClick={open}
 								className={
-									vk_staff_photo_image // eslint-disable-line camelcase
+									vk_staff_photo_image
 										? 'image-button'
 										: 'button button-large'
 								}
 							>
-								{!vk_staff_photo_image ? ( // eslint-disable-line camelcase
+								{!vk_staff_photo_image ? (
 									__('Select image', 'vk-blocks')
 								) : (
 									<img
 										className={`vk_staff_photo_image`}
-										src={vk_staff_photo_image} // eslint-disable-line camelcase
-										alt={vk_staff_photo_image_alt} // eslint-disable-line camelcase
+										src={vk_staff_photo_image}
+										alt={vk_staff_photo_image_alt}
 									/>
 								)}
 							</Button>

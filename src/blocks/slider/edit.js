@@ -24,6 +24,7 @@ import {
 import { isParentReusableBlock } from '@vkblocks/utils/is-parent-reusable-block';
 import { editSliderLaunch } from './edit-slider';
 import { MultiItemSetting } from './edit-multiItem';
+import { PauseButton } from './pause-button';
 import ResponsiveSizeControl, {
 	getMaxByUnit,
 } from '@vkblocks/components/responsive-size-control';
@@ -40,6 +41,7 @@ export default function SliderEdit(props) {
 		autoPlay,
 		autoPlayStop,
 		autoPlayDelay,
+		pauseButton,
 		pagination,
 		width,
 		loop,
@@ -142,15 +144,13 @@ export default function SliderEdit(props) {
 		if (editorMode === 'slide') {
 			// requestAnimationFrame で React のレンダリングが完了するのを待ってから初期化
 			let timerId;
-			// eslint-disable-next-line no-undef
 			const rafId = requestAnimationFrame(() => {
 				timerId = setTimeout(() => {
 					editSliderLaunch();
 				}, 50);
 			});
-			// eslint-disable-next-line no-undef
+
 			return () => {
-				// eslint-disable-next-line no-undef
 				cancelAnimationFrame(rafId);
 				if (timerId) {
 					clearTimeout(timerId);
@@ -243,6 +243,11 @@ export default function SliderEdit(props) {
 		// 1.49 以前では autoPlayStop が定義されていないので互換設定を追加
 		if (autoPlayStop === undefined) {
 			setAttributes({ autoPlayStop: false });
+		}
+
+		// pauseButton 追加前のブロックでは未定義なので互換設定を追加
+		if (pauseButton === undefined) {
+			setAttributes({ pauseButton: false });
 		}
 
 		// 1.49 以前では navigationPosition が定義されていないので互換設定を追加
@@ -343,6 +348,7 @@ export default function SliderEdit(props) {
 		autoPlay,
 		autoPlayStop,
 		autoPlayDelay,
+		pauseButton,
 		pagination,
 		blockId,
 		width,
@@ -385,6 +391,15 @@ export default function SliderEdit(props) {
 			></div>
 		);
 	}
+
+	// 停止/再生ボタンの HTML（プレビュー(slide)モードで Swiper が初期化される時のみ意味を持つため、
+	// editorMode === 'slide' かつ自動再生が有効かつ表示設定が ON の時だけ出力）
+	const pause_button_html =
+		editorMode === 'slide' && autoPlay && pauseButton ? (
+			<PauseButton />
+		) : (
+			''
+		);
 
 	const blockRef = useRef(null);
 
@@ -549,6 +564,26 @@ export default function SliderEdit(props) {
 							{...props}
 						/>
 					</BaseControl>
+					{/* 停止/再生ボタンは自動再生が有効な時のみ意味を持つため、autoPlay が ON の時だけ表示 */}
+					{autoPlay && (
+						<BaseControl
+							label={__(
+								'Display pause / play button',
+								'vk-blocks'
+							)}
+							id={`vk_slider-pauseButton`}
+							help={__(
+								'Displays a button on the front end that lets visitors pause and resume the autoplay.',
+								'vk-blocks'
+							)}
+						>
+							<AdvancedToggleControl
+								initialFixedTable={pauseButton}
+								schema={'pauseButton'}
+								{...props}
+							/>
+						</BaseControl>
+					)}
 					<BaseControl
 						label={__('Display Time', 'vk-blocks')}
 						id={`vk_slider-autoPlay`}
@@ -769,6 +804,7 @@ export default function SliderEdit(props) {
 				{navigation_next_html}
 				{navigation_prev_html}
 				{pagination_html}
+				{pause_button_html}
 			</div>
 		</>
 	);

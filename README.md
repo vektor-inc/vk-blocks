@@ -13,7 +13,7 @@ Rro version : https://github.com/vektor-inc/vk-blocks-pro ( Private )
 ## 前提
 - Docker
 - @wordpress/env をグローバルインストール( ```npm install -g @wordpress/env``` )
-- NodeJS、NPM
+- NodeJS（**Node.js 24.16.0 以上**。`.node-version` / `package.json` の `engines`・`volta` に準拠。volta 利用時は自動で 24.16.0 が選択されます）、NPM
 
 ## 依存関係のインストール
 ```

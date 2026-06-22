@@ -80,6 +80,17 @@ const blockAttributes4 = {
 	}
 }
 
+/*
+// v1.117.0 投稿リンク機能の追加に伴う属性の追加
+const blockAttributes5 = {
+	...blockAttributes4,
+	linkToPost: {
+		type: 'boolean',
+		default: false,
+	},
+}
+*/
+
 export const deprecated = [
 	{
 		attributes: blockAttributes4,

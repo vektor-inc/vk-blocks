@@ -1,7 +1,9 @@
 const gulp = require('gulp');
 const concat = require('gulp-concat');
 const sass = require('gulp-sass')(require('sass'));
-const autoprefixer = require('gulp-autoprefixer');
+// 本プロジェクトが使用する gulp-autoprefixer v10 は ESM のため、require で読み込むと
+// 関数本体が default プロパティに入る。そのため CommonJS から読み込む場合は .default を参照する。
+const autoprefixer = require('gulp-autoprefixer').default;
 const replace = require('gulp-replace');
 const uglify = require('gulp-uglify');
 const plumber = require('gulp-plumber');
@@ -10,6 +12,23 @@ const path = require('path');
 const { finished } = require('stream/promises');
 
 const waitForStream = (stream) => finished(stream);
+
+// 同梱している third-party の Bootstrap (lib/bootstrap) のソースは古い Sass 記法
+// （@import / グローバル組み込み関数 / "/" 除算 / if() / darken()・lighten() など）を
+// 使っており、Dart Sass 1.80+ で大量の非推奨警告を出す。これらは Bootstrap 側のコードに
+// 起因し、当プラグイン自身の SCSS には該当箇所が無い。上流コードを書き換えるのは不適切なため、
+// ビルド時はこれらの非推奨警告を抑制する（quietDeps: 依存として読み込まれたファイルの警告を抑制、
+// silenceDeprecations: 該当する種類の非推奨警告を抑制）。
+const sassQuietDeprecations = {
+	quietDeps: true,
+	silenceDeprecations: [
+		'import',
+		'global-builtin',
+		'slash-div',
+		'if-function',
+		'color-functions',
+	],
+};
 
 // replace_text_domain
 gulp.task('text-domain-free', () => {
@@ -133,9 +152,13 @@ gulp.task('sass', () => {
 		)
 		.pipe(
 			sass({
-				errLogToConsole: true,
-				outputStyle: 'compressed',
-				includePaths: [path.resolve(__dirname, 'src')],
+				// gulp-sass v6 はモダン Dart Sass API を使うため、旧 API オプションの
+				// errLogToConsole は廃止、出力形式は outputStyle ではなく style で指定する。
+				style: 'compressed',
+				// Bootstrap 由来の非推奨警告を抑制する（詳細は sassQuietDeprecations の定義参照）。
+				...sassQuietDeprecations,
+				// モダン Dart Sass API ではロードパスの指定は includePaths ではなく loadPaths。
+				loadPaths: [path.resolve(__dirname, 'src')],
 			})
 		)
 		.pipe(autoprefixer())
@@ -153,9 +176,13 @@ gulp.task('sass_editor', () => {
 		.pipe(gulp.dest('./editor-css/'))
 		.pipe(
 			sass({
-				errLogToConsole: true,
-				outputStyle: 'compressed',
-				includePaths: [path.resolve(__dirname, 'src')],
+				// gulp-sass v6 はモダン Dart Sass API を使うため、旧 API オプションの
+				// errLogToConsole は廃止、出力形式は outputStyle ではなく style で指定する。
+				style: 'compressed',
+				// Bootstrap 由来の非推奨警告を抑制する（詳細は sassQuietDeprecations の定義参照）。
+				...sassQuietDeprecations,
+				// モダン Dart Sass API ではロードパスの指定は includePaths ではなく loadPaths。
+				loadPaths: [path.resolve(__dirname, 'src')],
 			})
 		)
 		.pipe(autoprefixer())
@@ -168,8 +195,11 @@ gulp.task('sass_vk_blocks_options', () => {
 	return gulp.src(['./options-css/*.scss'])
 		.pipe(
 			sass({
-				errLogToConsole: true,
-				outputStyle: 'compressed',
+				// gulp-sass v6 はモダン Dart Sass API を使うため、旧 API オプションの
+				// errLogToConsole は廃止、出力形式は outputStyle ではなく style で指定する。
+				style: 'compressed',
+				// Bootstrap 由来の非推奨警告を抑制する（詳細は sassQuietDeprecations の定義参照）。
+				...sassQuietDeprecations,
 			})
 		)
 		.pipe(autoprefixer())
@@ -183,8 +213,11 @@ gulp.task('sass_bootstrap', () => {
 	return gulp.src(['./lib/bootstrap/scss/bootstrap.scss'])
 		.pipe(
 			sass({
-				errLogToConsole: true,
-				outputStyle: 'compressed',
+				// gulp-sass v6 はモダン Dart Sass API を使うため、旧 API オプションの
+				// errLogToConsole は廃止、出力形式は outputStyle ではなく style で指定する。
+				style: 'compressed',
+				// Bootstrap 由来の非推奨警告を抑制する（詳細は sassQuietDeprecations の定義参照）。
+				...sassQuietDeprecations,
 			})
 		)
 		.pipe(autoprefixer())
@@ -198,8 +231,11 @@ gulp.task('sass_vk_components', () => {
 	return gulp.src(['./vendor/vektor-inc/vk-component/src/assets/scss'])
 		.pipe(
 			sass({
-				errLogToConsole: true,
-				outputStyle: 'compressed',
+				// gulp-sass v6 はモダン Dart Sass API を使うため、旧 API オプションの
+				// errLogToConsole は廃止、出力形式は outputStyle ではなく style で指定する。
+				style: 'compressed',
+				// Bootstrap 由来の非推奨警告を抑制する（詳細は sassQuietDeprecations の定義参照）。
+				...sassQuietDeprecations,
 			})
 		)
 		.pipe(autoprefixer())
@@ -214,9 +250,13 @@ gulp.task('sass-separate-free', () => {
 			gulp.src('./src/blocks/**/*.scss')
 		.pipe(
 			sass({
-				errLogToConsole: true,
-				outputStyle: 'compressed',
-				includePaths: [path.resolve(__dirname, 'src')],
+				// gulp-sass v6 はモダン Dart Sass API を使うため、旧 API オプションの
+				// errLogToConsole は廃止、出力形式は outputStyle ではなく style で指定する。
+				style: 'compressed',
+				// Bootstrap 由来の非推奨警告を抑制する（詳細は sassQuietDeprecations の定義参照）。
+				...sassQuietDeprecations,
+				// モダン Dart Sass API ではロードパスの指定は includePaths ではなく loadPaths。
+				loadPaths: [path.resolve(__dirname, 'src')],
 			})
 		)
 		.pipe(autoprefixer())
@@ -227,9 +267,13 @@ gulp.task('sass-separate-free', () => {
 			gulp.src('./src/extensions/**/**/*.scss')
 		.pipe(
 			sass({
-				errLogToConsole: true,
-				outputStyle: 'compressed',
-				includePaths: [path.resolve(__dirname, 'src')],
+				// gulp-sass v6 はモダン Dart Sass API を使うため、旧 API オプションの
+				// errLogToConsole は廃止、出力形式は outputStyle ではなく style で指定する。
+				style: 'compressed',
+				// Bootstrap 由来の非推奨警告を抑制する（詳細は sassQuietDeprecations の定義参照）。
+				...sassQuietDeprecations,
+				// モダン Dart Sass API ではロードパスの指定は includePaths ではなく loadPaths。
+				loadPaths: [path.resolve(__dirname, 'src')],
 			})
 		)
 		.pipe(autoprefixer())
@@ -240,9 +284,13 @@ gulp.task('sass-separate-free', () => {
 			gulp.src('./src/utils/*.scss')
 		.pipe(
 			sass({
-				errLogToConsole: true,
-				outputStyle: 'compressed',
-				includePaths: [path.resolve(__dirname, 'src')],
+				// gulp-sass v6 はモダン Dart Sass API を使うため、旧 API オプションの
+				// errLogToConsole は廃止、出力形式は outputStyle ではなく style で指定する。
+				style: 'compressed',
+				// Bootstrap 由来の非推奨警告を抑制する（詳細は sassQuietDeprecations の定義参照）。
+				...sassQuietDeprecations,
+				// モダン Dart Sass API ではロードパスの指定は includePaths ではなく loadPaths。
+				loadPaths: [path.resolve(__dirname, 'src')],
 			})
 		)
 		.pipe(autoprefixer())
@@ -256,9 +304,13 @@ gulp.task('sass-separate-pro', () => {
 	return gulp.src('./src/blocks/_pro/**/*.scss')
 		.pipe(
 			sass({
-				errLogToConsole: true,
-				outputStyle: 'compressed',
-				includePaths: [path.resolve(__dirname, 'src')],
+				// gulp-sass v6 はモダン Dart Sass API を使うため、旧 API オプションの
+				// errLogToConsole は廃止、出力形式は outputStyle ではなく style で指定する。
+				style: 'compressed',
+				// Bootstrap 由来の非推奨警告を抑制する（詳細は sassQuietDeprecations の定義参照）。
+				...sassQuietDeprecations,
+				// モダン Dart Sass API ではロードパスの指定は includePaths ではなく loadPaths。
+				loadPaths: [path.resolve(__dirname, 'src')],
 			})
 		)
 		.pipe(autoprefixer())

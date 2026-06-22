@@ -407,12 +407,20 @@ a.vk_button_link {
 
 			
 		}
+		&.btn-xl {
+			font-size: calc( 1rem * 1.5 );
+		}
 		&.btn-lg{
 			font-size:calc( 1rem * 1.25 );
 		}
 		&.btn-sm {
 			font-size: calc( 1rem * .875 );
 		}
+		&.btn-xs {
+			font-size: calc( 1rem * .75 );
+		}
+		// アイコンとテキストの間隔は固定値 (0.7rem) を採用。
+		// font-size に追従させる em 単位は将来検討の余地あり。
 		&_before {
 			margin-right: 0.7rem;
 		}

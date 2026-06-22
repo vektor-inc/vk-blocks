@@ -172,6 +172,23 @@ const blockAttributes13 = {
 	...blockAttributes12,
 	relAttribute: {
 		type: 'string',
+		default: '',
+	},
+	// v1.117.0 投稿リンク機能の追加に伴う属性の追加
+	linkToPost: {
+		type: 'boolean',
+		default: false,
+	},
+	// v1.121.0 ホバー色設定の追加に伴う属性の追加
+	buttonHoverBgColorCustom: {
+		type: 'string',
+	},
+	buttonHoverTextColorCustom: {
+		type: 'string',
+	},
+	// [ ボタン ] サイズ 5 段階化に伴う任意の文字サイズ指定属性の追加 #2986
+	fontSizeValue: {
+		type: 'string',
 		default: null,
 	},
 }

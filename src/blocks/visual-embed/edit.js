@@ -1,3 +1,5 @@
+/* global vkBlocksVisualEmbed */
+/* vkBlocksVisualEmbed は PHP 側で wp_localize_script により注入されるグローバル */
 import { __ } from '@wordpress/i18n';
 import {
 	InspectorControls,
@@ -13,12 +15,14 @@ import {
 } from '@wordpress/components';
 import { useEffect, useRef, useState } from '@wordpress/element';
 
+import { getCssLength } from './utils/get-css-length';
 import { isAllowedSrc as isAllowedSrcByPatterns } from './utils/match-url-pattern';
+import { getYouTubePreviewData } from './utils/youtube-preview';
 
 const allowedUrlPatterns =
-	typeof vkBlocksVisualEmbed !== 'undefined' && // eslint-disable-line no-undef
-	vkBlocksVisualEmbed.allowedUrlPatterns // eslint-disable-line no-undef
-		? vkBlocksVisualEmbed.allowedUrlPatterns // eslint-disable-line no-undef
+	typeof vkBlocksVisualEmbed !== 'undefined' &&
+	vkBlocksVisualEmbed.allowedUrlPatterns
+		? vkBlocksVisualEmbed.allowedUrlPatterns
 		: [];
 
 // 許可するURLパターンの配列
@@ -32,7 +36,7 @@ const ALLOWED_URL_PATTERNS = [
 // フィルターフックを使用してURLパターンを変更
 const filteredAllowedUrlPatterns = [
 	...ALLOWED_URL_PATTERNS,
-	// eslint-disable-next-line no-undef
+
 	...allowedUrlPatterns,
 ];
 
@@ -83,6 +87,11 @@ export default function EmbedCodeEdit({ attributes, setAttributes }) {
 	const blockProps = useBlockProps({
 		className: 'vk-visual-embed',
 	});
+	const youtubePreviewData = getYouTubePreviewData(iframeCode);
+	const youtubePreviewStyle = {
+		width: getCssLength(iframeWidth),
+		height: getCssLength(iframeHeight),
+	};
 
 	// iframeのsrc属性を検証する関数（許可パターン判定は utils に切り出し済み）
 	const isAllowedSrc = (src) =>
@@ -277,7 +286,37 @@ export default function EmbedCodeEdit({ attributes, setAttributes }) {
 				</PanelBody>
 			</InspectorControls>
 			<div style={{ position: 'relative' }}>
-				{iframeCode && (
+				{iframeCode && youtubePreviewData && (
+					<div
+						className="vk-visual-embed-preview vk-visual-embed-preview--youtube"
+						style={youtubePreviewStyle}
+						title={__(
+							'Preview only. The video plays on the published page.',
+							'vk-blocks'
+						)}
+					>
+						<img
+							className="vk-visual-embed-preview__youtube-thumbnail"
+							src={youtubePreviewData.thumbnailUrl}
+							alt={__('YouTube video preview', 'vk-blocks')}
+							decoding="async"
+						/>
+						<span
+							className="vk-visual-embed-preview__youtube-play"
+							aria-hidden="true"
+						>
+							<svg
+								className="vk-visual-embed-preview__youtube-play-icon"
+								viewBox="0 0 17 20"
+								xmlns="http://www.w3.org/2000/svg"
+								focusable="false"
+							>
+								<path d="M0 0 L17 10 L0 20 Z" />
+							</svg>
+						</span>
+					</div>
+				)}
+				{iframeCode && !youtubePreviewData && (
 					<div
 						className="vk-visual-embed-preview"
 						dangerouslySetInnerHTML={{ __html: iframeCode }}

@@ -11,7 +11,8 @@
 			"role": "content"
 		},
 		"subCaption": {
-			"type": "string"
+			"type": "string",
+			"role": "content"
 		},
 		"buttonUrl": {
 			"type": "string",
@@ -91,7 +92,17 @@
 			"type": "string",
 			"default": null
 		},
+		"fontSizeValue": {
+			"type": "string",
+			"default": null
+		},
 		"clientId": {
+			"type": "string"
+		},
+		"buttonHoverBgColorCustom": {
+			"type": "string"
+		},
+		"buttonHoverTextColorCustom": {
 			"type": "string"
 		},
 		"blockId": {
@@ -109,9 +120,14 @@
 		"anchor": true,
 		"typography": {
 			"__experimentalFontFamily": true,
-			"__experimentalFontSize": true,
 			"__experimentalTextTransform": true,
 			"__experimentalLetterSpacing": true
+		},
+		"spacing": {
+			"padding": true,
+			"__experimentalDefaultControls": {
+				"padding": true
+			}
 		}
 	},
 	"usesContext": ["queryId"]

@@ -8,7 +8,6 @@ import { InspectorControls, transformStyles } from '@wordpress/block-editor';
 import { createHigherOrderComponent, useInstanceId } from '@wordpress/compose';
 import { hasBlockSupport } from '@wordpress/blocks';
 import { useEffect } from '@wordpress/element';
-import { addQueryArgs } from '@wordpress/url';
 import { select } from '@wordpress/data';
 /**
  * External dependencies
@@ -20,6 +19,7 @@ import classnames from 'classnames';
  */
 import { CodeMirrorCss } from '@vkblocks/components/code-mirror-css';
 import { emptyStringToUndefined } from '@vkblocks/utils/empty-string-to-undefined';
+import { getSettingsPageUrl } from '@vkblocks/utils/settings-page-url';
 import { VkPanelIcon } from '@vkblocks/components/vk-icon';
 /*globals vk_blocks_params */
 
@@ -231,9 +231,7 @@ export const withInspectorControls = createHigherOrderComponent(
 							)}
 						</p>
 						<Button
-							href={addQueryArgs(
-								'options-general.php?page=vk_blocks_options#custom-css-setting'
-							)}
+							href={getSettingsPageUrl('custom-css-setting')}
 							target="_blank"
 							rel="noreferrer"
 							variant="secondary"

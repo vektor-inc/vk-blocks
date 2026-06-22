@@ -1,0 +1,99 @@
+/*-------------------------------------------*/
+/* core/navigation : メニュー項目の説明を表示 */
+/* Show menu item description option           */
+/*-------------------------------------------*/
+
+/*
+ * コアは `.wp-block-navigation .wp-block-navigation-item__description { display: none; }`
+ * （詳細度 0,2,0）で説明を非表示にしている。
+ * ブロック単位クラスを最外殻 `.wp-block-navigation` に付与した上で、
+ * `.wp-block-navigation.vk-navigation-show-description`（詳細度 0,3,0）で
+ * 確実に上書きする。!important は使わない。
+ *
+ * Core hides the description with `.wp-block-navigation .wp-block-navigation-item__description`
+ * (specificity 0,2,0). We override it with a higher specificity selector
+ * (0,3,0) scoped to the block that has the toggle enabled, without !important.
+ */
+.wp-block-navigation.vk-navigation-show-description {
+	/*
+	 * 説明あり（2行）と説明なし（1行）の項目が混在すると、項目ごとに
+	 * 高さが変わる。コアは各項目（li）内でサブメニューの矢印を縦中央に置くため、
+	 * 項目の高さがバラつくと矢印の縦位置も項目ごとにズレてしまう。
+	 * コンテナを align-items: stretch にして全項目の高さを最も高い項目に
+	 * そろえ、矢印の縦位置を安定させる。
+	 * （height: stretch ではなくコンテナ側の align-items を使う。後者は
+	 * クロスブラウザで安定し、モバイルのオーバーレイ表示時はコアが
+	 * align-items を上書きするため、この指定は横並び時のみ効く。）
+	 * Items with a description (2 lines) and without (1 line) end up at
+	 * different heights. Core vertically centers the submenu arrow inside each
+	 * item, so mismatched item heights make the arrow position drift per item.
+	 * Stretch all items to the tallest one's height so the arrow stays put.
+	 * (Use the container's align-items, not height: stretch, for cross-browser
+	 * stability; in the mobile overlay core overrides align-items, so this only
+	 * affects the horizontal layout.)
+	 */
+	.wp-block-navigation__container {
+		align-items: stretch;
+	}
+	/*
+	 * 高さをそろえても、ラベルは引き続き上端でそろえたい。さらに、項目に背景色や
+	 * 枠線を付けるテーマ（ピル型・ボタン型メニュー）でも、説明なし項目の背景や
+	 * クリック範囲が隣の説明あり項目より低くならないよう、コンテンツ（<a>）自体を
+	 * 項目いっぱいに伸ばす。<a> はブロック要素なので、高さを伸ばしてもラベルの
+	 * テキストは上端から流れ、ラベルは上にそろったままになる。
+	 * Keep labels aligned to the top, and also stretch the content (<a>) to fill
+	 * the item height so that—on themes that give menu items a background or
+	 * border (pill/button menus)—a description-less item's background and click
+	 * area don't come out shorter than its neighbors. The content is a block
+	 * element, so stretching its height keeps the label flowing from the top.
+	 */
+	.wp-block-navigation__container
+		> .wp-block-navigation-item
+		> .wp-block-navigation-item__content {
+		align-self: stretch;
+	}
+	/*
+	 * 矢印（サブメニューインジケーター）は項目の縦中央に固定する。
+	 * 上でコンテンツ（<a>）を stretch にしたが、矢印は引き伸ばさず中央へ置き、
+	 * 説明あり／なしのどちらの項目でも矢印が同じ高さに来るようにする。
+	 * Pin the submenu arrow to the vertical center of the item. The content (<a>)
+	 * is stretched above, but the arrow should stay centered (not stretched) so it
+	 * lands at the same height whether or not the item has a description.
+	 */
+	.wp-block-navigation__container
+		> .wp-block-navigation-item
+		> .wp-block-navigation__submenu-icon {
+		align-self: center;
+	}
+	.wp-block-navigation-item__description {
+		display: block;
+		/*
+		 * 説明文は副次情報なのでラベルより一回り小さくし、ラベルとの間に余白を取る。
+		 * 色は固定せずテーマの文字色（currentColor）を継承させたうえで、
+		 * opacity で少しだけ弱め、ラベルとの主従（情報の優先順位）を表す。
+		 * 固定色ではなく opacity にすることで、暗背景テーマでも文字色に追従する。
+		 * The description is secondary info: render it a bit smaller than the label
+		 * and add spacing from the label. No fixed color is set so it inherits the
+		 * theme text color (currentColor); opacity slightly de-emphasizes it to
+		 * express the label/description hierarchy while still following the theme.
+		 */
+		font-size: 0.8em;
+		margin-top: 0.25em;
+		opacity: 0.85;
+	}
+	/*
+	 * サブメニュー（ドロップダウン）内の項目。コアは
+	 * `...__submenu-container > ... > .wp-block-navigation-item__content`
+	 * を display:flex（既定 row）にしているため、説明が出るとラベルの
+	 * 右隣に横並びになってしまう。縦積み（flex-direction: column）に戻し、
+	 * 左寄せにして自然に読めるようにする。
+	 * Submenu (dropdown) items. Core sets the submenu item content to
+	 * display:flex (default row), so the description ends up beside the label.
+	 * Restore vertical stacking and left-align it so the dropdown reads naturally.
+	 */
+	.wp-block-navigation__submenu-container .wp-block-navigation-item__content {
+		flex-direction: column;
+		align-items: flex-start;
+		text-align: left;
+	}
+}

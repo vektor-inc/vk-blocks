@@ -1,318 +1,486 @@
 import { test, expect } from '@wordpress/e2e-test-utils-playwright';
 
+// 公開済み投稿を保存する。WP 7.0 では公開済み投稿の更新ボタンが「Save」になり、
+// 押下後に変更確認パネル（Editor publish リージョン）が表示される場合があるため、
+// 確定の「Save」が出たら押す（表示されない設定にも対応）。保存完了まで待つ。
+async function saveEditorPost(page: any) {
+	await page
+		.getByRole('region', { name: 'Editor top bar' })
+		.getByRole('button', { name: 'Save', exact: true })
+		.click();
+	try {
+		await page
+			.getByRole('region', { name: 'Editor publish' })
+			.getByRole('button', { name: 'Save', exact: true })
+			.click({ timeout: 5000 });
+	} catch {
+		// 確認パネルが無い場合はそのまま保存完了
+	}
+	// 固定待機ではなく保存完了の確定的なシグナルを待つ。
+	// 保存完了スナックバー（"Saved" 等）の表示とネットワーク静止のいずれかで判定し、
+	// 環境によりどちらのシグナルも出ない場合でもテストが止まらないよう .catch() で握りつぶす。
+	await page
+		.locator('.components-snackbar')
+		.first()
+		.waitFor({ state: 'visible', timeout: 5000 })
+		.catch(() => {});
+	await page
+		.waitForLoadState('networkidle', { timeout: 4000 })
+		.catch(() => {});
+}
+
+// 公開完了を確定的シグナルで待つ。固定待機（waitForTimeout）の置き換え。
+// 公開成功スナックバーの表示とネットワーク静止のいずれかで判定する。
+// post_type_manage（ExUnit の CPT 定義画面）のように core/editor で公開状態を
+// 追えない／公開時に画面リロードする画面でも動くよう、saveEditorPost と同じ
+// best-effort パターンを用いる（シグナルが出ない環境でも止まらない）。
+async function waitForPostPublished(page: any) {
+	// 公開成功スナックバーの表示を主シグナルにする（通常 1〜2 秒で出る）。
+	await page
+		.locator('.components-snackbar')
+		.first()
+		.waitFor({ state: 'visible', timeout: 8000 })
+		.catch(() => {});
+	// networkidle はブロックエディタでは到達しない場合があるため短くタイムアウトを
+	// 区切る（区切らないとテスト全体のタイムアウトまで待ち続けてしまう）。
+	await page
+		.waitForLoadState('networkidle', { timeout: 4000 })
+		.catch(() => {});
+}
+
+// エディタが編集可能になるまで確定的に待ち、ウェルカムガイド等のモーダルが
+// 出ていれば閉じる。固定待機（waitForTimeout）の置き換え。
+// ※ ブロックエディタは heartbeat 等で networkidle に到達せずハングするため、
+//   networkidle ではなく canvas 内のブロック描画完了をシグナルにする。
+async function waitForEditorReady(editor: any, page: any) {
+	await editor.canvas
+		.locator('.is-root-container, .block-editor-default-block-appender')
+		.first()
+		.waitFor({ state: 'visible', timeout: 30000 });
+	const modal = page.locator('.components-modal__frame');
+	if (await modal.isVisible().catch(() => false)) {
+		await modal
+			.getByRole('button', { name: 'Close' })
+			.click()
+			.catch(() => {});
+	}
+}
+
 test('Taxonomy Block Test', async ({ editor, page }) => {
-	// login
-	await page.goto('http://localhost:8889/wp-login.php');
-	await page.getByLabel('Username or Email Address').click();
-	await page.getByLabel('Username or Email Address').fill('admin');
-	await page.getByLabel('Username or Email Address').press('Tab');
-	await page.getByLabel('Password', { exact: true }).fill('password');
-	await page.getByLabel('Password', { exact: true }).press('Enter');
+	// 認証は @wordpress/e2e-test-utils-playwright の storageState（global-setup で
+	// 管理者ログイン済みの状態を保存）で済んでいるため、手動ログインは不要。
 
 	// Install ExUnit /////////////////////////////////////////////////
-	await page.goto('http://localhost:8889/wp-admin/');
+	await page.goto('/wp-admin/');
 	// Check if the modal is visible
-	const isPTM = await page.isVisible('#menu-posts-post_type_manage');
+	const isPTM = await page
+		.locator('#menu-posts-post_type_manage')
+		.isVisible();
 
 	// If the modal is visible, click the close button
 	if (!isPTM) {
-		console.log('ExUnit is not active');
-		await page.goto('http://localhost:8889/wp-admin/plugins.php');
-		await page.locator('#wpbody-content').getByRole('link', { name: 'Add New' }).click();
-		await page.getByPlaceholder('Search plugins...').fill('vk all in one expansion unit');
-		await page.getByPlaceholder('Search plugins...').press('Enter');
-		// ExUnit が表示されるまでちょい待機
-		await page.waitForTimeout(1000);
+		// WP 6.5+ で Plugins 画面の「Add New」リンクは「Add Plugin」へ改称されたため、
+		// リンク名に依存せずプラグイン追加画面（plugin-install.php）へ直接遷移する。
+		await page.goto('/wp-admin/plugin-install.php');
+		// WP 7.0 では検索欄の placeholder 「Search plugins...」が廃止され、
+		// label 由来のアクセシブル名「Search Plugins」を持つ searchbox になっている。
+		await page
+			.getByRole('searchbox', { name: 'Search Plugins' })
+			.fill('vk all in one expansion unit');
+		await page
+			.getByRole('searchbox', { name: 'Search Plugins' })
+			.press('Enter');
 
-		// Wait for display ExUnit Button 
-		// ( At this point it is unknown whether it is the install button or the activate button )
-		await page.waitForSelector('.plugin-card-vk-all-in-one-expansion-unit .plugin-action-buttons .button');
+		// ExUnit のアクションボタン（Install / Update / Activate のいずれか）。
+		// Locator API（自動待機・auto-retry）に統一する。
+		const actionButton = page
+			.locator(
+				'.plugin-card-vk-all-in-one-expansion-unit .plugin-action-buttons .button'
+			)
+			.first();
+		await actionButton.waitFor();
 
-		// Get button text
-		const buttonText = await page.$eval('.plugin-card-vk-all-in-one-expansion-unit .plugin-action-buttons .button', el => el.textContent);
+		const buttonText = await actionButton.textContent();
 
 		if (buttonText === 'Install Now') {
-			console.log(buttonText);
-			// インストールボタンが存在する場合
-			// インストールボタンが表示されるまで待機
-				await page.waitForSelector('a[class="install-now button"][data-slug="vk-all-in-one-expansion-unit"]');
-			const installButton = await page.$('a[class="install-now button"][data-slug="vk-all-in-one-expansion-unit"]');
-			if (installButton !== null) {
-
-
-				// インストールボタンが表示されるまで待機
-				await page.waitForSelector('a[class="install-now button"][data-slug="vk-all-in-one-expansion-unit"]');
-
-				// クリックしてインストール
-				await installButton.click();
-
-				// Activateボタンが表示されるまで待機
-				await page.waitForSelector('a[class="button activate-now button-primary"][data-slug="vk-all-in-one-expansion-unit"]');
-			}
+			// インストールボタンを待機してクリック
+			const installButton = page.locator(
+				'a[class="install-now button"][data-slug="vk-all-in-one-expansion-unit"]'
+			);
+			await installButton.waitFor();
+			await installButton.click();
+			// Activateボタンが表示されるまで待機
+			await page
+				.locator(
+					'a[class="button activate-now button-primary"][data-slug="vk-all-in-one-expansion-unit"]'
+				)
+				.waitFor();
 		} else if (buttonText === 'Update Now') {
-			console.log(buttonText);
-			const updateButton = await page.$('a[class*="update-now button"][data-slug="vk-all-in-one-expansion-unit"]');
-			if (updateButton !== null) {
+			const updateButton = page.locator(
+				'a[class*="update-now button"][data-slug="vk-all-in-one-expansion-unit"]'
+			);
+			if ((await updateButton.count()) > 0) {
 				await updateButton.click();
 				// アップデート完了まで待機
-				await page.waitForSelector('a[class*="button activate-now"][data-slug="vk-all-in-one-expansion-unit"]');
+				await page
+					.locator(
+						'a[class*="button activate-now"][data-slug="vk-all-in-one-expansion-unit"]'
+					)
+					.waitFor();
 			}
 		}
 
-				// Check if the button is disabled
-				const isDisabled = await page.$eval('.plugin-card-vk-all-in-one-expansion-unit .plugin-action-buttons .button', (button) => button.disabled);
+		// ボタンが disabled かを確認（アンカーの場合 disabled は undefined → 有効化処理へ）
+		const isDisabled = await actionButton.evaluate(
+			(el: any) => el.disabled
+		);
 
-				// If the button is not disabled, click it
-				// すでに ExUnit が有効化されていない場合のみ有効化処理を実行
-				if (!isDisabled) {
-					await page.goto('http://localhost:8889/wp-admin/plugins.php');
-					// Activateボタンをクリックして有効化処理を実行
-					await page.getByLabel('Activate VK All in One Expansion Unit').click();
-		
-					// Activateボタンが消えるまで待機
-					await page.waitForSelector('a[class*="button activate-now"][data-slug="vk-all-in-one-expansion-unit"]', { state: 'hidden' });
-				}
-	} else {
-		console.log('ExUnit is active');
+		// If the button is not disabled, click it
+		// すでに ExUnit が有効化されていない場合のみ有効化処理を実行
+		if (!isDisabled) {
+			await page.goto('/wp-admin/plugins.php');
+			// Activateボタンをクリックして有効化処理を実行
+			await page
+				.getByLabel('Activate VK All in One Expansion Unit')
+				.click();
+
+			// Activateボタンが消えるまで待機
+			await page
+				.locator(
+					'a[class*="button activate-now"][data-slug="vk-all-in-one-expansion-unit"]'
+				)
+				.waitFor({ state: 'hidden' });
+		}
 	}
 
 	// Add Event Post Type /////////////////////////////////////////////////
 
-	await page.goto('http://localhost:8889/wp-admin/edit.php?post_type=post_type_manage');
-	await page.locator('#wpbody-content').getByRole('link', { name: 'Add New Post' }).click();
+	await page.goto('/wp-admin/edit.php?post_type=post_type_manage');
+	// WP 7.0 では一覧画面の「Add New {投稿タイプ}」ボタンが投稿タイプの add_new ラベル
+	// （ここでは「Add Post」）で出力されるため、その名称で取得する。
+	await page
+		.locator('#wpbody-content')
+		.getByRole('link', { name: 'Add Post' })
+		.click();
 	await page.getByLabel('Add title').fill('Event');
 	await page.locator('#veu_post_type_id').fill('event');
 	await page.getByText('title', { exact: true }).click();
 	await page.getByText('editor', { exact: true }).click();
-	await page.locator('[id="veu_taxonomy\\[1\\]\\[slug\\]"]').fill('event-cat');
-	await page.locator('[id="veu_taxonomy\\[1\\]\\[label\\]"]').fill('Event Category');
+	await page
+		.locator('[id="veu_taxonomy\\[1\\]\\[slug\\]"]')
+		.fill('event-cat');
+	await page
+		.locator('[id="veu_taxonomy\\[1\\]\\[label\\]"]')
+		.fill('Event Category');
+	// CPT 定義を公開する。post_type_manage はブロックエディタのため、事前公開チェックが
+	// 有効だと確認パネルが出る。設定に依存せず公開できるよう、確定ボタンが出たら押す。
 	await page.getByRole('button', { name: 'Publish', exact: true }).click();
-	// 「Update」ボタンが表示されるまで待つ
-	// await page.waitForSelector('#publish[value="Update"]');
+	try {
+		await page
+			.getByRole('region', { name: 'Editor publish' })
+			.getByRole('button', { name: 'Publish', exact: true })
+			.click({ timeout: 5000 });
+	} catch {
+		// 事前公開パネルが無効な場合は最初の Publish で公開完了
+	}
+	// CPT/タクソノミーの登録が反映される（公開完了）まで待つ
+	await waitForPostPublished(page);
 
 	// Set permalink
-	await page.goto('http://localhost:8889/wp-admin/options-permalink.php');
+	await page.goto('/wp-admin/options-permalink.php');
 	await page.getByLabel('Post name').check();
 	await page.getByRole('button', { name: 'Save Changes' }).click();
 
 	// Add event category /////////////////////////////////////////////////
-	await page.goto('http://localhost:8889/wp-admin/edit-tags.php?taxonomy=event-cat&post_type=event');
+	// CPT/タクソノミー（event-cat）の登録は ExUnit の init（公開後の後続リクエスト）で
+	// 反映されるため、公開直後は edit-tags が「Invalid taxonomy」になることがある。
+	// 固定待機ではなく、Name 入力欄が現れる＝登録反映済みになるまで edit-tags を
+	// リロードして確定的に待つ（toPass によるリトライ）。
+	// フレッシュな専用テスト環境（CI 等のコールド起動）では、ExUnit 有効化〜CPT 公開〜
+	// パーマリンク反映〜タクソノミー登録の一連が暖機済み環境より時間を要するため、
+	// 登録反映までの待機上限を長めに確保する。
+	await expect(async () => {
+		await page.goto(
+			'/wp-admin/edit-tags.php?taxonomy=event-cat&post_type=event'
+		);
+		await expect(page.getByRole('textbox', { name: 'Name' })).toBeVisible({
+			timeout: 2000,
+		});
+	}).toPass({ timeout: 90000 });
 	await page.getByRole('textbox', { name: 'Name' }).fill('event-term');
-	await page.getByRole('button', { name: 'Add New Category' }).click();
+	// WP 7.0 でカテゴリー系ラベルが「Add New Category」→「Add Category」へ簡略化された。
+	await page.getByRole('button', { name: 'Add Category' }).click();
 
 	// Add Event Post /////////////////////////////////////////////////
-	await page.goto('http://localhost:8889/wp-admin/post-new.php?post_type=event');
+	await page.goto('/wp-admin/post-new.php?post_type=event');
 
-	await page.waitForTimeout(2000);
-	// Check if the modal is visible
-	const isModalVisible = await page.isVisible('.components-modal__frame');
+	// エディタが編集可能になるまで待ち、モーダルが出ていれば閉じる。
+	await waitForEditorReady(editor, page);
 
-	// If the modal is visible, click the close button
-	if (isModalVisible) {
-		await page.click('button[aria-label="Close"]');
-	}
-
-	await page.getByRole('textbox', { name: 'Add title' }).fill('Event Post');
+	// WP 7.0 ではエディタ本文（タイトル含む）が iframe(editor-canvas) 内にあるため
+	// editor.canvas 経由で取得する。
+	await editor.canvas
+		.getByRole('textbox', { name: 'Add title' })
+		.fill('Event Post');
 
 	// ブロックを挿入する
-	await editor.insertBlock( {
+	await editor.insertBlock({
 		name: 'vk-blocks/taxonomy',
-	} );
+	});
 
 	// サイドパネル（投稿タイプ）を開く
 	await page.getByRole('tab', { name: 'Event' }).click();
 
-	// サイドパネルが閉じている場合があるので、すべてのパネルを取得して、対象のパネルが閉じていたら開く
-	// Get all buttons with the specified classes
-	const EventMetaPanels = await page.$$('.components-button.components-panel__body-toggle');
-
-	for (const button of EventMetaPanels) {
-		// Get the button text
-		const buttonText = await button.textContent();
-
-		// Check if the button text is "Event Category"
-		if (buttonText === 'Event Category') {
-			// Get the value of the 'aria-expanded' attribute
-			const isExpanded = await button.getAttribute('aria-expanded');
-
-			// If the panel is not expanded, click the button
-			if (isExpanded === 'false') {
-				await button.click();
-			}
-		}
+	// 「Event Category」パネルが閉じていれば開く。
+	// ElementHandle（page.$$）ではなく Locator API を使い auto-wait を活かす。
+	const eventCategoryPanel = page
+		.locator('.components-button.components-panel__body-toggle')
+		.filter({ hasText: 'Event Category' })
+		.first();
+	if ((await eventCategoryPanel.getAttribute('aria-expanded')) === 'false') {
+		await eventCategoryPanel.click();
 	}
 
 	await page.getByLabel('event-term').check();
+	// 公開する。事前公開チェックの有効/無効でパネルの有無が変わるため、確定ボタンが
+	// 出た場合のみ押す（設定に依存せず公開できるようにする）。
 	await page.getByRole('button', { name: 'Publish', exact: true }).click();
-	await page.getByRole('region', { name: 'Editor publish' }).getByRole('button', { name: 'Publish', exact: true }).click();
-
-	// 一旦再読み込み（しないとタクソノミーブロックで event-category が選択肢にでてこないため）
-	await page.getByRole('button', { name: 'Dismiss this notice' }).getByRole('link', { name: 'View Post' }).click();
-	await page.getByRole('menuitem', { name: ' Edit Post' }).click();
-
-	// タクソノミーブロックで event-cat を指定
-	await page.getByRole('document', { name: 'Block: Taxonomy' }).getByRole('listitem').click();
-	await page.getByRole('combobox', { name: 'Taxonomy' }).selectOption('event-cat');
-	await page.getByRole('button', { name: 'Update' }).click();
-	await page.getByLabel('Display as dropdown').check();
-	await page.getByRole('button', { name: 'Update' }).click();
-	// タクソノミーブロックが配置された投稿を表示
-	// await page.getByRole('link', { name: 'View Post', exact: true }).click(); // <- 複数 View Post があるとエラーになる
-	// View Post 表記のリンクが複数ある（管理バーがアクティブの場合）とエラーになるため .components-snackbar__action の View Post をクリックする
-	// 一旦 .components-snackbar__action のリンクをすべて取得して...
-	const links = await page.$$('.components-snackbar__action');
-	// テキストが View Post のリンクを探してクリックする
-	for (let link of links) {
-		const value = await link.evaluate(node => node.textContent);
-		if (value === 'View Post') {
-			await link.click();
-			break;
-		}
+	try {
+		await page
+			.getByRole('region', { name: 'Editor publish' })
+			.getByRole('button', { name: 'Publish', exact: true })
+			.click({ timeout: 5000 });
+	} catch {
+		// 事前公開パネルが無効な場合は最初の Publish で公開完了
 	}
+	// 公開完了を待ち、エディタ状態から公開した投稿の ID を取得する
+	await waitForPostPublished(page);
+	const eventPostId = await page.evaluate(() =>
+		window.wp.data.select('core/editor').getCurrentPostId()
+	);
+	// getCurrentPostId() は number | string | null を返す。null だと post=null で遷移して
+	// しまうため、後続の page.goto で使う前に有効な ID であることを保証する。
+	expect(eventPostId).toBeTruthy();
+
+	// 作成したタームをタクソノミーブロックの選択肢へ反映させるため、公開した投稿の
+	// 編集画面を改めて開き直す（旧コードの「View Post→管理バーの Edit」往復の代替）。
+	await page.goto(`/wp-admin/post.php?post=${eventPostId}&action=edit`);
+	// エディタが編集可能になるまで待ち、モーダルが出ていれば閉じる。
+	await waitForEditorReady(editor, page);
+
+	// タクソノミーブロックで event-cat を指定（ブロックは iframe canvas 内）
+	await editor.canvas
+		.getByRole('document', { name: 'Block: Taxonomy' })
+		.getByRole('listitem')
+		.click();
+	await page
+		.getByRole('combobox', { name: 'Taxonomy' })
+		.selectOption('event-cat');
+	await page.getByLabel('Display as dropdown').check();
+	// 変更を保存する
+	await saveEditorPost(page);
+
+	// タクソノミーブロックが配置された投稿（フロント）を表示する。
+	// 旧コードは snackbar の View Post から遷移していたが、CPT 依存でラベルが変わるため
+	// 取得済みの投稿 ID で直接遷移する。
+	await page.goto(`/?p=${eventPostId}`);
 
 	// Select event-cat in taxonomy block
-	await page.selectOption('.vk_taxonomy__input-wrap--select', { value: 'event-term' });
+	await page.selectOption('.vk_taxonomy__input-wrap--select', {
+		value: 'event-term',
+	});
 
 	// チェック
 	// Event Category ページが表示されてるはず
 	// h1タグのテキストを取得する
-	await page.waitForSelector('h1.alignwide.wp-block-query-title');
-	let h1Text = await page.$eval('h1.alignwide.wp-block-query-title', el => el.textContent);
+	let h1Text = await page.locator('h1.wp-block-query-title').textContent();
 	// expect関数を使用して、h1タグのテキストが「event-category」を含むことを確認する
 	expect(h1Text).toContain('event-term');
 
 	// Check post category /////////////////////////////////////////////////
 
-	await page.goto('http://localhost:8889/wp-admin/post-new.php');
-	await page.getByRole('textbox', { name: 'Add title' }).fill('Test Post');
+	await page.goto('/wp-admin/post-new.php');
+	// エディタが編集可能になるまで待ち、モーダルが出ていれば閉じる。
+	await waitForEditorReady(editor, page);
+	// タイトルは iframe(editor-canvas) 内
+	await editor.canvas
+		.getByRole('textbox', { name: 'Add title' })
+		.fill('Test Post');
 	// ブロックを挿入する
-	await editor.insertBlock( {
+	await editor.insertBlock({
 		name: 'vk-blocks/taxonomy',
-	} );
+	});
 	await page.getByRole('tab', { name: 'Block' }).click();
-	 await page.getByLabel('Editor settings').getByLabel('Taxonomy').selectOption('category');
+	await page
+		.getByLabel('Editor settings')
+		.getByLabel('Taxonomy')
+		.selectOption('category');
 	await page.getByLabel('Display as dropdown').check();
 
 	// サイドパネル（投稿タイプ）を開く
 	await page.getByRole('tab', { name: 'Post' }).click();
 
-	// await page.getByLabel('Add New Tag').click();
-
+	// await page.getByLabel('Add Tag').click();
 
 	// サイドパネルが閉じている場合があるので、操作したいパネルが閉じていたら開く処理が必要
 
-	// まずはサイドパネルは後からバタバタでてきたりするので、パネルがでてくるまで待つ
-	// とりあえず２秒待つ（本当は適当に待つだけじゃなくてちゃんと対象のサイドパネルを指定するべき...）
-	await page.waitForTimeout(1500);
-
-	// Get all metabox
-	const PostMetaPanels = await page.$$('.components-button.components-panel__body-toggle');
-
-	// await page.waitForSelector('text=*Tags*');
-
-	for (const button of PostMetaPanels) {
-		// Get the button text
-		const buttonText = await button.textContent();
-		if (buttonText === 'Tags') {
-			// Get the value of the 'aria-expanded' attribute
-			const isExpanded = await button.getAttribute('aria-expanded');
-
-			// If the panel is not expanded, click the button
-			if (isExpanded === 'false') {
-				await button.click();
-			}
-			// Set tag to post
-			await page.getByLabel('Add New Tag').fill('test-tag');
-			await page.getByLabel('Add New Tag').press('Enter');
-			await page.waitForTimeout(1000);
-		}
+	// サイドパネルは後から描画されるため、操作対象の「Tags」パネルトグルが
+	// 出現するまで確定的に待ち、閉じていれば開く（ElementHandle ではなく Locator API）。
+	const tagsPanel = page
+		.locator('.components-button.components-panel__body-toggle')
+		.filter({ hasText: 'Tags' })
+		.first();
+	await tagsPanel.waitFor({ state: 'visible', timeout: 15000 });
+	if ((await tagsPanel.getAttribute('aria-expanded')) === 'false') {
+		await tagsPanel.click();
 	}
 
-	// await page.goto('http://localhost:8889/wp-admin/post.php?post=10&action=edit');
+	// Set tag to post
+	await page.getByLabel('Add Tag').fill('test-tag');
+	await page.getByLabel('Add Tag').press('Enter');
+	// タグトークンが生成される（追加が反映される）まで確定的に待つ。
+	await expect(
+		page
+			.locator('.components-form-token-field__token')
+			.filter({ hasText: 'test-tag' })
+	).toBeVisible({ timeout: 10000 });
 
+	// await page.goto('/wp-admin/post.php?post=10&action=edit');
+
+	// 公開する（確定パネルが出た場合のみ押す）。完了後にエディタ状態から投稿 ID を取得する。
 	await page.getByRole('button', { name: 'Publish', exact: true }).click();
-	await page.getByRole('region', { name: 'Editor publish' }).getByRole('button', { name: 'Publish', exact: true }).click();
+	try {
+		await page
+			.getByRole('region', { name: 'Editor publish' })
+			.getByRole('button', { name: 'Publish', exact: true })
+			.click({ timeout: 5000 });
+	} catch {
+		// 事前公開パネルが無効な場合は最初の Publish で公開完了
+	}
+	await waitForPostPublished(page);
+	const testPostId = await page.evaluate(() =>
+		window.wp.data.select('core/editor').getCurrentPostId()
+	);
+	// getCurrentPostId() は number | string | null を返す。null だと不正な URL になるため検証する。
+	expect(testPostId).toBeTruthy();
 	// Display Post ----------------------------------------------
-	await page.getByRole('button', { name: 'Dismiss this notice' }).getByRole('link', { name: 'View Post' }).click();
+	await page.goto(`/?p=${testPostId}`);
 	// Select category in taxonomy block
-	await page.selectOption('.vk_taxonomy__input-wrap--select', { value: 'uncategorized' });
+	await page.selectOption('.vk_taxonomy__input-wrap--select', {
+		value: 'uncategorized',
+	});
 	// チェック
 	// h1タグのテキストを取得する
-	await page.waitForSelector('h1.alignwide.wp-block-query-title');
-	h1Text = await page.$eval('h1.alignwide.wp-block-query-title', el => el.textContent);
+	h1Text = await page.locator('h1.wp-block-query-title').textContent();
 	// expect関数を使用して、h1タグのテキストが「Uncategorized」を含むことを確認する
 	expect(h1Text).toContain('Uncategorized');
 
 	// Check Post tag /////////////////////////////////////////////////
 
 	await page.getByRole('link', { name: 'Test Post' }).first().click();
-	await page.getByRole('menuitem', { name: ' Edit Post' }).click();
+	await page.locator('#wp-admin-bar-edit a').click();
 
 	// Display Post ----------------------------------------------
-	await page.getByRole('document', { name: 'Block: Taxonomy' }).locator('div').nth(1).click();
+	// 位置依存の .locator('div').nth(1) ではなく、e2e-utils の selectBlocks で
+	// タクソノミーブロックを確実に選択する。
+	await editor.selectBlocks(
+		editor.canvas.getByRole('document', { name: 'Block: Taxonomy' })
+	);
 	// 対象を「post_tag」に変更
-	await page.getByRole('combobox', { name: 'Taxonomy' }).selectOption('post_tag');
-	await page.getByRole('button', { name: 'Update' }).click();
-	await page.getByRole('button', { name: 'Dismiss this notice' }).getByRole('link', { name: 'View Post' }).click();
+	await page
+		.getByRole('combobox', { name: 'Taxonomy' })
+		.selectOption('post_tag');
+	await saveEditorPost(page);
+	// フロント（単一投稿）へ遷移
+	await page.goto(`/?p=${testPostId}`);
 	// Select category in taxonomy block
-	await page.selectOption('.vk_taxonomy__input-wrap--select', { value: 'test-tag' });
+	await page.selectOption('.vk_taxonomy__input-wrap--select', {
+		value: 'test-tag',
+	});
 	// チェック
 	// h1タグのテキストを取得する
-	await page.waitForSelector('h1.alignwide.wp-block-query-title');
-	h1Text = await page.$eval('h1.alignwide.wp-block-query-title', el => el.textContent);
+	h1Text = await page.locator('h1.wp-block-query-title').textContent();
 	// expect関数を使用して、h1タグのテキストが「test-tag」を含むことを確認する
 	expect(h1Text).toContain('test-tag');
 
 	//////////////////////////////////////////////////////////////////////////////////////////////
 
 	// Delete Test post
-	await page.goto('http://localhost:8889/wp-admin/edit.php?post_type=post');
+	await page.goto('/wp-admin/edit.php?post_type=post');
 	await page.locator('#cb-select-all-1').check();
 	await page.locator('#bulk-action-selector-top').selectOption('trash');
 	await page.locator('#doaction').click();
-	await page.goto('http://localhost:8889/wp-admin/edit.php?post_status=trash&post_type=post');
-	await page.locator('#post-query-submit + #delete_all').filter({ hasText: 'Empty Trash' }).click();
+	await page.goto('/wp-admin/edit.php?post_status=trash&post_type=post');
+	await page
+		.locator('#post-query-submit + #delete_all')
+		.filter({ hasText: 'Empty Trash' })
+		.click();
 
 	// Delete all event
-	await page.goto('http://localhost:8889/wp-admin/edit.php?post_type=event');
+	await page.goto('/wp-admin/edit.php?post_type=event');
 	await page.locator('#cb-select-all-1').check();
 	await page.locator('#bulk-action-selector-top').selectOption('trash');
 	await page.locator('#doaction').click();
-	await page.goto('http://localhost:8889/wp-admin/edit.php?post_status=trash&post_type=event');
-	await page.locator('#post-query-submit + #delete_all').filter({ hasText: 'Empty Trash' }).click();
+	await page.goto('/wp-admin/edit.php?post_status=trash&post_type=event');
+	await page
+		.locator('#post-query-submit + #delete_all')
+		.filter({ hasText: 'Empty Trash' })
+		.click();
 
-	// Delete Event Category
-	await page.goto('http://localhost:8889/wp-admin/edit-tags.php?taxonomy=event-cat&post_type=event');
-	await page.getByRole('link', { name: '“event-term” (Edit)' }).click();
-	page.once('dialog', dialog => {
-		console.log(`Dialog message: ${dialog.message()}`);
-		dialog.dismiss().catch(() => { });
-	});
-	await page.getByRole('link', { name: 'Delete' }).click();
-
-	// Delete all post_type_manage
-	await page.goto('http://localhost:8889/wp-admin/edit.php?post_type=post_type_manage');
-	await page.locator('#cb-select-all-1').check();
-	await page.locator('#bulk-action-selector-top').selectOption('trash');
-	await page.locator('#doaction').click();
-	await page.goto('http://localhost:8889/wp-admin/edit.php?post_status=trash&post_type=post_type_manage');
-	await page.locator('#post-query-submit + #delete_all').filter({ hasText: 'Empty Trash' }).click();
-
-	// Delete ExUnit
-
-	// Check Plugin ExUnit is Active
-	const isExUnitActive = await page.isVisible('#wp-admin-bar-veu_adminlink');
-
-	// If ExUnit Active
-	if (isExUnitActive) {
-		await page.getByRole('link', { name: 'Plugins', exact: true }).click();
-		await page.getByRole('link', { name: 'Deactivate VK All in One Expansion Unit' }).click();
-		// ※ 正常に ExUnit の削除が完了しない...が、まぁ今の所問題はないので保留。
-		// ローカルでテストを繰り返す場合は http://localhost:8889/wp-admin/plugins.php で手動で削除する必要がある。
-		page.once('dialog', dialog => {
-			console.log(`Dialog message: ${dialog.message()}`);
-			dialog.dismiss().catch(() => { });
+	// 以降の後始末（ターム/CPT 定義/ExUnit の削除）は best-effort。
+	// CI はクリーン環境で実行されるため、UI ラベル変更等で失敗してもテスト結果に影響させない。
+	try {
+		// Delete Event Category
+		await page.goto(
+			'/wp-admin/edit-tags.php?taxonomy=event-cat&post_type=event'
+		);
+		page.once('dialog', (dialog) => {
+			dialog.accept().catch(() => {});
 		});
-		await page.getByRole('link', { name: 'Delete VK All in One Expansion Unit' }).click();
+		await page
+			.locator('#the-list .row-title')
+			.filter({ hasText: 'event-term' })
+			.first()
+			.click({ timeout: 5000 });
+		await page
+			.getByRole('link', { name: 'Delete' })
+			.click({ timeout: 5000 });
+	} catch {
+		// 後始末失敗は無視
+	}
+
+	try {
+		// Delete all post_type_manage
+		await page.goto('/wp-admin/edit.php?post_type=post_type_manage');
+		await page.locator('#cb-select-all-1').check();
+		await page.locator('#bulk-action-selector-top').selectOption('trash');
+		await page.locator('#doaction').click();
+		await page.goto(
+			'/wp-admin/edit.php?post_status=trash&post_type=post_type_manage'
+		);
+		await page
+			.locator('#post-query-submit + #delete_all')
+			.filter({ hasText: 'Empty Trash' })
+			.click();
+	} catch {
+		// 後始末失敗は無視
+	}
+
+	// Delete ExUnit（best-effort）
+	try {
+		const isExUnitActive = await page
+			.locator('#wp-admin-bar-veu_adminlink')
+			.isVisible();
+		if (isExUnitActive) {
+			await page.goto('/wp-admin/plugins.php');
+			page.once('dialog', (dialog) => {
+				dialog.accept().catch(() => {});
+			});
+			await page
+				.getByLabel('Deactivate VK All in One Expansion Unit')
+				.click({ timeout: 5000 });
+		}
+	} catch {
+		// 後始末失敗は無視
 	}
 });

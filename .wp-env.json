@@ -1,11 +1,12 @@
 {
-    "core": null,
-    "plugins": [
-        "."
+	"core": null,
+	"plugins": [
+		"."
 	],
 	"config": {
 		"WP_DEBUG": true,
 		"SCRIPT_DEBUG": true,
 		"FS_METHOD": "direct"
-	}
+	},
+	"testsEnvironment": false
 }

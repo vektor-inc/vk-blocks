@@ -42,7 +42,7 @@ const fontSizes = [
 ];
 
 function parseFontSize(fontSize = '') {
-	return fontSize.replace('font-size:', '');
+	return fontSize.replace('font-size:', '').replace(/;/g, '').trim();
 }
 
 export function getActiveInlineFontSize(value, name) {

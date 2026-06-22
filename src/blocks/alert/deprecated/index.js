@@ -13,10 +13,18 @@ const blockAttributes = {
 };
 
 /*
-// ver.1.104.0 で追加
-// 上記以降でdeprecatedを更新するときに対応お願いします
+// v1.80.0 アイコン設定の追加に伴う属性の追加
 const blockAttributes2 = {
 	...blockAttributes,
+	icon: {
+		type: 'string',
+		default: '',
+	},
+	iconText: {
+		type: 'string',
+		default: '',
+	},
+	// v1.105.0 モバイルアイコン位置設定の追加に伴う属性の追加
 	mobileIconPosition: {
 		type: 'string',
 		default: 'left',

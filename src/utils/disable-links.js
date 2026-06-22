@@ -1,4 +1,3 @@
-/* globals MutationObserver */
 import { useCallback, useEffect } from '@wordpress/element';
 
 const DEFAULT_LINK_SELECTOR =

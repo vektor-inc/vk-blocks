@@ -3,6 +3,98 @@ language: "ja-JP"
 reviews:
   profile: "chill"
   high_level_summary: true
+  # 意図的な設計・方針のため、以下は繰り返し指摘しないよう CodeRabbit へ通知する。
+  path_instructions:
+    - path: "package.json"
+      instructions: >-
+        volta.npm: "11.16.0" は実在する有効な npm バージョンで、volta は Node にバンドル
+        された npm ではなくこの固定版を使用します。Node 24.16.0 バンドル npm（11.13.0 等）と
+        一致させる必要はないため、volta.npm の変更は提案しないでください。
+    - path: "test/e2e/breadcrumb-disable-links.spec.ts"
+      instructions: >-
+        force クリック後の page.waitForTimeout(500) + URL 比較は「遷移しないこと」という
+        非イベントの不在を検証するための意図的な実装です。waitForNavigation は非推奨で、
+        かつ意図的に発生しないナビゲーションを待つことになるため不適。固定待機の置き換えや
+        navigation 監視への変更は提案しないでください。
+    - path: "test/e2e/list.spec.ts"
+      instructions: >-
+        page.evaluate 内の (window as any).wp は意図的です。e2e spec は CI で型チェック
+        されず、(window as any) はスイート共通の慣習です。global Window 型拡張の追加や
+        window.wp への型付けは提案しないでください。
+    - path: "test/e2e/spacer.spec.ts"
+      instructions: >-
+        editor.getEditedPostContent() の完全一致アサーション（toBe による厳密一致）は
+        意図的です。対象は VK Blocks 自身が生成する安定したシリアライズ出力であり、
+        toMatchSnapshot や toContain など部分一致・スナップショットへの変更は提案しないでください。
+    - path: "test/e2e/highlighter-*.spec.ts"
+      instructions: >-
+        editor.getEditedPostContent() の完全一致アサーション（toBe による厳密一致）は
+        意図的です。VK Blocks のフォーマット拡張（vk_highlighter）の出力と、テーマ
+        パレット由来の色値を含めて厳密に検証するためのものです。toMatchSnapshot や
+        toContain など部分一致・スナップショットへの変更は提案しないでください。
+    - path: "test/e2e/balloon.spec.ts"
+      instructions: >-
+        editor.getEditedPostContent() に対する 1 本の正規表現（toMatch）での
+        フルシリアライズ検証は意図的です。VK Blocks 自身が生成する balloon ブロックの
+        出力（クラス・属性・インライン style・アップロード URL）を厳密に検証するためで、
+        アップロード先の年/月や uuid ファイル名のみ動的に吸収しています。DOM パースや
+        小さな toMatch への分割は提案しないでください。
+    - path: "test/e2e/{balloon,vk-blocks-options}.spec.ts"
+      instructions: >-
+        fs.rmSync（一時ファイル削除）は Node >= 14.14.0 の API ですが、本プロジェクトは
+        Node 24（engines/volta）・CI は Node 20.x のため利用可能です。Node 互換性や
+        fs.unlinkSync へのフォールバックは提案しないでください。
+    - path: "test/e2e/taxonomy.spec.ts"
+      instructions: >-
+        (1) getCurrentPostId() の結果に対する expect(...).toBeTruthy() は意図的です。
+        WordPress の投稿 ID は 1 以上で 0 は「現在の投稿なし」を表す無効値のため、0 も
+        弾く toBeTruthy が正しく、not.toBeNull()/toBeDefined() への変更は提案しないでください。
+        (2) page.once('dialog', d => d.accept()) を click の直前に登録するのは、トリガ前に
+        ハンドラを登録する Playwright の正しいパターンで race はありません（best-effort の
+        後始末）。Promise.all/waitForEvent への変更は提案しないでください。
+    - path: "test/e2e/license-key-security.spec.ts"
+      instructions: >-
+        単一テスト内でグループごとにループ検査しているのは意図的です。検査対象のブロック
+        一覧は実行時にライブページから取得するため、収集時に同期宣言が必要な test() を
+        グループ毎に分割するのは原理的に不可能です（グループ番号は console.log 出力済み）。
+        per-group の test 分割は提案しないでください。
+        また beforeEach のパーマリンク設定を beforeAll へ移す提案もしないでください。
+        この describe にはテストが 1 本のみで beforeEach は 1 回しか走らず高速化にならず、
+        かつ admin / page は test スコープの fixture で beforeAll では利用できません
+        （beforeAll で使えるのは requestUtils 等の worker スコープのみ）。
+    - path: "gulpfile.js"
+      instructions: >-
+        const autoprefixer = require('gulp-autoprefixer').default; は意図的です。
+        gulp-autoprefixer@10 は ESM ですが、本プロジェクトが対象とする Node では
+        require(ESM) がサポートされ（volta/engines は Node 24、CI は Node 20.19+）、
+        require した既定関数は .default に入るため、この記述で正しく動作します。
+        ESM 化（type: module / .mjs）や dynamic import への変更、v9 へのダウングレードは
+        提案しないでください。
+        また sassQuietDeprecations.silenceDeprecations の 'if-function' は、使用中の
+        Dart Sass 1.100.0 に実在する有効な deprecation ID（sass.deprecations に存在）です。
+        'if-function' を無効 ID として削除する提案はしないでください。
+    - path: "src/**/*.js"
+      instructions: >-
+        本プロジェクトは eslint.config.js で camelcase ルールを 'off' にしています
+        （PHP / REST 由来の snake_case 属性が多数あるため意図的）。よって
+        padding_left_and_right や upper_level 等の snake_case プロパティは camelcase
+        警告を出しません。eslint-disable-line camelcase の追加や camelcase 再有効化、
+        プロパティ名の変更は提案しないでください。
+    - path: "eslint.config.js"
+      instructions: >-
+        react-hooks/rules-of-hooks・react-hooks/exhaustive-deps・no-shadow・camelcase の
+        無効化、および linterOptions.reportUnusedDisableDirectives: 'off' は意図的です
+        （既存コードの規模・PHP 由来の snake_case 属性の都合で、一部は段階的に対応中で
+        別途追跡しています）。これらのルールの再有効化は本リポジトリの方針として
+        提案しないでください。
+    - path: "jest.setup.js"
+      instructions: >-
+        setTimeout ベースの MessageChannel polyfill は意図的です。jsdom には
+        MessageChannel が無く、worker_threads 版は open handle が残るため、タイマーフェーズで
+        決定的に配送しハンドルを残さない本実装を採用しています。React 18 互換で、ユニット
+        テストは --detectOpenHandles でも 74/74 PASS・残留ハンドル無しを確認済みです。
+        この polyfill の削除、native/worker_threads MessageChannel への置換、
+        global.MessageChannel=undefined 化は提案しないでください。
   path_filters:
     - "!**/dist/**"
     - "!**/vendor/**"

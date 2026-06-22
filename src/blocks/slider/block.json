@@ -31,11 +31,15 @@
 		},
 		"autoPlayStop": {
 			"type": "boolean",
-			"default": false
+			"default": true
 		},
 		"autoPlayDelay": {
 			"type": "number",
 			"default": 2500
+		},
+		"pauseButton": {
+			"type": "boolean",
+			"default": false
 		},
 		"pagination": {
 			"type": "string",

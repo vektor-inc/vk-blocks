@@ -11,6 +11,17 @@ const blockAttributes = {
 	},
 };
 
+/*
+// v1.60.0 質問・回答の表示切替の追加に伴う属性の追加
+const blockAttributes2 = {
+	...blockAttributes,
+	showContent: {
+		type: 'string',
+		default: 'default',
+	},
+}
+*/
+
 const deprecated = [
 	{
 		attributes: blockAttributes,

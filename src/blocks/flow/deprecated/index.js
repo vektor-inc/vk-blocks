@@ -22,6 +22,17 @@ const blockAttributes =  {
 	},
 }
 
+/*
+// v1.8.1 画像alt属性の追加に伴う属性の追加
+const blockAttributes2 = {
+	...blockAttributes,
+	insertImageAlt: {
+		type: 'string',
+		default: null,
+	},
+}
+*/
+
 const deprecated = [
 	{
 		attributes: blockAttributes,

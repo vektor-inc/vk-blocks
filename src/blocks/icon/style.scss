@@ -32,8 +32,10 @@
 		}
 		&_link {
 			display: flex;
+			text-decoration: none;
 			&:hover {
 				opacity: .85;
+				text-decoration: none;
 			}
 		}
 		&_font {

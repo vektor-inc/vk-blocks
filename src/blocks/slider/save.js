@@ -1,4 +1,5 @@
 import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
+import { PauseButton } from './pause-button';
 
 export default function save({ attributes }) {
 	const {
@@ -8,6 +9,7 @@ export default function save({ attributes }) {
 		autoPlay,
 		autoPlayStop,
 		autoPlayDelay,
+		pauseButton,
 		loop,
 		effect,
 		speed,
@@ -27,6 +29,7 @@ export default function save({ attributes }) {
 		autoPlay,
 		autoPlayStop,
 		autoPlayDelay,
+		pauseButton,
 		pagination,
 		width,
 		loop,
@@ -81,6 +84,9 @@ export default function save({ attributes }) {
 		className: `swiper swiper-container vk_slider vk_slider_${blockId}${alignClass}`,
 	});
 
+	// 停止/再生ボタンの HTML（自動再生が有効かつ表示設定が ON の時のみ出力）
+	const pause_button_html = autoPlay && pauseButton ? <PauseButton /> : '';
+
 	return (
 		<div {...blockProps} data-vkb-slider={JSON.stringify(sliderData)}>
 			<div className={`swiper-wrapper`}>
@@ -89,6 +95,7 @@ export default function save({ attributes }) {
 			{navigation_next_html}
 			{navigation_prev_html}
 			{pagination_html}
+			{pause_button_html}
 		</div>
 	);
 }

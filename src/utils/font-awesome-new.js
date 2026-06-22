@@ -84,14 +84,14 @@ export const FontAwesome = (props) => {
 		setAttributes,
 		modeClass = false,
 	} = props;
-	// eslint-disable-next-line no-undef
+
 	const hasVkFontAwesome =
 		typeof vkFontAwesome !== 'undefined' && vkFontAwesome;
-	// eslint-disable-next-line no-undef
+
 	const iconsUrl = hasVkFontAwesome ? vkFontAwesome.iconsUrl : '';
-	// eslint-disable-next-line no-undef
+
 	const versions = hasVkFontAwesome ? vkFontAwesome.versions : [];
-	// eslint-disable-next-line no-undef
+
 	const currentVersion = hasVkFontAwesome
 		? vkFontAwesome.currentVersion
 		: undefined;

@@ -1,3 +1,4 @@
+import SliderHook1_121_1 from './1.121.1';
 import SliderHook1_115_0 from './1.115.0';
 import SliderHook1_104_0 from './1.104.0';
 import SliderHook1_48_1 from './1.48.1';
@@ -10,6 +11,7 @@ import SliderHook1_2_1 from './1.2.1';
 import SliderHook1_0_16 from './1.0.16';
 
 export default [
+	SliderHook1_121_1, // 1.121.1 (pauseButton 追加前 / zoom CSS は var(--vk-slider-item-bg-image) 形式)
 	SliderHook1_115_0, // 1.115.0 (zoomFinalScal typo後方互換)
 	SliderHook1_104_0, // 1.110.1 (zoomFinalScal typo後方互換)
 	SliderHook1_115_0, // 1.115.0

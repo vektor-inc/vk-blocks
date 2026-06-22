@@ -14,12 +14,16 @@
  *  別の site-logo が表示される。本テストでは <main> 内（投稿コンテンツ内）に
  *  限定して検証する。
  */
+import path from 'path';
 import { test, expect } from '@wordpress/e2e-test-utils-playwright';
 
 // クリーンアップ用に作成した固定ページの ID を保持
 const createdPageIds: number[] = [];
 let originalShowOnFront: string = 'posts';
 let originalPageOnFront: number | null = null;
+// テスト用にアップロードしたサイトロゴ画像の ID と、元のサイトロゴ設定を退避
+let uploadedLogoId: number | null = null;
+let originalSiteLogo: number = 0;
 
 const SITE_LOGO_ON_BLOCK = '<!-- wp:site-logo {"isFrontPageH1":true} /-->';
 const SITE_LOGO_OFF_BLOCK = '<!-- wp:site-logo {"isFrontPageH1":false} /-->';
@@ -77,18 +81,58 @@ test.describe('PR #2962 core/site-logo フロントページ h1 化', () => {
 		});
 		originalShowOnFront = settings.show_on_front ?? 'posts';
 		originalPageOnFront = settings.page_on_front ?? null;
+		originalSiteLogo = settings.site_logo ?? 0;
+
+		// core/site-logo ブロックはサイトロゴ未設定だとフロント側で空出力になり、
+		// .wp-block-site-logo 自体が出力されない。h1 置換の検証にはロゴ画像が必要なため、
+		// テスト用画像をアップロードしてサイトロゴに設定する。
+		const media: any = await requestUtils.uploadMedia(
+			path.join(
+				__dirname,
+				'..',
+				'e2e-tests',
+				'assets',
+				'10x10_e2e_test_image_z9T8jK.png'
+			)
+		);
+		// media.id が無いと site_logo に undefined を渡してしまうため、
+		// アップロード結果を検証してから利用する。
+		if (!media || typeof media.id === 'undefined') {
+			throw new Error(
+				`Failed to upload site logo media: ${JSON.stringify(media)}`
+			);
+		}
+		uploadedLogoId = media.id;
+		await requestUtils.rest({
+			path: '/wp/v2/settings',
+			method: 'POST',
+			data: { site_logo: media.id },
+		});
 	});
 
 	test.afterAll(async ({ requestUtils }) => {
-		// 元のフロントページ表示設定に戻す
+		// 元のフロントページ表示設定・サイトロゴ設定に戻す
 		await requestUtils.rest({
 			path: '/wp/v2/settings',
 			method: 'POST',
 			data: {
 				show_on_front: originalShowOnFront,
 				page_on_front: originalPageOnFront,
+				site_logo: originalSiteLogo,
 			},
 		});
+
+		// アップロードしたサイトロゴ画像を削除
+		if (uploadedLogoId) {
+			try {
+				await requestUtils.rest({
+					path: `/wp/v2/media/${uploadedLogoId}?force=true`,
+					method: 'DELETE',
+				});
+			} catch {
+				// 削除失敗は無視
+			}
+		}
 
 		// 作成した固定ページを削除
 		for (const id of createdPageIds) {
@@ -97,7 +141,7 @@ test.describe('PR #2962 core/site-logo フロントページ h1 化', () => {
 					path: `/wp/v2/pages/${id}?force=true`,
 					method: 'DELETE',
 				});
-			} catch (e) {
+			} catch {
 				// 削除失敗は無視
 			}
 		}

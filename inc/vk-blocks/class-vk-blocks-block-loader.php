@@ -113,6 +113,8 @@ class VK_Blocks_Block_Loader {
 			wp_enqueue_style( 'vk-blocks/core-image', VK_BLOCKS_DIR_URL . 'build/extensions/core/image/style.css', array(), VK_BLOCKS_VERSION );
 			wp_enqueue_style( 'vk-blocks/core-columns', VK_BLOCKS_DIR_URL . 'build/extensions/core/columns/style.css', array(), VK_BLOCKS_VERSION );
 			wp_enqueue_style( 'vk-blocks/core-cover', VK_BLOCKS_DIR_URL . 'build/extensions/core/cover/style.css', array(), VK_BLOCKS_VERSION );
+			// core/navigation のメニュー説明表示オプション用CSS（コアの display:none を上書き）。
+			wp_enqueue_style( 'vk-blocks/core-navigation', VK_BLOCKS_DIR_URL . 'build/extensions/core/navigation/style.css', array(), VK_BLOCKS_VERSION );
 		} else {
 			// 分割読み込みが無効な場合はフロントエンド画面では結合スタイルを読み込まない
 			wp_enqueue_style( 'vk-blocks-build-css' );

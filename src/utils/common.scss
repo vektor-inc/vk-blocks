@@ -743,6 +743,48 @@ $colorPalette: (
 
 }
 
+//vk_slider用の自動再生 停止/再生ボタン
+//矢印ボタンと同じ見た目で、ページネーションや矢印と干渉しにくい右上に配置する
+.vk_slider,
+.vk_post_list_slider {
+	.swiper-pause-button {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		left: auto;
+		z-index: 20;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 2.4rem;
+		height: 2.4rem;
+		padding: 0;
+		border: none;
+		cursor: pointer;
+		color: var(--vk-color-text-body);
+		background-color: var(--vk-color-background-white-translucent);
+		border-radius: var(--vk-size-radius);
+		.vk_slider_pauseButton_icon {
+			width: 1.2rem;
+			height: 1.2rem;
+			fill: currentColor;
+		}
+		//再生中（既定）は停止アイコンのみ表示し、再生アイコンは隠す
+		.vk_slider_pauseButton_icon-play {
+			display: none;
+		}
+		//停止中は再生アイコンを表示し、停止アイコンを隠す
+		&.is-paused {
+			.vk_slider_pauseButton_icon-pause {
+				display: none;
+			}
+			.vk_slider_pauseButton_icon-play {
+				display: block;
+			}
+		}
+	}
+}
+
 .swiper-container {
 	/* vk_width-full は廃止になったが互換処理のために 2022年10月末までは残す */
 	&.vk_width-full {

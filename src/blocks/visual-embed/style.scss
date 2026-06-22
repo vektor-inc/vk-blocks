@@ -12,14 +12,16 @@
 	&.alignleft {
 		justify-items: start;
 
-		iframe {
+		iframe,
+		.vk-visual-embed-preview--youtube {
 			margin-right: auto;
 		}
 	}
 	&.aligncenter {
 		justify-items: center;
 
-		iframe {
+		iframe,
+		.vk-visual-embed-preview--youtube {
 			margin-left: auto;
 			margin-right: auto;
 		}
@@ -27,13 +29,56 @@
 	&.alignright {
 		justify-items: end;
 
-		iframe {
+		iframe,
+		.vk-visual-embed-preview--youtube {
 			margin-left: auto;
 		}
 	}
 
 	&-preview {
 		width: 100%;
+
+		&--youtube {
+			position: relative;
+			display: block;
+			overflow: hidden;
+			max-width: 100%;
+			aspect-ratio: 16 / 9;
+			background-color: #000;
+			// pointer-events: none は子要素側に移譲。
+			// 親要素は hover を受け取って title 属性のネイティブ tooltip を表示する必要があるため、
+			// ここでは pointer-events を奪わない。
+		}
+
+		&__youtube-thumbnail {
+			display: block;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			pointer-events: none;
+		}
+
+		&__youtube-play {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: clamp(40px, 12%, 68px);
+			aspect-ratio: 17 / 12; // 68 : 48 の比率を維持
+			border-radius: clamp(6px, 1.8%, 12px);
+			background-color: rgba(0, 0, 0, 0.72);
+			transform: translate(-50%, -50%);
+			pointer-events: none;
+		}
+
+		&__youtube-play-icon {
+			width: 25%; // プレイボタン幅の25%（≒ 17px @ 68px width）
+			height: auto;
+			fill: #fff;
+			pointer-events: none;
+		}
 	}
 
 	iframe {
@@ -51,14 +96,16 @@
 		&[data-align=left]:has(.vk-visual-embed) {
 			justify-items: start;
 
-			.vk-visual-embed iframe {
+			.vk-visual-embed iframe,
+			.vk-visual-embed-preview--youtube {
 				margin-right: auto;
 			}
 		}
 		&[data-align=center]:has(.vk-visual-embed) {
 			justify-items: center;
 
-			.vk-visual-embed iframe {
+			.vk-visual-embed iframe,
+			.vk-visual-embed-preview--youtube {
 				margin-left: auto;
 				margin-right: auto;
 			}
@@ -66,7 +113,8 @@
 		&[data-align=right]:has(.vk-visual-embed) {
 			justify-items: end;
 
-			.vk-visual-embed iframe {
+			.vk-visual-embed iframe,
+			.vk-visual-embed-preview--youtube {
 				margin-left: auto;
 			}
 		}

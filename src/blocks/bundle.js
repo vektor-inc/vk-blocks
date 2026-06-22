@@ -6,7 +6,7 @@ import '@wordpress/notices';
 // import '@wordpress/block-editor';
 import {
 	registerBlockType,
-	unstable__bootstrapServerSideBlockDefinitions, // eslint-disable-line camelcase
+	unstable__bootstrapServerSideBlockDefinitions,
 } from '@wordpress/blocks';
 import { compareVersions } from 'compare-versions';
 const vkblocksPro = [];
@@ -49,6 +49,7 @@ import '@vkblocks/extensions/core/group/style';
 import '@vkblocks/extensions/core/list/style';
 import '@vkblocks/extensions/core/columns/style';
 import '@vkblocks/extensions/core/site-logo/style';
+import '@vkblocks/extensions/core/navigation/style';
 import '@vkblocks/extensions/core/table/style';
 import '@vkblocks/extensions/core/cover/style';
 import '@vkblocks/extensions/common/hidden-extension';
@@ -121,7 +122,7 @@ const registerBlock = (block) => {
 		};
 	} else if (metadata) {
 		// ServerSideBlockの設定読み込み
-		unstable__bootstrapServerSideBlockDefinitions({ [name]: metadata }); // eslint-disable-line camelcase
+		unstable__bootstrapServerSideBlockDefinitions({ [name]: metadata });
 	}
 
 	// 5.8以前の場合はnameのみ渡す

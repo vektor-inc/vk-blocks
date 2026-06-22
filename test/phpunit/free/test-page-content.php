@@ -59,7 +59,11 @@ class PageContentBlockTest extends VK_UnitTestCase {
 		$actual   = vk_blocks_page_content_render_callback( $attributes );
 		$expected = vk_blocks_unescape_html( '<div class=\"vk_pageContent vk_pageContent-id-' . intval( $this->page_id ) . ' wp-block-vk-blocks-page-content\"><p class=\"wp-block-paragraph\">This is my page.<\/p><\/div><a href=\"' . admin_url() . 'post.php?post=' . intval( $this->page_id ) . '&#038;action=edit\" class=\"vk_pageContent_editBtn btn btn-outline-primary btn-sm veu_adminEdit\" target=\"_blank\">' . __( 'Edit this area', 'vk-blocks' ) . '<\/a>' );
 
-		$this->assertEquals( $expected, $actual );
+		// WP バージョンにより <p> に class="wp-block-paragraph" が付く場合と付かない場合がある
+		$normalize = function ( $html ) {
+			return preg_replace( '/<p class="wp-block-paragraph">/', '<p>', $html );
+		};
+		$this->assertEquals( $normalize( $expected ), $normalize( $actual ) );
 	}
 }
 

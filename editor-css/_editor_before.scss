@@ -197,6 +197,35 @@ $color-danger: #dd3333;
     min-width: 248px;
 }
 
+// 背景画像をブロックツールバーから変更するためのポップオーバー
+.vk-block-editor-bg-image-toolbar__popover {
+	// メディアライブラリ（.media-modal-backdrop: z-index 159900）より背面に配置し、
+	// 「Select image / Replace Image」でモーダルを開いたときにポップオーバーが
+	// モーダルより手前に残らないようにする。core/cover の MediaReplaceFlow が
+	// 採用しているポップオーバーの z-index（99999）と同じ値。
+	// .components-popover のデフォルト z-index（1000000）を上書きするため2クラスで指定。
+	&.components-popover {
+		z-index: 99999;
+	}
+	.vk-block-editor-bg-image-toolbar__content {
+		width: 280px;
+		padding: 16px;
+	}
+	// 各デバイス（PC / タブレット / モバイル）の設定ブロックの間隔
+	.vk-block-editor-bg-image-toolbar__field + .vk-block-editor-bg-image-toolbar__field {
+		margin-top: 16px;
+	}
+	.vk-block-editor-bg-image-toolbar__label {
+		margin: 0 0 6px;
+		font-weight: bold;
+	}
+	// プレビュー画像がポップオーバー幅を超えないようにする
+	.icon-image {
+		max-width: 100%;
+		min-width: 0;
+	}
+}
+
 .mb-2+div.components-toolbar{
 	margin-top: 0!important;
 }
@@ -345,6 +374,11 @@ $color-danger: #b52727;
 /* .vk_grid-column Layout
 /*-------------------------------------------*/
 @import "./editor_before_grid-column";
+
+/*-------------------------------------------*/
+/* core/navigation Show menu item description
+/*-------------------------------------------*/
+@import "./editor_before_navigation";
 
 /*-------------------------------------------*/
 /* edit hidden block class

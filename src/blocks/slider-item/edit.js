@@ -23,6 +23,7 @@ import {
 	ToggleControl,
 } from '@wordpress/components';
 import { AdvancedMediaUpload } from '@vkblocks/components/advanced-media-upload';
+import BackgroundImageToolbar from '@vkblocks/components/background-image-toolbar';
 import GenerateBgImage from './GenerateBgImage';
 import { isHexColor } from '@vkblocks/utils/is-hex-color';
 import { AdvancedColorPalette } from '@vkblocks/components/advanced-color-palette';
@@ -164,6 +165,10 @@ export default function SliderItemEdit(props) {
 						setAttributes({ verticalAlignment: alignment })
 					}
 					value={verticalAlignment}
+				/>
+				<BackgroundImageToolbar
+					sidebarClass={'vk_slider_item_sidebar_bgImage'}
+					{...props}
 				/>
 				<ToolbarGroup>
 					<LinkToolbar

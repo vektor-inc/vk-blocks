@@ -38,7 +38,6 @@ export default function save({ attributes }) {
 		delete iconImageColorStyle.background;
 	}
 
-	// eslint-disable-next-line camelcase,no-undef
 	const defaultAvatar =
 		typeof img_path !== 'undefined' && !!img_path.full_path // eslint-disable-line no-undef
 			? img_path.full_path // eslint-disable-line no-undef

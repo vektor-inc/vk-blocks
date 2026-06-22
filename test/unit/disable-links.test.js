@@ -6,9 +6,17 @@
 /* eslint-env jest, browser */
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import { act } from 'react';
 import { useDisableLinks } from '@vkblocks/utils/disable-links';
 
-const flushEffects = () => new Promise((resolve) => setTimeout(resolve, 0));
+global.IS_REACT_ACT_ENVIRONMENT = true;
+
+// MutationObserver のコールバックはマイクロタスクで配送されるため、
+// 1 マクロタスク分待機して反映を待つ
+const flushMutations = () =>
+	act(async () => {
+		await new Promise((resolve) => setTimeout(resolve, 0));
+	});
 
 const TestComponent = ({ selector, onLinkProcess, depsKey }) => {
 	useDisableLinks({
@@ -30,9 +38,11 @@ describe('useDisableLinks', () => {
 		root = createRoot(container);
 	});
 
-	afterEach(() => {
+	afterEach(async () => {
 		if (container) {
-			root.unmount();
+			await act(async () => {
+				root.unmount();
+			});
 			container.remove();
 		}
 		document.body.innerHTML = '';
@@ -43,10 +53,10 @@ describe('useDisableLinks', () => {
 		link.href = '#';
 		document.body.appendChild(link);
 
-		root.render(<TestComponent selector="a" />);
-		// useEffect での初回実行と MutationObserver のコールバック実行の両方を待つ
-		await flushEffects();
-		await flushEffects();
+		// render を act で囲むことで useEffect（初回の disableLinks）の実行を待つ
+		await act(async () => {
+			root.render(<TestComponent selector="a" />);
+		});
 
 		const clickEvent = new MouseEvent('click', {
 			bubbles: true,
@@ -65,14 +75,15 @@ describe('useDisableLinks', () => {
 			newLink.dataset.processed = '1';
 		});
 
-		root.render(
-			<TestComponent
-				selector=".target a"
-				onLinkProcess={processed}
-				depsKey="deps"
-			/>
-		);
-		await flushEffects();
+		await act(async () => {
+			root.render(
+				<TestComponent
+					selector=".target a"
+					onLinkProcess={processed}
+					depsKey="deps"
+				/>
+			);
+		});
 
 		const wrapper = document.createElement('div');
 		wrapper.className = 'target';
@@ -80,7 +91,8 @@ describe('useDisableLinks', () => {
 		wrapper.appendChild(newLink);
 		document.body.appendChild(wrapper);
 
-		await flushEffects();
+		// MutationObserver のコールバック（disableLinks の再実行）を待つ
+		await flushMutations();
 
 		expect(processed).toHaveBeenCalled();
 		expect(newLink.dataset.processed).toBe('1');

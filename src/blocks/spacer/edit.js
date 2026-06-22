@@ -5,6 +5,7 @@ import { __ } from '@wordpress/i18n';
 import {
 	PanelBody,
 	BaseControl,
+	ExternalLink,
 	__experimentalToggleGroupControl as ToggleGroupControl,
 	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
 } from '@wordpress/components';
@@ -16,8 +17,9 @@ import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import AdvancedViewportControl from '@vkblocks/components/advanced-viewport-control';
 import AdvancedUnitControl from '@vkblocks/components/advanced-unit-control';
 import AdvancedSpacerControl from './advanced-spacer-control';
+import { getSettingsPageUrl } from '@vkblocks/utils/settings-page-url';
 import Spacers from './spacers';
-import { useEffect } from '@wordpress/element';
+import { useEffect, createInterpolateElement } from '@wordpress/element';
 
 export default function SpacerEdit({
 	attributes,
@@ -122,9 +124,20 @@ export default function SpacerEdit({
 						`}
 					</style>
 					<p>
-						{__(
-							'You can change each common margin size from Setting > VK Blocks',
-							'vk-blocks'
+						{createInterpolateElement(
+							__(
+								'You can change each common margin size from <Link>Setting > VK Blocks</Link>',
+								'vk-blocks'
+							),
+							{
+								Link: (
+									<ExternalLink
+										href={getSettingsPageUrl(
+											'margin-setting'
+										)}
+									/>
+								),
+							}
 						)}
 					</p>
 					<AdvancedSpacerControl
