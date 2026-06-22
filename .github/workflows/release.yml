@@ -129,17 +129,18 @@ jobs:
           [ -d test ] && cp -r test "dist/${{ env.plugin_name }}/test" || true
           ls dist/${{ env.plugin_name }}/vendor/bin/phpunit && echo "phpunit OK" || echo "phpunit NOT FOUND"
       - name: Setup wp-env for dist
+        # npm run phpunit:free は --config .wp-env.tests.json を使うため、dist をその config にマウントして起動を揃える
         run: |
           node <<'NODE'
           const fs = require('fs');
-          const p = '.wp-env.json';
+          const p = '.wp-env.tests.json';
           const config = fs.existsSync(p) ? JSON.parse(fs.readFileSync(p, 'utf8')) : {};
           config.plugins = ['./dist/${{ env.plugin_name }}'];
           fs.writeFileSync(p, JSON.stringify(config));
           NODE
       - name: Start wp-env
         run: |
-          for n in 1 2 3; do npx wp-env start --update && break || [ "$n" -lt 3 ] || exit 1; done
+          for n in 1 2 3; do npx wp-env start --update --config .wp-env.tests.json && break || [ "$n" -lt 3 ] || exit 1; done
       - name: Run PHP Unit Test
         run: npm run phpunit:free
 
