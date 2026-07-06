@@ -7,6 +7,13 @@ import { __ } from '@wordpress/i18n';
  * ここでは再生中（停止アイコン表示）の初期状態でマークアップを生成する。
  * 切り替え時に使う aria-label は data 属性として保持しておく。
  *
+ * ⚠️ 配置上の制約: このボタンはスライダーのルート直下に配置すること。
+ * view.js が :scope > .swiper-pause-button で直下のみを検索するため、
+ * ラッパー要素で囲むと機能しなくなる。
+ * ⚠️ Placement contract: this button must be rendered as a DIRECT CHILD of the
+ * slider root — view.js locates it with ':scope > .swiper-pause-button', so
+ * wrapping it in another element breaks the feature.
+ *
  * @return {JSX.Element} 停止/再生ボタン要素
  */
 export const PauseButton = () => {

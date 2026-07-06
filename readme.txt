@@ -4,7 +4,7 @@ Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 6.6
 Tested up to: 7.0
-Stable tag: 1.122.0
+Stable tag: 1.123.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -107,6 +107,15 @@ e.g.
 1. VK Blocks examples.
 
 == Changelog ==
+
+= 1.123.0 =
+[ New Feature ][ Post List Block (Pro) / Post List Slider Block (Pro) / Select Post List Block (Pro) / Child Page List Block (Pro) ] Added a setting to show or hide the modified date.
+[ Spec Change ][ Outer ( Pro ) ][ Heading (not recommended) ][ Responsive Spacer ][ New FAQ ][ Border Box ][ Button Block ] Added JSON Schema enum definitions to block.json attributes so AI and external tools can read the allowed values for each setting.
+[ Spec Change ] Update vektor-inc/font-awesome-versions from 0.7.2 to 0.7.4
+[ Spec Change ][ Accordion ( Pro ) ][ New FAQ ][ Classic FAQ ] Added keyboard navigation (Enter / Space) and ARIA attributes (aria-expanded, aria-controls) for screen reader support
+[ Bug Fix ][ Category Badge Block (Pro) ] Fixed an issue where a PHP warning could be logged when the block was placed outside of a post context such as a Query Loop.
+[ Bug Fix ][ Slider Block ][ Post List Slider Block (Pro) ] Fixed an issue where autoplay never started on devices that request reduced motion (prefers-reduced-motion), making the slider appear broken with no way to resume it. Autoplay is now suppressed only when the pause / play button is enabled so visitors can resume it.
+[ Bug Fix ][ Outer ( Pro ) and other blocks ] Fixed an issue where opening a post containing blocks such as Outer marked the post as changed without any edit, causing an "unsaved changes" warning when leaving the screen, because the block ID was regenerated on every load. The block ID is now kept and only regenerated on actual duplication.
 
 = 1.122.0 =
 [ New Feature ][ Post List Block (Pro) / Post List Slider Block (Pro) ] Added exclusion settings that let you exclude specific posts by post ID and by taxonomy term.

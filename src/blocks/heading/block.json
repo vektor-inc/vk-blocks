@@ -12,14 +12,16 @@
 		},
 		"level": {
 			"type": "number",
-			"default": 2
+			"default": 2,
+			"enum": [1, 2, 3, 4, 5, 6]
 		},
 		"align": {
 			"type": "string"
 		},
 		"titleStyle": {
 			"type": "string",
-			"default": "default"
+			"default": "default",
+			"enum": ["default", "plain"]
 		},
 		"outerMarginBottom": {
 			"type": "number",
@@ -50,7 +52,8 @@
 		},
 		"subTextFlag": {
 			"type": "string",
-			"default": "off"
+			"default": "off",
+			"enum": ["on", "off"]
 		},
 		"subTextColor": {
 			"type": "string"

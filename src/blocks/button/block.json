@@ -34,11 +34,13 @@
 		},
 		"buttonSize": {
 			"type": "string",
-			"default": "md"
+			"default": "md",
+			"enum": ["xs", "sm", "md", "lg", "xl"]
 		},
 		"buttonType": {
 			"type": "string",
-			"default": "0"
+			"default": "0",
+			"enum": ["0", "1", "2"]
 		},
 		"buttonEffect": {
 			"type": "string",
@@ -46,7 +48,18 @@
 		},
 		"buttonColor": {
 			"type": "string",
-			"default": "primary"
+			"default": "primary",
+			"enum": [
+				"primary",
+				"secondary",
+				"success",
+				"info",
+				"warning",
+				"danger",
+				"light",
+				"dark",
+				"custom"
+			]
 		},
 		"buttonTextColorCustom": {
 			"type": "string"
@@ -56,19 +69,23 @@
 		},
 		"buttonAlign": {
 			"type": "string",
-			"default": "left"
+			"default": "left",
+			"enum": ["left", "center", "right", "wide", "block"]
 		},
 		"buttonWidthMobile": {
 			"type": "number",
-			"default": 0
+			"default": 0,
+			"enum": [0, 25, 50, 75, 100]
 		},
 		"buttonWidthTablet": {
 			"type": "number",
-			"default": 0
+			"default": 0,
+			"enum": [0, 25, 50, 75, 100]
 		},
 		"buttonWidth": {
 			"type": "number",
-			"default": 0
+			"default": 0,
+			"enum": [0, 25, 50, 75, 100]
 		},
 		"outerGap": {
 			"type": "string",

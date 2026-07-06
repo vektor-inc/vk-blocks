@@ -13,7 +13,7 @@
 		}
 	],
 	"require": {
-		"vektor-inc/font-awesome-versions": "^0.7.2",
+		"vektor-inc/font-awesome-versions": "^0.7.4",
 		"vektor-inc/vk-swiper": "^0.3.5",
 		"tgmpa/tgm-plugin-activation": "dev-develop",
 		"vektor-inc/vk-admin": "^0.8.0",
@@ -22,7 +22,7 @@
 		"vektor-inc/vk-breadcrumb": "^0.2.8",
 		"vektor-inc/vk-term-color": "^0.7.1",
 		"vektor-inc/vk-css-optimize": "^0.2.5",
-		"vektor-inc/vk-component": "^1.6.5"
+		"vektor-inc/vk-component": "^1.7.0"
 	},
 	"require-dev": {
 		"doctrine/instantiator": "1.5.0",

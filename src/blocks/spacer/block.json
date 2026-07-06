@@ -31,7 +31,17 @@
 		},
 		"spaceSize": {
 			"type": "string",
-			"default": "medium"
+			"default": "medium",
+			"enum": [
+				"xxs",
+				"xs",
+				"small",
+				"medium",
+				"large",
+				"xl",
+				"xxl",
+				"custom"
+			]
 		}
 	},
 	"textdomain": "vk-blocks",

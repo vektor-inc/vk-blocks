@@ -38,6 +38,7 @@ class Vk_Blocks_PostList {
 			'display_excerpt'            => esc_html( $attributes['display_excerpt'] ),
 			'display_author'             => esc_html( $attributes['display_author'] ),
 			'display_date'               => esc_html( $attributes['display_date'] ),
+			'display_modified'           => esc_html( $attributes['display_modified'] ),
 			'display_new'                => esc_html( $attributes['display_new'] ),
 			'display_taxonomies'         => esc_html( $attributes['display_taxonomies'] ),
 			'display_btn'                => esc_html( $attributes['display_btn'] ),

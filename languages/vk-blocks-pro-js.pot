@@ -1113,7 +1113,7 @@ msgid "Select image"
 msgstr ""
 
 #: src/blocks/_pro/card/edit.js:130
-#: src/components/display-items-control/index.js:32
+#: src/components/display-items-control/index.js:33
 msgid "Display item"
 msgstr ""
 
@@ -1126,29 +1126,29 @@ msgid "Warning! When you hide this item, you will lose the content."
 msgstr ""
 
 #: src/blocks/_pro/card/edit.js:162
-#: src/components/display-items-control/index.js:36
+#: src/components/display-items-control/index.js:37
 msgid "Image"
 msgstr ""
 
 #: src/blocks/_pro/card/edit.js:169
-#: src/components/display-items-control/index.js:87
+#: src/components/display-items-control/index.js:95
 msgid "Button"
 msgstr ""
 
 #: src/blocks/_pro/card/edit.js:174
-#: src/components/display-items-control/index.js:109
+#: src/components/display-items-control/index.js:117
 msgid "Button option"
 msgstr ""
 
 #: src/blocks/_pro/card/edit.js:177
-#: src/components/display-items-control/index.js:112
+#: src/components/display-items-control/index.js:120
 msgid ""
 "Click each card block to set the target url. You can find the url form at "
 "its sidebar."
 msgstr ""
 
 #: src/blocks/_pro/card/edit.js:183
-#: src/components/display-items-control/index.js:118
+#: src/components/display-items-control/index.js:126
 msgid "Button text"
 msgstr ""
 
@@ -1434,7 +1434,7 @@ msgstr ""
 #: src/blocks/balloon/edit.js:434
 #: src/blocks/button/edit.js:843
 #: src/blocks/pr-content/edit.js:269
-#: src/components/display-items-control/index.js:140
+#: src/components/display-items-control/index.js:148
 msgid "Right"
 msgstr ""
 
@@ -1448,7 +1448,7 @@ msgstr ""
 #: src/blocks/balloon/edit.js:430
 #: src/blocks/button/edit.js:835
 #: src/blocks/pr-content/edit.js:273
-#: src/components/display-items-control/index.js:132
+#: src/components/display-items-control/index.js:140
 msgid "Left"
 msgstr ""
 
@@ -2313,7 +2313,7 @@ msgstr ""
 #: src/blocks/_pro/post-list-slider/edit.js:344
 #: src/blocks/button/edit.js:839
 #: src/blocks/slider/edit.js:684
-#: src/components/display-items-control/index.js:136
+#: src/components/display-items-control/index.js:144
 msgid "Center"
 msgstr ""
 
@@ -3930,44 +3930,48 @@ msgstr ""
 msgid "Sticky posts always appear first, regardless of their publish date."
 msgstr ""
 
-#: src/components/display-items-control/index.js:104
+#: src/components/display-items-control/index.js:101
+msgid "Number of days to display the new post mark"
+msgstr ""
+
+#: src/components/display-items-control/index.js:112
 msgid "New post mark"
 msgstr ""
 
-#: src/components/display-items-control/index.js:123
+#: src/components/display-items-control/index.js:131
 msgid "Button align"
 msgstr ""
 
-#: src/components/display-items-control/index.js:45
+#: src/components/display-items-control/index.js:46
 msgid "Term's name on Image"
 msgstr ""
 
-#: src/components/display-items-control/index.js:53
+#: src/components/display-items-control/index.js:54
 msgid "Excerpt"
 msgstr ""
 
-#: src/components/display-items-control/index.js:60
+#: src/components/display-items-control/index.js:61
 msgid "Author"
 msgstr ""
 
-#: src/components/display-items-control/index.js:67
+#: src/components/display-items-control/index.js:68
 msgid "Date"
 msgstr ""
 
-#: src/components/display-items-control/index.js:72
+#: src/components/display-items-control/index.js:73
+msgid "Modified date"
+msgstr ""
+
+#: src/components/display-items-control/index.js:80
 msgid "New mark"
 msgstr ""
 
-#: src/components/display-items-control/index.js:79
+#: src/components/display-items-control/index.js:87
 msgid "Taxonomies (all)"
 msgstr ""
 
-#: src/components/display-items-control/index.js:91
+#: src/components/display-items-control/index.js:99
 msgid "New mark option"
-msgstr ""
-
-#: src/components/display-items-control/index.js:93
-msgid "Number of days to display the new post mark"
 msgstr ""
 
 #: src/components/link-control/index.js:37

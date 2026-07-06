@@ -12,7 +12,8 @@
 		},
 		"headingTag": {
 			"type": "string",
-			"default": "h4"
+			"default": "h4",
+			"enum": ["h3", "h4", "h5", "h6", "p"]
 		},
 		"anchor": {
 			"type": "string",
@@ -32,7 +33,8 @@
 		},
 		"bgColor": {
 			"type": "string",
-			"default": "transparent"
+			"default": "transparent",
+			"enum": ["transparent", "white"]
 		},
 		"faIcon": {
 			"type": "string",

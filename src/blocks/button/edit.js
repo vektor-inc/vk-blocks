@@ -25,7 +25,11 @@ import { useInstanceId } from '@wordpress/compose';
 import { dispatch, select } from '@wordpress/data';
 import { AdvancedColorPalette } from '@vkblocks/components/advanced-color-palette';
 import { isHexColor } from '@vkblocks/utils/is-hex-color';
-import { isParentReusableBlock } from '@vkblocks/utils/is-parent-reusable-block';
+import {
+	isParentReusableBlock,
+	hasBlockIdCollision,
+	shouldUpdateBlockId,
+} from '@vkblocks/utils/is-parent-reusable-block';
 import LinkToolbar from '@vkblocks/components/link-toolbar';
 import { iconLabel } from '@vkblocks/utils/icon-label';
 import { fixBrokenUnicode } from '@vkblocks/utils/fixBrokenUnicode';
@@ -301,9 +305,14 @@ export default function ButtonEdit(props) {
 		if (attributes.clientId !== undefined) {
 			setAttributes({ clientId: undefined });
 		}
+		// issue #2556: blockId を毎リロードで上書きすると dirty 化するため、
+		// 「未確定」または「再利用ブロック外での実衝突（複製）」のときだけ再採番する。
 		if (
-			blockId === undefined ||
-			isParentReusableBlock(clientId) === false
+			shouldUpdateBlockId({
+				blockId,
+				isInReusableBlock: isParentReusableBlock(clientId),
+				hasCollision: hasBlockIdCollision(clientId, blockId),
+			})
 		) {
 			setAttributes({ blockId: clientId });
 		}

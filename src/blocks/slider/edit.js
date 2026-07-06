@@ -21,7 +21,11 @@ import {
 	ToggleControl,
 	RangeControl,
 } from '@wordpress/components';
-import { isParentReusableBlock } from '@vkblocks/utils/is-parent-reusable-block';
+import {
+	isParentReusableBlock,
+	hasBlockIdCollision,
+	shouldUpdateBlockId,
+} from '@vkblocks/utils/is-parent-reusable-block';
 import { editSliderLaunch } from './edit-slider';
 import { MultiItemSetting } from './edit-multiItem';
 import { PauseButton } from './pause-button';
@@ -165,11 +169,14 @@ export default function SliderEdit(props) {
 			setAttributes({ clientId: undefined });
 		}
 
-		// blockID が定義されていない場合は blockID に clientID を挿入
-		// 再利用ブロックのインナーブロックではない場合 blockID を更新
+		// issue #2556: blockId を毎リロードで上書きすると dirty 化するため、
+		// 「未確定」または「再利用ブロック外での実衝突（複製）」のときだけ再採番する。
 		if (
-			blockId === undefined ||
-			isParentReusableBlock(clientId) === false
+			shouldUpdateBlockId({
+				blockId,
+				isInReusableBlock: isParentReusableBlock(clientId),
+				hasCollision: hasBlockIdCollision(clientId, blockId),
+			})
 		) {
 			setAttributes({ blockId: clientId });
 		}
@@ -572,10 +579,18 @@ export default function SliderEdit(props) {
 								'vk-blocks'
 							)}
 							id={`vk_slider-pauseButton`}
-							help={__(
-								'Displays a button on the front end that lets visitors pause and resume the autoplay.',
-								'vk-blocks'
-							)}
+							help={
+								<>
+									{__(
+										'Displays a button on the front end that lets visitors pause and resume the autoplay.',
+										'vk-blocks'
+									)}{' '}
+									{__(
+										'When this is off, autoplay keeps running even for visitors whose device requests reduced motion, since there is no button to pause it.',
+										'vk-blocks'
+									)}
+								</>
+							}
 						>
 							<AdvancedToggleControl
 								initialFixedTable={pauseButton}

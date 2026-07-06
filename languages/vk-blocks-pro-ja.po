@@ -3412,6 +3412,10 @@ msgstr "更新日 (過去から)"
 msgid "Modified Date"
 msgstr "更新日"
 
+#: src/components/display-items-control/index.js:73
+msgid "Modified date"
+msgstr "更新日"
+
 #: src/blocks/_pro/tab/edit.js:1096
 msgid "Monospaced"
 msgstr "等幅"

@@ -84,7 +84,15 @@ export default function save({ attributes }) {
 		className: `swiper swiper-container vk_slider vk_slider_${blockId}${alignClass}`,
 	});
 
-	// 停止/再生ボタンの HTML（自動再生が有効かつ表示設定が ON の時のみ出力）
+	// 停止/再生ボタンの HTML（自動再生が有効かつ表示設定が ON の時のみ出力）。
+	// ⚠️ ボタンはスライダーのルート直下に置くこと。view.js が
+	// :scope > .swiper-pause-button で直下のみを検索するため、ラッパーで囲むと
+	// 停止/再生ボタンと「視差効果を減らす」対応が機能しなくなる
+	// （保存出力の変更になるため deprecation も必要になる）。
+	// ⚠️ Keep this button a DIRECT CHILD of the slider root: view.js locates it
+	// with ':scope > .swiper-pause-button', so wrapping it breaks the pause/play
+	// button and the reduced-motion handling (changing the saved markup would
+	// also require a block deprecation).
 	const pause_button_html = autoPlay && pauseButton ? <PauseButton /> : '';
 
 	return (

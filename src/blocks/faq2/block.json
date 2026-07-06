@@ -16,7 +16,8 @@
 	"attributes": {
 		"showContent": {
 			"type": "string",
-			"default": "default"
+			"default": "default",
+			"enum": ["default", "disable", "open", "close"]
 		}
 	}
 }

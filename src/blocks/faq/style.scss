@@ -189,6 +189,11 @@ $answer-color: #337ab7;
 		}
 		.vk_faq_title{
 			cursor: pointer;
+			// tabindex="0" + role="button" の非ネイティブ要素にフォーカスインジケーターを付与（WCAG 2.1 AA）
+			&:focus-visible {
+				outline: 2px solid var(--vk-color-primary);
+				outline-offset: -2px;
+			}
 		}
 	}
 

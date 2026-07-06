@@ -6,7 +6,9 @@ document.defaultView.addEventListener('load', function () {
 	sliderNodeList = Array.from(sliderNodeList);
 
 	// OS の「視差効果を減らす」設定が有効かどうかを判定する。
-	// 有効な場合はアクセシビリティへの配慮として自動再生を発動させない。
+	// 停止判定のポリシーは Swiper 初期化直後の抑止ブロックのコメントを参照（#3044）。
+	// Detect whether the OS-level "reduce motion" setting is enabled.
+	// See the suppression block right after Swiper initialization for the policy (#3044).
 	const prefersReducedMotion =
 		typeof window.matchMedia === 'function' &&
 		window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -22,9 +24,9 @@ document.defaultView.addEventListener('load', function () {
 	// pause/play はトグル状態ではなく「次に実行する操作」を表すアクションボタンのため、
 	// aria-pressed は使わず aria-label を唯一の状態インジケーターとする（重複回避）。
 	// updateState 内で aria-label と is-paused クラスの更新を必ず維持すること。
-	const setupPauseButton = (sliderNode, swiperInstance) => {
-		const pauseButton = sliderNode.querySelector('.swiper-pause-button');
-		// ボタンが無い、または autoplay モジュールが無い場合は何もしない
+	const setupPauseButton = (pauseButton, swiperInstance) => {
+		// ボタンが無い、または autoplay モジュールが無い場合は何もしない（防御的チェック）
+		// Do nothing when there is no button or no autoplay module (defensive check).
 		if (!pauseButton || !swiperInstance || !swiperInstance.autoplay) {
 			return;
 		}
@@ -357,19 +359,58 @@ ${zoomSelector} .vk_slider_item.swiper-slide-next::before {
 			);
 			const swiperInstance = window[`swiper${index}`];
 
+			// 停止/再生ボタンをスライダー直下から一度だけ取得し、
+			// PRM 抑止と配線の両方で同じ要素を使う（基準の不一致を構造的に防ぐ）。
+			// ボタンはスライダー直下にのみ出力されるため :scope > で直下だけを見る。
+			// 子孫検索だとスライド内にネストされた別スライダーのボタンに誤マッチする。
+			// Query the pause/play button once from the slider's direct children and
+			// use the same element for both the reduced-motion suppression and the
+			// wiring, so the two criteria cannot drift apart. ':scope >' avoids
+			// matching a nested slider's button inside a slide.
+			const pauseButton = sliderNode.querySelector(
+				':scope > .swiper-pause-button'
+			);
+
+			// ⚠️ 同期注意: この「視差効果を減らす」対応ブロックは
+			// src/blocks/_pro/post-list-slider/view.js と同一ロジックを重複保持している。
+			// 変更時は必ず両ファイルを同期すること。
+			// ⚠️ Sync note: this reduced-motion block is duplicated in
+			// src/blocks/_pro/post-list-slider/view.js. Keep both files in sync.
+			//
 			// 「視差効果を減らす」設定時は初期化直後に自動再生を停止する。
+			// ただし停止/再生ボタンが DOM に存在するスライダーに限定する（#3044）。
+			// ボタンが無いスライダーまで停止すると、利用者に停止の理由が伝わらず
+			// 再開手段も無いため「自動再生が壊れた」ように見えてしまう。
+			// 属性値ではなく DOM 上のボタン有無で判定するのは、フィルタ等でボタンが
+			// 除去された場合でも「再開手段なしで停止」に陥らないようにするため。
 			// （autoplay モジュール自体は初期化しておき、停止/再生ボタンで再開できるようにする）
+			// Under reduced motion, stop autoplay right after initialization — but only
+			// when a pause/play button exists in the DOM (#3044): a stopped slider
+			// without a resume control just looks broken. Checking the DOM instead of
+			// the serialized attribute keeps this safe even if a filter strips the
+			// button. The autoplay module stays initialized so the button can restart it.
 			if (
 				prefersReducedMotion &&
+				pauseButton &&
 				swiperInstance?.autoplay &&
 				swiperInstance.autoplay.running
 			) {
 				swiperInstance.autoplay.stop();
 			}
 
-			// 停止/再生ボタンの設定（autoPlay かつ pauseButton が ON の時のみ DOM に存在する）
-			if (attributes.autoPlay && attributes.pauseButton) {
-				setupPauseButton(sliderNode, swiperInstance);
+			// 停止/再生ボタンの配線。ボタンの有無は上と同じ pauseButton（DOM の実態）で
+			// 判定しつつ、自動再生を無効にした作者の意図を尊重して attributes.autoPlay で
+			// ゲートする。バンドル版 Swiper は autoplay:false でも autoplay オブジェクトを
+			// 生成し、start() も enabled を確認しないため、このゲートが無いと注入された
+			// ボタンのクリックで無効化済みの自動再生が開始されてしまう。
+			// Wire the pause/play button. Button presence is decided by the same
+			// pauseButton element as above (DOM reality), while gating on
+			// attributes.autoPlay honors the author's autoplay-off intent: the bundled
+			// Swiper creates the autoplay object even with autoplay:false and start()
+			// does not check 'enabled', so without this gate a click on an injected
+			// button would start autoplay the author disabled.
+			if (attributes.autoPlay) {
+				setupPauseButton(pauseButton, swiperInstance);
 			}
 
 			// ページネーションがOFFの時非表示
