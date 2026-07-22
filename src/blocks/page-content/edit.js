@@ -1,8 +1,21 @@
 import { __ } from '@wordpress/i18n';
-import { PanelBody, BaseControl, SelectControl } from '@wordpress/components';
-import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
+import {
+	PanelBody,
+	BaseControl,
+	SelectControl,
+	Button,
+	ToolbarGroup,
+	ToolbarButton,
+} from '@wordpress/components';
+import {
+	InspectorControls,
+	useBlockProps,
+	BlockControls,
+} from '@wordpress/block-editor';
 import ServerSideRender from '@wordpress/server-side-render';
 import { useSelect } from '@wordpress/data';
+import { addQueryArgs } from '@wordpress/url';
+import { pencil } from '@wordpress/icons';
 
 // usePosts は本ブロック専用のためローカル定義
 const usePosts = (postType, query) => {
@@ -60,6 +73,24 @@ const getPagesSelect = (pages, currentTargetPost) => {
 
 export default function PageContentEdit({ attributes, setAttributes }) {
 	const { TargetPost } = attributes;
+	const hasTargetPost = TargetPost !== -1;
+	const editButtonLabel = __('Edit this area', 'vk-blocks');
+	const toolbarEditButtonLabel = hasTargetPost
+		? editButtonLabel
+		: __('Select a page first to edit this area', 'vk-blocks');
+
+	// 対象固定ページの編集画面を新規タブで開く
+	const openTargetPostEdit = () => {
+		if (!hasTargetPost) {
+			return;
+		}
+
+		const url = addQueryArgs('post.php', {
+			post: TargetPost,
+			action: 'edit',
+		});
+		window.open(url, `vk-page-content-edit-${TargetPost}`);
+	};
 
 	const pages = usePosts(
 		{ slug: 'page' },
@@ -91,6 +122,18 @@ export default function PageContentEdit({ attributes, setAttributes }) {
 
 	return (
 		<>
+			<BlockControls>
+				<ToolbarGroup>
+					<ToolbarButton
+						icon={pencil}
+						label={toolbarEditButtonLabel}
+						showTooltip={true}
+						disabled={!hasTargetPost}
+						accessibleWhenDisabled
+						onClick={openTargetPostEdit}
+					/>
+				</ToolbarGroup>
+			</BlockControls>
 			<InspectorControls>
 				<PanelBody
 					title={__('Page Setting', 'vk-blocks')}
@@ -108,6 +151,17 @@ export default function PageContentEdit({ attributes, setAttributes }) {
 							}
 						/>
 					</BaseControl>
+					<Button
+						className="mt-2"
+						variant="secondary"
+						icon={pencil}
+						aria-label={toolbarEditButtonLabel}
+						disabled={!hasTargetPost}
+						accessibleWhenDisabled
+						onClick={openTargetPostEdit}
+					>
+						{editButtonLabel}
+					</Button>
 				</PanelBody>
 			</InspectorControls>
 			<div {...blockProps}>{editContent}</div>

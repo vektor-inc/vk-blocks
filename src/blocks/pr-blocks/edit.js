@@ -467,6 +467,9 @@ export class ComponentBlockEdit extends Component {
 			if (faIcon && !faIcon.match(/<i/)) {
 				faIcon = `<i class="${faIcon}"></i>`;
 			}
+			if (!faIcon) {
+				return null;
+			}
 			//add class and inline css
 			const faIconFragment = faIcon.split(' ');
 			if (iconColor !== '') {

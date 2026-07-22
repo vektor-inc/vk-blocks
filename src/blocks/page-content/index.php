@@ -143,9 +143,11 @@ function vk_blocks_page_content_render_callback( $attributes ) {
 		$page_html   .= apply_filters( 'vk_blocks_page_content', $page_content );
 		$page_html   .= '</div>';
 
-		$url = get_edit_post_link( $page_content_id );
-		if ( $url ) {
-			$page_html .= '<a href="' . esc_url( $url ) . '" class="vk_pageContent_editBtn btn btn-outline-primary btn-sm veu_adminEdit" target="_blank">' . __( 'Edit this area', 'vk-blocks' ) . '</a>';
+		if ( ! $is_rest_request ) {
+			$url = get_edit_post_link( $page_content_id );
+			if ( $url ) {
+				$page_html .= '<a href="' . esc_url( $url ) . '" class="vk_pageContent_editBtn btn btn-outline-primary btn-sm veu_adminEdit" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Edit this area', 'vk-blocks' ) . '</a>';
+			}
 		}
 	}
 

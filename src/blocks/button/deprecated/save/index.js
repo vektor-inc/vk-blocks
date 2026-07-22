@@ -9,6 +9,7 @@ import save1_39_2 from './1.39.2/save';
 import save1_43_0 from './1.43.0/save';
 import save1_70_1 from './1.70.1/save';
 import save1_72_1 from './1.72.1/save';
+import save1_122_0 from './1.122.0/save';
 
 const blockAttributes = {
 	content: {
@@ -166,7 +167,6 @@ const blockAttributes12 = {
 	},
 }
 
-/*
 // v1.105.1 リンク機能の追加に伴う属性の追加
 const blockAttributes13 = {
 	...blockAttributes12,
@@ -191,10 +191,13 @@ const blockAttributes13 = {
 		type: 'string',
 		default: null,
 	},
-}
-*/
+};
 
 export const deprecated = [
+	{
+		attributes: blockAttributes13,
+		save: save1_122_0,
+	},
 	{
 		attributes: blockAttributes12,
 		save: save1_72_1,

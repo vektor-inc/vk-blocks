@@ -132,7 +132,7 @@ export class VKBButton extends Component {
 
 		if (fontAwesomeIconBefore) {
 			let fontAwesomeIconBeforeClassName =
-				fontAwesomeIconBefore.match(/class="(.*?)"/)?.[1] ?? '';
+				fontAwesomeIconBefore.match(/class="(.*?)"/)[1];
 			fontAwesomeIconBeforeClassName += ` vk_button_link_before`;
 			const styleBefore = iconSizeBefore
 				? ` style='font-size: ${iconSizeBefore}'`
@@ -141,7 +141,7 @@ export class VKBButton extends Component {
 		}
 		if (fontAwesomeIconAfter) {
 			let fontAwesomeIconAfterClassName =
-				fontAwesomeIconAfter.match(/class="(.*?)"/)?.[1] ?? '';
+				fontAwesomeIconAfter.match(/class="(.*?)"/)[1];
 			fontAwesomeIconAfterClassName += ` vk_button_link_after`;
 			const styleAfter = iconSizeAfter
 				? ` style='font-size: ${iconSizeAfter}'`
@@ -195,16 +195,9 @@ export class VKBButton extends Component {
 					</p>
 				) : (
 					subCaption && (
-						<p
-							className={'vk_button_link_subCaption'}
-							dangerouslySetInnerHTML={{
-								__html: subCaption
-									.replace(/&/g, '&amp;')
-									.replace(/</g, '&lt;')
-									.replace(/>/g, '&gt;')
-									.replace(/&lt;br\s*\/?&gt;/gi, '<br>'),
-							}}
-						/>
+						<p className={'vk_button_link_subCaption'}>
+							{subCaption}
+						</p>
 					)
 				)}
 			</a>

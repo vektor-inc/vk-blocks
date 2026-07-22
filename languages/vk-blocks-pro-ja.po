@@ -877,6 +877,11 @@ msgstr "下 XXS"
 msgid "Bottom on Mobile device"
 msgstr "モバイルでは下部に表示"
 
+#: src/blocks/_pro/post-list-slider/edit.js:370
+#: src/blocks/slider/edit.js:717
+msgid "Bottom on all devices"
+msgstr "常に下部に表示"
+
 #: src/blocks/_pro/fixed-display/edit.js:244
 msgid "Bottom section"
 msgstr "下部"
@@ -3175,6 +3180,10 @@ msgstr "左 (標準)"
 msgid "Left Right"
 msgstr "左右"
 
+#: src/blocks/_pro/tab/edit.js:1223
+msgid "Left and right"
+msgstr "左右"
+
 #: src/blocks/_pro/blog-card/variations.js:18
 msgid "Left image"
 msgstr "画像左"
@@ -4348,6 +4357,10 @@ msgstr "ページを選択"
 msgid "Select Taxonomy"
 msgstr "タクソノミーを選択"
 
+#: src/blocks/page-content/edit.js:80
+msgid "Select a page first to edit this area"
+msgstr "このエリアを編集するにはまずページを選択してください"
+
 #: src/blocks/_pro/outer/edit.js:790
 msgid ""
 "Select either Focal Point to control the image’s focus, or Background "
@@ -4885,6 +4898,18 @@ msgstr "タブアイコン設定"
 #: src/blocks/_pro/tab-item/index.js:18
 msgid "Tab Item"
 msgstr "タブアイテム"
+
+#: src/blocks/_pro/tab/edit.js:1235
+msgid "Tab Label Border Radius"
+msgstr "タブラベルの角丸"
+
+#: src/blocks/_pro/tab/edit.js:1205
+msgid "Tab Label Design"
+msgstr "タブラベルのデザイン"
+
+#: src/blocks/_pro/tab/edit.js:1210
+msgid "Tab Label Padding"
+msgstr "タブラベルの余白"
 
 #: src/blocks/_pro/tab/edit.js:871
 #. %s is the tab number
@@ -5521,6 +5546,18 @@ msgstr "上 XXL"
 msgid "Top XXS"
 msgstr "上 XXS"
 
+#: src/blocks/_pro/tab/edit.js:1213
+msgid "Top and bottom"
+msgstr "上下"
+
+#: src/blocks/_pro/tab/edit.js:1238
+msgid "Top left"
+msgstr "左上"
+
+#: src/blocks/_pro/tab/edit.js:1248
+msgid "Top right"
+msgstr "右上"
+
 #: src/blocks/_pro/fixed-display/edit.js:237
 msgid "Top section"
 msgstr "上部"
@@ -5853,6 +5890,13 @@ msgid ""
 "is half of the content width. Below 782px, the horizontal padding is "
 "removed."
 msgstr "画面サイズが782px以上の場合、インナーブロックの最大幅はコンテント幅の半分になります。782px未満の場合は、水平方向のパディングは削除されます。"
+
+#: src/blocks/_pro/post-list-slider/edit.js:254
+#: src/blocks/slider/edit.js:601
+msgid ""
+"When this is off, autoplay keeps running even for visitors whose device "
+"requests reduced motion, since there is no button to pause it."
+msgstr "オフの場合、reduced motion（動きを減らす設定）をリクエストしている端末の閲覧者に対しても自動再生は止まらず、一時停止するボタンもありません。"
 
 #: src/extensions/core/list/style.js:166
 msgid ""

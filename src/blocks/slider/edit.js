@@ -410,8 +410,15 @@ export default function SliderEdit(props) {
 
 	const blockRef = useRef(null);
 
+	// 高さ・ズーム用の CSS は blockId をキーに生成される（index.js / save.js と共通）。
+	// issue #2556 以降 blockId は編集時に clientId と一致しなくなったため、ラッパーの
+	// クラスも blockId で揃えないと編集画面だけ CSS が当たらず表示が崩れる。
+	// The height/zoom CSS is keyed on blockId (shared with index.js / save.js).
+	// Since issue #2556, blockId no longer equals clientId in the editor, so the
+	// wrapper class must also use blockId; otherwise the CSS misses only in the
+	// editor and the slider renders broken.
 	const blockProps = useBlockProps({
-		className: `vk_slider vk_swiper vk_slider_editorMode--${editorMode} vk_slider_${clientId}${alignClass}`,
+		className: `vk_slider vk_swiper vk_slider_editorMode--${editorMode} vk_slider_${blockId}${alignClass}`,
 		ref: blockRef,
 	});
 
@@ -696,6 +703,13 @@ export default function SliderEdit(props) {
 										'vk-blocks'
 									),
 									value: 'mobile-bottom',
+								},
+								{
+									label: __(
+										'Bottom on all devices',
+										'vk-blocks'
+									),
+									value: 'always-bottom',
 								},
 							]}
 							onChange={(value) =>

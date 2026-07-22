@@ -4,7 +4,7 @@ Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 6.6
 Tested up to: 7.0
-Stable tag: 1.123.0
+Stable tag: 1.124.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -107,6 +107,16 @@ e.g.
 1. VK Blocks examples.
 
 == Changelog ==
+
+= 1.124.0 =
+[ New Feature ][ Tab (Pro) ] Added sidebar controls to adjust the tab label's padding (top / bottom and left / right) and top corner radius (top left / top right).
+[ New Feature ][ Slider Block ][ Post List Slider Block (Pro) ] Added a "Bottom on all devices" option for the arrow navigation position so it stays fixed at the bottom on PC and tablet as well as mobile.
+[ Spec Change ] Update vektor-inc/font-awesome-versions from 0.7.4 to 0.7.5
+[ Spec Change ] Update vektor-inc/vk-component from 1.7.0 to 1.7.1
+[ Bug Fix ][ Button Block ] Fixed an issue where HTML tags entered in the Sub Caption field were displayed as literal text on the front end instead of being rendered as HTML.
+[ Bug Fix ][ PR Blocks (not recommended) ] Fixed an issue where opening certain legacy posts with no icon set in the PR Blocks block caused a crash in the block editor.
+[ Bug Fix ][ Slider Block ] Fixed an issue where the height setting was not applied in the block editor, causing slides to overlap as thin bands even though the front end displayed correctly.
+[ Bug Fix ][ Page Content ] Fixed an issue where the editor preview's "Edit this area" link could not be clicked to open the referenced page's edit screen. The edit link is now available from the block toolbar and sidebar.
 
 = 1.123.0 =
 [ New Feature ][ Post List Block (Pro) / Post List Slider Block (Pro) / Select Post List Block (Pro) / Child Page List Block (Pro) ] Added a setting to show or hide the modified date.

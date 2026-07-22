@@ -726,7 +726,9 @@ $colorPalette: (
 		height: auto; //100%だとおかしくなるのでautoに
 		transition-timing-function: cubic-bezier(0.77, 0.2, 0.05, 1);
 	}
-	//vk_slider用のnextとprevボタン	
+
+	// Next and previous buttons for vk_slider.
+	//vk_slider用のnextとprevボタン
 	.swiper-button-next,
 	.swiper-button-prev {
 		color: var(--vk-color-text-body);
@@ -738,6 +740,13 @@ $colorPalette: (
 		z-index: 20;
 		&:after {
 			font-size: 1.2rem;
+		}
+
+		// Keep arrows fixed at the bottom on all devices.
+		//全デバイスで矢印を下部固定
+		&.swiper-button-always-bottom {
+			top: unset;
+			bottom: 10px;
 		}
 	}
 

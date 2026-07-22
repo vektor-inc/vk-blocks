@@ -57,7 +57,7 @@ class PageContentBlockTest extends VK_UnitTestCase {
 		WP_Block_Supports::$block_to_render =  array('blockName'=> $attributes['name'], 'attrs' => $attributes );
 
 		$actual   = vk_blocks_page_content_render_callback( $attributes );
-		$expected = vk_blocks_unescape_html( '<div class=\"vk_pageContent vk_pageContent-id-' . intval( $this->page_id ) . ' wp-block-vk-blocks-page-content\"><p class=\"wp-block-paragraph\">This is my page.<\/p><\/div><a href=\"' . admin_url() . 'post.php?post=' . intval( $this->page_id ) . '&#038;action=edit\" class=\"vk_pageContent_editBtn btn btn-outline-primary btn-sm veu_adminEdit\" target=\"_blank\">' . __( 'Edit this area', 'vk-blocks' ) . '<\/a>' );
+		$expected = vk_blocks_unescape_html( '<div class=\"vk_pageContent vk_pageContent-id-' . intval( $this->page_id ) . ' wp-block-vk-blocks-page-content\"><p class=\"wp-block-paragraph\">This is my page.<\/p><\/div><a href=\"' . admin_url() . 'post.php?post=' . intval( $this->page_id ) . '&#038;action=edit\" class=\"vk_pageContent_editBtn btn btn-outline-primary btn-sm veu_adminEdit\" target=\"_blank\" rel=\"noopener noreferrer\">' . esc_html__( 'Edit this area', 'vk-blocks' ) . '<\/a>' );
 
 		// WP バージョンにより <p> に class="wp-block-paragraph" が付く場合と付かない場合がある
 		$normalize = function ( $html ) {
@@ -68,6 +68,27 @@ class PageContentBlockTest extends VK_UnitTestCase {
 }
 
 class Test_Page_Content extends WP_UnitTestCase {
+
+	/**
+	 * 公開固定ページの ID
+	 *
+	 * @var int
+	 */
+	public $public_page_id;
+
+	/**
+	 * 非公開固定ページの ID
+	 *
+	 * @var int
+	 */
+	public $private_page_id;
+
+	/**
+	 * 下書き固定ページの ID
+	 *
+	 * @var int
+	 */
+	public $draft_page_id;
 
 	public function setUp(): void {
 		parent::setUp();
@@ -113,7 +134,7 @@ class Test_Page_Content extends WP_UnitTestCase {
 					'className'  => '',
 					'TargetPost' => $this->public_page_id,
 				],
-				'expected' => '<div class="vk_pageContent vk_pageContent-id-' . $this->public_page_id . ' wp-block-vk-blocks-page-content">This is a public page.</div><a href="' . esc_url( get_edit_post_link( $this->public_page_id ) ) . '" class="vk_pageContent_editBtn btn btn-outline-primary btn-sm veu_adminEdit" target="_blank">' . __( 'Edit this area', 'vk-blocks' ) . '</a>',
+				'expected' => '<div class="vk_pageContent vk_pageContent-id-' . $this->public_page_id . ' wp-block-vk-blocks-page-content">This is a public page.</div><a href="' . esc_url( get_edit_post_link( $this->public_page_id ) ) . '" class="vk_pageContent_editBtn btn btn-outline-primary btn-sm veu_adminEdit" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Edit this area', 'vk-blocks' ) . '</a>',
 			),
 			array(
 				'test_name' => '非公開の固定ページの場合',
@@ -139,5 +160,32 @@ class Test_Page_Content extends WP_UnitTestCase {
 			$result = vk_blocks_page_content_render_callback( $test['attributes'] );
 			$this->assertEquals( $test['expected'], $result, $test['test_name'] );
 		}
+	}
+
+	/**
+	 * REST リクエスト時は編集リンクを出力しないことを確認
+	 *
+	 * @runInSeparateProcess
+	 * @preserveGlobalState disabled
+	 */
+	public function test_vk_blocks_page_content_render_callback_rest_request() {
+		define( 'REST_REQUEST', true );
+
+		$attributes = array(
+			'name'       => 'vk-blocks/page-content',
+			'className'  => '',
+			'TargetPost' => $this->public_page_id,
+		);
+
+		WP_Block_Supports::init();
+		WP_Block_Supports::$block_to_render = array(
+			'blockName' => $attributes['name'],
+			'attrs'     => $attributes,
+		);
+
+		$result = vk_blocks_page_content_render_callback( $attributes );
+
+		$this->assertStringContainsString( 'vk_pageContent', $result, 'REST リクエスト時も固定ページ本文のラッパーを出力する' );
+		$this->assertStringNotContainsString( 'vk_pageContent_editBtn', $result, 'REST リクエスト時は編集リンクを出力しない' );
 	}
 }
