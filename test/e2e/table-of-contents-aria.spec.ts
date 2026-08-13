@@ -8,9 +8,10 @@
  */
 import { test, expect } from '@wordpress/e2e-test-utils-playwright';
 import type { RequestUtils } from '@wordpress/e2e-test-utils-playwright';
+import { registerPostCleanup } from './utils/post-cleanup';
 
-// クリーンアップ用に作成した投稿 ID を保持
-const createdPostIds: number[] = [];
+// クリーンアップ用に作成した投稿 ID を保持（スペック終了時にまとめて削除される）
+const createdPostIds = registerPostCleanup();
 
 // REST 経由で投稿を作成して ID を返す
 async function createPost(
@@ -52,20 +53,6 @@ test.describe('Issue #2983 Table of Contents aria-expanded toggle', () => {
 		// フロント表示にはアクティブなテーマが必要。
 		// （このリポジトリでは playwright の globalSetup が無効のため明示的に有効化する）
 		await requestUtils.activateTheme('twentytwentyfive');
-	});
-
-	test.afterAll(async ({ requestUtils }) => {
-		// 作成した投稿を削除
-		for (const id of createdPostIds) {
-			try {
-				await requestUtils.rest({
-					path: `/wp/v2/posts/${id}?force=true`,
-					method: 'DELETE',
-				});
-			} catch {
-				// 削除失敗は無視
-			}
-		}
 	});
 
 	test('新マークアップ: button の aria-expanded がクリックでトグルする', async ({

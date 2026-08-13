@@ -191,6 +191,15 @@ const blockAttributes13 = {
 		type: 'string',
 		default: null,
 	},
+	// [ ボタン ] リンク先をカスタムフィールドから取得する機能の追加に伴う属性の追加 #2544
+	linkToCustomField: {
+		type: 'boolean',
+		default: false,
+	},
+	linkCustomFieldName: {
+		type: 'string',
+		default: '',
+	},
 };
 
 export const deprecated = [

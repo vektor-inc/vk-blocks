@@ -77,6 +77,8 @@ export default function ButtonEdit(props) {
 		buttonTarget,
 		relAttribute,
 		linkToPost,
+		linkToCustomField,
+		linkCustomFieldName,
 		buttonSize,
 		buttonType,
 		buttonEffect,
@@ -548,6 +550,16 @@ export default function ButtonEdit(props) {
 						linkToPost={linkToPost}
 						setLinkToPost={(checked) =>
 							setAttributes({ linkToPost: !!checked })
+						}
+						linkToCustomField={linkToCustomField}
+						setLinkToCustomField={(checked) =>
+							setAttributes({
+								linkToCustomField: !!checked,
+							})
+						}
+						customFieldName={linkCustomFieldName}
+						setCustomFieldName={(value) =>
+							setAttributes({ linkCustomFieldName: value })
 						}
 					/>
 				</ToolbarGroup>

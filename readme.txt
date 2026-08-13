@@ -4,7 +4,7 @@ Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 6.6
 Tested up to: 7.0
-Stable tag: 1.124.0
+Stable tag: 1.125.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -107,6 +107,23 @@ e.g.
 1. VK Blocks examples.
 
 == Changelog ==
+
+= 1.125.0 =
+[ New Feature ][ Button Block ] Added an option to use a custom field's URL as the button link. When the Button block is placed inside a Query Loop, each post's button can link to the URL stored in that post's custom field.
+[ New Feature ][ Slider Block ][ Post List Slider Block (Pro) ] Added the --vk-slider-edge-offset CSS custom property (default 10px) for how far the navigation arrows and the pause/play button sit from the edge of the slider. On the Post List Slider, bottom arrows keep their own mobile position, so only the horizontal offset follows there.
+[ New Feature ][ Slider Block ] Raising --vk-slider-edge-offset also moves the pagination away from the bottom edge and widens the space it leaves for bottom arrows. Lowering it below the default moves only the arrows and the pause/play button; the pagination never sits closer to the bottom edge than its default, and a negative value is treated as 0.
+[ Spec Change ][ Slider Block ][ Post List Slider Block (Pro) ] Update Swiper from 11.2.10 to 14.0.6 on the front end (vektor-inc/vk-swiper 0.3.6 to 0.4.0) and from 12.2.0 to 14.0.6 in the block editor. Swiper v14 requires Chrome / Edge 110+, Safari 16.4+ (iOS 16.4+) or Firefox 110+, so sliders no longer work on older browsers; sites that still need them have to stay on VK Blocks 1.124.x.
+[ Spec Change ][ Slider Block ] Removed the legacy "swiper-container" class from the saved markup, since Swiper renamed it to "swiper" in v8. Custom CSS targeting .swiper-container needs to be changed to .swiper.
+[ Spec Change ][ Slider Block ][ Post List Slider Block (Pro) ] Enlarged the pointer target of the navigation arrows and the pause/play button to 44px without changing their painted size, and gave the Slider Block pagination bullets a 24px tall target. On the Post List Slider the enlarged arrow target covers the leftmost few pixels of the first pagination bullet on mobile.
+[ Spec Change ][ Outer (Pro) / Slider Item ] Moved background image attachment ID resolution into AdvancedMediaUpload with a bounded filename search, and stopped using an invalid per_page:-1 full attachment query in the parent blocks.
+[ Design Bug Fix ][ Slider Block ] Fixed styles that relied on class names Swiper removed, so the pagination keeps its intended left and right padding when the arrows sit at the bottom, with slightly smaller bullets on mobile so the number that fits on one line is not reduced. On Firefox 120 and below the pagination keeps the layout it had before this change.
+[ Design Bug Fix ][ Slider Block ][ Post List Slider Block (Pro) ] Fixed the navigation arrows so they keep their intended size and stay centered in the button now that Swiper draws them as an SVG instead of an icon font.
+[ Design Bug Fix ][ Slider Block ] Fixed the zoom animation jumping straight to the final scale instead of gradually enlarging, including during loop playback, and the background not being drawn on the slides either side of the active one.
+[ Design Bug Fix ][ Slider Block ][ Post List Slider Block (Pro) ] Fixed the pagination bullets, navigation arrows and pause/play button showing no focus indicator when reached with the keyboard.
+[ Design Bug Fix ][ Post List Slider Block (Pro) ] Fixed the navigation arrows set to "Bottom on all devices" sitting 10px above the bottom edge on mobile instead of lining up with the "Bottom on mobile" position.
+[ Security Fix ][ Dynamic Text (Pro) ][ Blog Card Featured Image (Pro) ][ Page Content ] Fixed an issue where unescaped attribute values were concatenated directly into HTML tags, inline styles, and class attributes in render_callback output, which could allow arbitrary HTML/attribute injection.
+[ Security Fix ][ Post List Slider Block (Pro) ] Fixed an issue where the navigation position and pagination type attribute values were concatenated directly into HTML class attributes in render_callback output without escaping, which could allow arbitrary HTML/attribute injection.
+[ Other ][ Animation (Pro) / Card (Pro) / Fixed Display (Pro) / Outer (Pro) / Slider Item ] Reworded help texts in the block editor whose English was grammatically incorrect or inconsistent with the wording used elsewhere. The Japanese translations are unchanged.
 
 = 1.124.0 =
 [ New Feature ][ Tab (Pro) ] Added sidebar controls to adjust the tab label's padding (top / bottom and left / right) and top corner radius (top left / top right).

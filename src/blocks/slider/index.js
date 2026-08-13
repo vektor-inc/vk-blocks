@@ -56,7 +56,16 @@ const generateHeightCss = (attributes, cssSelector = '') => {
 	return css;
 };
 
-const generateZoomAnimationCss = (attributes = '') => {
+// ズーム用の CSS は generateHeightCss と違い cssSelector を取らない。ズームは
+// `.vk_slider_${blockId}` を起点にした固定のセレクタで完結するため、呼び出し側から
+// 起点を渡す余地が無い（渡しても使われない）。
+// attributes に既定値を置かないのは、未指定で呼ばれた時に黙って空の CSS を返すより、
+// その場で落ちて呼び出し側の誤りが分かるほうがよいため（generateHeightCss と同じ形）。
+//The zoom CSS, unlike generateHeightCss, takes no cssSelector: it is always anchored on
+//`.vk_slider_${blockId}`, so there is nothing for the caller to pass in.
+//`attributes` has no default on purpose — being called without it should fail here rather
+//than silently return empty CSS (same shape as generateHeightCss).
+const generateZoomAnimationCss = (attributes) => {
 	const {
 		blockId,
 		zoomAnimation,
@@ -93,8 +102,7 @@ ${zoomSelector} .vk_slider_item::before {
 	transition: transform ${(autoPlayDelay + speed + autoPlayDelay * 0.5) / 1000 || 6}s linear;
 }
 
-${zoomSelector} .vk_slider_item.swiper-slide-active::before,
-${zoomSelector} .vk_slider_item.swiper-slide-duplicate-active::before {
+${zoomSelector} .vk_slider_item.swiper-slide-active::before {
 	transform: scale(${zoomFinalScale !== undefined ? zoomFinalScale : 1.25});
 }
 
@@ -114,7 +122,7 @@ const vkbwithClientIdClassName = createHigherOrderComponent(
 		return (props) => {
 			if ('vk-blocks/slider' === props.name) {
 				const heightCss = generateHeightCss(props.attributes, '');
-				const zoomCss = generateZoomAnimationCss(props.attributes, '');
+				const zoomCss = generateZoomAnimationCss(props.attributes);
 				const cssTag = heightCss + zoomCss;
 				return (
 					<>
@@ -157,7 +165,7 @@ const addSwiperConfig = (el, type, attributes) => {
 		if (-1 === deprecatedFuncIndex) {
 			const cssSelector = `.vk_slider_${attributes.blockId},`;
 			const heightCss = generateHeightCss(attributes, cssSelector);
-			const zoomCss = generateZoomAnimationCss(attributes, cssSelector);
+			const zoomCss = generateZoomAnimationCss(attributes);
 			const cssTag = heightCss + zoomCss;
 			return (
 				<>

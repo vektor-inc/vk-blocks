@@ -5,6 +5,9 @@ import type {
 	RequestUtils,
 } from '@wordpress/e2e-test-utils-playwright';
 import type { Page } from '@playwright/test';
+import { saveDraftThenPublishViaRest } from './utils/publish';
+import { registerPostCleanup } from './utils/post-cleanup';
+import { waitForSwiperInit } from './utils/swiper';
 
 /**
  * スライダーブロック（本体）・投稿リストスライダーブロック（Pro）:
@@ -44,40 +47,7 @@ const VIEWPORT = {
 
 // このスペックで作成した投稿の ID。afterAll で対象を絞って削除する
 // （全削除だと他スペックのデータに影響し得るため、姉妹スペックの慣習に合わせる）
-const createdPostIds: number[] = [];
-
-/**
- * エディタで下書き保存した投稿を、REST API で直接 `publish` ステータスに切り替える。
- *
- * 【なぜ editor.publishPost()（UIの「公開」ボタン操作）を使わないか】
- * このテスト環境では `editor.publishPost()` の最終確認クリック後、
- * 「Publishing...」表示のまま REST リクエストが完了せずタイムアウトする現象が
- * 複数回（既存の slider-autoplay-reduced-motion.spec.ts でも）再現した。
- * 一方、`savePost()`（下書き保存）は問題なく動作するため、
- * 「下書き保存 → REST で status を publish に更新」で同じ状態（公開済み投稿）を作る。
- * このブロックの navigationPosition 属性値・保存内容には影響しない代替手段。
- *
- * @param page         Page フィクスチャ
- * @param requestUtils RequestUtils フィクスチャ
- */
-const saveDraftThenPublishViaRest = async (
-	page: Page,
-	requestUtils: RequestUtils
-): Promise<number> => {
-	const postId = await page.evaluate(async () => {
-		await window.wp.data.dispatch('core/editor').savePost();
-		return window.wp.data.select('core/editor').getCurrentPostId();
-	});
-	await page.waitForFunction(
-		() => !window.wp.data.select('core/editor').isSavingPost()
-	);
-	await requestUtils.rest({
-		path: `/wp/v2/posts/${postId}`,
-		method: 'POST',
-		data: { status: 'publish' },
-	});
-	return postId as number;
-};
+const createdPostIds = registerPostCleanup();
 
 /**
  * スライダーブロック（slider-item 2枚、高さ 300px 固定）を指定の navigationPosition で
@@ -87,16 +57,16 @@ const saveDraftThenPublishViaRest = async (
  *
  * @param admin              Admin フィクスチャ
  * @param editor             Editor フィクスチャ
- * @param navigationPosition 検証したい navigationPosition の値
  * @param page               Page フィクスチャ
  * @param requestUtils       RequestUtils フィクスチャ
+ * @param navigationPosition 検証したい navigationPosition の値
  */
 const publishSliderPost = async (
 	admin: Admin,
 	editor: Editor,
-	navigationPosition: string,
 	page: Page,
-	requestUtils: RequestUtils
+	requestUtils: RequestUtils,
+	navigationPosition: string
 ): Promise<number> => {
 	await admin.createNewPost();
 	await editor.insertBlock({
@@ -107,8 +77,11 @@ const publishSliderPost = async (
 			{ name: 'vk-blocks/slider-item' },
 		],
 	});
-	const postId = await saveDraftThenPublishViaRest(page, requestUtils);
-	createdPostIds.push(postId);
+	const postId = await saveDraftThenPublishViaRest(
+		page,
+		requestUtils,
+		createdPostIds
+	);
 	return postId;
 };
 
@@ -119,16 +92,16 @@ const publishSliderPost = async (
  *
  * @param admin              Admin フィクスチャ
  * @param editor             Editor フィクスチャ
+ * @param page               Page フィクスチャ
  * @param requestUtils       RequestUtils フィクスチャ
  * @param navigationPosition 検証したい navigationPosition の値
- * @param page               Page フィクスチャ
  */
 const publishPostListSliderPost = async (
 	admin: Admin,
 	editor: Editor,
+	page: Page,
 	requestUtils: RequestUtils,
-	navigationPosition: string,
-	page: Page
+	navigationPosition: string
 ): Promise<number> => {
 	const seedA = await requestUtils.rest({
 		path: '/wp/v2/posts',
@@ -156,14 +129,23 @@ const publishPostListSliderPost = async (
 		name: POST_LIST_SLIDER,
 		attributes: { navigationPosition },
 	});
-	const postId = await saveDraftThenPublishViaRest(page, requestUtils);
-	createdPostIds.push(postId);
+	const postId = await saveDraftThenPublishViaRest(
+		page,
+		requestUtils,
+		createdPostIds
+	);
 	return postId;
 };
 
 /**
  * フロントの投稿ページを指定ビューポートで開き、スライダーの矢印（prev/next）が
- * DOM に出現するまで待つ（hide のケースでは呼ばない）。
+ * DOM に出現し、かつ Swiper の初期化が完了するまで待つ（hide のケースでは呼ばない）。
+ *
+ * 矢印は save.js が出力する静的マークアップなので、出現を待っただけでは初期化完了に
+ * ならない。Swiper がスライドの寸法を確定させる前に矩形を測ると、スライダー自身の
+ * 下端がずれて計測値が変わってしまうため、初期化完了も待つ
+ * （詳細は waitForSwiperInit の JSDoc を参照）。本体・Pro どちらの view.js も
+ * `window[`swiper${index}`]` にインスタンスを入れるため、同じヘルパーで待てる。
  *
  * @param page            Page フィクスチャ
  * @param postId          表示する投稿 ID
@@ -179,6 +161,7 @@ const visitFrontendWithArrows = async (
 	await page.setViewportSize(viewport);
 	await page.goto(`/?p=${postId}`);
 	await page.locator('.swiper-button-next').first().waitFor();
+	await waitForSwiperInit(page);
 };
 
 /**
@@ -204,21 +187,6 @@ const getNextArrowBottomGap = async (
 		return containerRect.bottom - buttonRect.bottom;
 	}, containerSelector);
 };
-
-// このスペックで作成した投稿だけを削除する（他スペックのデータに影響を与えないよう
-// 全削除ではなく ID を追跡して対象を絞る。slider-autoplay-reduced-motion.spec.ts と同じ方式）
-test.afterAll(async ({ requestUtils }) => {
-	for (const id of createdPostIds) {
-		try {
-			await requestUtils.rest({
-				path: `/wp/v2/posts/${id}?force=true`,
-				method: 'DELETE',
-			});
-		} catch {
-			// 削除失敗は無視（後続スペックへの影響は無い）
-		}
-	}
-});
 
 test.describe('スライダー(本体)・投稿リストスライダー(Pro): Navigation Position に Bottom on all devices を追加 (#3062 / PR #3063)', () => {
 	test('エディタ: スライダー(本体)の Navigation Position に Bottom on all devices が表示される', async ({
@@ -308,9 +276,9 @@ test.describe('スライダー(本体)・投稿リストスライダー(Pro): Na
 		const postId = await publishSliderPost(
 			admin,
 			editor,
-			'always-bottom',
 			page,
-			requestUtils
+			requestUtils,
+			'always-bottom'
 		);
 
 		for (const [device, viewport] of Object.entries(VIEWPORT)) {
@@ -345,9 +313,9 @@ test.describe('スライダー(本体)・投稿リストスライダー(Pro): Na
 		const postId = await publishPostListSliderPost(
 			admin,
 			editor,
+			page,
 			requestUtils,
-			'always-bottom',
-			page
+			'always-bottom'
 		);
 
 		// PC・タブレット幅: common.scss の bottom:10px がそのまま適用される
@@ -384,16 +352,16 @@ test.describe('スライダー(本体)・投稿リストスライダー(Pro): Na
 		const alwaysBottomPostId = await publishPostListSliderPost(
 			admin,
 			editor,
+			page,
 			requestUtils,
-			'always-bottom',
-			page
+			'always-bottom'
 		);
 		const mobileBottomPostId = await publishPostListSliderPost(
 			admin,
 			editor,
+			page,
 			requestUtils,
-			'mobile-bottom',
-			page
+			'mobile-bottom'
 		);
 
 		await visitFrontendWithArrows(
@@ -433,9 +401,9 @@ test.describe('スライダー(本体)・投稿リストスライダー(Pro): Na
 		const postId = await publishSliderPost(
 			admin,
 			editor,
-			'hide',
 			page,
-			requestUtils
+			requestUtils,
+			'hide'
 		);
 
 		await page.setViewportSize(VIEWPORT.pc);
@@ -459,9 +427,9 @@ test.describe('スライダー(本体)・投稿リストスライダー(Pro): Na
 		const postId = await publishSliderPost(
 			admin,
 			editor,
-			'center',
 			page,
-			requestUtils
+			requestUtils,
+			'center'
 		);
 
 		await visitFrontendWithArrows(page, postId, VIEWPORT.pc);
@@ -484,9 +452,9 @@ test.describe('スライダー(本体)・投稿リストスライダー(Pro): Na
 		const postId = await publishSliderPost(
 			admin,
 			editor,
-			'mobile-bottom',
 			page,
-			requestUtils
+			requestUtils,
+			'mobile-bottom'
 		);
 
 		// PC幅では中央寄りのまま（bottom固定されない）
@@ -510,9 +478,9 @@ test.describe('スライダー(本体)・投稿リストスライダー(Pro): Na
 		const postId = await publishPostListSliderPost(
 			admin,
 			editor,
+			page,
 			requestUtils,
-			'hide',
-			page
+			'hide'
 		);
 
 		await page.setViewportSize(VIEWPORT.pc);

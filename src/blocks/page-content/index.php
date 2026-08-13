@@ -129,10 +129,14 @@ function vk_blocks_page_content_render_callback( $attributes ) {
 			$classes .= ' vk_hidden-xs';
 		}
 		if ( isset( $attributes['marginTop'] ) && $attributes['marginTop'] ) {
-			$classes .= ' ' . $attributes['marginTop'];
+			// Strip characters that are invalid in a class name (characters that could lead to HTML/attribute injection) before concatenating.
+			// class 名として不正な文字（HTML/属性への混入につながる文字）を除去してから連結する.
+			$classes .= ' ' . preg_replace( '/[^A-Za-z0-9_\-\/ ]/', '', $attributes['marginTop'] );
 		}
 		if ( isset( $attributes['marginBottom'] ) && $attributes['marginBottom'] ) {
-			$classes .= ' ' . $attributes['marginBottom'];
+			// Strip invalid characters the same way as marginTop, before concatenating.
+			// marginTop と同様に不正な文字を除去してから連結する.
+			$classes .= ' ' . preg_replace( '/[^A-Za-z0-9_\-\/ ]/', '', $attributes['marginBottom'] );
 		}
 
 		$wrapper_attributes = get_block_wrapper_attributes( array( 'class' => $classes ) );

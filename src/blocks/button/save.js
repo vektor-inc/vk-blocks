@@ -12,6 +12,7 @@ export default function save(props) {
 		buttonTarget,
 		relAttribute,
 		linkToPost,
+		linkToCustomField,
 		buttonSize,
 		buttonType,
 		buttonEffect,
@@ -35,7 +36,7 @@ export default function save(props) {
 		fontSizeValue,
 	} = attributes;
 
-	const effectiveUrl = linkToPost ? '' : buttonUrl;
+	const effectiveUrl = linkToPost || linkToCustomField ? '' : buttonUrl;
 
 	let containerClass = '';
 	// カスタムカラーの場合 またはアウターにギャップが指定されている場合 またはホバー色が指定されている場合
@@ -147,6 +148,7 @@ export default function save(props) {
 				lbUrl={effectiveUrl}
 				lbTarget={buttonTarget}
 				lbLinkToPost={linkToPost}
+				lbLinkToCustomField={linkToCustomField}
 				lbRelAttribute={relAttribute}
 				lbFontAwesomeIconBefore={fontAwesomeIconBefore}
 				lbFontAwesomeIconAfter={fontAwesomeIconAfter}

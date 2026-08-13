@@ -132,7 +132,7 @@
 		"rulesync": "^8.24.1",
 		"sass": "1.100.0",
 		"style-loader": "^4.0.0",
-		"swiper": "^12.2.0"
+		"swiper": "^14.0.6"
 	},
 	"engines": {
 		"node": ">=24.16.0"

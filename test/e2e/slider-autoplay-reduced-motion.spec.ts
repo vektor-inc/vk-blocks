@@ -5,6 +5,12 @@ import type {
 	RequestUtils,
 } from '@wordpress/e2e-test-utils-playwright';
 import type { Page } from '@playwright/test';
+import { registerPostCleanup } from './utils/post-cleanup';
+import {
+	waitForSwiperInit,
+	getAutoplayRunning,
+	waitForAutoplayRunning,
+} from './utils/swiper';
 
 /**
  * スライダー / 投稿リストスライダー：prefers-reduced-motion（PRM）と自動再生の関係。
@@ -25,7 +31,7 @@ import type { Page } from '@playwright/test';
 
 // このスペックで作成した投稿の ID。afterAll で対象を絞って削除する
 // （全削除だと他スペックのデータに影響し得るため、姉妹スペックの慣習に合わせる）
-const createdPostIds: number[] = [];
+const createdPostIds = registerPostCleanup();
 
 /**
  * スライダーブロック（slider-item 2枚）を挿入して公開し、投稿 ID を返す。
@@ -116,19 +122,8 @@ const visitFrontend = async (
 ): Promise<void> => {
 	await page.emulateMedia({ reducedMotion });
 	await page.goto(`/?p=${postId}`);
-	await page.waitForFunction(
-		() => typeof (window as any).swiper0 !== 'undefined'
-	);
+	await waitForSwiperInit(page);
 };
-
-/**
- * autoplay.running の現在値を返す。
- * visitFrontend で Swiper の初期化完了を待ってから呼ぶこと。
- *
- * @param page Page フィクスチャ
- */
-const getAutoplayRunning = async (page: Page): Promise<boolean> =>
-	await page.evaluate(() => !!(window as any).swiper0?.autoplay?.running);
 
 /**
  * PRM: reduce + 停止/再生ボタンありのスライダーで、
@@ -137,32 +132,21 @@ const getAutoplayRunning = async (page: Page): Promise<boolean> =>
  * @param page Page フィクスチャ
  */
 const expectPausedThenResumable = async (page: Page): Promise<void> => {
-	// 自動再生が停止しており、ボタンは「停止中（再生アイコン）」表示になっている
-	expect(await getAutoplayRunning(page)).toBe(false);
+	// 自動再生が停止しており、ボタンは「停止中（再生アイコン）」表示になっている。
+	// 単発の evaluate ではなく状態が変わるまで待つのは、再開側と同じ理由。
+	// waitForSwiperInit はインスタンスの生成を見ているだけなので、抑止（autoplay.stop）や
+	// 初期化直後の自動再生開始とレースし得る。waitForAutoplayRunning はインスタンス不在を
+	// 「停止中」と解釈せず例外にするため、初期化前に偶然通ることもない。
+	await waitForAutoplayRunning(page, false);
 	const pauseButton = page.locator('.swiper-pause-button');
 	await expect(pauseButton).toHaveClass(/is-paused/);
 
 	// 再生ボタンをクリックすると自動再生が開始される
-	// （単発の evaluate では状態更新とレースし得るため、ポーリングで待つ）
+	// （単発の evaluate では状態更新とレースし得るため、状態が変わるまで待つ）
 	await pauseButton.click();
-	await expect.poll(() => getAutoplayRunning(page)).toBe(true);
+	await waitForAutoplayRunning(page, true);
 	await expect(pauseButton).not.toHaveClass(/is-paused/);
 };
-
-// このスペックで作成した投稿だけを削除する（他スペックのデータに影響を与えないよう
-// 全削除ではなく ID を追跡して対象を絞る。table-of-contents-aria.spec.ts と同じ方式）
-test.afterAll(async ({ requestUtils }) => {
-	for (const id of createdPostIds) {
-		try {
-			await requestUtils.rest({
-				path: `/wp/v2/posts/${id}?force=true`,
-				method: 'DELETE',
-			});
-		} catch {
-			// 削除失敗は無視（後続スペックへの影響は無い）
-		}
-	}
-});
 
 test.describe('Slider autoplay と prefers-reduced-motion (#3044)', () => {
 	test('PRM 未設定: ページロード時に自動再生が開始される', async ({

@@ -1,4 +1,5 @@
 import { test, expect } from '@wordpress/e2e-test-utils-playwright';
+import { registerPostCleanup } from './utils/post-cleanup';
 
 /**
  * スライダーブロック: 編集画面のラッパー class が blockId 基準であることの回帰テスト
@@ -54,6 +55,9 @@ async function getWrapperClassTokens(editor, clientId) {
 	return (cls ?? '').split(/\s+/);
 }
 
+// このスペックは下書きを 1 件保存するため、終了時に削除されるよう登録しておく
+const createdPostIds = registerPostCleanup();
+
 test.describe('スライダー: 編集画面ラッパー class が blockId 基準（回帰 / #2556 副作用）', () => {
 	test('リロード後 blockId ≠ clientId でもラッパー class は .vk_slider_<blockId>', async ({
 		admin,
@@ -86,6 +90,7 @@ test.describe('スライダー: 編集画面ラッパー class が blockId 基�
 		const postId = await page.evaluate(() =>
 			window.wp.data.select('core/editor').getCurrentPostId()
 		);
+		createdPostIds.push(postId);
 		await admin.editPost(postId);
 		await waitForSliderBlockIds(page, 1);
 

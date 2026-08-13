@@ -11,6 +11,12 @@ import SliderHook1_2_1 from './1.2.1';
 import SliderHook1_0_16 from './1.0.16';
 
 export default [
+	// 1.124.0 (旧クラス swiper-container 削除前 / zoom CSS に .swiper-slide-duplicate-active あり)
+	// zoom・height のインライン CSS 出力は 1.121.1 と完全に同一のためフックを再利用する。#3069
+	// 1.124.0 (before the legacy swiper-container class was dropped / zoom CSS still
+	// carries .swiper-slide-duplicate-active). The inline zoom and height CSS is
+	// identical to 1.121.1, so the same hook is reused. #3069
+	SliderHook1_121_1,
 	SliderHook1_121_1, // 1.121.1 (pauseButton 追加前 / zoom CSS は var(--vk-slider-item-bg-image) 形式)
 	SliderHook1_115_0, // 1.115.0 (zoomFinalScal typo後方互換)
 	SliderHook1_104_0, // 1.110.1 (zoomFinalScal typo後方互換)

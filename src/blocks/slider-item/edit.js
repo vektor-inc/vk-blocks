@@ -6,7 +6,6 @@ import classnames from 'classnames';
 /* eslint camelcase: 0 */
 import { __ } from '@wordpress/i18n';
 import { useEffect } from '@wordpress/element';
-import { select } from '@wordpress/data';
 import {
 	InspectorControls,
 	BlockControls,
@@ -72,47 +71,6 @@ export default function SliderItemEdit(props) {
 			setAttributes({ blockId: clientId });
 		}
 	}, [clientId]);
-
-	// 既存ブロックの bgImage, bgImageTablet, bgImageMobile の ID を自動補完
-	useEffect(() => {
-		let isMounted = true;
-
-		const updateBgImageId = async (imageUrl, idAttributeName) => {
-			if (!imageUrl || attributes[idAttributeName]) {
-				return;
-			}
-
-			for (let attempts = 0; attempts < 10 && isMounted; attempts++) {
-				const media = select('core').getEntityRecords(
-					'postType',
-					'attachment',
-					{ per_page: -1 }
-				);
-				const mediaItem = media?.find(
-					(item) => item.source_url === imageUrl
-				);
-
-				if (mediaItem?.id) {
-					setAttributes({ [idAttributeName]: mediaItem.id });
-					return;
-				}
-
-				await new Promise((resolve) => setTimeout(resolve, 500));
-			}
-		};
-
-		['bgImage', 'bgImageTablet', 'bgImageMobile'].forEach((attr) =>
-			updateBgImageId(attributes[attr], `${attr}Id`)
-		);
-
-		return () => {
-			isMounted = false;
-		};
-	}, [
-		attributes.bgImage,
-		attributes.bgImageTablet,
-		attributes.bgImageMobile,
-	]);
 
 	const spacingPaddingLeft = attributes?.style?.spacing?.padding?.left;
 	const spacingPaddingRight = attributes?.style?.spacing?.padding?.right;
@@ -244,7 +202,7 @@ export default function SliderItemEdit(props) {
 						label={__('Color Setting', 'vk-blocks')}
 						id={`vk_sliderItem-colorSetting`}
 						help={__(
-							'Color will overcome background image. If you want to display image, set opacity 0.',
+							'The color will cover the background image. To display the image, set the opacity to 0.',
 							'vk-blocks'
 						)}
 					>

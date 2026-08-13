@@ -115,7 +115,7 @@ export const DisplayItemsControl = (props) => {
 			</h4>
 			<p>
 				{__(
-					'Click each card block to set the target url. You can find the url form at its sidebar.',
+					'Click each card block to set the target URL. You can find the URL field in the sidebar.',
 					'vk-blocks'
 				)}
 			</p>

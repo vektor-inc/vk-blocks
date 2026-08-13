@@ -51,8 +51,8 @@ msgstr "※ 未来の期間を選択する場合は、未来の投稿が即時�
 
 #: src/blocks/_pro/outer/edit.js:1180
 msgid ""
-"* If you select \"Do not use\" that, please set yourself it such as a "
-"spacer block."
+"* If you select \"Do not use\", set the padding yourself, for example with "
+"a Spacer block."
 msgstr "*「使用しない」を選択した場合はスペーサーブロックなどで任意に設定してください。"
 
 #: src/blocks/balloon/edit.js:154
@@ -378,7 +378,7 @@ msgid "Animation effect"
 msgstr "アニメーションの効果"
 
 #: src/blocks/_pro/animation/edit.js:150
-msgid "Animation only the first view"
+msgid "Animate only on the first view"
 msgstr "初回表示のみアニメーション"
 
 #: src/blocks/_pro/animation/edit.js:124
@@ -1179,8 +1179,8 @@ msgstr "キャッシュをクリア"
 #: src/blocks/_pro/card/edit.js:177
 #: src/components/display-items-control/index.js:112
 msgid ""
-"Click each card block to set the target url. You can find the url form at "
-"its sidebar."
+"Click each card block to set the target URL. You can find the URL field in "
+"the sidebar."
 msgstr "ボタンのリンク先は各カードブロックをクリックすると、サイドバーにURL入力フォームが表示されます。"
 
 #: src/blocks/_pro/fixed-display/edit.js:544
@@ -1237,8 +1237,8 @@ msgstr "色設定"
 
 #: src/blocks/_pro/outer/edit.js:723 src/blocks/slider-item/edit.js:271
 msgid ""
-"Color will overcome background image. If you want to display image, set "
-"opacity 0."
+"The color will cover the background image. To display the image, set the "
+"opacity to 0."
 msgstr "色を指定すると画像よりも優先されます。画像を表示したい場合は、不透明度を0に設定します。"
 
 #: src/components/column-layout/index.js:103
@@ -5083,8 +5083,8 @@ msgstr "表示番号に小数点を設定できるのは、表示を 1 つずつ
 
 #: src/blocks/_pro/fixed-display/edit.js:179
 msgid ""
-"The fixed position of the fixed position block will not change on the edit "
-"screen. Please check on the front screen."
+"The position of this block will not change on the edit screen. Please check "
+"on the front end."
 msgstr "編集画面では固定位置ブロックの固定位置は変わりません。フロント画面でご確認ください。"
 
 #: src/admin/import-export/import-form.js:414

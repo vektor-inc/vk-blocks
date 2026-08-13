@@ -807,7 +807,7 @@ msgid "Long"
 msgstr ""
 
 #: src/blocks/_pro/animation/edit.js:159
-msgid "Animation only the first view"
+msgid "Animate only on the first view"
 msgstr ""
 
 #: src/blocks/_pro/animation/edit.js:171
@@ -1155,7 +1155,7 @@ msgstr ""
 
 #: src/blocks/_pro/card/edit.js:192
 #: src/components/display-items-control/index.js:120
-msgid "Click each card block to set the target url. You can find the url form at its sidebar."
+msgid "Click each card block to set the target URL. You can find the URL field in the sidebar."
 msgstr ""
 
 #: src/blocks/_pro/card/edit.js:198
@@ -1400,7 +1400,7 @@ msgid "Fixed Display Setting"
 msgstr ""
 
 #: src/blocks/_pro/fixed-display/edit.js:192
-msgid "The fixed position of the fixed position block will not change on the edit screen. Please check on the front screen."
+msgid "The position of this block will not change on the edit screen. Please check on the front end."
 msgstr ""
 
 #: src/blocks/_pro/fixed-display/edit.js:199
@@ -1928,7 +1928,7 @@ msgid "Do not use default padding"
 msgstr ""
 
 #: src/blocks/_pro/outer/edit.js:1204
-msgid "* If you select \"Do not use\" that, please set yourself it such as a spacer block."
+msgid "* If you select \"Do not use\", set the padding yourself, for example with a Spacer block."
 msgstr ""
 
 #: src/blocks/_pro/outer/edit.js:1211
@@ -2057,7 +2057,7 @@ msgstr ""
 
 #: src/blocks/_pro/outer/edit.js:739
 #: src/blocks/slider-item/edit.js:246
-msgid "Color will overcome background image. If you want to display image, set opacity 0."
+msgid "The color will cover the background image. To display the image, set the opacity to 0."
 msgstr ""
 
 #: src/blocks/_pro/outer/edit.js:751

@@ -717,11 +717,220 @@ $colorPalette: (
 	--vk-color-background-white-translucent:rgba(255, 255, 255, 0.5);
 }
 
+// Painted size of the navigation buttons. The pagination's side clearance is derived from
+// it, so the arrow size and the space reserved for it can never drift apart.
+//ナビゲーションボタンの描画サイズ。ページネーションの左右クリアランスをここから算出するため、
+//矢印のサイズと確保する余白がずれることがない。
+$swiper-nav-size: 2.4rem;
+
+// Distance every overlay control (arrows, pause/play button) keeps from the edge of the slider.
+// Kept in one place so the controls cannot drift apart when one of them is touched. It is
+// exposed as --vk-slider-edge-offset so a theme or user CSS can move every control at once:
+// the arrows, the pause/play button, the space the pagination leaves for the arrows and the
+// pagination's own distance from the bottom edge all follow the same value.
+// The variable is declared nowhere, only read with a fallback, so it can be set on any
+// ancestor — inheritance is the point here, unlike the pagination variables further down,
+// which are deliberately scoped so they cannot reach a nested slider. It applies to the Post
+// List Slider (Pro) too, since both blocks share these rules.
+// It has to be a length (10px, 1rem …). A unitless value such as 10 would make the clearance
+// calc() invalid at computed-value time, which is what the @property registration below
+// guards against — a var() fallback alone does not cover an invalid value. Note that a
+// unitless 0 is a valid <length>, so it is honoured as 0px rather than falling back; the
+// clamp on the value below is what keeps a negative value from reopening the hole this offset
+// exists to close (a negative clearance clamps padding to 0, letting the arrow's hit area
+// swallow the first bullet's taps again).
+// Raising it eats horizontal space on narrow screens, so the number of bullets that fit on
+// one line falls as the value rises; the bullets wrap onto a second row once that number
+// drops below the slide count. Where that happens therefore depends on how many slides the
+// slider has, not on a fixed threshold value.
+//スライダー上に重ねるコントロール（矢印・停止/再生ボタン）が端から空ける距離。
+//片方だけ触って静かにずれることが無いよう 1 箇所にまとめる。テーマやユーザー CSS から
+//まとめて動かせるよう --vk-slider-edge-offset として公開し、矢印・停止/再生ボタン・
+//ページネーションが矢印のために空ける左右の余白・ページネーション自身の下端からの距離が、
+//すべて同じ値に追従する。変数はどこにも宣言せずフォールバック付きで
+//参照するだけなので、任意の祖先要素で指定できる。これらのルールは投稿リストスライダー（Pro）と
+//共通のため、Pro にも同じように効く（後述のページネーション用の変数は入れ子のスライダーに
+//届かないよう意図的にスコープを絞っているが、この変数は逆に継承させるのが目的）。
+//指定は長さ（10px・1rem など）で行う。10 のような単位なしの値ではクリアランスの
+//calc() が計算時に無効になるため、下の @property 登録でそれを防いでいる
+//（var() のフォールバックは「未定義」の時しか効かず、不正値は救えない）。
+//なお単位なしの 0 は <length> として妥当なため、フォールバックせず 0px として効く。
+//負の値も <length> として通ってしまい、クリアランスが負になると padding は 0 に
+//クランプされて「当たり判定が先頭 bullet のタップを奪う」——このオフセットが
+//塞いだはずの穴——が変数経由で再現するため、下の値で 0 を下限にしている。
+//値を上げると狭い画面では横幅を消費するぶん 1 行に並ぶ bullets の枚数が減り、
+//枚数がスライド数を下回った時点で 2 行に折り返す。つまり折り返しが起きる値は
+//スライドの枚数によって決まり、固定のしきい値があるわけではない。
+$swiper-edge-offset: 10px;
+$swiper-edge-offset-var: max(0px, var(--vk-slider-edge-offset, #{$swiper-edge-offset}));
+
+// Registering the custom property makes an invalid or unitless value fall back to the
+// default instead of invalidating the whole declaration it is used in — without this,
+// `--vk-slider-edge-offset: 10` drops the pagination's padding to 0 (bullets slide under
+// the arrows) while the arrows' own offset still falls back, so the breakage is uneven and
+// hard to trace. inherits: true is mandatory here: the default is false, which would stop a
+// value set on an ancestor from reaching the controls at all.
+//カスタムプロパティを登録しておくと、不正値・単位なしの値が指定された時に「その宣言全体が
+//無効」になるのではなく既定値へフォールバックする。これが無いと
+//`--vk-slider-edge-offset: 10` でページネーションの padding だけが 0 に落ちて
+//（bullets が矢印の下に潜る）、矢印側はフォールバックが効く、という不揃いな壊れ方になり
+//原因を追いにくい。inherits: true は必須で、既定の false では祖先で指定した値が
+//コントロールに届かなくなる。
+// Note that @property is not supported below Safari 16.4 / Firefox 128, so on those the
+// uneven fallback described above still happens for a unitless value. Valid lengths behave
+// the same everywhere.
+//なお @property は Safari 16.4 未満・Firefox 128 未満では効かないため、それらのブラウザでは
+//単位なしの値を指定した場合に上記の不揃いなフォールバックが依然として起きる。
+//正しい長さを指定している限り、どのブラウザでも挙動は同じ。
+@property --vk-slider-edge-offset {
+	syntax: "<length>";
+	inherits: true;
+	initial-value: #{$swiper-edge-offset};
+}
+
+// Swiper's own defaults for how far the pagination sits from the bottom edge (8px for
+// bullets, and the value below for the fraction counter, which vk-blocks sets itself).
+// The pagination follows --vk-slider-edge-offset only by the amount the value is raised
+// above its 10px default, so the default layout does not move: reading the variable
+// directly would shift the bullets from 8px to 10px on every existing slider. Without this
+// the arrows would move away from the bottom edge while the bullets stayed put, leaving the
+// arrows above the bullet row and the side clearance reserved for nothing.
+//ページネーションが下端から空ける距離の既定値（bullets は Swiper 既定の 8px、
+//スライド枚数表示は vk-blocks 側で指定している下の値）。
+//ページネーションは --vk-slider-edge-offset を「既定の 10px から上げたぶん」だけ追従する。
+//変数をそのまま読むと既存のすべてのスライダーで bullets が 8px から 10px へ動いてしまうため、
+//既定の見た目を変えないためにこの形にしている。追従させないと、値を上げた時に矢印だけが
+//下端から離れて bullets が取り残され、矢印が bullet 列の上に来たうえ、
+//左右に確保したクリアランスが誰のためでもない余白になる。
+$swiper-pagination-bullets-bottom: 8px;
+$swiper-pagination-fraction-bottom: 5px;
+// 「既定値」と「既定値＋上げたぶん」の大きい方。
+// calc() 側だけで「既定の 10px なら既定値のまま」は成立するので、max() は別の意思決定
+// ——「既定より小さい値でもページネーションを既定位置より下げない」ための下限クランプ——
+// である。0 や負の値で bullets が下端からはみ出して切れるのを防ぐのが目的で、
+// そのぶん下方向には追従しない（矢印だけが端に寄る）非対称な挙動になる。
+// The calc() alone already keeps the default in place at the default 10px, so max() is a
+// separate decision: it clamps the pagination so it never sits closer to the bottom edge
+// than its default, which is what stops 0 or negative values from pushing the bullets
+// outside the slider. The trade-off is that it does not follow downwards — below 10px only
+// the arrows and the pause/play button move closer to the edge.
+$swiper-pagination-bullets-bottom-var: max(#{$swiper-pagination-bullets-bottom}, calc(#{$swiper-edge-offset-var} - #{$swiper-edge-offset} + #{$swiper-pagination-bullets-bottom}));
+$swiper-pagination-fraction-bottom-var: max(#{$swiper-pagination-fraction-bottom}, calc(#{$swiper-edge-offset-var} - #{$swiper-edge-offset} + #{$swiper-pagination-fraction-bottom}));
+
+// Minimum pointer target size (WCAG 2.1 SC 2.5.5 Target Size, AAA / Apple HIG 44pt).
+// This is applied as an invisible hit area, not by enlarging the button itself: WCAG
+// measures the target, not the painted box. Growing the painted button would also widen
+// the clearance the bullets have to leave for it, which measurably reduced how many
+// bullets fit on mobile — this way both are satisfied at once.
+//ポインタターゲットの最小サイズ（WCAG 2.1 SC 2.5.5・AAA / Apple HIG 44pt）。
+//ボタン自体を大きくするのではなく不可視の当たり判定として付与する。WCAG が測るのは
+//ターゲットであって描画ボックスではないため。描画サイズを大きくすると bullets が
+//空けるべきクリアランスまで広がり、実測でモバイルの bullets 収容数が減ってしまうので、
+//この方法なら見た目・収容数を変えずに両立できる。
+$swiper-touch-target: 44px;
+
+// Expands the pointer target to $swiper-touch-target without changing the painted size.
+//描画サイズを変えずにポインタターゲットだけを $swiper-touch-target まで広げる。
+@mixin vk-slider-touch-target {
+	&::before {
+		content: "";
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: max(100%, #{$swiper-touch-target});
+		height: max(100%, #{$swiper-touch-target});
+	}
+}
+
+// Focus ring shared by every keyboard-reachable slider control (pagination bullets,
+// navigation arrows, pause/play button). All of them sit on arbitrary photos, so a
+// single-coloured ring can disappear on an image of the same tone. The ring is therefore a
+// dark line with a white halo outside it, which keeps the focus position visible against
+// both dark and light images (WCAG 2.1 SC 2.4.7 / SC 1.4.11).
+//キーボードで到達できるスライダーのコントロール（ページネーションの bullets・ナビゲーション矢印・
+//停止/再生ボタン）で共有するフォーカスリング。いずれも任意の写真の上に載るため、単色のリングでは
+//同系色の画像で消えてしまう。そのため暗い線の外側に白いハローを置き、暗い写真・明るい写真の
+//どちらでもフォーカス位置が分かるようにする（WCAG 2.1 SC 2.4.7 / SC 1.4.11）。
+//
+// The ring colour is a literal, not var(--vk-color-text-body): that variable is supplied by
+// vk-component and the Lightning themes, so a theme that sets a light body colour (or one
+// that turns vk-components off, leaving it undefined) would produce a white ring inside a
+// white halo — no focus indicator at all on a light image. The bullets themselves are also
+// fixed colours (#ccc / #666), so the ring has no theme colour to follow in the first place.
+//リング色は var(--vk-color-text-body) ではなくリテラルにしている。この変数は vk-component や
+//Lightning 系テーマが供給するもので、本文色に明るい色を設定したテーマ（あるいは vk-components を
+//切って未定義になったテーマ）では「白いリング＋白いハロー」になり、明るい画像の上でフォーカス表示が
+//皆無になる。bullets 自身も #ccc / #666 の固定色なので、そもそもリングが追従すべきテーマ色は無い。
+//
+// The outer spread has to clear the ring's outer edge to be visible at all: outline-offset
+// 2px plus outline-width 2px puts that edge 4px out, and the outline is painted over the
+// box-shadow, so a 4px spread would sit entirely underneath it. 6px leaves 2px of white
+// outside the ring. The bullet gap is 8px on mobile and 10px on PC, so it still does not
+// reach the neighbouring bullet.
+//外側の広がりはリングの外端を越えないと見えない。outline-offset 2px ＋ outline-width 2px で
+//リングの外端は 4px の位置にあり、outline は box-shadow の上に描かれるため、4px では
+//ハローが完全に隠れてしまう。6px にするとリングの外側に白が 2px 残る。bullet の間隔は
+//モバイル 8px・PC 10px あるため、隣の bullet には届かない。
+//
+// The inner 1px shadow reproduces the translucent white hairline that `outline` replaces on
+// the bullets (`outline` is a single property, so the focus ring overwrites the permanent
+// one). On the arrows and the pause/play button there is no permanent hairline, so it simply
+// becomes the inner half of the same sandwich.
+//内側の 1px は、bullets で `outline` が置き換えてしまう半透明の白ヘアラインを再現するためのもの
+//（`outline` は単一プロパティなので、フォーカスリングが常時のヘアラインを上書きする）。矢印と
+//停止/再生ボタンには常時のヘアラインが無いため、同じサンドイッチの内側の層になるだけ。
+//
+// The two shadow layers deliberately differ in where their colour comes from. The outer halo
+// is a literal for the same reason the ring is: if a theme overrode
+// --vk-color-background-white-translucent with a dark colour, the sandwich would become
+// "dark ring + dark halo" and the focus position would vanish on a light image — the exact
+// hole this ring was added to close, reopened through another door. The inner 1px keeps the
+// variable because its job is to reproduce the permanent hairline above, which reads the same
+// variable: if a theme changes that hairline, this layer has to follow it.
+//2 つの影は色の出どころをあえて変えている。外側のハローをリテラルにするのはリングと同じ理由で、
+//テーマが --vk-color-background-white-translucent を暗い色に上書きすると「暗いリング＋暗いハロー」
+//になり、明るい画像の上でフォーカス位置が消える（このリングで塞いだ穴が別経路で再現する）。
+//内側の 1px を変数のままにするのは、その役割が上の常時ヘアライン（同じ変数を読む）の再現だから。
+//テーマがヘアラインを変えたなら、この層も追従しなければならない。
+$swiper-focus-ring-color: #333;
+$swiper-focus-ring-halo-color: rgba(255, 255, 255, 0.5);
+
+@mixin vk-slider-focus-ring {
+	&:focus-visible {
+		outline: 2px solid $swiper-focus-ring-color;
+		outline-offset: 2px;
+		box-shadow:
+			0 0 0 1px var(--vk-color-background-white-translucent),
+			0 0 0 6px $swiper-focus-ring-halo-color;
+	}
+}
+
+// The injected SVG draws a thinner stroke than the icon font used up to Swiper v11, and it
+// sits on a translucent white circle over arbitrary photos, so the contrast against the
+// slide (WCAG 2.1 SC 1.4.11) depends on the image. Scaling the arrow up slightly thickens
+// the stroke and brings it back to roughly the previous weight. The circle's opacity is
+// left alone on purpose — it comes from a shared variable used by other controls too.
+//注入される SVG は Swiper v11 までのアイコンフォントより線が細く、任意の写真の上に置かれた
+//半透明の白丸に載るため、スライドとのコントラスト（WCAG 2.1 SC 1.4.11）が画像に左右される。
+//矢印を少し大きくすると線も太くなり、従来の見た目に近づく。白丸の不透明度は他のコントロールでも
+//使う共通変数のため、あえて触っていない。
+$swiper-arrow-height: 1.4rem;
+
+// Arrow icon used as a mask when Swiper has not injected its own SVG yet.
+// The shape matches the SVG Swiper v12+ injects, so both look identical.
+//Swiper がまだ SVG を注入していない時にマスクとして使う矢印アイコン。
+//Swiper v12 以降が注入する SVG と同じ形なので、どちらでも見た目は同じになる。
+$swiper-arrow-icon: "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2011%2020'%3E%3Cpath%20d='M0.38296%2020.0762C0.111788%2019.805%200.111788%2019.3654%200.38296%2019.0942L9.19758%2010.2796L0.38296%201.46497C0.111788%201.19379%200.111788%200.754138%200.38296%200.482966C0.654131%200.211794%201.09379%200.211794%201.36496%200.482966L10.4341%209.55214C10.8359%209.9539%2010.8359%2010.6053%2010.4341%2011.007L1.36496%2020.0762C1.09379%2020.3474%200.654131%2020.3474%200.38296%2020.0762Z'%20fill='%23000'/%3E%3C/svg%3E";
+
+// Slider container
+// -----------------------------------------------------------------------------
 .vk_slider,
 .vk_post_list_slider {
 	//共通ではないためvk_sliderの中に格納
 	height: auto; //100%だとサイトエディター画面でおかしくなるのでautoに
 	position: relative;
+
 	.swiper-wrapper {
 		height: auto; //100%だとおかしくなるのでautoに
 		transition-timing-function: cubic-bezier(0.77, 0.2, 0.05, 1);
@@ -731,25 +940,107 @@ $colorPalette: (
 	//vk_slider用のnextとprevボタン
 	.swiper-button-next,
 	.swiper-button-prev {
-		color: var(--vk-color-text-body);
+		// Swiper derives the button's width, height and vertical centering offset from this
+		// variable, so setting it alone is enough — no separate width/height is needed.
+		//Swiper はこの変数からボタンの幅・高さ・上下中央寄せのオフセットを算出するため、
+		//この 1 本を指定すれば足り、width/height を別途書く必要はない。
+		--swiper-navigation-size: #{$swiper-nav-size};
+
+		// Swiper's default sides offset changed from 10px (v11) to 4px (v14). Pin it to the
+		// shared edge offset so the arrows keep their previous position and stay aligned with
+		// .swiper-pause-button. Declaring Swiper's own variable on the element would beat any
+		// value inherited from an ancestor, so the override goes through --vk-slider-edge-offset,
+		// which every control reads — setting it moves the arrows, the pause/play button and the
+		// pagination clearance together instead of just one of them.
+		//Swiper 既定の左右オフセットは v11 の 10px から v14 で 4px に変わったため、共通の
+		//端オフセットに固定し、停止/再生ボタン（.swiper-pause-button）と端からの距離を揃える。
+		//Swiper 自身の変数を要素に直接宣言すると祖先からの継承に必ず勝ってしまうため、上書きは
+		//全コントロールが読む --vk-slider-edge-offset 経由にする。これにより矢印だけでなく
+		//停止/再生ボタン・ページネーションのクリアランスも一緒に動く。
+		--swiper-navigation-sides-offset: #{$swiper-edge-offset-var};
+
+		// The fallback is required: vk-blocks itself does not define --vk-color-text-body (it is
+		// commented out in class-vk-blocks-print-css-variables.php); vk-component and the
+		// Lightning themes supply it. On a theme that turns vk-components off via the
+		// vk_blocks_should_load_vk_components filter it is undefined, this declaration is
+		// invalid at computed-value time and `color` falls back to the inherited value — which
+		// can be light, leaving the arrow invisible on the translucent white circle.
+		//フォールバックは必須。--vk-color-text-body は vk-blocks 自身では定義しておらず
+		//（class-vk-blocks-print-css-variables.php でコメントアウト）、vk-component や
+		//Lightning 系テーマが供給している。vk_blocks_should_load_vk_components フィルタで
+		//vk-components を切ったテーマでは未定義になり、この宣言が計算時に無効化されて `color` は
+		//継承値に落ちる。継承値が明るい色だと半透明の白丸の上で矢印が見えなくなる。
+		color: var(--vk-color-text-body, #333);
 		background-color: var(--vk-color-background-white-translucent);
 		border-radius: var(--vk-size-radius);
 		background-image: none;
-		width: 2.4rem;
-		height: 2.4rem;
 		z-index: 20;
-		&:after {
-			font-size: 1.2rem;
+
+		// 見た目は変えずに当たり判定だけ 44px 角にする
+		@include vk-slider-touch-target;
+
+		// bullets と同じフォーカスリング。矢印は role="button" tabindex="0" でフォーカスできる。
+		@include vk-slider-focus-ring;
+
+		// Since Swiper v12 the arrow is an injected SVG (.swiper-navigation-icon) instead of
+		// an ::after icon font. Its viewBox is 11:20, so only the height is fixed and the
+		// width follows the aspect ratio instead of being letterboxed into a square.
+		//Swiper v12 以降、矢印は ::after のアイコンフォントではなく注入される SVG（.swiper-navigation-icon）になった。
+		//viewBox が 11:20 のため、正方形に収めてレターボックスさせず、高さだけを固定して幅は比率に従わせる。
+		.swiper-navigation-icon {
+			height: $swiper-arrow-height;
+			width: auto;
+		}
+
+		// Swiper injects the arrow SVG on initialization, and only into an empty button.
+		// The block editor preview does not initialize Swiper, so the button would stay
+		// empty and show no arrow at all (up to Swiper v11 the arrow came from a CSS icon
+		// font, so it rendered without JS). Draw the same arrow here while the button is
+		// empty; once the SVG is injected the button is no longer :empty and this stops.
+		//Swiper は初期化時に、中身が空のボタンにだけ矢印 SVG を注入する。
+		//ブロックエディタのプレビューでは Swiper を初期化しないため、そのままだと
+		//ボタンが空のままで矢印が出ない（v11 まではアイコンフォント＝CSS だけで描画できていた）。
+		//そこで中身が空の間だけ同じ形の矢印を描画する。SVG 注入後は :empty でなくなり自動的に無効になる。
+		&:where(:empty)::after {
+			content: "";
+			// height と aspect-ratio はインラインボックスには効かないため、明示的に
+			// 非インラインにする。Swiper 側のボタンが display:flex なので現状は
+			// フレックスアイテムとして blockify され結果的に効いているが、それに
+			// 依存すると Swiper のボタンのスタイルが変わった時に静かに矢印が消える。
+			//This pseudo-element needs a non-inline display for height / aspect-ratio to
+			//apply. Swiper's own button is display:flex, so it is blockified as a flex item
+			//today — relying on that would silently drop the arrow if Swiper changes it.
+			display: block;
+			height: $swiper-arrow-height;
+			aspect-ratio: 11 / 20; //注入される SVG の viewBox と同じ比率
+			background-color: currentColor;
+			-webkit-mask: url($swiper-arrow-icon) no-repeat center / contain;
+			mask: url($swiper-arrow-icon) no-repeat center / contain;
 		}
 
 		// Keep arrows fixed at the bottom on all devices.
 		//全デバイスで矢印を下部固定
 		&.swiper-button-always-bottom {
 			top: unset;
-			bottom: 10px;
+			bottom: $swiper-edge-offset-var;
 		}
 	}
 
+	// The prev arrow reuses the same icon, rotated 180 degrees. It sits outside the
+	// `.swiper-button-next, .swiper-button-prev` nest above on purpose, because the rotation must
+	// apply to the prev arrow only — inside that nest the declaration would reach both arrows and
+	// point the next arrow backwards. (Writing it there as `&.swiper-button-prev` would scope it
+	// correctly but also emit a `.swiper-button-next.swiper-button-prev` branch that no element
+	// can match: harmless, yet dead output that reads as if such an element existed.)
+	//prev は同じアイコンを 180 度回して使う。上の `.swiper-button-next, .swiper-button-prev` の
+	//ネストの外に置くのは、この回転を prev だけに効かせる必要があるため。ネスト内に書くと
+	//next にも掛かり、next の矢印が逆向きになってしまう。
+	//（ネスト内で `&.swiper-button-prev` と書けば対象は正しく絞れるが、どの要素にも一致しない
+	//`.swiper-button-next.swiper-button-prev` の分岐まで出力される。害は無いものの、
+	//そういう要素が存在するかのように読める死んだ出力が残る。）
+	.swiper-button-prev:where(:empty)::after {
+		transform: rotate(180deg);
+	}
 }
 
 //vk_slider用の自動再生 停止/再生ボタン
@@ -758,24 +1049,33 @@ $colorPalette: (
 .vk_post_list_slider {
 	.swiper-pause-button {
 		position: absolute;
-		top: 10px;
-		right: 10px;
+		top: $swiper-edge-offset-var;
+		right: $swiper-edge-offset-var;
 		left: auto;
 		z-index: 20;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 2.4rem;
-		height: 2.4rem;
+		width: $swiper-nav-size;
+		height: $swiper-nav-size;
 		padding: 0;
 		border: none;
 		cursor: pointer;
-		color: var(--vk-color-text-body);
+		// 矢印と同じ理由でフォールバックを付ける（上の .swiper-button-next / -prev のコメント参照）。
+		//Same fallback as the arrows — see the comment on .swiper-button-next / -prev above.
+		color: var(--vk-color-text-body, #333);
 		background-color: var(--vk-color-background-white-translucent);
 		border-radius: var(--vk-size-radius);
+
+		// 矢印ボタンと同じく、見た目は変えずに当たり判定だけ 44px 角にする
+		@include vk-slider-touch-target;
+
+		// bullets・矢印と同じフォーカスリング。
+		@include vk-slider-focus-ring;
+
 		.vk_slider_pauseButton_icon {
-			width: 1.2rem;
-			height: 1.2rem;
+			width: $swiper-arrow-height;
+			height: $swiper-arrow-height;
 			fill: currentColor;
 		}
 		//再生中（既定）は停止アイコンのみ表示し、再生アイコンは隠す
@@ -794,23 +1094,23 @@ $colorPalette: (
 	}
 }
 
-.swiper-container {
-	/* vk_width-full は廃止になったが互換処理のために 2022年10月末までは残す */
-	&.vk_width-full {
-		//全幅の時
-		margin: 0 calc(50% - 50vw);
-		width: 100vw;
-	}
-	&-horizontal{
-		>.swiper-pagination-bullets {
-			.swiper-pagination-bullet{
-				margin: 0 5px;
-			}
-		}
-	}
+// vk_width-full を出力していた頃（〜1.34.1）の保存済みコンテンツ向けの互換ルール。
+// 起点は Swiper 由来の旧クラス .swiper-container ではなく、当時から一貫して付いている
+// .vk_slider にする（新しい保存出力からは .swiper-container を削除したため / #3069）。
+// Compatibility rule for content saved back when vk_width-full was emitted (up to 1.34.1).
+// It is anchored on .vk_slider — present in every version — instead of Swiper's legacy
+// .swiper-container class, which the current save output no longer emits (#3069).
+.vk_slider.vk_width-full {
+	//全幅の時
+	margin: 0 calc(50% - 50vw);
+	width: 100vw;
 }
 
-// ↓ これ要る？
+// Slides
+// -----------------------------------------------------------------------------
+// Slides are laid out as a column box so that inner blocks stack and stay vertically
+// centered regardless of how tall the slide content is.
+//スライドの中身の高さに関わらずインナーブロックが縦に積まれ上下中央に収まるよう、縦方向のボックスにする。
 .swiper-slide {
 	height: auto; //100%だとおかしくなるのでautoに
 	font-size: 18px;
@@ -819,17 +1119,284 @@ $colorPalette: (
 	flex-direction: column;
 }
 
-//paginationの親枠
-.swiper-container-horizontal>.swiper-pagination-bullets{
-	padding-left:3.2rem;
-	padding-right:3.2rem;
+// Pagination (bullets)
+// =============================================================================
+// The old selectors were anchored on .swiper-container-horizontal, which Swiper renamed
+// in v8, so they had stopped matching. They are re-anchored on the block's own class
+// instead of the new .swiper-horizontal because Swiper is never initialized vertically
+// here (no direction option is passed) and, in the block editor, Swiper is initialized on
+// an inner element so .swiper-horizontal never lands on the block root itself.
+//旧セレクタは Swiper が v8 でリネームした .swiper-container-horizontal を起点にしていたため不発だった。
+//新クラス .swiper-horizontal ではなくブロック自身のクラスを起点にするのは、direction オプションを
+//渡しておらず縦スライダーが存在しないことと、ブロックエディタでは Swiper が内側の要素に初期化されるため
+//.swiper-horizontal がブロックのルート自体には付かないため。
+
+// The conditions that mean "the arrows sit at the bottom", kept in one place. The clearance
+// and the bullet shrink that pays for it must always match; splitting these apart is what
+// previously left always-bottom with the clearance but not the smaller bullets.
+//「矢印が下部にある」という条件を 1 箇所にまとめる。クリアランスと、その分を取り戻すための
+//bullet 縮小は常に一致していなければならず、これを別々に書いたことが
+//always-bottom にクリアランスだけ効いて bullet が縮まない不具合の原因だった。
+// Each variable stays a single selector — the comma lives inside :has(), which takes a
+// relative selector list — so they behave the same wherever they are interpolated. A
+// top-level comma would silently split the compound selector when used outside :where().
+//カンマは相対セレクタリストを取れる :has() の内側に置き、各変数を単一セレクタに保つ。
+//トップレベルにカンマがあると :where() の外で使ったときにセレクタが分割され、
+//`.vk_slider` が外れた条件が黙って過剰マッチしてしまう。
+// These are always interpolated inside :where(), which IS forgiving: on a browser without
+// :has() support the unknown :has() is dropped from the list and :where() ends up empty, so
+// the rule stays valid but matches nothing. The clearance and the bullet shrink therefore
+// never apply one without the other — the pagination simply keeps the layout it had before
+// this change, which is the same kind of safe degradation as the @property note further up.
+// Note that it is :where() providing this, not :has(): taking :where() off would make the
+// whole selector invalid instead.
+//これらは必ず forgiving な `:where()` の内側に補間する。`:has()` 非対応ブラウザでは
+//未知の `:has()` がリストから捨てられて `:where()` が空になるため、ルール自体は有効なまま
+//どの要素にも一致しない。そのため左右クリアランスと bullet 縮小が片方だけ適用されることはなく、
+//ページネーションはこの変更前と同じレイアウトのまま残る（上の @property の注記と同じく安全に劣化する）。
+//この安全な劣化を担保しているのは `:has()` ではなく `:where()` である点に注意。`:where()` を
+//外すとセレクタ全体が無効になる。
+//:has() が使えるのは Chrome / Edge 105 以降・Safari 15.4 以降・Firefox 121 以降。
+$swiper-nav-mobile-bottom-class: ".swiper-button-mobile-bottom";
+$swiper-nav-always-bottom-class: ".swiper-button-always-bottom";
+$swiper-nav-mobile-bottom: ":has(> #{$swiper-nav-mobile-bottom-class})";
+$swiper-nav-always-bottom: ":has(> #{$swiper-nav-always-bottom-class})";
+$swiper-nav-bottom-any: ":has(> #{$swiper-nav-mobile-bottom-class}, > #{$swiper-nav-always-bottom-class})";
+
+// Side clearance so the bullets do not run underneath the arrow buttons.
+// Only applied when the arrows are actually at the bottom, i.e. on the same row as the
+// bullets. Reserving it unconditionally would waste roughly 100px even when the arrows are
+// hidden or vertically centered, which noticeably reduces how many bullets fit on mobile.
+//矢印ボタンの下に bullets が潜り込まないようにするための左右の余白。
+//矢印が実際に下部にある（＝bullets と同じ高さに並ぶ）時だけ適用する。
+//無条件に確保すると、矢印が無い(hide)・上下中央(center)の時にも約100px を消費してしまい、
+//特にモバイルで並べられる bullets の枚数が無駄に減るため。
+@mixin vk-slider-pagination-arrow-clearance {
+	// Derived from the arrow's actual geometry so it cannot drift: the edge offset, plus the
+	// distance to the arrow's centre, plus half of whatever is wider — the painted button or
+	// its 44px pointer target. Reserving only the painted width let the invisible hit area
+	// (z-index 20, above the pagination) swallow the first bullet's taps: with the previous
+	// `2.4rem + 0.8rem` that happened whenever the root font-size was below 16px, the default
+	// 16px sitting exactly on the boundary with zero margin. With a 16px root this evaluates
+	// to the same 51.2px as before, so nothing moves in the default case.
+	// Note that from a root font-size of about 18.3px upwards the painted button is the wider
+	// of the two, so the clearance lands exactly on the painted button's edge and the visible
+	// gap between the arrow and the first bullet becomes zero. Measured against the hit area
+	// the clearance always lands exactly on its inner edge, at any root size — that is the
+	// intended contract; only the visible gap is at stake here. An explicit spacing term would
+	// restore it but would also move the default 51.2px, so keeping the default untouched wins.
+	//矢印の実際の座標から導出してずれないようにする。端オフセット＋矢印中心までの距離＋
+	//「描画ボックスと 44px のポインタターゲットのうち大きい方」の半分。描画幅だけを確保すると、
+	//不可視の当たり判定（z-index 20 で pagination の上）が先頭 bullet のタップを奪ってしまう。
+	//従来の `2.4rem + 0.8rem` ではルート font-size が 16px 未満のとき常にこれが起き、
+	//既定の 16px はちょうど余裕ゼロの境界だった。ルート 16px では従来と同じ 51.2px になるため、
+	//既定の見た目は変わらない。
+	//なおルート font-size が約 18.3px 以上になると描画ボックスの方が大きくなるため、
+	//クリアランスが描画ボックスの端そのものと一致し、矢印と先頭 bullet の**見た目の**隙間が
+	//0 になる。当たり判定を基準にすればクリアランスはどのルート値でも常にその内端と一致し、
+	//そちらが担保したい契約（既定の 16px でも接している）。ここで問題にしているのは
+	//見た目の隙間だけ。式に明示的な間隔項を足せば解消できるが既定の 51.2px が動いてしまうため、
+	//既定を変えないことを優先している。
+	$clearance: calc(
+		#{$swiper-edge-offset-var} + #{$swiper-nav-size * 0.5} +
+			max(#{$swiper-nav-size}, #{$swiper-touch-target}) * 0.5
+	);
+
+	padding-left: $clearance;
+	padding-right: $clearance;
 	box-sizing: border-box; //他のFSEテーマではみ出るので追加
+}
+
+// The rules below (clearance, bullet gap, mobile bullet size) apply to .vk_slider only. The
+// Post List Slider (Pro) lays its pagination out with position: inherit, i.e. in the normal
+// flow underneath the slides rather than overlaying them, so the layout it starts from is a
+// different one. The old selector had been dead since Swiper v8, so leaving the Pro block out
+// keeps it rendering as it does today. #3069
+//
+// Do NOT read this as "the arrows and the bullets can never overlap on Pro". They can, and in
+// the default configuration they do: Pro's navigationPosition defaults to mobile-bottom, so on
+// mobile its arrows are absolutely positioned at bottom: 0 and land on the same row as the
+// bullets in the normal flow. Measured at 375px with the defaults, the prev arrow's 44px
+// pointer target covers the leftmost 3.7px of the first bullet (30px wide), and
+// elementFromPoint there returns the arrow because the arrows are z-index 20 against the
+// pagination's 10. The remaining 26.3px of the bullet still takes the tap. The overlap predates
+// this change (the painted 38.4px button already covered 0.89px); widening the pointer target
+// to 44px added 2.8px. Pro is left out because that residual overlap is judged acceptable, not
+// because it is structurally impossible.
+//以下のルール（クリアランス・bullet の間隔・モバイルの bullet 幅）は .vk_slider だけに限定する。
+//投稿リストスライダー（Pro）は pagination を position: inherit で通常フロー（スライドの下）に
+//置くため、出発点となる配置構造が異なる。旧セレクタは Swiper v8 以降ずっと不発だったため、
+//Pro を対象外にすることで現状の表示を一切変えずに済む。#3069
+//
+//これを「Pro では矢印と bullets が重なり得ない」と読まないこと。既定の設定では実際に重なる。
+//Pro の navigationPosition の既定値は mobile-bottom なので、モバイルでは矢印が bottom: 0 の
+//絶対配置になり、通常フローにある bullets 行と同じ高さに来る。既定設定・375px で実測すると、
+//前矢印の 44px のポインタターゲットが先頭 bullet（幅 30px）の左端 3.7px を覆い、その点の
+//elementFromPoint は矢印を返す（矢印が z-index 20、pagination が 10 のため）。bullet の残り
+//26.3px はタップを受け取れる。重なり自体はこの変更以前からあり（描画ボックス 38.4px の時点で
+//0.89px）、ポインタターゲットを 44px に広げたぶん 2.8px 増えた。Pro を対象外にしているのは
+//構造的に起こり得ないからではなく、この残りの重なりを許容できると判断したためである。
+
+// Everything below is scoped to the block's own pagination element (`> .swiper-pagination-bullets`)
+// rather than to .vk_slider itself. A slider item can hold arbitrary inner blocks, including a
+// Post List Slider (Pro): declaring the custom property on .vk_slider would let it inherit into
+// that nested pagination, and a descendant bullet selector would match its bullets too.
+//以下はすべて .vk_slider 自身ではなく、そのブロック直下の pagination 要素
+//（`> .swiper-pagination-bullets`）を起点にする。スライドの中には任意のインナーブロック、
+//たとえば投稿リストスライダー（Pro）も入れられるため、カスタムプロパティを .vk_slider に
+//置くと入れ子の pagination まで継承され、bullet の子孫セレクタも入れ子側に当たってしまう。
+.vk_slider > .swiper-pagination-bullets {
+	// The bullet gap is set through Swiper's own custom property instead of overriding
+	// its margin rule, so no direction class (.swiper-horizontal) has to be matched.
+	//bullet の間隔は Swiper の margin ルールを上書きせず、Swiper 自身のカスタムプロパティで指定する。
+	//これにより方向クラス（.swiper-horizontal）を起点にする必要が無くなる。
+	--swiper-pagination-bullet-horizontal-gap: 5px;
+
+	// Keeps the default position relationship with the arrows when the shared edge offset is
+	// raised (the two are never level — the arrows are 38.4px tall at 10px from the edge, the
+	// bullets 5px tall at 8px; what is preserved is that 2px difference at the bottom), so the
+	// arrows do not end up above the bullet row. Stays at Swiper's default 8px otherwise.
+	// How the variable maps onto each control: the arrows and the pause/play button take it as
+	// their distance from the edge directly, while the pagination follows it from its own
+	// default position, and only upwards — the max() further up clamps the downward direction
+	// at that default. Unlike the side clearance, the follow is not limited to the bottom
+	// arrow positions: what moves the pagination is the requested distance from the edge, not
+	// where the arrows happen to be. With hide / center there is simply no arrow on that row
+	// to line up with, and the bullets still honour the offset.
+	//共通の端オフセットを上げた時に、矢印との既定の位置関係を保つ（両者の高さが揃うわけではない。
+	//矢印は端から 10px・高さ 38.4px、bullets は 8px・高さ 5px で、維持されるのは下端の 2px 差）。
+	//これにより矢印が bullet 列の上に来ることを防ぐ。それ以外の場合は Swiper 既定の 8px のまま。
+	//この変数が各コントロールに効く形は同じではない。矢印と停止/再生ボタンは端からの距離を
+	//そのまま指定するが、ページネーションは自身の既定位置を基準に「上げたぶんだけ」追従する
+	//（下方向は上の max() で既定位置を下限にクランプ）。
+	//左右のクリアランスと違って矢印が下部にある場合に限定していないのは、ページネーションを
+	//動かしているのが矢印の位置ではなく「端からの距離」の指定だから。hide / center では
+	//同じ行に揃える矢印が無いだけで、指定された端からの距離は bullets にも同じように効かせる。
+	--swiper-pagination-bottom: #{$swiper-pagination-bullets-bottom-var};
+
+	// The painted bar is only 5px tall, so a finger that is a few pixels off vertically misses
+	// it — and on mobile the bar is narrowed to 20px on top of that. This gives it an invisible
+	// target 24px tall (WCAG 2.2 SC 2.5.8 Target Size Minimum). Only the height grows: widening
+	// it would eat into the neighbouring bullet's target and into the clearance reserved for the
+	// arrows, which is the very thing the narrowing pays for. Height alone leaves the painted
+	// size and the number of bullets that fit on one line exactly as they are.
+	// Scoped to this block's own pagination like the rules above, so the Post List Slider (Pro)
+	// keeps its current target — Pro lays its pagination out in the normal flow, where a taller
+	// target would reach into the content above and below instead of into the slide.
+	//描画されるバーは高さ 5px しかないため、指が縦に数 px ずれるだけで外れる（モバイルではさらに
+	//幅 20px に縮んでいる）。ここで高さ 24px の不可視ターゲットを与える
+	//（WCAG 2.2 SC 2.5.8 Target Size Minimum）。広げるのは高さだけ。横に広げると隣の bullet の
+	//ターゲットと、矢印のために空けたクリアランス（バーを縮めてまで確保したもの）を侵食する。
+	//高さだけなら描画サイズも 1 行に並ぶ枚数もそのままで済む。
+	//
+	// How SC 2.5.8 is met depends on the pointer, not on the width — this target only exists
+	// where a coarse pointer is available (see the media query below), so there are two paths:
+	//   - With a coarse pointer: 30x24 on PC (meets the 24x24 minimum outright) and 20x24 on
+	//     mobile, where the narrowed bar falls back to the spacing exception (bullet 20px +
+	//     4px gap on each side = 28px between centres).
+	//   - Mouse-only devices: no target is generated, so the bullet stays at its painted
+	//     30x5 and passes solely through the spacing exception (30px + 5px gap on each side
+	//     = 40px between centres).
+	// Either way the spacing exception is what the narrow cases rest on, and it requires at
+	// least 24px between centres. Narrowing the bar or the gap further would drop it.
+	// Watch the arrow side before the neighbouring bullet: on mobile the clearance puts the
+	// first bullet's centre at 65.2px, so the left edge of its 24px circle sits at 53.2px —
+	// only 2px clear of the arrow's 44px target (inner edge 51.2px). Tightening the clearance
+	// formula or the mobile gap breaks the exception here first, not between the bullets.
+	//注意すべきは隣の bullet より先に矢印側。モバイルではクリアランスにより先頭 bullet の
+	//中心が 65.2px になり、その 24px 円の左端は 53.2px ＝ 矢印の 44px ターゲットの内端
+	//（51.2px）との余裕は 2px しかない。クリアランスの式やモバイルの gap を詰めると、
+	//bullet 同士より先にこちら側で例外が外れる。
+	//SC 2.5.8 の満たし方は幅ではなくポインタで変わる。このターゲットは粗いポインタがある環境に
+	//しか存在しない（下のメディアクエリ）ため、経路は 2 つある。
+	//  - 粗いポインタあり: PC は 30x24 で 24x24 の最小サイズを直接満たす。モバイルはバーが
+	//    20px に縮むため 20x24 となり、間隔例外で成立する
+	//    （bullet 20px ＋ 左右 4px ずつの gap ＝ 中心間 28px）。
+	//  - マウスのみの環境: ターゲットは生成されないので bullet は描画どおりの 30x5 で、
+	//    間隔例外だけで成立する（bullet 30px ＋ 左右 5px ずつの gap ＝ 中心間 40px）。
+	//いずれの狭いケースも拠り所は間隔例外で、中心間 24px 以上が必要。
+	//バーや gap をこれ以上詰めると、その例外から外れる。
+	//上のルールと同じくこのブロック直下の pagination に限定し、投稿リストスライダー（Pro）は
+	//現状のターゲットを維持する。Pro は pagination を通常フローに置くため、縦に広げると
+	//スライドではなく前後のコンテンツへ食い込むからである。
+	//
+	// Limited to devices that have a coarse pointer available. The bullet is positioned and
+	// keeps pointer-events: auto inside a pagination that has them off, and that pagination
+	// carries Swiper's own z-index: 10 (the bullet itself resolves to z-index: auto), so this
+	// target sits in front of whatever the slide puts under it — on a mouse-only device that
+	// just takes clicks away, since the benefit (absorbing vertical finger drift) does not
+	// apply to a precise pointer. SC 2.5.8 is likewise about low-precision input.
+	// `any-pointer` rather than `pointer`: the latter describes only the *primary* pointer, so a
+	// touch-capable laptop reports `pointer: fine` and would lose the target for finger input
+	// even though the screen is being touched. `any-pointer: coarse` matches whenever *some*
+	// coarse pointer exists, which is exactly the condition this target is for.
+	//粗いポインタを持つ環境に限定する。bullet は positioned で、pointer-events を切った
+	//pagination の中で auto を保つ。その pagination に Swiper 自身が z-index: 10 を付けている
+	//ため（bullet 自身は z-index: auto）、このターゲットはスライド側に置かれたものより手前に
+	//来る。マウスしか無い環境では「指の縦ブレを吸収する」という恩恵が無く、クリックを奪う
+	//副作用だけが残る。SC 2.5.8 が想定しているのも精度の低い入力である。
+	//`pointer` ではなく `any-pointer` を使うのは、前者が*主*ポインタしか表さないため。
+	//タッチ対応のノート PC は `pointer: fine` を返すので、画面を指で操作していてもターゲットが
+	//効かなくなる。`any-pointer: coarse` は粗いポインタが 1 つでもあれば一致し、
+	//これがまさにこのターゲットを出したい条件になる。
+	@media (any-pointer: coarse) {
+		> .swiper-pagination-bullet {
+			position: relative;
+
+			&::before {
+				content: "";
+				position: absolute;
+				top: 50%;
+				left: 0;
+				transform: translateY(-50%);
+				width: 100%;
+				height: 24px;
+			}
+		}
+	}
+}
+
+// always-bottom は全デバイスで矢印が下部
+.vk_slider:where(#{$swiper-nav-always-bottom}) > .swiper-pagination-bullets {
+	@include vk-slider-pagination-arrow-clearance;
+}
+
+@media (max-width: 575.98px) {
+	// mobile-bottom（既定）はモバイル幅でのみ矢印が下部
+	.vk_slider:where(#{$swiper-nav-mobile-bottom}) > .swiper-pagination-bullets {
+		@include vk-slider-pagination-arrow-clearance;
+	}
+
+	// Applied under the same condition as the clearance — both bottom positions, since the
+	// clearance is what costs the space. Reserving it costs horizontal space, which reduces
+	// how many bullets fit on one line — on a 375px screen it would drop from 8 to 6, and once
+	// they wrap they overlap the slide and the rows sit too close together to keep the
+	// WCAG 2.1 SC 2.5.8 spacing exception. Slightly smaller bullets on mobile keep the
+	// count at least at what it was before the clearance started applying. Without arrows at
+	// the bottom (hide / center) there is no clearance, so the bullets stay at their normal 30px.
+	// (Swiper's dynamicBullets would remove wrapping entirely, but it scales inactive
+	// bullets to .33 — fine for round dots, unusable for these 30x5 bars.)
+	//クリアランスと同じ条件（下部配置の 2 種類）で適用する。横幅を消費しているのは
+	//クリアランスだからである。クリアランスを確保すると 1 行に並べられる bullets の枚数が減る
+	//（375px 幅で 8枚→6枚）。折り返すとスライドに重なるうえ、行間が詰まって
+	//WCAG 2.1 SC 2.5.8 の間隔例外も成立しなくなる。モバイルでは bullet を少し小さくして、
+	//クリアランスが効く前と同等以上の枚数を維持する。矢印が下部に無い（hide / center）場合は
+	//クリアランス自体が無いので bullet は通常の 30px のままにする。
+	//（Swiper の dynamicBullets なら折り返し自体が無くなるが、非アクティブな bullet を
+	//　scale(.33) で縮小する仕様のため、円形ドットならともかく 30x5 のバーでは破綻する）
+	.vk_slider:where(#{$swiper-nav-bottom-any}) > .swiper-pagination-bullets {
+		--swiper-pagination-bullet-horizontal-gap: 4px;
+
+		> .swiper-pagination-bullet {
+			width: 20px;
+		}
+	}
 }
 //pagination
 .swiper-pagination{
 	pointer-events: none;
 	//標準
-	&-bullet{ 
+	&-bullet{
 		border-radius: unset;
 		width: 30px;
 		height: 5px;
@@ -840,6 +1407,18 @@ $colorPalette: (
 		&-active {
 			background: #666;
 		}
+
+		// Swiper marks clickable bullets with role="button" and tabindex="0", so they are
+		// keyboard focusable. The permanent translucent outline above would otherwise hide
+		// the focus indicator, so an explicit focus ring is required (WCAG 2.1 SC 2.4.7).
+		// The ring itself is shared with the arrows and the pause/play button so that every
+		// control in the widget shows focus the same way (see vk-slider-focus-ring).
+		//Swiper はクリック可能な bullet に role="button" と tabindex="0" を付けるためキーボードで
+		//フォーカスできる。上の常時 outline がフォーカス表示を潰してしまうため、明示的に
+		//フォーカスリングを指定する（WCAG 2.1 SC 2.4.7）。リング自体は矢印・停止/再生ボタンと
+		//共有し、ウィジェット内のどのコントロールでもフォーカス表示が同じになるようにしている
+		//（vk-slider-focus-ring を参照）。
+		@include vk-slider-focus-ring;
 	}
 	//標準以外（スライドの枚数）
 	&.swiper-pagination-fraction:not(.swiper-pagination-bullets){
@@ -849,17 +1428,65 @@ $colorPalette: (
 		background: var(--vk-color-background-white-translucent);
 		padding: 0.4rem 1.5rem;
 		border-radius: 30px;
-		bottom: 5px;
+		bottom: $swiper-pagination-fraction-bottom;
 	}
 }
 
-//矢印ボタン モバイルは下部
+// The counter follows the shared edge offset only on the main slider, so it does not stay
+// behind when the arrows move away from the bottom edge. It is deliberately not applied to
+// the Post List Slider (Pro): that block lays its pagination out in the normal flow
+// (position: inherit), so moving `bottom` would push the counter into the slides instead of
+// away from the edge — the same reason the side clearance and the bullet variables above are
+// scoped to .vk_slider.
+//枚数表示の端オフセット追従は本体スライダーだけに限定する。矢印が下端から離れた時に
+//枚数表示だけ取り残されないようにするためのもので、投稿リストスライダー（Pro）は
+//pagination を通常フロー（position: inherit）に置くため bottom を動かすと端から離れるのではなく
+//スライド側へ食い込んでしまう。上のクリアランスや bullet 用の変数を .vk_slider 限定に
+//しているのと同じ理由。
+// :not() は詳細度を上げないよう :where() で包む。基底ルールと同じ (0,3,0) になるため、
+// ソース順の後勝ちで効かせる（基底ルールはこの上にある）。
+.vk_slider > .swiper-pagination.swiper-pagination-fraction:where(:not(.swiper-pagination-bullets)) {
+	bottom: #{$swiper-pagination-fraction-bottom-var};
+}
+
+// 矢印ボタン モバイルは下部。
+// 起点を .vk_slider に限定する。投稿リストスライダー（Pro）はモバイルでの下部位置を
+// 自前の style.scss（bottom: 0）で決めており、こちらは対象外。無起点のままだと
+// Pro にも一致してしまい、Pro 側の指定が消えた時に黙って端オフセットへ追従し始める
+// （＝always-bottom で実際に起きた不整合と同じ形）。
+// Anchored on .vk_slider: the Post List Slider (Pro) decides its own mobile bottom
+// position in its style.scss (bottom: 0). Without an anchor this also matches Pro, so
+// removing Pro's own rule would silently make it follow the edge offset instead — the
+// same kind of mismatch that actually happened with always-bottom.
 @media (max-width: 575.98px) {
-	.swiper-button-next, 
-	.swiper-button-prev{
-		&.swiper-button-mobile-bottom{
-		top:unset;
-		bottom: 10px;
+	.vk_slider {
+		.swiper-button-next,
+		.swiper-button-prev {
+			&.swiper-button-mobile-bottom {
+				top: unset;
+				bottom: $swiper-edge-offset-var;
+			}
+		}
+	}
+
+	// 投稿リストスライダー（Pro）は always-bottom でもモバイル幅では下端ベタ付き
+	// （bottom: 0）を維持する。PC・タブレット幅は上の共有ルールの端オフセットに従う。
+	// このルールは以前 Pro の style.scss にあったが、共有ルールと詳細度が同じ (0,3,0) で
+	// 別ファイルとして読み込まれるため順序で勝敗が決まり、実際には共有ルールが後勝ちして
+	// モバイルでも 10px になっていた（mobile-bottom と位置が揃わない）。共有ルールと
+	// 同じファイルでソース順を後ろにすることで、読み込み順に依存せず必ず効く。#3069
+	// The Post List Slider (Pro) keeps its arrows flush with the bottom edge on mobile even
+	// with always-bottom; PC / tablet follow the shared edge offset above. This lived in Pro's
+	// style.scss, but it has the same specificity (0,3,0) as the shared rule and shipped in a
+	// separate file, so load order decided the winner — the shared rule won and mobile stayed
+	// at 10px, out of line with mobile-bottom. Keeping it in the same file as the shared rule
+	// lets source order settle it, independent of load order. #3069
+	.vk_post_list_slider {
+		.swiper-button-next,
+		.swiper-button-prev {
+			&.swiper-button-always-bottom {
+				bottom: 0;
+			}
 		}
 	}
 }

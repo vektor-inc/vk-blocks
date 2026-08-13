@@ -163,6 +163,58 @@ class Test_Page_Content extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Security: verify that the marginTop / marginBottom attributes are not concatenated into the class string without sanitization.
+	 * セキュリティ: marginTop / marginBottom 属性が class 文字列へ無害化されずに連結されていないかを確認する。
+	 * issue #3065: regression test for the vulnerability where render_callback concatenated values into the class attribute without escaping.
+	 * issue #3065: render_callback 内でエスケープなしに class 属性へ連結していた脆弱性の回帰テスト。
+	 */
+	public function test_vk_blocks_page_content_render_callback_sanitizes_margin_classes() {
+		$tests = array(
+			array(
+				'test_name'  => '正常な marginTop / marginBottom クラス名の場合 => そのまま class に反映される',
+				'attributes' => array(
+					'name'         => 'vk-blocks/page-content',
+					'className'    => '',
+					'TargetPost'   => $this->public_page_id,
+					'marginTop'    => 'vk_margin-top-30',
+					'marginBottom' => 'vk_margin-bottom-30',
+				),
+				'contains'   => array( 'vk_margin-top-30', 'vk_margin-bottom-30' ),
+				'not_contains' => array(),
+			),
+			array(
+				'test_name'  => 'marginTop / marginBottom に class 属性を脱出させる不正値を指定した場合 => 不正な文字が除去される',
+				'attributes' => array(
+					'name'         => 'vk-blocks/page-content',
+					'className'    => '',
+					'TargetPost'   => $this->public_page_id,
+					'marginTop'    => 'vk_margin-top-30"><script>alert(1)</script>',
+					'marginBottom' => 'vk_margin-bottom-30" onmouseover="alert(2)',
+				),
+				'contains'   => array(),
+				// '"><' or the bare 'onmouseover' can also appear in the safe class string left after sanitization
+				// (e.g. "...30 onmouseoveralert2"), so asserting on them is a false-positive risk.
+				// Assert only on structures that would actually form an event handler or script tag.
+				// '"><' や裸の 'onmouseover' は、無害化後に残る安全なクラス文字列
+				// （例: "...30 onmouseoveralert2"）にも現れうるため誤検知の元になる。
+				// 実際にイベントハンドラや script タグとして成立する構造だけを検証する。
+				'not_contains' => array( '<script', 'onmouseover="', 'alert(' ),
+			),
+		);
+
+		foreach ( $tests as $test ) {
+			$result = vk_blocks_page_content_render_callback( $test['attributes'] );
+
+			foreach ( $test['contains'] as $needle ) {
+				$this->assertStringContainsString( $needle, $result, $test['test_name'] );
+			}
+			foreach ( $test['not_contains'] as $needle ) {
+				$this->assertStringNotContainsString( $needle, $result, $test['test_name'] );
+			}
+		}
+	}
+
+	/**
 	 * REST リクエスト時は編集リンクを出力しないことを確認
 	 *
 	 * @runInSeparateProcess

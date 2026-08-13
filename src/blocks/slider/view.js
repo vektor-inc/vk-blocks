@@ -108,8 +108,7 @@ document.defaultView.addEventListener('load', function () {
 			const zoomSelector = `.vk_slider_${sliderId}`;
 
 			css += `
-.vk_slider_${sliderId} .vk_slider_item.swiper-slide-active::before,
-.vk_slider_${sliderId} .vk_slider_item.swiper-slide-duplicate-active::before {
+${zoomSelector} .vk_slider_item::before {
 	content: "";
 	position: absolute;
 	top: 0;
@@ -125,8 +124,7 @@ document.defaultView.addEventListener('load', function () {
 	z-index: -1;
 }
 
-${zoomSelector} .vk_slider_item.swiper-slide-active::before,
-${zoomSelector} .vk_slider_item.swiper-slide-duplicate-active::before {
+${zoomSelector} .vk_slider_item.swiper-slide-active::before {
 	transform: scale(${zoomFinalScale !== undefined ? zoomFinalScale : 1.25});
 }
 

@@ -16,6 +16,9 @@ export class VKBButton extends Component {
 		const buttonTarget = this.props.lbTarget;
 		const relAttribute = this.props.lbRelAttribute;
 		const linkToPost = this.props.lbLinkToPost;
+		const linkToCustomField = this.props.lbLinkToCustomField;
+		// 投稿リンク or カスタムフィールドURL のいずれかなら、href はサーバー側で差し替える動的リンク。
+		const isDynamicLink = linkToPost || linkToCustomField;
 		let fontAwesomeIconBefore = this.props.lbFontAwesomeIconBefore;
 		let fontAwesomeIconAfter = this.props.lbFontAwesomeIconAfter;
 		if (fontAwesomeIconBefore) {
@@ -172,9 +175,9 @@ export class VKBButton extends Component {
 
 		return (
 			/* eslint react/jsx-no-target-blank: 0 */
-			/* eslint-disable-next-line jsx-a11y/anchor-is-valid -- linkToPost: href replaced server-side with permalink */
+			/* eslint-disable-next-line jsx-a11y/anchor-is-valid -- linkToPost / linkToCustomField: href replaced server-side (permalink or custom field URL) */
 			<a
-				href={linkToPost ? '#' : buttonUrl}
+				href={isDynamicLink ? '#' : buttonUrl}
 				style={btnInlineStyle}
 				className={aClass}
 				role={'button'}
@@ -182,6 +185,9 @@ export class VKBButton extends Component {
 				target={buttonTarget ? '_blank' : null}
 				rel={relValue}
 				{...(linkToPost ? { 'data-vk-link-to-post': '1' } : {})}
+				{...(linkToCustomField && !linkToPost
+					? { 'data-vk-link-to-custom-field-url': '1' }
+					: {})}
 			>
 				<div className={'vk_button_link_caption'}>
 					{parse(iconBefore)}
