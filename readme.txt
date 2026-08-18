@@ -108,6 +108,8 @@ e.g.
 
 == Changelog ==
 
+[ Spec Change ] Update vektor-inc/vk-component from 1.7.1 to 1.7.2. The post list CSS it ships now uses media query range syntax, which needs Chrome / Edge 104+, Safari 16.4+ (iOS 16.4+) or Firefox 102+, and a viewport exactly on a breakpoint value (576 / 768 / 992 / 1200 / 1400px) now falls on the smaller side instead of the larger one.
+
 = 1.125.0 =
 [ New Feature ][ Button Block ] Added an option to use a custom field's URL as the button link. When the Button block is placed inside a Query Loop, each post's button can link to the URL stored in that post's custom field.
 [ New Feature ][ Slider Block ][ Post List Slider Block (Pro) ] Added the --vk-slider-edge-offset CSS custom property (default 10px) for how far the navigation arrows and the pause/play button sit from the edge of the slider. On the Post List Slider, bottom arrows keep their own mobile position, so only the horizontal offset follows there.
