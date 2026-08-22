@@ -37,6 +37,7 @@
 		"translate:admin": "po2json ./languages/vk-blocks-pro-ja.po ./languages/vk-blocks-pro-ja-vk-blocks-admin-js.json -f jed",
 		"build:js": "webpack --config webpack2.config.js",
 		"gulp": "cross-env NODE_OPTIONS=--disable-warning=DEP0180 npx gulp",
+		"check:breakpoints": "cross-env NODE_OPTIONS=--disable-warning=DEP0180 npx gulp check-breakpoints",
 		"lint": "npm run lint:js && npm run lint:php",
 		"lint:check": "npm run lint:js:check && npm run lint:php:check",
 		"lint:js": "wp-scripts format src/ test/e2e/ && wp-scripts lint-js src/ test/e2e/ --fix",

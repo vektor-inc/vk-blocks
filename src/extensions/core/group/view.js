@@ -16,6 +16,21 @@
 	// 更新中フラグ（無限ループを防ぐ）
 	let isUpdating = false;
 
+	// Breakpoint constants matching $xs (576px) / $md (992px) in
+	// src/utils/_breakpoints.scss. Unified to integers + `<` comparison,
+	// equivalent to the old `.98` notation (`<= 575.98` / `<= 991.98`),
+	// since window.innerWidth is always an integer. Previously duplicated
+	// in shouldApplyTableMode() and shouldApplyGridScrollableByBreakpoint();
+	// consolidated here into a single module-scope definition.
+	// _breakpoints.scss の $xs (576px) / $md (992px) と一致させるブレークポイント
+	// 定数。window.innerWidth は常に整数のため、旧 `.98` 記法
+	// （`<= 575.98` / `<= 991.98`）と等価な整数＋`<` 比較に統一した。
+	// 以前は shouldApplyTableMode() と shouldApplyGridScrollableByBreakpoint()
+	// の2箇所に重複定義されていたため、ここに1箇所へ統合した。
+	// See: https://github.com/vektor-inc/vk-blocks-pro/issues/3091
+	const MOBILE_BREAKPOINT = 576;
+	const TABLET_BREAKPOINT = 992;
+
 	// 測定用コンテナ（1回だけ作成して再利用、パフォーマンス向上）
 	let measurementContainer = null;
 
@@ -110,22 +125,20 @@
 		}
 
 		const windowWidth = window.innerWidth;
-		const mobileBreakpoint = 575.98;
-		const tabletBreakpoint = 991.98;
 
 		// PCブレークポイントの場合：常に適用
 		if (breakpoint === 'group-scrollable-pc') {
 			return true;
 		}
 
-		// Tabletブレークポイントの場合：991.98px以下の場合のみ適用
+		// Tabletブレークポイントの場合：992px未満の場合のみ適用
 		if (breakpoint === 'group-scrollable-tablet') {
-			return windowWidth <= tabletBreakpoint;
+			return windowWidth < TABLET_BREAKPOINT;
 		}
 
-		// Mobileブレークポイントの場合：575.98px以下の場合のみ適用
+		// Mobileブレークポイントの場合：576px未満の場合のみ適用
 		if (breakpoint === 'group-scrollable-mobile') {
-			return windowWidth <= mobileBreakpoint;
+			return windowWidth < MOBILE_BREAKPOINT;
 		}
 
 		return false;
@@ -551,22 +564,20 @@
 		}
 
 		const windowWidth = window.innerWidth;
-		const mobileBreakpoint = 575.98;
-		const tabletBreakpoint = 991.98;
 
 		// PCブレークポイントの場合：常に適用
 		if (breakpoint === 'group-scrollable-pc') {
 			return true;
 		}
 
-		// Tabletブレークポイントの場合：991.98px以下の場合のみ適用
+		// Tabletブレークポイントの場合：992px未満の場合のみ適用
 		if (breakpoint === 'group-scrollable-tablet') {
-			return windowWidth <= tabletBreakpoint;
+			return windowWidth < TABLET_BREAKPOINT;
 		}
 
-		// Mobileブレークポイントの場合：575.98px以下の場合のみ適用
+		// Mobileブレークポイントの場合：576px未満の場合のみ適用
 		if (breakpoint === 'group-scrollable-mobile') {
-			return windowWidth <= mobileBreakpoint;
+			return windowWidth < MOBILE_BREAKPOINT;
 		}
 
 		return false;

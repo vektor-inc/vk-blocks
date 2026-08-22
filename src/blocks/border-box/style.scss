@@ -1,3 +1,5 @@
+@use 'utils/breakpoints' as *;
+
 :root {
 	--vk-color-border-red: #dc3545;
 	--vk-color-background-red: #dc3545;
@@ -106,7 +108,7 @@
 		padding: 1.5em;
 		border-width: 2px;
 		border-style: solid;
-		@media (min-width: 992px) {
+		@media (width >= $md) {
 			padding: 1.5em 2em 1.5em;
 		}
 

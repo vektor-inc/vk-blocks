@@ -1,0 +1,22 @@
+// =============================================================================
+// Breakpoint variables (single source of truth)
+// ブレークポイント変数（一元管理）
+// =============================================================================
+// One variable per breakpoint, used with range-syntax media queries
+// (e.g. `@media (width < $sm)`), so the `.98px` workaround is no longer needed.
+// 1つの境目につき1つの変数。レンジ構文（例: `@media (width < $sm)`）と組み合わせて使うため、
+// `.98px` による代用が不要になった。
+//
+// Not named $xs-max/$sm-min etc.: the vendor library vk-component already defines
+// $xs-max with the OPPOSITE meaning (the boundary value belongs to the smaller band).
+// This plugin needs the boundary to belong to the larger band (to keep existing output
+// unchanged), so reusing that name under a different meaning would be confusing.
+// $xs-max/$sm-min 等にしない理由: 依存ライブラリ vk-component が既に $xs-max を「境目の値を
+// 小さい帯に含める」逆の意味で定義しているため。当プラグインは既存の見た目を変えないために
+// 境目を大きい帯に含める必要があり、同名を別の意味で使うと混乱するため名前を変えている。
+// See: https://github.com/vektor-inc/vk-blocks-pro/issues/3091
+$xs: 576px;
+$sm: 768px;
+$md: 992px;
+$lg: 1200px;
+$xl: 1400px;

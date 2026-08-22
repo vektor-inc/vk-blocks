@@ -1,5 +1,6 @@
 @use 'components/scroll-hint/styles/base' as *;
 @use 'components/scrollbar-styles/scrollbar' as *;
+@use 'utils/breakpoints' as *;
 
 /*-------------------------------------------*/
 /* スクロールヒント - グループブロック用
@@ -355,14 +356,14 @@ $text-elements: p, h1, h2, h3, h4, h5, h6, li, span, div;
 	&.is-style-vk-group-scrollable {
 
 		&[data-scroll-breakpoint="group-scrollable-mobile"] {
-			@media (max-width: 575.98px) {
+			@media (width < $xs) {
 				@include scrollable-group;
 				@include scrollbar-custom;
 			}
 		}
 
 		&[data-scroll-breakpoint="group-scrollable-tablet"] {
-			@media (max-width: 991.98px) {
+			@media (width < $md) {
 				@include scrollable-group;
 				@include scrollbar-custom;
 			}
@@ -382,7 +383,7 @@ $text-elements: p, h1, h2, h3, h4, h5, h6, li, span, div;
 		&.is-style-vk-group-scrollable {
 
 			&[data-scroll-breakpoint="group-scrollable-mobile"] {
-				@media (max-width: 575.98px) {
+				@media (width < $xs) {
 					@include scrollable-group-editor;
 					@include scrollbar-custom;
 					@include scrollbar-custom-editor-override;
@@ -390,7 +391,7 @@ $text-elements: p, h1, h2, h3, h4, h5, h6, li, span, div;
 			}
 
 			&[data-scroll-breakpoint="group-scrollable-tablet"] {
-				@media (max-width: 991.98px) {
+				@media (width < $md) {
 					@include scrollable-group-editor;
 					@include scrollbar-custom;
 					@include scrollbar-custom-editor-override;

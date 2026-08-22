@@ -19,6 +19,8 @@ export default function save(props) {
 		buttonColor,
 		buttonTextColorCustom,
 		buttonColorCustom,
+		buttonBorderColorCustom,
+		buttonHoverBorderColorCustom,
 		buttonHoverBgColorCustom,
 		buttonHoverTextColorCustom,
 		buttonAlign,
@@ -37,13 +39,26 @@ export default function save(props) {
 	} = attributes;
 
 	const effectiveUrl = linkToPost || linkToCustomField ? '' : buttonUrl;
+	const hasButtonBorderColor =
+		(buttonType === '0' || buttonType === null || buttonType === '1') &&
+		buttonBorderColorCustom !== undefined &&
+		buttonBorderColorCustom !== null &&
+		buttonBorderColorCustom !== '';
+	const hasButtonHoverBorderColor =
+		(buttonType === '0' || buttonType === null || buttonType === '1') &&
+		buttonHoverBorderColorCustom !== undefined &&
+		buttonHoverBorderColorCustom !== null &&
+		buttonHoverBorderColorCustom !== '';
 
 	let containerClass = '';
-	// カスタムカラーの場合 またはアウターにギャップが指定されている場合 またはホバー色が指定されている場合
+	// カスタム色・枠線色・アウターのギャップ・ホバー色のいずれかを使う場合
+	// Add the block-specific class for custom colors, a border color, an outer gap, or hover colors.
 	if (
 		(buttonColorCustom !== undefined && isHexColor(buttonColorCustom)) ||
 		(buttonTextColorCustom !== undefined &&
 			isHexColor(buttonTextColorCustom)) ||
+		hasButtonBorderColor ||
+		hasButtonHoverBorderColor ||
 		outerGap ||
 		(buttonHoverBgColorCustom !== undefined &&
 			buttonHoverBgColorCustom !== '') ||

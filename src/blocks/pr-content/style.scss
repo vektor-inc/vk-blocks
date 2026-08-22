@@ -1,8 +1,10 @@
+@use 'utils/breakpoints' as *;
+
 /*-------------------------------------------*/
 /* Layout
 /*-------------------------------------------*/
 .vk_prContent {
-	@media (min-width: 576px) {
+	@media (width >= $xs) {
 		display: flex;
 		.col-sm-6 {
 			width: 50%;
@@ -26,7 +28,7 @@
 				padding-right: 0;
 			}
 		}
-	} // @media (min-width: 768px) {
+	} // @media (width >= $xs) {
 }
 
 /*-------------------------------------------*/
@@ -51,7 +53,7 @@
 			color: inherit;
 			line-height: 1.5;
 			text-align: left; /* 見出しに左右線デザインを当てられている場合があるので上書きする */
-			@media (max-width: 575.98px) {
+			@media (width < $xs) {
 				&:first-child {
 					margin-top: 30px;
 				}
@@ -67,7 +69,7 @@
 			margin-bottom: 1.7em;
 		}
 		&_btn.btn {
-			@media (min-width: 992px) {
+			@media (width >= $md) {
 				font-size: 16px;
 			}
 		}

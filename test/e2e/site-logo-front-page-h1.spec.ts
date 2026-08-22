@@ -123,10 +123,16 @@ test.describe('PR #2962 core/site-logo フロントページ h1 化', () => {
 		});
 
 		// アップロードしたサイトロゴ画像を削除
+		//
+		// `force` は `path` ではなく `params` で渡す。理由は
+		// test/e2e/utils/post-cleanup.ts のコメントを参照。
+		// `force` goes through `params`, not `path`.
+		// See test/e2e/utils/post-cleanup.ts for why.
 		if (uploadedLogoId) {
 			try {
 				await requestUtils.rest({
-					path: `/wp/v2/media/${uploadedLogoId}?force=true`,
+					path: `/wp/v2/media/${uploadedLogoId}`,
+					params: { force: true },
 					method: 'DELETE',
 				});
 			} catch {
@@ -138,7 +144,10 @@ test.describe('PR #2962 core/site-logo フロントページ h1 化', () => {
 		for (const id of createdPageIds) {
 			try {
 				await requestUtils.rest({
-					path: `/wp/v2/pages/${id}?force=true`,
+					// 同上: クエリは `params` で渡す
+					// Same as above: the query goes through `params`
+					path: `/wp/v2/pages/${id}`,
+					params: { force: true },
 					method: 'DELETE',
 				});
 			} catch {

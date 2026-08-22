@@ -9,9 +9,131 @@ const uglify = require('gulp-uglify');
 const plumber = require('gulp-plumber');
 const notify = require('gulp-notify');
 const path = require('path');
+const fs = require('fs');
 const { finished } = require('stream/promises');
 
 const waitForStream = (stream) => finished(stream);
+
+// =============================================================================
+// Breakpoint consistency check (issue #3091)
+// ブレークポイント整合性チェック（issue #3091）
+// =============================================================================
+// gulp build ではモジュール解決が通らない単体ビルドの view.js が複数存在し、
+// src/utils/_breakpoints.scss の値を import で共有できない。そのため値そのものは
+// 各 view.js にリテラルで直書きしたまま、ビルド時にこの一覧と _breakpoints.scss を
+// 突き合わせ、ズレていたらビルドを失敗させることで一致を保証する（値の自動注入はしない）。
+// Several view.js files are built standalone by gulp (uglify + concat only, no
+// webpack/babel), so they cannot `import` the values from
+// src/utils/_breakpoints.scss. Instead of injecting values at build time, each
+// view.js keeps its breakpoint constant as a literal number, and this list is
+// checked against _breakpoints.scss on every build; a mismatch fails the build.
+//
+// 対象を増やす場合はこの配列に1行追加するだけでよい。
+// To cover another file, just add one entry to this array.
+const BREAKPOINT_CHECKS = [
+	{
+		jsFile: 'src/blocks/_pro/animation/view.js',
+		jsConstant: 'MOBILE_BREAKPOINT',
+		scssVariable: 'sm',
+	},
+	{
+		jsFile: 'src/extensions/core/group/view.js',
+		jsConstant: 'MOBILE_BREAKPOINT',
+		scssVariable: 'xs',
+	},
+	{
+		jsFile: 'src/extensions/core/group/view.js',
+		jsConstant: 'TABLET_BREAKPOINT',
+		scssVariable: 'md',
+	},
+];
+
+const BREAKPOINTS_SCSS_FILE = 'src/utils/_breakpoints.scss';
+
+/**
+ * _breakpoints.scss から `$変数名: 数値px;` の数値を抽出する。
+ * Extracts the numeric value of `$variableName: numberpx;` from _breakpoints.scss.
+ *
+ * @param {string} scssContent  _breakpoints.scss の中身 / file contents
+ * @param {string} variableName 変数名（`$` を除く）/ variable name without `$`
+ * @return {number|null} 数値（px）。見つからない場合は null / the number in px, or null if not found
+ */
+function extractScssBreakpointValue(scssContent, variableName) {
+	const pattern = new RegExp(
+		`\\$${variableName}\\s*:\\s*(\\d+(?:\\.\\d+)?)px`
+	);
+	const match = scssContent.match(pattern);
+	return match ? Number(match[1]) : null;
+}
+
+/**
+ * view.js から `const 定数名 = 数値;` の数値を抽出する。
+ * Extracts the numeric value of `const constantName = number;` from a view.js file.
+ *
+ * @param {string} jsContent   JSファイルの中身 / file contents
+ * @param {string} constantName 定数名 / constant name
+ * @return {number|null} 数値。見つからない場合は null / the number, or null if not found
+ */
+function extractJsBreakpointValue(jsContent, constantName) {
+	const pattern = new RegExp(
+		`\\bconst\\s+${constantName}\\s*=\\s*(\\d+(?:\\.\\d+)?)\\s*;`
+	);
+	const match = jsContent.match(pattern);
+	return match ? Number(match[1]) : null;
+}
+
+// check-breakpoints
+gulp.task('check-breakpoints', (done) => {
+	const scssPath = path.resolve(__dirname, BREAKPOINTS_SCSS_FILE);
+	const scssContent = fs.readFileSync(scssPath, 'utf8');
+
+	const errors = [];
+
+	BREAKPOINT_CHECKS.forEach(({ jsFile, jsConstant, scssVariable }) => {
+		const jsPath = path.resolve(__dirname, jsFile);
+		// Pro 専用ファイルは無料版ビルド時に .freeignore で除外され存在しないため、
+		// 存在しないファイルはチェック対象から除外する（Pro ビルド時は必ず存在する）。
+		if (!fs.existsSync(jsPath)) {
+			return;
+		}
+		const jsContent = fs.readFileSync(jsPath, 'utf8');
+
+		const scssValue = extractScssBreakpointValue(scssContent, scssVariable);
+		const jsValue = extractJsBreakpointValue(jsContent, jsConstant);
+
+		if (scssValue === null) {
+			errors.push(
+				`[check-breakpoints] ${BREAKPOINTS_SCSS_FILE} に $${scssVariable} が見つかりません。 / ` +
+					`$${scssVariable} not found in ${BREAKPOINTS_SCSS_FILE}.`
+			);
+			return;
+		}
+
+		if (jsValue === null) {
+			errors.push(
+				`[check-breakpoints] ${jsFile} に定数 ${jsConstant} が見つかりません。 / ` +
+					`Constant ${jsConstant} not found in ${jsFile}.`
+			);
+			return;
+		}
+
+		if (scssValue !== jsValue) {
+			errors.push(
+				`[check-breakpoints] ${jsFile} の ${jsConstant} (実際の値/actual: ${jsValue}) が ` +
+					`${BREAKPOINTS_SCSS_FILE} の $${scssVariable} (期待値/expected: ${scssValue}) と一致しません。 / ` +
+					`${jsFile}'s ${jsConstant} (actual: ${jsValue}) does not match ` +
+					`${BREAKPOINTS_SCSS_FILE}'s $${scssVariable} (expected: ${scssValue}).`
+			);
+		}
+	});
+
+	if (errors.length > 0) {
+		done(new Error(`\n${errors.join('\n')}`));
+		return;
+	}
+
+	done();
+});
 
 // 同梱している third-party の Bootstrap (lib/bootstrap) のソースは古い Sass 記法
 // （@import / グローバル組み込み関数 / "/" 除算 / if() / darken()・lighten() など）を
@@ -342,6 +464,7 @@ gulp.task('watch', () => {
 gulp.task(
 	'build:dev:free',
 	gulp.series(
+		'check-breakpoints',
 		'text-domain-free',
 		'sass',
 		'helper-js',
@@ -353,6 +476,7 @@ gulp.task(
 gulp.task(
 	'build:dev:pro',
 	gulp.series(
+		'check-breakpoints',
 		'sass',
 		'helper-js',
 		'helper-js-pro',
@@ -366,6 +490,7 @@ gulp.task(
 gulp.task(
 	'build:free',
 	gulp.series(
+		'check-breakpoints',
 		'text-domain-free',
 		'sass',
 		'helper-js',
@@ -379,6 +504,7 @@ gulp.task(
 gulp.task(
 	'build:pro',
 	gulp.series(
+		'check-breakpoints',
 		'sass',
 		'helper-js',
 		'helper-js-pro',

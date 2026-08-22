@@ -1,5 +1,6 @@
 @use 'components/scroll-hint/styles/base' as *;
 @use 'components/scrollbar-styles/scrollbar' as *;
+@use 'utils/breakpoints' as *;
 
 /*-------------------------------------------*/
 /* スクロールヒント - テーブルブロック用
@@ -44,14 +45,14 @@
 	&.is-style-vk-table-scrollable {
 
 		&[data-scroll-breakpoint="table-scrollable-mobile"] {
-			@media (max-width: 575.98px) {
+			@media (width < $xs) {
 				@include scrollable-table;
 				@include scrollbar-custom;
 			}
 		}
 
 		&[data-scroll-breakpoint="table-scrollable-tablet"] {
-			@media (max-width: 991.98px) {
+			@media (width < $md) {
 				@include scrollable-table;
 				@include scrollbar-custom;
 			}
@@ -71,7 +72,7 @@
 		&.is-style-vk-table-scrollable {
 
 			&[data-scroll-breakpoint="table-scrollable-mobile"] {
-				@media (max-width: 575.98px) {
+				@media (width < $xs) {
 					@include scrollable-table-editor;
 					@include scrollbar-custom;
 					@include scrollbar-custom-editor-override;
@@ -79,7 +80,7 @@
 			}
 
 			&[data-scroll-breakpoint="table-scrollable-tablet"] {
-				@media (max-width: 991.98px) {
+				@media (width < $md) {
 					@include scrollable-table-editor;
 					@include scrollbar-custom;
 					@include scrollbar-custom-editor-override;

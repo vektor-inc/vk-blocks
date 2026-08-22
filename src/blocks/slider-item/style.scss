@@ -3,6 +3,7 @@
 /* CSS
 /*-------------------------------------------*/
 @use 'components/link-toolbar/styles/slider-item';
+@use 'utils/breakpoints' as *;
 
 .vk_slider_item {
 	display: flex;
@@ -82,16 +83,6 @@
 
 /* CSS
 /*-------------------------------------------*/
-$media-sm-up: 576px;
-$media-md-up: 768px;
-$media-lg-up: 992px;
-$media-xl-up: 1200px;
-$media-xxl-up: 1400px;
-$media-sm-down: 575.98px;
-$media-md-down: 767.98px;
-$media-lg-down: 991.98px;
-$media-xl-down: 1199.98px;
-$media-xxl-down: 1399.98px;
 
 .vk_slider_item {
 	background-position: center;
@@ -134,27 +125,27 @@ $padding-xxl: 4em;
 	padding-left: $padding-none;
 	padding-right: $padding-none;
 
-	@media (min-width: $media-sm-up) {
+	@media (width >= $xs) {
 		padding-left: $padding-sm;
 		padding-right: $padding-sm;
 	}
 
-	@media (min-width: $media-md-up) {
+	@media (width >= $sm) {
 		padding-left: $padding-md;
 		padding-right: $padding-md;
 	}
 
-	@media (min-width: $media-lg-up) {
+	@media (width >= $md) {
 		padding-left: $padding-lg;
 		padding-right: $padding-lg;
 	}
 
-	@media (min-width: $media-xl-up) {
+	@media (width >= $lg) {
 		padding-left: $padding-xl;
 		padding-right: $padding-xl;
 	}
 
-	@media (min-width: $media-xxl-up) {
+	@media (width >= $xl) {
 		padding-left: $padding-xxl;
 		padding-right: $padding-xxl;
 	}

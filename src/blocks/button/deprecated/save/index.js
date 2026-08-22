@@ -202,6 +202,10 @@ const blockAttributes13 = {
 	},
 };
 
+// buttonBorderColorCustom / buttonHoverBorderColorCustom 未設定時は
+// wrapper class と style 出力が変わらないため、deprecated save は追加しない。
+// No deprecated save is added because an unset value leaves the wrapper class and style output unchanged.
+
 export const deprecated = [
 	{
 		attributes: blockAttributes13,

@@ -1,3 +1,5 @@
+@use 'utils/breakpoints' as *;
+
 :root {
 	--vk-margin-elem:2rem;
 }
@@ -29,7 +31,9 @@
 		max-width: 50%;
 	}
 }
-@media (max-width: 781.98px) {
+// 782px は WP コア準拠の独自しきい値のため共有変数化はしない（$xs 等の5値とは無関係）。
+// 782px is an ad-hoc WP-core-aligned threshold, not one of the shared $xs..$xl values.
+@media (width < 782px) {
 	// モバイルで縦積みの場合のみ打ち消し
 	.wp-block-columns:where(:not(.is-not-stacked-on-mobile)){
 		// 各カラムのスタイルでPC用で中央側に padding を指定するのが一般的なため、!importantをつけないと上書きできない
@@ -1361,7 +1365,7 @@ $swiper-nav-bottom-any: ":has(> #{$swiper-nav-mobile-bottom-class}, > #{$swiper-
 	@include vk-slider-pagination-arrow-clearance;
 }
 
-@media (max-width: 575.98px) {
+@media (width < $xs) {
 	// mobile-bottom（既定）はモバイル幅でのみ矢印が下部
 	.vk_slider:where(#{$swiper-nav-mobile-bottom}) > .swiper-pagination-bullets {
 		@include vk-slider-pagination-arrow-clearance;
@@ -1458,7 +1462,7 @@ $swiper-nav-bottom-any: ":has(> #{$swiper-nav-mobile-bottom-class}, > #{$swiper-
 // position in its style.scss (bottom: 0). Without an anchor this also matches Pro, so
 // removing Pro's own rule would silently make it follow the edge offset instead — the
 // same kind of mismatch that actually happened with always-bottom.
-@media (max-width: 575.98px) {
+@media (width < $xs) {
 	.vk_slider {
 		.swiper-button-next,
 		.swiper-button-prev {
@@ -1494,10 +1498,9 @@ $swiper-nav-bottom-any: ":has(> #{$swiper-nav-mobile-bottom-class}, > #{$swiper-
 /*-------------------------------------------*/
 /* col-xxl
 /*-------------------------------------------*/
-$xxl-min: 1400px;
 .col {
 	// Bootstrap4 では xxl サイズがないので独自に追加
-	@media (min-width: $xxl-min) {
+	@media (width >= $xl) {
 		&-xxl-2 {
 			flex: 0 0 16.66667%;
 			max-width: 16.66667%;

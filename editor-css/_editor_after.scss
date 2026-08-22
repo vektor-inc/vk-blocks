@@ -27,7 +27,7 @@
 		// display block だとカラムがすべて落ちるため posts と balloon は flexで上書き
 		display: flex !important;
 	}
-	@media (max-width: $xs-max) {
+	@media (width < $xs) {
 		&-xs {
 			display: block !important;
 
@@ -38,7 +38,7 @@
 			}
 		}
 	}
-	@media (min-width: $sm-min) and (max-width: $sm-max) {
+	@media ($xs <= width < $sm) {
 		&-sm {
 			display: block !important;
 
@@ -49,7 +49,7 @@
 			}
 		}
 	}
-	@media (min-width: $md-min) and (max-width: $md-max) {
+	@media ($sm <= width < $md) {
 		&-md {
 	  		display: block !important;
 
@@ -60,7 +60,7 @@
 	  		}
 		}
   	}
-  	@media (min-width: $lg-min) and (max-width: $lg-max) {
+  	@media ($md <= width < $lg) {
 		&-lg {
 			display: block !important;
 
@@ -71,7 +71,7 @@
 			}
 		}
 	}
-  	@media (min-width: $xl-min) {
+  	@media (width >= $lg) {
 		&-xl {
 			display: block !important;
 	  		&.vk_posts{
@@ -80,7 +80,7 @@
 			}
 		}
 	}
-	@media (min-width: $xxl-min) {
+	@media (width >= $xl) {
 		&-xxl {
 			display: block !important;
 

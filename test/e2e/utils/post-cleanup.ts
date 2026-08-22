@@ -34,14 +34,56 @@ export const registerPostCleanup = (): number[] => {
 			}
 			// status だけを見ると REST やプラグイン由来の無関係な 404 でも
 			// 「消えている」と誤判定してしまうため、投稿 ID 不正のコードだけを見る。
+			//
+			// Keep this limited to `rest_post_invalid_id` on purpose. `rest_no_route`
+			// is also a 404, but it means the request itself was malformed — treating
+			// it as "already gone" would hide a broken delete and let posts pile up.
+			//
+			// 判定を `rest_post_invalid_id` だけに限るのは意図的。`rest_no_route` も
+			// 404 だが、これはリクエストの組み立てが壊れている合図であり、
+			// 「既に消えている」と扱うと削除の不具合を隠して投稿が溜まってしまう。
 			const { code } = error as { code?: string };
 			return code === 'rest_post_invalid_id';
 		};
 
 		const deletePost = async (id: number): Promise<void> => {
+			// Pass `force` through `params`, never inside `path`.
+			// `requestUtils.rest()` only concatenates `rootURL + path`. On an
+			// environment with plain permalinks `rootURL` is
+			// `.../index.php?rest_route=/`, so a query string written into `path`
+			// lands inside the `rest_route` value
+			// (`rest_route=/wp/v2/posts/150?force=true`), matches no route and returns
+			// `rest_no_route` (404), which made every delete fail silently.
+			// Whether the test environment ends up with plain or pretty permalinks
+			// depends on how it was built: `wp-env` sets pretty permalinks while
+			// configuring a fresh install (and after `reset` / `clean`), but it does
+			// not reconfigure an existing install, so a long-lived environment can
+			// still be on plain. Do not assume either one. `params` also works fine on
+			// pretty permalinks, so `params` is the only form that passes on both.
+			// `params` is forwarded to Playwright's `fetch()`, which appends it to the
+			// URL as a real query parameter. Keep it an object: a string or a
+			// URLSearchParams replaces the whole query and would drop `rest_route`.
+			//
+			// `force` は `path` ではなく `params` で渡すこと。
+			// `requestUtils.rest()` は `rootURL + path` を単純連結するだけで、
+			// パーマリンクがプレーンな環境では `rootURL` が
+			// `.../index.php?rest_route=/` になる。
+			// `path` にクエリ文字列を書くとその文字列が `rest_route` の値の中に入り
+			// （`rest_route=/wp/v2/posts/150?force=true`）、存在しないルートとして
+			// `rest_no_route`（404）が返るため、削除が全件失敗していた。
+			// テスト環境がプレーンかプリティかは環境の作られ方次第で、
+			// `wp-env` は新規構築時（および `reset` / `clean` 後）にプリティを
+			// 設定するが、既存環境には再設定しないため、古くから使っている環境は
+			// プレーンのままになりうる。どちらとも決め打ちしないこと。
+			// プリティな環境でも `params` は正しく動くため、どちらの環境でも
+			// 通るのは `params` 形式だけ。
+			// `params` は Playwright の `fetch()` に渡され、URL のクエリとして
+			// 正しく追加される。オブジェクトで渡すこと（文字列や URLSearchParams だと
+			// クエリ全体が置き換わり `rest_route` が消える）。
 			const request = async () =>
 				requestUtils.rest({
-					path: `/wp/v2/posts/${id}?force=true`,
+					path: `/wp/v2/posts/${id}`,
+					params: { force: true },
 					method: 'DELETE',
 				});
 
@@ -69,7 +111,7 @@ export const registerPostCleanup = (): number[] => {
 		// 配列の型は number[] だが、呼び出し側の ID は型の付いていない
 		// `requestUtils.rest()` の戻り（`post.id` 等）や `as number` のキャスト経由で
 		// 入ってくるため、TypeScript では取り違えを止められない。そのまま渡すと
-		// `/wp/v2/posts/undefined?force=true` という壊れたパスを叩き、
+		// `/wp/v2/posts/undefined` という壊れたパスを叩き、
 		// 実在しない投稿の削除失敗として報告されてしまう。
 		// 投稿 ID は 1 以上の整数なので、そこまで絞る。Number.isFinite だけだと
 		// 0 / 負値 / 1.5 のような値も通り、`/wp/v2/posts/0` のような無効なパスを叩く。

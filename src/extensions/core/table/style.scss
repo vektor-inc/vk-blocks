@@ -1,4 +1,5 @@
 @use 'components/scroll-hint/styles/table' as scroll-hint;
+@use 'utils/breakpoints' as *;
 
 /*      mixin
 /*-------------------------------------------*/
@@ -113,13 +114,13 @@
 	&.is-style-vk-table-cell-vertical {
 
 		&[data-cell-vertical-breakpoint="table-cell-vertical-mobile"] {
-			@media (max-width: 575.98px) {
+			@media (width < $xs) {
 				@include cell-vertical-table;
 			}
 		}
 
 		&[data-cell-vertical-breakpoint="table-cell-vertical-tablet"] {
-			@media (max-width: 991.98px) {
+			@media (width < $md) {
 				@include cell-vertical-table;
 			}
 		}
@@ -151,13 +152,13 @@
 			}
 	
 			&[data-cell-vertical-breakpoint="table-cell-vertical-mobile"] {
-				@media (max-width: 575.98px) {
+				@media (width < $xs) {
 					@include cell-vertical-table;
 				}
 			}
 	
 			&[data-cell-vertical-breakpoint="table-cell-vertical-tablet"] {
-				@media (max-width: 991.98px) {
+				@media (width < $md) {
 					@include cell-vertical-table;
 				}
 			}

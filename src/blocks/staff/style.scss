@@ -1,3 +1,5 @@
+@use 'utils/breakpoints' as *;
+
 /*-------------------------------------------*/
 /* CSS
 /*-------------------------------------------*/
@@ -145,7 +147,7 @@ $font_serif: "ＭＳ Ｐ明朝", "MS PMincho", "ヒラギノ明朝 Pro W3",
 .page-template-page-lp,
 .page-template-page-lp-builder {
 	.vk_staff {
-		@media (min-width: 992px) {
+		@media (width >= $md) {
 			&_text {
 				width: 74%;
 				&_caption {
@@ -160,7 +162,7 @@ $font_serif: "ＭＳ Ｐ明朝", "MS PMincho", "ヒラギノ明朝 Pro W3",
 				width: 22%;
 			}
 		}
-		@media (min-width: 1200px) {
+		@media (width >= $lg) {
 			&_text {
 				width: 75%;
 			}

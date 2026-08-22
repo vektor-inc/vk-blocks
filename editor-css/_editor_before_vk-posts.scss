@@ -82,7 +82,7 @@
 	&-col-xs-12 > .block-editor-inner-blocks > .block-editor-block-list__layout > .block-list-appender.wp-block {
 		width: calc(100% - 30px);
 	}
-	@media (min-width: $sm-min) {
+	@media (width >= $xs) {
 		&-col-sm-2 > .block-editor-inner-blocks > .editor-block-list__layout > .editor-block-list__block,
 		&-col-sm-2 > .block-editor-inner-blocks > .block-editor-block-list__layout > .block-editor-block-list__block,
 		&-col-sm-2 > .block-editor-inner-blocks > .editor-block-list__layout > .block-list-appender.wp-block,
@@ -114,7 +114,7 @@
 			width: calc(100% - 30px);
 		}
 	}
-	@media (min-width: $md-min) {
+	@media (width >= $sm) {
 		&-col-md-2 > .block-editor-inner-blocks > .editor-block-list__layout > .editor-block-list__block,
 		&-col-md-2 > .block-editor-inner-blocks > .block-editor-block-list__layout > .block-editor-block-list__block,
 		&-col-md-2 > .block-editor-inner-blocks > .editor-block-list__layout > .block-list-appender.wp-block,
@@ -146,7 +146,7 @@
 			width: calc(100% - 30px);
 		}
 	}
-	@media (min-width: $lg-min) {
+	@media (width >= $md) {
 		&-col-lg-2 > .block-editor-inner-blocks > .editor-block-list__layout > .editor-block-list__block,
 		&-col-lg-2 > .block-editor-inner-blocks > .block-editor-block-list__layout > .block-editor-block-list__block,
 		&-col-lg-2 > .block-editor-inner-blocks > .editor-block-list__layout > .block-list-appender.wp-block,
@@ -178,7 +178,7 @@
 			width: calc(100% - 30px);
 		}
 	}
-	@media (min-width: $xl-min) {
+	@media (width >= $lg) {
 		&-col-xl-2 > .block-editor-inner-blocks > .editor-block-list__layout > .editor-block-list__block,
 		&-col-xl-2 > .block-editor-inner-blocks > .block-editor-block-list__layout > .block-editor-block-list__block,
 		&-col-xl-2 > .block-editor-inner-blocks > .editor-block-list__layout > .block-list-appender.wp-block,
@@ -210,7 +210,7 @@
 			width: calc(100% - 30px);
 		}
 	}
-	@media (min-width: $xxl-min) {
+	@media (width >= $xl) {
 		&-col-xxl-2 > .block-editor-inner-blocks > .editor-block-list__layout > .editor-block-list__block,
 		&-col-xxl-2 > .block-editor-inner-blocks > .block-editor-block-list__layout > .block-editor-block-list__block,
 		&-col-xxl-2 > .block-editor-inner-blocks > .editor-block-list__layout > .block-list-appender.wp-block,

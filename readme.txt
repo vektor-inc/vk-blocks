@@ -4,7 +4,7 @@ Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 6.6
 Tested up to: 7.0
-Stable tag: 1.125.0
+Stable tag: 1.126.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -108,8 +108,16 @@ e.g.
 
 == Changelog ==
 
-= 1.125.0 =
+= 1.126.0 =
 [ New Feature ][ Button Block ] Added an option to use a custom field's URL as the button link. When the Button block is placed inside a Query Loop, each post's button can link to the URL stored in that post's custom field.
+[ New Feature ][ Button Block ] Added options to specify the button border color and a different border color on hover.
+[ New Feature ][ Query Loop Block ] Added a VK Blocks Pro-only toggle to show related posts ranked by shared tag relevance.
+[ Spec Change ] Update vektor-inc/vk-component from 1.7.1 to 1.7.2. The breakpoints of the VK post list components are now whole numbers (576px / 768px / 992px / 1200px / 1400px), so at exactly those widths the layout for the narrower screen size is applied.
+[ Spec Change ] Changed how the plugin's own breakpoints (576px / 768px / 992px / 1200px / 1400px) are written in media queries, switching to the CSS range syntax. This raises the minimum supported browser to Safari 16.4+ (iOS 16.4+); Chrome, Edge, and Firefox have supported it for years already.
+[ Bug Fix ][ Grid Column Block (Pro) / Post List Block (Pro) / Hidden Settings ] Fixed an issue where, at a browser width between 1200px and 1399px, the block editor preview did not match the published page's layout. The front-end (published page) appearance is unchanged.
+[ Design Bug Fix ] Fixed the Font Awesome icon list button in the icon picker so its label stays readable on WordPress 7.1, where ExternalLink styling made the text the same color as the primary button background.
+
+= 1.125.0 =
 [ New Feature ][ Slider Block ][ Post List Slider Block (Pro) ] Added the --vk-slider-edge-offset CSS custom property (default 10px) for how far the navigation arrows and the pause/play button sit from the edge of the slider. On the Post List Slider, bottom arrows keep their own mobile position, so only the horizontal offset follows there.
 [ New Feature ][ Slider Block ] Raising --vk-slider-edge-offset also moves the pagination away from the bottom edge and widens the space it leaves for bottom arrows. Lowering it below the default moves only the arrows and the pause/play button; the pagination never sits closer to the bottom edge than its default, and a negative value is treated as 0.
 [ Spec Change ][ Slider Block ][ Post List Slider Block (Pro) ] Update Swiper from 11.2.10 to 14.0.6 on the front end (vektor-inc/vk-swiper 0.3.6 to 0.4.0) and from 12.2.0 to 14.0.6 in the block editor. Swiper v14 requires Chrome / Edge 110+, Safari 16.4+ (iOS 16.4+) or Firefox 110+, so sliders no longer work on older browsers; sites that still need them have to stay on VK Blocks 1.124.x.

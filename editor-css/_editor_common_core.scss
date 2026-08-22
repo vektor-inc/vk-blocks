@@ -1,3 +1,11 @@
+// Load src/utils/_breakpoints.scss, the single source of truth for breakpoint variables (Issue #3091).
+// ブレークポイント変数を一元管理する src/utils/_breakpoints.scss を読み込む（Issue #3091）。
+// The 'sass_editor' gulp task concatenates _editor_common_core.scss → _editor_before.scss → _editor_after.scss
+// into one file before compiling it, so @use must sit at the top of the concatenated result (i.e. this file's top).
+// editor-css は gulp task 'sass_editor' で _editor_common_core.scss → _editor_before.scss → _editor_after.scss を
+// 連結してから1つのファイルとしてコンパイルするため、@use は連結後の先頭（＝このファイルの先頭）に置く必要がある。
+@use 'utils/breakpoints' as *;
+
 /*
 コア側のブロックcssを上書き用のファイルです
 --------------------------------------------*/
@@ -159,4 +167,13 @@
 			content: 'Reverse' !important;
 		}
 	}
+}
+
+/*-------------------------------------------*/
+/* サイドバーパネル内 Notice の下余白
+/* Notice コンポーネント自体にデフォルトの余白が無く、
+/* 直下のコントロールと接着してしまうため確保する
+/*-------------------------------------------*/
+.editor-sidebar__panel .components-notice {
+	margin-bottom: 16px;
 }

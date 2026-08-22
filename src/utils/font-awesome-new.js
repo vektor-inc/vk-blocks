@@ -2,14 +2,14 @@
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n';
+import { __, isRTL } from '@wordpress/i18n';
 import {
 	BaseControl,
 	ToggleControl,
 	TextControl,
 	SelectControl,
 	Button,
-	ExternalLink,
+	VisuallyHidden,
 } from '@wordpress/components';
 import { useState, useEffect } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
@@ -392,12 +392,29 @@ export const FontAwesome = (props) => {
 				</div>
 			</BaseControl>
 			<hr />
-			<ExternalLink
+			<Button
+				variant="primary"
 				href={iconsUrl}
-				className="components-button is-primary mt-1"
+				target="_blank"
+				rel="noreferrer noopener"
+				disabled={!iconsUrl}
+				className="mt-1"
 			>
 				{__('Font Awesome icon list', 'vk-blocks')}
-			</ExternalLink>
+				{!!iconsUrl && (
+					<>
+						<span
+							className="vk-font-awesome-external-link-icon wp-exclude-emoji"
+							aria-hidden="true"
+						>
+							{isRTL() ? '↖' : '↗'}
+						</span>
+						<VisuallyHidden as="span">
+							{__('(opens in a new tab)', 'vk-blocks')}
+						</VisuallyHidden>
+					</>
+				)}
+			</Button>
 			<p className="mt-1">
 				{__(
 					"If you want to use an icon other than the ones listed above, you can use any of the icons from Font Awesome's icon list Please select a tag and enter it.",

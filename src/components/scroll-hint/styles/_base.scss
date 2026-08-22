@@ -1,3 +1,5 @@
+@use 'utils/breakpoints' as *;
+
 /*-------------------------------------------*/
 /* スクロールヒント - 共通ベーススタイル
 /*-------------------------------------------*/
@@ -39,8 +41,8 @@
 
 	// ブレークポイントの定義
 	$breakpoints: (
-		'mobile': 575.98px,
-		'tablet': 991.98px,
+		'mobile': $xs,
+		'tablet': $md,
 		'pc': null, // PCはメディアクエリなし
 	);
 
@@ -49,12 +51,12 @@
 
 	// 各ブロックタイプとブレークポイントの組み合わせを生成
 	@each $block-type in $block-types {
-		@each $breakpoint-name, $max-width in $breakpoints {
+		@each $breakpoint-name, $boundary in $breakpoints {
 			$attr-value: '#{$block-type}-scrollable-#{$breakpoint-name}';
-			
+
 			&[data-scroll-breakpoint="#{$attr-value}"] {
-				@if $max-width {
-					@media (max-width: $max-width) {
+				@if $boundary {
+					@media (width < $boundary) {
 						@include scrollable-block-scroll-hint;
 					}
 				} @else {

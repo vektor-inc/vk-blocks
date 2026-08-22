@@ -85,6 +85,8 @@ export default function ButtonEdit(props) {
 		buttonColor,
 		buttonTextColorCustom,
 		buttonColorCustom,
+		buttonBorderColorCustom,
+		buttonHoverBorderColorCustom,
 		buttonAlign,
 		buttonWidthMobile,
 		buttonWidthTablet,
@@ -428,11 +430,24 @@ export default function ButtonEdit(props) {
 	}, [fontAwesomeIconBefore, fontAwesomeIconAfter]);
 
 	let containerClass;
-	// カスタムカラーの場合 またはアウターにギャップが指定されている場合 またはホバー色が指定されている場合
+	const hasButtonBorderColor =
+		(buttonType === '0' || buttonType === null || buttonType === '1') &&
+		buttonBorderColorCustom !== undefined &&
+		buttonBorderColorCustom !== null &&
+		buttonBorderColorCustom !== '';
+	const hasButtonHoverBorderColor =
+		(buttonType === '0' || buttonType === null || buttonType === '1') &&
+		buttonHoverBorderColorCustom !== undefined &&
+		buttonHoverBorderColorCustom !== null &&
+		buttonHoverBorderColorCustom !== '';
+	// カスタム色・枠線色・アウターのギャップ・ホバー色のいずれかを使う場合
+	// Add the block-specific class for custom colors, a border color, an outer gap, or hover colors.
 	if (
 		(buttonColorCustom !== undefined && isHexColor(buttonColorCustom)) ||
 		(buttonTextColorCustom !== undefined &&
 			isHexColor(buttonTextColorCustom)) ||
+		hasButtonBorderColor ||
+		hasButtonHoverBorderColor ||
 		outerGap ||
 		(buttonHoverBgColorCustom !== undefined &&
 			buttonHoverBgColorCustom !== '') ||
@@ -1132,6 +1147,17 @@ export default function ButtonEdit(props) {
 								</BaseControl>
 							)}
 					</BaseControl>
+					{buttonType !== '2' && (
+						<BaseControl
+							id={`vk_block_button_custom_border_color`}
+							label={__('Border Color', 'vk-blocks')}
+						>
+							<AdvancedColorPalette
+								schema={'buttonBorderColorCustom'}
+								{...props}
+							/>
+						</BaseControl>
+					)}
 					<h4 className={`mt-0 mb-2`}>
 						{__('Hover Color', 'vk-blocks')}
 					</h4>
@@ -1159,6 +1185,21 @@ export default function ButtonEdit(props) {
 								{...props}
 							/>
 						</BaseControl>
+						{buttonType !== '2' && (
+							<BaseControl
+								id={`vk_block_button_hover_border_color`}
+								label={__('Hover Border Color', 'vk-blocks')}
+								help={__(
+									'If not specified, the color specified in Border Color is also used on hover.',
+									'vk-blocks'
+								)}
+							>
+								<AdvancedColorPalette
+									schema={'buttonHoverBorderColorCustom'}
+									{...props}
+								/>
+							</BaseControl>
+						)}
 					</BaseControl>
 					<BaseControl>
 						<h4 className={`mt-0 mb-2`}>

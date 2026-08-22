@@ -13,6 +13,7 @@ import transforms from './transforms';
 import { addFilter } from '@wordpress/hooks';
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { isHexColor } from '@vkblocks/utils/is-hex-color';
+import { sanitizeSlug } from '@vkblocks/utils/sanitizeSlug';
 
 const { name } = metadata;
 
@@ -50,11 +51,11 @@ export const settings = {
 };
 
 /**
- * ホバー色のCSS値を取得する
- * @param {string} value - 色の値（HEX、rgba、またはパレットスラッグ）
- * @return {string|null} CSS で使用できる色の値、または null
+ * カラーのCSS値を取得する / Returns a CSS color value.
+ * @param {string} value - HEX、rgba、またはパレットスラッグ / A HEX, rgba, or palette slug.
+ * @return {string|null} CSS で使用できる色、または null / A CSS color value or null.
  */
-const getHoverColorCssValue = (value) => {
+const getColorCssValue = (value) => {
 	if (value === undefined || value === '' || value === null) {
 		return null;
 	}
@@ -67,14 +68,21 @@ const getHoverColorCssValue = (value) => {
 	if (cssFuncColorPattern.test(value)) {
 		return value;
 	}
-	// パレットのスラッグの場合 → CSS カスタムプロパティで参照
-	return `var(--wp--preset--color--${value})`;
+	// パレットのスラッグ → sanitize して CSS 変数参照（hover / 枠線で共用）
+	// Sanitize palette slugs before embedding them in CSS custom properties.
+	const safeSlug = sanitizeSlug(value);
+	if (!safeSlug) {
+		return null;
+	}
+	return `var(--wp--preset--color--${safeSlug})`;
 };
 
 const generateInlineCss = (attributes) => {
 	const {
 		buttonTextColorCustom,
 		buttonColorCustom,
+		buttonBorderColorCustom,
+		buttonHoverBorderColorCustom,
 		buttonHoverBgColorCustom,
 		buttonHoverTextColorCustom,
 		buttonType,
@@ -82,25 +90,42 @@ const generateInlineCss = (attributes) => {
 	} = attributes;
 	let inlineCss = '';
 
+	// 枠線色が有効なときは塗り／アウトライン側の同色 border を出さない。
+	// エディタでは特異性の差で buttonColorCustom 側の border が勝つことがあるため。
+	// When a custom border color is active, skip the matching border from fill/outline styles.
+	// In the editor, buttonColorCustom border rules can win due to specificity differences.
+	const borderColorCssValue = getColorCssValue(buttonBorderColorCustom);
+	const hoverBorderColorCssValue = getColorCssValue(
+		buttonHoverBorderColorCustom
+	);
+	const isBorderStyleType =
+		buttonType === '0' || buttonType === null || buttonType === '1';
+	const hasCustomBorderColor = !!(borderColorCssValue && isBorderStyleType);
+	const hasCustomHoverBorderColor = !!(
+		hoverBorderColorCssValue && isBorderStyleType
+	);
+
 	// カスタムカラーの場合
 	if (buttonColorCustom !== undefined && isHexColor(buttonColorCustom)) {
+		// 枠線色未設定時のみ、ボタン色と同色の border を出す（後方互換）。
+		// Emit a matching border only when no custom border color is set (backward compatibility).
+		const colorBorderCss = hasCustomBorderColor
+			? ''
+			: `\n\t\t\t\tborder: 1px solid ${buttonColorCustom};`;
 		// 塗り
 		if (buttonType === '0' || buttonType === null) {
 			inlineCss += `.vk_button-${blockId} .has-background {
-				background-color: ${buttonColorCustom};
-				border: 1px solid ${buttonColorCustom};
+				background-color: ${buttonColorCustom};${colorBorderCss}
 			}`;
 		}
 		// アウトライン
 		if (buttonType === '1') {
 			inlineCss += `.vk_button-${blockId} .has-text-color.is-style-outline {
-				background-color: transparent;
-				border: 1px solid ${buttonColorCustom};
+				background-color: transparent;${colorBorderCss}
 				color: ${buttonColorCustom};
 			}
 			.vk_button-${blockId} .has-text-color.is-style-outline:hover {
-				background-color: ${buttonColorCustom};
-				border: 1px solid ${buttonColorCustom};
+				background-color: ${buttonColorCustom};${colorBorderCss}
 				color: #fff;
 			}`;
 		}
@@ -128,7 +153,7 @@ const generateInlineCss = (attributes) => {
 	// WP コアが .has-*-background-color に !important を付与するため
 	// !important で上書きする必要がある
 	// filter: none でテーマの brightness/saturate フィルタをリセット
-	const hoverBgCssValue = getHoverColorCssValue(buttonHoverBgColorCustom);
+	const hoverBgCssValue = getColorCssValue(buttonHoverBgColorCustom);
 	if (hoverBgCssValue) {
 		inlineCss += ` .vk_button.vk_button-${blockId} .vk_button_link:hover {
 			background-color: ${hoverBgCssValue} !important;
@@ -140,7 +165,7 @@ const generateInlineCss = (attributes) => {
 	}
 
 	// ホバー時のテキスト色が設定されている場合
-	const hoverTextCssValue = getHoverColorCssValue(buttonHoverTextColorCustom);
+	const hoverTextCssValue = getColorCssValue(buttonHoverTextColorCustom);
 	if (hoverTextCssValue) {
 		inlineCss += ` .vk_button.vk_button-${blockId} .vk_button_link:hover {
 			color: ${hoverTextCssValue} !important;
@@ -150,6 +175,41 @@ const generateInlineCss = (attributes) => {
 		.vk_button.vk_button-${blockId} .vk_button_link:hover .vk_button_link_before,
 		.vk_button.vk_button-${blockId} .vk_button_link:hover .vk_button_link_after {
 			color: ${hoverTextCssValue} !important;
+		}`;
+	}
+
+	if (hasCustomBorderColor) {
+		// 枠線色は背景色・文字色から独立させる。
+		// 通常時は width/style ごと指定する（テーマ側 .btn に border が無い場合でも見えるように）。
+		// エディタでは .editor-styles-wrapper .vk_button .has-text-color.is-style-outline
+		// （特異性 0,4,0 / border-color:currentColor）が
+		// `.vk_button.vk_button-{id} .vk_button_link`（0,3,0）より勝つため、
+		// `.editor-styles-wrapper` 付きセレクタを併記する。
+		// Keep border color independent from background/text colors.
+		// Specify width/style in the default state so borders remain visible even when the theme .btn has none.
+		// In the editor, pair selectors with .editor-styles-wrapper to match outline specificity (0,4,0).
+		inlineCss += ` .vk_button.vk_button-${blockId} .vk_button_link,
+.editor-styles-wrapper .vk_button.vk_button-${blockId} .vk_button_link {
+			border: 1px solid ${borderColorCssValue};
+		}`;
+	}
+
+	// ホバー時の枠線色:
+	// - Hover Border Color があればそれを使う
+	// - 無ければ通常の Border Color を維持（未設定ならホバー背景色側の border-color に任せる）
+	// ホバーは border-color のみ !important（先行する hover 背景色ルールの border-color !important に勝つため）。
+	// Hover border color:
+	// - Use Hover Border Color when set
+	// - Otherwise keep Border Color (or defer to hover background border-color when unset)
+	// Use border-color with !important so this rule wins over the hover background rule above.
+	const hoverBorderCssValue =
+		(hasCustomHoverBorderColor && hoverBorderColorCssValue) ||
+		(hasCustomBorderColor && borderColorCssValue) ||
+		'';
+	if (hoverBorderCssValue) {
+		inlineCss += ` .vk_button.vk_button-${blockId} .vk_button_link:hover,
+.editor-styles-wrapper .vk_button.vk_button-${blockId} .vk_button_link:hover {
+			border-color: ${hoverBorderCssValue} !important;
 		}`;
 	}
 

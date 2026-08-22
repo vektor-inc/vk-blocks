@@ -1,3 +1,5 @@
+@use 'utils/breakpoints' as *;
+
 /*-------------------------------------------*/
 /* CSS
 /*-------------------------------------------*/
@@ -34,17 +36,19 @@
 	}
 }
 
-// Small devices (landscape phones, 575.98px以下)
-@media (max-width: 575.98px) {
+// Small devices (mobile)
+@media (width < $xs) {
 	@include switchVisibility(none, none, block);
 }
 
-// Medium devices (tablets, 577pxから 991.98px)
-@media (min-width: 576px) and (max-width: 991.98px) {
+// Medium devices (tablets)
+// レンジ構文化により、旧記法(575.98px/576px)の間にあった帯なし区間(表示スイッチ全消え)が解消される。
+// Range syntax closes the tiny gap the old .98px/integer pair left uncovered (all three display:none).
+@media ($xs <= width < $md) {
 	@include switchVisibility(none, block, none);
 }
 
-// Large devices (desktops, 992px以上)
-@media (min-width: 992px) {
+// Large devices (desktops)
+@media (width >= $md) {
 	@include switchVisibility(block, none, none);
 }

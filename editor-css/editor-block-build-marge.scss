@@ -1,3 +1,11 @@
+// Load src/utils/_breakpoints.scss, the single source of truth for breakpoint variables (Issue #3091).
+// ブレークポイント変数を一元管理する src/utils/_breakpoints.scss を読み込む（Issue #3091）。
+// The 'sass_editor' gulp task concatenates _editor_common_core.scss → _editor_before.scss → _editor_after.scss
+// into one file before compiling it, so @use must sit at the top of the concatenated result (i.e. this file's top).
+// editor-css は gulp task 'sass_editor' で _editor_common_core.scss → _editor_before.scss → _editor_after.scss を
+// 連結してから1つのファイルとしてコンパイルするため、@use は連結後の先頭（＝このファイルの先頭）に置く必要がある。
+@use 'utils/breakpoints' as *;
+
 /*
 コア側のブロックcssを上書き用のファイルです
 --------------------------------------------*/
@@ -159,6 +167,15 @@
 			content: 'Reverse' !important;
 		}
 	}
+}
+
+/*-------------------------------------------*/
+/* サイドバーパネル内 Notice の下余白
+/* Notice コンポーネント自体にデフォルトの余白が無く、
+/* 直下のコントロールと接着してしまうため確保する
+/*-------------------------------------------*/
+.editor-sidebar__panel .components-notice {
+	margin-bottom: 16px;
 }
 
 @import "_variables";
@@ -480,17 +497,8 @@ h1:first-child.vk_prBlocks_item_title {
 $border_primary: 1px solid #e5e5e5;
 $color_font_default: #464646;
 
-$xs-max: 575.98px;
-$sm-max: 767.98px;
-$md-max: 991.98px;
-$lg-max: 1199.98px;
-$xl-max: 1399.98px;
-
-$sm-min: 576px;
-$md-min: 768px;
-$lg-min: 992px;
-$xl-min: 1200px;
-$xxl-min: 1200px;
+// $xs etc. (including $xl) now come from src/utils/_breakpoints.scss (already loaded via @use in _editor_common_core.scss).
+// $xs 等（$xl を含む）は src/utils/_breakpoints.scss（_editor_common_core.scss で @use 済み）を利用する。
 
 $color-danger: #b52727;
 
@@ -605,7 +613,7 @@ $color-danger: #b52727;
 		// display block だとカラムがすべて落ちるため posts と balloon は flexで上書き
 		display: flex !important;
 	}
-	@media (max-width: $xs-max) {
+	@media (width < $xs) {
 		&-xs {
 			display: block !important;
 
@@ -616,7 +624,7 @@ $color-danger: #b52727;
 			}
 		}
 	}
-	@media (min-width: $sm-min) and (max-width: $sm-max) {
+	@media ($xs <= width < $sm) {
 		&-sm {
 			display: block !important;
 
@@ -627,7 +635,7 @@ $color-danger: #b52727;
 			}
 		}
 	}
-	@media (min-width: $md-min) and (max-width: $md-max) {
+	@media ($sm <= width < $md) {
 		&-md {
 	  		display: block !important;
 
@@ -638,7 +646,7 @@ $color-danger: #b52727;
 	  		}
 		}
   	}
-  	@media (min-width: $lg-min) and (max-width: $lg-max) {
+  	@media ($md <= width < $lg) {
 		&-lg {
 			display: block !important;
 
@@ -649,7 +657,7 @@ $color-danger: #b52727;
 			}
 		}
 	}
-  	@media (min-width: $xl-min) {
+  	@media (width >= $lg) {
 		&-xl {
 			display: block !important;
 	  		&.vk_posts{
@@ -658,7 +666,7 @@ $color-danger: #b52727;
 			}
 		}
 	}
-	@media (min-width: $xxl-min) {
+	@media (width >= $xl) {
 		&-xxl {
 			display: block !important;
 

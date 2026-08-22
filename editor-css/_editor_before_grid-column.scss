@@ -66,7 +66,7 @@
 		width: calc(100% - 30px);
 		max-width: var(--vk-width-couter-col-12) ;
 	}
-	@media (min-width: $sm-min) {
+	@media (width >= $xs) {
 		& > .col-sm-2,
 		& > .col-sm-2 + .block-list-appender.wp-block {
 			width: calc(16.66% - 30px);
@@ -93,7 +93,7 @@
 			max-width: var(--vk-width-couter-col-12) ;
 		}
 	}
-	@media (min-width: $md-min) {
+	@media (width >= $sm) {
 		& > .col-md-2,
 		& > .col-md-2 + .block-list-appender.wp-block {
 			width: calc(16.66% - 30px);
@@ -120,7 +120,7 @@
 			max-width: var(--vk-width-couter-col-12) ;
 		}
 	}
-	@media (min-width: $lg-min) {
+	@media (width >= $md) {
 		& > .col-lg-2,
 		& > .col-lg-2 + .block-list-appender.wp-block {
 			width: calc(16.66% - 30px);
@@ -147,7 +147,7 @@
 			max-width: var(--vk-width-couter-col-12) ;
 		}
 	}
-	@media (min-width: $xl-min) {
+	@media (width >= $lg) {
 		& > .col-xl-2,
 		& > .col-xl-2 + .block-list-appender.wp-block {
 			width: calc(16.66% - 30px);
@@ -174,7 +174,7 @@
 			max-width: var(--vk-width-couter-col-12) ;
 		}
 	}
-	@media (min-width: $xxl-min) {
+	@media (width >= $xl) {
 		& > .col-xxl-2,
 		& > .col-xxl-2 + .block-list-appender.wp-block {
 			width: calc(16.66% - 30px);

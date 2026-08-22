@@ -362,6 +362,10 @@ msgstr "先祖のタイトルタグ"
 msgid "Anchor Link Information"
 msgstr "アンカーリンク情報"
 
+#: src/blocks/_pro/animation/edit.js:150
+msgid "Animate only on the first view"
+msgstr "初回表示のみアニメーション"
+
 #: dist/vk-blocks-pro/inc/vk-blocks/build/blocks/_pro/animation/block.json
 #: inc/vk-blocks/build/blocks/_pro/animation/block.json
 #: src/blocks/_pro/animation/block.json
@@ -376,10 +380,6 @@ msgstr "アニメーション設定"
 #: src/blocks/_pro/animation/edit.js:46
 msgid "Animation effect"
 msgstr "アニメーションの効果"
-
-#: src/blocks/_pro/animation/edit.js:150
-msgid "Animate only on the first view"
-msgstr "初回表示のみアニメーション"
 
 #: src/blocks/_pro/animation/edit.js:124
 msgid "Animation range"
@@ -1235,12 +1235,6 @@ msgstr "色設定"
 msgid "Color Settings"
 msgstr "色設定"
 
-#: src/blocks/_pro/outer/edit.js:723 src/blocks/slider-item/edit.js:271
-msgid ""
-"The color will cover the background image. To display the image, set the "
-"opacity to 0."
-msgstr "色を指定すると画像よりも優先されます。画像を表示したい場合は、不透明度を0に設定します。"
-
 #: src/components/column-layout/index.js:103
 msgid "Column ( Screen size : Extra large )"
 msgstr "カラム ( 画面サイズ : Extra large )"
@@ -1490,6 +1484,10 @@ msgstr "カスタム値"
 #: src/blocks/_pro/dynamic-text/edit.js:302
 msgid "Custom field"
 msgstr "カスタムフィールド"
+
+#: src/components/link-toolbar/index.js:364
+msgid "Custom field URL"
+msgstr ""
 
 #: src/utils/font-awesome-new.js:203
 msgid "Custom list"
@@ -2266,6 +2264,10 @@ msgstr "Font Awesome カスタムリスト設定"
 msgid "Font Awesome icon list"
 msgstr "Font Awesome アイコンリスト"
 
+#: src/utils/font-awesome-new.js:413
+msgid "(opens in a new tab)"
+msgstr "(新しいタブで開く)"
+
 #: src/blocks/button/edit.js:733
 msgid "Font Size"
 msgstr ""
@@ -2560,6 +2562,10 @@ msgstr "水平スクロールエリア"
 msgid "Hover Background Color"
 msgstr "ホバー背景色"
 
+#: src/blocks/button/edit.js:1199
+msgid "Hover Border Color"
+msgstr "ホバー線の色"
+
 #: src/blocks/button/edit.js:614
 msgid "Hover Color"
 msgstr "ホバー色"
@@ -2676,6 +2682,10 @@ msgstr "Font Awesome の class 名が入力されている場合は数字は上�
 #: src/blocks/_pro/timeline-item/edit.js:104
 msgid "If left blank, it will be displayed as a circle."
 msgstr "未入力の場合は円形で表示されます。"
+
+#: src/blocks/button/edit.js:1202
+msgid "If not specified, the color specified in Border Color is also used on hover."
+msgstr "未指定の場合は「線の色」で指定した色をホバー時も使います。"
 
 #: src/extensions/common/custom-css-extension/index.js:204
 msgid ""
@@ -3701,6 +3711,14 @@ msgstr "表示順"
 msgid "Order by"
 msgstr "並び順"
 
+#: src/extensions/core/query/style.js:359
+msgid "Order for posts that share the same number of tags."
+msgstr "共有するタグ数が同じ記事どうしの並び順です。"
+
+#: src/extensions/core/query/style.js:344
+msgid "Order settings only affect posts that share the same number of tags."
+msgstr "並び順の設定は、共有するタグ数が同じ記事どうしの並びにのみ影響します。"
+
 #: src/blocks/_pro/blog-card-featured-image/dimension-controls.js:107
 msgid "Original"
 msgstr "オリジナル"
@@ -4032,6 +4050,10 @@ msgstr "位置"
 msgid "Post"
 msgstr "投稿"
 
+#: inc/vk-blocks-pro/extensions/core/query.php:357
+msgid "Post ID used as the related-posts reference in the editor preview."
+msgstr "エディタプレビューで関連記事の基準として使用する投稿ID。"
+
 #: dist/vk-blocks-pro/inc/vk-blocks/build/blocks/_pro/post-list-slider/block.json
 #: inc/vk-blocks/build/blocks/_pro/post-list-slider/block.json
 #: src/blocks/_pro/post-list-slider/block.json
@@ -4139,6 +4161,10 @@ msgstr "公開日"
 msgid "Pyramid"
 msgstr "ピラミッド"
 
+#: src/extensions/core/query/style.js:118
+msgid "Query Loop"
+msgstr "クエリーループ"
+
 #: src/blocks/faq/save.js:16 src/blocks/faq2-q/save.js:9
 msgid "Question"
 msgstr "質問"
@@ -4164,6 +4190,26 @@ msgstr "再表示設定"
 #: src/extensions/common/custom-block-variation/block-variation-explorer/sidebar.js:21
 msgid "Registered"
 msgstr "登録済み"
+
+#: src/extensions/core/query/style.js:198
+msgid "Related posts are matched by the tags on the current post."
+msgstr "関連記事は、現在の投稿のタグをもとに選ばれます。"
+
+#: src/extensions/core/query/style.js:339
+msgid ""
+"Related posts are ranked by how many tags each post shares with the post "
+"you are editing, showing the most related first."
+msgstr ""
+"関連記事は、編集中の投稿と共有するタグの数が多い順に並び、最も関連性の高い"
+"記事から表示されます。"
+
+#: src/extensions/core/query/style.js:322
+msgid "Related posts are unavailable for this content type."
+msgstr "このコンテンツタイプでは関連記事を利用できません。"
+
+#: src/extensions/core/query/style.js:278
+msgid "Related posts turned off."
+msgstr "関連記事の表示をオフにしました。"
 
 #: dist/vk-blocks-pro/inc/vk-blocks/build/blocks/_pro/fixed-display/block.json
 #: inc/vk-blocks/build/blocks/_pro/fixed-display/block.json
@@ -4534,6 +4580,10 @@ msgstr "トップレベルのみ表示"
 msgid "Show post counts"
 msgstr "投稿件数を表示"
 
+#: src/extensions/core/query/style.js:308
+msgid "Show related posts"
+msgstr "関連記事を表示"
+
 #: dist/vk-blocks-pro/inc/vk-blocks/build/blocks/_pro/blog-card-excerpt/block.json
 #: inc/vk-blocks/build/blocks/_pro/blog-card-excerpt/block.json
 #: src/blocks/_pro/blog-card-excerpt/block.json
@@ -4851,6 +4901,10 @@ msgstr "接尾辞"
 msgid "Supported direct blocks:"
 msgstr "対応する直下ブロック:"
 
+#: src/extensions/core/query/style.js:327
+msgid "Switch to editing a post that has tags to use this feature."
+msgstr "この機能を使うには、タグが設定された投稿の編集画面に切り替えてください。"
+
 #: src/blocks/_pro/tab/index.js:18
 msgid "Tab"
 msgstr "タブ"
@@ -5074,18 +5128,18 @@ msgstr "固定ページ本文ブロックは VK Blocks 1.95.0 以降は非公開
 msgid "The VK Blocks Pro license is invalid."
 msgstr "VK Blocks Pro のライセンスが無効です。"
 
+#: src/blocks/_pro/outer/edit.js:723 src/blocks/slider-item/edit.js:271
+msgid ""
+"The color will cover the background image. To display the image, set the "
+"opacity to 0."
+msgstr "色を指定すると画像よりも優先されます。画像を表示したい場合は、不透明度を0に設定します。"
+
 #: src/blocks/_pro/post-list-slider/multi-item-setting.js:36
 #: src/blocks/slider/edit-multiItem.js:42
 msgid ""
 "The decimal point can be set for the display number only when the display "
 "is switched one by one."
 msgstr "表示番号に小数点を設定できるのは、表示を 1 つずつ切り替える場合のみです。"
-
-#: src/blocks/_pro/fixed-display/edit.js:179
-msgid ""
-"The position of this block will not change on the edit screen. Please check "
-"on the front end."
-msgstr "編集画面では固定位置ブロックの固定位置は変わりません。フロント画面でご確認ください。"
 
 #: src/admin/import-export/import-form.js:414
 msgid "The following data will not be imported because the identifiers are covered."
@@ -5136,6 +5190,18 @@ msgid ""
 "(Required/Unchangeable)"
 msgstr "CSSクラスの算出に使用されるスタイルの識別子 (必須/変更不可)"
 
+#: src/components/link-toolbar/index.js:398
+msgid "The link points to the URL stored in this custom field of each post."
+msgstr ""
+
+#: src/extensions/core/query/style.js:203
+msgid ""
+"The list may be empty on pages or other post types, or until a new post is "
+"saved."
+msgstr ""
+"固定ページなど投稿以外のタイプでは表示されないことがあります。また、新規投"
+"稿を保存するまでは表示されない場合があります。"
+
 #: src/blocks/border-box/edit.js:224
 msgid ""
 "The margin-top of the first element and the margin-bottom of the last "
@@ -5149,6 +5215,12 @@ msgstr ""
 #: src/blocks/button/edit.js:65
 msgid "The numeric font size takes priority."
 msgstr ""
+
+#: src/blocks/_pro/fixed-display/edit.js:179
+msgid ""
+"The position of this block will not change on the edit screen. Please check "
+"on the front end."
+msgstr "編集画面では固定位置ブロックの固定位置は変わりません。フロント画面でご確認ください。"
 
 #: src/blocks/visual-embed/edit.js:220
 msgid "The provided URL is not allowed. Please use an approved embed source."
@@ -5690,6 +5762,10 @@ msgstr ""
 msgid "Use standard options"
 msgstr "標準の設定を使用"
 
+#: src/extensions/core/query/style.js:349
+msgid "Use the \"Items per page\" setting to change how many related posts appear."
+msgstr "表示する関連記事の件数を変更するには「ページあたりの項目数」の設定を使用してください。"
+
 #: dist/vk-blocks-pro/inc/vk-blocks/build/blocks/staff/block.json
 #: inc/vk-blocks/build/blocks/staff/block.json src/blocks/staff/block.json
 msgctxt "block description"
@@ -5715,6 +5791,10 @@ msgstr "VK Blocks"
 #. Plugin Name of the plugin
 msgid "VK Blocks Pro"
 msgstr "VK Blocks Pro"
+
+#: inc/vk-blocks-pro/extensions/core/query.php:353
+msgid "VK Blocks Pro query type for Query Loop related posts."
+msgstr "クエリーループの関連記事表示用の VK Blocks Pro クエリータイプ。"
 
 #: src/blocks/_pro/table-of-contents-new/edit.js:397
 msgid "VK Blocks Setting"
@@ -5841,11 +5921,11 @@ msgid ""
 "the fixed display."
 msgstr "有効にすると固定表示を非表示にできる「閉じる」ボタンが表示されます。"
 
-#: src/blocks/_pro/animation/edit.js:166
+#: src/blocks/_pro/animation/edit.js:175
 msgid ""
-"When enabled, animation will not run on viewports 767.98px wide or less. "
+"When enabled, animation will not run on viewports narrower than 768px. "
 "Content will still appear."
-msgstr "有効にすると、幅767.98px以下の画面ではアニメーションが実行されません。コンテンツは引き続き表示されます。"
+msgstr "有効にすると、幅768px未満の画面ではアニメーションが実行されません。コンテンツは引き続き表示されます。"
 
 #: src/admin/toc.js:131
 msgid ""
@@ -5896,7 +5976,9 @@ msgstr "画面サイズが782px以上の場合、インナーブロックの最�
 msgid ""
 "When this is off, autoplay keeps running even for visitors whose device "
 "requests reduced motion, since there is no button to pause it."
-msgstr "オフの場合、reduced motion（動きを減らす設定）をリクエストしている端末の閲覧者に対しても自動再生は止まらず、一時停止するボタンもありません。"
+msgstr ""
+"オフの場合、reduced "
+"motion（動きを減らす設定）をリクエストしている端末の閲覧者に対しても自動再生は止まらず、一時停止するボタンもありません。"
 
 #: src/extensions/core/list/style.js:166
 msgid ""

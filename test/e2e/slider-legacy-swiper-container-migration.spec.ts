@@ -232,7 +232,12 @@ const getSavedContent = async (
 	postId: number
 ): Promise<string> => {
 	const post = await requestUtils.rest({
-		path: `/wp/v2/posts/${postId}?context=edit`,
+		// `context` は `path` ではなく `params` で渡す。理由は
+		// test/e2e/utils/post-cleanup.ts のコメントを参照。
+		// `context` goes through `params`, not `path`.
+		// See test/e2e/utils/post-cleanup.ts for why.
+		path: `/wp/v2/posts/${postId}`,
+		params: { context: 'edit' },
 	});
 	return post.content.raw as string;
 };

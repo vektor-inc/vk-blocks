@@ -1,3 +1,5 @@
+@use 'utils/breakpoints' as *;
+
 /*-------------------------------------------*/
 /* CSS
 /*-------------------------------------------*/
@@ -5,7 +7,7 @@
 /* .vk_icon
 /*-------------------------------------------*/
 .vk_icon {
-	@media screen and (max-width: 991.98px) {
+	@media screen and (width < $md) {
 		margin-bottom: 1.5em;
 	}
 }
