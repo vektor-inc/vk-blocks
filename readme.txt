@@ -108,6 +108,9 @@ e.g.
 
 == Changelog ==
 
+[ Bug Fix ] Update vektor-inc/font-awesome-versions from 0.7.5 to 0.7.6 to fix Font Awesome icons not displaying in some environments (e.g. AWS Bitnami).
+[ Bug Fix ][ Slider Block ][ Post List Slider Block (Pro) ] Update vektor-inc/vk-swiper from 0.4.0 to 0.4.1 to fix sliders not working in some environments (e.g. AWS Bitnami).
+
 = 1.126.0 =
 [ New Feature ][ Button Block ] Added an option to use a custom field's URL as the button link. When the Button block is placed inside a Query Loop, each post's button can link to the URL stored in that post's custom field.
 [ New Feature ][ Button Block ] Added options to specify the button border color and a different border color on hover.
