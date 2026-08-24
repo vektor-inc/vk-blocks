@@ -4,7 +4,7 @@ Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 6.6
 Tested up to: 7.0
-Stable tag: 1.126.1
+Stable tag: 1.126.2
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -107,6 +107,9 @@ e.g.
 1. VK Blocks examples.
 
 == Changelog ==
+
+= 1.126.2 =
+[ Security Fix ][ Icon Block / Button Block / Outer Block (Pro) / Group Block / Cover Block ] Fixed an issue where the Link to Post feature output unescaped HTML attributes, which could allow stored XSS.
 
 = 1.126.1 =
 [ Bug Fix ] Update vektor-inc/font-awesome-versions from 0.7.5 to 0.7.6, fixing an issue where Font Awesome icons did not display in some server environments (e.g. AWS Bitnami).

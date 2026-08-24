@@ -65,22 +65,27 @@ if ( ! class_exists( 'VK_Blocks_Link_To_Post' ) ) {
 
 			$permalink_esc = esc_url( $permalink );
 
-			// data-vk-link-to-post を含むすべての <a> タグ内の href をパーマリンクに置換（属性順は不定）.
-			$block_content = preg_replace_callback(
-				'/<a\s([^>]*data-vk-link-to-post="1"[^>]*)>/',
-				function ( $m ) use ( $permalink_esc ) {
-					$attrs = $m[1];
-					$attrs = preg_replace( '/\shref="[^"]*"/', ' href="' . $permalink_esc . '"', $attrs, 1 );
-					// href が先にある場合 (data-vk-link-to-post の前).
-					if ( strpos( $attrs, 'href="' . $permalink_esc . '"' ) === false ) {
-						$attrs = preg_replace( '/href="[^"]*"/', 'href="' . $permalink_esc . '"', $attrs, 1 );
-					}
-					return '<a ' . $attrs . '>';
-				},
-				$block_content
-			);
+			// data-vk-link-to-post を含むすべての <a> タグの href をパーマリンクに置換する.
+			// 正規表現による属性文字列の直接書き換えは、title/class 等の属性値内に含まれる
+			// `href="` のような文字列を誤って属性境界として解釈し、クォート構造を破壊して
+			// 攻撃者が仕込んだ onfocus 等を実属性として実行可能にしてしまう（属性インジェクション）ため使用しない.
+			// WP_HTML_Tag_Processor は実際のブラウザと同じ HTML トークナイズ規則で属性を解釈するため、
+			// このような壊れたクォート構造を安全に扱い、正しくエスケープされた形で再出力できる.
+			// Replace the href of every <a> tag that has data-vk-link-to-post with the permalink.
+			// Do not rewrite the attribute string with regex: a string such as `href="` appearing
+			// inside another attribute's value (e.g. title, class) can be misread as an attribute
+			// boundary, breaking the quote structure and letting an attacker-supplied attribute such
+			// as onfocus become a real, executable attribute (attribute injection).
+			// WP_HTML_Tag_Processor tokenizes attributes using the same rules a browser uses, so it
+			// safely handles this kind of broken quote structure and re-serializes it with correct escaping.
+			$processor = new WP_HTML_Tag_Processor( $block_content );
+			while ( $processor->next_tag( array( 'tag_name' => 'a' ) ) ) {
+				if ( '1' === $processor->get_attribute( 'data-vk-link-to-post' ) ) {
+					$processor->set_attribute( 'href', $permalink_esc );
+				}
+			}
 
-			return $block_content;
+			return $processor->get_updated_html();
 		}
 	}
 }
