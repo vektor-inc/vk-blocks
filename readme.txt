@@ -4,7 +4,7 @@ Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 6.6
 Tested up to: 7.0
-Stable tag: 1.126.0
+Stable tag: 1.126.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -107,6 +107,10 @@ e.g.
 1. VK Blocks examples.
 
 == Changelog ==
+
+= 1.126.1 =
+[ Bug Fix ] Update vektor-inc/font-awesome-versions from 0.7.5 to 0.7.6, fixing an issue where Font Awesome icons did not display in some server environments (e.g. AWS Bitnami).
+[ Bug Fix ][ Slider Block ] Update vektor-inc/vk-swiper from 0.4.0 to 0.4.1, fixing an issue where the slider did not work in some server environments (e.g. AWS Bitnami).
 
 = 1.126.0 =
 [ New Feature ][ Button Block ] Added an option to use a custom field's URL as the button link. When the Button block is placed inside a Query Loop, each post's button can link to the URL stored in that post's custom field.
