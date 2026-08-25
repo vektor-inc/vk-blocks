@@ -5,6 +5,11 @@
  * @package vk-blocks
  */
 
+// Do not load directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Register Google map block.
  *

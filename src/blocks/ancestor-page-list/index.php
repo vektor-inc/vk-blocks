@@ -5,6 +5,11 @@
  * @package vk-blocks
  */
 
+// Do not load directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Get Ancestor Page ID
  * 先祖階層の投稿IDを取得する関数

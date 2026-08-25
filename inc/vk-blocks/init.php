@@ -5,6 +5,11 @@
  * @package vk-blocks
  */
 
+// Do not load directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * プラグインを有効化した時にoption値を保存する
  *

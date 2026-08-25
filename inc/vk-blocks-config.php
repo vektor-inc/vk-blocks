@@ -7,6 +7,11 @@
  * @package vk-blocks
  */
 
+// Do not load directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 // Load composer autoload.
 require_once dirname( __DIR__ ) . '/vendor/autoload.php';
 

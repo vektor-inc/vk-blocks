@@ -3,6 +3,62 @@
 	bottom: 0;
 }
 
+/* ==========================================================================
+   エクスポート欄（「すべて切り替える」＋個別チェックボックス一覧）
+   ========================================================================== */
+
+// 「すべて切り替える」は個別項目と同列ではなく群全体を操作するコントロールのため、
+// 個別項目群との間だけ区切り線を入れて階層を分ける
+.import_export_toggle_all {
+	padding-bottom: 12px;
+	margin-bottom: 24px;
+	border-bottom: 1px solid #c5c5c5;
+}
+
+// 左マージンの解除・list-style の解除は vk-admin の ul.no-style（JSX側で付与）
+// が担当する。ここではブラウザ既定の ul 下マージン（margin-block-end: 1em）
+// だけを打ち消す
+.import_export_list {
+	margin-bottom: 0;
+}
+
+.import_export_list_item {
+	// wp-admin の `li, dd { margin-bottom: 6px }` を打ち消し、項目間の
+	// 余白は下の隣接セレクタ1箇所だけで決まるようにする
+	margin-bottom: 0;
+
+	// margin-bottom + :last-child ではなく、隣接セレクタで前後の項目間
+	// だけに余白を付ける（余白の付け方を1流儀に統一し、将来 li 以外の
+	// 要素が増えても静かに崩れないようにする）
+	+ .import_export_list_item {
+		margin-top: 12px;
+	}
+
+	// クリック領域を確保しつつ、チェックボックスとラベルの近接（標準ギャップ）は変更しない
+	.components-checkbox-control__label {
+		padding: 4px 0;
+	}
+
+	// ラベルに padding を足すとラベルのボックスだけ縦に伸び、CheckboxControl
+	// 内部の HStack（align-items: flex-start）によってチェックボックスと
+	// ラベルの文字が上下にズレる。block-manager と同じく input 側を
+	// 中央揃えにして解消する（options-css/_admin-block-manager.scss 参照）。
+	.components-checkbox-control__input-container {
+		align-self: center;
+	}
+}
+
+/* ==========================================================================
+   インポート欄（設定グループごとの囲み）
+   ========================================================================== */
+
+// .import_export_section の後には常に .import_export_add_modal_button_area
+// （送信ボタン領域）が続くため margin-bottom + :last-child では最後の1件を
+// 判定できない。上の .import_export_list_item と同じく隣接セレクタで統一する
+.import_export_section + .import_export_section {
+	margin-top: 24px;
+}
+
 .import_export_detail_area {
 	margin: 0 0 calc(8px) 2em;
 }

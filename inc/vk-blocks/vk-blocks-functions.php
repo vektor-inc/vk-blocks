@@ -7,6 +7,11 @@
  * @package vk_blocks
  */
 
+// Do not load directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 // Load Files
 require_once __DIR__ . '/utils/hex-to-rgba.php';
 require_once __DIR__ . '/utils/color-slug-to-color-code.php';

@@ -4,7 +4,7 @@ Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 6.6
 Tested up to: 7.1
-Stable tag: 1.126.3
+Stable tag: 1.126.4
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -107,6 +107,12 @@ e.g.
 1. VK Blocks examples.
 
 == Changelog ==
+
+= 1.126.4 =
+[ Bug Fix ] Fixed the free version's package including unnecessary developer files (uncompiled source, translation files) that are not needed at runtime and could interfere with wordpress.org-hosted translations.
+[ Bug Fix ] Fixed the import/export tool's "Toggle all" checkbox not reflecting the state of the items, and the Export button staying enabled when no item was selected.
+[ Design Bug Fix ] Fixed the checkboxes in the import/export tool's Export and Import panels being displayed with no vertical spacing, making it hard to tell where one item ended and the next began.
+[ Security Fix ] Added a direct file access check to internal PHP files that lacked one, and escaped an output value in a customizer control that bypassed escaping.
 
 = 1.126.2 =
 [ Security Fix ][ Icon Block / Button Block / Outer Block (Pro) / Group Block / Cover Block ] Fixed an issue where the Link to Post feature output unescaped HTML attributes, which could allow stored XSS.

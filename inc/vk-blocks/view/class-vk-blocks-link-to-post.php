@@ -8,6 +8,11 @@
  * @package vk-blocks-pro
  */
 
+// Do not load directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 if ( ! class_exists( 'VK_Blocks_Link_To_Post' ) ) {
 
 	/**

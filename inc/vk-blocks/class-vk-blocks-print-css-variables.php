@@ -11,6 +11,11 @@
  * @package vk_blocks
  */
 
+// Do not load directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Vk_Blocks_Print_CSS_Variables
  */

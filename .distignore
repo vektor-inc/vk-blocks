@@ -47,6 +47,8 @@ codex.md
 .editorconfig
 .eslintignore
 .eslintrc.js
+eslint.config.js
+.lintstagedrc.js
 .prettierignore
 .phpcs.xml
 .coderabbit.yaml
@@ -61,6 +63,7 @@ test-results
 # --- WordPress 開発環境 ---
 .wp-env.json
 .wp-env.override.json
+.wp-env.tests.json
 .node-version
 
 # --- ビルドツール / 依存定義（配布物では再生成不要） ---
@@ -73,6 +76,20 @@ generate-block-docs.js
 package.json
 package-lock.json
 node_modules
+
+# --- 未コンパイルのソース（配布物には build/ 配下のビルド済みファイルのみを含める） ---
+# 先頭に / を付けてルート直下の src/ のみに限定する。名前単独（src）だと
+# vendor/ 配下の Composer パッケージが持つ PSR-4 の src/ ディレクトリまで
+# 除外され、クラスファイルが同梱されず Fatal Error になるため注意.
+/src
+
+# --- 翻訳ファイル ---
+# 無料版は wordpress.org 配信のため、翻訳は GlotPress で管理される。
+# languages を同梱すると GlotPress の翻訳が無効になるため除外する。
+# 先頭に / を付けてルート直下の languages/ のみに限定する。名前単独（languages）だと
+# vendor/ 配下の Composer パッケージが持つ languages/ ディレクトリまで除外され、
+# それらのパッケージの翻訳が読み込めなくなるため注意.
+/languages
 
 # --- 開発用スクリプト・ツール ---
 bin

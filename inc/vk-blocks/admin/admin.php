@@ -5,6 +5,11 @@
  * @package VK Blocks
  */
 
+// Do not load directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use VektorInc\VK_Admin\VkAdmin;
 VkAdmin::init();
 

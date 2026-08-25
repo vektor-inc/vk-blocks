@@ -17,6 +17,11 @@
  * @link       https://github.com/TGMPA/TGM-Plugin-Activation
  */
 
+// Do not load directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 add_action( 'tgmpa_register', 'vkb_register_required_plugins' );
 /**
  * Register the required plugins for this theme.

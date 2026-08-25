@@ -3,8 +3,8 @@
  * Plugin Name: VK Blocks
  * Plugin URI: https://github.com/vektor-inc/vk-blocks
  * Description: This is a plugin that extends Block Editor.
- * Version: 1.126.3
- * Requires at least: 6.5
+ * Version: 1.126.4
+ * Requires at least: 6.6
  * Author: Vektor,Inc.
  * Author URI: https://vektor-inc.co.jp
  * Text Domain: vk-blocks
@@ -155,247 +155,17 @@ if ( ! function_exists( 'vk_blocks_loaded' ) ) {
 
 /****************************************************************************************
  * Load updater ( Pro version only )
+ *
+ * This code lives in inc/vk-blocks-pro/updater.php, not here, so that it is
+ * never present in the free version's distributed files (that file is excluded
+ * from the free repository sync via .freeignore).
+ * このコードを本ファイルに直接書かず inc/vk-blocks-pro/updater.php に分離しているのは、
+ * 無料版の配布物にこのコード（アップデートチェッカー）が含まれないようにするため。
+ * このファイルは .freeignore により無料版リポジトリへの同期対象から除外される。
  */
-
-if ( function_exists( 'vk_blocks_is_pro' ) && vk_blocks_is_pro() ) {
-
-	// 翻訳を実行
-	add_action(
-		'plugins_loaded',
-		function () {
-			// サイトのロケールを取得
-			$locale = determine_locale();
-			// 翻訳ファイルのパスを指定
-			$path = plugin_dir_path( __FILE__ ) . 'languages';
-
-			// 日本語の設定のみ翻訳ファイルを読み込み
-			if ( strpos( $locale, 'ja' ) === 0 ) {
-				// PHPファイルの翻訳読み込み
-				load_textdomain( 'vk-blocks-pro', $path . '/vk-blocks-pro-ja.mo' );
-
-				// JavaScriptファイルの翻訳設定
-				add_action(
-					'wp_enqueue_scripts',
-					function () use ( $path ) {
-						// スクリプト登録後に翻訳設定
-						wp_set_script_translations( 'vk-blocks-build-js', 'vk-blocks-pro', $path );
-						wp_set_script_translations( 'vk-blocks-admin-js', 'vk-blocks-pro', $path );
-					}
-				);
-			}
-		}
-	);
-
-	// 本来 Pro 版でしか読み込まないが、1.36.0.0 は間違って読み込んでしまっており
-	// 無料版 1.36.0 を有効化していると previously declared になるため ! function_exists() を通した上で宣言している.
-	if ( ! function_exists( 'vk_blocks_update_checker' ) ) {
-		/**
-		 * Perform update checks on VK Blocks.
-		 *
-		 * @return void
-		 */
-		function vk_blocks_update_checker() {
-
-			// Cope with : WP HTTP Error: cURL error 60: SSL certificate problem: certificate has expired.
-			add_filter( 'https_ssl_verify', '__return_false' );
-
-			global $vk_blocks_update_checker;
-
-			$vk_blocks_update_checker = YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker(
-				'https://license.vektor-inc.co.jp/check/?action=get_metadata&slug=vk-blocks-pro',
-				__FILE__, // この処理を他の場所に移動するとここを変更しないといけなくなるので注意.
-				'vk-blocks-pro'
-			);
-
-			$vk_blocks_update_checker->addQueryArgFilter( 'vk_blocks_get_license_check_query_arg' );
-
-			// 管理画面 かつ テーマオプションの編集権限がある場合.
-			if ( is_admin() && current_user_can( 'edit_theme_options' ) ) {
-				$network_runnning_pro = false;
-
-				// マルチサイトでOriginal Brand Unitが動いていたら.
-				if ( is_multisite() ) {
-					$network_options = get_site_option( 'active_sitewide_plugins', array() );
-					if ( isset( $network_options['lightning-original-brand-unit/lightning-original-brand-unit.php'] ) ) {
-						$network_runnning_pro = true;
-					}
-				}
-
-				// マルチサイトでOriginal Brand Unitが動いていない && Original Brand Unitが有効になっていない.
-				$active_plugins = get_option( 'active_plugins', array() );
-				if ( ! $network_runnning_pro && ! in_array( 'lightning-original-brand-unit/lightning-original-brand-unit.php', $active_plugins, true ) ) {
-					add_action(
-						'admin_notices',
-						function () {
-							vk_blocks_the_update_messsage();
-						}
-					);
-				}
-			}
-		}
-	}
-
-	add_action( 'after_setup_theme', 'vk_blocks_update_checker' );
-
-	if ( ! function_exists( 'vk_blocks_license_check' ) ) {
-		/**
-		 * Licence Checker
-		 *
-		 * @param array $test_data    テストデータ.
-		 * @return string $check_result ライセンス認証の結果.
-		 */
-		function vk_blocks_license_check( $test_data = array() ) {
-
-			// アップデート周りの変数を取得.
-			global $vk_blocks_update_checker;
-
-			// オプション値を取得.
-			$options = get_option( 'vk_blocks_options' );
-
-			// 返す値
-			$check_result = null;
-
-			// テストデータがある場合はそれを処理し、ない場合はそれぞれ取得
-			if ( ! empty( $test_data ) ) {
-
-				// 現在のテーマ
-				$template = $test_data['template'];
-
-				// Pro 版か否か
-				$is_pro = $test_data['is_pro'];
-
-				// ライセンスキー
-				$license_key = ! empty( $test_data['license_key'] ) ? $test_data['license_key'] : '';
-
-				// アップデート API
-				$update = ! empty( $test_data['update'] ) ? $test_data['update'] : array();
-			} else {
-
-				// 現在のテーマ
-				$template = wp_get_theme()->Template;
-
-				// Pro 版か否か
-				$is_pro = vk_blocks_is_pro();
-
-				// ライセンスキー
-				$license_key = ! empty( $options['vk_blocks_pro_license_key'] ) ? $options['vk_blocks_pro_license_key'] : '';
-
-				// アップデート API の情報（オブジェクトは扱いにくいので配列化）
-				$update = (array) $vk_blocks_update_checker->getUpdateState()->getUpdate();
-			}
-
-			// 条件に応じて認証結果を返す.
-			if ( 'katawara' === $template || false === $is_pro ) {
-
-				// Katawara と無料版はライセンス認証免除対象なので 'exemption' を返す
-				$check_result = 'exemption';
-			} elseif ( empty( $license_key ) ) {
-
-				// それ以外でライセンスキーが空の場合は 'empty' を返す
-				$check_result = 'empty';
-			} elseif ( ! empty( $update ) && empty( $update['download_url'] ) ) {
-
-				// それ以外でライセンスキーが違う場合は 'invalid' を返す
-				$check_result = 'invalid';
-			} else {
-
-				// それ以外の場合はライセンスキーが正しいと言えるので 'valid' を返す
-				$check_result = 'valid';
-			}
-
-			// 実際の API がどう動いているかのチェック用
-			// var_dump( $check_result );
-
-			return $check_result;
-		}
-	}
-
-	if ( ! function_exists( 'vk_blocks_the_update_messsage' ) ) {
-		/**
-		 * Update alert message
-		 *
-		 * @return void
-		 */
-		function vk_blocks_the_update_messsage() {
-			global $vk_blocks_update_checker;
-			$license_check = vk_blocks_license_check();
-			$notice_title  = '';
-
-			// ライセンスキーが未入力の場合.
-			if ( 'empty' === $license_check ) {
-				$notice_title = __( 'License Key has no registered.', 'vk-blocks' );
-			} elseif ( 'invalid' === $license_check ) {
-
-				// ライセンスが切れている あるいは 無効な場合.
-				// アップデートは存在するがURLが帰ってこなかった場合.
-				$notice_title = __( 'The VK Blocks Pro license is invalid.', 'vk-blocks' );
-			}
-
-			if ( empty( $notice_title ) ) {
-				return;
-			}
-
-			$link_url = wp_nonce_url(
-				add_query_arg(
-					array(
-						'puc_check_for_updates' => 1,
-						'puc_slug'              => $vk_blocks_update_checker->slug,
-					),
-					self_admin_url( 'plugins.php' )
-				),
-				'puc_check_for_updates'
-			);
-
-			$alert_html  = '';
-			$alert_html .= '<div class="error">';
-			$alert_html .= '<h4>VK Blocks Pro : ' . $notice_title . '</h4>';
-			$alert_html .= '<p>' . __( 'Please enter a valid license key for any of the following products on the settings screen.', 'vk-blocks' ) . '</p>';
-			$alert_html .= '<ul>';
-			$alert_html .= '<li><a href="https://vws.vektor-inc.co.jp/product/vektor-passport-1y/?rel=vk-blocks-pro-alert" target="_blank">Vektor Passport</a></li>';
-			$alert_html .= '<li><a href="https://vws.vektor-inc.co.jp/product/lightning-g3-pro-pack/?rel=vk-blocks-pro-alert" target="_blank">Lightning G3 Pro Pack</a></li>';
-			$alert_html .= '<li><a href="https://vws.vektor-inc.co.jp/product/lightning-pro-update-license?rel=vk-blocks-pro-alert" target="_blank">Lightning Pro</a></li>';
-			$alert_html .= '</ul>';
-
-			$alert_html .= '<p><a href="' . admin_url( '/options-general.php?page=vk_blocks_options' ) . '" class="button button-primary">' . __( 'Enter the license key', 'vk-blocks' ) . '</a></p>';
-
-			$alert_html .= '<p style="margin-bottom:15px">';
-			$alert_html .= __( 'If this display does not disappear even after entering a valid license key, re-acquire the update.', 'vk-blocks' );
-			$alert_html .= ' <span class="nowrap">[ <a href="' . $link_url . '">' . __( 'Re-acquisition of updates', 'vk-blocks' ) . '</a> ]</span>';
-			$alert_html .= '</p>';
-
-			$alert_html .= '</div>';
-			echo wp_kses_post( $alert_html );
-		}
-	}
-
-	if ( ! function_exists( 'vk_blocks_get_license_check_query_arg' ) ) {
-		/**
-		 * Register update license key
-		 *
-		 * @param array $query_args : updatechacker array.
-		 * @return $query_args
-		 */
-		function vk_blocks_get_license_check_query_arg( $query_args ) {
-			$options = get_option( 'vk_blocks_options' );
-			$license = '';
-			if ( ! empty( $options['vk_blocks_pro_license_key'] ) ) {
-				$license = esc_html(
-					preg_replace(
-						"/\A[\x20\xE3\x80\x80]++|[\x20\xE3\x80\x80]++\z/u",
-						'',
-						$options['vk_blocks_pro_license_key']
-					)
-				);
-			}
-
-			if ( ! empty( $license ) ) {
-				$query_args['vk-blocks-pro-license-key'] = $license;
-			}
-			$query_args['template'] = wp_get_theme()->Template;
-
-			return $query_args;
-		}
-	}
+$vk_blocks_pro_updater_file = plugin_dir_path( __FILE__ ) . 'inc/vk-blocks-pro/updater.php';
+if ( file_exists( $vk_blocks_pro_updater_file ) ) {
+	require_once $vk_blocks_pro_updater_file;
 }
 
 if ( function_exists( 'register_deactivation_hook' ) ) {

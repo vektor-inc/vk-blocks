@@ -81,15 +81,6 @@ export default function ExportForm(props) {
 	});
 	const isExportLists = visibleExportLists.filter((list) => !!list.isExport);
 
-	let ariaChecked;
-	if (isExportLists.length === visibleExportLists.length) {
-		ariaChecked = 'true';
-	} else if (isExportLists.length > 0) {
-		ariaChecked = 'mixed';
-	} else {
-		ariaChecked = 'false';
-	}
-
 	const handleToggleAll = (value) => {
 		const copyObj = JSON.parse(JSON.stringify(exportOptionLists));
 		copyObj.forEach((list) => (list.isExport = value));
@@ -97,47 +88,58 @@ export default function ExportForm(props) {
 	};
 
 	const canExport =
-		!isChanged && exportOptionLists.some((list) => !!list.isExport)
+		!isChanged && visibleExportLists.some((list) => !!list.isExport)
 			? true
 			: false;
 
 	return (
 		<div>
 			<h4>{__('Export', 'vk-blocks')}</h4>
-			<CheckboxControl
-				label={__('Toggle all', 'vk-blocks')}
-				checked={isExportLists.length === exportOptionLists.length}
-				onChange={handleToggleAll}
-				aria-checked={ariaChecked}
-			/>
-			{Object.keys(OPTION_DEFAULT_SETTINGS).map((key, index) => {
-				const { groupTitle, isShow = true } =
-					OPTION_DEFAULT_SETTINGS[key];
-				const checked = exportOptionLists[index].isExport
-					? true
-					: false;
-				const handleToggle = (value) => {
-					const copyObj = JSON.parse(
-						JSON.stringify(exportOptionLists)
+			<div className="import_export_toggle_all">
+				<CheckboxControl
+					label={__('Toggle all', 'vk-blocks')}
+					checked={
+						visibleExportLists.length > 0 &&
+						isExportLists.length === visibleExportLists.length
+					}
+					indeterminate={
+						isExportLists.length > 0 &&
+						isExportLists.length < visibleExportLists.length
+					}
+					onChange={handleToggleAll}
+				/>
+			</div>
+			<ul className="no-style import_export_list">
+				{Object.keys(OPTION_DEFAULT_SETTINGS).map((key, index) => {
+					const { groupTitle, isShow = true } =
+						OPTION_DEFAULT_SETTINGS[key];
+					const checked = exportOptionLists[index].isExport
+						? true
+						: false;
+					const handleToggle = (value) => {
+						const copyObj = JSON.parse(
+							JSON.stringify(exportOptionLists)
+						);
+						copyObj[index].isExport = value;
+						setExportOptionLists(copyObj);
+					};
+					return (
+						isShow && (
+							<li className="import_export_list_item" key={index}>
+								<CheckboxControl
+									label={sprintf(
+										// translators: Export %s
+										__('Export %s', 'vk-blocks'),
+										groupTitle
+									)}
+									checked={checked}
+									onChange={handleToggle}
+								/>
+							</li>
+						)
 					);
-					copyObj[index].isExport = value;
-					setExportOptionLists(copyObj);
-				};
-				return (
-					isShow && (
-						<CheckboxControl
-							key={index}
-							label={sprintf(
-								// translators: Export %s
-								__('Export %s', 'vk-blocks'),
-								groupTitle
-							)}
-							checked={checked}
-							onChange={(value) => handleToggle(value, index)}
-						/>
-					)
-				);
-			})}
+				})}
+			</ul>
 			{isChanged && (
 				<p>
 					{__(

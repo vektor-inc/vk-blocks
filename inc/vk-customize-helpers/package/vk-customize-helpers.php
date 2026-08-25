@@ -1,4 +1,9 @@
 <?php
+// Do not load directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 add_action( 'customize_register', 'vk_register_customize_helpers', 1 );
 if ( ! function_exists( 'vk_register_customize_helpers' ) ){
     function vk_register_customize_helpers( $wp_customize ) {
@@ -14,13 +19,12 @@ if ( ! function_exists( 'vk_register_customize_helpers' ) ){
                 ?>
                 <label>
                 <span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
-                <?php $style = ( $this->input_before || $this->input_after ) ? ' style="width:50%"' : ''; ?>
                 <div>
                 <?php echo wp_kses_post( $this->input_before ); ?>
-                <input type="text" value="<?php echo esc_attr( $this->value() ); ?>"<?php echo $style; ?> <?php $this->link(); ?> />
+                <input type="text" value="<?php echo esc_attr( $this->value() ); ?>"<?php if ( $this->input_before || $this->input_after ) : ?> style="width:50%"<?php endif; ?> <?php $this->link(); ?> />
                 <?php echo wp_kses_post( $this->input_after ); ?>
                 </div>
-                <div><?php echo $this->description; ?></div>
+                <div><?php echo wp_kses_post( $this->description ); ?></div>
             </label>
             <?php
                 } // public function render_content() {

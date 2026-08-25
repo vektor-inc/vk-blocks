@@ -5,6 +5,11 @@
  * @package VK Blocks
  */
 
+// Do not load directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Load Scripts
  */

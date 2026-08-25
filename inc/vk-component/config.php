@@ -5,6 +5,11 @@
  * @package VK Blocks
  */
 
+// Do not load directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use VektorInc\VK_Component\VK_Component_Button;
 use VektorInc\VK_Component\VK_Component_Mini_Contents;
 use VektorInc\VK_Component\VK_Component_Posts;

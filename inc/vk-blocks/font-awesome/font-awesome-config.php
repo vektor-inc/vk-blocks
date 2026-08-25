@@ -5,6 +5,11 @@
  * @package vk_blocks
  */
 
+// Do not load directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use VektorInc\VK_Font_Awesome_Versions\VkFontAwesomeVersions;
 
 /*

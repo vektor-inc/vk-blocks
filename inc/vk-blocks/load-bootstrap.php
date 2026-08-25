@@ -9,6 +9,11 @@
  * @package vk_blocks
  */
 
+// Do not load directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Boostrapの読み込み
  *
