@@ -372,10 +372,33 @@ export default function ButtonEdit(props) {
 			}
 			setAttributes({ old_1_31_0: true });
 		}
-		if (!isInnerButton) {
-			setAttributes({ buttonWidth: 0 });
-		}
 	}, [clientId]);
+
+	// 横並びボタンから単体ボタンへ移動・コピーした場合は、親ブロック内でのみ
+	// 使用する幅とギャップをまとめて解除する。親子関係の変化も監視することで、
+	// clientId が変わらない「移動」でも横並び用の出力を残さない。
+	// When a button is moved or copied out of Button Outer, clear every layout
+	// attribute owned by the parent. Watching the parent relationship also covers
+	// moves that preserve the clientId and prevents stale width classes or gap CSS.
+	useEffect(() => {
+		if (
+			!isInnerButton &&
+			(buttonWidthMobile || buttonWidthTablet || buttonWidth || outerGap)
+		) {
+			setAttributes({
+				buttonWidthMobile: 0,
+				buttonWidthTablet: 0,
+				buttonWidth: 0,
+				outerGap: null,
+			});
+		}
+	}, [
+		isInnerButton,
+		buttonWidthMobile,
+		buttonWidthTablet,
+		buttonWidth,
+		outerGap,
+	]);
 
 	const { updateBlockAttributes } = dispatch('core/block-editor');
 

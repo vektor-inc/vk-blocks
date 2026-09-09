@@ -4,7 +4,7 @@ Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 6.6
 Tested up to: 7.1
-Stable tag: 1.126.4
+Stable tag: 1.127.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -107,6 +107,18 @@ e.g.
 1. VK Blocks examples.
 
 == Changelog ==
+
+= 1.127.0 =
+[ New Feature ][ Outer ( Pro ) ] The divider shape can now be created by cutting out the section's own background, so it looks natural even in headers and footers without matching the adjacent color. Existing blocks keep their appearance and color settings unchanged; only newly added blocks use the new method.
+[ New Feature ][ Flow ] Added controls to delete or replace registered images directly.
+[ New Feature ][ Site Title Block ] Added an option to output the site title block as an h1 tag only on the front page.
+[ Spec Change ][ Slider Block ][ Post List Slider Block (Pro) ] The screen reader label of the pause/play button now follows the site language instead of the language of whoever edited the post.
+[ Spec Change ][ Slider Block ] Updated Swiper used in the block editor from 14.0.6 to 14.2.0.
+[ Spec Change ] Updated the WordPress packages the block editor code is built against to the latest set, including @wordpress/icons 13.2.0 to 15.5.0 which is bundled into the plugin, so a few editor icons may look slightly different.
+[ Bug Fix ][ Slider Block ] Fixed an issue where a change to the translation, or the editor's translation data failing to load, made existing posts containing a pause/play button prompt for block recovery.
+[ Bug Fix ][ Button Block ] Fixed an issue where moving or copying a button out of a row of buttons into a standalone block could leave its width and spacing appearance unexpectedly changed.
+[ Bug Fix ][ Button Block ] Cleaned up a duplicated class in the markup of filled buttons with a custom text color. There is no change in appearance and existing buttons are unaffected.
+[ Design Bug Fix ][ Outer (Pro) / Slider Item / Flow ] Standardized image action button heights and Delete button colors, and improved attachment ID resolution for large media libraries.
 
 = 1.126.4 =
 [ Bug Fix ] Fixed the free version's package including unnecessary developer files (uncompiled source, translation files) that are not needed at runtime and could interfere with wordpress.org-hosted translations.

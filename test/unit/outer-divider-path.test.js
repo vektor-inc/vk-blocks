@@ -8,7 +8,10 @@
  * 期待値は origin/master の component-divider.js に書かれていた
  * テンプレートリテラルを忠実にコピーした「ゴールデン値」。
  */
-import { getDividerPathD } from '../../src/blocks/_pro/outer/utils/divider-path';
+import {
+	getDividerPathD,
+	clampLevel,
+} from '../../src/blocks/_pro/outer/utils/divider-path';
 
 describe('getDividerPathD - tilt', () => {
 	test('level > 0', () => {
@@ -237,5 +240,118 @@ describe('getDividerPathD - unknown type', () => {
 
 	test('returns null for undefined dividerType', () => {
 		expect(getDividerPathD(30, undefined)).toBeNull();
+	});
+});
+
+describe('clampLevel - エディタ入口の level 範囲ガード', () => {
+	test('正規値（-100〜100）はそのまま返す', () => {
+		expect(clampLevel(0)).toBe(0);
+		expect(clampLevel(50)).toBe(50);
+		expect(clampLevel(-50)).toBe(-50);
+		expect(clampLevel(100)).toBe(100);
+		expect(clampLevel(-100)).toBe(-100);
+	});
+
+	test('範囲外は [-100, 100] に丸める', () => {
+		expect(clampLevel(100000)).toBe(100);
+		expect(clampLevel(-100000)).toBe(-100);
+		expect(clampLevel(101)).toBe(100);
+		expect(clampLevel(-101)).toBe(-100);
+	});
+
+	test('数値文字列は数値に変換して丸める', () => {
+		expect(clampLevel('50')).toBe(50);
+		expect(clampLevel('100000')).toBe(100);
+	});
+
+	test('非数値・非有限は 0 にする（PHP: 非数値 → 0）', () => {
+		expect(clampLevel('abc')).toBe(0);
+		expect(clampLevel('')).toBe(0);
+		expect(clampLevel(NaN)).toBe(0);
+		expect(clampLevel(Infinity)).toBe(0);
+		expect(clampLevel(-Infinity)).toBe(0);
+		expect(clampLevel(undefined)).toBe(0);
+		expect(clampLevel(null)).toBe(0);
+	});
+
+	test('配列・オブジェクトは 0（PHP filter_var(FLOAT)=false と同じ・Number([50])=50 の化け対策）', () => {
+		// 配列・オブジェクトは Number に落ちる前に 0。
+		expect(clampLevel([50])).toBe(0);
+		expect(clampLevel([])).toBe(0);
+		expect(clampLevel([50, 60])).toBe(0);
+		expect(clampLevel({})).toBe(0);
+		expect(clampLevel({ x: 50 })).toBe(0);
+	});
+
+	test('boolean は PHP filter_var(FLOAT) と同値（true→1・false→0）', () => {
+		expect(clampLevel(true)).toBe(1);
+		expect(clampLevel(false)).toBe(0);
+	});
+});
+
+describe('getDividerPathD - level クランプ（エディタ入口）', () => {
+	// 手書き JSON の巨大 level でも path 生成は ±100 に丸めて暴発しない。
+	test('巨大な正の level は level=100 と同じ d を返す（範囲丸め）', () => {
+		[
+			'tilt',
+			'curve',
+			'wave',
+			'triangle',
+			'largeTriangle',
+			'serrated',
+			'book',
+			'pyramid',
+		].forEach((type) => {
+			expect(getDividerPathD(100000, type)).toBe(
+				getDividerPathD(100, type)
+			);
+		});
+	});
+
+	test('巨大な負の level は level=-100 と同じ d を返す（範囲丸め）', () => {
+		[
+			'tilt',
+			'curve',
+			'wave',
+			'triangle',
+			'largeTriangle',
+			'serrated',
+			'book',
+			'pyramid',
+		].forEach((type) => {
+			expect(getDividerPathD(-100000, type)).toBe(
+				getDividerPathD(-100, type)
+			);
+		});
+	});
+
+	test('非数値 level は 0 扱い（level=0 で null を返す型は null）', () => {
+		expect(getDividerPathD('abc', 'tilt')).toBeNull();
+		expect(getDividerPathD(NaN, 'wave')).toBeNull();
+		expect(getDividerPathD(Infinity, 'curve')).toBeNull();
+		expect(getDividerPathD(undefined, 'triangle')).toBeNull();
+		// serrated は level=0 でも path を返す（clamp 後 0 として）
+		expect(getDividerPathD('abc', 'serrated')).toBe(
+			getDividerPathD(0, 'serrated')
+		);
+	});
+
+	test('serrated のループ本数は level に比例せず 60 で頭打ち（DoS 防御）', () => {
+		// clamp 済み 100 → serrationCount = 40 + floor(100/5) = 60（Math.min(count, 60) で頭打ち）。
+		// serrationCount=60 で組んだゴールデンと一致させ、「60 分割で cap される」ことを明示する。
+		const serrationCount = 60;
+		const step = 100 / serrationCount;
+		const height = 10;
+		const pathData = Array.from({ length: serrationCount + 1 })
+			.map((_, i) => {
+				const x = i * step;
+				const y = i % 2 === 0 ? 100 - height : 100;
+				return `${x},${y}`;
+			})
+			.join(' L ');
+		const capped = `M0,100 L ${pathData} L100,100 Z`;
+		expect(getDividerPathD(100, 'serrated')).toBe(capped);
+		// 巨大 level でも clamp 済み 100（= 60 分割）と完全一致＝ループが有界であることを固定。
+		expect(getDividerPathD(100000, 'serrated')).toBe(capped);
 	});
 });

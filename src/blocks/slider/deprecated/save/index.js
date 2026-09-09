@@ -1,4 +1,5 @@
 /* eslint camelcase: 0 */
+import save1_126_4 from './1.126.4/save';
 import save1_124_0 from './1.124.0/save';
 import save1_121_1 from './1.121.1/save';
 import save1_115_0 from './1.115.0/save';
@@ -255,6 +256,136 @@ const blockAttributes13 = {
 	},
 };
 
+const PAUSE_BUTTON_SELECTOR = '.swiper-pause-button';
+
+// ラベルが焼き付いていた頃の保存形式を、翻訳やロケールに依存せず復元するための属性。
+//
+// 停止/再生ボタンのラベルは 1.126.4 まで save 出力に焼き付いていた。その値を deprecated の
+// save が `__()` で作り直すと、「保存した時の訳文」と「いま開いている人のロケールの現在の
+// 訳文」が食い違った瞬間に保存内容と一致せず、リカバリー警告になる。訳文の変更や、
+// ユーザーごとに異なる管理画面言語だけでなく、**エディタ用の翻訳 JSON が読み込まれなかった
+// だけ**でも `__()` は英語を返すため、日本語で保存した投稿が丸ごと警告対象になる。
+//
+// そこで作り直すのをやめ、保存済みマークアップに実際に書かれている値をそのまま読む。
+// 読んだ値を save がそのまま出力するので、訳文が何であろうと必ず一致する。
+//
+// ⚠️ これは上の blockAttributes13 の警告（「属性を足すな」）には当たらない。あの警告が
+// 対象にしているのは `source` を持たない＝ブロックコメントから読む属性で、既定値付きで
+// 足すと当時保存されていない値まで解決されてしまうケースである。ここで足すのは
+//   - `source: 'attribute'` … ブロックコメントを一切参照せず、マークアップだけを見る
+//   - `default` 無し … マークアップに無ければ undefined のまま。既定値の注入が起きない
+// であり、さらに source 付きの属性はシリアライズ時にブロックコメントへ書き戻されない。
+// そのため「当時の保存内容に無い属性が既定値付きで解決される」という事象は発生しない。
+// block.json にも存在しない属性なので、block.json との同期でもない。
+//
+// 3 つを個別に読むのは、`aria-label` と `data-label-pause` が通常は同値でも、手で編集された
+// マークアップではずれ得るため。個別に読めばその場合も出力が保存内容と一致する。
+//
+// ⚠️ セレクタは `querySelector` 相当で、ドキュメント順で最初に一致した要素を取る。読み取りの
+// 対象になるのはブロック全体のマークアップ（インナーブロックを含む）で、save の出力順は
+// インナーブロック → ナビ → ページネーション → 停止ボタン なので、**スライドの中に別の
+// スライダーが入れ子になっている場合は内側のボタンが先に一致する**。
+// 内側と外側のラベルは、同じ環境で保存された限りは同一セッション・同一ロケールで焼かれるため
+// 同値になり、この取り違えは表面化しない。表面化するのは、別サイトや別ロケールで保存された
+// マークアップをコードエディタで貼り付けた場合など、**内側と外側で焼き付いた訳文が異なる**
+// ときで、その場合は外側の save が内側のラベルを出力して保存内容と食い違い、この修正が
+// 塞いだはずのリカバリー警告が戻る。入れ子自体が稀なうえ、内外で訳文が違う状況はさらに稀
+// なため、セレクタを外側のボタンに限定する複雑さは今回引き受けていない。
+//
+// Attributes that restore the era when the labels were baked in, without depending on the
+// translation or the locale.
+//
+// The pause / play button's labels were part of the save output up to 1.126.4. If a
+// deprecation's save rebuilds them with `__()`, the output stops matching the saved content
+// the moment "the translation at save time" and "the current translation in the locale of
+// whoever is opening the editor" diverge — which shows up as a recovery notice. That happens
+// not only when the wording changes or when users have different admin languages, but also
+// when the editor's translation JSON simply fails to load: `__()` then returns English and
+// every post saved in Japanese is affected.
+//
+// So instead of rebuilding them, read the values actually present in the saved markup. The
+// save emits exactly what it read, so it matches whatever the translation happens to be.
+//
+// ⚠️ This does NOT fall under the warning on blockAttributes13 above ("do not add
+// attributes"). That warning is about attributes WITHOUT a `source` — read from the block
+// comment — where adding one with a default resolves values that were never saved. What is
+// added here is
+//   - `source: 'attribute'` … never consults the block comment; looks only at the markup
+//   - no `default` … absent from the markup means it stays undefined; no default is injected
+// and sourced attributes are not written back into the block comment on serialization.
+// So "an attribute that was not in the saved content gets resolved with a default" cannot
+// occur. These attributes do not exist in block.json either, so this is not mirroring it.
+//
+// The three are read separately because `aria-label` and `data-label-pause`, while normally
+// equal, can diverge in hand-edited markup; reading each one keeps the output matching the
+// saved content even then.
+//
+// ⚠️ The selector behaves like `querySelector` and takes the first match in document order.
+// What is read is the block's whole markup, inner blocks included, and the save emits inner
+// blocks → navigation → pagination → pause button — so **when a slide contains a nested
+// slider, the inner button matches first**. As long as both were saved in the same
+// environment their labels were baked in the same session and locale, so they are equal and
+// the mix-up never surfaces. It surfaces when the inner and outer wording differ — markup
+// saved on another site or in another locale and pasted in through the code editor, say — and
+// there the outer save emits the inner labels, disagrees with the saved content, and brings
+// back the very recovery notice this fix removed. Nesting is rare to begin with and differing
+// wording inside and out rarer still, so the complexity of restricting the selector to the
+// outer button is not taken on here.
+const bakedPauseButtonLabelAttributes = {
+	bakedAriaLabel: {
+		type: 'string',
+		source: 'attribute',
+		selector: PAUSE_BUTTON_SELECTOR,
+		attribute: 'aria-label',
+	},
+	bakedLabelPause: {
+		type: 'string',
+		source: 'attribute',
+		selector: PAUSE_BUTTON_SELECTOR,
+		attribute: 'data-label-pause',
+	},
+	bakedLabelPlay: {
+		type: 'string',
+		source: 'attribute',
+		selector: PAUSE_BUTTON_SELECTOR,
+		attribute: 'data-label-play',
+	},
+};
+
+// blockAttributes13（凍結）はそのままに、ラベル復元用の属性だけを足した派生。
+// 使うのはラベルが焼き付いていた 2 世代（1.126.4 / 1.124.0）の deprecated のみ。
+//
+// A derivative of the frozen blockAttributes13 with only the label-restoring attributes added.
+// Used solely by the two generations that baked the labels in (1.126.4 / 1.124.0).
+const blockAttributes13WithBakedLabels = {
+	...blockAttributes13,
+	...bakedPauseButtonLabelAttributes,
+};
+
+/**
+ * 復元用に読んだラベル属性を、移行後の属性から取り除く。
+ *
+ * これらはマークアップを読むためだけの属性で、現行のブロックは持たない。deprecated の
+ * 判定を通った後まで残す必要が無いため落とす。source 付きの属性はブロックコメントへ
+ * 書き戻されないので残っていても保存内容は汚れないが、現行スキーマに無い属性が
+ * 実行時の attributes に紛れていると、後から読む人が必ず「これは何か」と引っかかる。
+ *
+ * Drops the label attributes that were only read in order to restore the markup.
+ * They exist purely to read the markup and are not part of the current block, so there is no
+ * reason to keep them past the deprecation match. Sourced attributes are never written back
+ * into the block comment, so leaving them would not dirty the saved content — but an
+ * attribute absent from the current schema lingering in the runtime attributes is something
+ * the next reader will always stop and puzzle over.
+ *
+ * @param {Object} attributes 移行前の属性 / the attributes before migration.
+ * @return {Object} ラベル属性を除いた属性 / the attributes without the label ones.
+ */
+const migrateDropBakedPauseButtonLabels = (attributes) => {
+	const { bakedAriaLabel, bakedLabelPause, bakedLabelPlay, ...rest } =
+		attributes;
+	return rest;
+};
+
 // Swiper v7 以前の旧クラス名。1.124.0 までは save 出力に含めていた。#3069
 // The pre-v8 legacy Swiper class name, emitted by the save output up to 1.124.0. #3069
 const LEGACY_SWIPER_CONTAINER_CLASS = 'swiper-container';
@@ -277,13 +408,17 @@ const hasLegacySwiperContainerClass = (attributes) =>
  * attribute and the block stays valid, so `swiper-container` would linger in the
  * "Additional CSS class(es)" field and keep being emitted. Opting into this
  * deprecation resolves `className` against the 1.124.0 save instead, dropping it.
- * The removal itself is done by WordPress' fixCustomClassname during that
- * resolution, so no `migrate` of our own is involved — and therefore nothing here
- * can strip a className the user set.
+ * The removal itself is done by WordPress' fixCustomClassname during that resolution, not by
+ * any `migrate` of ours. This deprecation does carry a `migrate`
+ * (`migrateDropBakedPauseButtonLabels`), but it only removes the three label attributes read
+ * for restoration and never touches `className` — so there is still no path here that can
+ * strip a className the user set.
  *
- * 旧クラスの除去そのものは、この解決の過程で WordPress の fixCustomClassname が行う。
- * こちらで `migrate` を持たないため、ユーザーが設定した className を
- * 削ってしまう経路は存在しない。
+ * 旧クラスの除去そのものは、この解決の過程で WordPress の fixCustomClassname が行うもので、
+ * こちらの `migrate` によるものではない。この deprecated は `migrate`
+ * （`migrateDropBakedPauseButtonLabels`）を持つが、復元用に読んだラベル 3 属性を落とすだけで
+ * `className` には一切触れない。したがってユーザーが設定した className を削ってしまう経路は
+ * 依然として存在しない。
  *
  * A `swiper-container` the user typed into "Additional CSS class(es)" themselves must be
  * kept, so the two cases are told apart by where the class comes from: `parsedAttributes`
@@ -338,6 +473,32 @@ const migrateZoomFinalScaleTypo = (attributes) => {
 };
 
 const deprecated = [
+	// 停止/再生ボタンの翻訳文（aria-label / data-label-*）を save 出力に焼き付けていた頃
+	// （= 1.125.0〜1.126.4 の保存形式）を救済する。属性スキーマは現行と同一。
+	// 旧クラス `swiper-container` は 1.125.0 で削除済みのため、この save には含まれない。
+	//
+	// なお旧クラスを含む 1.124.0 以前の保存内容も、className へ吸収されたうえでこの save1_126_4 に
+	// 一旦一致してしまう（ブロック検証はクラスを順不同の集合として比較するため）。ただし
+	// applyBlockDeprecatedVersions は最初に一致した時点で止まらず配列の末尾まで走査し、
+	// 一致後は isEligible を持つ deprecated だけが評価される。次の 1.124.0 の isEligible が
+	// そこで true を返して上書きするため、旧クラスの除去は従来どおり行われる。#3071
+	//
+	// Rescues the format that baked the pause / play button's translated labels (aria-label /
+	// data-label-*) into the save output (= 1.125.0 through 1.126.4). The attribute schema is
+	// unchanged. The legacy `swiper-container` class was already dropped in 1.125.0, so it is
+	// not part of this save.
+	//
+	// Content saved by 1.124.0 and earlier does match this save1_126_4 as well, once the legacy
+	// class is absorbed into `className` (block validation compares classes as an unordered
+	// set). That is harmless: applyBlockDeprecatedVersions does not stop at the first match — it
+	// walks the whole array and, once the block is valid, only deprecations with an `isEligible`
+	// are still considered. The 1.124.0 entry below returns true there and overwrites the
+	// result, so the legacy class is still removed as before. #3071
+	{
+		attributes: blockAttributes13WithBakedLabels,
+		save: save1_126_4,
+		migrate: migrateDropBakedPauseButtonLabels,
+	},
 	// ルート要素から Swiper v7 以前の旧クラス `swiper-container` を削除する前
 	// （= 1.124.0 までの保存形式）を救済する。属性スキーマは現行と同一。
 	// この save1_124_0 が現行と違うのは保存マークアップのクラスだけで、zoom 用インライン CSS の
@@ -351,9 +512,16 @@ const deprecated = [
 	// is emitted by the deprecated hooks instead — deprecated/hooks/index.js reuses the
 	// 1.121.1 hook for 1.124.0 because their zoom and height output is identical. #3069
 	{
-		attributes: blockAttributes13,
+		attributes: blockAttributes13WithBakedLabels,
 		save: save1_124_0,
 		isEligible: isLegacySwiperContainerMarkup,
+		// applyBlockDeprecatedVersions は最初の一致で止まらず配列の末尾まで走査するため、
+		// 旧クラス付きのコンテンツはここでもう一度 getBlockAttributes を通ってラベル属性が
+		// 復活する。上のエントリと同じく落としておく。
+		// applyBlockDeprecatedVersions does not stop at the first match — it walks to the end
+		// of the array — so content carrying the legacy class passes through
+		// getBlockAttributes again here and regains the label attributes. Drop them as above.
+		migrate: migrateDropBakedPauseButtonLabels,
 	},
 	// pauseButton 属性追加・autoPlayStop の既定値を false→true に変更する前
 	// （= 1.121.1 までの保存形式: pauseButton なし／autoPlayStop 既定 false）を救済する。

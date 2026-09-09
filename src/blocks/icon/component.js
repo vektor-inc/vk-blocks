@@ -60,7 +60,9 @@ export class VKBIcon extends Component {
 					};
 				} else {
 					// palette color
-					borderClass += ` has-${sanitizeSlug(iconColor)}-background-color`;
+					borderClass += ` has-${sanitizeSlug(
+						iconColor
+					)}-background-color`;
 				}
 			}
 		} else {
@@ -97,14 +99,12 @@ export class VKBIcon extends Component {
 		}
 
 		// margin
-		if (
-			!(
-				iconSize === 36 &&
-				iconSizeUnit === 'px' &&
-				iconMargin === 22 &&
-				iconMarginUnit === 'px'
-			)
-		) {
+		if (!(
+			iconSize === 36 &&
+			iconSizeUnit === 'px' &&
+			iconMargin === 22 &&
+			iconMarginUnit === 'px'
+		)) {
 			borderStyle.width =
 				'calc(' +
 				(iconSize + iconSizeUnit) +
@@ -142,7 +142,9 @@ export class VKBIcon extends Component {
 					fontStyle += ` color:${iconFontColor};`;
 				} else {
 					// palette color
-					fontClass += ` has-text-color has-${sanitizeSlug(iconFontColor)}-color `;
+					fontClass += ` has-text-color has-${sanitizeSlug(
+						iconFontColor
+					)}-color `;
 				}
 			}
 

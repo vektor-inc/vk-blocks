@@ -12,7 +12,7 @@
  * 異なる。この差分が崩れると既存コンテンツの保存 HTML 互換が壊れるため重点的に固定する。
  */
 import { renderToString } from '@wordpress/element';
-import { componentDivider } from '@vkblocks/blocks/_pro/outer/component-divider';
+import { componentDivider } from '@vkblocks/blocks/_pro/outer/components/component-divider';
 
 /**
  * componentDivider をレンダリングし、検証に必要な部分を抜き出す。
@@ -142,6 +142,21 @@ describe('componentDivider - sectionPadding 互換', () => {
 		expect(
 			render({ level: 50, side: 'lower', type: 'book' }).divStyle
 		).toBe('padding-top:50px');
+	});
+
+	it('巨大な level は legacy padding も clamp される（SVG 形状と揃う・改善の狙い）', () => {
+		// getSectionStyle が padding にも clamp 済み level を使う。level=100000 でも
+		// abs(clamp(100000))=100 → 100px。raw の 100000px が残らないことを固定する。
+		expect(
+			render({ level: 100000, side: 'upper', type: 'tilt' }).divStyle
+		).toBe('padding-bottom:100px');
+		expect(
+			render({ level: -100000, side: 'lower', type: 'wave' }).divStyle
+		).toBe('padding-top:100px');
+		// serrated は level 非依存の 10px 固定。clamp 後もそのまま。
+		expect(
+			render({ level: 100000, side: 'upper', type: 'serrated' }).divStyle
+		).toBe('padding-bottom:10px');
 	});
 
 	it('既知 8 タイプ以外の dividerType は元実装どおり undefinedpx を出力する', () => {

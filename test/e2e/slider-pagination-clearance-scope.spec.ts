@@ -67,10 +67,7 @@ const publishSliderPost = async (
 	page: Page,
 	requestUtils: RequestUtils,
 	navigationPosition:
-		| 'mobile-bottom'
-		| 'always-bottom'
-		| 'hide'
-		| 'center' = 'mobile-bottom',
+		'mobile-bottom' | 'always-bottom' | 'hide' | 'center' = 'mobile-bottom',
 	pagination: 'bullets' | 'fraction' = 'bullets'
 ): Promise<number> => {
 	await admin.createNewPost();

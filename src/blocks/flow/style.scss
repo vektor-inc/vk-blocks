@@ -96,3 +96,8 @@
 		overflow: unset;
 	}
 }
+
+// Editor-only rules (Delete/Replace button stacking, etc.) live in
+// editor-css/_editor_before.scss so they aren't shipped to front-end visitors.
+// 編集画面専用のルール（削除・置換ボタンの縦積み等）はフロントに配信されないよう
+// editor-css/_editor_before.scss に置く。

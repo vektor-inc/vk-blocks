@@ -156,32 +156,54 @@ addFilter(
  */
 const addSwiperConfig = (el, type, attributes) => {
 	if ('vk-blocks/slider' === type.name) {
-		//現在実行されている deprecated内の save関数のindexを取得
-		const deprecatedFuncIndex = deprecated.findIndex(
-			(item) => item.save === type.save
-		);
+		// 実行中の save 関数そのものをキーにして、その保存形式向けのフックを引く。
+		// 添字ではなく参照で引くため、deprecated/save と deprecated/hooks の並び順に依存しない。#3083
+		// Look the hook up by the running save function itself instead of by position, so
+		// this no longer depends on deprecated/save and deprecated/hooks staying in the
+		// same order. #3083
+		const DeprecatedHook = deprecatedHooks.get(type.save);
 
-		// 最新版
-		if (-1 === deprecatedFuncIndex) {
-			const cssSelector = `.vk_slider_${attributes.blockId},`;
-			const heightCss = generateHeightCss(attributes, cssSelector);
-			const zoomCss = generateZoomAnimationCss(attributes);
-			const cssTag = heightCss + zoomCss;
-			return (
-				<>
-					{el}
-					{(() => {
-						if (cssTag) {
-							return <style type="text/css">{cssTag}</style>;
-						}
-					})()}
-				</>
-			);
-
-			//後方互換
+		// 後方互換：保存形式ごとの追加 CSS はフック側が出力する
+		// Backward compatibility: the hook emits the extra CSS for that saved format
+		if (DeprecatedHook) {
+			return <DeprecatedHook el={el} attributes={attributes} />;
 		}
-		const DeprecatedHook = deprecatedHooks[deprecatedFuncIndex];
-		return <DeprecatedHook el={el} attributes={attributes} />;
+
+		// 最新版。対応付けが無い保存形式もここに来る。
+		// ここは旧実装から挙動を変えている（安全側へ）。添字方式で -1 になったのは
+		// `deprecated` に存在しない save（＝最新版）だけで、「`deprecated` にはあるが
+		// 対応付けが無い」ケースは -1 にならず、範囲外アクセスによる例外か、別世代のフックの
+		// 適用になっていた。それをこの経路へ安全に流すようにしている。書き忘れは
+		// test/unit/slider-deprecated-hook-map.test.js で検出する方針で、実行時には落とさない
+		// （書き忘れで利用者のフロントを壊さないことを優先している）。
+		// なお現在はすべての保存形式が Map に載っているため、この経路に入る保存形式は存在しない。
+		// （件数は deprecated の追加のたびに変わるため、ここには書かない。対応漏れが無いことは
+		// test/unit/slider-deprecated-hook-map.test.js の集合比較で担保している）
+		// The current format. A save with no mapping lands here as well.
+		// This deliberately differs from the old behaviour, erring on the safe side: the index
+		// lookup returned -1 only for a save absent from `deprecated` (i.e. the current one).
+		// A save that was in `deprecated` but had no hook did not yield -1 — it either threw on
+		// the out-of-range access or was handed another generation's hook. Those cases are now
+		// routed here instead. A forgotten mapping is caught by
+		// test/unit/slider-deprecated-hook-map.test.js rather than by failing at runtime, so it
+		// can never break a visitor's page. As it stands every saved format is in the Map, so
+		// nothing actually reaches this branch by way of a missing mapping. (No count is written
+		// here — it changes with every deprecation added; that nothing is missing is asserted by
+		// the set comparison in test/unit/slider-deprecated-hook-map.test.js.)
+		const cssSelector = `.vk_slider_${attributes.blockId},`;
+		const heightCss = generateHeightCss(attributes, cssSelector);
+		const zoomCss = generateZoomAnimationCss(attributes);
+		const cssTag = heightCss + zoomCss;
+		return (
+			<>
+				{el}
+				{(() => {
+					if (cssTag) {
+						return <style type="text/css">{cssTag}</style>;
+					}
+				})()}
+			</>
+		);
 	}
 	// Slider以外のブロック
 	return el;

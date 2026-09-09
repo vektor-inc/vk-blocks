@@ -1,16 +1,14 @@
 import {
 	RichText,
 	InspectorControls,
-	MediaUpload,
 	useBlockProps,
 } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
-
-import { RadioControl, PanelBody, Button } from '@wordpress/components';
+import { RadioControl, PanelBody } from '@wordpress/components';
+import { AdvancedMediaUpload } from '@vkblocks/components/advanced-media-upload';
 
 export default function FlowEdit({ attributes, setAttributes, clientId }) {
-	const { heading, content, insertImage, arrowFlag, insertImageAlt } =
-		attributes;
+	const { heading, content, arrowFlag } = attributes;
 	const blockProps = useBlockProps({
 		className: `${arrowFlag} vk_flow`,
 	});
@@ -63,34 +61,12 @@ export default function FlowEdit({ attributes, setAttributes, clientId }) {
 						/>
 					</dl>
 					<div className={'vk_flow_frame_image'}>
-						<MediaUpload
-							onSelect={(value) => {
-								setAttributes({ insertImage: value.url });
-								setAttributes({ insertImageAlt: value.alt });
-							}}
-							type="image"
-							className={'vk_flow_frame_image'}
-							value={insertImage}
-							render={({ open }) => (
-								<Button
-									onClick={open}
-									className={
-										insertImage
-											? 'image-button'
-											: 'button button-large'
-									}
-								>
-									{!insertImage ? (
-										__('Select image', 'vk-blocks')
-									) : (
-										<img
-											className={'icon-image'}
-											src={insertImage}
-											alt={insertImageAlt}
-										/>
-									)}
-								</Button>
-							)}
+						<AdvancedMediaUpload
+							schema={'insertImage'}
+							altSchema={'insertImageAlt'}
+							showPlaceholder={false}
+							setAttributes={setAttributes}
+							attributes={attributes}
 						/>
 					</div>
 				</div>

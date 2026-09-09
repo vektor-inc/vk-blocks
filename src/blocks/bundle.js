@@ -49,6 +49,7 @@ import '@vkblocks/extensions/core/group/style';
 import '@vkblocks/extensions/core/list/style';
 import '@vkblocks/extensions/core/columns/style';
 import '@vkblocks/extensions/core/site-logo/style';
+import '@vkblocks/extensions/core/site-title/style';
 import '@vkblocks/extensions/core/navigation/style';
 import '@vkblocks/extensions/core/table/style';
 import '@vkblocks/extensions/core/cover/style';

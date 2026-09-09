@@ -60,11 +60,13 @@ describe('slider save pause/play button handling', () => {
 		const dom = getDom(markup);
 		const button = dom.querySelector('.swiper-pause-button');
 		expect(button).not.toBeNull();
-		// 初期状態（再生中）は aria-label が「停止」操作を示す
-		expect(button.getAttribute('aria-label')).toBe('Pause slideshow');
-		// 状態切り替え用のラベルが data 属性に保持されている
-		expect(button.getAttribute('data-label-pause')).toBe('Pause slideshow');
-		expect(button.getAttribute('data-label-play')).toBe('Play slideshow');
+		// 翻訳文が保存出力に焼き付かないことを固定する回帰テスト（#3071）。
+		// aria-label / data-label-* は PHP の render_block フィルタが描画時に付与するため、
+		// save 出力には一切含めない。ここが復活すると、翻訳を変更した時点で
+		// 保存済みコンテンツがブロック検証エラーになる。
+		expect(button.hasAttribute('aria-label')).toBe(false);
+		expect(button.hasAttribute('data-label-pause')).toBe(false);
+		expect(button.hasAttribute('data-label-play')).toBe(false);
 		// data-vkb-slider ペイロードにも pauseButton:true が反映される
 		const slider = dom.querySelector('.vk_slider');
 		const sliderData = JSON.parse(slider.getAttribute('data-vkb-slider'));

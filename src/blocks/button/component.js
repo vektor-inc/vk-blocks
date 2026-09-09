@@ -63,7 +63,11 @@ export class VKBButton extends Component {
 				buttonColor === 'custom' &&
 				buttonTextColorCustom !== undefined
 			) {
-				aClass += ` btn has-text-color`;
+				// btn は直前の塗り分岐で付与済みなので、ここでは付け直さない
+				// （付けると class に btn が 2 回出力される）。
+				// `btn` is already added by the fill branch above, so do not add it again
+				// here; doing so would output the `btn` class twice.
+				aClass += ` has-text-color`;
 				// カスタムパレットカラーの場合
 				if (!isHexColor(buttonTextColorCustom)) {
 					aClass += ` has-${sanitizeSlug(buttonTextColorCustom)}-color`;

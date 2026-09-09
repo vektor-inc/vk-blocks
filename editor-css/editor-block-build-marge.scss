@@ -260,9 +260,25 @@ input[type="range"] {
 	margin: 1px;
 }
 
-// これがないとスタッフブロックや各種画像の外側のbuttonが高さを検出できない
-button.image-button:not(.button-delete) {
+$color-danger: #b52727;
+
+// これがないとスタッフブロックや各種画像の外側のbuttonが高さを検出できない
+// Delete/replace buttons also use image-button; do not stretch them.
+// ただし削除・置換ボタンも image-button を使うため、それらは伸ばさない
+button.image-button:not(.button-delete, .button-replace) {
 	height: 100%;
+}
+
+// Shared destructive styling for image delete buttons.
+// 画像削除ボタン共通の破壊的操作スタイル
+button.image-button.button-delete {
+	border: 1px solid $color-danger;
+	color: $color-danger;
+	&:hover {
+		background-color: $color-danger;
+		border: 1px solid #b72a2a;
+		color: #fff;
+	}
 }
 
 .components-base-control {
@@ -338,7 +354,6 @@ button.image-button:not(.button-delete) {
 @import "./editor_before_archive-list";
 
 // VK Outer & スライダーアイテム 編集パネル
-$color-danger: #dd3333;
 .vk_outer_sidebar_bgImage,
 .vk_slider_item_sidebar_bgImage,
 .vk_slider_item_sidebar_bgImage_button_container {
@@ -358,15 +373,10 @@ $color-danger: #dd3333;
 		opacity: 0;
 		transition: all 1s;
 	}
-	.button-delete {
-		border: 1px solid $color-danger;
-		color: $color-danger;
-		&:hover {
-			background-color: $color-danger;
-			border: 1px solid #b72a2a;
-			color: #fff;
-		}
-	}
+	// Delete button colors come from the shared rule above;
+	// this section only controls layout and visibility.
+	// 削除ボタンの配色は上記の共通ルールを使い、
+	// このセクションではレイアウトと表示だけを制御する。
 	&:hover .components-button-group {
 		transition: all 1s;
 		opacity: 1;
@@ -375,6 +385,38 @@ $color-danger: #dd3333;
 
 .vk_slider_item_sidebar_bgImage_button_container img {
     min-width: 248px;
+}
+
+// VK Flow 編集パネル
+.editor-styles-wrapper .vk_flow_frame_image {
+	// Editor: stack Delete/Replace image buttons inside the 150px frame.
+	// .vk_flow_frame_image uses max-width:150px (maximum width), so two English
+	// labels overflow when placed side by side. Override core .components-button-group
+	// (inline-block) and its margin-left:-1px join rule for a full-width stack.
+	// Beat core .components-button-group .components-button (0,2,0) and
+	// .components-button-group .components-button + .components-button (0,3,0)
+	// by targeting .components-button for specificity 0,4,0.
+	// 編集画面：画像操作ボタン（削除・置換）を150px枠内で縦に整える。
+	// 画像枠(.vk_flow_frame_image)は最大幅(max-width:150px)のため、英語ラベル2ボタンは
+	// 横並びにすると溢れて折り返す。コアの .components-button-group（inline-block）と
+	// ボタン連結用の margin-left:-1px を上書きして全幅・縦積みに揃える。
+	// コアの .components-button-group .components-button（詳細度 0,2,0）と
+	// .components-button-group .components-button + .components-button（0,3,0）に
+	// 勝つため .components-button まで指定して詳細度 0,4,0 にする。
+	.components-button-group {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		margin-top: 8px;
+
+		.components-button {
+			width: 100%;
+			justify-content: center;
+
+			// Cancel the group's -1px join offset / group連結の -1px を打ち消す
+			margin-left: 0;
+		}
+	}
 }
 
 // 背景画像をブロックツールバーから変更するためのポップオーバー
@@ -500,8 +542,6 @@ $color_font_default: #464646;
 // $xs etc. (including $xl) now come from src/utils/_breakpoints.scss (already loaded via @use in _editor_common_core.scss).
 // $xs 等（$xl を含む）は src/utils/_breakpoints.scss（_editor_common_core.scss で @use 済み）を利用する。
 
-$color-danger: #b52727;
-
 /*-------------------------------------------*/
 /* card
 /*-------------------------------------------*/
@@ -522,13 +562,7 @@ $color-danger: #b52727;
 	}
 	.button-delete {
 		opacity: 0;
-		border: 1px solid $color-danger;
-		color: $color-danger;
 		transition: all 1s;
-		&:hover {
-			background-color: $color-danger;
-			color: #fff;
-		}
 	}
 }
 .vk_post_imgOuter:hover .button-delete {

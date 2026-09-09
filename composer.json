@@ -18,7 +18,7 @@
 		"tgmpa/tgm-plugin-activation": "dev-develop",
 		"vektor-inc/vk-admin": "^0.8.0",
 		"vektor-inc/vk-color-palette-manager": "^0.4.0",
-		"vektor-inc/vk-helpers": "^0.2.1",
+		"vektor-inc/vk-helpers": "^0.3.0",
 		"vektor-inc/vk-breadcrumb": "^0.2.8",
 		"vektor-inc/vk-term-color": "^0.7.1",
 		"vektor-inc/vk-css-optimize": "^0.2.5",
@@ -27,13 +27,13 @@
 	"require-dev": {
 		"doctrine/instantiator": "1.5.0",
 		"squizlabs/php_codesniffer": "*",
-		"sirbrillig/phpcs-variable-analysis": "^2.8",
-		"wp-phpunit/wp-phpunit": "^5.4",
+		"sirbrillig/phpcs-variable-analysis": "^3.0",
+		"wp-phpunit/wp-phpunit": "^7.1",
 		"dealerdirect/phpcodesniffer-composer-installer": "*",
 		"phpcompatibility/phpcompatibility-wp": "*",
 		"wp-coding-standards/wpcs": "*",
-		"yoast/phpunit-polyfills": "^1.0",
-		"vektor-inc/vk-wp-unit-test-tools": "^0.10.0"
+		"yoast/phpunit-polyfills": "^4.0",
+		"vektor-inc/vk-wp-unit-test-tools": "^0.12.0"
 	},
 	"scripts": {
 		"format": "phpcbf --standard=./.phpcs.xml --report-summary --report-source",
@@ -41,6 +41,9 @@
 		"phpcs": "phpcs --standard=./.phpcs.xml"
 	},
 	"config": {
+		"platform": {
+			"php": "7.4"
+		},
 		"allow-plugins": {
 			"dealerdirect/phpcodesniffer-composer-installer": true
 		}

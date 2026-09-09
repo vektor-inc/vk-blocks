@@ -4,14 +4,32 @@ import { MediaUpload } from '@wordpress/block-editor';
 import { resolveSelect } from '@wordpress/data';
 import { useEffect, useRef, useState } from '@wordpress/element';
 import noImage from '../../../inc/vk-blocks/images/no-image.svg';
+import {
+	attachmentIdForMediaUpload,
+	createHighlight,
+	highlightFromAttributes,
+} from './session-highlight';
+
+export const ATTACHMENT_SEARCH_PER_PAGE = 100;
+export const ATTACHMENT_SEARCH_MAX_PAGES = 20;
+
+const resolvedAttachmentIdByUrl = new Map();
+
+/**
+ * Clear the session cache of URL → attachment ID lookups.
+ * テスト用。URL → 添付 ID のセッションキャッシュを消す。
+ */
+export function clearResolvedAttachmentIdCache() {
+	resolvedAttachmentIdByUrl.clear();
+}
 
 /**
  * Resolve an attachment ID from a media URL.
- * REST API only allows per_page 1–100, so avoid fetching all attachments.
- * Search by filename, then match source_url exactly. Return null on failure.
+ * REST API only allows per_page 1–100 (unlike WP_Query, -1 is invalid), so
+ * search by filename and page through results until source_url matches exactly.
  * メディアURLから添付IDを解決する。
- * REST API の per_page は 1〜100 のみなので全件取得は使わない。
- * ファイル名で検索し source_url が一致するものを返す。失敗時は null。
+ * REST API の per_page は 1〜100 のみ（WP_Query と違い -1 は無効）なので、
+ * ファイル名で検索し、source_url が一致するまでページングする。
  *
  * @param {string} imageUrl
  * @return {Promise<number|null>} Attachment ID, or null when not found / on failure.
@@ -19,6 +37,10 @@ import noImage from '../../../inc/vk-blocks/images/no-image.svg';
 export async function resolveAttachmentIdByUrl(imageUrl) {
 	if (!imageUrl) {
 		return null;
+	}
+
+	if (resolvedAttachmentIdByUrl.has(imageUrl)) {
+		return resolvedAttachmentIdByUrl.get(imageUrl);
 	}
 
 	let fileName;
@@ -37,32 +59,63 @@ export async function resolveAttachmentIdByUrl(imageUrl) {
 		return null;
 	}
 
-	let media;
+	// Cap pages so a huge media library cannot loop forever.
+	// 巨大ライブラリで無限ループしないようページ数に上限を設ける
+	const perPage = ATTACHMENT_SEARCH_PER_PAGE;
+	const maxPages = ATTACHMENT_SEARCH_MAX_PAGES;
+
 	try {
-		media = await resolveSelect('core').getEntityRecords(
-			'postType',
-			'attachment',
-			{
-				search: fileName,
-				per_page: 100,
+		for (let page = 1; page <= maxPages; page++) {
+			const media = await resolveSelect('core').getEntityRecords(
+				'postType',
+				'attachment',
+				{
+					search: fileName,
+					per_page: perPage,
+					page,
+					orderby: 'id',
+					order: 'asc',
+				}
+			);
+
+			if (!media?.length) {
+				return null;
 			}
-		);
+
+			const mediaItem = media.find(
+				(item) => item.source_url === imageUrl
+			);
+			if (mediaItem?.id) {
+				resolvedAttachmentIdByUrl.set(imageUrl, mediaItem.id);
+				return mediaItem.id;
+			}
+
+			// Last page is shorter than per_page — no further results.
+			// 最終ページ（per_page 未満）なら以降は無い
+			if (media.length < perPage) {
+				return null;
+			}
+		}
 	} catch {
 		// REST / resolver failure → open media library without ID.
 		// REST / resolver 失敗時は ID なしでメディアライブラリを開く。
 		return null;
 	}
-	const mediaItem = media?.find((item) => item.source_url === imageUrl);
-	return mediaItem?.id ?? null;
+
+	return null;
 }
 
 /**
- * Media select / replace / delete UI with attachment ID backfill.
- * 添付IDの補完付きメディア選択・置換・削除 UI。
+ * Media select / replace / delete UI.
+ * Attachment IDs stay in session state only (not block attributes),
+ * so opening a post does not mark it dirty.
+ * メディア選択・置換・削除 UI。
+ * 添付 ID はセッション内のみ保持し属性には書かない
+ * （投稿を開いただけでは dirty にしない）。
  *
  * @param {Object}   props
  * @param {string}   props.schema                 URL attribute key (e.g. bgImage)
- * @param {string}   [props.schemaId]             ID attribute key (default: schema + 'Id')
+ * @param {string}   [props.schemaId]             Legacy attachment-ID attribute key to clear on delete/replace (default: schema + 'Id')
  * @param {string}   [props.altSchema]            Optional alt attribute key
  * @param {boolean}  [props.showPlaceholder=true] Show no-image placeholder when empty
  * @param {Function} props.setAttributes          Attribute setter
@@ -81,57 +134,37 @@ export const AdvancedMediaUpload = (props) => {
 
 	const schemaIdKey = schemaId || `${schema}Id`;
 	const imageUrl = attributes[schema];
-	const imageId = attributes[schemaIdKey];
 	const imageAlt = altSchema ? attributes[altSchema] : undefined;
 
-	// Keep the latest URL for stale-async guards.
-	// 非同期解決の stale 判定用に最新の URL を保持する
-	const imageUrlRef = useRef(imageUrl);
-	useEffect(() => {
-		imageUrlRef.current = imageUrl;
-	}, [imageUrl]);
+	// Ephemeral highlight for MediaUpload — reconciled with attribute URL on every render.
+	// 属性 URL と毎 render で突き合わせる一時ハイライト状態
+	const [highlight, setHighlight] = useState(() =>
+		highlightFromAttributes(attributes, schema)
+	);
+	const mediaUploadId = attachmentIdForMediaUpload(highlight, imageUrl);
 
-	// Hold MediaUpload's open so we can call it after imageId is in props.
-	// imageId が props に反映されたあとに開くため、open を保持する
 	const openRef = useRef(null);
 	const [shouldOpenAfterId, setShouldOpenAfterId] = useState(false);
 
+	const imageUrlRef = useRef(imageUrl);
 	useEffect(() => {
-		if (shouldOpenAfterId && imageId && openRef.current) {
+		imageUrlRef.current = imageUrl;
+		setShouldOpenAfterId(false);
+	}, [imageUrl]);
+
+	// Open after highlight is in state so MediaUpload.value has the current ID.
+	// ハイライトが state に載ってから開く（value に現在 ID が入った状態でライブラリを出す）
+	useEffect(() => {
+		if (shouldOpenAfterId && mediaUploadId && openRef.current) {
 			openRef.current();
 			setShouldOpenAfterId(false);
 		}
-	}, [shouldOpenAfterId, imageId]);
-
-	// Backfill missing attachment ID when URL exists (legacy / migrated blocks).
-	// URL があるのに ID が無い既存ブロック向けに添付IDを補完する
-	useEffect(() => {
-		let cancelled = false;
-
-		if (!imageUrl || imageId) {
-			return undefined;
-		}
-
-		const requestedUrl = imageUrl;
-		(async () => {
-			const id = await resolveAttachmentIdByUrl(requestedUrl);
-			if (cancelled) {
-				return;
-			}
-			if (imageUrlRef.current !== requestedUrl) {
-				return;
-			}
-			if (id) {
-				setAttributes({ [schemaIdKey]: id });
-			}
-		})();
-
-		return () => {
-			cancelled = true;
-		};
-	}, [imageUrl, imageId, schemaIdKey, setAttributes]);
+	}, [shouldOpenAfterId, mediaUploadId]);
 
 	const deleteImgBtn = () => {
+		imageUrlRef.current = null;
+		setShouldOpenAfterId(false);
+		setHighlight(createHighlight(null, null));
 		const next = {
 			[schema]: null,
 			[schemaIdKey]: null,
@@ -142,14 +175,8 @@ export const AdvancedMediaUpload = (props) => {
 		setAttributes(next);
 	};
 
-	/**
-	 * Resolve missing attachment ID, then open the media library so the
-	 * current image can be highlighted. Wait until React has the new value.
-	 * 不足している添付IDを解決してからメディアライブラリを開き、現在画像を
-	 * 選択状態にする。ID が props に載るまで open を待つ。
-	 */
 	const ensureImageId = async () => {
-		if (imageId) {
+		if (mediaUploadId) {
 			openRef.current?.();
 			return;
 		}
@@ -160,20 +187,18 @@ export const AdvancedMediaUpload = (props) => {
 		}
 
 		const requestedUrl = imageUrl;
-		const id = await resolveAttachmentIdByUrl(requestedUrl);
+		const attachmentId = await resolveAttachmentIdByUrl(requestedUrl);
 
 		if (imageUrlRef.current !== requestedUrl) {
 			return;
 		}
 
-		if (id) {
-			setAttributes({ [schemaIdKey]: id });
+		if (attachmentId) {
+			setHighlight(createHighlight(requestedUrl, attachmentId));
 			setShouldOpenAfterId(true);
 			return;
 		}
 
-		// Resolve failed — still open without a highlighted selection.
-		// 解決失敗時もハイライトなしでライブラリを開く
 		openRef.current?.();
 	};
 
@@ -182,33 +207,29 @@ export const AdvancedMediaUpload = (props) => {
 			onSelect={(value) => {
 				const newAttributes = {
 					[schema]: value.url,
+					[schemaIdKey]: null,
 				};
 				if (altSchema) {
 					newAttributes[altSchema] = value.alt;
 				}
 
+				imageUrlRef.current = value.url;
+				setHighlight(createHighlight(value.url, value.id ?? null));
+				setAttributes(newAttributes);
+
 				if (value.id) {
-					newAttributes[schemaIdKey] = value.id;
-					imageUrlRef.current = value.url;
-					setAttributes(newAttributes);
 					return;
 				}
 
-				// Clear stale ID when onSelect has no id; resolve async.
-				// onSelect に id が無いときは古い ID を残さず、非同期で解決する
-				newAttributes[schemaIdKey] = null;
-				imageUrlRef.current = value.url;
-				setAttributes(newAttributes);
-
 				const requestedUrl = value.url;
-				resolveAttachmentIdByUrl(requestedUrl).then((id) => {
-					if (id && imageUrlRef.current === requestedUrl) {
-						setAttributes({ [schemaIdKey]: id });
+				resolveAttachmentIdByUrl(requestedUrl).then((resolvedId) => {
+					if (resolvedId && imageUrlRef.current === requestedUrl) {
+						setHighlight(createHighlight(requestedUrl, resolvedId));
 					}
 				});
 			}}
 			type="image"
-			value={imageId}
+			value={mediaUploadId}
 			render={({ open }) => {
 				openRef.current = open;
 				return (
@@ -252,6 +273,11 @@ export const AdvancedMediaUpload = (props) => {
 								)}
 								<Button
 									onClick={open}
+									variant={
+										showPlaceholder
+											? undefined
+											: 'secondary'
+									}
 									className={
 										showPlaceholder
 											? 'button button-large components-button'

@@ -5,7 +5,18 @@ import { __ } from '@wordpress/i18n';
  *
  * 停止/再生の状態切り替えはフロント側 (view.js) で行うため、
  * ここでは再生中（停止アイコン表示）の初期状態でマークアップを生成する。
- * 切り替え時に使う aria-label は data 属性として保持しておく。
+ *
+ * ⚠️ 保存出力に翻訳文を入れないこと。静的ブロックの save 出力は現行の save 結果と
+ * バイト単位で突き合わされるため、翻訳文を焼き付けると翻訳を変更した時点で
+ * ブロック検証エラーになる。フロントの aria-label / data-label-* は PHP 側
+ * （inc/vk-blocks/view/slider-pause-button-label.php）が描画時に付与する。
+ * withLabels はエディタ表示用のオプションで、save からは決して渡さないこと。
+ * ⚠️ Never bake translated text into the saved markup: a static block's save output is
+ * compared byte for byte against the current save result, so a frozen translation turns
+ * into a block validation error as soon as the translation changes. On the front end the
+ * aria-label / data-label-* attributes are added at render time by
+ * inc/vk-blocks/view/slider-pause-button-label.php. `withLabels` exists for the editor
+ * preview only and must never be passed from save.
  *
  * ⚠️ 配置上の制約: このボタンはスライダーのルート直下に配置すること。
  * view.js が :scope > .swiper-pause-button で直下のみを検索するため、
@@ -14,21 +25,31 @@ import { __ } from '@wordpress/i18n';
  * slider root — view.js locates it with ':scope > .swiper-pause-button', so
  * wrapping it in another element breaks the feature.
  *
- * @return {JSX.Element} 停止/再生ボタン要素
+ * @param {Object}  props            プロパティ / props
+ * @param {boolean} props.withLabels true の場合のみ aria-label / data-label-* を出力する
+ *                                   （エディタ表示用。save からは渡さない）
+ *                                   Emit aria-label / data-label-* only when true
+ *                                   (editor preview only; never passed from save).
+ * @return {JSX.Element} 停止/再生ボタン要素 / the pause / play button element
  */
-export const PauseButton = () => {
-	// 再生中に表示するラベル（押すと停止する）/ ラベルは1文ごとに区切る
-	const labelPause = __('Pause slideshow', 'vk-blocks');
-	// 停止中に表示するラベル（押すと再生する）
-	const labelPlay = __('Play slideshow', 'vk-blocks');
+export const PauseButton = ({ withLabels = false } = {}) => {
+	// エディタ表示用のラベル。保存出力には含めない。
+	// Labels for the editor preview only; never part of the saved output.
+	const labelProps = withLabels
+		? {
+				// 再生中に表示するラベル（押すと停止する）/ ラベルは1文ごとに区切る
+				'aria-label': __('Pause slideshow', 'vk-blocks'),
+				'data-label-pause': __('Pause slideshow', 'vk-blocks'),
+				// 停止中に表示するラベル（押すと再生する）
+				'data-label-play': __('Play slideshow', 'vk-blocks'),
+			}
+		: {};
 
 	return (
 		<button
 			type="button"
 			className="vk_slider_pauseButton swiper-pause-button"
-			aria-label={labelPause}
-			data-label-pause={labelPause}
-			data-label-play={labelPlay}
+			{...labelProps}
 		>
 			{/* 停止アイコン（再生中に表示） */}
 			<svg

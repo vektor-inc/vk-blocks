@@ -28,17 +28,14 @@ const BackgroundImageToolbar = (props) => {
 		{
 			label: __('Background Image PC', 'vk-blocks'),
 			schema: 'bgImage',
-			schemaId: 'bgImageId',
 		},
 		{
 			label: __('Background Image Tablet', 'vk-blocks'),
 			schema: 'bgImageTablet',
-			schemaId: 'bgImageTabletId',
 		},
 		{
 			label: __('Background Image Mobile', 'vk-blocks'),
 			schema: 'bgImageMobile',
-			schemaId: 'bgImageMobileId',
 		},
 	];
 
@@ -69,7 +66,6 @@ const BackgroundImageToolbar = (props) => {
 								</p>
 								<AdvancedMediaUpload
 									schema={field.schema}
-									schemaId={field.schemaId}
 									{...props}
 								/>
 							</div>

@@ -43,6 +43,10 @@ msgstr "(例) vk-format-1"
 msgid "(no title)"
 msgstr "(タイトルなし)"
 
+#: src/utils/font-awesome-new.js:413
+msgid "(opens in a new tab)"
+msgstr "(新しいタブで開く)"
+
 #: src/components/display-condition/index.js:353
 msgid ""
 "* If you choose a future period, you will need to customize it so that "
@@ -1367,6 +1371,11 @@ msgctxt "button label"
 msgid "Convert to link"
 msgstr "リンクに変換"
 
+#: src/blocks/_pro/outer/edit.js:1311
+msgid "Convert to new divider display"
+msgstr "新しい区切り表示へ変換"
+
+
 #: src/blocks/_pro/tab/edit.js:433
 msgid "Copied!"
 msgstr "コピーしました！"
@@ -2263,10 +2272,6 @@ msgstr "Font Awesome カスタムリスト設定"
 #: src/utils/font-awesome-new.js:394
 msgid "Font Awesome icon list"
 msgstr "Font Awesome アイコンリスト"
-
-#: src/utils/font-awesome-new.js:413
-msgid "(opens in a new tab)"
-msgstr "(新しいタブで開く)"
 
 #: src/blocks/button/edit.js:733
 msgid "Font Size"
@@ -3220,6 +3225,10 @@ msgstr "ライセンスキー"
 msgid "Light"
 msgstr "Light"
 
+#: src/extensions/core/site-title/style.js:44
+msgid "Limit <h1> tag to the front page"
+msgstr "フロントページだけ h1 として出力"
+
 #: src/blocks/_pro/tab/index.js:28
 msgid "Line"
 msgstr "ライン"
@@ -3647,6 +3656,10 @@ msgstr "OPEN"
 #: src/components/display-condition/index.js:300
 msgid "OR ( Whichever apply )"
 msgstr "OR ( どれか )"
+
+#: src/extensions/core/site-title/style.js:58
+msgid "On other pages it is output as <div> instead."
+msgstr "他のページでは <div> として出力されます。"
 
 #: src/admin/license.js:30
 msgid ""
@@ -4199,9 +4212,7 @@ msgstr "関連記事は、現在の投稿のタグをもとに選ばれます。
 msgid ""
 "Related posts are ranked by how many tags each post shares with the post "
 "you are editing, showing the most related first."
-msgstr ""
-"関連記事は、編集中の投稿と共有するタグの数が多い順に並び、最も関連性の高い"
-"記事から表示されます。"
+msgstr "関連記事は、編集中の投稿と共有するタグの数が多い順に並び、最も関連性の高い記事から表示されます。"
 
 #: src/extensions/core/query/style.js:322
 msgid "Related posts are unavailable for this content type."
@@ -4594,6 +4605,10 @@ msgstr "URLから取得した抜粋を表示します。"
 #: src/extensions/core/site-logo/style.js
 msgid "Site Logo Tag Setting"
 msgstr "サイトロゴタグ設定"
+
+#: src/extensions/core/site-title/style.js:39
+msgid "Site Title Tag Setting"
+msgstr "サイトタイトルタグ設定"
 
 #: src/blocks/_pro/tab-item/edit.js:315 src/blocks/button/edit.js:611
 #: src/blocks/icon-outer/edit.js:90 src/blocks/icon/edit.js:87
@@ -5141,6 +5156,13 @@ msgid ""
 "is switched one by one."
 msgstr "表示番号に小数点を設定できるのは、表示を 1 つずつ切り替える場合のみです。"
 
+#: src/blocks/_pro/outer/edit.js:1323
+msgid ""
+"The divider shape is cut out from the background, so a color setting is no "
+"longer needed."
+msgstr "区切りの形は背景を切り抜いて表示するため、色の設定は不要です。"
+
+
 #: src/admin/import-export/import-form.js:414
 msgid "The following data will not be imported because the identifiers are covered."
 msgstr "次のデータは識別子が重複しているため、インポートされません。"
@@ -5198,9 +5220,7 @@ msgstr ""
 msgid ""
 "The list may be empty on pages or other post types, or until a new post is "
 "saved."
-msgstr ""
-"固定ページなど投稿以外のタイプでは表示されないことがあります。また、新規投"
-"稿を保存するまでは表示されない場合があります。"
+msgstr "固定ページなど投稿以外のタイプでは表示されないことがあります。また、新規投稿を保存するまでは表示されない場合があります。"
 
 #: src/blocks/border-box/edit.js:224
 msgid ""
@@ -5766,6 +5786,17 @@ msgstr "標準の設定を使用"
 msgid "Use the \"Items per page\" setting to change how many related posts appear."
 msgstr "表示する関連記事の件数を変更するには「ページあたりの項目数」の設定を使用してください。"
 
+#: src/blocks/_pro/outer/edit.js:1340
+msgid "Use the old (filled) divider display instead"
+msgstr "従来の塗り表示に戻す"
+
+
+#: src/extensions/core/site-title/style.js:62
+msgid ""
+"Use this only when another heading, such as the post or page title, is "
+"already output as <h1> on those other pages."
+msgstr "他のページで、投稿タイトルや固定ページタイトルなど別の見出しがすでに <h1> として出力されている場合にのみ使用してください。"
+
 #: dist/vk-blocks-pro/inc/vk-blocks/build/blocks/staff/block.json
 #: inc/vk-blocks/build/blocks/staff/block.json src/blocks/staff/block.json
 msgctxt "block description"
@@ -5958,6 +5989,10 @@ msgid ""
 "other pages it is output as <div>."
 msgstr "有効にすると、このサイトロゴはフロントページのみ <h1> として出力されます。他のページでは <div> として出力されます。"
 
+#: src/extensions/core/site-title/style.js:54
+msgid "When enabled, this site title keeps the <h1> tag on the front page."
+msgstr "有効にすると、このサイトタイトルはフロントページでは <h1> のまま出力されます。"
+
 #: src/blocks/slider/edit.js:705
 msgid ""
 "When multiple items are set in \"Multi-item Display Setting\", zoom "
@@ -6057,6 +6092,14 @@ msgstr "XXS"
 #: src/blocks/_pro/archive-list/edit.js:50
 msgid "Yearly"
 msgstr "年別"
+
+#: src/blocks/_pro/outer/edit.js:1299
+msgid ""
+"You are using the legacy divider display. The shape is filled with a color. "
+"The new method cuts the Outer background so the section below shows through "
+"naturally. After converting, divider color settings are hidden."
+msgstr "現在は従来の区切り表示を使用しています。形は単色で塗りつぶされます。新しい方式では Outer の背景を切り抜くため、後ろにあるセクションが自然に透けて見えます。変換すると区切りの色設定は表示されなくなります。"
+
 
 #: src/admin/custom-format/index.js:53
 msgid "You can apply commonly used formatting on the block toolbar."

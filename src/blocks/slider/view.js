@@ -24,6 +24,18 @@ document.defaultView.addEventListener('load', function () {
 	// pause/play はトグル状態ではなく「次に実行する操作」を表すアクションボタンのため、
 	// aria-pressed は使わず aria-label を唯一の状態インジケーターとする（重複回避）。
 	// updateState 内で aria-label と is-paused クラスの更新を必ず維持すること。
+	//
+	// data-label-* が付いていなかった場合に使う最終フォールバック。ラベルは通常 PHP の
+	// render_block フィルタ（inc/vk-blocks/view/slider-pause-button-label.php）が
+	// サイトのロケールで付与するため、ここが使われるのはフィルタを通らない経路に限られる。
+	// 未翻訳でも無名ボタンよりはましなので、英語の原文を保持する。
+	// Last-resort fallback used when data-label-* is missing. The labels are normally
+	// applied in the site's locale by the render_block filter in
+	// inc/vk-blocks/view/slider-pause-button-label.php, so this only kicks in on paths
+	// that bypass that filter. An untranslated label still beats an unlabeled button.
+	const FALLBACK_LABEL_PAUSE = 'Pause slideshow';
+	const FALLBACK_LABEL_PLAY = 'Play slideshow';
+
 	const setupPauseButton = (pauseButton, swiperInstance) => {
 		// ボタンが無い、または autoplay モジュールが無い場合は何もしない（防御的チェック）
 		// Do nothing when there is no button or no autoplay module (defensive check).
@@ -31,33 +43,44 @@ document.defaultView.addEventListener('load', function () {
 			return;
 		}
 
-		// 再生中／停止中それぞれの aria-label（React の save 時に data 属性へ保持済み）
-		const labelPause = pauseButton.getAttribute('data-label-pause');
-		const labelPlay = pauseButton.getAttribute('data-label-play');
+		// 再生中／停止中それぞれの aria-label（PHP が描画時に data 属性へ付与する）
+		const rawLabelPause = pauseButton.getAttribute('data-label-pause');
+		const rawLabelPlay = pauseButton.getAttribute('data-label-play');
 
-		// data-label-* が欠落していると状態に応じた aria-label を出せないため、
-		// 原因を追えるよう初期化時に一度だけ警告する（ラベルは静的値なので、
-		// updateState 内で出すと自動再生のたびにログが氾濫してしまう）。
-		if (!labelPause || !labelPlay) {
+		// data-label-* の欠落は本来起きない想定なので、原因を追えるよう初期化時に一度だけ
+		// 警告する（ラベルは静的値なので、updateState 内で出すと自動再生のたびに
+		// ログが氾濫してしまう）。警告は検知手段であり、動作はフォールバックで継続する。
+		if (!rawLabelPause || !rawLabelPlay) {
 			// eslint-disable-next-line no-console
 			console.warn(
-				'vk-blocks slider: pause button is missing data-label attributes; aria-label will not be updated.',
-				{ element: pauseButton, labelPause, labelPlay }
+				'vk-blocks slider: pause button is missing data-label attributes; falling back to the untranslated labels.',
+				{
+					element: pauseButton,
+					labelPause: rawLabelPause,
+					labelPlay: rawLabelPlay,
+				}
 			);
 		}
+
+		// 欠落時もボタンが無名にならないようフォールバックを噛ませる。
+		// Fall back so the button never ends up without an accessible name.
+		const labelPause = rawLabelPause || FALLBACK_LABEL_PAUSE;
+		const labelPlay = rawLabelPlay || FALLBACK_LABEL_PLAY;
 
 		// 現在の再生状態に合わせてボタンの見た目とラベルを更新する
 		const updateState = () => {
 			const running = !!swiperInstance.autoplay.running;
 			// 停止中は is-paused クラスで再生アイコンを表示する
 			pauseButton.classList.toggle('is-paused', !running);
-			// aria-label を現在の操作（停止中なら「再生」、再生中なら「停止」）に合わせる
-			if (labelPause && labelPlay) {
-				pauseButton.setAttribute(
-					'aria-label',
-					running ? labelPause : labelPlay
-				);
-			}
+			// aria-label を現在の操作（停止中なら「再生」、再生中なら「停止」）に合わせる。
+			// data-label-* の有無で分岐せず常に更新する（分岐すると欠落時に状態と
+			// 読み上げが食い違ったまま固定されてしまうため）。
+			// Always update, without gating on the presence of data-label-*: gating would
+			// freeze the announced label out of sync with the actual state.
+			pauseButton.setAttribute(
+				'aria-label',
+				running ? labelPause : labelPlay
+			);
 		};
 
 		// クリックで再生／停止をトグルする

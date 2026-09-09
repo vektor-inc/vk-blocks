@@ -1,5 +1,4 @@
 import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
-import { __ } from '@wordpress/i18n';
 
 /**
  * 1.124.0 までの保存形式で使っていた停止/再生ボタン。
@@ -9,17 +8,33 @@ import { __ } from '@wordpress/i18n';
  * ⚠️ A deprecated save must stay frozen at the markup of its era, so the pause
  * button is inlined here instead of importing the current ./pause-button.js.
  *
+ * ⚠️ ラベルは `__()` で作り直さず、**保存済みマークアップから読み取った値**を受け取って
+ * そのまま出力する。作り直すと、保存した時の訳文と、いま開いている人のロケールの現在の
+ * 訳文が食い違った瞬間に保存内容と一致せず、リカバリー警告になる。読み取り方は
+ * deprecated/save/index.js の `bakedPauseButtonLabelAttributes` を参照。#3071
+ * ⚠️ The labels are NOT rebuilt with `__()`: the values read from the saved markup are passed
+ * in and emitted as they are. Rebuilding them stops matching the saved content the moment the
+ * translation at save time and the current translation in the reader's locale diverge, which
+ * surfaces as a recovery notice. See `bakedPauseButtonLabelAttributes` in
+ * deprecated/save/index.js for how they are read. #3071
+ *
+ * ここが一致しないと、この世代が持つ `isEligible`（旧クラス `swiper-container` の除去）まで
+ * 巻き添えで効かなくなる点に注意。
+ * Note that a mismatch here also takes down this generation's `isEligible` — the removal of
+ * the legacy `swiper-container` class — as collateral damage.
+ *
+ * @param {Object} props            プロパティ / props.
+ * @param {string|undefined} props.ariaLabel  保存済みの aria-label / the saved aria-label.
+ * @param {string|undefined} props.labelPause 保存済みの data-label-pause / the saved data-label-pause.
+ * @param {string|undefined} props.labelPlay  保存済みの data-label-play / the saved data-label-play.
  * @return {JSX.Element} 停止/再生ボタン要素
  */
-const PauseButton = () => {
-	const labelPause = __( 'Pause slideshow', 'vk-blocks' );
-	const labelPlay = __( 'Play slideshow', 'vk-blocks' );
-
+const PauseButton = ({ ariaLabel, labelPause, labelPlay }) => {
 	return (
 		<button
 			type="button"
 			className="vk_slider_pauseButton swiper-pause-button"
-			aria-label={labelPause}
+			aria-label={ariaLabel}
 			data-label-pause={labelPause}
 			data-label-play={labelPlay}
 		>
@@ -84,6 +99,9 @@ export default function save({ attributes }) {
 		zoomInitialScale,
 		zoomFinalScale,
 		direction,
+		bakedAriaLabel,
+		bakedLabelPause,
+		bakedLabelPlay,
 	} = attributes;
 
 	const sliderData = {
@@ -147,7 +165,16 @@ export default function save({ attributes }) {
 		className: `swiper swiper-container vk_slider vk_slider_${blockId}${alignClass}`,
 	});
 
-	const pause_button_html = autoPlay && pauseButton ? <PauseButton /> : '';
+	const pause_button_html =
+		autoPlay && pauseButton ? (
+			<PauseButton
+				ariaLabel={bakedAriaLabel}
+				labelPause={bakedLabelPause}
+				labelPlay={bakedLabelPlay}
+			/>
+		) : (
+			''
+		);
 
 	return (
 		<div {...blockProps} data-vkb-slider={JSON.stringify(sliderData)}>

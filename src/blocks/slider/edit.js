@@ -401,9 +401,14 @@ export default function SliderEdit(props) {
 
 	// 停止/再生ボタンの HTML（プレビュー(slide)モードで Swiper が初期化される時のみ意味を持つため、
 	// editorMode === 'slide' かつ自動再生が有効かつ表示設定が ON の時だけ出力）
+	// エディタの出力は保存されないため、ここでは withLabels でラベルを付けてよい。
+	// フロント側のラベルは PHP が描画時に付与する（save 側は withLabels を渡さない）。
+	// The editor output is never saved, so labels can safely be rendered here via
+	// withLabels. On the front end the labels are added by PHP at render time, which is
+	// why save does not pass withLabels.
 	const pause_button_html =
 		editorMode === 'slide' && autoPlay && pauseButton ? (
-			<PauseButton />
+			<PauseButton withLabels />
 		) : (
 			''
 		);

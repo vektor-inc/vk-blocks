@@ -99,6 +99,14 @@ export default function save({ attributes }) {
 	// with ':scope > .swiper-pause-button', so wrapping it breaks the pause/play
 	// button and the reduced-motion handling (changing the saved markup would
 	// also require a block deprecation).
+	//
+	// ⚠️ ラベル（aria-label / data-label-*）はここでは出力しない。翻訳文を保存出力に
+	// 焼き付けると翻訳変更時にブロック検証エラーになるため、PHP 側
+	// （inc/vk-blocks/view/slider-pause-button-label.php）が描画時に付与する。
+	// ⚠️ The labels (aria-label / data-label-*) are intentionally not emitted here:
+	// baking translated text into the saved output causes a block validation error when
+	// the translation changes, so they are added at render time by
+	// inc/vk-blocks/view/slider-pause-button-label.php instead.
 	const pause_button_html = autoPlay && pauseButton ? <PauseButton /> : '';
 
 	return (
