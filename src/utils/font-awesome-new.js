@@ -523,7 +523,7 @@ export const FontAwesome = (props) => {
 					}
 				}}
 				placeholder={'<i class="fa-solid fa-circle-right"></i>'}
-				className="mb-0"
+				className="mb-1"
 			/>
 			<AdvancedPopOverControl
 				label={__('Select Icon', 'vk-blocks')}

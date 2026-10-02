@@ -45,6 +45,10 @@
 			"type": "string",
 			"default": "bullets"
 		},
+		"showActualSlideCount": {
+			"type": "boolean",
+			"default": false
+		},
 		"clientId": {
 			"type": "string"
 		},

@@ -180,6 +180,13 @@ function vk_blocks_content_enqueue_scripts( $page_content ) {
 		wp_enqueue_style( 'vk-blocks-swiper', VK_BLOCKS_DIR_URL . 'build/swiper.min.css', array(), VK_BLOCKS_VERSION );
 		wp_enqueue_script( 'vk-blocks-swiper', VK_BLOCKS_DIR_URL . 'build/swiper.min.js', array(), VK_BLOCKS_VERSION, true );
 		wp_enqueue_script( 'vk-blocks-slider', VK_BLOCKS_DIR_URL . 'build/vk-slider.min.js', array( 'vk-blocks-swiper' ), VK_BLOCKS_VERSION, true );
+		// 「実際のスライド数で表示」の aria-label テンプレートを渡す。
+		// vk_blocks_localize_slider_actual_count_label() の定義・理由は
+		// inc/vk-blocks/vk-blocks-functions.php を参照（#3080）。
+		// Passes the "Show actual slide count" aria-label template. See
+		// vk_blocks_localize_slider_actual_count_label() in
+		// inc/vk-blocks/vk-blocks-functions.php for the definition and rationale (#3080).
+		vk_blocks_localize_slider_actual_count_label( 'vk-blocks-slider' );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'vk_blocks_content_enqueue_scripts' );

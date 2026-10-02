@@ -4,6 +4,10 @@ import parse from 'html-react-parser';
 import { isHexColor } from '@vkblocks/utils/is-hex-color';
 import { sanitizeSlug } from '@vkblocks/utils/sanitizeSlug';
 import { fixBrokenUnicode } from '@vkblocks/utils/fixBrokenUnicode';
+import {
+	sanitizeFiniteNumber,
+	sanitizeSizeUnit,
+} from '@vkblocks/utils/icon-style-attribute-validation';
 
 export class VKBIcon extends Component {
 	render() {
@@ -11,11 +15,21 @@ export class VKBIcon extends Component {
 		if (fontAwesomeIcon) {
 			fontAwesomeIcon = fixBrokenUnicode(fontAwesomeIcon);
 		}
-		const iconSize = this.props.lbSize;
-		const iconSizeUnit = this.props.lbSizeUnit;
-		const iconMargin = this.props.lbMargin;
-		const iconMarginUnit = this.props.lbMarginUnit;
-		const iconRadius = this.props.lbRadius;
+		// 単位・数値の値を、生の style 文字列へ連結する（下記「icon font」の
+		// fontStyle 生成部分）前に検証する。想定外の値は block.json の既定値へ
+		// 倒す。正規の値（アイコン自身のUIで選べる値）ではこの処理を通っても
+		// 値は変わらない。
+		//
+		// Validate the unit/number values before they are concatenated into a
+		// raw style string (the "icon font" fontStyle build below). An
+		// unexpected value falls back to the block.json default. For a
+		// regular value (one the block's own UI can produce), this leaves
+		// the value unchanged.
+		const iconSize = sanitizeFiniteNumber(this.props.lbSize, 36);
+		const iconSizeUnit = sanitizeSizeUnit(this.props.lbSizeUnit, 'px');
+		const iconMargin = sanitizeFiniteNumber(this.props.lbMargin, 22);
+		const iconMarginUnit = sanitizeSizeUnit(this.props.lbMarginUnit, 'px');
+		const iconRadius = sanitizeFiniteNumber(this.props.lbRadius, 50);
 		const iconAlign = this.props.lbAlign;
 		const iconType = this.props.lbType;
 		const iconColor = this.props.lbColor;

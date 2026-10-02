@@ -36,6 +36,7 @@ import {
 	isParentReusableBlock,
 	hasBlockIdCollision,
 	shouldUpdateBlockId,
+	shouldDefaultShowActualSlideCountOn,
 } from '../../src/utils/is-parent-reusable-block';
 
 // ── ヘルパー: モックの組み立て ───────────────────────────────────────────────
@@ -180,6 +181,69 @@ describe('shouldUpdateBlockId — 修正後（真の衝突検出）', () => {
 				blockId: '',
 				isInReusableBlock: false,
 				hasCollision: false,
+			})
+		).toBe(false);
+	});
+});
+
+// ── shouldDefaultShowActualSlideCountOn: #3080 CodeRabbit指摘の回帰テスト ──
+//
+// 「実際のスライド数で表示」トグルを新規挿入時だけ ON 始まりにする判定
+// （src/blocks/slider/edit.js・src/blocks/_pro/post-list-slider/edit.js）が、
+// blockId === undefined だけを見ていたため、blockId 属性導入前に保存された
+// 古いブロックをエディタで開いただけでも新規挿入と誤判定してしまっていた
+// （CodeRabbitレビューで指摘）。wasBlockJustInserted と組み合わせた修正後の
+// 判定を検証する。
+//
+// shouldDefaultShowActualSlideCountOn: #3080 CodeRabbit feedback regression
+// tests. The "default the 'Show actual slide count' toggle on for new
+// insertions only" logic (in slider/edit.js and post-list-slider/edit.js) used
+// to look only at blockId === undefined, which misfired when merely opening
+// an old block saved before the blockId attribute existed (found via
+// CodeRabbit review). These tests verify the fixed logic that combines it
+// with wasBlockJustInserted.
+describe('shouldDefaultShowActualSlideCountOn — #3080 CodeRabbit指摘の回帰テスト', () => {
+	// 最重要の回帰ケース: blockId 属性導入前に保存された古いブロックを開くと、
+	// blockId は undefined になるが、挿入し直したわけではないので
+	// wasBlockJustInserted は false のはず。この組み合わせで誤って ON に
+	// ならないことを確認する。
+	it('古い投稿の既存ブロックを開いた場合（blockId未設定・新規挿入ではない）→ ON にしない false', () => {
+		expect(
+			shouldDefaultShowActualSlideCountOn({
+				blockId: undefined,
+				wasJustInserted: false,
+			})
+		).toBe(false);
+	});
+
+	// 新規挿入相当: blockId 未確定かつ、たった今挿入された → ON にする
+	it('新規に挿入した場合（blockId未設定・たった今挿入された）→ ON にする true', () => {
+		expect(
+			shouldDefaultShowActualSlideCountOn({
+				blockId: undefined,
+				wasJustInserted: true,
+			})
+		).toBe(true);
+	});
+
+	// 複製相当: blockId は複製元からコピーされるため確定済み。たった今挿入された
+	// 扱いにはなるが、blockId が undefined ではないため ON にしない
+	// （複製元の showActualSlideCount の値を維持する）。
+	it('複製した場合（blockIdは複製元からコピー済み・たった今挿入された）→ ON にしない false', () => {
+		expect(
+			shouldDefaultShowActualSlideCountOn({
+				blockId: 'copied-from-source',
+				wasJustInserted: true,
+			})
+		).toBe(false);
+	});
+
+	// 通常のリロード: blockId 確定済み・新規挿入でもない → ON にしない
+	it('通常のリロード（blockId確定済み・新規挿入ではない）→ ON にしない false', () => {
+		expect(
+			shouldDefaultShowActualSlideCountOn({
+				blockId: 'saved-block-id',
+				wasJustInserted: false,
 			})
 		).toBe(false);
 	});

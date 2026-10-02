@@ -4,7 +4,7 @@ Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 6.6
 Tested up to: 7.1
-Stable tag: 1.127.0
+Stable tag: 1.128.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -107,6 +107,13 @@ e.g.
 1. VK Blocks examples.
 
 == Changelog ==
+
+= 1.128.0 =
+[ New Feature ][ Slider Block ][ Post List Slider Block (Pro) ] Added a "Show actual slide count" option for the "Number of slides" pagination. When it is off, Swiper shows the number of positions it can stop at as the total, which can look smaller than the actual number of slides when loop is off and multiple slides are shown per view; turning this on shows the real slide count and the currently visible range instead ("1–3 / 6" visually, and "Showing 1 to 3 of 6" for screen readers).
+[ New Feature ][ Icon Block ] Added "Copy styles" / "Paste styles" to the block settings menu, letting the icon type, color, size, margin and corner radius be copied to other Icon blocks.
+[ Spec Change ][ Slider Block ] Changed the editor preview so that, when "Number of items to change in a transition" is set to "Same as the number of items to display" and "Number of Items to display per view" is a decimal, the preview now advances by that number truncated to a whole number instead of one slide, matching the front end.
+[ Bug Fix ][ Slider Block ] Fixed the background zoom animation playing even on devices that request reduced motion (prefers-reduced-motion). The background now stays at its initial scale and remains visible.
+[ Design Bug Fix ] Fixed the Font Awesome icon input field having no margin below it, making it look stuck to the "Select Icon" button underneath.
 
 = 1.127.0 =
 [ New Feature ][ Outer ( Pro ) ] The divider shape can now be created by cutting out the section's own background, so it looks natural even in headers and footers without matching the adjacent color. Existing blocks keep their appearance and color settings unchanged; only newly added blocks use the new method.

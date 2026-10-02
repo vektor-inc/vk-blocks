@@ -25,10 +25,12 @@ import {
 	isParentReusableBlock,
 	hasBlockIdCollision,
 	shouldUpdateBlockId,
+	shouldDefaultShowActualSlideCountOn,
 } from '@vkblocks/utils/is-parent-reusable-block';
 import { editSliderLaunch } from './edit-slider';
 import { MultiItemSetting } from './edit-multiItem';
 import { PauseButton } from './pause-button';
+import { getEffectiveLoop } from './loop-min-slides';
 import ResponsiveSizeControl, {
 	getMaxByUnit,
 } from '@vkblocks/components/responsive-size-control';
@@ -64,11 +66,36 @@ export default function SliderEdit(props) {
 		zoomInitialScale,
 		zoomFinalScale,
 		blockId,
+		showActualSlideCount,
 	} = attributes;
 
 	// インナーブロックを取得
 	const innerBlocks = useSelect((select) =>
 		select('core/block-editor').getBlocks(clientId)
+	);
+
+	// このブロックが「たった今」挿入されたものかどうか（#3080）。
+	// blockId の有無だけでは判定できない。blockId 属性は、この属性が導入される
+	// 前に保存された古いブロックでも undefined になり得るため（issue #2556の
+	// shouldUpdateBlockId/hasBlockIdCollisionが、まさにこの「blockIdが無い古い
+	// ブロック」を救済するために存在する）、blockId === undefined だけを新規
+	// 判定に使うと、古い投稿をエディタで開いただけで意図せず新規挿入と誤判定
+	// されてしまう（CodeRabbit指摘）。@wordpress/block-editor の
+	// wasBlockJustInserted はブロックが実際に挿入された直後かどうかを判定する
+	// 標準セレクターで、この用途に使う。
+	//
+	// Whether this block was *just* inserted (#3080). blockId presence alone
+	// cannot tell this apart: the blockId attribute can be undefined even on
+	// old blocks saved before this attribute existed (issue #2556's
+	// shouldUpdateBlockId/hasBlockIdCollision exist precisely to rescue such
+	// "no blockId" legacy blocks), so using blockId === undefined alone as the
+	// "just inserted" signal misfires when merely opening an old post in the
+	// editor (CodeRabbit feedback). @wordpress/block-editor's
+	// wasBlockJustInserted is the standard selector for detecting a genuine,
+	// just-now insertion, so it is used here instead.
+	const wasJustInserted = useSelect(
+		(select) => select('core/block-editor').wasBlockJustInserted(clientId),
+		[clientId]
 	);
 
 	// editorMode と innerBlocks の順序をログ出力
@@ -178,7 +205,31 @@ export default function SliderEdit(props) {
 				hasCollision: hasBlockIdCollision(clientId, blockId),
 			})
 		) {
-			setAttributes({ blockId: clientId });
+			const blockIdUpdates = { blockId: clientId };
+			// 「blockId が undefined」かつ「たった今挿入された」の両方を満たす
+			// 時だけ、実スライド数表示を ON始まりにする（#3080 decision-record）。
+			// blockId === undefined だけでは、blockId 属性導入前の古い投稿を
+			// 開いただけでも真になってしまうため、wasBlockJustInserted と
+			// 組み合わせて「本当に新規挿入されたブロックか」を判定する
+			// （CodeRabbit指摘）。複製時は blockId が複製元からコピーされ
+			// undefined ではないため、この分岐には入らず複製元の値を維持する。
+			// Only turn the default display on when the block's blockId is
+			// undefined AND it was just inserted (#3080 decision-record).
+			// blockId === undefined alone would also be true simply from
+			// opening an old post saved before this attribute existed, so it
+			// is combined with wasBlockJustInserted to detect a genuine new
+			// insertion (CodeRabbit feedback). Duplicating a block copies its
+			// blockId from the source (so it is not undefined), so a
+			// duplicate does not hit this branch and keeps the source's value.
+			if (
+				shouldDefaultShowActualSlideCountOn({
+					blockId,
+					wasJustInserted,
+				})
+			) {
+				blockIdUpdates.showActualSlideCount = true;
+			}
+			setAttributes(blockIdUpdates);
 		}
 
 		// 1.49 以前では slidesPerViewMobile が定義されていないので互換設定を追加
@@ -371,7 +422,33 @@ export default function SliderEdit(props) {
 		zoomInitialScale,
 		zoomFinalScale,
 		direction,
+		showActualSlideCount,
 	};
+
+	// 「実際のスライド数で表示」トグルの表示条件に使う実効loop状態（#3080）。
+	// 保存された loop 属性ではなく、view.js の needsLoopDisable と同じ計算で
+	// スライド枚数不足時の強制OFFを反映した値を使う。保存された loop だけを
+	// 見ると、スライド枚数が少なすぎてSwiperのループが実際には機能しない
+	// ケースで判定がずれ、トグル自体が表示されなくなってしまう
+	// （Claude Code code-review指摘）。
+	// The effective loop state used for the "Show actual slide count" toggle's
+	// visibility (#3080). Uses the same calculation as view.js's
+	// needsLoopDisable, reflecting the forced-off state when there are too few
+	// slides, rather than the raw saved loop attribute. Using the raw
+	// attribute alone misses this case and hides the toggle when there are too
+	// few slides for Swiper's loop mode to actually work (found via Claude
+	// Code code-review).
+	const effectiveLoop = getEffectiveLoop({
+		loop,
+		slideCount: innerBlocks ? innerBlocks.length : 0,
+		effect,
+		slidesPerView,
+		slidesPerViewMobile,
+		slidesPerViewTablet,
+		slidesPerViewPC,
+		slidesPerGroup,
+		centeredSlides,
+	});
 
 	// ページネーションの HTML
 	let pagination_html = '';
@@ -687,6 +764,48 @@ export default function SliderEdit(props) {
 							}
 						/>
 					</BaseControl>
+					{/* ループOFF（実効状態）・「スライドの枚数」・複数枚表示（PC/タブレット/
+						モバイルのいずれかで2枚以上）の組み合わせのときだけ表示する（#3080）。
+						ループONや全ブレークポイントで1枚ずつ表示では、トグルをONにしても
+						表示が変わらない（従来通り単一数値(current / total)のまま）ため、
+						無意味な設定を見せないよう非表示にする。ここでの「ループOFF」判定は
+						保存された loop 属性ではなく effectiveLoop（実効loop状態）を使う。
+						スライド枚数不足でSwiperのループが実際には機能しないケースでも、
+						保存値だけを見るとトグル自体が表示されなくなってしまうため
+						（Claude Code code-review指摘）。effect が 'fade' のときは
+						slidesPerView の設定に関わらず視覚的に1枚ずつしか表示されない
+						（view.js が config.slidesPerView 自体を設定しない）ため、
+						この場合もトグルを見せない（CodeRabbit指摘）。 */}
+					{pagination === 'fraction' &&
+						!effectiveLoop &&
+						effect !== 'fade' &&
+						[
+							slidesPerViewMobile,
+							slidesPerViewTablet,
+							slidesPerViewPC,
+						].some((v) => Number(v) > 1) && (
+							// BaseControl で ToggleControl を包むと、label・help が
+							// ToggleControl の実際の input 要素と正しく関連付けられない
+							// ため（CodeRabbit指摘）、包まずに label・help を
+							// ToggleControl へ直接渡す。
+							// Wrapping ToggleControl in BaseControl does not correctly
+							// associate the label/help with ToggleControl's actual input
+							// element (CodeRabbit feedback), so the label/help are passed
+							// directly to ToggleControl instead of wrapping it.
+							<ToggleControl
+								label={__(
+									'Show actual slide count',
+									'vk-blocks'
+								)}
+								help={`${__('Turn this on to show the real slide count and the range currently visible (e.g. "1–3 / 6").', 'vk-blocks')} ${__("When it's off, the total can look smaller than the real number of slides if multiple slides are shown at once.", 'vk-blocks')}`}
+								checked={!!showActualSlideCount}
+								onChange={(value) =>
+									setAttributes({
+										showActualSlideCount: value,
+									})
+								}
+							/>
+						)}
 					<BaseControl
 						label={__('Navigation Position', 'vk-blocks')}
 						id={`vk_slider-navigationPosition`}

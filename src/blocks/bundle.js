@@ -43,6 +43,22 @@ import '@vkblocks/utils/store';
 import '@vkblocks/utils/store/termColor';
 
 /**
+ * "Copy styles" / "Paste styles" (issue #3205). Registers the shared
+ * BlockSettingsMenuControls Fill once for the whole editor. Lives here (the
+ * free bundle) so both free and Pro blocks can opt in by registering their
+ * own configuration (src/components/copy-paste-styles/config-registry.js)
+ * from their own module, regardless of which bundle they ship in.
+ *
+ * 「スタイルをコピー/貼り付け」（issue #3205）。共通の BlockSettingsMenuControls
+ * Fill をエディタ全体に対して一度だけ登録する。無料版バンドルに置くことで、
+ * 無料版・Pro版どちらのブロックも、自分がどちらのバンドルで配布されるかに関わらず、
+ * 自分自身のモジュールから設定
+ * （src/components/copy-paste-styles/config-registry.js）を登録するだけで
+ * 利用できる。
+ */
+import '@vkblocks/components/copy-paste-styles/register-plugin';
+
+/**
  * Extensions
  */
 import '@vkblocks/extensions/core/group/style';

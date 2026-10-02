@@ -472,6 +472,34 @@ const migrateZoomFinalScaleTypo = (attributes) => {
 	return attributes;
 };
 
+// 「実際のスライド数で表示」（#3080）は save の出力形式を変えていないため、
+// このPRでは deprecated エントリを追加していない。
+//
+// "Show actual slide count" (#3080) does not change the save output format,
+// so no deprecated entry is added in this PR.
+
+// 「視差効果を減らす」時のズーム抑止（#3082）も deprecated エントリを追加していない。
+// 保存マークアップは変えていないが、`blocks.getSaveElement` が出すズーム用 <style> の中身は
+// 変えている（最終倍率を @media (prefers-reduced-motion: no-preference) で包んだ）。この <style> も
+// 保存内容の一部で検証の対象のため、1.127.0 までに「ズーム有効」で保存された投稿は現行 save と
+// 一致しない。ただし下の save1_126_4 のエントリがそのまま巻き取る:
+// あの世代の save が現行と違うのは停止/再生ボタンに焼き付いていたラベルだけで、それは
+// `source: 'attribute'` で保存済みマークアップから読むため、ラベルを持たない 1.127.0 の
+// 保存内容では undefined になり React が属性ごと省く（＝出力が一致する）。対応するフック
+// deprecated/hooks/1.126.4 が包む前のズーム CSS を出すので、<style> の側も一致する。
+// この前提は test/unit/slider-zoom-prm-saved-content-validation.test.js で固定している。
+//
+// The reduced-motion zoom suppression (#3082) likewise adds no deprecated entry. It leaves the
+// saved markup alone but does change the zoom <style> emitted by `blocks.getSaveElement` (the
+// final scale is now wrapped in @media (prefers-reduced-motion: no-preference)). That <style>
+// is part of the saved content and is validated too, so content saved with zoom enabled up to
+// 1.127.0 no longer matches the current save — but the save1_126_4 entry below absorbs it.
+// What that generation's save does differently is the pause / play button labels baked into
+// the markup, and they are read back with `source: 'attribute'`: content saved by 1.127.0 has
+// none, the attributes resolve to undefined, and React omits them, so the markup matches. Its
+// hook (deprecated/hooks/1.126.4) emits the pre-wrapping zoom CSS, so the <style> matches too.
+// test/unit/slider-zoom-prm-saved-content-validation.test.js pins this down.
+
 const deprecated = [
 	// 停止/再生ボタンの翻訳文（aria-label / data-label-*）を save 出力に焼き付けていた頃
 	// （= 1.125.0〜1.126.4 の保存形式）を救済する。属性スキーマは現行と同一。

@@ -31,4 +31,42 @@
 			overflow: hidden;
 		}
 	}
+
+	// 「実際のスライド数で表示」（#3080）は分数の表示範囲が「1–3 / 6」のように
+	// 単一数値より長くなるため、狭い画面幅でその内部だけ改行されるのを防ぐ。
+	//
+	// "Show actual slide count" (#3080) makes the fraction longer than a single
+	// number (e.g. "1–3 / 6"), so prevent an awkward line break inside it on
+	// narrow viewports.
+	.swiper-pagination-current,
+	.swiper-pagination-total,
+	.vk-slider-pagination-separator {
+		white-space: nowrap;
+	}
+}
+
+// 「実際のスライド数で表示」（#3080）のスクリーンリーダー専用ラベル要素。
+// screen-reader-text クラスの視覚的な非表示スタイルはテーマ側の実装に
+// 依存しており、テーマが定義していないと読み上げ専用のはずのテキストが
+// 画面に見えてしまう（CodeRabbit指摘）。テーマの実装に関わらず確実に
+// 隠すよう、プラグイン側でも同クラスに一般的な sr-only パターン
+// （絶対配置で画面外へ飛ばす）を適用する。
+//
+// Screen-reader-only label element for "Show actual slide count" (#3080).
+// The screen-reader-text class's visually-hidden styling depends on the
+// active theme providing it; without that, text meant to be read-only would
+// show up on screen (CodeRabbit feedback). Applies the standard sr-only
+// pattern (absolutely positioned off-screen) to the same class here, so it
+// works regardless of the theme's own implementation.
+.vk-slider-pagination-sr-text {
+	border: 0;
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+	word-wrap: normal;
 }

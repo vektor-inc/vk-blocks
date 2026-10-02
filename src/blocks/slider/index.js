@@ -56,6 +56,20 @@ const generateHeightCss = (attributes, cssSelector = '') => {
 	return css;
 };
 
+// ズーム倍率は数値として扱い、正の有限数でなければ既定値へフォールバックする。
+// CSS へ値を埋め込む前に型を確定させるための処理。
+// 正常な値（block.json の型は number、UI は 1〜3）では出力文字列は変わらない。
+// Zoom scales are treated as numbers; anything that is not a positive finite number
+// falls back to the default. This settles the type before the value is embedded into
+// CSS. For valid values (block.json types them as number, the UI allows 1–3) the
+// generated string is unchanged.
+const toZoomScale = (value, fallbackScale) => {
+	const numericScale = Number(value);
+	return Number.isFinite(numericScale) && numericScale > 0
+		? numericScale
+		: fallbackScale;
+};
+
 // ズーム用の CSS は generateHeightCss と違い cssSelector を取らない。ズームは
 // `.vk_slider_${blockId}` を起点にした固定のセレクタで完結するため、呼び出し側から
 // 起点を渡す余地が無い（渡しても使われない）。
@@ -81,6 +95,33 @@ const generateZoomAnimationCss = (attributes) => {
 		// ズーム用のセレクターは ::before 専用にして、親要素への副作用を防ぐ
 		const zoomSelector = `.vk_slider_${blockId}`;
 
+		// CSS に埋め込む倍率は、ここで数値へ確定させたものだけを使う。
+		// Only these resolved numbers are embedded into the CSS below.
+		const initialScale = toZoomScale(zoomInitialScale, 1);
+		const finalScale = toZoomScale(zoomFinalScale, 1.25);
+
+		// 最終倍率（＝ズームの動きそのもの）は「視差効果を減らす」が有効でない環境だけに
+		// 適用する。@media で包むのは最終倍率の規則だけで、::before の基本規則
+		// （背景画像・初期倍率・transition）は包まない。基本規則ごと包むと「視差効果を
+		// 減らす」環境で背景画像が描画されなくなり、初期倍率も効かなくなるため。
+		// transition は transform が変化しない限り発火しないので、そのまま残している。#3082
+		//
+		// ⚠️ この CSS は blocks.getSaveElement 経由で保存マークアップに書き出される
+		// （＝保存内容の一部）。ここを変えると保存出力そのものが変わる。ただしリリース済みの
+		// 保存形式は例外なく deprecated/hooks 側が CSS を出しており、この関数の出力を
+		// 受けるのは現行の保存形式だけなので、この変更で既存投稿の検証は壊れない。
+		//
+		// Only the final scale — the movement itself — is applied when the visitor has not
+		// asked for reduced motion. Just that one rule goes inside the query: the base
+		// ::before rule (background image, initial scale, transition) stays outside, because
+		// wrapping it would take the background image and the initial scale with it. The
+		// transition never fires while the transform never changes, so it is left as is. #3082
+		//
+		// ⚠️ This CSS is written into the saved markup through blocks.getSaveElement, so it is
+		// part of the saved content and changing it changes the saved output. Every already
+		// released format gets its CSS from deprecated/hooks instead, and only the current
+		// format is served by this function, so no existing post's validation is affected.
+
 		css += `
 ${zoomSelector} .vk_slider_item {
 	position: relative;
@@ -98,17 +139,19 @@ ${zoomSelector} .vk_slider_item::before {
 	background-position: center;
 	background-image: var(--vk-slider-item-bg-image, inherit);
 	will-change: transform;
-	transform: scale(${zoomInitialScale !== undefined ? zoomInitialScale : 1});
+	transform: scale(${initialScale});
 	transition: transform ${(autoPlayDelay + speed + autoPlayDelay * 0.5) / 1000 || 6}s linear;
 }
 
-${zoomSelector} .vk_slider_item.swiper-slide-active::before {
-	transform: scale(${zoomFinalScale !== undefined ? zoomFinalScale : 1.25});
+@media (prefers-reduced-motion: no-preference) {
+	${zoomSelector} .vk_slider_item.swiper-slide-active::before {
+		transform: scale(${finalScale});
+	}
 }
 
 ${zoomSelector} .vk_slider_item.swiper-slide-prev::before,
 ${zoomSelector} .vk_slider_item.swiper-slide-next::before {
-	transform: scale(${zoomInitialScale !== undefined ? zoomInitialScale : 1});
+	transform: scale(${initialScale});
 }
 `;
 	}

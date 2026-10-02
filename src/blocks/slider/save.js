@@ -23,6 +23,7 @@ export default function save({ attributes }) {
 		zoomInitialScale,
 		zoomFinalScale,
 		direction,
+		showActualSlideCount,
 	} = attributes;
 
 	const sliderData = {
@@ -47,6 +48,19 @@ export default function save({ attributes }) {
 		blockId,
 	};
 
+	// 既定値 false のまま無条件でキーを出すと、この属性が存在しなかった頃の
+	// 保存済み投稿の HTML と現在の save 出力が食い違い、「ブロックの検証に
+	// 失敗しました」というリカバリー表示が既存サイト全体で出てしまう。
+	// 値が true のときだけキーを出すことで、既存投稿の出力を変えない。
+	//
+	// Emitting this key unconditionally (even at its false default) would make
+	// the save output differ from posts saved before this attribute existed,
+	// triggering a block-validation "attempt recovery" notice site-wide. Only
+	// emit the key when true, so existing posts keep their current output.
+	if (showActualSlideCount) {
+		sliderData.showActualSlideCount = true;
+	}
+
 	let alignClass = '';
 	if ('full' === width) {
 		alignClass = ' alignfull';
@@ -55,6 +69,32 @@ export default function save({ attributes }) {
 	}
 
 	// ページネーションの HTML
+	//
+	// aria-label 用の読み上げテンプレート文字列（#3080）は、ここでは出力しない。
+	// save() は決定的関数である必要があり、__() の翻訳結果（保存時点のロケールで
+	// 解決された文字列）を保存HTMLに埋め込むと、後でサイトの言語設定を変えたときに
+	// save() の再計算結果（新ロケールの翻訳）と保存済みHTML（保存時点の翻訳）が
+	// 食い違い、ブロック検証エラーになってしまう（この属性を条件付き出力にした
+	// 本来の目的＝既存投稿の検証エラー回避と矛盾するため、CodeRabbitレビューで
+	// 指摘・修正）。翻訳文字列は wp_localize_script() 経由で渡し、view.js が
+	// window.vkBlocksSliderI18n.actualCountLabel から取得する
+	// （vk_blocks_localize_slider_actual_count_label() を参照）。
+	// showActualSlideCount・pagination・loop は真偽値・列挙値でロケールに依存しない
+	// ため、data-vkb-slider の JSON にある値だけで view.js 側の適用判定は完結する。
+	//
+	// The aria-label template string (#3080) is intentionally NOT emitted here.
+	// save() must be a deterministic function: embedding __()'s translation result
+	// (resolved against whatever locale was active at save time) into the saved
+	// HTML would make save()'s recomputed output (using a possibly different,
+	// later locale) diverge from the frozen saved HTML if the site's language
+	// setting changes, causing a block-validation error — defeating the very
+	// purpose this attribute was made conditional for in the first place (existing
+	// posts must keep validating). Found and fixed via CodeRabbit review. The
+	// translated string is instead passed via wp_localize_script() and read by
+	// view.js from window.vkBlocksSliderI18n.actualCountLabel (see
+	// vk_blocks_localize_slider_actual_count_label()). showActualSlideCount,
+	// pagination, and loop are booleans/enums (locale-independent), so view.js can
+	// still decide whether to apply the override from the data-vkb-slider JSON alone.
 	let pagination_html = '';
 	if (pagination !== 'hide') {
 		pagination_html = (
