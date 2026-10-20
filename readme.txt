@@ -108,6 +108,8 @@ e.g.
 
 == Changelog ==
 
+[ Bug Fix ][ Slider Block ] Fixed the slide behind the current one showing through faintly with the fade effect on themes that do not set box-sizing: border-box globally (e.g. Twenty Twenty-Five).
+
 = 1.128.0 =
 [ New Feature ][ Slider Block ][ Post List Slider Block (Pro) ] Added a "Show actual slide count" option for the "Number of slides" pagination. When it is off, Swiper shows the number of positions it can stop at as the total, which can look smaller than the actual number of slides when loop is off and multiple slides are shown per view; turning this on shows the real slide count and the currently visible range instead ("1–3 / 6" visually, and "Showing 1 to 3 of 6" for screen readers).
 [ New Feature ][ Icon Block ] Added "Copy styles" / "Paste styles" to the block settings menu, letting the icon type, color, size, margin and corner radius be copied to other Icon blocks.

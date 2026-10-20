@@ -9,6 +9,13 @@
 	display: flex;
 	position: relative;
 	width: 100%;
+	// Include the left/right padding in the width Swiper sets on each slide. Without this, on themes that
+	// do not set border-box globally, slides render wider than Swiper calculates, and with the fade effect
+	// the active slide never becomes fully opaque, so the slide behind it shows through.
+	// Swiper が各スライドに設定する幅に左右の余白を含める。これが無いと border-box を全体指定しないテーマで
+	// スライドが Swiper の計算より広く描画され、フェード切り替えで表示中のスライドが完全に不透明にならず、
+	// 裏のスライドが透けて見える。
+	box-sizing: border-box;
 
 	// 互換性対応ここから 1.27.6以前
 	@for $i from 0 through 10 {
