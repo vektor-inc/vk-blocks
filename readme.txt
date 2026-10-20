@@ -4,7 +4,7 @@ Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 6.6
 Tested up to: 7.1
-Stable tag: 1.128.0
+Stable tag: 1.129.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -100,6 +100,12 @@ e.g.
 
 == Frequently Asked Questions ==
 
+= What should I know about Post List / Post List Slider filters (Pro)? =
+The search keyword is a fixed filter; it does not add a search field to the site.
+A keyword makes WordPress treat the block query as a search (is_search()), so themes or search plugins may affect its results.
+Once a keyword is saved, the post containing the block may appear in its own results, because block settings are saved in the post content and WordPress searches it (the same as the core Query Loop block). In that case, turn on "Ignore this post".
+The parent filter displays only direct children of one hierarchical post type exposed through REST. To sort child pages by Page Order (menu_order), use the existing Child page list block.
+
 
 == Screenshots ==
 
@@ -108,9 +114,22 @@ e.g.
 
 == Changelog ==
 
+= 1.129.0 =
+[ New Feature ][ Post List Block (Pro) ][ Post List Slider Block (Pro) ] Added fixed keyword search and parent filters for displaying matching posts or direct child pages.
+[ Spec Change ][ Post List Block (Pro) / Post List Slider Block (Pro) / Select Post List Block (Pro) / Child Page List Block (Pro) ] Updated the vk-term-color library used for category colors from 0.7.1 to 0.7.4, also adding a permission check when saving a term color and hardening the library against invalid input (fatal errors / PHP warnings in a few edge cases). The text on a colored category label is now black or white depending on how light the category color is, instead of always being white. On existing sites, labels with a light category color (yellow or yellow-green, for example) change from white text to black text and become easier to read; labels with a darker color look the same as before. To keep the labels white, add `.vk_post_imgOuter_singleTermLabel, .postListText_singleTermLabel_inner { color: #fff !important; }` to Additional CSS.
+[ Spec Change ] A category color that is not a valid color code is now discarded, and that category falls back to the default gray (#999999). Colors picked with the color picker are not affected.
+[ Bug Fix ][ Category Badge Block (Pro) ] Fixed the display of multiple categories using the hard-coded default gray instead of the color set with the term_color_default_custom filter, which the display of a single category already used.
+[ Bug Fix ] Fixed an issue where highlighter colors disappeared in the free version when Authors or Contributors saved posts.
+[ Bug Fix ][ Fixed Display (Pro) ] Fixed an issue where, when "Specify the time until display and hide" was combined with "Do not display again until the browser is closed", the banner disappeared right after it appeared if the page took a long time to load.
+[ Bug Fix ][ Fixed Display (Pro) ] Fixed an issue where the name and description of the close button read out by screen readers were always in English, even on a Japanese site. They now follow the site language.
+[ Bug Fix ][ Slider Block ] Fixed the slide behind the current one showing through faintly with the fade effect on themes that do not set box-sizing: border-box globally (e.g. Twenty Twenty-Five).
+[ Security Fix ][ Dynamic Text (Pro) ][ Category Badge Block (Pro) ] Fixed an issue where ancestor/parent page titles, the logged-in user's display name, and category names/links were output without HTML escaping, which could allow arbitrary HTML/attribute injection.
+[ Security Fix ] Hardened the inline CSS safety check used for the highlighter color against a crafted-input edge case.
+
 = 1.128.0 =
 [ New Feature ][ Slider Block ][ Post List Slider Block (Pro) ] Added a "Show actual slide count" option for the "Number of slides" pagination. When it is off, Swiper shows the number of positions it can stop at as the total, which can look smaller than the actual number of slides when loop is off and multiple slides are shown per view; turning this on shows the real slide count and the currently visible range instead ("1–3 / 6" visually, and "Showing 1 to 3 of 6" for screen readers).
 [ New Feature ][ Icon Block ] Added "Copy styles" / "Paste styles" to the block settings menu, letting the icon type, color, size, margin and corner radius be copied to other Icon blocks.
+[ New Feature ][ Slider Block ] Added a "Continuous loop" playback mode that keeps the slides flowing at a constant speed (marquee style) without custom CSS, with a pause / play button that is always shown and support for reduced motion.
 [ Spec Change ][ Slider Block ] Changed the editor preview so that, when "Number of items to change in a transition" is set to "Same as the number of items to display" and "Number of Items to display per view" is a decimal, the preview now advances by that number truncated to a whole number instead of one slide, matching the front end.
 [ Bug Fix ][ Slider Block ] Fixed the background zoom animation playing even on devices that request reduced motion (prefers-reduced-motion). The background now stays at its initial scale and remains visible.
 [ Design Bug Fix ] Fixed the Font Awesome icon input field having no margin below it, making it look stuck to the "Select Icon" button underneath.

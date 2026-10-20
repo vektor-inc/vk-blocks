@@ -83,6 +83,69 @@ if ( ! function_exists( 'vk_blocks_allow_wp_kses_allowed_html' ) ) {
 	add_filter( 'wp_kses_allowed_html', 'vk_blocks_allow_wp_kses_allowed_html', 10, 1 );
 }
 
+/*
+ * ---------------------------------------------------------------------------
+ * kses filters (called from wp_kses_post() → safecss_filter_attr())
+ * ---------------------------------------------------------------------------
+ */
+
+if ( ! function_exists( 'vk_blocks_allow_color_functions_in_kses' ) ) {
+
+	/**
+	 * Allow rgb/rgba/hsl/hsla color functions in inline CSS when saving posts.
+	 *
+	 * The highlighter format outputs `style="--vk-highlighter-color: rgba(...);"`.
+	 * WordPress core's `safecss_filter_attr()` strips any CSS declaration whose
+	 * value contains parentheses other than the built-in `var()`, `calc()`, and a
+	 * few other functions. That behavior removes the highlighter color for any
+	 * user without the `unfiltered_html` capability (Author, Contributor, and
+	 * every user on multisite except Super Admin), so the marker appears without
+	 * color on the front end.
+	 *
+	 * rgb/rgba/hsl/hsla are well-defined color functions that accept only numeric
+	 * arguments. They cannot be used to smuggle URLs or scripts, so it is safe to
+	 * treat them the same as `var()` and strip them from the test string before
+	 * the final character check.
+	 *
+	 * @param bool   $allow_css       Whether the CSS is considered safe so far.
+	 * @param string $css_test_string The CSS declaration being tested.
+	 * @return bool
+	 */
+	function vk_blocks_allow_color_functions_in_kses( $allow_css, $css_test_string ) {
+		if ( $allow_css ) {
+			return $allow_css;
+		}
+
+		/*
+		 * Strip rgb/rgba/hsl/hsla function calls so that the remaining string can pass
+		 * the core disallow check. This is not a strict color-value validator; the
+		 * character class intentionally allows commas/spaces/%/minus/dot so that core's
+		 * final `[\(]` check is what ultimately decides safety.
+		 *
+		 * The quantifiers are possessive (`*+`, `++`) so a very long run of digits/commas/
+		 * spaces with no closing `)` cannot trigger catastrophic backtracking and hit
+		 * PCRE's backtrack limit.
+		 */
+		$stripped = preg_replace(
+			'/\b(?:rgba?|hsla?)\(\s*+[\d.\s,%\-]++\s*+\)/i',
+			'',
+			$css_test_string
+		);
+
+		// preg_replace() returns null on a PCRE error (e.g. backtrack/recursion limit
+		// reached). Treat that as unsafe (fail closed) instead of letting it fall through
+		// to preg_match(), which would read "no dangerous characters" from a null haystack.
+		if ( null === $stripped ) {
+			return false;
+		}
+
+		// Same pattern as core's default `safecss_filter_attr_allow_css` check (see wp-includes/kses.php).
+		return ! preg_match( '%[\\\(&=}]|/\*%', $stripped );
+	}
+	// @todo WP core が rgb/rgba/hsl/hsla を safecss_filter_attr() の許可関数として公式サポートしたら、このフィルター全体を削除する。
+	add_filter( 'safecss_filter_attr_allow_css', 'vk_blocks_allow_color_functions_in_kses', 10, 2 );
+}
+
 if ( ! function_exists( 'vk_blocks_fix_gt_style_errors' ) ) {
 
 	/**

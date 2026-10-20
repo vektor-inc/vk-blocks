@@ -1,4 +1,4 @@
-/* global Swiper */
+/* global Swiper, vkBlocksSliderMarquee */
 document.defaultView.addEventListener('load', function () {
 	// //data-vkb-slider属性のNodeを取得
 	let sliderNodeList = document.querySelectorAll('[data-vkb-slider]');
@@ -513,6 +513,34 @@ ${zoomSelector} .vk_slider_item.swiper-slide-next::before {
 			) {
 				attributes.zoomFinalScale = attributes.zoomFinalScal;
 			}
+
+			// 等速ループ（#3053）は Swiper を初期化せず、共通のマーキー処理に任せる。
+			// スライドを複製して常にループを成立させるため、loop-min-slides の自動無効化も、
+			// Swiper のアクティブスライドを前提にしたズーム用 CSS も適用しない。
+			// vkBlocksSliderMarquee は gulp でこのファイルの前に連結される marquee.js が定義する
+			// （gulpfile.js の helper-js を参照）。
+			// The continuous loop (#3053) does not initialize Swiper; the shared marquee
+			// logic takes over. Since cloning the slides always keeps the loop going, neither
+			// the loop-min-slides auto-disable nor the zoom CSS (which relies on Swiper's active
+			// slide) is applied. vkBlocksSliderMarquee is defined by marquee.js, which gulp
+			// concatenates in front of this file (see helper-js in gulpfile.js).
+			if (
+				typeof vkBlocksSliderMarquee !== 'undefined' &&
+				vkBlocksSliderMarquee.isMarqueeMode(attributes)
+			) {
+				vkBlocksSliderMarquee.setup({
+					root: sliderNode,
+					track: sliderNode.querySelector(':scope > .swiper-wrapper'),
+					speed: attributes.marqueeSpeed,
+					direction: attributes.direction,
+					pauseButton: sliderNode.querySelector(
+						':scope > .swiper-pause-button'
+					),
+					prefersReducedMotion,
+				});
+				continue;
+			}
+
 			if (!sliderNode.classList.contains('swiper')) {
 				sliderNode.classList.add('swiper');
 			}

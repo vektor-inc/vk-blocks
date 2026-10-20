@@ -229,6 +229,9 @@ class Vk_Blocks_PostList {
 	/**
 	 * Get Loop Query
 	 *
+	 * 表示条件から投稿リスト共通の問い合わせを組み立てる。
+	 * Build the shared post list query from the display conditions.
+	 *
 	 * @param array $attributes attributes.
 	 *
 	 * @return WP_Query|bool WP_Query object or false.
@@ -360,6 +363,24 @@ class Vk_Blocks_PostList {
 				$args['posts_per_page'] = count( $args['post__in'] );
 				$args['orderby']        = $attributes['orderby'];
 				break;
+		}
+
+		// 固定の検索語を無害化し、空欄なら条件を追加しない。
+		// Sanitize the fixed search term and omit the condition when empty.
+		if ( isset( $attributes['searchKeyword'] ) ) {
+			$search_keyword = trim( sanitize_text_field( $attributes['searchKeyword'] ) );
+			if ( '' !== $search_keyword ) {
+				$args['s'] = $search_keyword;
+			}
+		}
+
+		// 親の指定は、候補を取得できる階層型投稿タイプ1つに限定する。
+		// Limit the parent filter to a single hierarchical type available through REST.
+		if ( isset( $attributes['postParent'] ) && is_numeric( $attributes['postParent'] ) && $attributes['postParent'] >= 0 && is_array( $is_checked_post_type ) && 1 === count( $is_checked_post_type ) ) {
+			$post_type_object = get_post_type_object( reset( $is_checked_post_type ) );
+			if ( $post_type_object && $post_type_object->hierarchical && $post_type_object->show_in_rest ) {
+				$args['post_parent'] = (int) $attributes['postParent'];
+			}
 		}
 
 		$args = apply_filters( 'vk_blocks_post_list_query_args', $args, $attributes );

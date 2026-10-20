@@ -1,5 +1,6 @@
 import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 import { PauseButton } from './pause-button';
+import { vkBlocksSliderMarquee } from './marquee';
 
 export default function save({ attributes }) {
 	const {
@@ -24,7 +25,12 @@ export default function save({ attributes }) {
 		zoomFinalScale,
 		direction,
 		showActualSlideCount,
+		marqueeSpeed,
 	} = attributes;
+
+	// 等速ループ（#3053）かどうか
+	// Whether the slider is in continuous loop mode (#3053).
+	const isMarquee = vkBlocksSliderMarquee.isMarqueeMode(attributes);
 
 	const sliderData = {
 		autoPlay,
@@ -61,6 +67,17 @@ export default function save({ attributes }) {
 		sliderData.showActualSlideCount = true;
 	}
 
+	// 等速ループ（#3053）の設定も、有効なときだけキーを出す（理由は上と同じ）。
+	// 既定の「通常」では一切出力しないため、既存の保存済み投稿の出力は変わらない。
+	// The continuous loop settings (#3053) are likewise emitted only when enabled (same
+	// reason as above). Nothing is added for the default standard mode, so the output for
+	// existing saved posts is unchanged.
+	if (isMarquee) {
+		sliderData.playbackMode = 'marquee';
+		sliderData.marqueeSpeed =
+			vkBlocksSliderMarquee.normalizeSpeed(marqueeSpeed);
+	}
+
 	let alignClass = '';
 	if ('full' === width) {
 		alignClass = ' alignfull';
@@ -95,8 +112,10 @@ export default function save({ attributes }) {
 	// vk_blocks_localize_slider_actual_count_label()). showActualSlideCount,
 	// pagination, and loop are booleans/enums (locale-independent), so view.js can
 	// still decide whether to apply the override from the data-vkb-slider JSON alone.
+	// 等速ループでは矢印・ページネーションを使わないため出力しない（#3053）
+	// The continuous loop uses neither arrows nor pagination, so they are not output (#3053).
 	let pagination_html = '';
-	if (pagination !== 'hide') {
+	if (!isMarquee && pagination !== 'hide') {
 		pagination_html = (
 			<div
 				className={`swiper-pagination swiper-pagination-${pagination}`}
@@ -107,7 +126,7 @@ export default function save({ attributes }) {
 	// ナビゲーションの HTML
 	let navigation_next_html = '';
 	let navigation_prev_html = '';
-	if (navigationPosition !== 'hide') {
+	if (!isMarquee && navigationPosition !== 'hide') {
 		navigation_next_html = (
 			<div
 				className={`swiper-button-next swiper-button-${navigationPosition}`}
@@ -126,9 +145,25 @@ export default function save({ attributes }) {
 	// `swiper-container` is the pre-v8 legacy class name (renamed to `swiper` in v8)
 	// and is no longer referenced by Swiper, so it is not emitted anymore (#3069).
 	// Content saved with the legacy class is handled by deprecated/save/1.124.0.
-	const blockProps = useBlockProps.save({
-		className: `swiper vk_slider vk_slider_${blockId}${alignClass}`,
-	});
+	// 等速ループのときだけ、ルートに目印のクラスと画面幅ごとの表示枚数（CSS 変数）を足す。
+	// JS の準備が終わる前からスライドを横並び・正しい幅で表示し、Swiper 向けの見た目
+	// （1枚表示など）が一瞬見えるのを防ぐため（#3053）。通常方式では何も足さない。
+	// Only in continuous loop mode, add a marker class and the per-viewport slides per view
+	// (CSS variables) to the root, so the slides are laid out in a row at the right width
+	// before the JS runs and the Swiper-oriented look (one slide, etc.) never flashes (#3053).
+	// Nothing is added in the standard mode.
+	const blockProps = useBlockProps.save(
+		isMarquee
+			? {
+					className: `swiper vk_slider vk_slider_${blockId}${alignClass} vk_slider--marquee`,
+					style: vkBlocksSliderMarquee.getSlidesPerViewStyle(
+						attributes
+					),
+				}
+			: {
+					className: `swiper vk_slider vk_slider_${blockId}${alignClass}`,
+				}
+	);
 
 	// 停止/再生ボタンの HTML（自動再生が有効かつ表示設定が ON の時のみ出力）。
 	// ⚠️ ボタンはスライダーのルート直下に置くこと。view.js が
@@ -147,7 +182,14 @@ export default function save({ attributes }) {
 	// baking translated text into the saved output causes a block validation error when
 	// the translation changes, so they are added at render time by
 	// inc/vk-blocks/view/slider-pause-button-label.php instead.
-	const pause_button_html = autoPlay && pauseButton ? <PauseButton /> : '';
+	//
+	// 等速ループでは、訪問者が動きを止められるよう保存値に関係なく常に出力する（#3053）。
+	// 通常方式の条件（autoPlay && pauseButton）はそのまま残すため、既存の出力は変わらない。
+	// In continuous loop mode the button is always output, regardless of the saved values,
+	// so visitors can stop the motion (#3053). The standard mode's condition
+	// (autoPlay && pauseButton) is kept as is, so existing output does not change.
+	const pause_button_html =
+		(autoPlay && pauseButton) || isMarquee ? <PauseButton /> : '';
 
 	return (
 		<div {...blockProps} data-vkb-slider={JSON.stringify(sliderData)}>

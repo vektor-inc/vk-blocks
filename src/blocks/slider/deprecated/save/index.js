@@ -256,6 +256,34 @@ const blockAttributes13 = {
 	},
 };
 
+/*
+// 次に save の出力を変える変更が来たら、以下を blockAttributes14 として昇格させる（予約コメント）。
+// いずれの属性も「有効なときだけ」保存データに書き出す作りのため、既存の保存内容は変わらず、
+// 追加時点では deprecated のスナップショットを作っていない。
+// [ スライダー ] 実際のスライド数を表示（showActualSlideCount）を追加 #3080
+// [ スライダー ] 再生方式（playbackMode）・等速ループの流れる速さ（marqueeSpeed）を追加 #3053
+// Reserved: promote this to blockAttributes14 when the save output changes next. These
+// attributes are written into the saved data only when enabled, so existing saved content
+// is unchanged and no deprecated snapshot was made when they were added.
+// [ Slider ] Added showActualSlideCount #3080
+// [ Slider ] Added playbackMode and the continuous loop's marqueeSpeed #3053
+const blockAttributes14 = {
+	...blockAttributes13,
+	showActualSlideCount: {
+		type: 'boolean',
+		default: false,
+	},
+	playbackMode: {
+		type: 'string',
+		default: 'default',
+	},
+	marqueeSpeed: {
+		type: 'number',
+		default: 60,
+	},
+};
+*/
+
 const PAUSE_BUTTON_SELECTOR = '.swiper-pause-button';
 
 // ラベルが焼き付いていた頃の保存形式を、翻訳やロケールに依存せず復元するための属性。

@@ -111,6 +111,14 @@
 			"type": "string",
 			"default": "rtl"
 		},
+		"playbackMode": {
+			"type": "string",
+			"default": "default"
+		},
+		"marqueeSpeed": {
+			"type": "number",
+			"default": 60
+		},
 		"blockId": {
 			"type": "string"
 		}

@@ -4061,6 +4061,7 @@ msgstr ""
 msgid "Copy link"
 msgstr ""
 
+#: src/components/display-condition/parent-filter-control.js
 #: src/components/post-exclusion-control/index.js:109
 msgid "(no title)"
 msgstr ""
@@ -6400,4 +6401,41 @@ msgstr ""
 #: temp/plugins/vk-blocks/inc/vk-blocks/build/blocks/_pro/timeline/block.json
 msgctxt "block description"
 msgid "Displays a simple schedule and other information that is useful for explaining the order."
+msgstr ""
+
+#: src/components/display-condition/index.js
+msgid "Search keyword"
+msgstr ""
+
+#: src/components/display-condition/index.js
+msgid "Enter a fixed search term to display only matching posts."
+msgstr ""
+
+#: src/components/display-condition/index.js
+msgid "This does not add a search field to the site."
+msgstr ""
+
+#: src/components/display-condition/parent-filter-control.js
+msgctxt "post list filter"
+msgid "Parent"
+msgstr ""
+
+#: src/components/display-condition/parent-filter-control.js
+msgid "No parent filter"
+msgstr ""
+
+#: src/components/display-condition/parent-filter-control.js
+msgid "Select a parent to display only its direct children."
+msgstr ""
+
+#: src/components/display-condition/parent-filter-control.js
+msgid "Loading parent pages…"
+msgstr ""
+
+#: src/components/display-condition/parent-filter-control.js
+msgid "Unable to load parent pages."
+msgstr ""
+
+#: src/components/display-condition/parent-filter-control.js
+msgid "Available only when a single hierarchical post type (such as Pages) is selected."
 msgstr ""

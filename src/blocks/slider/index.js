@@ -87,11 +87,16 @@ const generateZoomAnimationCss = (attributes) => {
 		zoomFinalScale,
 		autoPlayDelay,
 		speed,
+		playbackMode,
 	} = attributes;
 
 	let css = '';
 
-	if (zoomAnimation) {
+	// 等速ループ（#3053）では Swiper のアクティブスライドが無くズームが成立しないため、
+	// 保存値が残っていても出力しない（通常方式では従来どおり）。
+	// In continuous loop mode (#3053) there is no Swiper active slide for the zoom to act
+	// on, so nothing is emitted even if the setting is still saved (standard mode is unchanged).
+	if (zoomAnimation && playbackMode !== 'marquee') {
 		// ズーム用のセレクターは ::before 専用にして、親要素への副作用を防ぐ
 		const zoomSelector = `.vk_slider_${blockId}`;
 

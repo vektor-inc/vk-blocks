@@ -8,9 +8,14 @@ import {
 	ACTUAL_SLIDE_COUNT_SEPARATOR_CLASS,
 } from './pagination-actual-count';
 import { getEffectiveLoop, normalizeSlidesPerGroup } from './loop-min-slides';
+import { vkBlocksSliderMarquee } from './marquee';
 
 // スライダーの格納
 const swiper = {};
+
+// 等速ループ（#3053）のプレビュー中のマーキーの格納（キーは sliderId）
+// Marquees running in the continuous loop (#3053) preview, keyed by sliderId.
+const marquee = {};
 
 // 監視中の editorRoot を管理
 const observedRoots = new Set();
@@ -192,6 +197,131 @@ const removeSwiperClassName = (targetElement) => {
 	}
 };
 
+// エディタ上の複製スライドから、ブロックエディタ固有の属性を取り除く（#3053）。
+// data-block 等が残ると複製をクリックしたときに原本のブロックとして扱われ、
+// contenteditable が残ると複製の中で文字を編集できてしまうため。
+// プレビューは動きの確認用なので、複製はクリックの対象からも外す。
+// Strips block-editor-specific attributes from cloned slides in the editor (#3053):
+// a leftover data-block would make clicking a clone act on the original block, and a
+// leftover contenteditable would let text be edited inside the clone. The preview is only
+// for checking the motion, so clones are taken out of clicks as well.
+const stripEditorAttributesFromClone = (clone) => {
+	[clone, ...clone.querySelectorAll('*')].forEach((element) => {
+		element.removeAttribute('data-block');
+		element.removeAttribute('data-type');
+		element.removeAttribute('data-title');
+		element.removeAttribute('contenteditable');
+		element.removeAttribute('role');
+	});
+	clone.classList.remove('is-selected', 'is-highlighted');
+	clone.style.pointerEvents = 'none';
+};
+
+// 等速ループのプレビューを片付ける
+// Cleans up the continuous loop preview.
+const destroyMarquee = (sliderId) => {
+	if (marquee[sliderId]) {
+		marquee[sliderId].controller.destroy();
+		delete marquee[sliderId];
+	}
+};
+
+// 等速ループのプレビューを開始する（開始済みなら速さ・向きなどを反映して組み直す）。
+// 公開画面（view.js）と同じ marquee.js の処理を使い、停止ボタン・一時停止も同じ動きにする。
+// Starts the continuous loop preview (or, if already running, applies the new speed,
+// direction, etc.). It uses the same marquee.js as the front end (view.js), so the pause
+// button and the temporary pauses behave the same way.
+const launchMarquee = (slider, sliderId, attributes) => {
+	const track = slider.querySelector('.block-editor-block-list__layout');
+	if (!track) {
+		return;
+	}
+
+	// 開始済みで、並びの要素が同じなら作り直さずに更新する（今の位置から続けて流すため）
+	// If already running on the same track element, update instead of rebuilding (so it
+	// keeps flowing from the current position).
+	if (marquee[sliderId] && marquee[sliderId].track === track) {
+		marquee[sliderId].controller.update({
+			speed: attributes.marqueeSpeed,
+			direction: attributes.direction,
+		});
+		return;
+	}
+	destroyMarquee(sliderId);
+
+	// 通常方式のプレビューから切り替えた直後は Swiper が残っているので片付ける
+	// Right after switching from the standard preview, Swiper is still there; clean it up.
+	if (swiper[sliderId]) {
+		swiper[sliderId].destroy();
+		swiper[sliderId] = null;
+	}
+	removeSwiperClassName(slider.querySelector('.block-editor-inner-blocks'));
+	removeSwiperClassName(track);
+	slider.querySelectorAll('.vk_slider_item').forEach((slide) => {
+		slide.classList.remove('is-selected');
+		removeSwiperClassName(slide);
+	});
+
+	const view = slider.ownerDocument.defaultView;
+	const controller = vkBlocksSliderMarquee.setup({
+		root: slider,
+		track,
+		slideSelector: '.vk_slider_item',
+		speed: attributes.marqueeSpeed,
+		direction: attributes.direction,
+		pauseButton: slider.querySelector(':scope > .swiper-pause-button'),
+		prefersReducedMotion:
+			typeof view.matchMedia === 'function' &&
+			view.matchMedia('(prefers-reduced-motion: reduce)').matches,
+		onClone: stripEditorAttributesFromClone,
+	});
+	if (controller) {
+		marquee[sliderId] = { controller, track, root: slider };
+	}
+};
+
+/**
+ * 削除されたノードに合わせて、等速ループ（#3053）のプレビューを整える。
+ * - ページから外れたスライダー（ブロックごとの削除など）のマーキーを片付ける
+ * - プレビュー中のスライダーから原本のスライドが削除されたら、複製を組み直す
+ * 通常方式のスライダーには何もしない（LaunchSwiper を呼ぶと、編集モードでは全スライドの
+ * 選択表示が付け直されてしまうため）。
+ * Updates the continuous loop (#3053) preview for removed nodes:
+ * - cleans up marquees whose slider has left the page (e.g. the whole block was removed)
+ * - rebuilds the clones when an original slide is removed from a previewing slider
+ * Standard sliders are left alone (calling LaunchSwiper would reset every slide's
+ * selection highlight in edit mode).
+ *
+ * @param {MutationRecord} mutation childList の変更記録 / a childList mutation record.
+ */
+export const handleRemovedNodes = (mutation) => {
+	// ページから外れたスライダーのマーキーを片付ける（リスナー・ResizeObserver を残さない）
+	// Clean up marquees whose slider is no longer in the page (no leftover listeners or
+	// ResizeObserver).
+	Object.keys(marquee).forEach((sliderId) => {
+		if (!marquee[sliderId].root.isConnected) {
+			destroyMarquee(sliderId);
+		}
+	});
+
+	const removedOriginalSlide = Array.from(mutation.removedNodes).some(
+		(removedNode) =>
+			removedNode.nodeType === 1 &&
+			removedNode.classList.contains('vk_slider_item') &&
+			!removedNode.hasAttribute(vkBlocksSliderMarquee.CLONE_ATTRIBUTE)
+	);
+	if (!removedOriginalSlide || !mutation.target.closest) {
+		return;
+	}
+	const parentSlider = mutation.target.closest('.vk_slider');
+	const entry = Object.values(marquee).find(
+		(item) => item.root === parentSlider
+	);
+	if (entry) {
+		entry.controller.relayout();
+	}
+};
+
 // スライダーブロック単体の処理
 const LaunchSwiper = (slider) => {
 	// 値を取得して配列に格納
@@ -214,6 +344,19 @@ const LaunchSwiper = (slider) => {
 			// 1.36.0 より古い状態で保存されてる場合の互換処理
 			sliderId = attributes.clientId;
 		}
+
+		// 等速ループ（#3053）のプレビューは Swiper の代わりにマーキーで動かす
+		// The continuous loop (#3053) preview runs the marquee instead of Swiper.
+		if (
+			attributes.editorMode === 'slide' &&
+			vkBlocksSliderMarquee.isMarqueeMode(attributes)
+		) {
+			launchMarquee(slider, sliderId, attributes);
+			return;
+		}
+		// それ以外（編集モード・通常方式）ではマーキーを片付けてから従来の処理へ進む
+		// Otherwise (edit mode / standard mode), clean up the marquee and carry on as before.
+		destroyMarquee(sliderId);
 
 		// 編集モードに応じた処理を実行
 		if (attributes.editorMode && attributes.editorMode === 'slide') {
@@ -554,6 +697,18 @@ export const SliderObserver = (editorRoot) => {
 			if (mutation.type === 'childList') {
 				if (mutation.addedNodes.length > 0) {
 					mutation.addedNodes.forEach((addedNode) => {
+						// 等速ループの複製スライドは marquee.js 自身が追加したものなので無視する
+						// （反応すると組み直し→複製の追加→組み直し…と止まらなくなる）
+						// Ignore the continuous loop's clones, which marquee.js adds itself
+						// (reacting to them would loop: rebuild → add clones → rebuild ...).
+						if (
+							addedNode.nodeType === 1 &&
+							addedNode.hasAttribute(
+								vkBlocksSliderMarquee.CLONE_ATTRIBUTE
+							)
+						) {
+							return;
+						}
 						if (
 							addedNode.classList &&
 							addedNode.classList.contains('vk_slider')
@@ -568,6 +723,11 @@ export const SliderObserver = (editorRoot) => {
 							LaunchSwiper(parentSlider);
 						}
 					});
+				}
+				// 等速ループのプレビュー（#3053）向けに、削除されたノードを処理する
+				// Handle removed nodes for the continuous loop preview (#3053).
+				if (mutation.removedNodes.length > 0) {
+					handleRemovedNodes(mutation);
 				}
 			} else if (mutation.type === 'attributes') {
 				if (

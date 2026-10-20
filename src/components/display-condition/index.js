@@ -22,6 +22,7 @@ import { fixBrokenUnicode } from '@vkblocks/utils/fixBrokenUnicode';
 
 // Load VK Blocks Compornents
 import { AdvancedCheckboxControl } from '@vkblocks/components/advanced-checkbox-control';
+import { ParentFilterControl } from './parent-filter-control';
 import { PostExclusionControl } from '@vkblocks/components/post-exclusion-control';
 
 export function DisplayCondition(props) {
@@ -40,6 +41,8 @@ export function DisplayCondition(props) {
 		selfIgnore,
 		pagedlock,
 		stickyPosts,
+		searchKeyword,
+		postParent,
 	} = attributes;
 
 	// 以前の値を切り替え
@@ -140,6 +143,19 @@ export function DisplayCondition(props) {
 			exclusionTerms: JSON.stringify(newExcludedTermsData),
 		});
 	};
+
+	// 保存属性から判定し、undo と情報取得中に親の属性を変更しない。
+	// Read saved attributes without changing the parent during undo or loading.
+	const savedPostTypes = JSON.parse(fixBrokenUnicode(isCheckedPostType));
+	const parentFilterPostType =
+		savedPostTypes.length === 1
+			? postTypesProps.find(
+					(type) =>
+						type.slug === savedPostTypes[0] &&
+						type.hierarchical &&
+						type.show_in_rest
+				)
+			: undefined;
 
 	// メディアと再利用ブロックを除外
 	const filteredPostTypesProps = useMemo(() => {
@@ -356,12 +372,37 @@ export function DisplayCondition(props) {
 					schema={'isCheckedPostType'}
 					rawData={filteredPostTypesProps}
 					checkedData={isCheckedPostTypeData}
-					setAttributes={setAttributes}
 					saveState={saveStatePostTypes}
 					removeState={removeStateTerms}
 					{...props}
+					setAttributes={(updatedAttributes) =>
+						setAttributes({ ...updatedAttributes, postParent: -1 })
+					}
 				/>
 			</BaseControl>
+			{parentFilterPostType && (
+				<ParentFilterControl
+					key={parentFilterPostType.slug}
+					postType={parentFilterPostType.slug}
+					value={postParent}
+					onChange={(value) => setAttributes({ postParent: value })}
+				/>
+			)}
+			<TextControl
+				label={__('Search keyword', 'vk-blocks')}
+				help={[
+					__(
+						'Enter a fixed search term to display only matching posts.',
+						'vk-blocks'
+					),
+					__(
+						'This does not add a search field to the site.',
+						'vk-blocks'
+					),
+				].join(' ')}
+				value={searchKeyword || ''}
+				onChange={(value) => setAttributes({ searchKeyword: value })}
+			/>
 			<hr />
 			<h4 className={`mt-0 mb-2`}>
 				{__('Taxonomy filter condition', 'vk-blocks')}

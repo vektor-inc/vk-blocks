@@ -39,6 +39,7 @@ msgstr "(例) %s-block-style"
 msgid "(e.g.) vk-format-1"
 msgstr "(例) vk-format-1"
 
+#: src/components/display-condition/parent-filter-control.js
 #: src/components/post-exclusion-control/index.js:94
 msgid "(no title)"
 msgstr "(タイトルなし)"
@@ -433,6 +434,10 @@ msgstr "アーカイブタイプ"
 #: src/extensions/common/custom-block-variation/block-variation-list/item/title-area/delete-button/index.js:42
 msgid "Are you sure you want to delete this variation?"
 msgstr "本当にこのバリエーションを削除しますか？"
+
+#: src/blocks/slider/edit.js
+msgid "Around 60 gives a gentle pace."
+msgstr "60 前後でゆったりした速さになります。"
 
 #: dist/vk-blocks-pro/inc/vk-blocks/class-vk-blocks-global-settings.php:342
 #: inc/vk-blocks/class-vk-blocks-global-settings.php:342
@@ -1366,6 +1371,10 @@ msgstr "本文の色"
 msgid "Continue"
 msgstr "続ける"
 
+#: src/blocks/slider/edit.js
+msgid "Continuous loop"
+msgstr "等速ループ"
+
 #: src/blocks/_pro/blog-card/edit/url-placeholder.js:127
 msgctxt "button label"
 msgid "Convert to link"
@@ -2249,6 +2258,10 @@ msgctxt "block title"
 msgid "Flow"
 msgstr "フロー"
 
+#: src/blocks/slider/edit.js
+msgid "Flow speed (px/s)"
+msgstr "流れる速さ（px/秒）"
+
 #: src/blocks/_pro/outer/edit.js:824
 msgid "Focal Point"
 msgstr "フォーカルポイント"
@@ -2987,6 +3000,10 @@ msgid ""
 "unnatural."
 msgstr "表示枚数と同じモードでは、配置済みスライドアイテム数の約数を入力してください。約数でない場合、スライド動作が不自然になります。"
 
+#: src/blocks/slider/edit.js
+msgid "In continuous loop mode, this button is always displayed so that visitors can stop the motion."
+msgstr "等速ループでは、訪問者が動きを止められるよう、このボタンは常に表示されます。"
+
 #: src/components/display-condition/index.js:445
 msgid "Include"
 msgstr "含める"
@@ -3153,6 +3170,10 @@ msgstr "大画像 & 画像下文字"
 #: src/blocks/_pro/outer/edit.js:1234
 msgid "Large triangle"
 msgstr "大きい三角"
+
+#: src/blocks/slider/edit.js
+msgid "Larger values make the slides flow faster."
+msgstr "値を大きくするほど速く流れます。"
 
 #: src/blocks/staff/edit.js:146
 msgid "Layout"
@@ -3929,6 +3950,10 @@ msgstr "装飾無し"
 msgid "Play slideshow"
 msgstr "スライドショーを再生"
 
+#: src/blocks/slider/edit.js
+msgid "Playback mode"
+msgstr "再生方式"
+
 #: src/blocks/_pro/dynamic-text/edit.js:386
 msgid "Please Select"
 msgstr "選択してください"
@@ -4536,6 +4561,10 @@ msgstr "設定"
 msgid "Settings for each device"
 msgstr "デバイス毎の設定"
 
+#: src/blocks/slider/edit.js
+msgid "Settings that do not apply, such as arrows and pagination, are hidden."
+msgstr "矢印やページネーションなど、この方式で使わない設定は非表示になります。"
+
 #: dist/vk-blocks-pro/inc/vk-blocks/class-vk-blocks-global-settings.php:426
 #: dist/vk-blocks-pro/inc/vk-blocks/class-vk-blocks-global-settings.php:476
 #: inc/vk-blocks/class-vk-blocks-global-settings.php:426
@@ -4667,6 +4696,14 @@ msgstr "スライド設定"
 #: src/blocks/slider-item/save.js:100
 msgid "Slider item link"
 msgstr "スライダーアイテムリンク"
+
+#: src/blocks/slider/edit.js
+msgid "Slides change one after another at set intervals."
+msgstr "一定の時間ごとにスライドが切り替わります。"
+
+#: src/blocks/slider/edit.js
+msgid "Slides keep flowing at a constant speed without stopping."
+msgstr "スライドが止まらずに一定の速度で流れ続けます。"
 
 #: src/blocks/_pro/animation/edit.js:107
 msgid "Slow"
@@ -4837,6 +4874,10 @@ msgstr "スタッフ (非推奨)"
 #: src/blocks/staff/edit.js:203
 msgid "Staff name"
 msgstr "名前"
+
+#: src/blocks/slider/edit.js
+msgid "Standard"
+msgstr "通常"
 
 #: dist/vk-blocks-pro/inc/vk-blocks/build/blocks/_pro/step/block.json
 #: inc/vk-blocks/build/blocks/_pro/step/block.json
@@ -6366,3 +6407,40 @@ msgstr "wysiwyg"
 #: src/admin/custom-format/index.js:96
 msgid "※ Required If no title is entered, it will not appear on the toolbar."
 msgstr "※ タイトルが入力されていない場合、ツールバーには表示されません。"
+
+#: src/components/display-condition/index.js
+msgid "Search keyword"
+msgstr "検索キーワード"
+
+#: src/components/display-condition/index.js
+msgid "Enter a fixed search term to display only matching posts."
+msgstr "一致する投稿だけを表示する固定の検索語を入力します。"
+
+#: src/components/display-condition/index.js
+msgid "This does not add a search field to the site."
+msgstr "サイトに検索欄は追加されません。"
+
+#: src/components/display-condition/parent-filter-control.js
+msgctxt "post list filter"
+msgid "Parent"
+msgstr "親"
+
+#: src/components/display-condition/parent-filter-control.js
+msgid "No parent filter"
+msgstr "親による絞り込みなし"
+
+#: src/components/display-condition/parent-filter-control.js
+msgid "Select a parent to display only its direct children."
+msgstr "親を選択すると、その直下の投稿だけを表示します。"
+
+#: src/components/display-condition/parent-filter-control.js
+msgid "Loading parent pages…"
+msgstr "親ページを取得中…"
+
+#: src/components/display-condition/parent-filter-control.js
+msgid "Unable to load parent pages."
+msgstr "親ページを取得できませんでした。"
+
+#: src/components/display-condition/parent-filter-control.js
+msgid "Available only when a single hierarchical post type (such as Pages) is selected."
+msgstr "固定ページなど、親子関係を持つ投稿タイプを 1 つだけ選んでいるときに使えます。"

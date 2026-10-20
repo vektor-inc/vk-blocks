@@ -1,3 +1,5 @@
+@use 'utils/breakpoints' as *;
+
 /*-------------------------------------------*/
 /* CSS
 /*-------------------------------------------*/
@@ -69,4 +71,109 @@
 	position: absolute;
 	width: 1px;
 	word-wrap: normal;
+}
+
+// =============================================================================
+// 等速ループ（マーキー）（#3053）
+// Continuous loop (marquee) (#3053)
+// =============================================================================
+// 動き自体は marquee.js が Web Animations API で付ける。ここでは並び方とスライド幅だけを決める。
+// 保存マークアップのルートには、等速ループのときだけ .vk_slider--marquee と
+// 画面幅ごとの表示枚数（--vk-slider-marquee-spv-mobile / -tablet / -pc）が出力される。
+// The motion itself is applied by marquee.js through the Web Animations API; this only sets
+// the layout and slide width. The saved root carries .vk_slider--marquee and the per-viewport
+// slides per view (--vk-slider-marquee-spv-mobile / -tablet / -pc) only in marquee mode.
+
+// 画面幅ごとの表示枚数
+// Slides per view for each viewport
+// -----------------------------------------------------------------------------
+// Swiper の breakpoints（576px / 992px）と同じ区切りで、未設定の画面幅は狭い側の値を使う。
+// marquee.js はここで決まった --vk-slider-marquee-spv を読んでスライド幅を計算する。
+// Uses the same breakpoints as Swiper (576px / 992px); an unset viewport falls back to the
+// narrower one. marquee.js reads the resolved --vk-slider-marquee-spv to size the slides.
+.vk_slider--marquee {
+	--vk-slider-marquee-spv: var(--vk-slider-marquee-spv-mobile, 1);
+	// JS の準備前でも 100cqw でスライド幅を決められるよう、ルートを幅のコンテナにする
+	// Make the root an inline-size container so 100cqw can size the slides before the JS runs.
+	container-type: inline-size;
+
+	@media (width >= $xs) {
+		--vk-slider-marquee-spv: var(
+			--vk-slider-marquee-spv-tablet,
+			var(--vk-slider-marquee-spv-mobile, 1)
+		);
+	}
+
+	@media (width >= $md) {
+		--vk-slider-marquee-spv: var(
+			--vk-slider-marquee-spv-pc,
+			var(
+				--vk-slider-marquee-spv-tablet,
+				var(--vk-slider-marquee-spv-mobile, 1)
+			)
+		);
+	}
+}
+
+// スライドの並び
+// The slide track
+// -----------------------------------------------------------------------------
+// 公開画面: JS が動く前から横並び・正しい幅にして、Swiper 向けの見た目（1枚表示・縦積み）が
+// 一瞬見えるのを防ぐ。
+// エディタ: プレビューモードのときだけ横並びにする。クラスはすべて React が管理するものを使い、
+// 子孫で直下だけを指定する（スライドの中のインナーブロックの並びに効かないように）。
+// スライド幅は marquee.js が入れる px の値を優先し、無ければ 100cqw から計算する
+// （cqw に対応していないブラウザでも、JS の準備後は px の値で正しい幅になる）。
+// Front end: lay the slides out in a row at the right width before the JS runs, so the
+// Swiper-oriented look (one slide, stacked) never flashes.
+// Editor: only in preview mode. Every class used here is managed by React, and only direct
+// children are targeted (so the inner block lists inside a slide are left alone).
+// The px width set by marquee.js wins; otherwise it is derived from 100cqw (browsers without
+// cqw support still get the right width from the px value once the JS has run).
+.vk_slider--marquee > .swiper-wrapper,
+.vk_slider--marquee.vk_slider_editorMode--slide
+	> .vk_slider_wrapper
+	> div
+	> .block-editor-inner-blocks
+	> .block-editor-block-list__layout {
+	display: flex;
+	flex-wrap: nowrap;
+	width: max-content;
+	max-width: none;
+	margin: 0;
+
+	> * {
+		flex: 0 0 auto;
+		// スライドの左右の余白（padding）を含めた幅にする。含めないと余白の分だけ広がり、
+		// 表示枚数どおりに並ばない
+		// Include the slide's horizontal padding in its width; otherwise the padding widens
+		// each slide and the slides per view no longer fit.
+		box-sizing: border-box;
+		width: var(
+			--vk-slider-marquee-slide-width,
+			calc(100cqw / var(--vk-slider-marquee-spv, 1))
+		);
+		max-width: none;
+		margin: 0;
+	}
+
+	// ブロック追加ボタンは並びに混ざると一緒に流れてしまうため隠す（編集モードでは表示される）
+	// Hide the block appender so it does not flow with the slides (it shows in edit mode).
+	> .block-list-appender {
+		display: none;
+	}
+}
+
+// はみ出した分を隠す（公開画面は .swiper、エディタはプレビューモードのとき）。
+// hidden のままだと、スライド内へのフォーカス移動でブラウザがルートを横スクロールさせ、
+// 停止ボタンまでずれてしまうため、スクロールできない clip にする
+// （clip に対応していないブラウザは hidden のままになり、marquee.js がスクロールを戻す）。
+// Clip the overflow (.swiper on the front end, preview mode in the editor). With hidden, moving
+// focus into a slide lets the browser scroll the root sideways, shifting even the pause
+// button, so use clip, which cannot scroll (browsers without clip keep hidden, and marquee.js
+// undoes the scroll).
+.vk_slider--marquee.swiper,
+.vk_slider--marquee.vk_slider_editorMode--slide {
+	overflow: hidden;
+	overflow: clip;
 }

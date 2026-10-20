@@ -195,7 +195,34 @@ gulp.task('text-domain-free', () => {
 	]);
 });
 
+// 等速ループ（#3053）: marquee.js の書き出し宣言。helper-js でこの宣言だけを var に置き換える。
+// 宣言の書き方が変わって置き換えられなくなると、公開画面でマーキーが動かなくなるため、
+// 見つからないときはビルドを失敗させる。
+// Continuous loop (#3053): marquee.js's export declaration. helper-js rewrites only this
+// declaration to var. If its wording changes and the rewrite no longer matches, the marquee
+// silently stops working on the front end, so the build fails when it is not found.
+const SLIDER_MARQUEE_EXPORT_PATTERN = /^export const vkBlocksSliderMarquee\b/m;
+
+/**
+ * marquee.js に置き換え対象の宣言があることを確かめる。無ければ例外を投げる。
+ * Makes sure marquee.js contains the declaration to rewrite; throws otherwise.
+ *
+ */
+function assertSliderMarqueeExport() {
+	const filePath = path.resolve(__dirname, 'src/blocks/slider/marquee.js');
+	const content = fs.readFileSync(filePath, 'utf8');
+	if (!SLIDER_MARQUEE_EXPORT_PATTERN.test(content)) {
+		throw new Error(
+			'[helper-js] src/blocks/slider/marquee.js に `export const vkBlocksSliderMarquee` が見つかりません。 / ' +
+				'`export const vkBlocksSliderMarquee` not found in src/blocks/slider/marquee.js.'
+		);
+	}
+}
+
 gulp.task('helper-js', () => {
+	// 置き換え対象が無ければ、連結を始める前にビルドを失敗させる
+	// Fail the build before concatenating when the declaration to rewrite is missing.
+	assertSliderMarqueeExport();
 	return Promise.all([
 		waitForStream(
 			gulp.src('src/blocks/faq2/view.js')
@@ -203,10 +230,23 @@ gulp.task('helper-js', () => {
 		.pipe(concat('vk-faq2.min.js'))
 		.pipe(gulp.dest('./build/'))
 		),
+		// 等速ループ（#3053）の共通処理 marquee.js をエディタと共有するため、view.js の前に
+		// 連結する。marquee.js は webpack 用に `export const vkBlocksSliderMarquee` と
+		// 書いてあるので、その宣言だけを `var vkBlocksSliderMarquee` に置き換えてグローバルにする
+		// （var なので、万一二重に読み込まれても再宣言エラーにならない）。
+		// To share the continuous-loop (#3053) helper marquee.js with the editor, it is
+		// concatenated in front of view.js. marquee.js declares
+		// `export const vkBlocksSliderMarquee` for webpack, so only that declaration is
+		// rewritten to `var vkBlocksSliderMarquee` to make it a global (var also survives
+		// the file being loaded twice without a redeclaration error).
 		waitForStream(
-			gulp.src('src/blocks/slider/view.js')
-		.pipe(uglify())
+			gulp.src([
+				'src/blocks/slider/marquee.js',
+				'src/blocks/slider/view.js',
+			])
+		.pipe(replace(SLIDER_MARQUEE_EXPORT_PATTERN, 'var vkBlocksSliderMarquee'))
 		.pipe(concat('vk-slider.min.js'))
+		.pipe(uglify())
 		.pipe(gulp.dest('./build/'))
 		),
 		waitForStream(
