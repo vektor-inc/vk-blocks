@@ -140,10 +140,6 @@
 	"engines": {
 		"node": ">=24.16.0"
 	},
-	"volta": {
-		"node": "24.16.0",
-		"npm": "11.16.0"
-	},
 	"dependencies": {
 		"regenerator-runtime": "^0.14.1"
 	},
