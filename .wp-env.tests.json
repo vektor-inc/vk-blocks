@@ -4,6 +4,9 @@
 		"."
 	],
 	"port": 8889,
+	"mappings": {
+		"wp-content/mu-plugins/vk-e2e-event-cpt.php": "./test/e2e/fixtures/mu-plugins/vk-e2e-event-cpt.php"
+	},
 	"config": {
 		"WP_DEBUG": true,
 		"SCRIPT_DEBUG": true,

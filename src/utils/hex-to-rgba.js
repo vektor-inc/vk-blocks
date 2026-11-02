@@ -1,5 +1,10 @@
 //hexカラーコード定義をrgbaに変換
 export default function hex2rgba(hex, alpha) {
+	// Return null for non-string input (undefined and the like) so the string operations below cannot throw.
+	// 文字列以外（undefined など）が渡された場合は、以降の文字列操作で落ちないよう null を返す。
+	if (typeof hex !== 'string') {
+		return null;
+	}
 	// rgbaの場合は、そのまま返す（例：rgba( 255,255,255,0.1 )）
 	if (hex.substring(0, 4) === 'rgba') {
 		return hex;

@@ -13,7 +13,11 @@ import { Popover } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import { highlighColor as settings, highlighterOnApply } from './common';
+import {
+	highlighColor as settings,
+	highlighterOnApply,
+	getHighlighterColorCode,
+} from './common';
 
 export function getGradientDirectionByWritingMode(contentRef) {
 	if (!contentRef?.current) {
@@ -43,7 +47,11 @@ export function getActiveColors(value, name) {
 		return undefined;
 	}
 
-	return activeColorFormat.attributes.data;
+	// ColorPalette decides the selected swatch by color code, so a raw slug would leave
+	// nothing selected and print the slug in the input field. Resolve it back first.
+	// ColorPalette は色コードで選択中の色を判定するため、スラッグのままだと選択の印が付かず
+	// 入力欄にスラッグが出る。data にはパレットのスラッグが入ることがあるため色コードへ戻して返す。
+	return getHighlighterColorCode(activeColorFormat.attributes);
 }
 
 function ColorPicker({ name, value, onChange, setIsAddingColor, contentRef }) {

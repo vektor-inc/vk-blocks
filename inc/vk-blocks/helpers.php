@@ -94,7 +94,12 @@ if ( ! function_exists( 'vk_blocks_allow_color_functions_in_kses' ) ) {
 	/**
 	 * Allow rgb/rgba/hsl/hsla color functions in inline CSS when saving posts.
 	 *
-	 * The highlighter format outputs `style="--vk-highlighter-color: rgba(...);"`.
+	 * The highlighter format outputs `style="--vk-highlighter-color: rgba(...);"` for a color
+	 * picked outside the palette. A color picked from the palette is stored as a reference
+	 * instead (`--vk-highlighter-base: var(--wp--preset--color--<slug>, <color code>);`, or
+	 * `--vk-highlighter-color: var(...)` when the palette color already carries an alpha);
+	 * those pass core's own `var()` handling and do not depend on this filter, but the
+	 * fallback color code inside them can still be an rgba() value.
 	 * WordPress core's `safecss_filter_attr()` strips any CSS declaration whose
 	 * value contains parentheses other than the built-in `var()`, `calc()`, and a
 	 * few other functions. That behavior removes the highlighter color for any

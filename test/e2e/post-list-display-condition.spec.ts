@@ -460,6 +460,29 @@ test.describe('Post list parent filter for authors', () => {
 			password: AUTHOR_PASSWORD,
 			roles: ['author'],
 		});
+		// 作ったばかりのユーザーはエディタの設定が未保存のため、エディタを開くと
+		// 「Welcome to the editor」のウェルカムガイド（モーダル）が少し遅れて出る。
+		// モーダルが出ている間は背後の画面が操作対象から外れ、サイドバーのボタンなどが
+		// 見つからなくなる（結果がタイミングで揺れる）。admin.createNewPost() の既定の
+		// 非表示処理は、ユーザー設定の読み込みと競合して間に合わないことがあるため、
+		// 投稿者を作った時点でウェルカムガイドを出さない設定を保存しておく。
+		// A freshly created user has no saved editor preferences, so the "Welcome to the
+		// editor" guide modal opens shortly after the editor loads and hides the rest of the page
+		// from role queries. admin.createNewPost() hides it too, but loses the race against the
+		// user preferences loading, so save "no welcome guide" when the author is created.
+		await requestUtils.rest({
+			path: `/wp/v2/users/${author.id}`,
+			method: 'POST',
+			data: {
+				meta: {
+					persisted_preferences: {
+						'core/edit-post': { welcomeGuide: false },
+						'core/edit-site': { welcomeGuide: false },
+						_modified: new Date().toISOString(),
+					},
+				},
+			},
+		});
 		return { ...author, username };
 	};
 

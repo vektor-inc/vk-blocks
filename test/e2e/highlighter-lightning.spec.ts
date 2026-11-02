@@ -48,15 +48,17 @@ test.describe('Lightning Highlighter', () => {
 		// メニューから「Highlighter」を選択する
 		await page.getByRole('menuitem', { name: 'Highlighter' }).click();
 
-		// 色オプション「Black」を選択する（Lightning パレット由来 → #000000）
+		// 色オプション「Black」を選択する（Lightning はパレットを定義しないため WP 標準パレット由来 → slug: black / #000000）
 		// カラーパレットのスウォッチは role="option" でレンダリングされ、
 		// アクセシブルネームは色名（パレットの name）になる
 		await page.getByRole('option', { name: 'Black', exact: true }).click();
 
-		// 出力された HTML が期待通り（vk_highlighter span）であることを検証する
+		// 出力された HTML が期待通り（vk_highlighter span）であることを検証する。
+		// パレットの色なので色コードではなくスラッグが保存され、表示は CSS 変数で解決する。
+		// 不透明度 0.7 は記事本文に焼かず、src/utils/common.scss 側で --vk-highlighter-base に掛ける。
 		expect(await editor.getEditedPostContent()).toBe(
 			`<!-- wp:paragraph -->
-<p><span data-color="#000000" style="--vk-highlighter-color: rgba(0, 0, 0, 0.7);" class="vk_highlighter">1</span></p>
+<p><span data-color="black" style="--vk-highlighter-base: var(--wp--preset--color--black, #000000);" class="vk_highlighter">1</span></p>
 <!-- /wp:paragraph -->`
 		);
 	});

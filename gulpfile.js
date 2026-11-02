@@ -509,8 +509,10 @@ gulp.task(
 		'sass',
 		'helper-js',
 		'sass_editor',
+		'sass_vk_blocks_options',
 		'sass_bootstrap',
-		'sass_vk_components'
+		'sass_vk_components',
+		'sass-separate-free'
 	)
 );
 gulp.task(
@@ -521,8 +523,11 @@ gulp.task(
 		'helper-js',
 		'helper-js-pro',
 		'sass_editor',
+		'sass_vk_blocks_options',
 		'sass_bootstrap',
-		'sass_vk_components'
+		'sass_vk_components',
+		'sass-separate-free',
+		'sass-separate-pro'
 	)
 );
 

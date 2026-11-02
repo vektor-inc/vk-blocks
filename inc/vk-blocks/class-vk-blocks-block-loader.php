@@ -207,19 +207,36 @@ class VK_Blocks_Block_Loader {
 		 * Load Marged file case
 		 * 結合読み込みの場合 -> 個別の js / css ファイルを読み込まないように配列を改変する
 		 */
+		// 以下の分岐はすべて「$args['style'] があり、ブロック名が vk-blocks/<名前> に一致する」
+		// 場合にだけ $args を書き換える。条件を満たさない登録（コアや他プラグインのブロックを含む
+		// 大半の登録）は、ファイルの存在確認をせずに早期 return する。
+		// この関数はブロック 1 つの登録ごとに呼ばれるため、以前のように一致を確かめる前に
+		// ブロック数ぶんの file_exists を実行すると、1 リクエストで数千回のファイル確認になり、
+		// ファイルアクセスが遅い環境で表示が大きく遅くなっていた。
+		// Return early unless this registration is a VK block with a style: nothing below changes
+		// $args otherwise, and this filter runs once per registered block, so checking
+		// file_exists() for every Pro block first meant thousands of stat calls per request.
+		if ( empty( $args['style'] ) || empty( $args['name'] ) || 0 !== strpos( $args['name'], 'vk-blocks/' ) ) {
+			return $args;
+		}
+
 		foreach ( $this->get_block_names( array( 'is_pro' => false ) ) as $block_name ) {
-			if ( ! empty( $args['style'] ) && 'vk-blocks/' . $block_name === $args['name'] ) {
+			if ( 'vk-blocks/' . $block_name === $args['name'] ) {
 				$args['style_handles']  = array();
 				$args['script_handles'] = array();
+				// ブロック名は一意なので、一致したら残りを調べる必要はない.
+				break;
 			}
 		}
 
 		foreach ( $this->get_block_names( array( 'is_pro' => true ) ) as $block_name ) {
-			if ( file_exists( VK_BLOCKS_DIR_PATH . 'inc/vk-blocks/build/blocks/_pro/' . $block_name . '/index.php' ) ) {
-				if ( ! empty( $args['style'] ) && 'vk-blocks/' . $block_name === $args['name'] ) {
+			// 先にブロック名の一致を判定し、一致したブロックだけ index.php の存在を確認する.
+			if ( 'vk-blocks/' . $block_name === $args['name'] ) {
+				if ( file_exists( VK_BLOCKS_DIR_PATH . 'inc/vk-blocks/build/blocks/_pro/' . $block_name . '/index.php' ) ) {
 					$args['style_handles']  = array();
 					$args['script_handles'] = array();
 				}
+				break;
 			}
 		}
 		return $args;

@@ -97,7 +97,7 @@ globs: ["**/*"]
 - コントラスト比は WCAG AA 以上を目安に。点滅/自動再生などは回避または `prefers-reduced-motion` に対応。
 
 ## 14. ビルド / アセット運用
-- Node は Volta 設定（`package.json`）に従う。基本コマンド: `npm run build`（本番）、`npm run build:dev`/`build:cache`（開発）。
+- Node は `.node-version` に従う。基本コマンド: `npm run build`（本番）、`npm run build:dev`/`build:cache`（開発）。
 - 変更を含む PR ではビルドを実施し、必要な生成物（`inc/vk-blocks/build/` 等）をコミット。PR テンプレートの確認事項に従う。
 - 翻訳ファイルは `npm run translate` で更新。
 

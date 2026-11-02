@@ -74,6 +74,23 @@
 [class*="--vk-highlighter"] {
 	@include vk-highlighter-gradient();
 }
+/* --vk-highlighter-color holds the final color with 0.7 already applied, --vk-highlighter-base
+   holds the base color before 0.7 is applied; swapping the two applies 0.7 twice to existing
+   markers. 70% must stay in sync with `alpha` in src/extensions/common/highlighter/common.js.
+   This rule is limited to markers that carry --vk-highlighter-base themselves. CSS variables are
+   inherited, so defining --vk-highlighter-color on every marker would override the color of an
+   ancestor such as a Pro custom format class, and leaving it undefined would make a marker take
+   its ancestor's color instead of its own base color.
+   --vk-highlighter-color は 0.7 を適用済みの最終色、--vk-highlighter-base は 0.7 を掛ける前の
+   ベース色で、役割が違う。2つを入れ替えると既存のマーカーに 0.7 が二重に掛かって薄くなるため、
+   片方だけ読み替えないこと。70% は src/extensions/common/highlighter/common.js の alpha と
+   そろえる必要があり、片方だけ変えると新旧データで濃さが食い違う。
+   --vk-highlighter-base を自分で持つマーカーだけに限定している。CSS 変数は継承されるため、
+   すべてのマーカーに --vk-highlighter-color を定義すると Pro のカスタム書式のクラスなど祖先の色を
+   上書きしてしまい、定義しないと自分のベース色ではなく祖先の色を拾ってしまう。 */
+.vk_highlighter[style*="--vk-highlighter-base"] {
+	--vk-highlighter-color: color-mix(in srgb, var(--vk-highlighter-base) 70%, transparent);
+}
 [style*="vertical-rl"] .vk_highlighter,
 [style*="vertical-rl"] [class*="--vk-highlighter"] {
 	@include vk-highlighter-gradient(to left);

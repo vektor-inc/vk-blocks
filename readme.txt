@@ -4,7 +4,7 @@ Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 6.6
 Tested up to: 7.1
-Stable tag: 1.129.0
+Stable tag: 1.130.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -114,10 +114,20 @@ The parent filter displays only direct children of one hierarchical post type ex
 
 == Changelog ==
 
+= 1.130.0 =
+[ New Feature ][ Group Block ] Added a "Mark up as a heading group (`<hgroup>`)" switch to the Advanced settings, so a group can be output as an `<hgroup>` element.
+[ Spec Change ][ Highlighter ] Markers now follow later changes to the palette color they were drawn with. Markers drawn before this update, and markers drawn with a color picked outside the palette, keep the color they were drawn with. To make a marker drawn before this update with a palette color follow the palette, select its text, choose a different palette color, and then choose the original color again.
+[ Spec Change ] Updated the WordPress icon library (@wordpress/icons) bundled into the block editor screens from 17.0.0 to 19.0.0.
+[ Bug Fix ][ Animation (Pro) ] Fixed the content staying invisible when JavaScript is disabled. It is now displayed from the start.
+[ Bug Fix ][ Animation (Pro) ] Fixed the animation still playing on devices that request reduced motion (prefers-reduced-motion). The content is now displayed from the start without moving.
+[ Security Fix ] Enabled SSL certificate verification for HTTPS requests.
+[ Other ] Reduced the number of file existence checks run on every page load when blocks are registered, which made page loading slow on servers with slow file access.
+
 = 1.129.0 =
 [ New Feature ][ Post List Block (Pro) ][ Post List Slider Block (Pro) ] Added fixed keyword search and parent filters for displaying matching posts or direct child pages.
 [ Spec Change ][ Post List Block (Pro) / Post List Slider Block (Pro) / Select Post List Block (Pro) / Child Page List Block (Pro) ] Updated the vk-term-color library used for category colors from 0.7.1 to 0.7.4, also adding a permission check when saving a term color and hardening the library against invalid input (fatal errors / PHP warnings in a few edge cases). The text on a colored category label is now black or white depending on how light the category color is, instead of always being white. On existing sites, labels with a light category color (yellow or yellow-green, for example) change from white text to black text and become easier to read; labels with a darker color look the same as before. To keep the labels white, add `.vk_post_imgOuter_singleTermLabel, .postListText_singleTermLabel_inner { color: #fff !important; }` to Additional CSS.
 [ Spec Change ] A category color that is not a valid color code is now discarded, and that category falls back to the default gray (#999999). Colors picked with the color picker are not affected.
+[ Spec Change ][ Fixed Display (Pro) ] When the keyboard focus is inside a fixed display that has a close button, pressing Esc now closes it the same way as the close button.
 [ Bug Fix ][ Category Badge Block (Pro) ] Fixed the display of multiple categories using the hard-coded default gray instead of the color set with the term_color_default_custom filter, which the display of a single category already used.
 [ Bug Fix ] Fixed an issue where highlighter colors disappeared in the free version when Authors or Contributors saved posts.
 [ Bug Fix ][ Fixed Display (Pro) ] Fixed an issue where, when "Specify the time until display and hide" was combined with "Do not display again until the browser is closed", the banner disappeared right after it appeared if the page took a long time to load.

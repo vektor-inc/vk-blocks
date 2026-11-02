@@ -6444,3 +6444,24 @@ msgstr "親ページを取得できませんでした。"
 #: src/components/display-condition/parent-filter-control.js
 msgid "Available only when a single hierarchical post type (such as Pages) is selected."
 msgstr "固定ページなど、親子関係を持つ投稿タイプを 1 つだけ選んでいるときに使えます。"
+
+#: src/extensions/core/group/hgroup-control.js
+msgid "Mark up as a heading group (<hgroup>)"
+msgstr "見出しグループ（<hgroup>）としてマークアップする"
+
+#: src/extensions/core/group/hgroup-control.js
+msgid "Marks a heading and its subtitle or tagline as one unit in HTML."
+msgstr "見出しとサブタイトル（キャッチコピー）を、HTML 上でひとまとまりの見出しとして示します。"
+
+#: src/extensions/core/group/hgroup-control.js
+msgid "The \"HTML element\" field keeps showing \"Default\" while this is on."
+msgstr "ON の間も「HTML 要素」の欄は「デフォルト」のままです。"
+
+#: src/extensions/core/group/hgroup-control.js
+msgid "<hgroup> can only contain one Heading block and Paragraph blocks, such as a subtitle."
+msgstr "<hgroup> の中に置けるのは、見出しブロック 1 つと、サブタイトルなどの段落ブロックだけです。"
+
+#: src/extensions/core/group/hgroup-control.js
+msgid "Group links cannot be used with <hgroup>."
+msgstr "<hgroup> ではグループのリンクを使えません。"
+

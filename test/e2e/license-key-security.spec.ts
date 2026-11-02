@@ -226,6 +226,20 @@ test.describe('Security', () => {
 
 		// グループ化して一括検査（既存ロジックを流用）
 		const groups = makeGroups(testBlocks, groupSize);
+
+		// このテストは、ブロックを groupSize 個ずつのグループに分け、グループごとに
+		// 「新規投稿を開く→ブロックを挿入→公開→フロントを表示」を繰り返す。
+		// 必要な時間はグループ数（＝ブロック数）に比例して増えるため、テスト全体の上限を
+		// 一律 100 秒にしておくと、ブロックが増えるたびに収まらなくなる。
+		// そこで、グループ 1 つあたり 30 秒 + 全体の余裕 60 秒を上限にする。
+		// 既定の上限（100 秒）より短くならないよう Math.max で下限を保つ（CI の挙動は変わらない）。
+		// The time needed grows with the number of groups (= number of blocks), so a flat
+		// 100-second cap stops fitting as blocks are added. Budget 30 s per group + 60 s overall,
+		// never below the default cap (Math.max), so CI behaviour does not change.
+		test.setTimeout(
+			Math.max(test.info().timeout, groups.length * 30000 + 60000)
+		);
+
 		for (let idx = 0; idx < groups.length; idx++) {
 			const group = groups[idx];
 

@@ -1,4 +1,5 @@
 const { execFileSync } = require('child_process');
+const fs = require('fs');
 const path = require('path');
 const { request } = require('@playwright/test');
 const { RequestUtils } = require('@wordpress/e2e-test-utils-playwright');
@@ -26,7 +27,62 @@ const REPO_ROOT = path.resolve(__dirname, '..', '..');
 // The plugin slug in the test environment. `.wp-env.tests.json` declares `"plugins": ["."]`, so
 // the basename wp-env uses is the checkout directory's name. That name differs in a worktree, so
 // derive it from the root instead of hard-coding it.
-const PLUGIN_SLUG = path.basename(REPO_ROOT);
+//
+// ただし、プラグイン側は「プラグインのディレクトリ名に vk-blocks-pro が含まれるか」で Pro 版かどうかを
+// 判定する（vk_blocks_is_pro()）。worktree のようにディレクトリ名が変わると Pro 版ではなく
+// 無料版として動き、ライセンスキー欄・Import・FAQ・カスタム書式などの Pro 版の画面が出ずに
+// e2e が落ちる。そのためディレクトリ名に vk-blocks-pro が含まれない場所で流すときは、
+// `.wp-env.tests.override.json`（コミットしないローカル設定）で
+// `"plugins": []` と `"mappings": { "wp-content/plugins/vk-blocks-pro": "." }` を指定して
+// vk-blocks-pro という名前でマウントし、ここではその名前を有効化する。
+//
+// The plugin decides whether it is the Pro build from whether its directory name contains
+// `vk-blocks-pro` (vk_blocks_is_pro()). In a checkout whose directory is named otherwise (e.g.
+// a worktree) it runs as the free build, hiding the Pro-only screens (license key, Import, FAQ,
+// custom formats, ...) and failing those specs. When the checkout directory does not contain
+// `vk-blocks-pro`, mount it under that name through the local `.wp-env.tests.override.json`
+// (`"plugins": []` plus `"mappings": { "wp-content/plugins/vk-blocks-pro": "." }`), and
+// activate that name here.
+const CHECKOUT_DIR_NAME = path.basename(REPO_ROOT);
+
+// wp-env の設定ファイル（`.wp-env.tests.json` と、ローカル上書きの `.wp-env.tests.override.json`）の
+// `mappings` に、`wp-content/plugins/vk-blocks-pro` への割り当てがあるかどうか。
+// 割り当てがあるときだけ、そのフォルダ名（vk-blocks-pro）で有効化する。割り当てが無いのに
+// vk-blocks-pro を有効化しようとすると、存在しないプラグインを指して全テストが止まるため、
+// その場合は従来どおりチェックアウト先のフォルダ名を使う（無料版リポジトリでも同じ）。
+//
+// Whether `mappings` in the wp-env config files (`.wp-env.tests.json` and the local
+// `.wp-env.tests.override.json`) maps something to `wp-content/plugins/vk-blocks-pro`.
+// Only then activate that name. Activating `vk-blocks-pro` without such a mapping points at a
+// plugin that does not exist and stops every spec, so otherwise fall back to the checkout
+// directory name as before (also in the free-version repository).
+function hasVkBlocksProMapping() {
+	const target = 'wp-content/plugins/vk-blocks-pro';
+	for (const file of ['.wp-env.tests.json', '.wp-env.tests.override.json']) {
+		try {
+			const config = JSON.parse(
+				fs.readFileSync(path.join(REPO_ROOT, file), 'utf8')
+			);
+			const mappings = config.mappings || {};
+			if (
+				Object.keys(mappings).some(
+					(key) => key.replace(/^\/+|\/+$/g, '') === target
+				)
+			) {
+				return true;
+			}
+		} catch {
+			// ファイルが無い、または JSON として読めない場合は、割り当て無しとして扱う
+			// A missing or unparsable file counts as "no mapping".
+		}
+	}
+	return false;
+}
+
+const PLUGIN_SLUG =
+	!CHECKOUT_DIR_NAME.includes('vk-blocks-pro') && hasVkBlocksProMapping()
+		? 'vk-blocks-pro'
+		: CHECKOUT_DIR_NAME;
 
 // wp-env の実行ファイルの絶対パス。
 //
@@ -175,8 +231,15 @@ function activatePluginUnderTest() {
 		throw new Error(
 			`テスト対象のプラグイン '${PLUGIN_SLUG}' を有効化できませんでした。` +
 				'この状態では全スペックが publishPost() のタイムアウトで落ちます。' +
+				'フォルダ名に vk-blocks-pro を含まない場所（worktree など）で流す場合は、' +
+				'`.wp-env.tests.override.json` で `"plugins": []` と ' +
+				'`"mappings": {"wp-content/plugins/vk-blocks-pro": "."}` を指定して ' +
+				'vk-blocks-pro という名前でマウントしてください。' +
 				` / Could not activate the plugin under test ('${PLUGIN_SLUG}'). ` +
 				'Every spec would fail on a publishPost() timeout in this state. ' +
+				'If the checkout directory name does not contain vk-blocks-pro (e.g. a worktree), ' +
+				'mount it under that name through `.wp-env.tests.override.json` with ' +
+				'`"plugins": []` and `"mappings": {"wp-content/plugins/vk-blocks-pro": "."}`. ' +
 				`(${error.message})`
 		);
 	}

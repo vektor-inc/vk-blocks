@@ -6439,3 +6439,24 @@ msgstr ""
 #: src/components/display-condition/parent-filter-control.js
 msgid "Available only when a single hierarchical post type (such as Pages) is selected."
 msgstr ""
+
+#: src/extensions/core/group/hgroup-control.js
+msgid "Mark up as a heading group (<hgroup>)"
+msgstr ""
+
+#: src/extensions/core/group/hgroup-control.js
+msgid "Marks a heading and its subtitle or tagline as one unit in HTML."
+msgstr ""
+
+#: src/extensions/core/group/hgroup-control.js
+msgid "The \"HTML element\" field keeps showing \"Default\" while this is on."
+msgstr ""
+
+#: src/extensions/core/group/hgroup-control.js
+msgid "<hgroup> can only contain one Heading block and Paragraph blocks, such as a subtitle."
+msgstr ""
+
+#: src/extensions/core/group/hgroup-control.js
+msgid "Group links cannot be used with <hgroup>."
+msgstr ""
+

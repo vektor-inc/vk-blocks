@@ -5,11 +5,6 @@ reviews:
   high_level_summary: true
   # 意図的な設計・方針のため、以下は繰り返し指摘しないよう CodeRabbit へ通知する。
   path_instructions:
-    - path: "package.json"
-      instructions: >-
-        volta.npm: "11.16.0" は実在する有効な npm バージョンで、volta は Node にバンドル
-        された npm ではなくこの固定版を使用します。Node 24.16.0 バンドル npm（11.13.0 等）と
-        一致させる必要はないため、volta.npm の変更は提案しないでください。
     - path: "test/e2e/breadcrumb-disable-links.spec.ts"
       instructions: >-
         force クリック後の page.waitForTimeout(500) + URL 比較は「遷移しないこと」という
@@ -42,7 +37,7 @@ reviews:
     - path: "test/e2e/{balloon,vk-blocks-options}.spec.ts"
       instructions: >-
         fs.rmSync（一時ファイル削除）は Node >= 14.14.0 の API ですが、本プロジェクトは
-        Node 24（engines/volta）・CI は Node 20.x のため利用可能です。Node 互換性や
+        Node 24（.node-version/engines）・CI も .node-version を使用するため利用可能です。Node 互換性や
         fs.unlinkSync へのフォールバックは提案しないでください。
     - path: "test/e2e/taxonomy.spec.ts"
       instructions: >-
@@ -66,7 +61,7 @@ reviews:
       instructions: >-
         const autoprefixer = require('gulp-autoprefixer').default; は意図的です。
         gulp-autoprefixer@10 は ESM ですが、本プロジェクトが対象とする Node では
-        require(ESM) がサポートされ（volta/engines は Node 24、CI は Node 20.19+）、
+        require(ESM) がサポートされ（.node-version/engines は Node 24、CI も .node-version を使用）、
         require した既定関数は .default に入るため、この記述で正しく動作します。
         ESM 化（type: module / .mjs）や dynamic import への変更、v9 へのダウングレードは
         提案しないでください。

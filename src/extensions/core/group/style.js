@@ -30,6 +30,7 @@ import HorizontalScrollControls, {
 	SCROLL_DATA_ATTR_KEYS,
 } from '@vkblocks/utils/horizontal-scroll-controls';
 import deprecated from './deprecated/index';
+import HgroupControl from './hgroup-control';
 
 /**
  * Check if the block type is valid for customization.
@@ -995,6 +996,11 @@ export const addBlockControl = createHigherOrderComponent((BlockEdit) => {
 							</PanelBody>
 						)}
 					</InspectorControls>
+					<HgroupControl
+						clientId={clientId}
+						attributes={attributes}
+						setAttributes={setAttributes}
+					/>
 				</Fragment>
 			);
 		}
