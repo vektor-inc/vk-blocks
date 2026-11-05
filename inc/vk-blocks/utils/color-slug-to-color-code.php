@@ -56,3 +56,31 @@ function vk_blocks_get_color_code( $value ) {
 	}
 	return $return;
 }
+
+/**
+ * Get_safe_color_code
+ *
+ * 保存された色の値を CSS の色コードに変換し、安全な形だけを返す関数。
+ * 許可する形は HEX（#fff / #ffff / #ffffff / #ffffffff）と、パレットスラッグの CSS 変数のみ。
+ * スラッグは ASCII 英数字・_・- に加え、日本語や絵文字など ASCII 以外の文字も許可する（CSS の区切りは ASCII のみのため）。
+ * それ以外（<style> を閉じる文字や宣言を足す文字を含む値など）は空文字を返す。
+ *
+ * @param string $value : color string.
+ *
+ * @return string 安全な色コード。許可しない値のときは空文字。
+ */
+function vk_blocks_get_safe_color_code( $value ) {
+	if ( ! is_string( $value ) ) {
+		return '';
+	}
+
+	// 既存の変換を通した結果が、許可する形に一致するものだけ返す
+	$color_code = vk_blocks_get_color_code( $value );
+	if ( preg_match( '/\A#(?:[a-fA-F0-9]{3}|[a-fA-F0-9]{4}|[a-fA-F0-9]{6}|[a-fA-F0-9]{8})\z/', $color_code ) ) {
+		return $color_code;
+	}
+	if ( preg_match( '/\Avar\(--wp--preset--color--(?:[a-zA-Z0-9_-]|[^\x00-\x7F])+\)\z/u', $color_code ) ) {
+		return $color_code;
+	}
+	return '';
+}

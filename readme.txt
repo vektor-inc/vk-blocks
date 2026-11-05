@@ -4,7 +4,7 @@ Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 6.6
 Tested up to: 7.1
-Stable tag: 1.130.0
+Stable tag: 1.130.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -113,6 +113,13 @@ The parent filter displays only direct children of one hierarchical post type ex
 1. VK Blocks examples.
 
 == Changelog ==
+
+= 1.130.1 =
+[ Bug Fix ][ Custom CSS (Pro) ] Custom CSS that did not take effect on the public page (such as a rule without the last semicolon or CSS nesting) now works the same way as in the editor.
+[ Bug Fix ][ Button Block ][ Outer (Pro) ][ Slider Block ][ Tab (Pro) ] Fixed a block validation error shown when reopening in the editor a block saved by a user other than an administrator.
+[ Security Fix ][ Custom CSS (Pro) ] Fixed the output processing of custom CSS.
+[ Security Fix ][ List Block ] Fixed the output processing of the list color.
+[ Security Fix ] Limited the HTML tags added to the allowed HTML list to post content only.
 
 = 1.130.0 =
 [ New Feature ][ Group Block ] Added a "Mark up as a heading group (`<hgroup>`)" switch to the Advanced settings, so a group can be output as an `<hgroup>` element.

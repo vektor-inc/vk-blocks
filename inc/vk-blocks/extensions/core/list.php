@@ -67,15 +67,17 @@ function vk_blocks_render_core_list( $block_content, $block ) {
 
 	$updated_html = $block_content->get_updated_html();
 
+	// 色の値は許可した形だけ通す（不正な値のときは色の CSS を出さない）
+	$color_code  = $has_color ? vk_blocks_get_safe_color_code( $block['attrs']['color'] ) : '';
 	$list_styles = array();
-	if ( $has_color ) {
+	if ( '' !== $color_code ) {
 		if ( $is_numbered_square ) {
 			$list_styles = array(
 				array(
 					'selector'     => ".is-style-vk-numbered-square-mark.{$unique_classname} li::before",
 					'declarations' => array(
 						'color'            => '#fff',
-						'background-color' => vk_blocks_get_color_code( $block['attrs']['color'] ) . ' !important',
+						'background-color' => $color_code . ' !important',
 					),
 				),
 			);
@@ -85,7 +87,7 @@ function vk_blocks_render_core_list( $block_content, $block ) {
 					'selector'     => ".is-style-vk-numbered-circle-mark.{$unique_classname} li::before",
 					'declarations' => array(
 						'color'            => '#fff',
-						'background-color' => vk_blocks_get_color_code( $block['attrs']['color'] ) . ' !important',
+						'background-color' => $color_code . ' !important',
 					),
 				),
 			);
@@ -94,7 +96,7 @@ function vk_blocks_render_core_list( $block_content, $block ) {
 				array(
 					'selector'     => ".{$unique_classname} li::marker,.{$unique_classname} li::before",
 					'declarations' => array(
-						'color' => vk_blocks_get_color_code( $block['attrs']['color'] ) . ' !important',
+						'color' => $color_code . ' !important',
 					),
 				),
 			);

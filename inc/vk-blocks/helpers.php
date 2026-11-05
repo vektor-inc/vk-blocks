@@ -27,49 +27,84 @@ function vk_blocks_is_lightning() {
 if ( ! function_exists( 'vk_blocks_allow_wp_kses_allowed_html' ) ) {
 
 	/**
-	 * Fix block saving for Non-Super-Admins (no unfiltered_html capability).
-	 * For Non-Super-Admins, some styles & HTML tags/attributes are removed upon saving,
-	 * this allows vkblocks HTML tags & attributes from being saved.
+	 * Add the tags that VK Blocks saves in post content to the allowed HTML list of the 'post' context.
+	 * VK Blocks が投稿の本文に保存するタグを、投稿の本文の場面（'post'）の HTML 許可リストに追加する。
 	 *
-	 * For every vkblocks block, add the HTML tags and attributes used here.
+	 * Users without the unfiltered_html capability (Author, Contributor, and every user on multisite
+	 * except Super Admin) have their content filtered by KSES on save. This keeps the style / svg / path / rect
+	 * tags and the attributes of a / li (button, outer, slider and tab blocks) output by VK Blocks from being removed.
+	 * unfiltered_html 権限を持たないユーザー（投稿者・寄稿者、マルチサイトのスーパー管理者以外）は、
+	 * 保存時に KSES で内容が絞られる。VK Blocks が出力する style・svg・path・rect と、a・li の
+	 * 属性（ボタン・アウター・スライダー・タブの各ブロック）が消えないようにする。
 	 *
-	 * @see The list of tags & attributes currently allowed: https://core.trac.wordpress.org/browser/tags/5.2/src/wp-includes/kses.php#L61
+	 * Only the 'post' context is changed. Other contexts (comments, 'data', 'strip', post titles,
+	 * profile descriptions, and so on) get the list back unchanged, so WordPress's own limits stay as they are.
+	 * 変えるのは投稿の本文の場面だけ。コメント・data・strip・投稿タイトル・プロフィール文などの場面は、
+	 * 受け取った一覧をそのまま返し、WordPress 本来の制限を保つ。
 	 *
-	 * @param array $tags Allowed HTML tags & attributes.
+	 * The input tag is not added, because adding it makes WordPress allow related tags automatically.
+	 * An input already added by another plugin is left as it is.
+	 * input は足さない（足すと WordPress 本体が関連するタグを自動で許可するため）。
+	 * ほかのプラグインが足した input には触らない。
 	 *
-	 * @return array Modified HTML tags & attributes.
+	 * Keep the default value of $context. Another plugin may call apply_filters( 'wp_kses_allowed_html', $tags )
+	 * with only one argument, and WordPress then passes only $tags to this function.
+	 * $context の既定値は外さないこと。ほかのプラグインが apply_filters( 'wp_kses_allowed_html', $tags ) と
+	 * 引数 1 つで呼ぶと、WordPress はこの関数に $tags だけを渡すため、既定値が無いと致命的エラーになる。
+	 *
+	 * @see wp_kses_allowed_html()
+	 *
+	 * @param array  $tags    Allowed HTML tags and attributes. / 許可するタグと属性の一覧.
+	 * @param string $context Optional. Context name of the allowed list (such as 'post'). Default '' (nothing is added). /
+	 *                        省略可。許可リストの場面名（'post' など）。既定値は ''（何も足さずに返す）.
+	 * @return array In the 'post' context, the list with the tags and attributes above added. Otherwise the list as received.
+	 *               'post' の場面では上記のタグと属性を足した一覧。それ以外の場面では受け取った一覧のまま。
 	 */
-	function vk_blocks_allow_wp_kses_allowed_html( $tags ) {
+	function vk_blocks_allow_wp_kses_allowed_html( $tags, $context = '' ) {
+		// Leave every context other than post content unchanged.
+		// 投稿の本文以外の場面は何も足さずに返す。
+		if ( 'post' !== $context ) {
+			return $tags;
+		}
 
+		// Attributes used by VK Blocks. Existing definitions are merged in so that attributes added by other plugins remain.
+		// VK Blocks が使う属性。ほかのプラグインが足した属性が残るよう、既存の定義と合わせる。
 		$style_defaults = array(
 			'type' => true,
-		);
-		$input_defaults = array(
-			'type'        => true,
-			'id'          => true,
-			'class'       => true,
-			'style'       => true,
-			'name'        => true,
-			'value'       => true,
-			'checked'     => true,
-			'placeholder' => true,
 		);
 		$svg_defaults   = array(
 			'viewbox'             => true,
 			'xmlns'               => true,
 			'preserveaspectratio' => true,
+			'class'               => true,
+			'width'               => true,
+			'height'              => true,
+			'aria-hidden'         => true,
+			'focusable'           => true,
 		);
 		$path_defaults  = array(
 			'fill'         => true,
 			'd'            => true,
 			'stroke-width' => true,
+			'class'        => true,
+		);
+		$rect_defaults  = array(
+			'x'      => true,
+			'y'      => true,
+			'width'  => true,
+			'height' => true,
+			'rx'     => true,
+		);
+		$a_defaults     = array(
+			'aria-pressed' => true,
+		);
+		$li_defaults    = array(
+			'aria-selected' => true,
+			'tabindex'      => true,
 		);
 
 		$current_style = ( isset( $tags['style'] ) && is_array( $tags['style'] ) ) ? $tags['style'] : array();
 		$tags['style'] = array_merge( $style_defaults, $current_style );
-
-		$current_input = ( isset( $tags['input'] ) && is_array( $tags['input'] ) ) ? $tags['input'] : array();
-		$tags['input'] = array_merge( $input_defaults, $current_input );
 
 		$current_svg = ( isset( $tags['svg'] ) && is_array( $tags['svg'] ) ) ? $tags['svg'] : array();
 		$tags['svg'] = array_merge( $svg_defaults, $current_svg );
@@ -77,10 +112,19 @@ if ( ! function_exists( 'vk_blocks_allow_wp_kses_allowed_html' ) ) {
 		$current_path = ( isset( $tags['path'] ) && is_array( $tags['path'] ) ) ? $tags['path'] : array();
 		$tags['path'] = array_merge( $path_defaults, $current_path );
 
+		$current_rect = ( isset( $tags['rect'] ) && is_array( $tags['rect'] ) ) ? $tags['rect'] : array();
+		$tags['rect'] = array_merge( $rect_defaults, $current_rect );
+
+		$current_a = ( isset( $tags['a'] ) && is_array( $tags['a'] ) ) ? $tags['a'] : array();
+		$tags['a'] = array_merge( $a_defaults, $current_a );
+
+		$current_li = ( isset( $tags['li'] ) && is_array( $tags['li'] ) ) ? $tags['li'] : array();
+		$tags['li'] = array_merge( $li_defaults, $current_li );
+
 		return $tags;
 	}
 
-	add_filter( 'wp_kses_allowed_html', 'vk_blocks_allow_wp_kses_allowed_html', 10, 1 );
+	add_filter( 'wp_kses_allowed_html', 'vk_blocks_allow_wp_kses_allowed_html', 10, 2 );
 }
 
 /*
