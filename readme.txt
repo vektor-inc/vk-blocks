@@ -4,7 +4,7 @@ Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 6.6
 Tested up to: 7.1
-Stable tag: 1.130.1
+Stable tag: 1.131.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -113,6 +113,16 @@ The parent filter displays only direct children of one hierarchical post type ex
 1. VK Blocks examples.
 
 == Changelog ==
+
+= 1.131.0 =
+[ Spec Change ][ Visual Embed ] The embed is now output by the plugin when the page is displayed, so it is no longer shown while the plugin is inactive. The allowed URL check is also applied when saving and displaying, not only in the editor.
+[ Spec Change ][ Visual Embed ] Position and z-index styles added to an embed, and characters other than letters, numbers, hyphens and underscores in its ID and CSS class, are no longer kept.
+[ Spec Change ] Update vektor-inc/vk-component from 1.7.2 to 1.7.3.
+[ Bug Fix ][ Visual Embed ] Fixed the embed disappearing and a block validation error being shown when a user without the unfiltered HTML permission (such as an Author) saves and reopens the post.
+[ Security Fix ][ Blog Card Site Logo (Pro) ] Fixed the output escaping of site logo URLs.
+[ Security Fix ][ Category Badge Block (Pro) ] Fixed the output processing of the gap between badges so that only a valid length is output. Values that are not a valid length are now replaced with the default (0.5em) on the front end.
+[ Security Fix ][ Blog Card (Pro) ] Fixed the URL validation and output escaping.
+[ Security Fix ][ Post List Slider Block (Pro) ][ Select Post List Block (Pro) ] Added output escaping for display settings.
 
 = 1.130.1 =
 [ Bug Fix ][ Custom CSS (Pro) ] Custom CSS that did not take effect on the public page (such as a rule without the last semicolon or CSS nesting) now works the same way as in the editor.

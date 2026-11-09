@@ -63,6 +63,17 @@ describe('full post content fixture', () => {
 			writable: false,
 		});
 
+		// ビジュアル埋め込みブロックの許可 URL（本番では PHP が wp_localize_script で渡す）。
+		// 無いと旧形式の fixture が移行時に不許可扱いになり embedAttributes が空になる。
+		window.vkBlocksVisualEmbed = {
+			allowedUrlPatterns: [
+				'https://*.google.com/*',
+				'https://*.youtube.com/embed/*',
+				'https://www.openstreetmap.org/export/*',
+				'https://player.vimeo.com/*',
+			],
+		};
+
 		// Load all hooks that modify blocks
 		require('./../../../src/blocks/slider');
 

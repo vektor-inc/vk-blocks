@@ -1,0 +1,182 @@
+[
+	{
+		"name": "許可ドメインのパス => 一致",
+		"url": "https://www.google.com/maps",
+		"pattern": "https://*.google.com/*",
+		"expected": true
+	},
+	{
+		"name": "サブドメイン無しのドメイン自体と日本語クエリ => 一致",
+		"url": "https://google.com/maps?q=東京",
+		"pattern": "https://*.google.com/*",
+		"expected": true
+	},
+	{
+		"name": "日本語のパスと空白を含む日本語クエリ => 一致",
+		"url": "https://www.google.com/地図?q=東京 駅",
+		"pattern": "https://*.google.com/*",
+		"expected": true
+	},
+	{
+		"name": "複数のクエリと日本語のフラグメント => 一致",
+		"url": "https://www.google.com/maps?x=a&y=b#地図",
+		"pattern": "https://*.google.com/*",
+		"expected": true
+	},
+	{
+		"name": "許可ドメインを前に付けた別ドメイン => 不一致",
+		"url": "https://www.google.com.attacker.test/maps",
+		"pattern": "https://*.google.com/*",
+		"expected": false
+	},
+	{
+		"name": "パスに許可ドメインを含む別ドメイン => 不一致",
+		"url": "https://attacker.test/.google.com/maps",
+		"pattern": "https://*.google.com/*",
+		"expected": false
+	},
+	{
+		"name": "ユーザー情報の位置に許可ドメインを置いた別ドメイン => 不一致",
+		"url": "https://www.google.com@attacker.test/maps",
+		"pattern": "https://*.google.com/*",
+		"expected": false
+	},
+	{
+		"name": "ユーザー情報付きの許可ドメイン => 不一致（あいまいな形は受け付けない）",
+		"url": "https://attacker.test@www.google.com/maps",
+		"pattern": "https://*.google.com/*",
+		"expected": false
+	},
+	{
+		"name": "スキームが http => 不一致",
+		"url": "http://www.google.com/maps",
+		"pattern": "https://*.google.com/*",
+		"expected": false
+	},
+	{
+		"name": "javascript スキーム => 不一致",
+		"url": "javascript:alert(1)",
+		"pattern": "https://*.google.com/*",
+		"expected": false
+	},
+	{
+		"name": "スキーム省略 => 不一致",
+		"url": "//www.google.com/maps",
+		"pattern": "https://*.google.com/*",
+		"expected": false
+	},
+	{
+		"name": "バックスラッシュを含むホスト偽装 => 不一致",
+		"url": "https://www.google.com\\@attacker.test/maps",
+		"pattern": "https://*.google.com/*",
+		"expected": false
+	},
+	{
+		"name": "ドット区間 (..) を含むパス => 不一致",
+		"url": "https://www.google.com/a/../maps",
+		"pattern": "https://*.google.com/*",
+		"expected": false
+	},
+	{
+		"name": "パーセント符号化したドット区間を含むパス => 不一致",
+		"url": "https://www.google.com/%2e%2e/maps",
+		"pattern": "https://*.google.com/*",
+		"expected": false
+	},
+	{
+		"name": "末尾に改行を含む URL => 不一致",
+		"url": "https://www.google.com/maps\n",
+		"pattern": "https://*.google.com/*",
+		"expected": false
+	},
+	{
+		"name": "不正なパーセント符号化を含むクエリ => 不一致",
+		"url": "https://www.google.com/maps?bad=%xx",
+		"pattern": "https://*.google.com/*",
+		"expected": false
+	},
+	{
+		"name": "範囲外のポート番号 => 不一致",
+		"url": "https://www.google.com:99999/maps",
+		"pattern": "https://*.google.com/*",
+		"expected": false
+	},
+	{
+		"name": "先頭に 0 を付けたポート番号 => 不一致",
+		"url": "https://www.google.com:0443/maps",
+		"pattern": "https://*.google.com/*",
+		"expected": false
+	},
+	{
+		"name": "パターンにポート指定が無ければ URL のポートは問わない => 一致",
+		"url": "https://www.google.com:443/maps",
+		"pattern": "https://*.google.com/*",
+		"expected": true
+	},
+	{
+		"name": "山括弧を含むクエリ => 不一致",
+		"url": "https://www.google.com/maps?x=<script>",
+		"pattern": "https://*.google.com/*",
+		"expected": false
+	},
+	{
+		"name": "空文字 => 不一致",
+		"url": "",
+		"pattern": "https://*.google.com/*",
+		"expected": false
+	},
+	{
+		"name": "null => 不一致",
+		"url": null,
+		"pattern": "https://*.google.com/*",
+		"expected": false
+	},
+	{
+		"name": "日本語クエリとパーセント符号化済みのパターン => 一致",
+		"url": "https://example.com/embed?q=東京",
+		"pattern": "https://example.com/embed?q=%E6%9D%B1%E4%BA%AC",
+		"expected": true
+	},
+	{
+		"name": "パターンのクエリと異なる値 => 不一致",
+		"url": "https://example.com/embed?q=wrong",
+		"pattern": "https://example.com/embed?q=right",
+		"expected": false
+	},
+	{
+		"name": "パターンのフラグメントと同じ値 => 一致",
+		"url": "https://example.com/embed#safe",
+		"pattern": "https://example.com/embed#safe",
+		"expected": true
+	},
+	{
+		"name": "パターンのフラグメントと異なる値 => 不一致",
+		"url": "https://example.com/embed#wrong",
+		"pattern": "https://example.com/embed#safe",
+		"expected": false
+	},
+	{
+		"name": "パターンに明示したポートと同じポート => 一致",
+		"url": "https://example.com:443/embed",
+		"pattern": "https://example.com:443/embed",
+		"expected": true
+	},
+	{
+		"name": "パターンに明示したポートが URL に無い => 不一致",
+		"url": "https://example.com/embed",
+		"pattern": "https://example.com:443/embed",
+		"expected": false
+	},
+	{
+		"name": "YouTube の埋め込みパス => 一致",
+		"url": "https://www.youtube.com/embed/abc",
+		"pattern": "https://*.youtube.com/embed/*",
+		"expected": true
+	},
+	{
+		"name": "YouTube の視聴ページ => 不一致",
+		"url": "https://www.youtube.com/watch?v=abc",
+		"pattern": "https://*.youtube.com/embed/*",
+		"expected": false
+	}
+]

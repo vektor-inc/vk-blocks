@@ -1,5 +1,3 @@
-/* global vkBlocksVisualEmbed */
-/* vkBlocksVisualEmbed は PHP 側で wp_localize_script により注入されるグローバル */
 import { __ } from '@wordpress/i18n';
 import {
 	InspectorControls,
@@ -12,38 +10,47 @@ import {
 	TextareaControl,
 	TextControl,
 	Notice,
+	Placeholder,
 } from '@wordpress/components';
+import { getBlockType } from '@wordpress/blocks';
 import { useEffect, useRef, useState } from '@wordpress/element';
 
+import { ReactComponent as Icon } from './icon.svg';
 import { getCssLength } from './utils/get-css-length';
-import { isAllowedSrc as isAllowedSrcByPatterns } from './utils/match-url-pattern';
+import {
+	EMPTY_EMBED_ATTRIBUTES,
+	getAllowedUrlPatterns,
+	extractEmbedAttributes,
+	sanitizeEmbedAttributes,
+	createIframeCode,
+	isValidEmbedSize,
+} from './utils/embed-attributes';
 import { getYouTubePreviewData } from './utils/youtube-preview';
 
-const allowedUrlPatterns =
-	typeof vkBlocksVisualEmbed !== 'undefined' &&
-	vkBlocksVisualEmbed.allowedUrlPatterns
-		? vkBlocksVisualEmbed.allowedUrlPatterns
-		: [];
-
-// 許可するURLパターンの配列
-const ALLOWED_URL_PATTERNS = [
-	'https://*.google.com/*',
-	'https://*.youtube.com/embed/*',
-	'https://www.openstreetmap.org/export/*',
-	'https://player.vimeo.com/*',
-];
-
-// フィルターフックを使用してURLパターンを変更
-const filteredAllowedUrlPatterns = [
-	...ALLOWED_URL_PATTERNS,
-
-	...allowedUrlPatterns,
-];
-
 export default function EmbedCodeEdit({ attributes, setAttributes }) {
-	const { iframeCode, iframeWidth, iframeHeight } = attributes;
+	const { iframeWidth, iframeHeight } = attributes;
+	const allowedUrlPatterns = getAllowedUrlPatterns();
+	// 保存データから表示用の iframe を組み立てる（保存データに不許可の URL や属性があっても表示しない）
+	const embedAttributes = sanitizeEmbedAttributes(
+		attributes.embedAttributes,
+		allowedUrlPatterns
+	);
+	const iframeCode = createIframeCode(embedAttributes);
+	const isIframe = !!embedAttributes.src;
+	// 入力欄の文字列は保存データとは別に持つ（不許可のコードも修正できるよう入力欄に残すため）
 	const [tempIframeCode, setTempIframeCode] = useState(iframeCode);
-	const prevIframeWidth = useRef(attributes.iframeWidth);
+	const [hasInputError, setHasInputError] = useState(false);
+	const prevIframeWidth = useRef(iframeWidth);
+	const lastAppliedIframeCode = useRef(iframeCode);
+
+	useEffect(() => {
+		// Undo/Redo・RTC など外部からの属性変更を入力欄と通知へ反映する（入力中の無効な文字列も置き換える）
+		if (iframeCode !== lastAppliedIframeCode.current) {
+			setTempIframeCode(iframeCode);
+			setHasInputError(false);
+			lastAppliedIframeCode.current = iframeCode;
+		}
+	}, [iframeCode]);
 
 	useEffect(() => {
 		// align がユーザーによって設定されていたら変更しない
@@ -51,7 +58,7 @@ export default function EmbedCodeEdit({ attributes, setAttributes }) {
 			return;
 		}
 
-		const isFullWidth = String(attributes.iframeWidth) === '100%';
+		const isFullWidth = String(iframeWidth) === '100%';
 		const wasFullWidth = String(prevIframeWidth.current) === '100%';
 
 		// 100% から 100% 以外に変わった瞬間のみ align: "center" を適用
@@ -60,29 +67,8 @@ export default function EmbedCodeEdit({ attributes, setAttributes }) {
 		}
 
 		// iframeWidth の変更を記録
-		prevIframeWidth.current = attributes.iframeWidth;
-	}, [attributes.iframeWidth]);
-
-	useEffect(() => {
-		if (iframeWidth && isIframe) {
-			updateIframeAttributes(iframeWidth, iframeHeight);
-		}
-	}, [iframeWidth, iframeHeight]);
-
-	// iframeを解析する関数
-	const parseIframeCode = (code) => {
-		const parser = new window.DOMParser();
-		const doc = parser.parseFromString(code, 'text/html');
-		const iframe = doc.querySelector('iframe');
-		return iframe ? iframe : false;
-	};
-	const [isIframe, setIsIframe] = useState(!!parseIframeCode(iframeCode));
-
-	// 外部からの属性変更（RTC・Undo/Redo等）をローカルstateに反映
-	useEffect(() => {
-		setTempIframeCode(iframeCode);
-		setIsIframe(!!parseIframeCode(iframeCode));
-	}, [iframeCode]);
+		prevIframeWidth.current = iframeWidth;
+	}, [iframeWidth]);
 
 	const blockProps = useBlockProps({
 		className: 'vk-visual-embed',
@@ -93,84 +79,57 @@ export default function EmbedCodeEdit({ attributes, setAttributes }) {
 		height: getCssLength(iframeHeight),
 	};
 
-	// iframeのsrc属性を検証する関数（許可パターン判定は utils に切り出し済み）
-	const isAllowedSrc = (src) =>
-		isAllowedSrcByPatterns(src, filteredAllowedUrlPatterns);
+	// 入力欄の埋め込みコードを検証して保存データへ反映する
+	const applyIframeCode = () => {
+		const data = extractEmbedAttributes(tempIframeCode, allowedUrlPatterns);
+		const isInvalid = !!tempIframeCode && !data.src;
+		setHasInputError(isInvalid);
 
-	// iframeタグ以外を削除する関数
-	const sanitizeIframeCode = (code) => {
-		if (!code) {
-			return '';
-		}
-
-		// DOMParserが利用できない環境の場合は入力をそのまま返す
-		if (typeof window.DOMParser === 'undefined') {
-			return code;
-		}
-
-		const iframe = parseIframeCode(code);
-
-		if (!iframe) {
-			return '';
-		}
-
-		// src属性を検証
-		const src = iframe.getAttribute('src');
-		if (!isAllowedSrc(src)) {
-			return __('Only allowed URLs can be embedded.', 'vk-blocks');
-		}
-
-		return iframe.outerHTML;
-	};
-
-	// iframeの属性を解析して幅と高さを取得
-	const extractIframeAttributes = (code) => {
-		if (typeof window.DOMParser === 'undefined') {
-			return false;
-		}
-
-		const iframe = parseIframeCode(code);
-
-		if (iframe) {
-			const newWidth = iframe.getAttribute('width') || iframeWidth;
-			const newHeight = iframe.getAttribute('height') || iframeHeight;
-
-			// 抽出した値を設定パネルに反映
-			setAttributes({
-				iframeWidth: newWidth,
-				iframeHeight: newHeight,
-			});
-
-			return true; // iframeが見つかった場合はtrueを返す
-		}
-
-		return false; // iframeが見つからない場合はfalseを返す
-	};
-
-	// iframeの属性を解析・更新する関数
-	const updateIframeAttributes = (newWidth, newHeight) => {
-		if (!iframeCode || typeof window.DOMParser === 'undefined') {
+		// 空にした場合と、不許可の URL や iframe 以外のコードの場合は、保存データとプレビューを空にする。
+		// 不許可の入力文字列は修正できるよう入力欄に残す
+		if (!data.src) {
+			lastAppliedIframeCode.current = '';
+			if (!isInvalid) {
+				setTempIframeCode('');
+			}
+			// 既に空なら保存データを変えない（フォーカスを外しただけで投稿が変更扱いにならないように）
+			if (isIframe) {
+				setAttributes({ embedAttributes: EMPTY_EMBED_ATTRIBUTES });
+			}
 			return;
 		}
 
-		const iframe = parseIframeCode(iframeCode);
-
-		if (iframe) {
-			if (newWidth) {
-				iframe.setAttribute('width', newWidth);
-			}
-			if (newHeight) {
-				iframe.setAttribute('height', newHeight);
-			}
-
-			// 更新後のiframeコードを設定
-			setAttributes({
-				iframeCode: iframe.outerHTML,
-				iframeWidth: newWidth || iframeWidth,
-				iframeHeight: newHeight || iframeHeight,
-			});
-			setTempIframeCode(iframe.outerHTML);
+		const appliedIframeCode = createIframeCode(data);
+		lastAppliedIframeCode.current = appliedIframeCode;
+		setTempIframeCode(appliedIframeCode);
+		// 埋め込みが変わっていなければ保存データを変えない
+		if (appliedIframeCode === iframeCode) {
+			return;
 		}
+		setAttributes({
+			embedAttributes: data,
+			iframeWidth: data.width || iframeWidth,
+			iframeHeight: data.height || iframeHeight,
+		});
+	};
+
+	// 設定欄の幅・高さを iframe へ反映する（空の値は iframe の現在値を保つ）
+	const updateIframeSize = (size) => {
+		// 埋め込みが無い場合と、値が変わっていない場合は保存データを変えない
+		if (
+			!isIframe ||
+			Object.keys(size).every(
+				(name) => embedAttributes[name] === size[name]
+			)
+		) {
+			return;
+		}
+		setAttributes({
+			embedAttributes: sanitizeEmbedAttributes(
+				{ ...embedAttributes, ...size },
+				allowedUrlPatterns
+			),
+		});
 	};
 
 	return (
@@ -184,28 +143,13 @@ export default function EmbedCodeEdit({ attributes, setAttributes }) {
 						onChange={(newCode) => {
 							setTempIframeCode(newCode);
 						}}
-						onBlur={() => {
-							if (!tempIframeCode) {
-								setAttributes({ iframeCode: '' });
-								setIsIframe(false);
-								return;
-							}
-							const sanitizedCode =
-								sanitizeIframeCode(tempIframeCode);
-							setAttributes({ iframeCode: sanitizedCode });
-							if (sanitizedCode) {
-								extractIframeAttributes(sanitizedCode);
-							}
-
-							setIsIframe(!!parseIframeCode(sanitizedCode));
-							setTempIframeCode(sanitizedCode);
-						}}
+						onBlur={applyIframeCode}
 						help={__(
 							'Please paste the iframe embed code directly. Only iframe tags with allowed URLs (Google Maps, Google Calendar, Google Forms, YouTube、OpenStreetMap, Vimeo) are permitted.',
 							'vk-blocks'
 						)}
 					/>
-					{!iframeCode && (
+					{!iframeCode && !hasInputError && (
 						<Notice
 							status="error"
 							isDismissible={false}
@@ -217,7 +161,7 @@ export default function EmbedCodeEdit({ attributes, setAttributes }) {
 							)}
 						</Notice>
 					)}
-					{iframeCode && !sanitizeIframeCode(iframeCode) && (
+					{hasInputError && (
 						<Notice
 							status="error"
 							isDismissible={false}
@@ -236,18 +180,17 @@ export default function EmbedCodeEdit({ attributes, setAttributes }) {
 							setAttributes({ iframeWidth: newWidth });
 						}}
 						onBlur={() => {
+							// 空にしたら iframe の現在の幅を設定欄へ戻す
 							if (!iframeWidth) {
-								extractIframeAttributes(iframeCode);
+								setAttributes({
+									iframeWidth: embedAttributes.width || '',
+								});
 								return;
 							}
-							if (/^\d+(px|%)?$/.test(iframeWidth)) {
-								updateIframeAttributes(
-									iframeWidth,
-									iframeHeight
-								);
+							if (isValidEmbedSize(iframeWidth)) {
+								updateIframeSize({ width: iframeWidth });
 							} else {
 								setAttributes({ iframeWidth: '' });
-								updateIframeAttributes('', iframeHeight);
 							}
 						}}
 						disabled={!isIframe}
@@ -259,18 +202,17 @@ export default function EmbedCodeEdit({ attributes, setAttributes }) {
 							setAttributes({ iframeHeight: newHeight });
 						}}
 						onBlur={() => {
+							// 空にしたら iframe の現在の高さを設定欄へ戻す
 							if (!iframeHeight) {
-								extractIframeAttributes(iframeCode);
+								setAttributes({
+									iframeHeight: embedAttributes.height || '',
+								});
 								return;
 							}
-							if (/^\d+(px|%)?$/.test(iframeHeight)) {
-								updateIframeAttributes(
-									iframeWidth,
-									iframeHeight
-								);
+							if (isValidEmbedSize(iframeHeight)) {
+								updateIframeSize({ height: iframeHeight });
 							} else {
 								setAttributes({ iframeHeight: '' });
-								updateIframeAttributes(iframeWidth, '');
 							}
 						}}
 						disabled={!isIframe}
@@ -286,6 +228,20 @@ export default function EmbedCodeEdit({ attributes, setAttributes }) {
 				</PanelBody>
 			</InspectorControls>
 			<div style={{ position: 'relative' }}>
+				{!iframeCode && (
+					// 空のブロックがキャンバスで高さ 0 にならず、クリックで選べるようにする。
+					// 見出しはブロック名（block.json の翻訳）、説明は既存の文言を使う
+					<Placeholder
+						icon={<Icon />}
+						label={
+							(getBlockType('vk-blocks/visual-embed') || {}).title
+						}
+						instructions={__(
+							'Please enter an iframe embed code.',
+							'vk-blocks'
+						)}
+					/>
+				)}
 				{iframeCode && youtubePreviewData && (
 					<div
 						className="vk-visual-embed-preview vk-visual-embed-preview--youtube"

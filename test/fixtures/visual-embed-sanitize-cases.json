@@ -1,0 +1,140 @@
+[
+	{
+		"name": "多重符号化 &amp;amp;#x2e; を含む src => 空",
+		"data": {
+			"src": "https://www.youtube.com/embed/&amp;amp;#x2e;&amp;amp;#x2e;/x"
+		},
+		"expected": {}
+	},
+	{
+		"name": "多重符号化 &amp;amp;#x5c; を含む src => 空",
+		"data": {
+			"src": "https://www.youtube.com/embed/a&amp;amp;#x5c;b"
+		},
+		"expected": {}
+	},
+	{
+		"name": "多重符号化 &amp;amp;#x2f; を含む src => 空",
+		"data": {
+			"src": "https://www.youtube.com/embed/a&amp;amp;#x2f;b"
+		},
+		"expected": {}
+	},
+	{
+		"name": "正当なクエリの & は壊さない",
+		"data": {
+			"src": "https://www.google.com/maps?a=1&amp;b=2"
+		},
+		"expected": {
+			"src": "https://www.google.com/maps?a=1&b=2"
+		}
+	},
+	{
+		"name": "style の配置系は除き、他は残す",
+		"data": {
+			"src": "https://www.google.com/maps",
+			"style": "border:0;position:fixed;top:0;left:0;right:0;bottom:0;inset:0;z-index:9999;max-width:100%"
+		},
+		"expected": {
+			"src": "https://www.google.com/maps",
+			"style": "border:0;max-width:100%"
+		}
+	},
+	{
+		"name": "style が配置系だけなら style 自体を出さない",
+		"data": {
+			"src": "https://www.google.com/maps",
+			"style": "position:absolute;inset-block-start:0"
+		},
+		"expected": {
+			"src": "https://www.google.com/maps"
+		}
+	},
+	{
+		"name": "id・class は英数字・_・- のトークンだけ残す",
+		"data": {
+			"src": "https://www.google.com/maps",
+			"id": "my-map_1",
+			"class": "a-b c_d e\"f g<h>"
+		},
+		"expected": {
+			"src": "https://www.google.com/maps",
+			"class": "a-b c_d",
+			"id": "my-map_1"
+		}
+	},
+	{
+		"name": "空白を含む id は除去する",
+		"data": {
+			"src": "https://www.google.com/maps",
+			"id": "a b"
+		},
+		"expected": {
+			"src": "https://www.google.com/maps"
+		}
+	},
+	{
+		"name": "; なしの &region はそのまま残す",
+		"data": {
+			"src": "https://www.google.com/maps?a=1&region=JP",
+			"title": "x&region=JP"
+		},
+		"expected": {
+			"src": "https://www.google.com/maps?a=1&region=JP",
+			"title": "x&region=JP"
+		}
+	},
+	{
+		"name": "; なしの &notify はそのまま残す",
+		"data": {
+			"src": "https://www.google.com/maps?a=1&notify=1",
+			"title": "x&notify=1"
+		},
+		"expected": {
+			"src": "https://www.google.com/maps?a=1&notify=1",
+			"title": "x&notify=1"
+		}
+	},
+	{
+		"name": "; なしの &timestamp はそのまま残す",
+		"data": {
+			"src": "https://www.google.com/maps?a=1&timestamp=1",
+			"title": "x&timestamp=1"
+		},
+		"expected": {
+			"src": "https://www.google.com/maps?a=1&timestamp=1",
+			"title": "x&timestamp=1"
+		}
+	},
+	{
+		"name": "; なしの &sect はそのまま残す",
+		"data": {
+			"src": "https://www.google.com/maps?a=1&sect=1",
+			"title": "x&sect=1"
+		},
+		"expected": {
+			"src": "https://www.google.com/maps?a=1&sect=1",
+			"title": "x&sect=1"
+		}
+	},
+	{
+		"name": "; なしの &para はそのまま残す",
+		"data": {
+			"src": "https://www.google.com/maps?a=1&para=1",
+			"title": "x&para=1"
+		},
+		"expected": {
+			"src": "https://www.google.com/maps?a=1&para=1",
+			"title": "x&para=1"
+		}
+	},
+	{
+		"name": "&amp;region=JP は &region=JP に戻る",
+		"data": {
+			"src": "https://www.google.com/maps?a=1&amp;region=JP"
+		},
+		"expected": {
+			"src": "https://www.google.com/maps?a=1&region=JP"
+		}
+	}
+]

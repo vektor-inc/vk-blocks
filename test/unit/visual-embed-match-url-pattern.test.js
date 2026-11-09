@@ -153,6 +153,25 @@ describe('visual-embed: matchUrlPattern (16 ケース)', () => {
 		expect(matchUrlPattern('https://www.google.com/maps', 123)).toBe(false);
 		expect(matchUrlPattern('https://www.google.com/maps', {})).toBe(false);
 	});
+
+	test('[異常] 対になっていないサロゲート文字を含む URL は例外を出さず false を返す（fail-close）', () => {
+		// encodeURIComponent() が URIError を出す文字。パス・クエリ・フラグメントのいずれでも弾く
+		['/\uD800', '/maps?q=\uD800', '/maps#\uDC00'].forEach((suffix) => {
+			expect(() =>
+				matchUrlPattern('https://www.google.com' + suffix, PATTERN)
+			).not.toThrow();
+			expect(
+				matchUrlPattern('https://www.google.com' + suffix, PATTERN)
+			).toBe(false);
+		});
+		// パターン側に含まれる場合も同じ
+		expect(
+			matchUrlPattern(
+				'https://www.google.com/maps',
+				'https://*.google.com/\uD800*'
+			)
+		).toBe(false);
+	});
 });
 
 describe('visual-embed: matchUrlPattern (ポート明示)', () => {

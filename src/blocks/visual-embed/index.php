@@ -10,6 +10,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+require_once __DIR__ . '/safe-embed.php';
+
 /**
  * Register Google map block.
  *
@@ -30,9 +32,10 @@ function vk_blocks_register_block_google_map() {
 	register_block_type(
 		__DIR__,
 		array(
-			'style'         => 'vk-blocks/visual-embed',
-			'editor_style'  => 'vk-blocks-build-editor-css',
-			'editor_script' => 'vk-blocks-build-js',
+			'render_callback' => 'vk_blocks_visual_embed_render',
+			'style'           => 'vk-blocks/visual-embed',
+			'editor_style'    => 'vk-blocks-build-editor-css',
+			'editor_script'   => 'vk-blocks-build-js',
 		)
 	);
 }
@@ -53,7 +56,7 @@ function vk_blocks_visual_embed_set_data() {
 		'vk-blocks-build-js',
 		'vkBlocksVisualEmbed',
 		array(
-			'allowedUrlPatterns' => apply_filters( 'vk_blocks_visual_embed_allowed_url_patterns', array() ),
+			'allowedUrlPatterns' => vk_blocks_visual_embed_allowed_patterns(),
 		)
 	);
 }
