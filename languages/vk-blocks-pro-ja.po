@@ -6465,3 +6465,11 @@ msgstr "<hgroup> の中に置けるのは、見出しブロック 1 つと、サ
 msgid "Group links cannot be used with <hgroup>."
 msgstr "<hgroup> ではグループのリンクを使えません。"
 
+
+#: src/extensions/common/text-box-trim/index.js
+msgid "Trim text top and bottom"
+msgstr "文字の上下を詰める"
+
+#: src/extensions/common/text-box-trim/index.js
+msgid "Removes the space above and below the text created by the line height (half-leading)."
+msgstr "行の高さによって文字の上下にできる余白（ハーフレディング）を取り除きます。"

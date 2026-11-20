@@ -48,12 +48,16 @@ class Test_VK_Blocks_Check_Using_VK_Page_Content_Block extends WP_UnitTestCase {
 			)
 		);
 
+		// Insert the Page Content blocks in the self-closing form (/-->) that the editor actually saves.
+		// With the unclosed form, WordPress 7.2 and later adds a closing comment when kses filters the content on save, so the usage check regex no longer matches.
+		// 固定ページ本文ブロックは、エディターが実際に保存する自己終了形（/-->）で入れる
+		// 閉じていない形だと WordPress 7.2 以降は保存時の HTML 安全化（kses）で閉じコメントが補われ、使用箇所チェックの正規表現に一致しなくなるため
 		$this->using_A_page_id = $this->factory->post->create(
 			array(
 				'post_type'    => 'page',
 				'post_status'  => 'publish',
 				'post_title'   => 'Using A',
-				'post_content' => '<!-- wp:vk-blocks/page-content {"TargetPost":' . $this->public_page_id_A . '} -->',
+				'post_content' => '<!-- wp:vk-blocks/page-content {"TargetPost":' . $this->public_page_id_A . '} /-->',
 			)
 		);
 
@@ -62,7 +66,7 @@ class Test_VK_Blocks_Check_Using_VK_Page_Content_Block extends WP_UnitTestCase {
 				'post_type'    => 'page',
 				'post_status'  => 'publish',
 				'post_title'   => 'Using B',
-				'post_content' => '<!-- wp:vk-blocks/page-content {"TargetPost":' . $this->private_page_id_B . '} -->',
+				'post_content' => '<!-- wp:vk-blocks/page-content {"TargetPost":' . $this->private_page_id_B . '} /-->',
 			)
 		);
 
@@ -71,8 +75,8 @@ class Test_VK_Blocks_Check_Using_VK_Page_Content_Block extends WP_UnitTestCase {
 				'post_type'    => 'page',
 				'post_status'  => 'publish',
 				'post_title'   => 'Using A and B',
-				'post_content' => '<!-- wp:vk-blocks/page-content {"TargetPost":' . $this->public_page_id_A . '} -->' .
-								'<!-- wp:vk-blocks/page-content {"TargetPost":' . $this->private_page_id_B . '} -->',
+				'post_content' => '<!-- wp:vk-blocks/page-content {"TargetPost":' . $this->public_page_id_A . '} /-->' .
+								'<!-- wp:vk-blocks/page-content {"TargetPost":' . $this->private_page_id_B . '} /-->',
 			)
 		);
 	}

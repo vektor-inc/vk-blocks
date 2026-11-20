@@ -461,8 +461,17 @@ class VKBlocksKsesHelperTest extends VK_UnitTestCase {
 					'content' => $outer_content,
 				),
 				'expected'            => array(
-					'stroke-width="0" fill="#ffffff" class="has-text-color"' => true,
 					'preserveaspectratio="none"' => true,
+				),
+				'expected_tags'       => array(
+					array(
+						'tag_name'   => 'path',
+						'attributes' => array(
+							'stroke-width' => '0',
+							'fill'         => '#ffffff',
+							'class'        => 'has-text-color',
+						),
+					),
 				),
 			),
 			array(
@@ -474,11 +483,37 @@ class VKBlocksKsesHelperTest extends VK_UnitTestCase {
 				),
 				'expected'            => array(
 					'class="vk_slider_pauseButton_icon vk_slider_pauseButton_icon-pause"' => true,
-					'width="16" height="16"' => true,
-					'aria-hidden="true"'     => true,
-					'focusable="false"'      => true,
-					'<rect x="3" y="2" width="4" height="12" rx="1"' => true,
-					'<rect x="9" y="2" width="4" height="12" rx="1"' => true,
+					'aria-hidden="true"' => true,
+					'focusable="false"'  => true,
+				),
+				'expected_tags'       => array(
+					array(
+						'tag_name'   => 'svg',
+						'attributes' => array(
+							'width'  => '16',
+							'height' => '16',
+						),
+					),
+					array(
+						'tag_name'   => 'rect',
+						'attributes' => array(
+							'x'      => '3',
+							'y'      => '2',
+							'width'  => '4',
+							'height' => '12',
+							'rx'     => '1',
+						),
+					),
+					array(
+						'tag_name'   => 'rect',
+						'attributes' => array(
+							'x'      => '9',
+							'y'      => '2',
+							'width'  => '4',
+							'height' => '12',
+							'rx'     => '1',
+						),
+					),
 				),
 			),
 			array(
@@ -489,9 +524,26 @@ class VKBlocksKsesHelperTest extends VK_UnitTestCase {
 					'content' => $slider_content,
 				),
 				'expected'            => array(
-					'width="16" height="16"' => true,
-					'focusable="false"'      => true,
-					'<rect x="3" y="2" width="4" height="12" rx="1"' => true,
+					'focusable="false"' => true,
+				),
+				'expected_tags'       => array(
+					array(
+						'tag_name'   => 'svg',
+						'attributes' => array(
+							'width'  => '16',
+							'height' => '16',
+						),
+					),
+					array(
+						'tag_name'   => 'rect',
+						'attributes' => array(
+							'x'      => '3',
+							'y'      => '2',
+							'width'  => '4',
+							'height' => '12',
+							'rx'     => '1',
+						),
+					),
 				),
 			),
 			array(
@@ -638,9 +690,51 @@ class VKBlocksKsesHelperTest extends VK_UnitTestCase {
 					$this->assertStringNotContainsStringIgnoringCase( $tag, $saved_content, $message );
 				}
 			}
+
+			// Check the tags that must remain with all of the given attributes, without comparing the attribute order.
+			// WordPress 7.2 and later outputs the attributes kept by kses in a different order from the source HTML.
+			// 指定した属性をすべて持ったまま残るべきタグを、属性の並び順は比べずに確かめる。
+			// WordPress 7.2 以降の kses は、残した属性を元の HTML とは違う順番で出力するため。
+			if ( isset( $test_case['expected_tags'] ) ) {
+				foreach ( $test_case['expected_tags'] as $expected_tag ) {
+					$message = $test_case['test_condition_name'] . ' : <' . $expected_tag['tag_name'] . '> ' . wp_json_encode( $expected_tag['attributes'] ) . "\n" . $saved_content;
+					$this->assertTrue(
+						$this->has_tag_with_attributes( $saved_content, $expected_tag['tag_name'], $expected_tag['attributes'] ),
+						$message
+					);
+				}
+			}
 		}
 
 		wp_set_current_user( 0 );
+	}
+
+	/**
+	 * Check whether the HTML has a tag with all of the given attribute values, in any attribute order.
+	 * 属性の並び順に関係なく、指定した属性の値をすべて持つタグが HTML にあるかを確かめる。
+	 *
+	 * @param string $html       HTML to search. / 探す対象の HTML.
+	 * @param string $tag_name   Tag name such as 'path'. / 'path' などのタグ名.
+	 * @param array  $attributes Attribute names and their expected values. / 属性名と、期待する値.
+	 * @return bool True if at least one tag has all of the attribute values. / すべての属性の値が一致するタグが 1 つでもあれば true.
+	 */
+	private function has_tag_with_attributes( $html, $tag_name, $attributes ) {
+		// Look at each tag with the given name, and return true at the first one whose attribute values all match.
+		// 指定した名前のタグを順に見て、属性の値がすべて一致したタグがあれば true を返す。
+		$processor = new WP_HTML_Tag_Processor( $html );
+		while ( $processor->next_tag( array( 'tag_name' => $tag_name ) ) ) {
+			$is_matched = true;
+			foreach ( $attributes as $name => $value ) {
+				if ( $processor->get_attribute( $name ) !== $value ) {
+					$is_matched = false;
+					break;
+				}
+			}
+			if ( $is_matched ) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**

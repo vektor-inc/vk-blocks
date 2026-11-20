@@ -4,7 +4,7 @@ Donate link:
 Tags: Gutenberg,FAQ,alert
 Requires at least: 6.6
 Tested up to: 7.1
-Stable tag: 1.131.0
+Stable tag: 1.132.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -113,6 +113,10 @@ The parent filter displays only direct children of one hierarchical post type ex
 1. VK Blocks examples.
 
 == Changelog ==
+
+= 1.132.0 =
+[ New Feature ][ Heading Block ][ Paragraph Block ] Added a "Trim text top and bottom" toggle to the Typography panel to remove the space above and below the text created by the line height.
+[ Security Fix ][ Blog Card (Pro) ][ Select Post List Block (Pro) ] Added conditions for the posts that can be referenced by URL
 
 = 1.131.0 =
 [ Spec Change ][ Visual Embed ] The embed is now output by the plugin when the page is displayed, so it is no longer shown while the plugin is inactive. The allowed URL check is also applied when saving and displaying, not only in the editor.

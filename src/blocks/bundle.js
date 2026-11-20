@@ -76,6 +76,7 @@ import '@vkblocks/extensions/common/nowrap';
 import '@vkblocks/extensions/common/responsive-br';
 import '@vkblocks/extensions/common/margin-extension';
 import '@vkblocks/extensions/common/content-width-half';
+import '@vkblocks/extensions/common/text-box-trim';
 
 const vkBlocks = [
 	alert,
